@@ -20,7 +20,6 @@ const DEMO_DATA: CarDataType = DEMO_CAR_LISTINGS[0];
 
 const CarCardH: FC<CarCardHProps> = ({ className = '', data = DEMO_DATA }) => {
   const {
-    address,
     galleryImgs,
     title,
     href,
@@ -30,8 +29,6 @@ const CarCardH: FC<CarCardHProps> = ({ className = '', data = DEMO_DATA }) => {
     price,
     reviewStart,
     reviewCount,
-    author,
-    featuredImage,
     seats,
     gearshift,
   } = data;

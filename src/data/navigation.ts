@@ -61,26 +61,6 @@ const megaMenuDemo: MegamenuItem[] = [
   },
 ];
 
-const demoChildMenus: NavItemType[] = [
-  {
-    id: ncNanoId(),
-    href: '/',
-    name: 'Online booking',
-  },
-  {
-    id: ncNanoId(),
-    href: '/home-2',
-    name: 'Real estate',
-    isNew: true,
-  },
-  {
-    id: ncNanoId(),
-    href: '/home-3',
-    name: 'Home 3',
-    isNew: true,
-  },
-];
-
 const otherPageChildMenus: NavItemType[] = [
   { id: ncNanoId(), href: '/blog', name: 'Blog page' },
   { id: ncNanoId(), href: '/blog/single' as Route, name: 'Blog single' },
@@ -91,11 +71,7 @@ const otherPageChildMenus: NavItemType[] = [
 ];
 
 const templatesChildrenMenus: NavItemType[] = [
-  { id: ncNanoId(), href: '/pay-done', name: 'Pay done' },
-  //
-  { id: ncNanoId(), href: '/author', name: 'Author page' },
   { id: ncNanoId(), href: '/account', name: 'Account page' },
-  //
   {
     id: ncNanoId(),
     href: '/subscription',
@@ -108,24 +84,20 @@ export const NAVIGATION_DEMO: NavItemType[] = [
     id: ncNanoId(),
     href: '/',
     name: 'Home',
-    type: 'dropdown',
-    children: demoChildMenus,
-    isNew: true,
   },
   {
     id: ncNanoId(),
     href: '/listing-car',
-    name: 'Listing Page',
+    name: 'Cars',
     type: 'dropdown',
     children: [
-      { id: ncNanoId(), href: '/listing-car', name: 'Cars page' },
-      { id: ncNanoId(), href: '/listing-car-map', name: 'Cars page (map)' },
+      { id: ncNanoId(), href: '/listing-car', name: 'Cars List' },
       { id: ncNanoId(), href: '/listing-car-detail', name: 'Car Detail' },
     ],
   },
   {
     id: ncNanoId(),
-    href: '/author',
+    href: '/account',
     name: 'Templates',
     type: 'dropdown',
     children: templatesChildrenMenus,
@@ -145,17 +117,13 @@ export const NAVIGATION_DEMO_2: NavItemType[] = [
     id: ncNanoId(),
     href: '/',
     name: 'Home',
-    type: 'dropdown',
-    children: demoChildMenus,
-    isNew: true,
   },
   {
     id: ncNanoId(),
     href: '/listing-car',
-    name: 'Listing pages',
+    name: 'Cars',
     children: [
       { id: ncNanoId(), href: '/listing-car', name: 'Cars listings' },
-      { id: ncNanoId(), href: '/listing-car-map', name: 'Cars listings (map)' },
       { id: ncNanoId(), href: '/listing-car-detail', name: 'Car detail' },
     ],
   },
@@ -163,7 +131,7 @@ export const NAVIGATION_DEMO_2: NavItemType[] = [
   //
   {
     id: ncNanoId(),
-    href: '/author',
+    href: '/account',
     name: 'Templates',
     type: 'dropdown',
     children: templatesChildrenMenus,

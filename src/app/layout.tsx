@@ -1,6 +1,5 @@
 import { Poppins } from 'next/font/google';
 import Header from './(client-components)/(Header)/Header';
-import ClientCommons from './ClientCommons';
 import './globals.css';
 import '@/fonts/line-awesome-1.3.0/css/line-awesome.css';
 import '@/styles/index.scss';
@@ -16,15 +15,12 @@ const poppins = Poppins({
 
 export default function RootLayout({
   children,
-  params,
 }: {
   children: React.ReactNode;
-  params: any;
 }) {
   return (
     <html lang='en' className={poppins.className}>
       <body className='bg-neutral-100 text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200'>
-        <ClientCommons />
         <Header />
         {children}
         <NavbarMobile />

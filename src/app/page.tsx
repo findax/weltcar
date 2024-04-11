@@ -24,30 +24,30 @@ function PageHome() {
       </div>
 
       <div className='container relative space-y-24 mb-24 lg:space-y-28 lg:mb-28'>
-        <SectionOurFeatures />
+        {/* <SectionOurFeatures /> */}
 
         <SectionHowItWork />
 
         <SectionSubscribe2 />
 
-        <div className='relative py-16'>
+        {/* <div className='relative py-16'>
           <BackgroundSection className='bg-orange-50 dark:bg-black dark:bg-opacity-20 ' />
           <SectionGridAuthorBox />
-        </div>
+        </div> */}
 
-        <SectionGridCategoryBox />
+        {/* <SectionGridCategoryBox /> */}
 
         <div className='relative py-16'>
           <BackgroundSection />
           <SectionBecomeAnAuthor />
         </div>
 
-        <SectionSliderNewCategories
+        {/* <SectionSliderNewCategories
           heading='Explore by types of stays'
           subHeading='Explore houses based on 10 types of stays'
           categoryCardType='card5'
           itemPerRow={5}
-        />
+        /> */}
 
         <SectionVideos />
 
