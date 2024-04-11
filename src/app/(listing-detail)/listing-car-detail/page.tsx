@@ -24,63 +24,6 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({}) => {
     router.push(`${thisPathname}/?modal=PHOTO_TOUR_SCROLLABLE` as Route);
   };
 
-  const renderSection1 = () => {
-    return (
-      <div className='listingSection__wrap !space-y-6'>
-        {/* 1 */}
-        <div className='flex justify-between items-center'>
-          <Badge color='pink' name='BMW car' />
-          <LikeSaveBtns />
-        </div>
-
-        {/* 2 */}
-        <h2 className='text-2xl sm:text-3xl lg:text-4xl font-semibold'>
-          BMW 3 Series Sedan
-        </h2>
-
-        {/* 3 */}
-        <div className='flex items-center space-x-4'>
-          <StartRating />
-          <span>·</span>
-          <span>
-            <i className='las la-map-marker-alt'></i>
-            <span className='ml-1'> Tokyo, Jappan</span>
-          </span>
-        </div>
-
-        {/* 4 */}
-        <div className='flex items-center'>
-          <Avatar hasChecked sizeClass='h-10 w-10' radius='rounded-full' />
-          <span className='ml-2.5 text-neutral-500 dark:text-neutral-400'>
-            Car owner{' '}
-            <span className='text-neutral-900 dark:text-neutral-200 font-medium'>
-              Kevin Francis
-            </span>
-          </span>
-        </div>
-
-        {/* 5 */}
-        <div className='w-full border-b border-neutral-100 dark:border-neutral-700' />
-
-        {/* 6 */}
-        <div className='flex items-center justify-between xl:justify-start space-x-8 xl:space-x-12 text-sm text-neutral-700 dark:text-neutral-300'>
-          <div className='flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 text-center sm:text-left sm:space-x-3 '>
-            <i className='las la-user-friends text-2xl'></i>
-            <span className=''>4 seats</span>
-          </div>
-          <div className='flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 text-center sm:text-left sm:space-x-3 '>
-            <i className='las la-dharmachakra text-2xl'></i>
-            <span className=''> Auto gearbox</span>
-          </div>
-          <div className='flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 text-center sm:text-left sm:space-x-3 '>
-            <i className='las la-suitcase text-2xl'></i>
-            <span className=''> 2 bags</span>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
   //
   const renderSectionTienIch = () => {
     return (
@@ -127,31 +70,6 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({}) => {
             celebrity-filled TV ad and you’ll see that when we say “everything,”
             we mean everything.
           </p>
-        </div>
-      </div>
-    );
-  };
-
-  const renderSection3 = () => {
-    return (
-      <div className='listingSection__wrap'>
-        <div>
-          <h2 className='text-2xl font-semibold'>Include </h2>
-          <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>
-            Included in the price
-          </span>
-        </div>
-        <div className='w-14 border-b border-neutral-200 dark:border-neutral-700'></div>
-        {/* 6 */}
-        <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 text-sm text-neutral-700 dark:text-neutral-300 '>
-          {includes_demo
-            .filter((_, i) => i < 12)
-            .map((item) => (
-              <div key={item.name} className='flex items-center space-x-3'>
-                <i className='las la-check-circle text-2xl'></i>
-                <span>{item.name}</span>
-              </div>
-            ))}
         </div>
       </div>
     );
@@ -265,13 +183,11 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({}) => {
       </header>
 
       {/* MAIn */}
-      <main className=' relative z-10 mt-11 flex flex-col lg:flex-row '>
+      <main className=' relative z-10 my-11 flex flex-col lg:flex-row '>
         {/* CONTENT */}
         <div className='w-full lg:w-3/5 xl:w-2/3 space-y-8 lg:pr-10 lg:space-y-10'>
-          {renderSection1()}
           {renderSectionTienIch()}
           {renderSection2()}
-          {renderSection3()}
         </div>
 
         {/* SIDEBAR */}
