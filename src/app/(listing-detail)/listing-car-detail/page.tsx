@@ -1,16 +1,11 @@
 'use client';
 
 import React, { FC } from 'react';
-import { ArrowRightIcon, Squares2X2Icon } from '@heroicons/react/24/outline';
-import CommentListing from '@/components/CommentListing';
-import FiveStartIconForRate from '@/components/FiveStartIconForRate';
+import { Squares2X2Icon } from '@heroicons/react/24/outline';
 import StartRating from '@/components/StartRating';
 import Avatar from '@/shared/Avatar';
 import Badge from '@/shared/Badge';
-import ButtonCircle from '@/shared/ButtonCircle';
 import ButtonPrimary from '@/shared/ButtonPrimary';
-import ButtonSecondary from '@/shared/ButtonSecondary';
-import Input from '@/shared/Input';
 import Image from 'next/image';
 import { Amenities_demos, includes_demo, PHOTOS } from './constant';
 import LikeSaveBtns from '@/components/LikeSaveBtns';
