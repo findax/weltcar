@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { DEMO_CAR_LISTINGS } from '@/data/listings';
 import { CarDataType } from '@/data/types';
-import StartRating from '@/components/StartRating';
 import BtnLikeIcon from '@/components/BtnLikeIcon';
 import SaleOffBadge from '@/components/SaleOffBadge';
 import Badge from '@/shared/Badge';
@@ -9,6 +8,7 @@ import GallerySlider from '@/components/GallerySlider';
 import Image from 'next/image';
 import Link from 'next/link';
 import ButtonPrimary from '@/shared/ButtonPrimary';
+import numberWithComma from '@/utils/numberWithComma';
 
 export interface CarCardProps {
   className?: string;
@@ -47,8 +47,8 @@ const CarCard: FC<CarCardProps> = ({
           href={href}
           galleryClass='rounded-xl'
         />
-        <BtnLikeIcon isLiked={like} className='absolute right-3 top-3 z-[1]' />
-        {saleOff && <SaleOffBadge className='absolute left-3 top-3' />}
+        {/* <BtnLikeIcon isLiked={like} className='absolute right-3 top-3 z-[1]' /> */}
+        {/* {saleOff && <SaleOffBadge className='absolute left-3 top-3' />} */}
       </div>
     );
   };
@@ -59,18 +59,18 @@ const CarCard: FC<CarCardProps> = ({
         <div className='space-y-2'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center space-x-2'>
-              {isAds && <Badge name='ADS' color='green' />}
+              {/* {isAds && <Badge name='ADS' color='green' />} */}
               <h2 className='capitalize text-xl font-semibold'>
                 <span className='line-clamp-1'>{title}</span>
               </h2>
             </div>
-            <StartRating reviewCount={reviewCount} point={reviewStart} />
+            <span className='text-xl font-semibold'>2024</span>
           </div>
-          <div className='flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-2'>
+          {/* <div className='flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-2'>
             <span className=''>{seats} seats</span>
             <span>-</span>
             <span className=''>{gearshift} </span>
-          </div>
+          </div> */}
 
           <div className='columns-1 md:columns-2'>
             <span className='flex items-center gap-2 pt-2'>
@@ -102,12 +102,28 @@ const CarCard: FC<CarCardProps> = ({
             </span>
           </div>
         </div>
-        <div className='w-14  border-b border-neutral-100 dark:border-neutral-800'></div>
-        <div className='flex justify-between items-end'>
+
+        {/* <div className='w-14 border-b border-neutral-100 dark:border-neutral-800'></div> */}
+        <div className='space-y-2 py-3'>
+          <div className='flex items-center'>
+            <span className=''>exterior color:</span>
+            <span className='w-6 h-6 mx-2 rounded-full inline-block border border-black dark:border-white bg-[#fff]'></span>
+            <span className=''> - white</span>
+          </div>
+          <div className='flex items-center'>
+            <span className=''>interior color:</span>
+            <span className='w-6 h-6 mx-2 rounded-full inline-block border border-black dark:border-white bg-[#000]'></span>
+            <span className=''> - black</span>
+          </div>
+        </div>
+        {/* <div className='w-14 border-b border-neutral-100 dark:border-neutral-800'></div> */}
+
+        <div className='h-3 border-t border-dashed border-neutral-200 dark:border-neutral-700'></div>
+        <div className='flex justify-between items-center'>
           <span className='text-3xl font-semibold text-primary-400'>
-            {price}
+            {numberWithComma(price)}€
           </span>
-          <ButtonPrimary>Buy</ButtonPrimary>
+          <ButtonPrimary>More</ButtonPrimary>
         </div>
       </div>
     );

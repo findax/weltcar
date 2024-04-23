@@ -1,14 +1,10 @@
 'use client';
 
-import React, { FC, useState, useEffect } from 'react';
+import { FC } from 'react';
 import Filters from '../Filters';
 import CarsList from '../CarsList';
-import { DEMO_CAR_LISTINGS } from '@/data/listings';
-import { CarDataType } from '@/data/types';
 
 export interface ListingCarPageProps {}
-
-const DEMO_DATA: CarDataType[] = DEMO_CAR_LISTINGS.filter((_, i) => i < 12);
 
 const ListingCarPage: FC<ListingCarPageProps> = () => {
   return (

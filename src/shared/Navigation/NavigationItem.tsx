@@ -3,27 +3,18 @@
 import { PathName } from '@/routers/types';
 import { Popover, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/24/solid';
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { FC, Fragment, useEffect, useState } from 'react';
 
 // <--- NavItemType --->
-export interface MegamenuItem {
-  id: string;
-  image: string;
-  title: string;
-  items: NavItemType[];
-}
 export interface NavItemType {
   id: string;
   name: string;
-  isNew?: boolean;
   href: PathName;
   targetBlank?: boolean;
   children?: NavItemType[];
-  megaMenu?: MegamenuItem[];
-  type?: 'dropdown' | 'megaMenu' | 'none';
+  type?: 'dropdown' | 'none';
 }
 
 export interface NavigationItemProps {
@@ -53,92 +44,13 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({ menuItem }) => {
     });
   };
 
-  // ===================== MENU MEGAMENU =====================
-  const renderMegaMenu = (menu: NavItemType) => {
-    const isHover = menuCurrentHovers.includes(menu.id);
-
-    const isFull = menu.megaMenu && menu.megaMenu?.length > 3;
-    const classPopover = isFull
-      ? 'menu-megamenu--large'
-      : 'menu-megamenu--small relative';
-    const classPanel = isFull ? 'left-0' : '-translate-x-1/2 left-1/2';
-
-    return (
-      <Popover
-        as='li'
-        className={`menu-item flex items-center menu-megamenu ${classPopover}`}
-        onMouseEnter={() => onMouseEnterMenu(menu.id)}
-        onMouseLeave={() => onMouseLeaveMenu(menu.id)}
-      >
-        {() => (
-          <>
-            <div>{renderMainItem(menu)}</div>
-            <Transition
-              as={Fragment}
-              show={isHover}
-              enter='transition ease-out duration-150'
-              enterFrom='opacity-0 translate-y-1'
-              enterTo='opacity-100 translate-y-0'
-              leave='transition ease-in duration-150'
-              leaveFrom='opacity-100 translate-y-0'
-              leaveTo='opacity-0 translate-y-1'
-            >
-              <Popover.Panel
-                static
-                className={`will-change-transform sub-menu absolute top-full transform z-10 w-screen max-w-sm px-4 sm:px-0 lg:max-w-max ${classPanel}`}
-              >
-                <div className='overflow-hidden rounded-lg shadow-lg ring-1 ring-black dark:ring-white ring-opacity-5 dark:ring-opacity-10 text-sm'>
-                  <div
-                    className={`relative bg-white dark:bg-neutral-900 px-3 py-6 grid gap-1 grid-cols-${menu.megaMenu?.length}`}
-                  >
-                    {menu.megaMenu?.map((item) => (
-                      <div key={item.id}>
-                        <div className='px-2'>
-                          <div className='w-36 h-24 rounded-lg overflow-hidden relative flex'>
-                            <Image alt='' src={item.image} fill sizes='200px' />
-                          </div>
-                        </div>
-                        <p className='font-medium text-neutral-900 dark:text-neutral-200 py-1 px-2 my-2'>
-                          {item.title}
-                        </p>
-                        <ul className='grid space-y-1'>
-                          {item.items.map(renderMegaMenuNavlink)}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </Popover.Panel>
-            </Transition>
-          </>
-        )}
-      </Popover>
-    );
-  };
-
-  const renderMegaMenuNavlink = (item: NavItemType) => {
-    return (
-      <li key={item.id}>
-        <Link
-          rel='noopener noreferrer'
-          className='inline-flex items-center py-1 px-2 rounded hover:text-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 font-normal text-neutral-600 dark:text-neutral-300'
-          href={item.href || ''}
-        >
-          {item.name}
-        </Link>
-      </li>
-    );
-  };
-
   // ===================== MENU DROPDOW =====================
   const renderDropdownMenu = (menuDropdown: NavItemType) => {
     const isHover = menuCurrentHovers.includes(menuDropdown.id);
     return (
       <Popover
         as='li'
-        className={`menu-item flex items-center menu-dropdown relative ${
-          menuDropdown.isNew ? 'menuIsNew_lv1' : ''
-        }`}
+        className='menu-item flex items-center menu-dropdown relative'
         onMouseEnter={() => onMouseEnterMenu(menuDropdown.id)}
         onMouseLeave={() => onMouseLeaveMenu(menuDropdown.id)}
       >
@@ -165,10 +77,7 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({ menuItem }) => {
                       return renderDropdownMenuNavlinkHasChild(i);
                     } else {
                       return (
-                        <li
-                          key={i.id}
-                          className={`px-2 ${i.isNew ? 'menuIsNew' : ''}`}
-                        >
+                        <li key={i.id} className='px-2'>
                           {renderDropdownMenuNavlink(i)}
                         </li>
                       );
@@ -252,26 +161,26 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({ menuItem }) => {
 
   // ===================== MENU MAIN MENU =====================
   const renderMainItem = (item: NavItemType) => {
-    return (
+    return item.type ? (
+      <div className='inline-flex items-center text-sm xl:text-base font-normal text-neutral-700 dark:text-neutral-300 py-2 px-4 xl:px-5 rounded-full cursor-default hover:text-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200'>
+        {item.name}
+        <ChevronDownIcon
+          className='ml-1 -mr-1 h-4 w-4 text-neutral-400'
+          aria-hidden='true'
+        />
+      </div>
+    ) : (
       <Link
         rel='noopener noreferrer'
         className='inline-flex items-center text-sm xl:text-base font-normal text-neutral-700 dark:text-neutral-300 py-2 px-4 xl:px-5 rounded-full hover:text-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200'
         href={item.href || '/'}
       >
         {item.name}
-        {item.type && (
-          <ChevronDownIcon
-            className='ml-1 -mr-1 h-4 w-4 text-neutral-400'
-            aria-hidden='true'
-          />
-        )}
       </Link>
     );
   };
 
   switch (menuItem.type) {
-    case 'megaMenu':
-      return renderMegaMenu(menuItem);
     case 'dropdown':
       return renderDropdownMenu(menuItem);
     default:

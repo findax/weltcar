@@ -2,13 +2,9 @@
 
 import React, { FC } from 'react';
 import { Squares2X2Icon } from '@heroicons/react/24/outline';
-import StartRating from '@/components/StartRating';
-import Avatar from '@/shared/Avatar';
-import Badge from '@/shared/Badge';
 import ButtonPrimary from '@/shared/ButtonPrimary';
 import Image from 'next/image';
-import { Amenities_demos, includes_demo, PHOTOS } from './constant';
-import LikeSaveBtns from '@/components/LikeSaveBtns';
+import { Amenities_demos, PHOTOS } from './constant';
 import { usePathname, useRouter } from 'next/navigation';
 import { Route } from 'next';
 
@@ -80,27 +76,7 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({}) => {
       <div className='listingSectionSidebar__wrap shadow-xl'>
         {/* PRICE */}
         <div className='flex justify-between'>
-          <span className='text-3xl font-semibold'>
-            $19
-            <span className='ml-1 text-base font-normal text-neutral-500 dark:text-neutral-400'>
-              /day
-            </span>
-          </span>
-          <StartRating />
-        </div>
-
-        {/* SUM */}
-        <div className='flex flex-col space-y-4 '>
-          <div className='flex justify-between text-neutral-600 dark:text-neutral-300'>
-            <span>$19 x 3 day</span>
-            <span>$57</span>
-          </div>
-
-          <div className='border-b border-neutral-200 dark:border-neutral-700'></div>
-          <div className='flex justify-between font-semibold'>
-            <span>Total</span>
-            <span>$199</span>
-          </div>
+          <span className='text-3xl font-semibold'>$190,000</span>
         </div>
 
         {/* SUBMIT */}

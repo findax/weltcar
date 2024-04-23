@@ -3,11 +3,11 @@
 import './styles/index.css';
 import Image from 'next/image';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { FC, Fragment, Suspense, useEffect, useRef } from 'react';
+import { FC, Fragment, useEffect, useRef } from 'react';
 import Modal from './components/Modal';
 import type { ListingGalleryImage } from './utils/types';
 import { useLastViewedPhoto } from './utils/useLastViewedPhoto';
-import { ArrowSmallLeftIcon } from '@heroicons/react/24/outline';
+import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import { Dialog, Transition } from '@headlessui/react';
 import LikeSaveBtns from '../LikeSaveBtns';
 import { Route } from 'next';
@@ -129,16 +129,16 @@ const ListingImageGallery: FC<Props> = ({ images = DEMO_IMAGE }) => {
           leaveFrom='opacity-100'
           leaveTo='opacity-0'
         >
-          <div className='fixed inset-0 bg-white' />
+          <div className='fixed inset-0 bg-white dark:bg-neutral-900' />
         </Transition.Child>
 
         <div className='fixed inset-0 overflow-y-auto'>
-          <div className='sticky z-10 top-0 p-4 xl:px-10 flex items-center justify-between bg-white'>
+          <div className='sticky z-10 top-0 p-4 xl:px-10 flex items-center justify-between bg-white dark:bg-neutral-900'>
             <button
-              className='focus:outline-none focus:ring-0 w-10 h-10 rounded-full flex items-center justify-center hover:bg-neutral-100'
+              className='focus:outline-none focus:ring-0 w-10 h-10 rounded-full flex items-center justify-center hover:bg-neutral-100 hover:dark:bg-neutral-800'
               onClick={handleClose}
             >
-              <ArrowSmallLeftIcon className='w-6 h-6' />
+              <ArrowLeftIcon className='w-6 h-6' />
             </button>
             <LikeSaveBtns />
           </div>

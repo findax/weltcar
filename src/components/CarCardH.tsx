@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { DEMO_CAR_LISTINGS } from '@/data/listings';
 import { CarDataType } from '@/data/types';
-import StartRating from '@/components/StartRating';
 import BtnLikeIcon from '@/components/BtnLikeIcon';
 import SaleOffBadge from '@/components/SaleOffBadge';
 import Badge from '@/shared/Badge';
@@ -10,6 +9,7 @@ import GallerySlider from '@/components/GallerySlider';
 import Image from 'next/image';
 import Link from 'next/link';
 import ButtonPrimary from '@/shared/ButtonPrimary';
+import numberWithComma from '@/utils/numberWithComma';
 
 export interface CarCardHProps {
   className?: string;
@@ -43,86 +43,30 @@ const CarCardH: FC<CarCardHProps> = ({ className = '', data = DEMO_DATA }) => {
             href={href}
           />
         </div>
-        <BtnLikeIcon isLiked={like} className='absolute right-3 top-3' />
-        {saleOff && <SaleOffBadge className='absolute left-3 top-3' />}
+        {/* <BtnLikeIcon isLiked={like} className='absolute right-3 top-3' /> */}
+        {/* {saleOff && <SaleOffBadge className='absolute left-3 top-3' />} */}
       </div>
     );
   };
 
   const renderContent = () => {
     return (
-      // <div className='flex-grow p-3 sm:p-5 flex flex-col justify-between h-full'>
-      //   <div className='space-y-2'>
-      //     <div className='flex justify-between items-center'>
-      //       <div className='flex items-center space-x-2'>
-      //         {isAds && <Badge name='ADS' color='green' />}
-      //         <h2 className='text-xl font-semibold capitalize'>
-      //           <span className='line-clamp-1'>{title}</span>
-      //         </h2>
-      //       </div>
-      //       <StartRating reviewCount={reviewCount} point={reviewStart} />
-      //     </div>
-      //   </div>
-      //   {/* <div className='hidden sm:block w-14 border-b border-neutral-200/80 dark:border-neutral-700 my-4'></div> */}
-      //   {/* SHOW MOBILE */}
-      //   <div className='flex sm:hidden items-center text-sm text-neutral-500 dark:text-neutral-400 space-x-2 mt-4 sm:mt-0'>
-      //     <span>4 seats</span>
-      //     <span>· </span>
-      //     <span>Auto gearbox</span>
-      //     <span>· </span>
-      //     <span>4 seats</span>
-      //   </div>
-      //   {/* SHOW DESK */}
-      //   <div className='hidden sm:flex items-center space-x-8'>
-      //     <ul className='flex justify-between items-center w-full'>
-      //       <li className='p-2 m-0 text-center flex-grow'>
-      //         <i className='las text-[#279155] la-user-friends text-[32px] inline-block mb-1'></i>
-      //         <span className='block text-sm max-width mx-auto'>8 Pass</span>
-      //       </li>
-      //       <li className='p-2 m-0 text-center flex-grow'>
-      //         <i className='las text-[#279155] la-shopping-bag text-[32px] inline-block mb-1'></i>
-      //         <span className='block text-sm max-width mx-auto'> 5 Bag </span>
-      //       </li>
-      //       <li className='p-2 m-0 text-center flex-grow'>
-      //         <i className='las text-[#279155] la-tachometer-alt text-[32px] inline-block mb-1'></i>
-      //         <span className='block text-sm max-width mx-auto'> 100km </span>
-      //       </li>
-      //       <li className='p-2 m-0 text-center flex-grow'>
-      //         <i className='las text-[#279155] la-gas-pump text-[32px] inline-block mb-1'></i>
-      //         <span className='block text-sm max-width mx-auto'>Petrol</span>
-      //       </li>
-      //       <li className='p-2 m-0 text-center flex-grow'>
-      //         <i className='las text-[#279155] la-cog text-[32px] inline-block mb-1'></i>
-      //         <span className='block text-sm max-width mx-auto'> Auto </span>
-      //       </li>
-      //     </ul>
-      //   </div>
-
-      //   {/* <div className='w-14 border-b border-neutral-200/80 dark:border-neutral-700 my-4'></div> */}
-      //   <div className='flex justify-between items-end'>
-      //     <span className='text-3xl font-semibold text-primary-400'>
-      //       {price}
-      //     </span>
-      //     <ButtonPrimary>Buy</ButtonPrimary>
-      //   </div>
-      // </div>
-
       <div className='h-full flex justify-between flex-col p-5  space-y-4'>
         <div className='space-y-2'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center space-x-2'>
-              {isAds && <Badge name='ADS' color='green' />}
+              {/* {isAds && <Badge name='ADS' color='green' />} */}
               <h2 className='text-xl font-semibold'>
                 <span className='line-clamp-1'>{title}</span>
               </h2>
             </div>
-            <StartRating reviewCount={reviewCount} point={reviewStart} />
+            <span className='text-xl font-semibold'>2025</span>
           </div>
-          <div className='flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-2'>
+          {/* <div className='flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-2'>
             <span className=''>{seats} seats</span>
             <span>-</span>
             <span className=''>{gearshift} </span>
-          </div>
+          </div> */}
 
           <div className='columns-1 md:columns-2'>
             <span className='flex items-center gap-2 pt-2'>
@@ -154,12 +98,26 @@ const CarCardH: FC<CarCardHProps> = ({ className = '', data = DEMO_DATA }) => {
             </span>
           </div>
         </div>
-        <div className='w-14  border-b border-neutral-100 dark:border-neutral-800'></div>
-        <div className='flex justify-between items-end'>
+
+        <div className='space-y-2'>
+          <div className='flex items-center'>
+            <span className=''>exterior color:</span>
+            <span className='w-6 h-6 mx-2 rounded-full inline-block border border-black dark:border-white bg-[#fff]'></span>
+            <span className=''> - white</span>
+          </div>
+          <div className='flex items-center'>
+            <span className=''>interior color:</span>
+            <span className='w-6 h-6 mx-2 rounded-full inline-block border border-black dark:border-white bg-[#000]'></span>
+            <span className=''> - black</span>
+          </div>
+        </div>
+
+        <div className='border-t border-dashed border-neutral-200 dark:border-neutral-700'></div>
+        <div className='flex justify-between items-center'>
           <span className='text-3xl font-semibold text-primary-400'>
-            {price}
+            {numberWithComma(price)}€
           </span>
-          <ButtonPrimary>Buy</ButtonPrimary>
+          <ButtonPrimary>More</ButtonPrimary>
         </div>
       </div>
     );

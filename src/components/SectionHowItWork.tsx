@@ -1,10 +1,10 @@
-import React, { FC } from "react";
-import HIW1img from "@/images/HIW1.png";
-import HIW2img from "@/images/HIW2.png";
-import HIW3img from "@/images/HIW3.png";
-import VectorImg from "@/images/VectorHIW.svg";
-import Image, { StaticImageData } from "next/image";
-import Heading from "@/shared/Heading";
+import React, { FC } from 'react';
+import HIW1img from '@/images/HIW1.png';
+import HIW2img from '@/images/HIW2.png';
+import HIW3img from '@/images/HIW3.png';
+import VectorImg from '@/images/VectorHIW.svg';
+import Image, { StaticImageData } from 'next/image';
+import Heading from '@/shared/Heading';
 
 export interface SectionHowItWorkProps {
   className?: string;
@@ -17,73 +17,73 @@ export interface SectionHowItWorkProps {
   }[];
 }
 
-const DEMO_DATA: SectionHowItWorkProps["data"] = [
+const DEMO_DATA: SectionHowItWorkProps['data'] = [
   {
     id: 1,
     img: HIW1img,
-    title: "Book & relax",
-    desc: "Let each trip be an inspirational journey, each room a peaceful space",
+    title: 'Discover luxury',
+    desc: 'Explore our curated selection of premium automobiles, where every ride embodies elegance and sophistication',
   },
   {
     id: 2,
     img: HIW2img,
-    title: "Smart checklist",
-    desc: "Let each trip be an inspirational journey, each room a peaceful space",
+    title: 'Personalized consultation',
+    desc: 'Receive expert guidance tailored to your preferences, ensuring that each vehicle aligns perfectly with your desires and lifestyle',
   },
   {
     id: 3,
     img: HIW3img,
-    title: "Save more",
-    desc: "Let each trip be an inspirational journey, each room a peaceful space",
+    title: 'Exclusive savings',
+    desc: 'Unlock special offers and financing options, allowing you to elevate your driving experience without compromising on quality or value',
   },
 ];
 
 const SectionHowItWork: FC<SectionHowItWorkProps> = ({
-  className = "",
+  className = '',
   data = DEMO_DATA,
 }) => {
   return (
     <div
       className={`nc-SectionHowItWork  ${className}`}
-      data-nc-id="SectionHowItWork"
+      data-nc-id='SectionHowItWork'
     >
-      <Heading isCenter desc="Keep calm & travel on">
+      <Heading isCenter desc='Keep calm & drive on'>
         How it work
       </Heading>
-      <div className="mt-20 relative grid md:grid-cols-3 gap-20">
+      <div className='mt-20 relative grid md:grid-cols-3 gap-20'>
         <Image
-          className="hidden md:block absolute inset-x-0 top-10"
+          className='hidden md:block absolute inset-x-0 top-10'
           src={VectorImg}
-          alt=""
+          alt=''
         />
         {data.map((item) => (
           <div
             key={item.id}
-            className="relative flex flex-col items-center max-w-xs mx-auto"
+            className='relative flex flex-col items-center max-w-xs mx-auto'
           >
             {item.imgDark ? (
               <>
                 <Image
-                  className="dark:hidden block mb-8 max-w-[180px] mx-auto"
+                  className='dark:hidden block mb-8 max-w-[180px] mx-auto'
                   src={item.img}
-                  alt=""
+                  alt=''
                 />
                 <Image
-                  alt=""
-                  className="hidden dark:block mb-8 max-w-[180px] mx-auto"
+                  alt=''
+                  className='hidden dark:block mb-8 max-w-[180px] mx-auto'
                   src={item.imgDark}
                 />
               </>
             ) : (
               <Image
-                alt=""
-                className="mb-8 max-w-[180px] mx-auto"
+                alt=''
+                className='mb-8 max-w-[180px] mx-auto'
                 src={item.img}
               />
             )}
-            <div className="text-center mt-auto">
-              <h3 className="text-xl font-semibold">{item.title}</h3>
-              <span className="block mt-5 text-neutral-500 dark:text-neutral-400">
+            <div className='text-center mt-auto'>
+              <h3 className='text-xl font-semibold'>{item.title}</h3>
+              <span className='block mt-5 text-neutral-500 dark:text-neutral-400'>
                 {item.desc}
               </span>
             </div>

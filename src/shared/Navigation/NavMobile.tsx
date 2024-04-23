@@ -71,33 +71,35 @@ const NavMobile: React.FC<NavMobileProps> = ({
         as='li'
         className='text-neutral-900 dark:text-white'
       >
-        <Link
-          className='flex w-full px-4 font-medium uppercase tracking-wide text-sm hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg'
-          href={{
-            pathname: item.href || undefined,
-          }}
-        >
-          <span
-            className={`py-2.5 pr-3 ${!item.children ? 'block w-full' : ''}`}
+        {item.children ? (
+          <>
+            <div
+              className='flex w-full px-4 font-medium uppercase tracking-wide text-sm hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg'
+              onClick={(e) => e.preventDefault()}
+            >
+              <span className='py-2.5 pr-3'>{item.name}</span>
+              <span className='flex-1 flex'>
+                <Disclosure.Button
+                  as='span'
+                  className='py-2.5 flex items-center justify-end flex-1 '
+                >
+                  <ChevronDownIcon
+                    className='ml-2 h-4 w-4 text-neutral-500'
+                    aria-hidden='true'
+                  />
+                </Disclosure.Button>
+              </span>
+            </div>
+            <Disclosure.Panel>{_renderMenuChild(item)}</Disclosure.Panel>
+          </>
+        ) : (
+          <Link
+            rel='noopener noreferrer'
+            className='inline-flex items-center text-sm xl:text-base font-normal text-neutral-700 dark:text-neutral-300 py-2 px-4 xl:px-5 rounded-full hover:text-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200'
+            href={item.href || '/'}
           >
-            {item.name}
-          </span>
-          {item.children && (
-            <span className='flex-1 flex' onClick={(e) => e.preventDefault()}>
-              <Disclosure.Button
-                as='span'
-                className='py-2.5 flex items-center justify-end flex-1 '
-              >
-                <ChevronDownIcon
-                  className='ml-2 h-4 w-4 text-neutral-500'
-                  aria-hidden='true'
-                />
-              </Disclosure.Button>
-            </span>
-          )}
-        </Link>
-        {item.children && (
-          <Disclosure.Panel>{_renderMenuChild(item)}</Disclosure.Panel>
+            <span className='py-2.5 pr-3 block w-full'>{item.name}</span>
+          </Link>
         )}
       </Disclosure>
     );
@@ -127,7 +129,7 @@ const NavMobile: React.FC<NavMobileProps> = ({
       <ul className='flex flex-col py-6 px-2 space-y-1'>
         {data.map(_renderItem)}
       </ul>
-      <div className='flex items-center justify-between py-6 px-5'>
+      {/* <div className='flex items-center justify-between py-6 px-5'>
         <a
           className='inline-block'
           href='https://themeforest.net/item/chisfis-online-booking-nextjs-template/43399526'
@@ -141,7 +143,7 @@ const NavMobile: React.FC<NavMobileProps> = ({
           className='flex'
           panelClassName='z-10 w-screen max-w-[280px] px-4 mb-3 right-3 bottom-full sm:px-0'
         />
-      </div>
+      </div> */}
     </div>
   );
 };

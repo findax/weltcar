@@ -28,8 +28,16 @@ const FiltersMobile = () => {
     );
   };
 
-  const renderContent = () => {
-    return (
+  return (
+    <>
+      <button
+        onClick={handleOpenFilters}
+        className={`focus:outline-none flex items-center justify-center py-2.5 rounded-lg text-neutral-700 dark:text-neutral-300`}
+      >
+        <span className='inline-block font-medium'>Filter</span>
+        <AdjustmentsHorizontalIcon className='h-5 w-5 ml-1' />
+      </button>
+
       <div
         className={`bg-white dark:bg-neutral-900 absolute top-0 left-0 h-screen overflow-y-auto w-full z-20 transform transition-transform ease-in-out duration-300 ${
           isVisable ? 'translate-x-0' : '-translate-x-full'
@@ -37,20 +45,6 @@ const FiltersMobile = () => {
       >
         <Filters CloseButton={renderCloseButton()} />
       </div>
-    );
-  };
-
-  return (
-    <>
-      <button
-        onClick={handleOpenFilters}
-        className={`focus:outline-none flex items-center justify-center p-2.5 rounded-lg text-neutral-700 dark:text-neutral-300`}
-      >
-        <span className='inline-block font-medium'>Filter</span>
-        <AdjustmentsHorizontalIcon className='h-5 w-5 ml-1' />
-      </button>
-
-      {renderContent()}
     </>
   );
 };

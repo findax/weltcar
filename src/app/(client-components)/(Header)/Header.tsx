@@ -7,7 +7,7 @@ import SearchDropdown from './SearchDropdown';
 import ButtonPrimary from '@/shared/ButtonPrimary';
 import MenuBar from '@/shared/MenuBar';
 import SwitchDarkMode from '@/shared/SwitchDarkMode';
-import LangDropdown from './LangDropdownSingle';
+import LangDropdown from './LangDropdown';
 import { useThemeMode } from '@/utils/useThemeMode';
 import AvatarDropdown from './AvatarDropdown';
 import NavbarMobile from '@/components/NavbarMobile';
@@ -41,15 +41,15 @@ const Header = () => {
         <div className='hidden md:flex flex-shrink-0 justify-end flex-1 lg:flex-none text-neutral-700 dark:text-neutral-100'>
           <div className='hidden xl:flex space-x-0.5'>
             {/* <SearchDropdown className='flex items-center' /> */}
-            <LangDropdown />
+            {/* <LangDropdown /> */}
             <SwitchDarkMode />
-            <button
-              // onClick={_toogleDarkMode}
+            {/* <button
+              onClick={goToFavorite()}
               className={`self-center text-2xl md:text-3xl w-12 h-12 rounded-full text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none flex items-center justify-center`}
             >
               <span className='sr-only'>Enable dark mode</span>
               <HeartIcon className='w-7 h-7' />
-            </button>
+            </button> */}
             <AvatarDropdown />
           </div>
 
