@@ -18,7 +18,6 @@ export interface TaxonomyType {
   desc?: string;
   color?: TwMainColor | string;
   taxonomy: 'category' | 'tag';
-  listingType?: 'stay' | 'experiences' | 'car';
 }
 
 export interface AuthorType {

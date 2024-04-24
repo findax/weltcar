@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import { DEMO_CAR_LISTINGS } from '@/data/listings';
+import { DEMO_CARS_LIST } from '@/data/listings';
 import { CarDataType } from '@/data/types';
 import BtnLikeIcon from '@/components/BtnLikeIcon';
 import SaleOffBadge from '@/components/SaleOffBadge';
 import Badge from '@/shared/Badge';
-import GallerySlider from '@/components/GallerySlider';
+import CardImagesSlider from '@/components/CardImagesSlider';
 import Image from 'next/image';
 import Link from 'next/link';
 import ButtonPrimary from '@/shared/ButtonPrimary';
@@ -16,7 +16,7 @@ export interface CarCardProps {
   size?: 'default' | 'small';
 }
 
-const DEMO_DATA: CarDataType = DEMO_CAR_LISTINGS[0];
+const DEMO_DATA: CarDataType = DEMO_CARS_LIST[0];
 
 const CarCard: FC<CarCardProps> = ({
   size = 'small',
@@ -41,7 +41,7 @@ const CarCard: FC<CarCardProps> = ({
   const renderSliderGallery = () => {
     return (
       <div className='relative w-full overflow-hidden'>
-        <GallerySlider
+        <CardImagesSlider
           ratioClass='aspect-w-4 aspect-h-3'
           galleryImgs={galleryImgs}
           href={href}

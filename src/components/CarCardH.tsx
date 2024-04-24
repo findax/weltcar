@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
-import { DEMO_CAR_LISTINGS } from '@/data/listings';
+import { DEMO_CARS_LIST } from '@/data/listings';
 import { CarDataType } from '@/data/types';
 import BtnLikeIcon from '@/components/BtnLikeIcon';
 import SaleOffBadge from '@/components/SaleOffBadge';
 import Badge from '@/shared/Badge';
 import Avatar from '@/shared/Avatar';
-import GallerySlider from '@/components/GallerySlider';
+import CardImagesSlider from '@/components/CardImagesSlider';
 import Image from 'next/image';
 import Link from 'next/link';
 import ButtonPrimary from '@/shared/ButtonPrimary';
@@ -16,7 +16,7 @@ export interface CarCardHProps {
   data?: CarDataType;
 }
 
-const DEMO_DATA: CarDataType = DEMO_CAR_LISTINGS[0];
+const DEMO_DATA: CarDataType = DEMO_CARS_LIST[0];
 
 const CarCardH: FC<CarCardHProps> = ({ className = '', data = DEMO_DATA }) => {
   const {
@@ -37,7 +37,7 @@ const CarCardH: FC<CarCardHProps> = ({ className = '', data = DEMO_DATA }) => {
     return (
       <div className='relative w-full flex items-center justify-center md:w-[45%] flex-shrink-0 border-r border-neutral-200/80 dark:border-neutral-700'>
         <div className='w-full'>
-          <GallerySlider
+          <CardImagesSlider
             ratioClass='aspect-w-6 aspect-h-4'
             galleryImgs={galleryImgs}
             href={href}

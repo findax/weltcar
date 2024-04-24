@@ -1,18 +1,18 @@
 'use client';
 
-import ListingImageGallery from '@/components/listing-image-gallery/ListingImageGallery';
+import CarImagesGallery from '@/components/car-images-gallery/CarImagesGallery';
 import React, { ReactNode, Suspense } from 'react';
 import MobileFooterSticky from './(components)/MobileFooterSticky';
-import { imageGallery as listingCarImageGallery } from './listing-car-detail/constant';
+import { CarImageGallery } from './car-details/constant';
 
-const DetailtLayout = ({ children }: { children: ReactNode }) => {
+const CarDetailsLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className='ListingDetailPage'>
+    <div className='CarDetailsPage'>
       <Suspense>
-        <ListingImageGallery images={listingCarImageGallery} />
+        <CarImagesGallery images={CarImageGallery} />
       </Suspense>
 
-      <div className='container ListingDetailPage__content'>{children}</div>
+      <div className='container CarDetailsPage__content'>{children}</div>
 
       {/* STICKY FOOTER MOBILE */}
       <MobileFooterSticky />
@@ -20,4 +20,4 @@ const DetailtLayout = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default DetailtLayout;
+export default CarDetailsLayout;

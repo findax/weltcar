@@ -10,12 +10,12 @@ export const NAVIGATION_DEMO: NavItemType[] = [
   },
   {
     id: ncNanoId(),
-    href: '/listing-car',
+    href: '/cars-list',
     name: 'Cars',
     type: 'dropdown',
     children: [
-      { id: ncNanoId(), href: '/listing-car', name: 'Cars List' },
-      { id: ncNanoId(), href: '/listing-car-detail', name: 'Car Detail' },
+      { id: ncNanoId(), href: '/cars-list', name: 'Cars List' },
+      { id: ncNanoId(), href: '/car-details', name: 'Car Details' },
     ],
   },
   {

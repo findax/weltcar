@@ -33,9 +33,6 @@
 .nc-SectionClientSay .glide__bullet--active {
   @apply bg-neutral-700;
 }
-.nc-GallerySlider .glide__bullet--active {
-  @apply bg-white w-2 h-2;
-}
 
 //
 .nc-card-title {
@@ -90,36 +87,9 @@
     rgba(17, 17, 26, 0.05) 0px 8px 32px;
 }
 
-.ListingDetailPage {
+.CarDetailsPage {
   .nc-hero-field-focused {
     @apply rounded-3xl shadow-2xl;
-  }
-  &.nc-ListingExperiencesDetailPage {
-    .ExperiencesDateSingleInput .nc-hero-field-focused {
-      @apply rounded-r-none;
-    }
-    .listingExperiencesDetailPage__GuestsInput .nc-hero-field-focused {
-      @apply rounded-l-none;
-    }
-  }
-
-  .DateRangePickerInput_clearDates,
-  .SingleDatePickerInput_clearDate {
-    @apply rounded-full bg-neutral-200/90 dark:bg-white/10;
-    svg {
-      @apply w-2 fill-neutral-700 dark:fill-neutral-300;
-    }
-  }
-}
-
-.nc-ListingStayDetailPage__guestsInput {
-  .nc-hero-field-focused {
-    @apply rounded-t-none;
-  }
-}
-.nc-ListingStayDetailPage__stayDatesRangeInput {
-  .nc-hero-field-focused {
-    @apply rounded-b-none;
   }
 }
 
@@ -185,20 +155,12 @@ button.gm-control-active.gm-fullscreen-control {
   @apply rounded-xl #{!important};
 }
 
-//
-.nc-FiveStartIconForRate {
-  svg:hover ~ svg {
-    @apply text-neutral-300;
-  }
-}
-
-// LISTING PAGE DETAIL
-.listingSection__wrap {
+// DETAILS PAGE
+.detailsSection__wrap {
   @apply w-full flex flex-col sm:rounded-2xl border-b sm:border-t sm:border-l sm:border-r border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8 pb-10 px-0 sm:p-4 xl:p-8;
 }
 
-// LISTING PAGE DETAIL
-.listingSectionSidebar__wrap {
+.detailsSectionSidebar__wrap {
   @apply w-full flex flex-col rounded-2xl border-b border-t border-l border-r border-neutral-200 dark:border-neutral-700 space-y-6 xl:space-y-7 pb-10 p-2 sm:p-4 xl:px-8 xl:py-6;
 }
 

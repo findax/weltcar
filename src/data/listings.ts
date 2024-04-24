@@ -1,4 +1,4 @@
-import __carsListing from './jsons/__carsListing.json';
+import __carsList from './jsons/__carsList.json';
 import { CarDataType } from './types';
 import { DEMO_AUTHORS } from './authors';
 import car1 from '@/images/cars/1.png';
@@ -37,10 +37,10 @@ const carsImgs = [
   car16,
 ];
 
-const DEMO_CAR_LISTINGS = __carsListing.map((post, index): CarDataType => {
+const DEMO_CARS_LIST = __carsList.map((post, index): CarDataType => {
   return {
     ...post,
-    id: `carsListing_${index}_`,
+    id: `carsList_${index}_`,
     saleOff: !index ? '-20% today' : post.saleOff,
     isAds: !index ? true : post.isAds,
     author: DEMO_AUTHORS.filter((user) => user.id === post.authorId)[0],
@@ -49,4 +49,4 @@ const DEMO_CAR_LISTINGS = __carsListing.map((post, index): CarDataType => {
   };
 });
 
-export { DEMO_CAR_LISTINGS };
+export { DEMO_CARS_LIST };
