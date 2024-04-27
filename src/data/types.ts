@@ -61,79 +61,18 @@ export type TwMainColor =
   | 'gray';
 
 //
-export interface StayDataType {
-  id: string | number;
-  author: AuthorType;
-  date: string;
-  href: Route<string>;
-  title: string;
-  featuredImage: StaticImageData | string;
-  commentCount: number;
-  viewCount: number;
-  address: string;
-  reviewStart: number;
-  reviewCount: number;
-  like: boolean;
-  galleryImgs: (StaticImageData | string)[];
-  price: string;
-  maxGuests: number;
-  bedrooms: number;
-  bathrooms: number;
-  saleOff?: string | null;
-  isAds: boolean | null;
-  map: {
-    lat: number;
-    lng: number;
-  };
-}
-
-//
-export interface ExperiencesDataType {
-  id: string | number;
-  author: AuthorType;
-  date: string;
-  href: Route<string>;
-  title: string;
-  featuredImage: StaticImageData | string;
-  commentCount: number;
-  viewCount: number;
-  address: string;
-  reviewStart: number;
-  reviewCount: number;
-  like: boolean;
-  galleryImgs: (StaticImageData | string)[];
-  price: string;
-  maxGuests: number;
-  saleOff?: string | null;
-  isAds: boolean | null;
-  map: {
-    lat: number;
-    lng: number;
-  };
-}
-
-//
 export interface CarDataType {
   id: string | number;
-  author: AuthorType;
   date: string;
-  href: Route<string>;
-  title: string;
-  featuredImage: StaticImageData | string;
-  commentCount: number;
-  viewCount: number;
-  address: string;
-  reviewStart: number;
-  reviewCount: number;
-  like: boolean;
+  brand: string;
+  model: string;
   galleryImgs: (StaticImageData | string)[];
   price: string;
-  seats: number;
-  gearshift: string;
   saleOff?: string | null;
   isAds: boolean | null;
-  map: {
-    lat: number;
-    lng: number;
-  };
+}
+
+export interface CarGalleryImage {
+  id: number;
+  url: string;
 }

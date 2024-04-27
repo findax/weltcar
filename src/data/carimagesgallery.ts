@@ -1,4 +1,4 @@
-import { CarGalleryImage } from '@/components/car-images-gallery/utils/types';
+import { CarGalleryImage } from '@/data/types';
 import carUtilities1 from '@/images/carUtilities/1.png';
 import carUtilities2 from '@/images/carUtilities/2.png';
 import carUtilities3 from '@/images/carUtilities/3.png';
@@ -33,17 +33,6 @@ export const PHOTOS: string[] = [
   'https://images.pexels.com/photos/136872/pexels-photo-136872.jpeg?auto=compress&cs=tinysrgb&w=1600',
 ];
 
-export const includes_demo = [
-  { name: 'Free cancellation up to 48 hours before pick-up' },
-  { name: 'Collision Damage Waiver with $214 deductible' },
-  { name: 'Theft Protection with $19,999 excess' },
-  { name: 'Unlimited mileage' },
-  {
-    name: 'Car interiors and exteriors cleaned with disinfectant before pick-up',
-  },
-  { name: 'Masks are required at the pick-up location' },
-];
-
 export const Amenities_demos = [
   { name: '59 MPG Combined, 58 City/60 Hwy', icon: carUtilities1 },
   {
@@ -58,7 +47,7 @@ export const Amenities_demos = [
   { name: 'Blind-Spot Collision Warning (BCW)', icon: carUtilities8 },
 ];
 
-export const CarImageGallery: CarGalleryImage[] = [...PHOTOS].map(
+export const DEMO_CAR_IMAGES_GALLERY: CarGalleryImage[] = [...PHOTOS].map(
   (item, index): CarGalleryImage => {
     return {
       id: index,

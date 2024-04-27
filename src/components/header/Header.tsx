@@ -28,7 +28,7 @@ const Header = () => {
   return (
     <header
       className={`z-30 sticky hidden md:block top-0 bg-white dark:bg-neutral-900 shadow-sm dark:border-b dark:border-neutral-700 ${
-        scrolled && 'z-50 shadow-md bg-opacity-80 backdrop-blur'
+        scrolled && 'z-50 shadow-md bg-opacity-90 backdrop-blur'
       } duration-300`}
     >
       <div className='px-4 lg:container h-20 relative flex justify-between'>

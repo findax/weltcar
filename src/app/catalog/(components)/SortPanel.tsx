@@ -19,7 +19,7 @@ const SortPanel: FC<SortPanelProps> = ({ handleClick, isGrid }) => {
     <div className='col-span-12 bg-white dark:bg-neutral-900 mb-4 py-2 px-6 lg:mb-6 border border-neutral-200 dark:border-neutral-700 rounded-xl'>
       <ul className='flex justify-between items-center flex-wrap gap-3 '>
         <li className='hidden lg:block'>
-          <p className='mb-0 clr-neutral-500'>Showing 5 of 20 Results</p>
+          <p className='mb-0 clr-neutral-500'>124 Results</p>
         </li>
         <li className='lg:hidden'>
           <FiltersMobile />

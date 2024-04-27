@@ -1,6 +1,5 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import SortPanel from './SortPanel';
-import { DEMO_CARS_LIST } from '@/data/listings';
 import { CarDataType } from '@/data/types';
 import Pagination from '@/shared/Pagination';
 import CarCard from '@/components/CarCard';
@@ -8,13 +7,7 @@ import CarCardH from '@/components/CarCardH';
 import CarCardHSkeleton from '@/components/CarCardHSkeleton';
 import CarCardSkeleton from '@/components/CarCardSkeleton';
 
-export interface CarsListPageProps {
-  carsList?: CarDataType[];
-}
-
-const DEMO_DATA: CarDataType[] = DEMO_CARS_LIST.filter((_, i) => i < 12);
-
-const CarsList: FC<CarsListPageProps> = ({ carsList = DEMO_DATA }) => {
+const CarsList = ({ carsList }: { carsList: CarDataType[] }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isGrid, setIsGrid] = useState(true);
   const ww = typeof window !== 'undefined' ? window.innerWidth : 1000;
@@ -35,7 +28,7 @@ const CarsList: FC<CarsListPageProps> = ({ carsList = DEMO_DATA }) => {
         ) : (
           <div className='flex flex-col gap-4 lg:gap-6'>
             {carsList.map((car) => (
-              <CarCardH key={car.id} data={car} />
+              <CarCardH key={car.id} carData={car} />
             ))}
           </div>
         )
@@ -44,7 +37,7 @@ const CarsList: FC<CarsListPageProps> = ({ carsList = DEMO_DATA }) => {
       ) : (
         <div className='grid grid-cols-1 gap-4 lg:gap-6 sm:grid-cols-2'>
           {carsList.map((car) => (
-            <CarCard key={car.id} data={car} />
+            <CarCard key={car.id} carData={car} />
           ))}
         </div>
       )}

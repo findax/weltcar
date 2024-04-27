@@ -1,10 +1,10 @@
 import React from 'react';
-import SectionHero from '@/app/(server-components)/SectionHero';
+import SectionHero from '@/components/SectionHero';
 import BgGlassmorphism from '@/components/BgGlassmorphism';
 import BackgroundSection from '@/components/BackgroundSection';
 import SectionHowItWork from '@/components/SectionHowItWork';
 import SectionSubscribe from '@/components/SectionSubscribe';
-import SectionBecomeAnAuthor from '@/components/SectionBecomeAnAuthor';
+import SectionWhyChooseUs from '@/components/SectionWhyChooseUs';
 import SectionVideos from '@/components/SectionVideos';
 import SectionClientSay from '@/components/SectionClientSay';
 
@@ -26,7 +26,7 @@ function PageHome() {
 
         <div className='relative py-16'>
           <BackgroundSection />
-          <SectionBecomeAnAuthor />
+          <SectionWhyChooseUs />
         </div>
 
         <SectionVideos />

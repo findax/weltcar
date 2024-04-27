@@ -12,16 +12,14 @@ import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
-import { DEMO_IMAGE } from '../CarImagesGallery';
 import { variants } from '@/utils/animationVariants';
 import downloadPhoto from '../utils/downloadPhoto';
 import { range } from '../utils/range';
-import type { CarGalleryImage } from '../utils/types';
-import Twitter from './Icons/Twitter';
+import type { CarGalleryImage } from '@/data/types';
 
-interface SharedModalProps {
+interface CarDetailsSliderProps {
   index: number;
-  images?: CarGalleryImage[];
+  images: CarGalleryImage[];
   currentPhoto?: CarGalleryImage;
   changePhotoId: (newVal: number) => void;
   closeModal: () => void;
@@ -29,15 +27,15 @@ interface SharedModalProps {
   direction?: number;
 }
 
-export default function SharedModal({
+export default function CarDetailsSlider({
   index,
-  images = DEMO_IMAGE,
+  images,
   changePhotoId,
   closeModal,
   navigation,
   currentPhoto,
   direction,
-}: SharedModalProps) {
+}: CarDetailsSliderProps) {
   const [loaded, setLoaded] = useState(false);
 
   let filteredImages = images?.filter((img: CarGalleryImage) =>

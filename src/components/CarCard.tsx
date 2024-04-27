@@ -1,57 +1,22 @@
-import React, { FC } from 'react';
-import { DEMO_CARS_LIST } from '@/data/listings';
 import { CarDataType } from '@/data/types';
 import BtnLikeIcon from '@/components/BtnLikeIcon';
 import SaleOffBadge from '@/components/SaleOffBadge';
 import Badge from '@/shared/Badge';
-import CardImagesSlider from '@/components/CardImagesSlider';
-import Image from 'next/image';
+import CardSlider from '@/components/CardSlider';
 import Link from 'next/link';
 import ButtonPrimary from '@/shared/ButtonPrimary';
 import numberWithComma from '@/utils/numberWithComma';
 
-export interface CarCardProps {
-  className?: string;
-  data?: CarDataType;
-  size?: 'default' | 'small';
-}
-
-const DEMO_DATA: CarDataType = DEMO_CARS_LIST[0];
-
-const CarCard: FC<CarCardProps> = ({
+const CarCard = ({
   size = 'small',
   className = '',
-  data = DEMO_DATA,
+  carData,
+}: {
+  size?: 'default' | 'small';
+  className?: string;
+  carData: CarDataType;
 }) => {
-  const {
-    featuredImage,
-    galleryImgs,
-    title,
-    href,
-    like,
-    saleOff,
-    isAds,
-    price,
-    reviewStart,
-    reviewCount,
-    seats,
-    gearshift,
-  } = data;
-
-  const renderSliderGallery = () => {
-    return (
-      <div className='relative w-full overflow-hidden'>
-        <CardImagesSlider
-          ratioClass='aspect-w-4 aspect-h-3'
-          galleryImgs={galleryImgs}
-          href={href}
-          galleryClass='rounded-xl'
-        />
-        {/* <BtnLikeIcon isLiked={like} className='absolute right-3 top-3 z-[1]' /> */}
-        {/* {saleOff && <SaleOffBadge className='absolute left-3 top-3' />} */}
-      </div>
-    );
-  };
+  const { id, galleryImgs, brand, model, saleOff, isAds, price } = carData;
 
   const renderContent = () => {
     return (
@@ -61,18 +26,20 @@ const CarCard: FC<CarCardProps> = ({
             <div className='flex items-center space-x-2'>
               {/* {isAds && <Badge name='ADS' color='green' />} */}
               <h2 className='capitalize text-xl font-semibold'>
-                <span className='line-clamp-1'>{title}</span>
+                <span className='line-clamp-1'>
+                  {brand} {model}
+                </span>
               </h2>
             </div>
             <span className='text-xl font-semibold'>2024</span>
           </div>
-          {/* <div className='flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-2'>
-            <span className=''>{seats} seats</span>
-            <span>-</span>
-            <span className=''>{gearshift} </span>
-          </div> */}
+          <div className='flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-2'>
+            <span className=''>{id}</span>
+            {/* <span>-</span>
+            <span className=''>{gearshift} </span> */}
+          </div>
 
-          <div className='columns-1 md:columns-2'>
+          {/* <div className='columns-1 md:columns-2'>
             <span className='flex items-center gap-2 pt-2'>
               <svg fill='#22804A' height='24' width='24' viewBox='0 0 24 24'>
                 <path d='M8,10H16V18H11L9,16H7V11M7,4V6H10V8H7L5,10V13H3V10H1V18H3V15H5V18H8L10,20H18V16H20V19H23V9H20V12H18V8H12V6H15V4H7Z'></path>
@@ -100,7 +67,7 @@ const CarCard: FC<CarCardProps> = ({
               </svg>
               Automatic
             </span>
-          </div>
+          </div> */}
         </div>
 
         {/* <div className='w-14 border-b border-neutral-100 dark:border-neutral-800'></div> */}
@@ -135,8 +102,17 @@ const CarCard: FC<CarCardProps> = ({
       data-nc-id='CarCard'
     >
       <div className='relative rounded-2xl p-2'>
-        {renderSliderGallery()}
-        <Link href={href}>{renderContent()}</Link>
+        <div className='relative w-full overflow-hidden'>
+          <CardSlider
+            ratioClass='aspect-w-4 aspect-h-3'
+            galleryImgs={galleryImgs}
+            id={id}
+            galleryClass='rounded-xl'
+          />
+          {/* <BtnLikeIcon isLiked={like} className='absolute right-3 top-3 z-[1]' /> */}
+          {/* {saleOff && <SaleOffBadge className='absolute left-3 top-3' />} */}
+        </div>
+        <Link href={`/car-details/${id}`}>{renderContent()}</Link>
       </div>
     </div>
   );

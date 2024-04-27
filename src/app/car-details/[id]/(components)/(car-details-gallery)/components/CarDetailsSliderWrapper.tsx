@@ -5,12 +5,12 @@ import { motion } from 'framer-motion';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useRef, useState } from 'react';
 import useKeypress from 'react-use-keypress';
-import { getNewParam } from '../CarImagesGallery';
-import type { CarGalleryImage } from '../utils/types';
-import SharedModal from './SharedModal';
+import { getNewParam } from '../CarDetailsGallery';
+import type { CarGalleryImage } from '@/data/types';
+import CarDetailsSlider from './CarDetailsSlider';
 import { Route } from 'next';
 
-export default function CarImagesGalleryModal({
+export default function CarDetailsSliderWrapper({
   images,
   onClose,
 }: {
@@ -70,7 +70,7 @@ export default function CarImagesGalleryModal({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         />
-        <SharedModal
+        <CarDetailsSlider
           index={curIndex}
           direction={direction}
           images={images}

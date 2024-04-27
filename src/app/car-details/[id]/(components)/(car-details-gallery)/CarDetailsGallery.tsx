@@ -1,36 +1,16 @@
 'use client';
 
-import './styles/index.css';
+import { Fragment, useEffect, useRef } from 'react';
+import { Route } from 'next';
 import Image from 'next/image';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { FC, Fragment, useEffect, useRef } from 'react';
-import CarImagesGalleryModal from './components/CarImagesGalleryModal';
-import type { CarGalleryImage } from './utils/types';
+import CarDetailsSliderWrapper from './components/CarDetailsSliderWrapper';
+import ShareSaveBtns from '@/components/ShareSaveBtns';
+import type { CarGalleryImage } from '@/data/types';
 import { useLastViewedPhoto } from './utils/useLastViewedPhoto';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import { Dialog, Transition } from '@headlessui/react';
-import ShareSaveBtns from '../ShareSaveBtns';
-import { Route } from 'next';
-
-const PHOTOS: string[] = [
-  'https://images.pexels.com/photos/6129967/pexels-photo-6129967.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
-  'https://images.pexels.com/photos/7163619/pexels-photo-7163619.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-  'https://images.pexels.com/photos/6527036/pexels-photo-6527036.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-  'https://images.pexels.com/photos/6969831/pexels-photo-6969831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-  'https://images.pexels.com/photos/6438752/pexels-photo-6438752.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-  'https://images.pexels.com/photos/1320686/pexels-photo-1320686.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-  'https://images.pexels.com/photos/261394/pexels-photo-261394.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-  'https://images.pexels.com/photos/2861361/pexels-photo-2861361.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-];
-
-export const DEMO_IMAGE: CarGalleryImage[] = [...PHOTOS].map(
-  (item, index): CarGalleryImage => {
-    return {
-      id: index,
-      url: item,
-    };
-  }
-);
+import './styles/index.css';
 
 export const getNewParam = ({
   paramName = 'photoId',
@@ -44,11 +24,7 @@ export const getNewParam = ({
   return params.toString();
 };
 
-interface Props {
-  images?: CarGalleryImage[];
-}
-
-const CarImagesGallery: FC<Props> = ({ images = DEMO_IMAGE }) => {
+const CarDetailsGallery = ({ images }: { images: CarGalleryImage[] }) => {
   const searchParams = useSearchParams();
   const isShowModal = searchParams?.get('modal') === 'CAR_PHOTO_TOUR';
   const photoId = searchParams?.get('photoId');
@@ -76,7 +52,7 @@ const CarImagesGallery: FC<Props> = ({ images = DEMO_IMAGE }) => {
     return (
       <div className=' '>
         {photoId && (
-          <CarImagesGalleryModal
+          <CarDetailsSliderWrapper
             images={images}
             onClose={() => {
               // @ts-ignore
@@ -164,4 +140,4 @@ const CarImagesGallery: FC<Props> = ({ images = DEMO_IMAGE }) => {
   );
 };
 
-export default CarImagesGallery;
+export default CarDetailsGallery;

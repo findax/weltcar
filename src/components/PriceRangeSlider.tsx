@@ -102,7 +102,7 @@ export default function PriceRangeSlider() {
         /> */}
       </div>
 
-      <div className='dark:border-t dark:border-neutral-800 flex items-center justify-between'>
+      <div className='flex items-center justify-between'>
         <ButtonThird onClick={resetRange} sizeClass='px-4 py-2 sm:px-5'>
           Clear
         </ButtonThird>

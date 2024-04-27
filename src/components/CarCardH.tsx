@@ -1,53 +1,20 @@
-import React, { FC } from 'react';
-import { DEMO_CARS_LIST } from '@/data/listings';
 import { CarDataType } from '@/data/types';
 import BtnLikeIcon from '@/components/BtnLikeIcon';
 import SaleOffBadge from '@/components/SaleOffBadge';
 import Badge from '@/shared/Badge';
-import Avatar from '@/shared/Avatar';
-import CardImagesSlider from '@/components/CardImagesSlider';
-import Image from 'next/image';
+import CardSlider from '@/components/CardSlider';
 import Link from 'next/link';
 import ButtonPrimary from '@/shared/ButtonPrimary';
 import numberWithComma from '@/utils/numberWithComma';
 
-export interface CarCardHProps {
+const CarCardH = ({
+  className = '',
+  carData,
+}: {
   className?: string;
-  data?: CarDataType;
-}
-
-const DEMO_DATA: CarDataType = DEMO_CARS_LIST[0];
-
-const CarCardH: FC<CarCardHProps> = ({ className = '', data = DEMO_DATA }) => {
-  const {
-    galleryImgs,
-    title,
-    href,
-    like,
-    saleOff,
-    isAds,
-    price,
-    reviewStart,
-    reviewCount,
-    seats,
-    gearshift,
-  } = data;
-
-  const renderSliderGallery = () => {
-    return (
-      <div className='relative w-full flex items-center justify-center md:w-[45%] flex-shrink-0 border-r border-neutral-200/80 dark:border-neutral-700'>
-        <div className='w-full'>
-          <CardImagesSlider
-            ratioClass='aspect-w-6 aspect-h-4'
-            galleryImgs={galleryImgs}
-            href={href}
-          />
-        </div>
-        {/* <BtnLikeIcon isLiked={like} className='absolute right-3 top-3' /> */}
-        {/* {saleOff && <SaleOffBadge className='absolute left-3 top-3' />} */}
-      </div>
-    );
-  };
+  carData: CarDataType;
+}) => {
+  const { id, galleryImgs, brand, model, saleOff, isAds, price } = carData;
 
   const renderContent = () => {
     return (
@@ -57,18 +24,20 @@ const CarCardH: FC<CarCardHProps> = ({ className = '', data = DEMO_DATA }) => {
             <div className='flex items-center space-x-2'>
               {/* {isAds && <Badge name='ADS' color='green' />} */}
               <h2 className='text-xl font-semibold'>
-                <span className='line-clamp-1'>{title}</span>
+                <span className='line-clamp-1'>
+                  {brand} {model}
+                </span>
               </h2>
             </div>
             <span className='text-xl font-semibold'>2025</span>
           </div>
-          {/* <div className='flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-2'>
-            <span className=''>{seats} seats</span>
-            <span>-</span>
-            <span className=''>{gearshift} </span>
-          </div> */}
+          <div className='flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-2'>
+            <span className=''>{id}</span>
+            {/* <span>-</span>
+            <span className=''>{gearshift} </span> */}
+          </div>
 
-          <div className='columns-1 md:columns-2'>
+          {/* <div className='columns-1 md:columns-2'>
             <span className='flex items-center gap-2 pt-2'>
               <svg fill='#22804A' height='24' width='24' viewBox='0 0 24 24'>
                 <path d='M8,10H16V18H11L9,16H7V11M7,4V6H10V8H7L5,10V13H3V10H1V18H3V15H5V18H8L10,20H18V16H20V19H23V9H20V12H18V8H12V6H15V4H7Z'></path>
@@ -96,7 +65,7 @@ const CarCardH: FC<CarCardHProps> = ({ className = '', data = DEMO_DATA }) => {
               </svg>
               Automatic
             </span>
-          </div>
+          </div> */}
         </div>
 
         <div className='space-y-2'>
@@ -128,8 +97,18 @@ const CarCardH: FC<CarCardHProps> = ({ className = '', data = DEMO_DATA }) => {
       className={`relative bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-700 rounded-2xl overflow-hidden ${className}`}
     >
       <div className='flex flex-col md:flex-row'>
-        {renderSliderGallery()}
-        <Link href={href} className='w-full'>
+        <div className='relative w-full flex items-center justify-center md:w-[45%] flex-shrink-0 border-r border-neutral-200/80 dark:border-neutral-700'>
+          <div className='w-full'>
+            <CardSlider
+              ratioClass='aspect-w-6 aspect-h-4'
+              galleryImgs={galleryImgs}
+              id={id}
+            />
+          </div>
+          {/* <BtnLikeIcon isLiked={like} className='absolute right-3 top-3' /> */}
+          {/* {saleOff && <SaleOffBadge className='absolute left-3 top-3' />} */}
+        </div>
+        <Link href={`/car-details/${id}`} className='w-full'>
           {renderContent()}
         </Link>
       </div>

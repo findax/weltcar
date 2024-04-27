@@ -9,27 +9,25 @@ import { variants } from '@/utils/animationVariants';
 import Link from 'next/link';
 import { Route } from '@/routers/types';
 
-export interface CardImagesSliderProps {
+export interface CardSliderProps {
+  id: string | number;
   className?: string;
   galleryImgs: (StaticImageData | string)[];
   ratioClass?: string;
-  // uniqueID: string;
-  href?: Route<string>;
   imageClass?: string;
   galleryClass?: string;
   navigation?: boolean;
 }
 
-export default function CardImagesSlider({
+export default function CardSlider({
+  id,
   className = '',
   galleryImgs,
   ratioClass = 'aspect-w-4 aspect-h-3',
   imageClass = '',
-  // uniqueID = "uniqueID",
   galleryClass = '',
-  href = '/car-details',
   navigation = true,
-}: CardImagesSliderProps) {
+}: CardSliderProps) {
   const [loaded, setLoaded] = useState(false);
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -71,7 +69,7 @@ export default function CardImagesSlider({
         {/* Main image */}
         <div className={`w-full overflow-hidden ${galleryClass}`}>
           <Link
-            href={href}
+            href={`/car-details/${id}`}
             className={`relative flex items-center justify-center ${ratioClass}`}
           >
             <AnimatePresence initial={false} custom={direction}>
@@ -126,15 +124,16 @@ export default function CardImagesSlider({
           {/* Bottom Nav bar */}
           <div className='absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-neutral-900 opacity-50 rounded-b-lg'></div>
           <div className='flex items-center justify-center absolute bottom-2 left-1/2 transform -translate-x-1/2 space-x-1.5'>
-            {images.map((_, i) => (
-              <button
-                className={`w-1.5 h-1.5 rounded-full ${
-                  i === index ? 'bg-white' : 'bg-white/60 '
-                }`}
-                onClick={() => changePhotoId(i)}
-                key={i}
-              />
-            ))}
+            {images.length > 1 &&
+              images.map((_, i) => (
+                <button
+                  className={`w-1.5 h-1.5 rounded-full ${
+                    i === index ? 'bg-white' : 'bg-white/60 '
+                  }`}
+                  onClick={() => changePhotoId(i)}
+                  key={i}
+                />
+              ))}
           </div>
         </>
       </div>

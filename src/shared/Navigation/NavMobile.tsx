@@ -95,7 +95,7 @@ const NavMobile: React.FC<NavMobileProps> = ({
         ) : (
           <Link
             rel='noopener noreferrer'
-            className='inline-flex items-center text-sm xl:text-base font-normal text-neutral-700 dark:text-neutral-300 py-2 px-4 xl:px-5 rounded-full hover:text-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200'
+            className='flex w-full px-4 font-medium uppercase tracking-wide text-sm hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg'
             href={item.href || '/'}
           >
             <span className='py-2.5 pr-3 block w-full'>{item.name}</span>

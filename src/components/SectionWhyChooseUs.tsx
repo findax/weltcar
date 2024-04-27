@@ -3,20 +3,21 @@ import rightImgDemo from '@/images/BecomeAnAuthorImg.png';
 import ButtonPrimary from '@/shared/ButtonPrimary';
 import Logo from '@/shared/Logo';
 import Image from 'next/image';
+import Link from 'next/link';
 
-export interface SectionBecomeAnAuthorProps {
+export interface SectionWhyChooseUsProps {
   className?: string;
   rightImg?: string;
 }
 
-const SectionBecomeAnAuthor: FC<SectionBecomeAnAuthorProps> = ({
+const SectionWhyChooseUs: FC<SectionWhyChooseUsProps> = ({
   className = '',
   rightImg = rightImgDemo,
 }) => {
   return (
     <div
-      className={`nc-SectionBecomeAnAuthor relative flex flex-col lg:flex-row items-center  ${className}`}
-      data-nc-id='SectionBecomeAnAuthor'
+      className={`nc-SectionWhyChooseUs relative flex flex-col lg:flex-row items-center  ${className}`}
+      data-nc-id='SectionWhyChooseUs'
     >
       <div className='flex-shrink-0 mb-16 lg:mb-0 lg:mr-10 lg:w-2/5'>
         <Logo className='w-48' />
@@ -28,7 +29,11 @@ const SectionBecomeAnAuthor: FC<SectionBecomeAnAuthorProps> = ({
           booking accommodation, resort villas, hotels, private houses,
           apartments... becomes fast, convenient and easy.
         </span>
-        <ButtonPrimary className='mt-6 sm:mt-11'>Choose your car</ButtonPrimary>
+        <Link href='/catalog'>
+          <ButtonPrimary className='mt-6 sm:mt-11'>
+            Choose your car
+          </ButtonPrimary>
+        </Link>
       </div>
       <div className='flex-grow'>
         <Image alt='' src={rightImg} />
@@ -37,4 +42,4 @@ const SectionBecomeAnAuthor: FC<SectionBecomeAnAuthorProps> = ({
   );
 };
 
-export default SectionBecomeAnAuthor;
+export default SectionWhyChooseUs;

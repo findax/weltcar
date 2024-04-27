@@ -1,5 +1,6 @@
 import heroRightImage from '@/images/hero-right-car.png';
 import Image from 'next/image';
+import Link from 'next/link';
 import ButtonPrimary from '@/shared/ButtonPrimary';
 
 export default function SectionHeroArchivePage() {
@@ -24,9 +25,11 @@ export default function SectionHeroArchivePage() {
             Accompanying us, you have a trip full of experiences. With Chisfis,
             booking accommodation, resort villas, hotels
           </span>
-          <ButtonPrimary sizeClass='px-5 py-4 sm:px-7'>
-            Start your search
-          </ButtonPrimary>
+          <Link href='/catalog'>
+            <ButtonPrimary sizeClass='px-5 py-4 sm:px-7'>
+              Start your search
+            </ButtonPrimary>
+          </Link>
         </div>
         <div className='flex-grow'>
           <Image
