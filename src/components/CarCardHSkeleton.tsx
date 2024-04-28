@@ -5,8 +5,11 @@ export default function CarCardHSkeleton() {
         <li className='bg-white dark:bg-transparent border border-neutral-200 dark:border-neutral-700 rounded-2xl overflow-hidden'>
           <div className='flex animate-pulse'>
             <div className='bg-neutral-300 dark:bg-neutral-700 w-2/5'></div>
-            <div className='flex-1 space-y-6 p-3'>
-              <div className='h-10 bg-neutral-300 dark:bg-neutral-700 rounded'></div>
+            <div className='flex-1 space-y-8 p-3'>
+              <div className='space-y-3'>
+                <div className='h-10 bg-neutral-300 dark:bg-neutral-700 rounded'></div>
+                <div className='h-6 w-2/5 bg-neutral-300 dark:bg-neutral-700 rounded'></div>
+              </div>
               <div className='space-y-3'>
                 <div className='flex justify-between'>
                   <div className='h-6 w-2/5 bg-neutral-300 dark:bg-neutral-700 rounded col-span-1'></div>

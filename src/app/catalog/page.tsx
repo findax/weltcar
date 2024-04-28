@@ -1,7 +1,6 @@
 'use client';
 
 import { Fragment, useState, useEffect } from 'react';
-import { XMarkIcon } from '@heroicons/react/24/outline';
 import { Transition, Dialog } from '@headlessui/react';
 import { DEMO_CAR_LIST } from '@/data/carlist';
 import Filter from './(components)/Filter';

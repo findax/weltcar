@@ -102,7 +102,6 @@ const CarCardH = ({
             <CardSlider
               ratioClass='aspect-w-6 aspect-h-4'
               galleryImgs={galleryImgs}
-              id={id}
             />
           </div>
           {/* <BtnLikeIcon isLiked={like} className='absolute right-3 top-3' /> */}
