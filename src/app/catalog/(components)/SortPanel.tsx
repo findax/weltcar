@@ -1,20 +1,21 @@
 import React, { FC } from 'react';
-import Link from 'next/link';
-import FiltersMobile from './FiltersMobile';
-import { usePathname } from 'next/navigation';
 import {
   ListBulletIcon,
-  MapPinIcon,
-  ArrowPathIcon,
   Squares2X2Icon,
+  AdjustmentsHorizontalIcon,
 } from '@heroicons/react/24/outline';
 
 export interface SortPanelProps {
-  handleClick: (isGrid: boolean) => void;
-  isGrid?: boolean;
+  handleIsGrid: (isGrid: boolean) => void;
+  isGrid: boolean;
+  openFilter: (value: boolean) => void;
 }
 
-const SortPanel: FC<SortPanelProps> = ({ handleClick, isGrid }) => {
+const SortPanel: FC<SortPanelProps> = ({
+  handleIsGrid,
+  isGrid,
+  openFilter,
+}) => {
   return (
     <div className='col-span-12 bg-white dark:bg-neutral-900 mb-4 py-2 px-6 lg:mb-6 border border-neutral-200 dark:border-neutral-700 rounded-xl'>
       <ul className='flex justify-between items-center flex-wrap gap-3 '>
@@ -22,7 +23,13 @@ const SortPanel: FC<SortPanelProps> = ({ handleClick, isGrid }) => {
           <p className='mb-0 clr-neutral-500'>124 Results</p>
         </li>
         <li className='lg:hidden'>
-          <FiltersMobile />
+          <button
+            onClick={() => openFilter(true)}
+            className={`focus:outline-none flex items-center justify-center py-2.5 rounded-lg text-neutral-700 dark:text-neutral-300`}
+          >
+            <span className='inline-block font-medium'>Filter</span>
+            <AdjustmentsHorizontalIcon className='h-5 w-5 ml-1' />
+          </button>
         </li>
         <li className='flex-grow'>
           <div className='hidden md:flex flex-wrap justify-center justify-content-lg-start justify-content-xl-center gap-4'>
@@ -30,7 +37,7 @@ const SortPanel: FC<SortPanelProps> = ({ handleClick, isGrid }) => {
               className={`flex items-center gap-2 clr-neutral-500 hover:text-primary ${
                 isGrid && 'text-primary-600 dark:text-primary-400'
               }`}
-              onClick={() => handleClick(true)}
+              onClick={() => handleIsGrid(true)}
             >
               <Squares2X2Icon className='w-5 h-5' />
               <span className='inline-block font-medium'>Grid</span>
@@ -39,7 +46,7 @@ const SortPanel: FC<SortPanelProps> = ({ handleClick, isGrid }) => {
               className={`flex items-center gap-2 clr-neutral-500 hover:text-primary ${
                 !isGrid && 'text-primary-600 dark:text-primary-400'
               }`}
-              onClick={() => handleClick(false)}
+              onClick={() => handleIsGrid(false)}
             >
               <ListBulletIcon className='w-5 h-5' />
               <span className='inline-block font-medium'>List</span>

@@ -85,7 +85,7 @@ const cabdeparturetimes = [
   },
 ];
 
-const Filters = ({ CloseButton }: { CloseButton?: React.ReactNode }) => {
+const Filter = ({ closeFilter }: { closeFilter: (value: boolean) => void }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   // const handleClearData = () => {
@@ -94,9 +94,16 @@ const Filters = ({ CloseButton }: { CloseButton?: React.ReactNode }) => {
   //   }
   // };
   return (
-    <div className='mb-36 bg-white dark:bg-neutral-900 p-4 lg:py-6 lg:px-8 rounded-2xl border border-neutral-200 dark:border-neutral-700'>
-      {CloseButton ? CloseButton : null}
-      <h4 className='mb-6 text-2xl font-semibold'> Filter </h4>
+    <div className='overflow-y-auto h-screen lg:visible lg:h-auto mb-36 bg-white dark:bg-neutral-900 p-4 lg:py-6 lg:px-8 lg:rounded-2xl border border-neutral-200 dark:border-neutral-700'>
+      <div className='flex justify-between items-center'>
+        <h4 className='mb-6 text-2xl font-semibold'>Filter</h4>
+        <button
+          onClick={() => closeFilter(false)}
+          className='p-3 -mt-5 -mr-3 rounded-full lg:hidden'
+        >
+          <XMarkIcon className='w-6 h-6' />
+        </button>
+      </div>
       <div className='border-t border-dashed border-neutral-200 dark:border-neutral-700'></div>
       <form className='py-6 relative w-full'>
         <Input
@@ -180,10 +187,10 @@ const Filters = ({ CloseButton }: { CloseButton?: React.ReactNode }) => {
 
       <ButtonPrimary sizeClass='w-full gap-2 px-4 py-3 sm:px-6 mt-6'>
         <ArrowPathIcon className='w-5 h-5' />
-        Reset Filters
+        Reset Filter
       </ButtonPrimary>
     </div>
   );
 };
 
-export default Filters;
+export default Filter;

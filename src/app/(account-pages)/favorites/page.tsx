@@ -2,7 +2,7 @@
 
 import { Tab } from '@headlessui/react';
 import CarCard from '@/components/CarCard';
-import { DEMO_CARS_LIST } from '@/data/carslist';
+import { DEMO_CAR_LIST } from '@/data/carlist';
 import { Fragment, useState } from 'react';
 import ButtonSecondary from '@/shared/ButtonSecondary';
 
@@ -11,7 +11,7 @@ const AccountSavelists = () => {
 
   const renderSection1 = () => {
     return (
-      <div className='space-y-6 sm:space-y-8'>
+      <div className='space-y-6 md:space-y-8'>
         <div>
           <h2 className='text-3xl font-semibold'>Favorites</h2>
         </div>
@@ -39,7 +39,7 @@ const AccountSavelists = () => {
             <Tab.Panels>
               <Tab.Panel className='mt-8'>
                 <div className='grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-                  {DEMO_CARS_LIST.filter((_, i) => i < 8).map(car => (
+                  {DEMO_CAR_LIST.filter((_, i) => i < 8).map(car => (
                     <CarCard key={car.id} carData={car} />
                   ))}
                 </div>
@@ -50,7 +50,7 @@ const AccountSavelists = () => {
             </Tab.Panels>
           </Tab.Group> */}
           <div className='grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-            {DEMO_CARS_LIST.filter((_, i) => i < 8).map((car) => (
+            {DEMO_CAR_LIST.filter((_, i) => i < 8).map((car) => (
               <CarCard key={car.id} carData={car} />
             ))}
           </div>

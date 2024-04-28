@@ -9,7 +9,7 @@ export interface AccountPageProps {}
 
 const AccountPage = () => {
   return (
-    <div className='space-y-6 sm:space-y-8'>
+    <div className='space-y-6 md:space-y-8'>
       {/* HEADING */}
       <h2 className='text-3xl font-semibold'>Account infomation</h2>
       <div className='w-14 border-b border-neutral-200 dark:border-neutral-700'></div>
@@ -42,24 +42,10 @@ const AccountPage = () => {
             />
           </div>
         </div>
-        <div className='flex-grow mt-10 md:mt-0 md:pl-16 max-w-3xl space-y-6'>
+        <div className='flex-grow mt-10 md:mt-0 md:pl-16 max-w-xl space-y-6'>
           <div>
             <Label>Name</Label>
             <Input className='mt-1.5' defaultValue='Eden Tuan' />
-          </div>
-          {/* ---- */}
-          <div>
-            <Label>Gender</Label>
-            <Select className='mt-1.5'>
-              <option value='Male'>Male</option>
-              <option value='Female'>Female</option>
-              <option value='Other'>Other</option>
-            </Select>
-          </div>
-          {/* ---- */}
-          <div>
-            <Label>Username</Label>
-            <Input className='mt-1.5' defaultValue='@eden_tuan' />
           </div>
           {/* ---- */}
           <div>
@@ -73,18 +59,13 @@ const AccountPage = () => {
           </div>
           {/* ---- */}
           <div>
-            <Label>Addess</Label>
-            <Input className='mt-1.5' defaultValue='New york, USA' />
+            <Label>City</Label>
+            <Input className='mt-1.5' defaultValue='Hamburg' />
           </div>
           {/* ---- */}
           <div>
             <Label>Phone number</Label>
             <Input className='mt-1.5' defaultValue='003 888 232' />
-          </div>
-          {/* ---- */}
-          <div>
-            <Label>About you</Label>
-            <Textarea className='mt-1.5' defaultValue='...' />
           </div>
           <div className='pt-2'>
             <ButtonPrimary>Update info</ButtonPrimary>

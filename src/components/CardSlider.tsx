@@ -6,11 +6,8 @@ import Image, { StaticImageData } from 'next/image';
 import { useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import { variants } from '@/utils/animationVariants';
-import Link from 'next/link';
-import { Route } from '@/routers/types';
 
 export interface CardSliderProps {
-  id: string | number;
   className?: string;
   galleryImgs: (StaticImageData | string)[];
   ratioClass?: string;
@@ -20,7 +17,6 @@ export interface CardSliderProps {
 }
 
 export default function CardSlider({
-  id,
   className = '',
   galleryImgs,
   ratioClass = 'aspect-w-4 aspect-h-3',
@@ -68,8 +64,7 @@ export default function CardSlider({
       <div className={`relative group/cardSlider ${className}`} {...handlers}>
         {/* Main image */}
         <div className={`w-full overflow-hidden ${galleryClass}`}>
-          <Link
-            href={`/car-details/${id}`}
+          <div
             className={`relative flex items-center justify-center ${ratioClass}`}
           >
             <AnimatePresence initial={false} custom={direction}>
@@ -92,7 +87,7 @@ export default function CardSlider({
                 />
               </motion.div>
             </AnimatePresence>
-          </Link>
+          </div>
         </div>
 
         {/* Buttons + bottom nav bar */}

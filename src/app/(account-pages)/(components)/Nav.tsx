@@ -19,7 +19,7 @@ export const Nav = () => {
             <Link
               key={item}
               href={item}
-              className={`block py-5 md:py-8 border-b-2 flex-shrink-0 capitalize ${
+              className={`block py-5 md:py-6 border-b-2 flex-shrink-0 capitalize ${
                 isActive
                   ? 'border-primary-500 font-medium'
                   : 'border-transparent'

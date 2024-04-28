@@ -1,5 +1,3 @@
-import React, { useState, useEffect } from 'react';
-import SortPanel from './SortPanel';
 import { CarDataType } from '@/data/types';
 import Pagination from '@/shared/Pagination';
 import CarCard from '@/components/CarCard';
@@ -7,27 +5,25 @@ import CarCardH from '@/components/CarCardH';
 import CarCardHSkeleton from '@/components/CarCardHSkeleton';
 import CarCardSkeleton from '@/components/CarCardSkeleton';
 
-const CarsList = ({ carsList }: { carsList: CarDataType[] }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isGrid, setIsGrid] = useState(true);
+const CarList = ({
+  CarList,
+  isLoading,
+  isGrid,
+}: {
+  CarList: CarDataType[];
+  isLoading: boolean;
+  isGrid: boolean;
+}) => {
   const ww = typeof window !== 'undefined' ? window.innerWidth : 1000;
 
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 2000);
-  // }, [isGrid]);
-
   return (
-    <div className='col-span-12 lg:col-span-8'>
-      <SortPanel handleClick={(value) => setIsGrid(value)} isGrid={isGrid} />
+    <>
       {ww > 767 && !isGrid ? (
         isLoading ? (
           <CarCardHSkeleton />
         ) : (
           <div className='flex flex-col gap-4 lg:gap-6'>
-            {carsList.map((car) => (
+            {CarList.map((car) => (
               <CarCardH key={car.id} carData={car} />
             ))}
           </div>
@@ -36,16 +32,16 @@ const CarsList = ({ carsList }: { carsList: CarDataType[] }) => {
         <CarCardSkeleton />
       ) : (
         <div className='grid grid-cols-1 gap-4 lg:gap-6 sm:grid-cols-2'>
-          {carsList.map((car) => (
+          {CarList.map((car) => (
             <CarCard key={car.id} carData={car} />
           ))}
         </div>
       )}
-      <div className='flex mt-16 justify-center items-center'>
+      <div className='flex my-8 md:my-14 justify-center items-center'>
         <Pagination />
       </div>
-    </div>
+    </>
   );
 };
 
-export default CarsList;
+export default CarList;
