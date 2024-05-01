@@ -35,7 +35,7 @@ const SortPanel: FC<SortPanelProps> = ({
           <div className='hidden md:flex flex-wrap justify-center justify-content-lg-start justify-content-xl-center gap-4'>
             <button
               className={`flex items-center gap-2 clr-neutral-500 hover:text-primary ${
-                isGrid && 'text-primary-600 dark:text-primary-400'
+                isGrid ? 'text-primary-600 dark:text-primary-400' : ''
               }`}
               onClick={() => handleIsGrid(true)}
             >
@@ -44,7 +44,7 @@ const SortPanel: FC<SortPanelProps> = ({
             </button>
             <button
               className={`flex items-center gap-2 clr-neutral-500 hover:text-primary ${
-                !isGrid && 'text-primary-600 dark:text-primary-400'
+                !isGrid ? 'text-primary-600 dark:text-primary-400' : ''
               }`}
               onClick={() => handleIsGrid(false)}
             >

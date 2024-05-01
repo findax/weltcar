@@ -2,8 +2,6 @@ import Label from '@/components/Label';
 import Avatar from '@/shared/Avatar';
 import ButtonPrimary from '@/shared/ButtonPrimary';
 import Input from '@/shared/Input';
-import Select from '@/shared/Select';
-import Textarea from '@/shared/Textarea';
 
 export interface AccountPageProps {}
 
@@ -11,7 +9,7 @@ const AccountPage = () => {
   return (
     <div className='space-y-6 md:space-y-8'>
       {/* HEADING */}
-      <h2 className='text-3xl font-semibold'>Account infomation</h2>
+      <h2 className='text-3xl font-semibold'>Account information</h2>
       <div className='w-14 border-b border-neutral-200 dark:border-neutral-700'></div>
       <div className='flex flex-col md:flex-row'>
         <div className='flex-shrink-0 flex items-start'>

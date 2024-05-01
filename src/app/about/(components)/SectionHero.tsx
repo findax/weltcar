@@ -1,5 +1,5 @@
+import { ReactNode } from 'react';
 import Image, { StaticImageData } from 'next/image';
-import React, { FC, ReactNode } from 'react';
 import ButtonPrimary from '@/shared/ButtonPrimary';
 
 export interface SectionHeroProps {
@@ -7,16 +7,16 @@ export interface SectionHeroProps {
   rightImg: StaticImageData;
   heading: ReactNode;
   subHeading: string;
-  btnText: string;
+  btnText?: string;
 }
 
-const SectionHero: FC<SectionHeroProps> = ({
+const SectionHero = ({
   className = '',
   rightImg,
   heading,
   subHeading,
   btnText,
-}) => {
+}:SectionHeroProps) => {
   return (
     <div className={`nc-SectionHero relative ${className}`}>
       <div className='flex flex-col lg:flex-row space-y-14 lg:space-y-0 lg:space-x-10 items-center relative text-center lg:text-left'>
@@ -27,7 +27,7 @@ const SectionHero: FC<SectionHeroProps> = ({
           <span className='block text-base xl:text-lg text-neutral-600 dark:text-neutral-400'>
             {subHeading}
           </span>
-          {!!btnText && <ButtonPrimary href='/login'>{btnText}</ButtonPrimary>}
+          {!!btnText && <ButtonPrimary >{btnText}</ButtonPrimary>}
         </div>
         <div className='flex-grow'>
           <Image className='w-full' src={rightImg} alt='' />

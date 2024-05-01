@@ -233,8 +233,8 @@ input[type='time']::-webkit-calendar-picker-indicator {
   }
 }
 
-.NavbarMobile--hide {
-  @apply translate-y-full;
+.nc-Header--hide {
+  @apply -translate-y-full;
 }
 
 @keyframes myblur {

@@ -23,7 +23,7 @@ const AccordionComponent: FC<AccordionProps> = ({
       >
         {title}
         <ChevronDownIcon
-          className={`w-6 h-6 duration-300 ${opened && 'rotate-180'}`}
+          className={`w-6 h-6 duration-300 ${opened ? 'rotate-180' : ''}`}
         />
       </button>
       <AnimateHeight duration={300} height={opened ? 'auto' : 0}>

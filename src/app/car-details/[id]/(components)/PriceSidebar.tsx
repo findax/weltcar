@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Modal from '@/shared/Modal';
 import ButtonPrimary from '@/shared/ButtonPrimary';
+import Authorization from '@/components/authorization/Authorization';
 
 export default function PriceSidebar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,9 +13,7 @@ export default function PriceSidebar() {
   return (
     <>
       <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-        <div className='h-full flex justify-center items-center'>
-          some content
-        </div>
+        <Authorization />
       </Modal>
       <div className='block flex-grow mt-14 lg:mt-0'>
         <div className='hidden lg:block sticky top-28'>

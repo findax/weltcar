@@ -116,7 +116,7 @@ const CarDetailsGallery = ({ images }: { images: CarGalleryImage[] }) => {
             >
               <ArrowLeftIcon className='w-6 h-6' />
             </button>
-            <ShareSaveBtns />
+            {/* <ShareSaveBtns /> */}
           </div>
 
           <div className='flex min-h-full items-center justify-center sm:p-4 pt-0 text-center'>
@@ -129,7 +129,7 @@ const CarDetailsGallery = ({ images }: { images: CarGalleryImage[] }) => {
               leaveFrom='opacity-100 translate-y-0'
               leaveTo='opacity-0 translate-y-5'
             >
-              <Dialog.Panel className='w-full max-w-screen-lg mx-auto transform p-4 pt-0 text-left transition-all '>
+              <Dialog.Panel className='w-full max-w-screen-2xl mx-auto transform p-4 pt-0 text-left transition-all '>
                 {renderContent()}
               </Dialog.Panel>
             </Transition.Child>

@@ -109,16 +109,15 @@ const LangDropdown: FC<LangDropdownProps> = ({
       {({ open, close }) => (
         <>
           <Menu.Button
-            className={`
-                ${open ? '' : 'text-opacity-80'}
-             self-center h-10 sm:h-12 px-3 py-1.5 inline-flex items-center text-sm text-gray-800 dark:text-neutral-200 font-medium hover:text-opacity-100 focus:outline-none `}
+            className="
+             self-center h-10 sm:h-12 px-3 py-1.5 inline-flex items-center text-sm md:text-lg font-medium rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none"
           >
-            <GlobeAltIcon className='w-5 h-5 opacity-80' />
+            <GlobeAltIcon className='w-5 h-5 md:w-7 md:h-7 opacity-80' />
             <span className='mx-1'>/</span>
-            <BanknotesIcon className='w-5 h-5 opacity-80' />
+            <BanknotesIcon className='w-5 h-5 md:w-7 md:h-7 opacity-80' />
             <ChevronDownIcon
               className={`${open ? '-rotate-180' : 'text-opacity-70'}
-                  ml-1 h-4 w-4  group-hover:text-opacity-80 transition ease-in-out duration-150`}
+                  ml-1 w-4 h-4 md:w-6 md:h-6 group-hover:text-opacity-80 transition ease-in-out duration-150`}
               aria-hidden='true'
             />
           </Menu.Button>

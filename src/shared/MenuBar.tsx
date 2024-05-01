@@ -9,7 +9,7 @@ export interface MenuBarProps {
   iconClassName?: string;
 }
 const MenuBar: React.FC<MenuBarProps> = ({
-  className = 'p-2.5 rounded-lg text-neutral-700 dark:text-neutral-300',
+  className = '',
   iconClassName = 'h-8 w-8',
 }) => {
   const [isVisable, setIsVisable] = useState(false);
@@ -68,7 +68,7 @@ const MenuBar: React.FC<MenuBarProps> = ({
     <>
       <button
         onClick={handleOpenMenu}
-        className={`focus:outline-none flex items-center justify-center ${className}`}
+        className={`self-center ml-1 focus:outline-none w-10 h-10 lg:hidden text-neutral-700 dark:text-neutral-300 ${className}`}
       >
         <Bars3Icon className={iconClassName} />
       </button>

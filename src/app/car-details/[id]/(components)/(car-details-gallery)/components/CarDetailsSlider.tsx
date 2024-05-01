@@ -70,7 +70,7 @@ export default function CarDetailsSlider({
         {...handlers}
       >
         {/* Main image */}
-        <div className='w-full overflow-hidden'>
+        <div className='w-full m-8 md:m-16 overflow-hidden'>
           <div className='relative flex aspect-[3/2] items-center justify-center'>
             <AnimatePresence initial={false} custom={direction}>
               <motion.div
@@ -105,20 +105,20 @@ export default function CarDetailsSlider({
                 <>
                   {index > 0 && (
                     <button
-                      className='absolute left-3 top-[calc(50%-16px)] rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-none'
+                      className='absolute left-0 md:left-3 inset-y-0 bg-black/50 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-none'
                       style={{ transform: 'translate3d(0, 0, 0)' }}
                       onClick={() => changePhotoId(index - 1)}
                     >
-                      <ChevronLeftIcon className='h-6 w-6' />
+                      <ChevronLeftIcon className='h-8 w-8 md:h-10 md:w-10' />
                     </button>
                   )}
                   {index + 1 < images.length && (
                     <button
-                      className='absolute right-3 top-[calc(50%-16px)] rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-none'
+                      className='absolute right-0 md:right-3 inset-y-0 bg-black/50 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-none'
                       style={{ transform: 'translate3d(0, 0, 0)' }}
                       onClick={() => changePhotoId(index + 1)}
                     >
-                      <ChevronRightIcon className='h-6 w-6' />
+                      <ChevronRightIcon className='h-8 w-8 md:h-10 md:w-10' />
                     </button>
                   )}
                 </>
@@ -131,7 +131,7 @@ export default function CarDetailsSlider({
                   title='Open fullsize version'
                   rel='noreferrer'
                 >
-                  <ArrowTopRightOnSquareIcon className='h-5 w-5' />
+                  <ArrowTopRightOnSquareIcon className='h-6 w-6 md:h-8 md:w-8' />
                 </a>
 
                 <button
@@ -141,18 +141,18 @@ export default function CarDetailsSlider({
                   className='rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white'
                   title='Download fullsize version'
                 >
-                  <ArrowDownTrayIcon className='h-5 w-5' />
+                  <ArrowDownTrayIcon className='h-6 w-6 md:h-8 md:w-8' />
                 </button>
               </div>
-              <div className='absolute top-0 left-0 flex items-center gap-2 p-3 text-white'>
+              <div className='absolute top-0 left-0 flex items-center gap-2 text-white'>
                 <button
                   onClick={closeModal}
-                  className='rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white'
+                  className='rounded-full bg-black/50 p-5 md:p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white'
                 >
                   {navigation ? (
-                    <XMarkIcon className='h-5 w-5' />
+                    <XMarkIcon className='h-6 w-6 md:h-10 md:w-10' />
                   ) : (
-                    <ArrowUturnLeftIcon className='h-5 w-5' />
+                    <ArrowUturnLeftIcon className='h-6 w-6 md:h-10 md:w-10' />
                   )}
                 </button>
               </div>
