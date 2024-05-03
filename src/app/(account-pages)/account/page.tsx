@@ -42,18 +42,18 @@ const AccountPage = () => {
         </div>
         <div className='flex-grow mt-10 md:mt-0 md:pl-16 max-w-xl space-y-6'>
           <div>
-            <Label>Name</Label>
-            <Input className='mt-1.5' defaultValue='Eden Tuan' />
+            <Label>First name</Label>
+            <Input className='mt-1.5' defaultValue='Jon' />
+          </div>
+          {/* ---- */}
+          <div>
+            <Label>Last name</Label>
+            <Input className='mt-1.5' defaultValue='Snow' />
           </div>
           {/* ---- */}
           <div>
             <Label>Email</Label>
-            <Input className='mt-1.5' defaultValue='example@email.com' />
-          </div>
-          {/* ---- */}
-          <div className='max-w-lg'>
-            <Label>Date of birth</Label>
-            <Input className='mt-1.5' type='date' defaultValue='1990-07-22' />
+            <Input className='mt-1.5' defaultValue='example@mail.com' />
           </div>
           {/* ---- */}
           <div>

@@ -31,7 +31,10 @@ const PageAbout: FC<PageAboutProps> = ({}) => {
 
         <SectionStatistic />
 
-        <SectionSubscribe />
+        <div className='relative py-16'>
+          <BackgroundSection />
+          <SectionSubscribe />
+        </div>
       </div>
     </div>
   );

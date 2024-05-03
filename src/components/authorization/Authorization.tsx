@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import SocialAuth from './components/SocialAuth';
-import Login from './components/Login';
+import SignIn from './components/Signin';
 import Registration from './components/Registration';
 
 export default function Authorization() {
-  const [page, setPage] = useState(<Login />);
+  const [page, setPage] = useState(<SignIn />);
   const [isActive, setActive] = useState(true);
 
   return (
@@ -19,10 +19,10 @@ export default function Authorization() {
           }`}
           onClick={() => {
             setActive(true);
-            setPage(<Login />);
+            setPage(<SignIn />);
           }}
         >
-          LOGIN
+          SIGN IN
         </button>
         <button
           id='signup'
@@ -37,7 +37,7 @@ export default function Authorization() {
           SIGN UP
         </button>
       </div>
-      <SocialAuth />
+      {/* <SocialAuth /> */}
       {page}
     </div>
   );

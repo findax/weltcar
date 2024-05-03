@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import SectionSubscribe from '@/components/SectionSubscribe';
+import BackgroundSection from '@/components/BackgroundSection';
 import SocialsList from '@/shared/SocialsList';
 import Label from '@/components/Label';
 import Input from '@/shared/Input';
@@ -86,7 +87,10 @@ const PageContact: FC<PageContactProps> = ({}) => {
 
       {/* OTHER SECTIONS */}
       <div className='container'>
-        <SectionSubscribe className='pb-24 lg:pb-32' />
+        <div className='relative py-16 mb-24 lg:md-32'>
+          <BackgroundSection />
+          <SectionSubscribe />
+        </div>
       </div>
     </div>
   );
