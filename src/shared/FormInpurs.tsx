@@ -128,7 +128,7 @@ export const FormikInput = ({
       <span className='text-neutral-800 dark:text-neutral-200'>{title}</span>
       <Field name={name} className={commonClass} {...args} />
       {error && touched ? (
-        <div className='text-left text-xs text-red-500 py-2'>
+        <div className='flex items-center text-left text-xs text-red-500 py-2'>
           <InformationCircleIcon className='w-4 inline-block mr-1' />
           {error}
         </div>
@@ -156,9 +156,9 @@ export const FormikPhoneNumberInput = ({
           <>
             <ReactInputMask
               {...field}
-              mask='+49 999 9999999'
+              mask='+49 999 999999999'
               maskChar={null}
-              placeholder='+49 888 32432432'
+              placeholder='+49 888 324324324'
               className={commonClass}
             />
             {error && touched ? (
