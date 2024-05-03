@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import SocialAuth from './components/SocialAuth';
-import SignIn from './components/Signin';
+import SignIn from './components/SignIn';
 import Registration from './components/Registration';
 
 export default function Authorization() {
