@@ -3,9 +3,11 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import ButtonPrimary from '@/shared/ButtonPrimary';
 import { FormikInput, FormikPasswordInput } from '@/shared/FormInpurs';
+import ForgotPassword from './ForgotPassword';
 
 export default function Signin() {
-  const [forgotPassword, setForgotPassword] = useState(false);
+  const [isOpenForgotPassword, setIsOpenForgotPassword] = useState(false);
+  const [emailValue, setEmailValue] = useState('');
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
@@ -19,12 +21,9 @@ export default function Signin() {
       .required('Password is required'),
   });
 
-  const forgotPasswordSchema = Yup.object().shape({
-    forgotPassword: Yup.string()
-      .trim()
-      .email('Invalid email')
-      .required('Email is required'),
-  });
+  const handleFormChange = (data: { name: string; value: string }) => {
+    data.name === 'email' && setEmailValue(data.value);
+  };
 
   return (
     <>
@@ -40,8 +39,11 @@ export default function Signin() {
           console.log(castValues);
         }}
       >
-        {({ values, errors, touched, isSubmitting }) => (
-          <Form className='grid grid-cols-1 gap-7'>
+        {({ errors, touched, isSubmitting }) => (
+          <Form
+            className='grid grid-cols-1 gap-7'
+            onChange={(e: any) => handleFormChange(e.target)}
+          >
             <FormikInput
               name='email'
               type='email'
@@ -70,49 +72,15 @@ export default function Signin() {
             <button
               type='button'
               className='-mt-4 text-sm underline font-medium'
-              onClick={() => setForgotPassword(!forgotPassword)}
+              onClick={() => setIsOpenForgotPassword(!isOpenForgotPassword)}
             >
-              {forgotPassword ? 'Cancel' : 'Forgot password?'}
+              {isOpenForgotPassword ? 'Cancel' : 'Forgot password?'}
             </button>
           </Form>
         )}
       </Formik>
 
-      {forgotPassword && (
-        <Formik
-          initialValues={{
-            forgotPassword: '',
-          }}
-          validationSchema={forgotPasswordSchema}
-          onSubmit={(values) => {
-            // same shape as initial values
-            const castValues = forgotPasswordSchema.cast(values);
-            console.log(castValues);
-          }}
-        >
-          {({ errors, touched, isSubmitting }) => (
-            <div className='grid grid-cols-1 gap-4'>
-              <FormikInput
-                name='forgotPassword'
-                type='email'
-                placeholder='example@mail.com'
-                title='Email address'
-                error={errors.forgotPassword}
-                touched={touched.forgotPassword}
-                // value={formData.email}
-                // onChange={handleChange('email')}
-              />
-              <ButtonPrimary
-                type='button'
-                disabled={isSubmitting}
-                loading={isSubmitting}
-              >
-                Send
-              </ButtonPrimary>
-            </div>
-          )}
-        </Formik>
-      )}
+      {isOpenForgotPassword && <ForgotPassword emailValue={emailValue} />}
     </>
   );
 }

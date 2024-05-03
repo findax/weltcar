@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, Fragment, useState } from 'react';
+import { ReactNode, Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import ButtonClose from '@/shared/ButtonClose';
 
@@ -17,11 +17,7 @@ export default function Modal({
   setIsModalOpen: (isModalOpen: boolean) => void;
   children: ReactNode;
 }) {
-  // let [isModalOpen, setisModalOpen] = useState(false);
-
-  function closeModal() {
-    setIsModalOpen(false);
-  }
+  const closeModal = () => setIsModalOpen(false);
 
   return (
     <Transition appear show={isModalOpen} as={Fragment}>

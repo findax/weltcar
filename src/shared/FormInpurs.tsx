@@ -113,7 +113,6 @@ interface FormikInputProps {
   title: string;
   error?: string;
   touched?: boolean;
-  value?: string;
 }
 
 export const FormikInput = ({
