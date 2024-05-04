@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Slider from 'rc-slider';
-// import Slider from '@mui/material/Slider';
 import ButtonPrimary from '@/shared/ButtonPrimary';
 import ButtonThird from '@/shared/ButtonThird';
 
 export default function PriceRangeSlider() {
-  const [rangePrices, setRangePrices] = React.useState<number[]>([0, 260000]);
+  const [rangePrices, setRangePrices] = useState<number[]>([0, 260000]);
   // const [rangePrices, setRangePrices] = useState([0, 260000]);
   const handleMinPriceChange = (e: React.FormEvent<HTMLInputElement>) => {
     if (e.currentTarget.value === '') {
@@ -45,7 +44,7 @@ export default function PriceRangeSlider() {
           </label>
           <div className='mt-1 relative rounded-md'>
             <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
-              <span className='text-neutral-500 sm:text-sm'>$</span>
+              <span className='text-neutral-500 sm:text-sm'>€</span>
             </div>
             <input
               type='text'
@@ -66,7 +65,7 @@ export default function PriceRangeSlider() {
           </label>
           <div className='mt-1 relative rounded-md'>
             <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
-              <span className='text-neutral-500 sm:text-sm'>$</span>
+              <span className='text-neutral-500 sm:text-sm'>€</span>
             </div>
             <input
               type='text'
@@ -89,17 +88,6 @@ export default function PriceRangeSlider() {
           value={rangePrices}
           onChange={(e) => setRangePrices(e as number[])}
         />
-        {/* <Slider
-          getAriaLabel={() => 'Price range'}
-          min={0}
-          max={260000}
-          value={rangePrices}
-          onChange={(event: Event, newValue: number | number[]) =>
-            setRangePrices(newValue as number[])
-          }
-          valueLabelDisplay='off'
-          className='block mx-auto w-11/12 text-primary-600 [&>*:last-child]:bg-primary-100 [&>*:nth-child(3)]:bg-primary-100 [&>*:last-child]:border-4 [&>*:nth-child(3)]:border-4 [&>*:last-child]:border-primary-600 [&>*:nth-child(3)]:border-primary-600'
-        /> */}
       </div>
 
       <div className='flex items-center justify-between'>

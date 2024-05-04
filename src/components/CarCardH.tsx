@@ -81,7 +81,7 @@ const CarCardH = ({
           </div>
         </div>
 
-        <div className='border-t border-dashed border-neutral-200 dark:border-neutral-700'></div>
+        <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
         <div className='flex justify-between items-center'>
           <span className='text-3xl font-semibold text-primary-400'>
             {numberWithComma(price)}€

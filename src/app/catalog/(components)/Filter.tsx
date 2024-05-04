@@ -94,7 +94,7 @@ const Filter = ({ closeFilter }: { closeFilter: (value: boolean) => void }) => {
   //   }
   // };
   return (
-    <div className='overflow-y-auto h-screen lg:visible lg:h-auto mb-36 bg-white dark:bg-neutral-900 p-4 lg:py-6 lg:px-8 lg:rounded-2xl border border-neutral-200 dark:border-neutral-700'>
+    <div className='overflow-y-auto h-screen lg:visible lg:h-auto pb-24 bg-white dark:bg-neutral-900 p-4 lg:py-6 lg:px-8 lg:rounded-2xl border border-neutral-200 dark:border-neutral-700'>
       <div className='flex justify-between items-center'>
         <h4 className='mb-6 text-2xl font-semibold'>Filter</h4>
         <button
@@ -104,7 +104,7 @@ const Filter = ({ closeFilter }: { closeFilter: (value: boolean) => void }) => {
           <XMarkIcon className='w-6 h-6' />
         </button>
       </div>
-      <div className='border-t border-dashed border-neutral-200 dark:border-neutral-700'></div>
+      <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
       <form className='py-6 relative w-full'>
         <Input
           type='text'
@@ -120,12 +120,12 @@ const Filter = ({ closeFilter }: { closeFilter: (value: boolean) => void }) => {
           <i className='las la-search text-xl'></i>
         </ButtonCircle>
       </form>
-      <div className='border-t border-dashed border-neutral-200 dark:border-neutral-700'></div>
+      <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
 
       <AccordionComponent title='Pricing scale' className='py-6'>
         <PriceRangeSlider />
       </AccordionComponent>
-      <div className='border-t border-dashed border-neutral-200 dark:border-neutral-700'></div>
+      <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
 
       <AccordionComponent title='Car Types' className='py-6'>
         <ul className='mb-6 flex flex-col gap-3'>
@@ -137,7 +137,7 @@ const Filter = ({ closeFilter }: { closeFilter: (value: boolean) => void }) => {
           ))}
         </ul>
       </AccordionComponent>
-      <div className='border-t border-dashed border-neutral-200 dark:border-neutral-700'></div>
+      <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
 
       <AccordionComponent title='Departure Time' className='py-6'>
         <ul className='mb-6 flex flex-col gap-3'>
@@ -149,7 +149,7 @@ const Filter = ({ closeFilter }: { closeFilter: (value: boolean) => void }) => {
           ))}
         </ul>
       </AccordionComponent>
-      <div className='border-t border-dashed border-neutral-200 dark:border-neutral-700'></div>
+      <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
 
       <AccordionComponent title='Bags' className='py-6'>
         <ul className='mb-6 flex flex-col gap-3'>
@@ -167,7 +167,7 @@ const Filter = ({ closeFilter }: { closeFilter: (value: boolean) => void }) => {
           </li>
         </ul>
       </AccordionComponent>
-      <div className='border-t border-dashed border-neutral-200 dark:border-neutral-700'></div>
+      <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
 
       <AccordionComponent title='Payment type' className='py-6'>
         <div className='mb-6 grid grid-cols-12 gap-4'>
@@ -183,7 +183,7 @@ const Filter = ({ closeFilter }: { closeFilter: (value: boolean) => void }) => {
           </div>
         </div>
       </AccordionComponent>
-      <div className='border-t border-dashed border-neutral-200 dark:border-neutral-700'></div>
+      <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
 
       <ButtonPrimary sizeClass='w-full gap-2 px-4 py-3 sm:px-6 mt-6'>
         <ArrowPathIcon className='w-5 h-5' />

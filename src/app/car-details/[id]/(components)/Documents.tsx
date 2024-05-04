@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import { Amenities_demos } from '@/data/carimagesgallery';
+import { documents } from '@/data/carimagesgallery';
+import { DocumentArrowDownIcon } from '@heroicons/react/24/outline';
 
 export default function Documents() {
   return (
@@ -14,12 +14,25 @@ export default function Documents() {
       {/* 6 */}
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
         {/* TIEN ICH 1 */}
-        {Amenities_demos.map((item, index) => (
-          <div key={index} className='flex items-center space-x-4 '>
-            <div className='w-10 flex-shrink-0'>
-              <Image src={item.icon} alt='' />
-            </div>
-            <span>{item.name}</span>
+        {documents.map((item, index) => (
+          <div key={index} className='flex items-center space-x-4'>
+            <a
+              href={item.url}
+              target='_blank'
+              rel='noopener noreferrer'
+              download
+              className='w-14 flex-shrink-0'
+            >
+              <DocumentArrowDownIcon className='w-full' />
+            </a>
+            <a
+              href={item.url}
+              target='_blank'
+              rel='noopener noreferrer'
+              className='text-lg font-medium underline hover:no-underline ease-in duration-200 cursor-pointer'
+            >
+              {item.title}
+            </a>
           </div>
         ))}
       </div>

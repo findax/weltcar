@@ -36,6 +36,7 @@ export default function ImagesHeader({
               alt='photo 0'
               className='object-cover rounded-md sm:rounded-xl'
               sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw'
+              priority
             />
             <div className='absolute inset-0 bg-neutral-900 bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity'></div>
           </div>

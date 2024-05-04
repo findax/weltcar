@@ -17,8 +17,8 @@ const Logo: React.FC<LogoProps> = ({ className = 'w-36' }) => {
       <svg
         version='1.0'
         xmlns='http://www.w3.org/2000/svg'
-        width='auto'
-        height='auto'
+        width='100%'
+        height='54'
         viewBox='0 0 1059.000000 235.000000'
         preserveAspectRatio='xMidYMid meet'
       >

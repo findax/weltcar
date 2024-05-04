@@ -33,18 +33,25 @@ export const PHOTOS: string[] = [
   'https://images.pexels.com/photos/136872/pexels-photo-136872.jpeg?auto=compress&cs=tinysrgb&w=1600',
 ];
 
-export const Amenities_demos = [
-  { name: '59 MPG Combined, 58 City/60 Hwy', icon: carUtilities1 },
+export const documents = [
   {
-    name: 'Forward Collision-Avoidance Assist with Pedestrian Detection (FCA-Ped)',
-    icon: carUtilities2,
+    title: 'Specification',
+    description: 'some description',
+    file_name: 'someName.pdf',
+    url: '<url>',
   },
-  { name: '139-hp gas/electric combined', icon: carUtilities3 },
-  { name: 'Proximity Key with push button start', icon: carUtilities4 },
-  { name: '8-inch color touchscreen display audio', icon: carUtilities5 },
-  { name: 'Smart Cruise Control with Stop & Go (SCC)', icon: carUtilities6 },
-  { name: 'LED Daytime Running Lights (DRL)', icon: carUtilities7 },
-  { name: 'Blind-Spot Collision Warning (BCW)', icon: carUtilities8 },
+  {
+    title: 'Way Bill',
+    description: 'some description',
+    file_name: 'someName.pdf',
+    url: '<url>',
+  },
+  {
+    title: 'Export Confirm',
+    description: 'some description',
+    file_name: 'someName.pdf',
+    url: '<url>',
+  },
 ];
 
 export const DEMO_CAR_IMAGES_GALLERY: CarGalleryImage[] = [...PHOTOS].map(
