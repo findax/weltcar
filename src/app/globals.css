@@ -8,5 +8,4 @@ body {
 
 input:active {
   font-size: 16px;
-  transition-delay: 1s;
 }
