@@ -29,9 +29,8 @@
   {
     "id": "DB-FP-0724-03",
     "date": "May 20, 2021",
-    "title": "Mercedes",
-    "brand": "E-Class",
-    "model": "X5",
+    "brand": "Mercedes",
+    "model": "E-Class",
     "galleryImgs": [
       "https://placewisetw.vercel.app/_next/image?url=%2Fimg%2Ffeatured-img-7.jpg&w=828&q=75"
     ],

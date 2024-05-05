@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import rightImgDemo from '@/images/BecomeAnAuthorImg.png';
+import rightImgDemo from '@/images/WhyChooseUs.webp';
 import ButtonPrimary from '@/shared/ButtonPrimary';
 import Logo from '@/shared/Logo';
 import Image from 'next/image';

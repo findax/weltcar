@@ -25,9 +25,9 @@ export default function ImagesHeader({
       </Suspense>
 
       <div className='md:mt-11 rounded-md sm:rounded-xl'>
-        <div className='relative grid grid-cols-4 gap-1 sm:gap-2'>
+        <div className='relative grid grid-cols-4 grid-rows-2 gap-1 sm:gap-2'>
           <div
-            className='col-span-2 row-span-2 relative rounded-md sm:rounded-xl overflow-hidden cursor-pointer'
+            className='col-span-3 row-span-2 relative rounded-md sm:rounded-xl overflow-hidden cursor-pointer'
             onClick={handleOpenModalImageGallery}
           >
             <Image
@@ -42,7 +42,7 @@ export default function ImagesHeader({
           </div>
 
           {/*  */}
-          <div
+          {/* <div
             className='col-span-1 row-span-2 relative rounded-md sm:rounded-xl overflow-hidden cursor-pointer'
             onClick={handleOpenModalImageGallery}
           >
@@ -54,7 +54,7 @@ export default function ImagesHeader({
               sizes='400px'
             />
             <div className='absolute inset-0 bg-neutral-900 bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity'></div>
-          </div>
+          </div> */}
 
           {/*  */}
           {images
