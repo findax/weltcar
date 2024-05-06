@@ -2,13 +2,9 @@
 
 import Heading from '@/shared/Heading';
 import React, { FC, useState } from 'react';
-import clientSayMain from '@/images/clientSayMain.png';
-import clientSay1 from '@/images/clientSay1.png';
-import clientSay2 from '@/images/clientSay2.png';
-import clientSay3 from '@/images/clientSay3.png';
-import clientSay4 from '@/images/clientSay4.png';
-import clientSay5 from '@/images/clientSay5.png';
-import clientSay6 from '@/images/clientSay6.png';
+import clientSay1 from '@/images/avatars/Image-2.png';
+import clientSay2 from '@/images/avatars/Image-3.png';
+import clientSay3 from '@/images/avatars/Image-4.png';
 import quotationImg from '@/images/quotation.png';
 import quotationImg2 from '@/images/quotation2.png';
 import {
@@ -29,22 +25,25 @@ export interface SectionClientSayProps {
 const DEMO_DATA = [
   {
     id: 1,
+    avatar: clientSay1,
     clientName: 'Tiana Abie',
-    clientAddress: 'Malaysia',
+    clientAddress: 'Munich',
     content:
       'This place is exactly like the picture posted on Chisfis. Great service, we had a great stay!',
   },
   {
     id: 2,
+    avatar: clientSay2,
     clientName: 'Lennie Swiffan',
-    clientAddress: 'London',
+    clientAddress: 'Hamburg',
     content:
       'This place is exactly like the picture posted on Chisfis. Great service, we had a great stay!',
   },
   {
     id: 3,
+    avatar: clientSay3,
     clientName: 'Berta Emili',
-    clientAddress: 'Tokyo',
+    clientAddress: 'Berlin',
     content:
       'This place is exactly like the picture posted on Chisfis. Great service, we had a great stay!',
   },
@@ -56,6 +55,7 @@ const SectionClientSay: FC<SectionClientSayProps> = ({
 }) => {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  let currentItem = data[index];
 
   function changeItemId(newVal: number) {
     if (newVal > index) {
@@ -80,20 +80,9 @@ const SectionClientSay: FC<SectionClientSayProps> = ({
     trackMouse: true,
   });
 
-  let currentItem = data[index];
-
-  function changePhotoId(newVal: number) {
-    if (newVal > index) {
-      setDirection(1);
-    } else {
-      setDirection(-1);
-    }
-    setIndex(newVal);
-  }
-
   return (
     <div className={`nc-SectionClientSay relative ${className} `}>
-      <Heading desc="Let's see what people think of Chisfis" isCenter>
+      <Heading desc="Let's see what people think of WeltCar" isCenter>
         Good news from far away
       </Heading>
       <MotionConfig
@@ -117,8 +106,8 @@ const SectionClientSay: FC<SectionClientSayProps> = ({
               className='relative sm:px-20 inline-flex flex-col items-center text-center whitespace-normal'
             >
               <Image
-                className='mx-auto mb-8'
-                src={clientSayMain}
+                className='w-28 mx-auto mb-8 rounded-full'
+                src={currentItem.avatar}
                 alt='avatar'
               />
 
@@ -144,57 +133,26 @@ const SectionClientSay: FC<SectionClientSayProps> = ({
             </motion.div>
           </AnimatePresence>
 
-          {/* <div className='mt-10 flex items-center justify-center space-x-2'>
-                {data.map((item, i) => (
-                  <button
-                    className={`w-2 h-2 rounded-full ${
-                      i === index ? 'bg-black/70' : 'bg-black/10 '
-                    }`}
-                    onClick={() => changeItemId(i)}
-                    key={i}
-                  />
-                ))}
-              </div> */}
+          {/* Navigation buttons */}
+          <div className='mt-10 flex items-center justify-center space-x-3'>
+            <button
+              className={`w-11 h-11 rounded-full flex items-center justify-center bg-primary-600 focus:outline-none ${index === 0 ? '!bg-primary-400 dark:!bg-primary-900' : 'cursor-pointer hover:bg-primary-700'}`}
+              style={{ transform: 'translate3d(0, 0, 0)' }}
+              onClick={() => changeItemId(index - 1)}
+              disabled={index === 0}
+            >
+              <ChevronLeftIcon className='w-6 mr-0.5' color='white' />
+            </button>
 
-          {/* Buttons + bottom nav bar */}
-          <>
-            {/* Buttons */}
-            <div className='mt-10 flex items-center justify-center space-x-3'>
-              <button
-                className={`w-11 h-11 rounded-full flex items-center justify-center bg-primary-600 focus:outline-none ${index === 0 ? '!bg-primary-400 dark:!bg-primary-900' : 'cursor-pointer hover:bg-primary-700'}`}
-                style={{ transform: 'translate3d(0, 0, 0)' }}
-                onClick={() => changePhotoId(index - 1)}
-                disabled={index === 0}
-              >
-                <ChevronLeftIcon className='w-6 mr-0.5' color='white' />
-              </button>
-
-              <button
-                className={`w-11 h-11 rounded-full flex items-center justify-center bg-primary-600 focus:outline-none ${index === data.length - 1 ? '!bg-primary-400 dark:!bg-primary-900' : 'cursor-pointer hover:bg-primary-700'}`}
-                style={{ transform: 'translate3d(0, 0, 0)' }}
-                onClick={() => changePhotoId(index + 1)}
-                disabled={index === data.length - 1}
-              >
-                <ChevronRightIcon className='w-6 ml-0.5' color='white' />
-              </button>
-            </div>
-
-            {/* Bottom Nav bar */}
-            {/* <div className='mt-10 flex items-center justify-center space-x-2'>
-                  {data.length > 1 &&
-                    data.map((_, i) => (
-                      <button
-                        className={`w-1.5 h-1.5 rounded-full ${
-                          i === index
-                            ? 'bg-neutral-900 dark:bg-white'
-                            : 'bg-neutral-500 dark:bg-white/60'
-                        }`}
-                        onClick={() => changePhotoId(i)}
-                        key={i}
-                      />
-                    ))}
-                </div> */}
-          </>
+            <button
+              className={`w-11 h-11 rounded-full flex items-center justify-center bg-primary-600 focus:outline-none ${index === data.length - 1 ? '!bg-primary-400 dark:!bg-primary-900' : 'cursor-pointer hover:bg-primary-700'}`}
+              style={{ transform: 'translate3d(0, 0, 0)' }}
+              onClick={() => changeItemId(index + 1)}
+              disabled={index === data.length - 1}
+            >
+              <ChevronRightIcon className='w-6 ml-0.5' color='white' />
+            </button>
+          </div>
         </div>
       </MotionConfig>
     </div>

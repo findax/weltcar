@@ -19,7 +19,7 @@ const SectionWhyChooseUs: FC<SectionWhyChooseUsProps> = ({
       className={`nc-SectionWhyChooseUs relative flex flex-col lg:flex-row items-center  ${className}`}
       data-nc-id='SectionWhyChooseUs'
     >
-      <div className='flex-shrink-0 mb-16 lg:mb-0 lg:mr-10 lg:w-2/5'>
+      <div className='flex-shrink-0 mb-16 lg:mb-0 lg:mr-16 lg:w-1/2'>
         <Logo className='w-48' />
         <h2 className='font-semibold text-3xl sm:text-4xl mt-6 sm:mt-11'>
           Why did you choose us?
@@ -35,8 +35,8 @@ const SectionWhyChooseUs: FC<SectionWhyChooseUsProps> = ({
           </ButtonPrimary>
         </Link>
       </div>
-      <div className='flex-grow'>
-        <Image alt='' src={rightImg} />
+      <div className='flex-grow rounded-3xl overflow-hidden'>
+        <Image alt='good deal' src={rightImg} />
       </div>
     </div>
   );

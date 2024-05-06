@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import ButtonCircle from '@/shared/ButtonCircle';
-import rightImg from '@/images/SVG-subcribe2.png';
+import rightImg from '@/images/Subcribe.webp';
 import Badge from '@/shared/Badge';
 import Input from '@/shared/Input';
 import Image from 'next/image';
@@ -15,7 +15,7 @@ const SectionSubscribe: FC<SectionSubscribeProps> = ({ className = '' }) => {
       className={`nc-SectionSubscribe relative flex flex-col lg:flex-row lg:items-center ${className}`}
       data-nc-id='SectionSubscribe'
     >
-      <div className='flex-shrink-0 mb-10 lg:mb-0 lg:mr-10 lg:w-2/5'>
+      <div className='flex-shrink-0 mb-16 lg:mb-0 lg:mr-16 lg:w-1/2'>
         <h2 className='font-semibold text-4xl'>Join our newsletter 🎉</h2>
         <span className='block mt-5 text-neutral-500 dark:text-neutral-400'>
           Read and share new perspectives on just about any topic. Everyone’s
@@ -54,7 +54,7 @@ const SectionSubscribe: FC<SectionSubscribeProps> = ({ className = '' }) => {
         </form>
       </div>
       <div className='flex-grow'>
-        <Image alt='' src={rightImg} />
+        <Image alt='happy car buyer' src={rightImg} />
       </div>
     </div>
   );

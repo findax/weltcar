@@ -66,7 +66,7 @@ const Header = () => {
       >
         <div className='px-4 h-16 md:h-20 lg:container relative flex justify-between'>
           <div className='flex justify-start flex-1 space-x-4 sm:space-x-10'>
-            <Logo className='self-center w-40 md:w-60' />
+            <Logo className='self-center w-40 md:w-52' />
 
             <Navigation />
           </div>
