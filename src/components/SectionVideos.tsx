@@ -114,7 +114,7 @@ const SectionVideos: FC<SectionVideosProps> = ({
   };
 
   return (
-    <div className={`nc-SectionVideos ${className}`}>
+    <div className={`nc-SectionVideos pb-8 xl:pb-14 ${className}`}>
       <Heading
         desc='Check out our hottest videos. View more and share more new
           perspectives on just about any topic. Everyone’s welcome.'
@@ -122,8 +122,8 @@ const SectionVideos: FC<SectionVideosProps> = ({
         🎬 The Videos
       </Heading>
 
-      <div className='relative grid grid-cols-2 grid-rows-2 lg:grid-cols-3 gap-4 sm:pr-4 sm:py-4 md:pr-6 md:py-6 xl:pr-14 xl:py-14'>
-        <div className='absolute -top-4 -bottom-4 -right-4 w-2/3 rounded-3xl bg-primary-100 bg-opacity-40 z-0 sm:rounded-[50px] md:top-0 md:bottom-0 md:right-0 xl:w-1/2 dark:bg-black dark:bg-opacity-20'></div>
+      <div className='relative grid grid-cols-2 grid-rows-2 lg:grid-cols-3 gap-4'>
+        <div className='absolute -top-6 -bottom-6 -right-6 xl:-top-14 xl:-bottom-14 xl:-right-14 w-2/3 rounded-3xl bg-primary-100 bg-opacity-50 z-0 sm:rounded-[50px] xl:w-1/2 dark:bg-neutral-800 dark:bg-opacity-40'></div>
         {renderMainVideo()}
         {videos.map(renderSubVideo)}
       </div>
