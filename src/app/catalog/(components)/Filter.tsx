@@ -94,7 +94,7 @@ const Filter = ({ closeFilter }: { closeFilter: (value: boolean) => void }) => {
   //   }
   // };
   return (
-    <div className='overflow-y-auto h-screen lg:visible lg:h-auto pb-16 bg-white dark:bg-neutral-900 p-4 lg:py-6 lg:px-8 lg:rounded-2xl border border-neutral-200 dark:border-neutral-700'>
+    <div className='overflow-y-auto h-screen lg:visible lg:h-auto pb-20 px-4 lg:py-6 lg:px-8 bg-white dark:bg-neutral-900 lg:rounded-2xl border border-neutral-200 dark:border-neutral-700'>
       <div className='flex justify-between items-center'>
         <h4 className='mb-6 text-2xl font-semibold'>Filter</h4>
         <button

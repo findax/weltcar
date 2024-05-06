@@ -36,18 +36,6 @@ const VIDEOS_DEMO: VideoType[] = [
     thumbnail:
       'https://images.pexels.com/photos/1660995/pexels-photo-1660995.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
   },
-  {
-    id: 'eEaZvEZye84',
-    title: 'Magical Scotland - 4K Scenic Relaxation Film with Calming Music',
-    thumbnail:
-      'https://images.pexels.com/photos/4983184/pexels-photo-4983184.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-  },
-  {
-    id: 'EuDJZDaSP0Q',
-    title: 'Magical Scotland - 4K Scenic Relaxation Film with Calming Music',
-    thumbnail:
-      'https://images.pexels.com/photos/2549018/pexels-photo-2549018.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-  },
 ];
 
 const SectionVideos: FC<SectionVideosProps> = ({
@@ -61,7 +49,7 @@ const SectionVideos: FC<SectionVideosProps> = ({
     const video: VideoType = videos[currentVideo];
     return (
       <div
-        className='group aspect-w-16 aspect-h-16 sm:aspect-h-9 bg-neutral-800 rounded-3xl overflow-hidden border-4 border-white dark:border-neutral-900 sm:rounded-[50px] sm:border-[10px] will-change-transform'
+        className='col-span-2 row-span-2 lg:col-span-2 group aspect-w-16 aspect-h-9 bg-neutral-800 rounded-3xl sm:rounded-[30px] overflow-hidden border-4 border-white dark:border-neutral-900 sm:border-[10px] will-change-transform'
         title={video.title}
       >
         {isPlay ? (
@@ -100,7 +88,7 @@ const SectionVideos: FC<SectionVideosProps> = ({
     if (index === currentVideo) return null;
     return (
       <div
-        className='group relative aspect-h-16 aspect-w-16 rounded-2xl cursor-pointer overflow-hidden sm:aspect-h-12 sm:rounded-3xl lg:aspect-h-9 '
+        className='row-span-1 col-span-1 group relative aspect-h-16 aspect-w-16 rounded-3xl sm:rounded-[30px] cursor-pointer overflow-hidden sm:aspect-h-12 lg:aspect-h-9 bg-neutral-800 border-4 border-white dark:border-neutral-900 sm:border-[10px]'
         onClick={() => {
           setCurrentVideo(index);
           !isPlay && setIsPlay(true);
@@ -134,14 +122,10 @@ const SectionVideos: FC<SectionVideosProps> = ({
         🎬 The Videos
       </Heading>
 
-      <div className='flex flex-col relative sm:pr-4 sm:py-4 md:pr-6 md:py-6 xl:pr-14 xl:py-14 lg:flex-row'>
-        <div className='absolute -top-4 -bottom-4 -right-4 w-2/3 rounded-3xl bg-primary-100 bg-opacity-40 z-0 sm:rounded-[50px] md:top-0 md:bottom-0 md:right-0 xl:w-1/2 dark:bg-neutral-800 dark:bg-opacity-40'></div>
-        <div className='flex-grow relative pb-2 sm:pb-4 lg:pb-0 lg:pr-5 xl:pr-6'>
-          {renderMainVideo()}
-        </div>
-        <div className='flex-shrink-0 grid gap-2 grid-cols-4 sm:gap-6 lg:grid-cols-1 lg:w-36 xl:w-40'>
-          {videos.map(renderSubVideo)}
-        </div>
+      <div className='relative grid grid-cols-2 grid-rows-2 lg:grid-cols-3 gap-4 sm:pr-4 sm:py-4 md:pr-6 md:py-6 xl:pr-14 xl:py-14'>
+        <div className='absolute -top-4 -bottom-4 -right-4 w-2/3 rounded-3xl bg-primary-100 bg-opacity-40 z-0 sm:rounded-[50px] md:top-0 md:bottom-0 md:right-0 xl:w-1/2 dark:bg-black dark:bg-opacity-20'></div>
+        {renderMainVideo()}
+        {videos.map(renderSubVideo)}
       </div>
     </div>
   );

@@ -35,7 +35,7 @@ const SectionWhyChooseUs: FC<SectionWhyChooseUsProps> = ({
           </ButtonPrimary>
         </Link>
       </div>
-      <div className='flex-grow rounded-3xl overflow-hidden'>
+      <div className='flex-grow rounded-3xl sm:rounded-[40px] overflow-hidden'>
         <Image alt='good deal' src={rightImg} />
       </div>
     </div>
