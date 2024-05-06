@@ -161,21 +161,21 @@ const SectionClientSay: FC<SectionClientSayProps> = ({
             {/* Buttons */}
             <div className='mt-10 flex items-center justify-center space-x-3'>
               <button
-                className={`w-11 h-11 rounded-full flex items-center justify-center bg-primary-600 focus:outline-none ${index === 0 ? 'bg-primary-400 dark:bg-primary-900' : 'cursor-pointer hover:bg-primary-700'}`}
+                className={`w-11 h-11 rounded-full flex items-center justify-center bg-primary-600 focus:outline-none ${index === 0 ? '!bg-primary-400 dark:!bg-primary-900' : 'cursor-pointer hover:bg-primary-700'}`}
                 style={{ transform: 'translate3d(0, 0, 0)' }}
                 onClick={() => changePhotoId(index - 1)}
                 disabled={index === 0}
               >
-                <ChevronLeftIcon className='w-6' color='white' />
+                <ChevronLeftIcon className='w-6 mr-0.5' color='white' />
               </button>
 
               <button
-                className={`w-11 h-11 rounded-full flex items-center justify-center bg-primary-600 focus:outline-none ${index === data.length - 1 ? 'bg-primary-400 dark:bg-primary-900' : 'cursor-pointer hover:bg-primary-700'}`}
+                className={`w-11 h-11 rounded-full flex items-center justify-center bg-primary-600 focus:outline-none ${index === data.length - 1 ? '!bg-primary-400 dark:!bg-primary-900' : 'cursor-pointer hover:bg-primary-700'}`}
                 style={{ transform: 'translate3d(0, 0, 0)' }}
                 onClick={() => changePhotoId(index + 1)}
                 disabled={index === data.length - 1}
               >
-                <ChevronRightIcon className='w-6' color='white' />
+                <ChevronRightIcon className='w-6 ml-0.5' color='white' />
               </button>
             </div>
 

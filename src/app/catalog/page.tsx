@@ -6,8 +6,10 @@ import { DEMO_CAR_LIST } from '@/data/carlist';
 import Filter from './(components)/Filter';
 import SortPanel from './(components)/SortPanel';
 import CarList from './(components)/CarList';
+import LoadingSpinner from '@/shared/LoadingSpinner';
 
 const CarListPage = () => {
+  const [isFirstLoading, setIsFirstLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isGrid, setIsGrid] = useState(true);
@@ -28,7 +30,11 @@ const CarListPage = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  return (
+  return isFirstLoading ? (
+    <div className='w-full h-[calc(100vh-76px)] flex justify-center items-center'>
+      <LoadingSpinner className='w-12' />
+    </div>
+  ) : (
     <div className='relative overflow-hidden'>
       <div className='container'>
         <div className='grid grid-cols-12 gap-4 lg:gap-6 md:pt-6'>

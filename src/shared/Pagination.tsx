@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import twFocusClass from '@/utils/twFocusClass';
 import Link from 'next/link';
 import { Route } from '@/routers/types';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 
 const DEMO_PAGINATION: CustomLink[] = [
   {
@@ -56,7 +57,25 @@ const Pagination: FC<PaginationProps> = ({ className = '' }) => {
     <nav
       className={`nc-Pagination inline-flex space-x-1 text-base font-medium ${className}`}
     >
+      <button
+        className={`w-11 rounded-full flex items-center justify-center bg-primary-600 focus:outline-none ${true ? '!bg-primary-400 dark:!bg-primary-900' : 'cursor-pointer hover:bg-primary-700'}`}
+        style={{ transform: 'translate3d(0, 0, 0)' }}
+        onClick={() => console.log('prev')}
+        disabled={false}
+      >
+        <ChevronLeftIcon className='w-6 mr-0.5' color='white' />
+      </button>
+
       {DEMO_PAGINATION.map(renderItem)}
+
+      <button
+        className={`w-11 rounded-full flex items-center justify-center bg-primary-600 focus:outline-none ${false ? '!bg-primary-400 dark:!bg-primary-900' : 'cursor-pointer hover:bg-primary-700'}`}
+        style={{ transform: 'translate3d(0, 0, 0)' }}
+        onClick={() => console.log('next')}
+        disabled={true}
+      >
+        <ChevronRightIcon className='w-6 ml-0.5' color='white' />
+      </button>
     </nav>
   );
 };

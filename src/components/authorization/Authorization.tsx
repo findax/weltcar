@@ -10,12 +10,12 @@ export default function Authorization() {
   const [isActive, setActive] = useState(true);
 
   return (
-    <div className='w-full max-w-sm mx-auto space-y-6'>
+    <div className='w-full max-w-md mx-auto space-y-6'>
       <div className='w-full flex justify-between'>
         <button
           id='login'
-          className={`w-1/2 text-xl pb-4 border-b-4 ${
-            isActive ? 'border-primary-500 font-medium' : 'border-transparent'
+          className={`w-1/2 text-xl font-medium pb-4 border-b-4 ${
+            isActive ? 'border-primary-500 font-semibold' : 'border-transparent'
           }`}
           onClick={() => {
             setActive(true);
@@ -26,8 +26,8 @@ export default function Authorization() {
         </button>
         <button
           id='signup'
-          className={`w-1/2 text-xl pb-4 border-b-4 ${
-            isActive ? 'border-transparent' : 'border-primary-500 font-medium'
+          className={`w-1/2 text-xl font-medium pb-4 border-b-4 ${
+            isActive ? 'border-transparent' : 'border-primary-500 font-semibold'
           }`}
           onClick={() => {
             setActive(false);

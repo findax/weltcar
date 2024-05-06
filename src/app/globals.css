@@ -8,5 +8,5 @@ body {
 
 /* set font size 16px to avoid screen scale issue on mobile device */
 input {
-  font-size: 16px;
+  font-size: 16px !important;
 }

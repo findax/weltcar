@@ -29,7 +29,7 @@ const CarCardH = ({
                 </span>
               </h2>
             </div>
-            <span className='text-xl font-semibold'>2025</span>
+            <span className='text-xl font-semibold'>2024</span>
           </div>
           <div className='flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-2'>
             <span className=''>{id}</span>
@@ -68,15 +68,15 @@ const CarCardH = ({
           </div> */}
         </div>
 
-        <div className='space-y-2'>
+        <div className='space-y-2 py-3'>
           <div className='flex items-center'>
             <span className=''>exterior color:</span>
-            <span className='w-6 h-6 mx-2 rounded-full inline-block border border-black dark:border-white bg-[#fff]'></span>
+            <span className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 bg-[#fff]'></span>
             <span className=''> - white</span>
           </div>
           <div className='flex items-center'>
             <span className=''>interior color:</span>
-            <span className='w-6 h-6 mx-2 rounded-full inline-block border border-black dark:border-white bg-[#000]'></span>
+            <span className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 bg-[#000]'></span>
             <span className=''> - black</span>
           </div>
         </div>
@@ -86,7 +86,7 @@ const CarCardH = ({
           <span className='text-3xl font-semibold text-primary-400'>
             {numberWithComma(price)}€
           </span>
-          <ButtonPrimary>More</ButtonPrimary>
+          <ButtonPrimary>See more</ButtonPrimary>
         </div>
       </div>
     );

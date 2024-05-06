@@ -70,27 +70,25 @@ const CarCard = ({
           </div> */}
         </div>
 
-        {/* <div className='w-14 border-b border-neutral-100 dark:border-neutral-800'></div> */}
         <div className='space-y-2 py-3'>
           <div className='flex items-center'>
             <span className=''>exterior color:</span>
-            <span className='w-6 h-6 mx-2 rounded-full inline-block border border-black dark:border-white bg-[#fff]'></span>
+            <span className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 bg-[#fff]'></span>
             <span className=''> - white</span>
           </div>
           <div className='flex items-center'>
             <span className=''>interior color:</span>
-            <span className='w-6 h-6 mx-2 rounded-full inline-block border border-black dark:border-white bg-[#000]'></span>
+            <span className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 bg-[#000]'></span>
             <span className=''> - black</span>
           </div>
         </div>
-        {/* <div className='w-14 border-b border-neutral-100 dark:border-neutral-800'></div> */}
 
         <div className='h-3 border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
         <div className='flex justify-between items-center'>
-          <span className='text-3xl font-semibold text-primary-400'>
+          <span className='text-3xl sm:text-2xl md:text-3xl font-semibold text-primary-400'>
             {numberWithComma(price)}€
           </span>
-          <ButtonPrimary>More</ButtonPrimary>
+          <ButtonPrimary>See more</ButtonPrimary>
         </div>
       </div>
     );

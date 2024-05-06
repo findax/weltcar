@@ -124,7 +124,9 @@ export const FormikInput = ({
 }: FormikInputProps) => {
   return (
     <fieldset>
-      <span className='text-neutral-800 dark:text-neutral-200'>{title}</span>
+      <span className='text-sm text-neutral-800 dark:text-neutral-200'>
+        {title}
+      </span>
       <Field name={name} className={commonClass} {...args} />
       {error && touched ? (
         <div className='flex items-center text-left text-xs text-red-500 py-2'>
@@ -149,7 +151,9 @@ export const FormikPhoneNumberInput = ({
 }: FormikPhoneNumberInputProps) => {
   return (
     <fieldset>
-      <span className='text-neutral-800 dark:text-neutral-200'>{title}</span>
+      <span className='text-sm text-neutral-800 dark:text-neutral-200'>
+        {title}
+      </span>
       <Field name='phone' type='tel'>
         {({ field }: any) => (
           <>
@@ -193,7 +197,9 @@ export const FormikPasswordInput = ({
 
   return (
     <fieldset>
-      <span className='text-neutral-800 dark:text-neutral-200'>{title}</span>
+      <span className='text-sm text-neutral-800 dark:text-neutral-200'>
+        {title}
+      </span>
       <div className='relative'>
         <Field
           name='password'
