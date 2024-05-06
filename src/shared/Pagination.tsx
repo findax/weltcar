@@ -1,5 +1,7 @@
+'use client';
+
 import { CustomLink } from '@/data/types';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import twFocusClass from '@/utils/twFocusClass';
 import Link from 'next/link';
 import { Route } from '@/routers/types';
