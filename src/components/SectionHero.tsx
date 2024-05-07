@@ -1,4 +1,4 @@
-import heroRightImage from '@/images/hero-right-car.png';
+import heroRightImage from '@/images/luxury-vehicle.png';
 import Image from 'next/image';
 import Link from 'next/link';
 import ButtonPrimary from '@/shared/ButtonPrimary';
@@ -9,8 +9,8 @@ export default function SectionHeroArchivePage() {
       className='nc-SectionHeroArchivePage flex flex-col relative'
       data-nc-id='SectionHeroArchivePage'
     >
-      <div className='flex flex-col lg:flex-row lg:items-start'>
-        <div className='flex-shrink-0 lg:w-1/2 flex flex-col items-start space-y-6 lg:space-y-10 pb-14 xl:pt-8 xl:pr-14 lg:mr-10 xl:mr-0'>
+      <div className='flex flex-col lg:flex-row lg:items-start lg:mt-10'>
+        <div className='flex-shrink-0 lg:w-2/5 flex flex-col items-start space-y-6 lg:space-y-10 pb-14'>
           <h2 className='font-semibold text-4xl md:text-5xl xl:text-7xl leading-[110%] xl:leading-[120%]'>
             Hamburg, Germany
           </h2>
