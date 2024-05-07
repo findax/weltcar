@@ -43,7 +43,7 @@ export default function ImagesHeader({
 
           {/*  */}
           {images
-            .filter((_, i) => i >= 2 && i < 4)
+            .filter((_, i) => i >= 1 && i < 3)
             .map((item, index) => (
               <div
                 key={index}

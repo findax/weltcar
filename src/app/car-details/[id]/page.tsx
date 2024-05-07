@@ -1,13 +1,22 @@
 'use client';
 
+import { useState } from 'react';
 import ImagesHeader from './(components)/ImagesHeader';
 import { DEMO_CAR_IMAGES_GALLERY } from '@/data/carimagesgallery';
 import Documents from './(components)/Documents';
 import CarDescriptions from './(components)/CarDescriptions';
 import PriceSidebar from './(components)/PriceSidebar';
 import MobileFooterSticky from './(components)/MobileFooterSticky';
+import Modal from '@/shared/Modal';
+import Authorization from '@/components/authorization/Authorization';
 
 const CarDetailsPage = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  function handleSubmit() {
+    setIsModalOpen(true);
+  }
+
   return (
     <div className='CarDetailsPage'>
       <div className='container CarDetailsPage__content'>
@@ -20,12 +29,16 @@ const CarDetailsPage = () => {
               <CarDescriptions />
             </div>
 
-            <PriceSidebar />
+            <PriceSidebar onClick={handleSubmit} />
           </main>
         </div>
       </div>
 
-      <MobileFooterSticky />
+      <MobileFooterSticky onClick={handleSubmit} />
+
+      <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
+        <Authorization />
+      </Modal>
     </div>
   );
 };

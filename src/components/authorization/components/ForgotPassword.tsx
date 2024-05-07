@@ -1,7 +1,7 @@
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import ButtonPrimary from '@/shared/ButtonPrimary';
-import { FormikInput } from '@/shared/FormInpurs';
+import { FormikInput } from '@/shared/FormInputs';
 
 export default function ForgotPassword({ emailValue }: { emailValue: string }) {
   const forgotPasswordSchema = Yup.object().shape({

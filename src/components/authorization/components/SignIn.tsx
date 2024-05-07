@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import ButtonPrimary from '@/shared/ButtonPrimary';
-import { FormikInput, FormikPasswordInput } from '@/shared/FormInpurs';
+import { FormikInput, FormikPasswordInput } from '@/shared/FormInputs';
 import ForgotPassword from './ForgotPassword';
 
 export default function Signin() {

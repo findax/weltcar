@@ -5,7 +5,7 @@ import {
   FormikInput,
   FormikPhoneNumberInput,
   FormikPasswordInput,
-} from '@/shared/FormInpurs';
+} from '@/shared/FormInputs';
 
 export default function Registration() {
   // const phoneValidationPattern = /\+38 \(0\d{2}\) \d{3}-\d{2}-\d{2}/;

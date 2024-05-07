@@ -15,7 +15,7 @@ const SectionSubscribe: FC<SectionSubscribeProps> = ({ className = '' }) => {
       className={`nc-SectionSubscribe relative flex flex-col lg:flex-row lg:items-center ${className}`}
       data-nc-id='SectionSubscribe'
     >
-      <div className='flex-shrink-0 mb-16 lg:mb-0 lg:mr-16 lg:w-1/2'>
+      <div className='flex-shrink-0 mb-16 lg:mb-0 lg:pr-16 lg:w-1/2'>
         <h2 className='font-semibold text-4xl'>Join our newsletter 🎉</h2>
         <span className='block mt-5 text-neutral-500 dark:text-neutral-400'>
           Read and share new perspectives on just about any topic. Everyone’s

@@ -1,31 +1,20 @@
-import { useState } from 'react';
-import Modal from '@/shared/Modal';
 import ButtonPrimary from '@/shared/ButtonPrimary';
-import Authorization from '@/components/authorization/Authorization';
+import numberWithComma from '@/utils/numberWithComma';
 
-export default function PriceSidebar() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  function handleClick() {
-    setIsModalOpen(true);
-  }
-
+export default function PriceSidebar({ onClick }: { onClick: () => void }) {
   return (
-    <>
-      <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-        <Authorization />
-      </Modal>
-      <div className='block flex-grow mt-14 lg:mt-0'>
-        <div className='hidden lg:block sticky top-28'>
-          <div className='detailsSectionSidebar__wrap shadow-xl'>
-            <div className='flex justify-between'>
-              <span className='text-3xl font-semibold'>190,000€</span>
-            </div>
-
-            <ButtonPrimary onClick={handleClick}>Reserve</ButtonPrimary>
-          </div>
+    <div className='block flex-grow mt-14 lg:mt-0'>
+      <div className='detailsSectionSidebar__wrap sticky top-28 bg-white dark:bg-neutral-900 !hidden lg:!flex'>
+        <div className='flex justify-between items-end gap-1'>
+          <span className='text-2xl font-semibold'>Sum</span>
+          <span className='flex-grow mb-1 border-b border-dashed border-neutral-300 dark:border-neutral-700'></span>
+          <span className='text-3xl font-semibold'>
+            {numberWithComma('120000')}€
+          </span>
         </div>
+
+        <ButtonPrimary onClick={onClick}>Reserve</ButtonPrimary>
       </div>
-    </>
+    </div>
   );
 }
