@@ -1,4 +1,4 @@
-import heroRightImage from '@/images/luxury-vehicle.png';
+import heroRightImage from '@/images/luxury-vehicle.webp';
 import Image from 'next/image';
 import Link from 'next/link';
 import ButtonPrimary from '@/shared/ButtonPrimary';

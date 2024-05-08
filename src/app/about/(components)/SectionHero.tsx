@@ -1,12 +1,12 @@
-import rightImg from '@/images/Main-Banner-About.png';
+import rightImg from '@/images/Main-Banner-About.webp';
 import Image from 'next/image';
 import ButtonPrimary from '@/shared/ButtonPrimary';
 
 const SectionHero = () => {
   return (
     <div className='nc-SectionHero relative'>
-      <div className='flex flex-col lg:flex-row space-y-14 lg:space-y-0 lg:space-x-10 items-center relative text-center lg:text-left'>
-        <div className='w-full lg:w-2/5 space-y-5 lg:space-y-7'>
+      <div className='flex items-center flex-col lg:flex-row space-y-14 lg:space-y-0 lg:space-x-10 text-center lg:text-left'>
+        <div className='space-y-5 lg:space-y-7'>
           <h2 className='text-3xl !leading-tight font-semibold text-neutral-900 md:text-4xl xl:text-5xl dark:text-neutral-100'>
             👋 About Us
           </h2>
@@ -18,12 +18,8 @@ const SectionHero = () => {
           {/* {!!btnText && <ButtonPrimary>{btnText}</ButtonPrimary>} */}
         </div>
 
-        <div className='flex-grow lg:pt-6'>
-          <Image
-            className='w-screen lg:w-full'
-            src={rightImg}
-            alt='Luxury Vehicle'
-          />
+        <div className='lg:pt-6'>
+          <Image src={rightImg} alt='Luxury Vehicles' />
         </div>
       </div>
     </div>

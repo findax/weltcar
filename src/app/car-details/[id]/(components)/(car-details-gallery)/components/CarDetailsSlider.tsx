@@ -66,11 +66,11 @@ export default function CarDetailsSlider({
       }}
     >
       <div
-        className='relative z-50 flex aspect-[3/2] w-full max-w-7xl items-center wide:h-full xl:taller-than-854:h-auto'
+        className='relative z-50 flex items-center w-full max-w-7xl'
         {...handlers}
       >
         {/* Main image */}
-        <div className='w-full m-8 md:m-16 overflow-hidden'>
+        <div className='w-full m-8 overflow-hidden'>
           <div className='relative flex aspect-[3/2] items-center justify-center'>
             <AnimatePresence initial={false} custom={direction}>
               <motion.div
@@ -83,6 +83,7 @@ export default function CarDetailsSlider({
                 className='absolute'
               >
                 <Image
+                  // src={currentImage?.image || ''}
                   src={currentImage?.url || ''}
                   width={navigation ? 1280 : 1920}
                   height={navigation ? 853 : 1280}
@@ -125,7 +126,7 @@ export default function CarDetailsSlider({
               )}
               <div className='absolute top-0 right-0 flex items-center gap-2 md:p-2 text-white'>
                 <a
-                  href={currentImage?.url}
+                  // href={(currentImage?.url}
                   className='rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white'
                   target='_blank'
                   title='Open fullsize version'

@@ -9,7 +9,7 @@ export default function PriceSidebar({ onClick }: { onClick: () => void }) {
           <span className='text-2xl font-semibold'>Sum</span>
           <span className='flex-grow mb-1 border-b border-dashed border-neutral-300 dark:border-neutral-700'></span>
           <span className='text-3xl font-semibold'>
-            {numberWithComma('120000')}€
+            {numberWithComma('500000')}€
           </span>
         </div>
 

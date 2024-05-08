@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import SectionFounder from './(components)/SectionFounder';
 import SectionStatistic from './(components)/SectionStatistic';
 import SectionHero from './(components)/SectionHero';

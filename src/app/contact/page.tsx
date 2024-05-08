@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import SectionSubscribe from '@/components/SectionSubscribe';
 import BackgroundSection from '@/components/BackgroundSection';
 import SocialsList from '@/shared/SocialsList';
+import BgGlassmorphism from '@/components/BgGlassmorphism';
 import Label from '@/components/Label';
 import Input from '@/shared/Input';
 import Textarea from '@/shared/Textarea';
@@ -27,6 +28,9 @@ const info = [
 const PageContact: FC<PageContactProps> = ({}) => {
   return (
     <div className={`nc-PageContact overflow-hidden`}>
+      {/* ======== BG GLASS ======== */}
+      <BgGlassmorphism />
+
       <div className='mb-24 lg:mb-32'>
         <h2 className='my-16 sm:my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center'>
           Contact

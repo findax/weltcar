@@ -9,6 +9,20 @@ export interface CustomLink {
 }
 
 //  ##########  PostDataType ######## //
+export interface PostDataType {
+  id: string | number;
+  author: AuthorType;
+  date: string;
+  href: Route<string>;
+  categories: TaxonomyType[];
+  title: string;
+  featuredImage: StaticImageData | string;
+  desc?: string;
+  commentCount: number;
+  viewdCount: number;
+  readingTime: number;
+  postType?: 'standard' | 'video' | 'gallery' | 'audio';
+}
 export interface TaxonomyType {
   id: string | number;
   name: string;
@@ -35,21 +49,6 @@ export interface AuthorType {
   starRating?: number;
 }
 
-export interface PostDataType {
-  id: string | number;
-  author: AuthorType;
-  date: string;
-  href: Route<string>;
-  categories: TaxonomyType[];
-  title: string;
-  featuredImage: StaticImageData | string;
-  desc?: string;
-  commentCount: number;
-  viewdCount: number;
-  readingTime: number;
-  postType?: 'standard' | 'video' | 'gallery' | 'audio';
-}
-
 export type TwMainColor =
   | 'pink'
   | 'green'
@@ -74,5 +73,6 @@ export interface CarDataType {
 
 export interface CarGalleryImage {
   id: number;
+  // image: string | StaticImageData;
   url: string;
 }

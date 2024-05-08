@@ -55,7 +55,7 @@ export default function ImagesHeader({
                   <Image
                     fill
                     className='object-cover w-full h-full rounded-md sm:rounded-xl'
-                    src={item.url || ''}
+                    src={item.url}
                     alt='photos'
                     sizes='400px'
                   />

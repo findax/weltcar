@@ -16,7 +16,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'WeltCar - premium automobiles',
+  title: 'WeltCar - Premium Automobiles',
   description:
     'Explore our curated selection of premium automobiles, where every ride embodies elegance and sophistication',
   keywords: 'Cars, Vehicles, Automobiles',
