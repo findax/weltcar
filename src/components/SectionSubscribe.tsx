@@ -16,7 +16,7 @@ const SectionSubscribe: FC<SectionSubscribeProps> = ({ className = '' }) => {
       data-nc-id='SectionSubscribe'
     >
       <div className='flex-shrink-0 lg:w-1/2 lg:pr-16'>
-        <h2 className='font-semibold text-4xl'>Join our newsletter 🎉</h2>
+        <h2 className='font-semibold text-4xl'>📨 Join our newsletter</h2>
         <span className='block mt-5 text-neutral-500 dark:text-neutral-400'>
           Read and share new perspectives on just about any topic. Everyone’s
           welcome.

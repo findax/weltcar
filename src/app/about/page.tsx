@@ -1,4 +1,3 @@
-import rightImg from '@/images/about-hero-right.png';
 import React, { FC } from 'react';
 import SectionFounder from './(components)/SectionFounder';
 import SectionStatistic from './(components)/SectionStatistic';
@@ -17,19 +16,16 @@ const PageAbout: FC<PageAboutProps> = ({}) => {
       <BgGlassmorphism />
 
       <div className='container py-16 lg:py-28 space-y-16 lg:space-y-28'>
-        <SectionHero
-          rightImg={rightImg}
-          heading='👋 About Us.'
-          subHeading='We’re impartial and independent, and every day we create distinctive, world-class programmes and content which inform, educate and entertain millions of people in the around the world.'
-        />
-
-        <SectionFounder />
-        <div className='relative py-16'>
-          <BackgroundSection />
-          <SectionClientSay />
-        </div>
+        <SectionHero />
 
         <SectionStatistic />
+
+        <div className='relative py-16'>
+          <BackgroundSection />
+          <SectionFounder />
+        </div>
+
+        <SectionClientSay />
 
         <div className='relative py-16'>
           <BackgroundSection />
