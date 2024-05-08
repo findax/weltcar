@@ -25,18 +25,18 @@ function PageHome() {
           <SectionHowItWork />
         </div>
 
-        <SectionSubscribe />
+        <SectionWhyChooseUs />
 
         <div className='relative py-16'>
           <BackgroundSection />
-          <SectionWhyChooseUs />
+          <SectionVideos />
         </div>
 
-        <SectionVideos />
+        <SectionClientSay />
 
         <div className='relative py-16'>
           <BackgroundSection />
-          <SectionClientSay />
+          <SectionSubscribe />
         </div>
       </div>
     </main>

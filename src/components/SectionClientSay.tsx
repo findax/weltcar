@@ -81,7 +81,7 @@ const SectionClientSay: FC<SectionClientSayProps> = ({
   });
 
   return (
-    <div className={`nc-SectionClientSay relative ${className} `}>
+    <div className={`nc-SectionClientSay relative ${className}`}>
       <Heading desc="Let's see what people think of WeltCar" isCenter>
         Good news from far away
       </Heading>
