@@ -28,9 +28,6 @@ const info = [
 const PageContact: FC<PageContactProps> = ({}) => {
   return (
     <div className={`nc-PageContact overflow-hidden`}>
-      {/* ======== BG GLASS ======== */}
-      <BgGlassmorphism />
-
       <div className='mb-24 lg:mb-32'>
         <h2 className='my-16 sm:my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center'>
           Contact

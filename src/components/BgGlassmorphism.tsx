@@ -12,9 +12,9 @@ const BgGlassmorphism: FC<BgGlassmorphismProps> = ({
       className={`nc-BgGlassmorphism ${className}`}
       data-nc-id='BgGlassmorphism'
     >
-      <span className='block bg-[#ef233c] w-72 h-72 rounded-full mix-blend-multiply filter blur-3xl opacity-10 lg:w-96 lg:h-96'></span>
-      <span className='block bg-[#fed800ae] w-72 h-72 ml-16 mt-20 rounded-full mix-blend-multiply filter blur-3xl opacity-10 lg:w-96 lg:h-96 nc-animation-delay-2000'></span>
-      <span className='block bg-[#04868b] w-72 h-72 ml-16 mt-32 rounded-full mix-blend-multiply filter blur-3xl opacity-10 lg:w-96 lg:h-96'></span>
+      <span className='block bg-[#ef233c] w-72 h-72 ml-20 rounded-full mix-blend-multiply filter blur-3xl opacity-10 lg:w-96 lg:h-96'></span>
+      <span className='block bg-[#fed800ae] w-72 h-72 mt-16 ml-2 rounded-full mix-blend-multiply filter blur-3xl opacity-10 lg:w-96 lg:h-96'></span>
+      <span className='block bg-[#04868b] w-72 h-72 mt-32 ml-2 rounded-full mix-blend-multiply filter blur-3xl opacity-10 lg:w-96 lg:h-96'></span>
     </div>
   );
 };
