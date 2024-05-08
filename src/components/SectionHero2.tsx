@@ -13,7 +13,7 @@ export default function SectionHeroArchivePage() {
       <div className='flex flex-col space-y-14 lg:space-y-16 text-center lg:text-left'>
         <div className='flex items-center justify-between'>
           <div className='w-max space-y-5 lg:space-y-7'>
-            <h2 className='font-semibold md:font-bold text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[110%] xl:leading-[120%]'>
+            <h2 className='font-semibold md:font-bold text-4xl md:text-5xl xl:text-7xl leading-[110%] xl:leading-[120%]'>
               Hamburg, Germany
             </h2>
             <div className='hidden lg:flex text-base md:text-lg text-neutral-500 dark:text-neutral-400'>
@@ -33,13 +33,8 @@ export default function SectionHeroArchivePage() {
               </ButtonPrimary>
             </Link>
           </div>
-          <div className='hidden lg:block flex-grow max-w-sm px-8 xl:px-10 mx-auto opacity-90'>
-            <Image
-              className='w-full h-auto object-cover'
-              src={premiumLogo}
-              alt='premium logo'
-              priority
-            />
+          <div className='hidden lg:block flex-grow max-w-sm px-16 mx-auto opacity-90'>
+            <Image src={premiumLogo} alt='premium logo' priority />
           </div>
         </div>
         <Image
