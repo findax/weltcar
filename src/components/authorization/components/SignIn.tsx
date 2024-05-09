@@ -33,15 +33,18 @@ export default function Signin() {
           password: '',
         }}
         validationSchema={LoginSchema}
-        onSubmit={(values) => {
+        onSubmit={(values, { setSubmitting, resetForm }) => {
           // same shape as initial values
           const castValues = LoginSchema.cast(values);
           console.log(castValues);
+
+          resetForm();
+          // setSubmitting(false);
         }}
       >
         {({ errors, touched, isSubmitting }) => (
           <Form
-            className='grid grid-cols-1 gap-7'
+            className='grid grid-cols-1 gap-8'
             onChange={(e: any) => handleFormChange(e.target)}
           >
             <FormikInput

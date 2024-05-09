@@ -1,16 +1,12 @@
+'use client';
+
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
+import { FormikInput, FormikTextarea } from '@/shared/FormInputs';
 import { ButtonPrimary } from '@/shared/Buttons';
-import {
-  FormikInput,
-  FormikPhoneNumberInput,
-  FormikPasswordInput,
-} from '@/shared/FormInputs';
 
-export default function Registration() {
-  // const phoneValidationPattern = /\+38 \(0\d{2}\) \d{3}-\d{2}-\d{2}/;
-
-  const SignupSchema = Yup.object().shape({
+export default function MessageForm() {
+  const MessageSchema = Yup.object().shape({
     name: Yup.string()
       .trim()
       .min(2, 'Name is too short')
@@ -20,41 +16,34 @@ export default function Registration() {
       .trim()
       .email('Invalid email')
       .required('Email is required'),
-    phone: Yup.string()
+    message: Yup.string()
       .trim()
-      // .matches(phoneValidationPattern, 'Invalid phone number')
-      .required('Phone number is required'),
-    password: Yup.string()
-      .trim()
-      .min(4, 'Password is too short')
-      .max(50, 'Password is too long')
-      .required('Password is required'),
+      .min(10, 'Message is too short')
+      .required('Message is required'),
   });
-
   return (
     <Formik
       initialValues={{
         name: '',
         email: '',
-        phone: '',
-        password: '',
+        message: '',
       }}
-      validationSchema={SignupSchema}
+      validationSchema={MessageSchema}
       onSubmit={(values, { setSubmitting, resetForm }) => {
         // same shape as initial values
-        const castValues = SignupSchema.cast(values);
+        const castValues = MessageSchema.cast(values);
         console.log(castValues);
 
-        resetForm();
+        // resetForm();
         // setSubmitting(false);
       }}
     >
       {({ errors, touched, isSubmitting }) => (
-        <Form className='grid grid-cols-1 gap-8'>
+        <Form className='grid grid-cols-1 gap-8 -mt-1'>
           <FormikInput
             name='name'
             placeholder='Enter your name'
-            title='Name'
+            title='Full name'
             error={errors.name}
             touched={touched.name}
           />
@@ -68,17 +57,12 @@ export default function Registration() {
             touched={touched.email}
           />
           {/* ---- */}
-          <FormikPhoneNumberInput
-            title='Phone number'
-            error={errors.phone}
-            touched={touched.phone}
-          />
-          {/* ---- */}
-          <FormikPasswordInput
-            title='Password'
-            placeholder='Enter your password'
-            error={errors.password}
-            touched={touched.password}
+          <FormikTextarea
+            name='message'
+            title='Message'
+            rows={6}
+            error={errors.message}
+            touched={touched.message}
           />
 
           <ButtonPrimary
@@ -86,7 +70,7 @@ export default function Registration() {
             disabled={isSubmitting}
             loading={isSubmitting}
           >
-            Continue
+            Send Message
           </ButtonPrimary>
         </Form>
       )}

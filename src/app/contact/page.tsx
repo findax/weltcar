@@ -1,10 +1,7 @@
-import { FC } from 'react';
+import SocialsList from '@/shared/SocialsList';
+import MessageForm from './(components)/MessageForm';
 import SectionSubscribe from '@/components/SectionSubscribe';
 import BackgroundSection from '@/components/BackgroundSection';
-import SocialsList from '@/shared/SocialsList';
-import Label from '@/components/Label';
-import { Input, Textarea } from '@/shared/FormInputs';
-import { ButtonPrimary } from '@/shared/Buttons';
 
 export interface PageContactProps {}
 
@@ -23,7 +20,7 @@ const info = [
   },
 ];
 
-const PageContact: FC<PageContactProps> = ({}) => {
+const PageContact = () => {
   return (
     <div className={`nc-PageContact overflow-hidden`}>
       <div className='mb-24 lg:mb-32'>
@@ -50,34 +47,8 @@ const PageContact: FC<PageContactProps> = ({}) => {
                 <SocialsList className='mt-2' />
               </div>
             </div>
-            <form
-              className='grid grid-cols-1 gap-6 -mt-1'
-              action='#'
-              method='post'
-            >
-              <label className='block'>
-                <Label>Full name</Label>
 
-                <Input placeholder='Example Doe' type='text' className='mt-1' />
-              </label>
-              <label className='block'>
-                <Label>Email address</Label>
-
-                <Input
-                  type='email'
-                  placeholder='example@example.com'
-                  className='mt-1'
-                />
-              </label>
-              <label className='block'>
-                <Label>Message</Label>
-
-                <Textarea className='mt-1' rows={6} />
-              </label>
-              <div>
-                <ButtonPrimary type='submit'>Send Message</ButtonPrimary>
-              </div>
-            </form>
+            <MessageForm />
           </div>
         </div>
       </div>

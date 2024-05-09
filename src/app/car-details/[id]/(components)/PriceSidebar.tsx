@@ -3,8 +3,10 @@ import numberWithComma from '@/utils/numberWithComma';
 
 export default function PriceSidebar({
   onClick,
+  data,
 }: {
   onClick: (modalId: string) => void;
+  data: string;
 }) {
   return (
     <div className='block flex-grow mt-14 lg:mt-0'>
@@ -13,7 +15,7 @@ export default function PriceSidebar({
           <span className='text-2xl font-semibold'>Sum</span>
           <span className='flex-grow mb-1 border-b border-dashed border-neutral-300 dark:border-neutral-700'></span>
           <span className='text-3xl font-semibold'>
-            {numberWithComma('500000')}€
+            {numberWithComma(data)}€
           </span>
         </div>
 

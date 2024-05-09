@@ -3,9 +3,10 @@
 import React, { useRef } from 'react';
 import PriceRangeSlider from '@/components/PriceRangeSlider';
 import AccordionComponent from '@/components/AccordionComponent';
-import { ButtonCircle, ButtonPrimary } from '@/shared/Buttons';
-import { Input, Checkbox } from '@/shared/FormInputs';
+import { ButtonPrimary } from '@/shared/Buttons';
+import { Checkbox } from '@/shared/FormInputs';
 import { ArrowPathIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import SearchForm from './SearchForm';
 
 // DEMO DATA
 const cabtypes = [
@@ -103,21 +104,7 @@ const Filter = ({ closeFilter }: { closeFilter: (value: boolean) => void }) => {
         </button>
       </div>
       <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
-      <form className='py-6 relative w-full'>
-        <Input
-          type='text'
-          placeholder='Search by car name'
-          rounded='rounded-full'
-          sizeClass='h-12 px-5 py-3'
-        />
-        <ButtonCircle
-          type='button'
-          className='absolute transform top-1/2 -translate-y-1/2 right-1.5'
-          size='w-10 h-10'
-        >
-          <i className='las la-search text-xl'></i>
-        </ButtonCircle>
-      </form>
+      <SearchForm />
       <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
 
       <AccordionComponent title='Pricing scale' className='py-6'>

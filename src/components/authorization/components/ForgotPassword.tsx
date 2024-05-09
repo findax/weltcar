@@ -17,10 +17,13 @@ export default function ForgotPassword({ emailValue }: { emailValue: string }) {
         forgotPassword: emailValue,
       }}
       validationSchema={forgotPasswordSchema}
-      onSubmit={(values) => {
+      onSubmit={(values, { setSubmitting, resetForm }) => {
         // same shape as initial values
         const castValues = forgotPasswordSchema.cast(values);
         console.log(castValues);
+
+        // resetForm();
+        // setSubmitting(false);
       }}
     >
       {({ errors, touched, isSubmitting }) => (

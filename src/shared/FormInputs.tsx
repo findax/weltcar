@@ -1,11 +1,6 @@
 'use client';
 
-import {
-  useState,
-  forwardRef,
-  InputHTMLAttributes,
-  TextareaHTMLAttributes,
-} from 'react';
+import { useState, forwardRef, InputHTMLAttributes } from 'react';
 import { Field } from 'formik';
 import ReactInputMask from 'react-input-mask';
 import {
@@ -15,7 +10,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 const commonClass =
-  'block w-full border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl text-sm font-normal h-11 px-4 py-3 mt-1';
+  'block w-full border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl text-sm font-normal h-11 px-4 py-3';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   sizeClass?: string;
@@ -94,54 +89,18 @@ export const Checkbox = ({
   );
 };
 
-interface FormikCheckboxProps {
-  name: string;
-  label?: string;
-  className?: string;
-  defaultChecked?: boolean;
-  error?: string;
-  touched?: boolean;
+{
+  //* -- Formik Inputs -- *//
 }
-
-export const FormikCheckbox = ({
-  name,
-  label = '',
-  className = 'rounded-full',
-  defaultChecked,
-  error,
-  touched,
-}: FormikCheckboxProps) => {
-  return (
-    <fieldset>
-      <label htmlFor={name} className='flex items-center cursor-pointer'>
-        <Field
-          id={name}
-          name={name}
-          type='checkbox'
-          className={`focus:ring-action-primary h-7 w-7 text-primary-500 border-primary border-neutral-500 bg-white dark:bg-neutral-700  dark:checked:bg-primary-500 focus:ring-primary-500 cursor-pointer ${className}`}
-          defaultChecked={defaultChecked}
-        />
-        <span className='ml-3.5 text-neutral-900 hover:text-neutral-400 dark:text-neutral-100 dark:hover:text-neutral-400'>
-          {label}
-        </span>
-      </label>
-      {error && touched ? (
-        <div className='flex items-center text-left text-xs text-red-500 py-2'>
-          <InformationCircleIcon className='w-4 inline-block mr-1' />
-          {error}
-        </div>
-      ) : null}
-    </fieldset>
-  );
-};
-
 interface FormikInputProps {
   name: string;
   type?: string;
   placeholder?: string;
-  title: string;
+  title?: string;
   error?: string;
   touched?: boolean;
+  rounded?: string;
+  sizeClass?: string;
 }
 
 export const FormikInput = ({
@@ -149,16 +108,24 @@ export const FormikInput = ({
   title,
   error,
   touched,
+  rounded,
+  sizeClass,
   ...args
 }: FormikInputProps) => {
   return (
-    <fieldset>
-      <span className='text-sm text-neutral-800 dark:text-neutral-200'>
-        {title}
-      </span>
-      <Field name={name} className={commonClass} {...args} />
+    <fieldset className='relative'>
+      {title && (
+        <span className='inline-block text-sm text-neutral-800 dark:text-neutral-200 mb-1'>
+          {title}
+        </span>
+      )}
+      <Field
+        name={name}
+        className={`${commonClass} ${rounded} ${sizeClass}`}
+        {...args}
+      />
       {error && touched ? (
-        <div className='flex items-center text-left text-xs text-red-500 py-2'>
+        <div className='absolute top-full flex items-center text-left text-xs text-red-500 py-2'>
           <InformationCircleIcon className='w-4 inline-block mr-1' />
           {error}
         </div>
@@ -179,29 +146,27 @@ export const FormikPhoneNumberInput = ({
   touched,
 }: FormikPhoneNumberInputProps) => {
   return (
-    <fieldset>
-      <span className='text-sm text-neutral-800 dark:text-neutral-200'>
+    <fieldset className='relative'>
+      <span className='inline-block text-sm text-neutral-800 dark:text-neutral-200 mb-1'>
         {title}
       </span>
       <Field name='phone' type='tel'>
         {({ field }: any) => (
-          <>
-            <ReactInputMask
-              {...field}
-              mask='+49 999 999999999'
-              maskChar={null}
-              placeholder='+49 888 324324324'
-              className={commonClass}
-            />
-            {error && touched ? (
-              <div className='flex items-center text-left text-xs text-red-500 py-2'>
-                <InformationCircleIcon className='w-4 inline-block mr-1' />
-                {error}
-              </div>
-            ) : null}
-          </>
+          <ReactInputMask
+            {...field}
+            mask='+49 999 999999999'
+            maskChar={null}
+            placeholder='+49 888 324324324'
+            className={commonClass}
+          />
         )}
       </Field>
+      {error && touched ? (
+        <div className='absolute top-full flex items-center text-left text-xs text-red-500 py-2'>
+          <InformationCircleIcon className='w-4 inline-block mr-1' />
+          {error}
+        </div>
+      ) : null}
     </fieldset>
   );
 };
@@ -225,8 +190,8 @@ export const FormikPasswordInput = ({
     setIsPasswordVisible(!isPasswordVisible);
 
   return (
-    <fieldset>
-      <span className='text-sm text-neutral-800 dark:text-neutral-200'>
+    <fieldset className='relative'>
+      <span className='inline-block text-sm text-neutral-800 dark:text-neutral-200 mb-1'>
         {title}
       </span>
       <div className='relative'>
@@ -249,7 +214,7 @@ export const FormikPasswordInput = ({
         </button>
       </div>
       {error && touched ? (
-        <div className='flex items-center text-left text-xs text-red-500 py-2'>
+        <div className='absolute top-full flex items-center text-left text-xs text-red-500 py-2'>
           <InformationCircleIcon className='w-4 inline-block mr-1' />
           <span>{error}</span>
         </div>
@@ -257,20 +222,87 @@ export const FormikPasswordInput = ({
     </fieldset>
   );
 };
-interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
-// eslint-disable-next-line react/display-name
-export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className = '', children, ...args }, ref) => {
-    return (
-      <textarea
-        ref={ref}
-        className={`block w-full text-sm rounded-2xl border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-600 dark:focus:ring-opacity-25 dark:bg-neutral-900 ${className}`}
-        rows={4}
+interface FormikCheckboxProps {
+  name: string;
+  label?: string;
+  className?: string;
+  defaultChecked?: boolean;
+  error?: string;
+  touched?: boolean;
+}
+
+export const FormikCheckbox = ({
+  name,
+  label = '',
+  className = 'rounded-full',
+  defaultChecked,
+  error,
+  touched,
+}: FormikCheckboxProps) => {
+  return (
+    <fieldset className='relative'>
+      <label htmlFor={name} className='flex items-center cursor-pointer'>
+        <Field
+          id={name}
+          name={name}
+          type='checkbox'
+          className={`focus:ring-action-primary h-7 w-7 text-primary-500 border-primary border-neutral-500 bg-white dark:bg-neutral-700  dark:checked:bg-primary-500 focus:ring-primary-500 cursor-pointer ${className}`}
+          defaultChecked={defaultChecked}
+        />
+        <span className='ml-3.5 text-neutral-900 hover:text-neutral-400 dark:text-neutral-100 dark:hover:text-neutral-400'>
+          {label}
+        </span>
+      </label>
+      {error && touched ? (
+        <div className='absolute top-full flex items-center text-left text-xs text-red-500 py-2'>
+          <InformationCircleIcon className='w-4 inline-block mr-1' />
+          {error}
+        </div>
+      ) : null}
+    </fieldset>
+  );
+};
+interface FormikTextareaProps {
+  name: string;
+  type?: string;
+  placeholder?: string;
+  title?: string;
+  error?: string;
+  touched?: boolean;
+  rows?: number;
+  sizeClass?: string;
+}
+
+export const FormikTextarea = ({
+  name,
+  title,
+  error,
+  touched,
+  rows,
+  sizeClass = 'h-auto',
+  ...args
+}: FormikTextareaProps) => {
+  return (
+    <fieldset className='relative'>
+      {title && (
+        <span className='inline-block text-sm text-neutral-800 dark:text-neutral-200 mb-1'>
+          {title}
+        </span>
+      )}
+      <Field
+        as='textarea'
+        name={name}
+        rows={rows}
+        className={`${commonClass} ${sizeClass}`}
         {...args}
-      >
-        {children}
-      </textarea>
-    );
-  }
-);
+      />
+      {error && touched ? (
+        <div className='absolute top-full flex items-center text-left text-xs text-red-500 py-2'>
+          <InformationCircleIcon className='w-4 inline-block mr-1' />
+          {error}
+        </div>
+      ) : null}
+    </fieldset>
+  );
+};

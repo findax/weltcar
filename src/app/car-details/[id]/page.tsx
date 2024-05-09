@@ -14,6 +14,7 @@ import ConfirmForm from './(components)/ConfirmForm';
 const CarDetailsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalId, setModalId] = useState('');
+  const price = '460000';
 
   function handleReserve(modalId: string) {
     setModalId(modalId);
@@ -32,12 +33,12 @@ const CarDetailsPage = () => {
               <CarDescriptions />
             </div>
 
-            <PriceSidebar onClick={handleReserve} />
+            <PriceSidebar onClick={handleReserve} data={price} />
           </main>
         </div>
       </div>
 
-      <MobileFooterSticky onClick={handleReserve} />
+      <MobileFooterSticky onClick={handleReserve} data={price} />
 
       {modalId === 'authorization' && (
         <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>

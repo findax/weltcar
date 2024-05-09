@@ -60,7 +60,7 @@ export default function Modal({
                   className='absolute right-3 top-3'
                   onClick={closeModal}
                 />
-                <div className='p-6 sm:p-12 w-full h-full flex justify-center items-center text-neutral-700 dark:text-neutral-300'>
+                <div className='px-6 py-10 sm:p-12 w-full h-full flex justify-center items-center text-neutral-700 dark:text-neutral-300'>
                   {children}
                 </div>
               </Dialog.Panel>
