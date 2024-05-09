@@ -91,10 +91,16 @@ export default function PriceRangeSlider() {
       </div>
 
       <div className='flex items-center justify-between'>
-        <ButtonThird onClick={resetRange} sizeClass='px-4 py-2 sm:px-5'>
+        <ButtonThird
+          onClick={resetRange}
+          fontSize='text-sm'
+          sizeClass='px-4 py-2 sm:px-5'
+        >
           Clear
         </ButtonThird>
-        <ButtonPrimary sizeClass='px-4 py-2 sm:px-5'>Apply</ButtonPrimary>
+        <ButtonPrimary fontSize='text-sm' sizeClass='px-5 py-2 md:px-6'>
+          Apply
+        </ButtonPrimary>
       </div>
     </div>
   );

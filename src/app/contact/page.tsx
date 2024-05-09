@@ -1,8 +1,7 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import SectionSubscribe from '@/components/SectionSubscribe';
 import BackgroundSection from '@/components/BackgroundSection';
 import SocialsList from '@/shared/SocialsList';
-import BgGlassmorphism from '@/components/BgGlassmorphism';
 import Label from '@/components/Label';
 import Input from '@/shared/Input';
 import Textarea from '@/shared/Textarea';
@@ -52,36 +51,34 @@ const PageContact: FC<PageContactProps> = ({}) => {
                 <SocialsList className='mt-2' />
               </div>
             </div>
-            <div>
-              <form className='grid grid-cols-1 gap-6' action='#' method='post'>
-                <label className='block'>
-                  <Label>Full name</Label>
+            <form
+              className='grid grid-cols-1 gap-6 -mt-1'
+              action='#'
+              method='post'
+            >
+              <label className='block'>
+                <Label>Full name</Label>
 
-                  <Input
-                    placeholder='Example Doe'
-                    type='text'
-                    className='mt-1'
-                  />
-                </label>
-                <label className='block'>
-                  <Label>Email address</Label>
+                <Input placeholder='Example Doe' type='text' className='mt-1' />
+              </label>
+              <label className='block'>
+                <Label>Email address</Label>
 
-                  <Input
-                    type='email'
-                    placeholder='example@example.com'
-                    className='mt-1'
-                  />
-                </label>
-                <label className='block'>
-                  <Label>Message</Label>
+                <Input
+                  type='email'
+                  placeholder='example@example.com'
+                  className='mt-1'
+                />
+              </label>
+              <label className='block'>
+                <Label>Message</Label>
 
-                  <Textarea className='mt-1' rows={6} />
-                </label>
-                <div>
-                  <ButtonPrimary type='submit'>Send Message</ButtonPrimary>
-                </div>
-              </form>
-            </div>
+                <Textarea className='mt-1' rows={6} />
+              </label>
+              <div>
+                <ButtonPrimary type='submit'>Send Message</ButtonPrimary>
+              </div>
+            </form>
           </div>
         </div>
       </div>
