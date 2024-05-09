@@ -1,6 +1,6 @@
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import ButtonPrimary from '@/shared/ButtonPrimary';
+import { ButtonPrimary } from '@/shared/Buttons';
 import { FormikInput } from '@/shared/FormInputs';
 
 export default function ForgotPassword({ emailValue }: { emailValue: string }) {

@@ -1,12 +1,12 @@
 'use client';
 
-import { Fragment, useState, useEffect } from 'react';
-import { Transition, Dialog } from '@headlessui/react';
+import { useState, useEffect } from 'react';
 import { DEMO_CAR_LIST } from '@/data/carlist';
 import Filter from './(components)/Filter';
 import SortPanel from './(components)/SortPanel';
 import CarList from './(components)/CarList';
 import LoadingSpinner from '@/shared/LoadingSpinner';
+import SideMenuWrapper from '@/shared/SideMenuWrapper';
 
 const CarListPage = () => {
   const [isFirstLoading, setIsFirstLoading] = useState(false);
@@ -30,6 +30,9 @@ const CarListPage = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const handleOpenMenu = () => setFilterVisible(true);
+  const handleCloseMenu = () => setFilterVisible(false);
+
   return isFirstLoading ? (
     <div className='w-full h-[calc(100vh-76px)] flex justify-center items-center'>
       <LoadingSpinner className='w-12' />
@@ -40,42 +43,13 @@ const CarListPage = () => {
         <div className='grid grid-cols-12 gap-4 lg:gap-6 md:pt-6'>
           <div className='hidden lg:block lg:col-span-4'>
             {isMobile ? (
-              <Transition appear show={isFilterVisible} as={Fragment}>
-                <Dialog
-                  as='div'
-                  className='relative z-50 overflow-hidden'
-                  onClose={() => setFilterVisible(false)}
-                >
-                  <Transition.Child
-                    as={Fragment}
-                    enter=' duration-300'
-                    enterFrom='opacity-0'
-                    enterTo='opacity-100'
-                    leave=' duration-200'
-                    leaveFrom='opacity-100'
-                    leaveTo='opacity-0'
-                  >
-                    <Dialog.Overlay className='fixed inset-0 bg-black/60 dark:bg-black/70' />
-                  </Transition.Child>
-                  <div className='fixed inset-0'>
-                    <div className='flex justify-start min-h-full '>
-                      <Transition.Child
-                        as={Fragment}
-                        enter='transition duration-100 transform'
-                        enterFrom='opacity-0 -translate-x-56'
-                        enterTo='opacity-100 translate-x-0'
-                        leave='transition duration-150 transform'
-                        leaveFrom='opacity-100 translate-x-0'
-                        leaveTo='opacity-0 -translate-x-56'
-                      >
-                        <Dialog.Panel className='w-full max-w-md transform overflow-hidden transition-all '>
-                          <Filter closeFilter={setFilterVisible} />
-                        </Dialog.Panel>
-                      </Transition.Child>
-                    </div>
-                  </div>
-                </Dialog>
-              </Transition>
+              <SideMenuWrapper
+                handleCloseMenu={handleCloseMenu}
+                isVisable={isFilterVisible}
+                isLeftSide
+              >
+                <Filter closeFilter={setFilterVisible} />
+              </SideMenuWrapper>
             ) : (
               <Filter closeFilter={setFilterVisible} />
             )}

@@ -17,13 +17,11 @@ export interface NavItemType {
   type?: 'dropdown' | 'none';
 }
 
-export interface NavigationItemProps {
+interface NavigationItemProps {
   menuItem: NavItemType;
 }
 
-type NavigationItemWithRouterProps = NavigationItemProps;
-
-const NavigationItem: FC<NavigationItemWithRouterProps> = ({ menuItem }) => {
+const NavigationItem = ({ menuItem }: NavigationItemProps) => {
   const [menuCurrentHovers, setMenuCurrentHovers] = useState<string[]>([]);
 
   // CLOSE ALL MENU OPENING WHEN CHANGE HISTORY

@@ -3,9 +3,8 @@ import SectionSubscribe from '@/components/SectionSubscribe';
 import BackgroundSection from '@/components/BackgroundSection';
 import SocialsList from '@/shared/SocialsList';
 import Label from '@/components/Label';
-import Input from '@/shared/Input';
-import Textarea from '@/shared/Textarea';
-import ButtonPrimary from '@/shared/ButtonPrimary';
+import { Input, Textarea } from '@/shared/FormInputs';
+import { ButtonPrimary } from '@/shared/Buttons';
 
 export interface PageContactProps {}
 

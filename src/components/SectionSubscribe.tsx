@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import ButtonCircle from '@/shared/ButtonCircle';
+import { ButtonCircle } from '@/shared/Buttons';
 import rightImg from '@/images/Subcribe.webp';
 import Badge from '@/shared/Badge';
-import Input from '@/shared/Input';
+import { Input } from '@/shared/FormInputs';
 import Image from 'next/image';
 
 export interface SectionSubscribeProps {

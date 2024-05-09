@@ -1,6 +1,6 @@
 import Label from '@/components/Label';
-import ButtonPrimary from '@/shared/ButtonPrimary';
-import Input from '@/shared/Input';
+import { ButtonPrimary } from '@/shared/Buttons';
+import { Input } from '@/shared/FormInputs';
 
 const AccountPass = () => {
   return (

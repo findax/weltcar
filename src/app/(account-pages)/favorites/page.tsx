@@ -4,7 +4,7 @@ import { Tab } from '@headlessui/react';
 import CarCard from '@/components/CarCard';
 import { DEMO_CAR_LIST } from '@/data/carlist';
 import { Fragment, useState } from 'react';
-import ButtonSecondary from '@/shared/ButtonSecondary';
+import { ButtonSecondary } from '@/shared/Buttons';
 
 const AccountSavelists = () => {
   let [categories] = useState(['Stays', 'Experiences', 'Cars']);

@@ -1,7 +1,7 @@
 import Label from '@/components/Label';
 import Avatar from '@/shared/Avatar';
-import ButtonPrimary from '@/shared/ButtonPrimary';
-import Input from '@/shared/Input';
+import { ButtonPrimary } from '@/shared/Buttons';
+import { Input } from '@/shared/FormInputs';
 
 export interface AccountPageProps {}
 

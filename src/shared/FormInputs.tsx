@@ -1,4 +1,11 @@
-import { InputHTMLAttributes, FC, useState } from 'react';
+'use client';
+
+import {
+  useState,
+  forwardRef,
+  InputHTMLAttributes,
+  TextareaHTMLAttributes,
+} from 'react';
 import { Field } from 'formik';
 import ReactInputMask from 'react-input-mask';
 import {
@@ -11,29 +18,35 @@ const commonClass =
   'block w-full border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl text-sm font-normal h-11 px-4 py-3 mt-1';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  className?: string;
   sizeClass?: string;
   fontClass?: string;
   rounded?: string;
 }
 
 // eslint-disable-next-line react/display-name
-export const Input = ({
-  type = 'text',
-  className = '',
-  sizeClass = 'h-11 px-4 py-3',
-  fontClass = 'text-sm font-normal',
-  rounded = 'rounded-2xl',
-  ...args
-}: InputProps) => {
-  return (
-    <input
-      type={type}
-      className={`block w-full border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 ${rounded} ${fontClass} ${sizeClass} ${className}`}
-      {...args}
-    />
-  );
-};
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  (
+    {
+      className,
+      sizeClass,
+      fontClass,
+      rounded,
+      children,
+      type = 'text',
+      ...args
+    },
+    ref
+  ) => {
+    return (
+      <input
+        ref={ref}
+        type={type}
+        className={`${commonClass} ${rounded} ${fontClass} ${sizeClass} ${className}`}
+        {...args}
+      />
+    );
+  }
+);
 
 interface CheckboxProps {
   label?: string;
@@ -44,14 +57,14 @@ interface CheckboxProps {
   onChange?: (checked: boolean) => void;
 }
 
-export const Checkbox: FC<CheckboxProps> = ({
+export const Checkbox = ({
   subLabel = '',
   label = '',
   name,
   className = '',
   defaultChecked,
   onChange,
-}) => {
+}: CheckboxProps) => {
   return (
     <div className={`flex items-center text-sm sm:text-base ${className}`}>
       <input
@@ -81,28 +94,44 @@ export const Checkbox: FC<CheckboxProps> = ({
   );
 };
 
-export const InputPassword = ({ ...args }) => {
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+interface FormikCheckboxProps {
+  name: string;
+  label?: string;
+  className?: string;
+  defaultChecked?: boolean;
+  error?: string;
+  touched?: boolean;
+}
 
-  const togglePasswordVisibility = () =>
-    setIsPasswordVisible(!isPasswordVisible);
-
+export const FormikCheckbox = ({
+  name,
+  label = '',
+  className = 'rounded-full',
+  defaultChecked,
+  error,
+  touched,
+}: FormikCheckboxProps) => {
   return (
-    <div className='relative'>
-      <Input type={isPasswordVisible ? 'text' : 'password'} {...args} />
-
-      <button
-        type='button'
-        className='absolute top-1/2 -translate-y-1/2 right-0 pr-3 flex items-center'
-        onClick={togglePasswordVisibility}
-      >
-        {isPasswordVisible ? (
-          <EyeIcon className='w-5 h-5' color='black' />
-        ) : (
-          <EyeSlashIcon className='w-5 h-5' color='black' />
-        )}
-      </button>
-    </div>
+    <fieldset>
+      <label htmlFor={name} className='flex items-center cursor-pointer'>
+        <Field
+          id={name}
+          name={name}
+          type='checkbox'
+          className={`focus:ring-action-primary h-7 w-7 text-primary-500 border-primary border-neutral-500 bg-white dark:bg-neutral-700  dark:checked:bg-primary-500 focus:ring-primary-500 cursor-pointer ${className}`}
+          defaultChecked={defaultChecked}
+        />
+        <span className='ml-3.5 text-neutral-900 hover:text-neutral-400 dark:text-neutral-100 dark:hover:text-neutral-400'>
+          {label}
+        </span>
+      </label>
+      {error && touched ? (
+        <div className='flex items-center text-left text-xs text-red-500 py-2'>
+          <InformationCircleIcon className='w-4 inline-block mr-1' />
+          {error}
+        </div>
+      ) : null}
+    </fieldset>
   );
 };
 
@@ -228,3 +257,20 @@ export const FormikPasswordInput = ({
     </fieldset>
   );
 };
+interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {}
+
+// eslint-disable-next-line react/display-name
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+  ({ className = '', children, ...args }, ref) => {
+    return (
+      <textarea
+        ref={ref}
+        className={`block w-full text-sm rounded-2xl border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-600 dark:focus:ring-opacity-25 dark:bg-neutral-900 ${className}`}
+        rows={4}
+        {...args}
+      >
+        {children}
+      </textarea>
+    );
+  }
+);

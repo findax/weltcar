@@ -4,7 +4,7 @@ import SaleOffBadge from '@/components/SaleOffBadge';
 import Badge from '@/shared/Badge';
 import CardSlider from '@/components/CardSlider';
 import Link from 'next/link';
-import ButtonPrimary from '@/shared/ButtonPrimary';
+import { ButtonPrimary } from '@/shared/Buttons';
 import numberWithComma from '@/utils/numberWithComma';
 
 const CarCardH = ({

@@ -1,18 +1,17 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
+import SearchDropdown from './SearchDropdown';
+import MenuMobile from './MenuMobile';
+import SwitchDarkMode from './SwitchDarkMode';
+import LangDropdown from './LangDropdown';
+import AvatarDropdown from './AvatarDropdown';
 import Logo from '@/shared/Logo';
 import Navigation from '@/shared/Navigation/Navigation';
-import SearchDropdown from './SearchDropdown';
-import MenuBar from '@/shared/MenuBar';
-import SwitchDarkMode from '@/shared/SwitchDarkMode';
-import LangDropdown from './LangDropdown';
-import { useThemeMode } from '@/utils/useThemeMode';
-import AvatarDropdown from './AvatarDropdown';
-import { HeartIcon } from '@heroicons/react/24/outline';
-import { UserIcon } from '@heroicons/react/24/outline';
 import Modal from '@/shared/Modal';
 import Authorization from '@/components/authorization/Authorization';
+import { HeartIcon, UserIcon } from '@heroicons/react/24/outline';
+import { useThemeMode } from '@/utils/useThemeMode';
 
 const Header = () => {
   const prevScrollPos = useRef(0);
@@ -90,7 +89,7 @@ const Header = () => {
               <UserIcon className='w-5 md:w-7' />
             </button>
             <div className='px-0.5' />
-            <MenuBar />
+            <MenuMobile />
           </div>
         </div>
       </header>

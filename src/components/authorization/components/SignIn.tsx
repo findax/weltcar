@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import ButtonPrimary from '@/shared/ButtonPrimary';
+import { ButtonPrimary } from '@/shared/Buttons';
 import { FormikInput, FormikPasswordInput } from '@/shared/FormInputs';
 import ForgotPassword from './ForgotPassword';
 
@@ -71,7 +71,7 @@ export default function Signin() {
 
             <button
               type='button'
-              className='-mt-4 text-sm underline font-medium'
+              className='-mt-2 text-sm underline font-medium'
               onClick={() => setIsOpenForgotPassword(!isOpenForgotPassword)}
             >
               {isOpenForgotPassword ? 'Cancel' : 'Forgot password?'}

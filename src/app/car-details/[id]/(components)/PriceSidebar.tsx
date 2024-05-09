@@ -1,7 +1,11 @@
-import ButtonPrimary from '@/shared/ButtonPrimary';
+import { ButtonPrimary } from '@/shared/Buttons';
 import numberWithComma from '@/utils/numberWithComma';
 
-export default function PriceSidebar({ onClick }: { onClick: () => void }) {
+export default function PriceSidebar({
+  onClick,
+}: {
+  onClick: (modalId: string) => void;
+}) {
   return (
     <div className='block flex-grow mt-14 lg:mt-0'>
       <div className='detailsSectionSidebar__wrap sticky top-28 bg-white dark:bg-neutral-900 !hidden lg:!flex'>
@@ -13,7 +17,9 @@ export default function PriceSidebar({ onClick }: { onClick: () => void }) {
           </span>
         </div>
 
-        <ButtonPrimary onClick={onClick}>Reserve</ButtonPrimary>
+        <ButtonPrimary onClick={() => onClick('confirm')}>
+          Reserve
+        </ButtonPrimary>
       </div>
     </div>
   );

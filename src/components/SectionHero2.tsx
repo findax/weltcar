@@ -2,7 +2,7 @@ import heroRightImage from '@/images/Main-Banner-About.webp';
 import premiumLogo from '@/images/premium-quality.png';
 import Image from 'next/image';
 import Link from 'next/link';
-import ButtonPrimary from '@/shared/ButtonPrimary';
+import { ButtonPrimary } from '@/shared/Buttons';
 
 export default function SectionHeroArchivePage() {
   return (

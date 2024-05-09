@@ -1,7 +1,6 @@
-import { CheckIcon } from '@heroicons/react/24/solid';
 import React, { FC } from 'react';
-import ButtonPrimary from '@/shared/ButtonPrimary';
-import ButtonSecondary from '@/shared/ButtonSecondary';
+import { ButtonPrimary, ButtonSecondary } from '@/shared/Buttons';
+import { CheckIcon } from '@heroicons/react/24/solid';
 
 export interface PageSubcriptionProps {}
 

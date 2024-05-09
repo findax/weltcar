@@ -1,6 +1,6 @@
 import rightImg from '@/images/luxury-vehicle-2.webp';
 import Image from 'next/image';
-import ButtonPrimary from '@/shared/ButtonPrimary';
+import { ButtonPrimary } from '@/shared/Buttons';
 
 const SectionHero = () => {
   return (

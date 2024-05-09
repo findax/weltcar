@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import rightImgDemo from '@/images/WhyChooseUs.webp';
-import ButtonPrimary from '@/shared/ButtonPrimary';
+import { ButtonPrimary } from '@/shared/Buttons';
 import Logo from '@/shared/Logo';
 import Image from 'next/image';
 import Link from 'next/link';

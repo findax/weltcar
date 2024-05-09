@@ -9,11 +9,14 @@ import PriceSidebar from './(components)/PriceSidebar';
 import MobileFooterSticky from './(components)/MobileFooterSticky';
 import Modal from '@/shared/Modal';
 import Authorization from '@/components/authorization/Authorization';
+import ConfirmForm from './(components)/ConfirmForm';
 
 const CarDetailsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalId, setModalId] = useState('');
 
-  function handleSubmit() {
+  function handleReserve(modalId: string) {
+    setModalId(modalId);
     setIsModalOpen(true);
   }
 
@@ -29,16 +32,24 @@ const CarDetailsPage = () => {
               <CarDescriptions />
             </div>
 
-            <PriceSidebar onClick={handleSubmit} />
+            <PriceSidebar onClick={handleReserve} />
           </main>
         </div>
       </div>
 
-      <MobileFooterSticky onClick={handleSubmit} />
+      <MobileFooterSticky onClick={handleReserve} />
 
-      <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-        <Authorization />
-      </Modal>
+      {modalId === 'authorization' && (
+        <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
+          <Authorization />
+        </Modal>
+      )}
+
+      {modalId === 'confirm' && (
+        <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
+          <ConfirmForm />
+        </Modal>
+      )}
     </div>
   );
 };

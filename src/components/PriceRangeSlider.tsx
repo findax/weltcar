@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Slider from 'rc-slider';
-import ButtonPrimary from '@/shared/ButtonPrimary';
-import ButtonThird from '@/shared/ButtonThird';
+import { ButtonPrimary, ButtonThird } from '@/shared/Buttons';
 
 export default function PriceRangeSlider() {
   const [rangePrices, setRangePrices] = useState<number[]>([0, 260000]);

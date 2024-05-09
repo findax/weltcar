@@ -1,7 +1,7 @@
 'use client';
 
 import { Popover, Transition } from '@headlessui/react';
-import Input from '@/shared/Input';
+import { Input } from '@/shared/FormInputs';
 import React, { FC, Fragment } from 'react';
 
 interface Props {

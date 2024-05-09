@@ -1,14 +1,10 @@
-import React from 'react';
 import Link from 'next/link';
-import { StaticImageData } from 'next/image';
 
-export interface LogoProps {
-  img?: StaticImageData;
-  imgLight?: StaticImageData;
+interface LogoProps {
   className?: string;
 }
 
-const Logo: React.FC<LogoProps> = ({ className = 'w-36' }) => {
+const Logo = ({ className = 'w-36' }: LogoProps) => {
   return (
     <Link
       href='/'

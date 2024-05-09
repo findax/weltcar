@@ -3,10 +3,8 @@
 import React, { useRef } from 'react';
 import PriceRangeSlider from '@/components/PriceRangeSlider';
 import AccordionComponent from '@/components/AccordionComponent';
-import Input from '@/shared/Input';
-import ButtonCircle from '@/shared/ButtonCircle';
-import ButtonPrimary from '@/shared/ButtonPrimary';
-import Checkbox from '@/shared/Checkbox';
+import { ButtonCircle, ButtonPrimary } from '@/shared/Buttons';
+import { Input, Checkbox } from '@/shared/FormInputs';
 import { ArrowPathIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 // DEMO DATA
