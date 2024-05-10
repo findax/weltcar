@@ -24,7 +24,7 @@ export default function ImagesHeader({
         <CarDetailsGallery images={images} />
       </Suspense>
 
-      <div className='md:mt-11 rounded-md sm:rounded-xl'>
+      <div className='mt-8 md:mt-11 rounded-md sm:rounded-xl'>
         <div className='relative grid grid-rows-3 grid-cols-2 md:grid-rows-2 md:grid-cols-4 gap-1 sm:gap-2'>
           <div
             className='relative row-span-2 col-span-2 md:col-span-3 rounded-md sm:rounded-xl overflow-hidden cursor-pointer'

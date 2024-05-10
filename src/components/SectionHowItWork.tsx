@@ -56,16 +56,16 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
       </Heading>
       <div className='relative grid md:grid-cols-3 gap-20 md:gap-6 lg:gap-20'>
         <Image
-          className='hidden md:block absolute inset-x-0 top-20 lg:top-1/4 xl:top-1/3 -translate-y-1/2'
+          className='hidden md:block absolute inset-x-0 top-16 lg:top-1/4 -translate-y-1/2'
           src={VectorImg}
           alt='vector'
         />
         {data.map((item) => (
           <div
             key={item.id}
-            className='relative  flex flex-col items-center max-w-xs mx-auto'
+            className='relative  flex flex-col items-center max-w-sm mx-auto'
           >
-            <div className='relative after:content after:absolute after:inset-0 w-3/4 after:rounded-full after:shadow-2xl after:shadow-[#fed800]'>
+            <div className='relative after:content after:absolute after:inset-0 w-5/12 md:w-1/2 lg:w-7/12 after:rounded-full after:shadow-2xl after:shadow-[#fed800]'>
               <Image
                 alt={item.title}
                 className='opacity-[0.82] dark:opacity-100'
@@ -74,7 +74,7 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
             </div>
             <div className='mt-8 text-center'>
               <h3 className='text-xl font-bold'>{item.title}</h3>
-              <span className='block mt-5 md:text-sm xl:text-lg text-neutral-500 dark:text-neutral-400'>
+              <span className='block mt-5 md:text-sm xl:text-base text-neutral-500 dark:text-neutral-400'>
                 {item.desc}
               </span>
             </div>

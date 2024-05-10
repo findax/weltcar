@@ -40,7 +40,7 @@ const CarListPage = () => {
   ) : (
     <div className='relative overflow-hidden'>
       <div className='container'>
-        <div className='grid grid-cols-12 gap-4 lg:gap-6 md:pt-6'>
+        <div className='grid grid-cols-12 gap-4 lg:gap-6 pt-6'>
           <div className='hidden lg:block lg:col-span-4'>
             {isMobile ? (
               <SideMenuWrapper
