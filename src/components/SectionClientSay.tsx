@@ -16,6 +16,7 @@ import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 import Image from 'next/image';
 import { useSwipeable } from 'react-swipeable';
 import { variants } from '@/utils/animationVariants';
+import bgImg from '@/images/Urus_Performante.png';
 
 export interface SectionClientSayProps {
   className?: string;
@@ -112,12 +113,12 @@ const SectionClientSay: FC<SectionClientSayProps> = ({
               />
 
               <Image
-                className='hidden lg:block opacity-50 md:opacity-100 mt-4 absolute left-0 top-1/2 -translate-y-1/2'
+                className='hidden lg:block mt-4 absolute left-0 top-1/2 -translate-y-1/2'
                 src={quotationImg}
                 alt='quotation'
               />
               <Image
-                className='hidden lg:block opacity-50 md:opacity-100 mt-4 absolute right-0 top-1/2 -translate-y-1/2'
+                className='hidden lg:block mt-4 absolute right-0 top-1/2 -translate-y-1/2'
                 src={quotationImg2}
                 alt='quotation'
               />
@@ -155,6 +156,12 @@ const SectionClientSay: FC<SectionClientSayProps> = ({
           </div>
         </div>
       </MotionConfig>
+      <Image
+        className='hidden sm:block absolute inset-0 top-20 object-contain w-full m-auto opacity-[0.10] dark:opacity-[0.08] -z-10'
+        src={bgImg}
+        alt='premium logo'
+        priority
+      />
     </div>
   );
 };

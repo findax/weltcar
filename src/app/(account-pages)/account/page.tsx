@@ -2,12 +2,14 @@ import Label from '@/components/Label';
 import Avatar from '@/shared/Avatar';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { Input } from '@/shared/FormInputs';
+import Image from 'next/image';
+import bgImg from '@/images/mersedes-brabus.png';
 
 export interface AccountPageProps {}
 
 const AccountPage = () => {
   return (
-    <div className='space-y-6 md:space-y-8'>
+    <div className='relative space-y-6 md:space-y-8'>
       {/* HEADING */}
       <h2 className='text-3xl font-semibold'>Account information</h2>
       <div className='w-14 border-b border-neutral-300 dark:border-neutral-700'></div>
@@ -70,6 +72,12 @@ const AccountPage = () => {
           </div>
         </div>
       </div>
+      <Image
+        className='hidden md:block absolute inset-0 top-1/2 -translate-y-1/2 object-contain w-10/12 m-auto opacity-[0.06] -z-10'
+        src={bgImg}
+        alt='premium logo'
+        priority
+      />
     </div>
   );
 };

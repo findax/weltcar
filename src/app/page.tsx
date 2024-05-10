@@ -19,9 +19,6 @@ function PageHome() {
       <div className='container pt-10 pb-24 lg:pt-16 lg:pb-28'>
         <SectionHero2 />
       </div>
-      <div className='container pt-10 pb-24 lg:pt-16 lg:pb-28'>
-        <SectionHero />
-      </div>
 
       <div className='container relative space-y-24 mb-24 lg:space-y-28 lg:mb-28'>
         <div className='relative py-16'>

@@ -16,7 +16,7 @@ export default function SectionHeroArchivePage() {
             <h2 className='font-semibold md:font-bold text-4xl md:text-5xl xl:text-7xl leading-[110%] xl:leading-[120%]'>
               Hamburg, Germany
             </h2>
-            <div className='hidden lg:flex text-base md:text-lg text-neutral-500 dark:text-neutral-400'>
+            <div className='flex justify-center lg:justify-start text-base md:text-lg text-neutral-500 dark:text-neutral-400'>
               <i className='text-2xl las la-map-marked'></i>
               <span className='ml-2.5'>Hamburg </span>
               <span className='mx-5'></span>

@@ -2,6 +2,8 @@ import SocialsList from '@/shared/SocialsList';
 import MessageForm from './(components)/MessageForm';
 import SectionSubscribe from '@/components/SectionSubscribe';
 import BackgroundSection from '@/components/BackgroundSection';
+import Image from 'next/image';
+import bgImg from '@/images/porsche911-turbo.png';
 
 export interface PageContactProps {}
 
@@ -23,7 +25,7 @@ const info = [
 const PageContact = () => {
   return (
     <div className={`nc-PageContact overflow-hidden`}>
-      <div className='mb-24 lg:mb-32'>
+      <div className='relative mb-24 lg:mb-32'>
         <h2 className='my-16 sm:my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center'>
           Contact
         </h2>
@@ -51,6 +53,12 @@ const PageContact = () => {
             <MessageForm />
           </div>
         </div>
+        <Image
+          className='hidden sm:block absolute inset-0 top-1/4 object-contain w-10/12 max-w-7xl m-auto opacity-[0.06] -z-10'
+          src={bgImg}
+          alt='premium logo'
+          priority
+        />
       </div>
 
       {/* OTHER SECTIONS */}

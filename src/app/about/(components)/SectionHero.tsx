@@ -6,7 +6,7 @@ const SectionHero = () => {
   return (
     <div className='nc-SectionHero relative'>
       <div className='flex items-center flex-col lg:flex-row space-y-14 lg:space-y-0 lg:space-x-10 justify-between text-center lg:text-left'>
-        <div className='space-y-5 lg:space-y-7 w-2/3'>
+        <div className='space-y-5 lg:space-y-7 lg:w-2/3'>
           <h2 className='text-3xl !leading-tight font-semibold text-neutral-900 md:text-4xl xl:text-5xl dark:text-neutral-100'>
             👋 About Us
           </h2>
