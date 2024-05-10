@@ -16,7 +16,7 @@ import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 import Image from 'next/image';
 import { useSwipeable } from 'react-swipeable';
 import { variants } from '@/utils/animationVariants';
-import bgImg from '@/images/Urus_Performante.png';
+import bgImg from '@/images/bg-cars/Urus_Performante.png';
 
 export interface SectionClientSayProps {
   className?: string;
@@ -83,7 +83,11 @@ const SectionClientSay: FC<SectionClientSayProps> = ({
 
   return (
     <div className={`nc-SectionClientSay relative ${className}`}>
-      <Heading desc="Let's see what people think of WeltCar" isCenter>
+      <Heading
+        desc="Let's see what people think of WeltCar"
+        isCenter
+        fontClass='font-bold xl:text-5xl'
+      >
         Good news from far away
       </Heading>
       <MotionConfig

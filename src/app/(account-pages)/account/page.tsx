@@ -3,13 +3,13 @@ import Avatar from '@/shared/Avatar';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { Input } from '@/shared/FormInputs';
 import Image from 'next/image';
-import bgImg from '@/images/mersedes-brabus.png';
+import bgImg from '@/images/bg-cars/mersedes-brabus.png';
 
 export interface AccountPageProps {}
 
 const AccountPage = () => {
   return (
-    <div className='relative space-y-6 md:space-y-8'>
+    <div className='relative space-y-6 md:space-y-8 lg:min-h-[65vh]'>
       {/* HEADING */}
       <h2 className='text-3xl font-semibold'>Account information</h2>
       <div className='w-14 border-b border-neutral-300 dark:border-neutral-700'></div>

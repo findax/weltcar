@@ -2,11 +2,11 @@ import Label from '@/components/Label';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { Input } from '@/shared/FormInputs';
 import Image from 'next/image';
-import bgImg from '@/images/audi_r8.webp';
+import bgImg from '@/images/bg-cars/audi_r8.webp';
 
 const AccountPass = () => {
   return (
-    <div className='relative space-y-6 sm:space-y-8'>
+    <div className='relative space-y-6 sm:space-y-8 lg:min-h-[65vh]'>
       {/* HEADING */}
       <h2 className='text-3xl font-semibold'>Update your password</h2>
       <div className='w-14 border-b border-neutral-300 dark:border-neutral-700'></div>

@@ -1,3 +1,4 @@
+import Heading from '@/shared/Heading';
 import rightImg from '@/images/luxury-vehicle-2.webp';
 import Image from 'next/image';
 import { ButtonPrimary } from '@/shared/Buttons';
@@ -7,9 +8,10 @@ const SectionHero = () => {
     <div className='nc-SectionHero relative'>
       <div className='flex items-center flex-col lg:flex-row space-y-14 lg:space-y-0 lg:space-x-10 justify-between text-center lg:text-left'>
         <div className='space-y-5 lg:space-y-7 lg:w-2/3'>
-          <h2 className='text-3xl !leading-tight font-semibold text-neutral-900 md:text-4xl xl:text-5xl dark:text-neutral-100'>
+          <Heading fontClass='font-bold xl:text-5xl'>👋 About Us</Heading>
+          {/* <h2 className='text-3xl !leading-tight font-semibold text-neutral-900 md:text-4xl xl:text-5xl dark:text-neutral-100'>
             👋 About Us
-          </h2>
+          </h2> */}
           <span className='block text-base xl:text-lg text-neutral-600 dark:text-neutral-400'>
             We’re impartial and independent, and every day we create
             distinctive, world-class programmes and content which inform,

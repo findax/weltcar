@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import HIW1img from '@/images/HIW1.png';
-import HIW2img from '@/images/HIW2.png';
-import HIW3img from '@/images/HIW3.png';
+import HIW1img from '@/images/icons/dimond.png';
+import HIW2img from '@/images/icons/persolan.png';
+import HIW3img from '@/images/icons/saving.png';
 import VectorImg from '@/images/VectorHIW.svg';
 import Image, { StaticImageData } from 'next/image';
 import Heading from '@/shared/Heading';
@@ -47,43 +47,34 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
       className={`nc-SectionHowItWork  ${className}`}
       data-nc-id='SectionHowItWork'
     >
-      <Heading isCenter desc='Keep calm & drive on'>
+      <Heading
+        isCenter
+        desc='Keep calm & drive on'
+        fontClass='font-bold xl:text-5xl'
+      >
         How it work
       </Heading>
-      <div className='mt-20 relative grid md:grid-cols-3 gap-20'>
+      <div className='relative grid md:grid-cols-3 gap-20 md:gap-6 lg:gap-20'>
         <Image
-          className='hidden md:block absolute inset-x-0 top-10'
+          className='hidden md:block absolute inset-x-0 top-20 lg:top-1/4 xl:top-1/3 -translate-y-1/2'
           src={VectorImg}
-          alt=''
+          alt='vector'
         />
         {data.map((item) => (
           <div
             key={item.id}
-            className='relative flex flex-col items-center max-w-xs mx-auto'
+            className='relative  flex flex-col items-center max-w-xs mx-auto'
           >
-            {item.imgDark ? (
-              <>
-                <Image
-                  className='dark:hidden block mb-8 max-w-[180px] mx-auto'
-                  src={item.img}
-                  alt=''
-                />
-                <Image
-                  alt=''
-                  className='hidden dark:block mb-8 max-w-[180px] mx-auto'
-                  src={item.imgDark}
-                />
-              </>
-            ) : (
+            <div className='relative after:content after:absolute after:inset-0 w-3/4 after:rounded-full after:shadow-2xl after:shadow-[#fed800]'>
               <Image
-                alt=''
-                className='mb-8 max-w-[180px] mx-auto'
+                alt={item.title}
+                className='opacity-[0.82] dark:opacity-100'
                 src={item.img}
               />
-            )}
-            <div className='text-center mt-auto'>
-              <h3 className='text-xl font-semibold'>{item.title}</h3>
-              <span className='block mt-5 text-neutral-500 dark:text-neutral-400'>
+            </div>
+            <div className='mt-8 text-center'>
+              <h3 className='text-xl font-bold'>{item.title}</h3>
+              <span className='block mt-5 md:text-sm lg:text-lg text-neutral-500 dark:text-neutral-400'>
                 {item.desc}
               </span>
             </div>

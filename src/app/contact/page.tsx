@@ -1,9 +1,10 @@
+import Heading from '@/shared/Heading';
 import SocialsList from '@/shared/SocialsList';
 import MessageForm from './(components)/MessageForm';
 import SectionSubscribe from '@/components/SectionSubscribe';
 import BackgroundSection from '@/components/BackgroundSection';
 import Image from 'next/image';
-import bgImg from '@/images/porsche911-turbo.png';
+import bgImg from '@/images/bg-cars/lamborghini-side.png';
 
 export interface PageContactProps {}
 
@@ -26,9 +27,16 @@ const PageContact = () => {
   return (
     <div className={`nc-PageContact overflow-hidden`}>
       <div className='relative mb-24 lg:mb-32'>
-        <h2 className='my-16 sm:my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center'>
+        <Heading
+          isCenter
+          className='my-16 sm:my-20'
+          fontClass='font-bold xl:text-5xl'
+        >
           Contact
-        </h2>
+        </Heading>
+        {/* <h2 className='my-16 sm:my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center'>
+          Contact
+        </h2> */}
         <div className='container max-w-7xl mx-auto'>
           <div className='flex-shrink-0 grid grid-cols-1 sm:grid-cols-2 gap-12 '>
             <div className='max-w-sm space-y-8'>
@@ -54,7 +62,7 @@ const PageContact = () => {
           </div>
         </div>
         <Image
-          className='hidden sm:block absolute inset-0 top-1/4 object-contain w-10/12 max-w-7xl m-auto opacity-[0.06] -z-10'
+          className='hidden sm:block absolute inset-0 top-1/4 object-contain w-10/12 max-w-7xl m-auto opacity-[0.08] -z-10'
           src={bgImg}
           alt='premium logo'
           priority
