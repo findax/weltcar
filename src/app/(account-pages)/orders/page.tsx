@@ -6,7 +6,7 @@ import bgImg from '@/images/bg-cars/porsche911-turbo.png';
 
 const OrdersPage = () => {
   return (
-    <div className='relative space-y-6 md:space-y-8 lg:min-h-[65vh]'>
+    <div className='relative space-y-6 md:space-y-8 lg:min-h-[500px]'>
       {/* HEADING */}
       <h2 className='text-3xl font-semibold'>Your orders</h2>
       <div className='w-14 border-b border-neutral-300 dark:border-neutral-700'></div>
@@ -49,7 +49,7 @@ const OrdersPage = () => {
         <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
       </div>
       <Image
-        className='hidden md:block absolute inset-0 top-1/2 -translate-y-1/2 object-contain w-10/12 m-auto opacity-[0.08] -z-10'
+        className='hidden md:block absolute inset-0 top-1/2 -translate-y-1/2 object-contain w-full opacity-[0.08] -z-10'
         src={bgImg}
         alt='premium logo'
         priority

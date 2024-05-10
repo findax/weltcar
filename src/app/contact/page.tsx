@@ -26,18 +26,17 @@ const info = [
 const PageContact = () => {
   return (
     <div className={`nc-PageContact overflow-hidden`}>
-      <div className='relative mb-24 lg:mb-32'>
-        <Heading
-          isCenter
-          className='my-16 sm:my-20'
-          fontClass='font-bold xl:text-5xl'
-        >
-          Contact
-        </Heading>
-        {/* <h2 className='my-16 sm:my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center'>
-          Contact
-        </h2> */}
-        <div className='container max-w-7xl mx-auto'>
+      <div className='container py-16 xl:py-28 space-y-16 xl:space-y-28'>
+        {/* <div className='relative mb-24 lg:mb-32'>
+        <div className='container max-w-7xl mx-auto'> */}
+        <div className='relative'>
+          <Heading
+            isCenter
+            className='mb-16 xl:mb-20'
+            fontClass='!font-bold xl:text-5xl'
+          >
+            Contact
+          </Heading>
           <div className='flex-shrink-0 grid grid-cols-1 sm:grid-cols-2 gap-12 '>
             <div className='max-w-sm space-y-8'>
               {info.map((item, index) => (
@@ -60,17 +59,15 @@ const PageContact = () => {
 
             <MessageForm />
           </div>
+          {/* </div> */}
+          <Image
+            className='hidden sm:block absolute inset-0 object-contain w-full max-w-7xl m-auto opacity-[0.08] -z-10'
+            src={bgImg}
+            alt='premium logo'
+            priority
+          />
         </div>
-        <Image
-          className='hidden sm:block absolute inset-0 top-1/4 object-contain w-10/12 max-w-7xl m-auto opacity-[0.08] -z-10'
-          src={bgImg}
-          alt='premium logo'
-          priority
-        />
-      </div>
 
-      {/* OTHER SECTIONS */}
-      <div className='container'>
         <div className='relative py-16 mb-24 lg:md-32'>
           <BackgroundSection />
           <SectionSubscribe />

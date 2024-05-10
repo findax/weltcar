@@ -50,7 +50,7 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
       <Heading
         isCenter
         desc='Keep calm & drive on'
-        fontClass='font-bold xl:text-5xl'
+        fontClass='!font-bold xl:text-5xl'
       >
         How it work
       </Heading>
@@ -74,7 +74,7 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
             </div>
             <div className='mt-8 text-center'>
               <h3 className='text-xl font-bold'>{item.title}</h3>
-              <span className='block mt-5 md:text-sm lg:text-lg text-neutral-500 dark:text-neutral-400'>
+              <span className='block mt-5 md:text-sm xl:text-lg text-neutral-500 dark:text-neutral-400'>
                 {item.desc}
               </span>
             </div>
