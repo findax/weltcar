@@ -7,6 +7,9 @@ import SortPanel from './(components)/SortPanel';
 import CarList from './(components)/CarList';
 import LoadingSpinner from '@/shared/LoadingSpinner';
 import SideMenuWrapper from '@/shared/SideMenuWrapper';
+import { toast } from 'react-hot-toast';
+
+import { getCarsListFx } from '@/app/api/cars';
 
 const CarListPage = () => {
   const [isFirstLoading, setIsFirstLoading] = useState(false);
@@ -29,6 +32,21 @@ const CarListPage = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    loadCarsList();
+  }, []);
+  const loadCarsList = async () => {
+    try {
+      setIsLoading(true);
+      const data = await getCarsListFx('/api/cars/list?page=1&perPage=10');
+      console.log(data);
+    } catch (error) {
+      toast.error((error as Error).message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleOpenMenu = () => setFilterVisible(true);
   const handleCloseMenu = () => setFilterVisible(false);

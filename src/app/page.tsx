@@ -30,10 +30,10 @@ function PageHome() {
 
         <div className='relative py-16'>
           <BackgroundSection />
-          <SectionVideos />
+          <SectionClientSay />
         </div>
 
-        <SectionClientSay />
+        <SectionVideos />
 
         <div className='relative py-16'>
           <BackgroundSection />

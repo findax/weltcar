@@ -6,7 +6,7 @@ export interface BackgroundSectionProps {
 }
 
 const BackgroundSection: FC<BackgroundSectionProps> = ({
-  className = 'bg-white dark:bg-black/20',
+  className = 'bg-white/80 dark:bg-black/40',
   children,
 }) => {
   return (
