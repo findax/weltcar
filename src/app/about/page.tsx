@@ -17,15 +17,14 @@ const PageAbout: FC<PageAboutProps> = ({}) => {
 
       <div className='container py-16 xl:py-28 space-y-16 xl:space-y-28'>
         <SectionHero />
-
         <SectionStatistic />
+
+        <SectionFounder />
 
         <div className='relative py-16'>
           <BackgroundSection />
-          <SectionFounder />
+          <SectionClientSay />
         </div>
-
-        <SectionClientSay />
 
         <div className='relative py-16'>
           <BackgroundSection />

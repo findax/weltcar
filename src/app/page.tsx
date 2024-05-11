@@ -26,7 +26,10 @@ function PageHome() {
         <SectionHowItWork />
         {/* </div> */}
 
-        <SectionWhyChooseUs />
+        <div className='relative py-16'>
+          <BackgroundSection />
+          <SectionWhyChooseUs />
+        </div>
 
         <div className='relative py-16'>
           <BackgroundSection />

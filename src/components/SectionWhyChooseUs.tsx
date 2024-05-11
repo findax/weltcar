@@ -1,8 +1,10 @@
 import React, { FC } from 'react';
-import rightImgDemo from '@/images/WhyChooseUs.webp';
+import rightImgDemo from '@/images/audi-r8-yellow.png';
 import { ButtonPrimary } from '@/shared/Buttons';
 import Logo from '@/shared/Logo';
 import Image from 'next/image';
+import WCU1img from '@/images/icons/badge.webp';
+import WCU2img from '@/images/icons/shaking-hands.webp';
 import Link from 'next/link';
 
 export interface SectionWhyChooseUsProps {
@@ -16,10 +18,11 @@ const SectionWhyChooseUs: FC<SectionWhyChooseUsProps> = ({
 }) => {
   return (
     <div
-      className={`nc-SectionWhyChooseUs relative flex flex-col lg:flex-row items-center  ${className}`}
+      // lg:pt-10 xl:py-20
+      className={`nc-SectionWhyChooseUs relative flex flex-col lg:flex-row items-start xl:items-center ${className}`}
       data-nc-id='SectionWhyChooseUs'
     >
-      <div className='flex-shrink-0 mb-16 lg:mb-0 lg:pr-16 lg:w-1/2'>
+      <div className='flex-shrink-0 lg:pr-16 lg:w-1/2 lg:-mt-3 xl:-mt-12'>
         <Logo className='w-48' />
         <h2 className='font-semibold text-3xl sm:text-4xl mt-6 sm:mt-11'>
           Why did you choose us?
@@ -35,13 +38,24 @@ const SectionWhyChooseUs: FC<SectionWhyChooseUsProps> = ({
           </ButtonPrimary>
         </Link>
       </div>
-      <div className='flex-grow w-full aspect-w-4 aspect-h-4 sm:aspect-h-3 lg:aspect-w-6 xl:aspect-w-16 xl:aspect-h-6 rounded-3xl sm:rounded-[40px] overflow-hidden'>
-        <Image
-          fill
-          className='object-cover w-full h-full'
-          alt='good deal'
-          src={rightImg}
-        />
+      <div className='flex-grow mt-16 lg:mt-0'>
+        <div className='grid grid-cols-2'>
+          <div className='relative w-8/12 sm:w-7/12 m-auto after:content after:absolute after:inset-0 after:rounded-full after:shadow-2xl after:shadow-[#fed800]'>
+            <Image
+              alt='shaking hands'
+              className='opacity-[0.82] dark:opacity-100'
+              src={WCU1img}
+            />
+          </div>
+          <div className='relative w-8/12 sm:w-7/12 m-auto after:content after:absolute after:inset-0 after:rounded-full after:shadow-2xl after:shadow-[#fed800]'>
+            <Image
+              alt='best prices'
+              className='opacity-[0.82] dark:opacity-100'
+              src={WCU2img}
+            />
+          </div>
+        </div>
+        <Image className='mt-12' alt='car' src={rightImg} />
       </div>
     </div>
   );

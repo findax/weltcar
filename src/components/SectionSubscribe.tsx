@@ -1,9 +1,11 @@
 import React, { FC } from 'react';
 import { ButtonCircle } from '@/shared/Buttons';
-import rightImg from '@/images/Subcribe.webp';
+import rightImg from '@/images/ferrari-yellow.webp';
 import Badge from '@/shared/Badge';
 import { Input } from '@/shared/FormInputs';
 import Image from 'next/image';
+import SBS1img from '@/images/icons/message.webp';
+import SBS2img from '@/images/icons/bell.webp';
 
 export interface SectionSubscribeProps {
   className?: string;
@@ -12,7 +14,7 @@ export interface SectionSubscribeProps {
 const SectionSubscribe: FC<SectionSubscribeProps> = ({ className = '' }) => {
   return (
     <div
-      className={`nc-SectionSubscribe relative flex flex-col lg:flex-row lg:items-center gap-16 ${className}`}
+      className={`nc-SectionSubscribe relative flex flex-col lg:flex-row items-start lg:items-center gap-16 ${className}`}
       data-nc-id='SectionSubscribe'
     >
       <div className='flex-shrink-0 lg:w-1/2 lg:pr-16'>
@@ -54,7 +56,23 @@ const SectionSubscribe: FC<SectionSubscribeProps> = ({ className = '' }) => {
         </form>
       </div>
       <div className='flex-grow'>
-        <Image alt='happy car buyer' src={rightImg} />
+        <div className='grid grid-cols-2'>
+          <div className='relative w-8/12 sm:w-7/12 m-auto after:content after:absolute after:inset-0 after:rounded-full after:shadow-2xl after:shadow-[#fed800]'>
+            <Image
+              alt='shaking hands'
+              className='opacity-[0.82] dark:opacity-100'
+              src={SBS1img}
+            />
+          </div>
+          <div className='relative w-8/12 sm:w-7/12 m-auto after:content after:absolute after:inset-0 after:rounded-full after:shadow-2xl after:shadow-[#fed800]'>
+            <Image
+              alt='best prices'
+              className='opacity-[0.82] dark:opacity-100'
+              src={SBS2img}
+            />
+          </div>
+        </div>
+        <Image className='mt-12' alt='car' src={rightImg} />
       </div>
     </div>
   );

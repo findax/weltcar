@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import HIW1img from '@/images/icons/dimond.png';
-import HIW2img from '@/images/icons/persolan.png';
-import HIW3img from '@/images/icons/saving.png';
+import HIW1img from '@/images/icons/dimond.webp';
+import HIW2img from '@/images/icons/persolan.webp';
+import HIW3img from '@/images/icons/saving.webp';
 import VectorImg from '@/images/VectorHIW.svg';
 import Image, { StaticImageData } from 'next/image';
 import Heading from '@/shared/Heading';
