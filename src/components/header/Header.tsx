@@ -12,6 +12,7 @@ import Modal from '@/shared/Modal';
 import Authorization from '@/components/authorization/Authorization';
 import { HeartIcon, UserIcon } from '@heroicons/react/24/outline';
 import { useThemeMode } from '@/utils/useThemeMode';
+import { ToastContainer } from 'react-toastify';
 
 const Header = () => {
   const prevScrollPos = useRef(0);
@@ -97,6 +98,17 @@ const Header = () => {
       <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
         <Authorization />
       </Modal>
+
+      <ToastContainer
+        position='bottom-right'
+        hideProgressBar={false}
+        closeOnClick
+        rtl={false}
+        limit={1}
+        theme={
+          typeof localStorage !== 'undefined' ? localStorage.theme : 'light'
+        }
+      />
     </>
   );
 };

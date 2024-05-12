@@ -19,12 +19,15 @@ const PageAbout: FC<PageAboutProps> = ({}) => {
         <SectionHero />
         <SectionStatistic />
 
-        <SectionFounder />
-
         <div className='relative py-16'>
           <BackgroundSection />
-          <SectionClientSay />
+          <SectionFounder />
         </div>
+
+        {/* <div className='relative py-16'>
+          <BackgroundSection /> */}
+        <SectionClientSay />
+        {/* </div> */}
 
         <div className='relative py-16'>
           <BackgroundSection />

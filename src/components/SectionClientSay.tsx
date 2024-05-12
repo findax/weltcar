@@ -161,7 +161,7 @@ const SectionClientSay: FC<SectionClientSayProps> = ({
         </div>
       </MotionConfig>
       <Image
-        className='hidden sm:block absolute inset-0 top-20 object-contain w-full opacity-[0.4] dark:opacity-[0.2] -z-10'
+        className='hidden sm:block absolute inset-0 top-20 object-contain w-full opacity-[0.1] dark:opacity-[0.08] -z-10'
         src={bgImg}
         alt='premium logo'
         priority

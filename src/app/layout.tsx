@@ -4,10 +4,11 @@ import Header from '../components/header/Header';
 import Footer from '@/components/Footer';
 import { Metadata, Viewport } from 'next';
 
-import './globals.css';
 import '@/fonts/line-awesome-1.3.0/css/line-awesome.css';
-import '@/styles/index.scss';
 import 'rc-slider/assets/index.css';
+import 'react-toastify/dist/ReactToastify.css';
+import './globals.css';
+import '@/styles/index.scss';
 
 const poppins = Poppins({
   subsets: ['latin'],

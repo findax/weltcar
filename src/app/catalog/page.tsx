@@ -7,12 +7,12 @@ import SortPanel from './(components)/SortPanel';
 import CarList from './(components)/CarList';
 import LoadingSpinner from '@/shared/LoadingSpinner';
 import SideMenuWrapper from '@/shared/SideMenuWrapper';
-import { toast } from 'react-hot-toast';
+import { toast } from 'react-toastify';
 
 import { getCarsListFx } from '@/app/api/cars';
 
 const CarListPage = () => {
-  const [isFirstLoading, setIsFirstLoading] = useState(false);
+  const [isFirstLoading, setIsFirstLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isGrid, setIsGrid] = useState(true);
@@ -34,15 +34,19 @@ const CarListPage = () => {
   }, []);
 
   useEffect(() => {
+    isFirstLoading && setIsFirstLoading(false);
+
     loadCarsList();
   }, []);
+
   const loadCarsList = async () => {
     try {
       setIsLoading(true);
-      const data = await getCarsListFx('/api/cars/list?page=1&perPage=10');
+      const data = await getCarsListFx('/api/cars/list');
       console.log(data);
     } catch (error) {
       toast.error((error as Error).message);
+      // console.log(error);
     } finally {
       setIsLoading(false);
     }
