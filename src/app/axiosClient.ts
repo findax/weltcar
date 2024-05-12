@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_SERVER_URL}`,
+  // baseURL: `${process.env.NEXT_PUBLIC_SERVER_URL}`,
+  baseURL: 'http://49.12.230.191:8081',
   headers: {
     'Content-Type': 'application/json',
     Bearer:

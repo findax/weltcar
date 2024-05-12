@@ -1,4 +1,4 @@
-import { CarDataType } from '@/data/types';
+import { CarDataType } from '@/types/carData';
 import BtnLikeIcon from '@/components/BtnLikeIcon';
 import SaleOffBadge from '@/components/SaleOffBadge';
 import Badge from '@/shared/Badge';
@@ -14,7 +14,18 @@ const CarCardH = ({
   className?: string;
   carData: CarDataType;
 }) => {
-  const { id, galleryImgs, brand, model, saleOff, isAds, price } = carData;
+  const {
+    car_id,
+    photos,
+    brand,
+    model,
+    year,
+    price,
+    inner_color_hex,
+    inner_color_name,
+    outer_color_hex,
+    outer_color_name,
+  } = carData;
 
   const renderContent = () => {
     return (
@@ -29,10 +40,10 @@ const CarCardH = ({
                 </span>
               </h2>
             </div>
-            <span className='text-xl font-semibold'>2024</span>
+            <span className='text-xl font-semibold'>{year}</span>
           </div>
           <div className='flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-2'>
-            <span className=''>{id}</span>
+            <span className=''>{car_id}</span>
             {/* <span>-</span>
             <span className=''>{gearshift} </span> */}
           </div>
@@ -71,20 +82,26 @@ const CarCardH = ({
         <div className='space-y-2 py-3'>
           <div className='flex items-center'>
             <span className=''>exterior color:</span>
-            <span className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 bg-[#fff]'></span>
-            <span className=''> - white</span>
+            <span
+              className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500'
+              style={{ backgroundColor: `${outer_color_hex}` }}
+            ></span>
+            <span className=''> - {outer_color_name}</span>
           </div>
           <div className='flex items-center'>
             <span className=''>interior color:</span>
-            <span className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 bg-[#000]'></span>
-            <span className=''> - black</span>
+            <span
+              className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500'
+              style={{ backgroundColor: `${inner_color_hex}` }}
+            ></span>
+            <span className=''> - {inner_color_name}</span>
           </div>
         </div>
 
         <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
         <div className='flex justify-between items-center'>
           <span className='text-3xl font-semibold text-primary-400'>
-            {numberWithComma(price)}€
+            {numberWithComma(price)} €
           </span>
           <ButtonPrimary>See more</ButtonPrimary>
         </div>
@@ -99,15 +116,12 @@ const CarCardH = ({
       <div className='flex flex-col md:flex-row'>
         <div className='relative w-full flex items-center justify-center md:w-[45%] flex-shrink-0 border-r border-neutral-200/80 dark:border-neutral-700'>
           <div className='w-full'>
-            <CardSlider
-              ratioClass='aspect-w-6 aspect-h-4'
-              galleryImgs={galleryImgs}
-            />
+            <CardSlider ratioClass='aspect-w-6 aspect-h-4' photos={photos} />
           </div>
           {/* <BtnLikeIcon isLiked={like} className='absolute right-3 top-3' /> */}
           {/* {saleOff && <SaleOffBadge className='absolute left-3 top-3' />} */}
         </div>
-        <Link href={`/car-details/${id}`} className='w-full'>
+        <Link href={`/car-details/${car_id}`} className='w-full'>
           {renderContent()}
         </Link>
       </div>

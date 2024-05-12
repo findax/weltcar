@@ -2,7 +2,7 @@
 
 import Logo from '@/shared/Logo';
 import SocialsList1 from '@/shared/SocialsList1';
-import { CustomLink } from '@/data/types';
+import { CustomLink } from '@/types/types';
 import React from 'react';
 
 export interface WidgetFooterMenu {

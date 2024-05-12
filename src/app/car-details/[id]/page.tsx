@@ -1,8 +1,9 @@
 'use client';
 
+import { notFound } from 'next/navigation';
 import { useState } from 'react';
 import ImagesHeader from './(components)/ImagesHeader';
-import { DEMO_CAR_IMAGES_GALLERY } from '@/data/carimagesgallery';
+import { DEMO_CAR_IMAGES_GALLERY } from '@/types/carimagesgallery';
 import Documents from './(components)/Documents';
 import CarDescriptions from './(components)/CarDescriptions';
 import PriceSidebar from './(components)/PriceSidebar';
@@ -11,10 +12,10 @@ import Modal from '@/shared/Modal';
 import Authorization from '@/components/authorization/Authorization';
 import ConfirmForm from './(components)/ConfirmForm';
 
-const CarDetailsPage = () => {
+const CarDetailsPage = ({ params }: { params: { id: string } }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalId, setModalId] = useState('');
-  const price = '460000';
+  const price = 460000;
 
   function handleReserve(modalId: string) {
     setModalId(modalId);

@@ -6,7 +6,7 @@ export default function PriceSidebar({
   data,
 }: {
   onClick: (modalId: string) => void;
-  data: string;
+  data: number;
 }) {
   return (
     <div className='block flex-grow mt-14 lg:mt-0'>

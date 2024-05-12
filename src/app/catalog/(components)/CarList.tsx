@@ -1,4 +1,4 @@
-import { CarDataType } from '@/data/types';
+import { CarDataType } from '@/types/carData';
 import Pagination from '@/shared/Pagination';
 import CarCard from '@/components/CarCard';
 import CarCardH from '@/components/CarCardH';
@@ -6,11 +6,11 @@ import CarCardHSkeleton from '@/components/CarCardHSkeleton';
 import CarCardSkeleton from '@/components/CarCardSkeleton';
 
 const CarList = ({
-  CarList,
+  carsData,
   isLoading,
   isGrid,
 }: {
-  CarList: CarDataType[];
+  carsData: CarDataType[];
   isLoading: boolean;
   isGrid: boolean;
 }) => {
@@ -23,7 +23,7 @@ const CarList = ({
           <CarCardHSkeleton />
         ) : (
           <div className='flex flex-col gap-4 lg:gap-6'>
-            {CarList.map((car) => (
+            {carsData.map((car) => (
               <CarCardH key={car.id} carData={car} />
             ))}
           </div>
@@ -32,7 +32,7 @@ const CarList = ({
         <CarCardSkeleton />
       ) : (
         <div className='grid grid-cols-1 gap-4 lg:gap-6 sm:grid-cols-2'>
-          {CarList.map((car) => (
+          {carsData.map((car) => (
             <CarCard key={car.id} carData={car} />
           ))}
         </div>

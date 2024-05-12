@@ -13,7 +13,7 @@ const AccordionComponent: FC<AccordionProps> = ({
   title,
   children,
 }) => {
-  const [opened, setOpened] = useState<boolean>(true);
+  const [opened, setOpened] = useState(false);
 
   return (
     <>
@@ -29,6 +29,7 @@ const AccordionComponent: FC<AccordionProps> = ({
       <AnimateHeight duration={300} height={opened ? 'auto' : 0}>
         {children}
       </AnimateHeight>
+      <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
     </>
   );
 };

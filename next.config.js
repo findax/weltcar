@@ -2,7 +2,6 @@
 const nextConfig = {
   reactStrictMode: false,
   experimental: {
-    // appDir: true,
     typedRoutes: true,
   },
   images: {
@@ -20,21 +19,9 @@ const nextConfig = {
         pathname: '/**',
       },
       {
-        protocol: 'https',
-        hostname: 'a0.muscache.com',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'www.gstatic.com',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'placewisetw.vercel.app',
-        port: '',
+        protocol: 'http',
+        hostname: '49.12.230.191',
+        port: '8081',
         pathname: '/**',
       },
     ],

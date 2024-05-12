@@ -10,7 +10,7 @@ import { ButtonPrimary, ButtonClose } from '@/shared/Buttons';
 import SocialsList from '@/shared/SocialsList';
 import SwitchDarkMode from './SwitchDarkMode';
 import SideMenuWrapper from '@/shared/SideMenuWrapper';
-import { NAVIGATION_DEMO } from '@/data/navigation';
+import { NAVIGATION_DEMO } from '@/types/navigation';
 
 interface MenuMobileProps {
   className?: string;

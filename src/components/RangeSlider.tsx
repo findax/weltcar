@@ -2,33 +2,43 @@ import { useState } from 'react';
 import Slider from 'rc-slider';
 import { ButtonPrimary, ButtonThird } from '@/shared/Buttons';
 
-export default function PriceRangeSlider() {
-  const [rangePrices, setRangePrices] = useState<number[]>([0, 260000]);
-  // const [rangePrices, setRangePrices] = useState([0, 260000]);
+interface rangeDataProps {
+  rangeData: {
+    id: string;
+    max: number;
+    min: number;
+    name: string;
+  };
+}
+
+export default function RangeSlider({ rangeData }: rangeDataProps) {
+  const defaultRangeState = [rangeData.min, rangeData.max];
+  const [rangeState, setRangeState] = useState([rangeData.min, rangeData.max]);
+
   const handleMinPriceChange = (e: React.FormEvent<HTMLInputElement>) => {
     if (e.currentTarget.value === '') {
-      setRangePrices([0, rangePrices[1]]);
+      setRangeState([0, rangeState[1]]);
       return;
     }
     const newMinPrice = parseInt(e.currentTarget.value);
-    if (newMinPrice <= rangePrices[1]) {
-      setRangePrices([newMinPrice, rangePrices[1]]);
+    if (newMinPrice <= rangeState[1]) {
+      setRangeState([newMinPrice, rangeState[1]]);
     }
   };
 
   const handleMaxPriceChange = (e: React.FormEvent<HTMLInputElement>) => {
     if (e.currentTarget.value === '') {
-      setRangePrices([rangePrices[0], 0]);
+      setRangeState([rangeState[0], 0]);
       return;
     }
     const newMaxPrice = parseInt(e.currentTarget.value);
     if (newMaxPrice >= 0) {
-      setRangePrices([rangePrices[0], newMaxPrice]);
+      setRangeState([rangeState[0], newMaxPrice]);
     }
   };
 
   const resetRange = () => {
-    setRangePrices([0, 260000]);
+    setRangeState(defaultRangeState);
   };
 
   return (
@@ -36,42 +46,44 @@ export default function PriceRangeSlider() {
       <div className='flex justify-between space-x-5'>
         <div>
           <label
-            htmlFor='minPrice'
+            htmlFor={`min-${rangeData.id}`}
             className='block text-sm font-medium text-neutral-700 dark:text-neutral-300'
           >
-            Min price
+            Min
           </label>
           <div className='mt-1 relative rounded-md'>
-            <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
-              <span className='text-neutral-500 sm:text-sm'>€</span>
-            </div>
+            {rangeData.id === 'price' && (
+              <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+                <span className='text-neutral-500 sm:text-sm'>€</span>
+              </div>
+            )}
             <input
               type='text'
-              name='minPrice'
-              id='minPrice'
+              name={`min-${rangeData.id}`}
               className='bg-transparent focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-3 sm:text-sm border-neutral-200 dark:border-neutral-700 rounded-full'
-              value={rangePrices[0]}
+              value={rangeState[0]}
               onChange={handleMinPriceChange}
             />
           </div>
         </div>
         <div>
           <label
-            htmlFor='maxPrice'
+            htmlFor={`max-${rangeData.id}`}
             className='block text-sm font-medium text-neutral-700 dark:text-neutral-300'
           >
-            Max price
+            Max
           </label>
           <div className='mt-1 relative rounded-md'>
-            <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
-              <span className='text-neutral-500 sm:text-sm'>€</span>
-            </div>
+            {rangeData.id === 'price' && (
+              <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+                <span className='text-neutral-500 sm:text-sm'>€</span>
+              </div>
+            )}
             <input
               type='text'
-              name='maxPrice'
-              id='maxPrice'
+              name={`max-${rangeData.id}`}
               className='bg-transparent focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-3 sm:text-sm border-neutral-200 dark:border-neutral-700 rounded-full'
-              value={rangePrices[1]}
+              value={rangeState[1]}
               onChange={handleMaxPriceChange}
             />
           </div>
@@ -81,11 +93,12 @@ export default function PriceRangeSlider() {
       <div className='space-y-5'>
         <Slider
           range
+          allowCross={false}
           className='block mx-auto w-11/12 text-primary-600'
-          min={0}
-          max={260000}
-          value={rangePrices}
-          onChange={(e) => setRangePrices(e as number[])}
+          min={rangeData.min}
+          max={rangeData.max}
+          value={rangeState}
+          onChange={(e) => setRangeState(e as number[])}
         />
       </div>
 

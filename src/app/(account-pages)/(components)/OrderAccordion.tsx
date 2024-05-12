@@ -32,7 +32,7 @@ const OrderAccordion: FC<AccordionProps> = ({
           processing
         </span>
         <span className='text-nowrap text-ellipsis overflow-hidden'>
-          {numberWithComma('75000')}€
+          {numberWithComma(75000)} €
         </span>
         <ChevronDownIcon
           className={`absolute top-1/2 -translate-y-1/2 right-0 w-4 duration-300 ${opened ? 'rotate-180' : ''}`}

@@ -1,7 +1,7 @@
-import { TwMainColor } from "@/data/types";
-import { Route } from "@/routers/types";
-import Link from "next/link";
-import React, { FC, ReactNode } from "react";
+import { TwMainColor } from '@/types/types';
+import { Route } from '@/routers/types';
+import Link from 'next/link';
+import React, { FC, ReactNode } from 'react';
 
 export interface BadgeProps {
   className?: string;
@@ -11,56 +11,56 @@ export interface BadgeProps {
 }
 
 const Badge: FC<BadgeProps> = ({
-  className = "relative",
+  className = 'relative',
   name,
-  color = "blue",
+  color = 'blue',
   href,
 }) => {
   const getColorClass = (hasHover = true) => {
     switch (color) {
-      case "pink":
+      case 'pink':
         return `text-pink-800 bg-pink-100 ${
-          hasHover ? "hover:bg-pink-800" : ""
+          hasHover ? 'hover:bg-pink-800' : ''
         }`;
-      case "red":
-        return `text-red-800 bg-red-100 ${hasHover ? "hover:bg-red-800" : ""}`;
-      case "gray":
+      case 'red':
+        return `text-red-800 bg-red-100 ${hasHover ? 'hover:bg-red-800' : ''}`;
+      case 'gray':
         return `text-gray-800 bg-gray-100 ${
-          hasHover ? "hover:bg-gray-800" : ""
+          hasHover ? 'hover:bg-gray-800' : ''
         }`;
-      case "green":
+      case 'green':
         return `text-green-800 bg-green-100 ${
-          hasHover ? "hover:bg-green-800" : ""
+          hasHover ? 'hover:bg-green-800' : ''
         }`;
-      case "purple":
+      case 'purple':
         return `text-purple-800 bg-purple-100 ${
-          hasHover ? "hover:bg-purple-800" : ""
+          hasHover ? 'hover:bg-purple-800' : ''
         }`;
-      case "indigo":
+      case 'indigo':
         return `text-indigo-800 bg-indigo-100 ${
-          hasHover ? "hover:bg-indigo-800" : ""
+          hasHover ? 'hover:bg-indigo-800' : ''
         }`;
-      case "yellow":
+      case 'yellow':
         return `text-yellow-800 bg-yellow-100 ${
-          hasHover ? "hover:bg-yellow-800" : ""
+          hasHover ? 'hover:bg-yellow-800' : ''
         }`;
-      case "blue":
+      case 'blue':
         return `text-blue-800 bg-blue-100 ${
-          hasHover ? "hover:bg-blue-800" : ""
+          hasHover ? 'hover:bg-blue-800' : ''
         }`;
       default:
         return `text-pink-800 bg-pink-100 ${
-          hasHover ? "hover:bg-pink-800" : ""
+          hasHover ? 'hover:bg-pink-800' : ''
         }`;
     }
   };
 
   const CLASSES =
-    "nc-Badge inline-flex px-2.5 py-1 rounded-full font-medium text-xs " +
+    'nc-Badge inline-flex px-2.5 py-1 rounded-full font-medium text-xs ' +
     className;
   return !!href ? (
     <Link
-      href={href || ""}
+      href={href || ''}
       className={`transition-colors hover:text-white duration-300 ${CLASSES} ${getColorClass()}`}
     >
       {name}

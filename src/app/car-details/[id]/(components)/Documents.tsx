@@ -1,4 +1,4 @@
-import { documents } from '@/data/carimagesgallery';
+import { documents } from '@/types/carimagesgallery';
 import { DocumentArrowDownIcon } from '@heroicons/react/24/outline';
 
 export default function Documents() {

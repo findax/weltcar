@@ -1,8 +1,8 @@
 'use client';
 
+import __CarList from '@/mock/__carList.json';
 import { Tab } from '@headlessui/react';
 import CarCard from '@/components/CarCard';
-import { DEMO_CAR_LIST } from '@/data/carlist';
 import { Fragment, useState } from 'react';
 import { ButtonSecondary } from '@/shared/Buttons';
 
@@ -39,7 +39,7 @@ const AccountSavelists = () => {
             <Tab.Panels>
               <Tab.Panel className='mt-8'>
                 <div className='grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-                  {DEMO_CAR_LIST.filter((_, i) => i < 8).map(car => (
+                  {__CarList.filter((_, i) => i < 6).map(car => (
                     <CarCard key={car.id} carData={car} />
                   ))}
                 </div>
@@ -50,9 +50,11 @@ const AccountSavelists = () => {
             </Tab.Panels>
           </Tab.Group> */}
           <div className='grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-            {DEMO_CAR_LIST.filter((_, i) => i < 8).map((car) => (
-              <CarCard key={car.id} carData={car} />
-            ))}
+            {__CarList
+              .filter((_, i) => i < 6)
+              .map((car) => (
+                <CarCard key={car.id} carData={car} />
+              ))}
           </div>
           <div className='flex mt-11 justify-center items-center'>
             <ButtonSecondary>Show me more</ButtonSecondary>

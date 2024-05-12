@@ -1,8 +1,8 @@
 'use client';
 
+// import __CarList from '@/mock/__carList.json';
 import { useState, useEffect } from 'react';
-import { DEMO_CAR_LIST } from '@/data/carlist';
-import Filter from './(components)/Filter';
+import Filters from './(components)/Filters';
 import SortPanel from './(components)/SortPanel';
 import CarList from './(components)/CarList';
 import LoadingSpinner from '@/shared/LoadingSpinner';
@@ -16,14 +16,19 @@ const CarListPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isGrid, setIsGrid] = useState(true);
-  const [isFilterVisible, setFilterVisible] = useState(false);
+  const [isFiltersVisible, setFiltersVisible] = useState(false);
 
-  useEffect(() => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-  }, [isGrid]);
+  const [carsData, setCarsData] = useState([]);
+  const [filtersState, setFiltersState] = useState([]);
+
+  // useEffect(() => {
+  //   if (!isFirstLoading) {
+  //     setIsLoading(true);
+  //     setTimeout(() => {
+  //       setIsLoading(false);
+  //     }, 2000);
+  //   }
+  // }, [isGrid]);
 
   useEffect(() => {
     setIsMobile(window.innerWidth < 1024);
@@ -43,17 +48,18 @@ const CarListPage = () => {
     try {
       setIsLoading(true);
       const data = await getCarsListFx('/api/cars/list');
-      console.log(data);
+
+      setCarsData(data.data);
+      setFiltersState(data.filters);
     } catch (error) {
       toast.error((error as Error).message);
-      // console.log(error);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleOpenMenu = () => setFilterVisible(true);
-  const handleCloseMenu = () => setFilterVisible(false);
+  const handleOpenMenu = () => setFiltersVisible(true);
+  const handleCloseMenu = () => setFiltersVisible(false);
 
   return isFirstLoading ? (
     <div className='w-full h-[calc(100vh-76px)] flex justify-center items-center'>
@@ -67,23 +73,29 @@ const CarListPage = () => {
             {isMobile ? (
               <SideMenuWrapper
                 handleCloseMenu={handleCloseMenu}
-                isVisable={isFilterVisible}
+                isVisable={isFiltersVisible}
                 isLeftSide
               >
-                <Filter closeFilter={setFilterVisible} />
+                <Filters
+                  filtersState={filtersState}
+                  closeFilters={setFiltersVisible}
+                />
               </SideMenuWrapper>
             ) : (
-              <Filter closeFilter={setFilterVisible} />
+              <Filters
+                filtersState={filtersState}
+                closeFilters={setFiltersVisible}
+              />
             )}
           </div>
           <div className='col-span-12 lg:col-span-8'>
             <SortPanel
               handleIsGrid={setIsGrid}
               isGrid={isGrid}
-              openFilter={setFilterVisible}
+              openFilter={setFiltersVisible}
             />
             <CarList
-              CarList={DEMO_CAR_LIST}
+              carsData={carsData}
               isLoading={isLoading}
               isGrid={isGrid}
             />

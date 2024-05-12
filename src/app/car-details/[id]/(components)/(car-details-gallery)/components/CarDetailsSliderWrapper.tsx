@@ -6,7 +6,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useRef, useState } from 'react';
 import useKeypress from 'react-use-keypress';
 import { getNewParam } from '../CarDetailsGallery';
-import type { CarGalleryImage } from '@/data/types';
+import type { CarGalleryImage } from '@/types/types';
 import CarDetailsSlider from './CarDetailsSlider';
 import { Route } from 'next';
 

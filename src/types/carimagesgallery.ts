@@ -1,4 +1,4 @@
-import { CarGalleryImage } from '@/data/types';
+import { CarGalleryImage } from '@/types/types';
 
 import car1 from '@/images/car-details/1.jpeg';
 import car2 from '@/images/car-details/2.jpeg';

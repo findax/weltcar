@@ -2,14 +2,14 @@
 
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import { useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import { variants } from '@/utils/animationVariants';
 
 export interface CardSliderProps {
   className?: string;
-  galleryImgs: (StaticImageData | string)[];
+  photos: { thumb: string }[];
   ratioClass?: string;
   imageClass?: string;
   galleryClass?: string;
@@ -18,7 +18,7 @@ export interface CardSliderProps {
 
 export default function CardSlider({
   className = '',
-  galleryImgs,
+  photos,
   ratioClass = 'aspect-w-4 aspect-h-3',
   imageClass = '',
   galleryClass = '',
@@ -27,7 +27,7 @@ export default function CardSlider({
   const [loaded, setLoaded] = useState(false);
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
-  const images = galleryImgs;
+  const images = photos;
 
   function changePhotoId(newVal: number) {
     if (newVal > index) {
@@ -52,8 +52,7 @@ export default function CardSlider({
     trackMouse: true,
   });
 
-  let currentImage = images[index];
-
+  let currentImage = images[index].thumb;
   return (
     <MotionConfig
       transition={{

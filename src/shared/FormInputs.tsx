@@ -61,7 +61,7 @@ export const Checkbox = ({
   onChange,
 }: CheckboxProps) => {
   return (
-    <div className={`flex items-center text-sm sm:text-base ${className}`}>
+    <label className={`flex items-center text-sm sm:text-base ${className}`}>
       <input
         id={name}
         name={name}
@@ -71,21 +71,11 @@ export const Checkbox = ({
         onChange={(e) => onChange && onChange(e.target.checked)}
       />
       {label && (
-        <label
-          htmlFor={name}
-          className='ml-3.5 flex flex-col flex-1 justify-center cursor-pointer'
-        >
-          <span className=' text-neutral-900 hover:text-neutral-400 dark:text-neutral-100 dark:hover:text-neutral-400'>
-            {label}
-          </span>
-          {subLabel && (
-            <p className='mt-1 text-neutral-500 dark:text-neutral-400 text-sm font-light'>
-              {subLabel}
-            </p>
-          )}
-        </label>
+        <span className='ml-3.5 text-neutral-900 hover:text-neutral-400 dark:text-neutral-100 dark:hover:text-neutral-400 cursor-pointer'>
+          {label}
+        </span>
       )}
-    </div>
+    </label>
   );
 };
 

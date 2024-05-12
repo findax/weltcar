@@ -15,7 +15,7 @@ import { useSwipeable } from 'react-swipeable';
 import { variants } from '@/utils/animationVariants';
 import downloadPhoto from '../utils/downloadPhoto';
 import { range } from '../utils/range';
-import type { CarGalleryImage } from '@/data/types';
+import type { CarGalleryImage } from '@/types/types';
 
 interface CarDetailsSliderProps {
   index: number;

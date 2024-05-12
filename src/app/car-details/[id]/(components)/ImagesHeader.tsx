@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import CarDetailsGallery from './(car-details-gallery)/CarDetailsGallery';
 import { Squares2X2Icon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
-import type { CarGalleryImage } from '@/data/types';
+import type { CarGalleryImage } from '@/types/types';
 import { usePathname, useRouter } from 'next/navigation';
 import { Route } from 'next';
 
