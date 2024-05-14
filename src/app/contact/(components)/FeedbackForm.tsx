@@ -4,9 +4,10 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { FormikInput, FormikTextarea } from '@/shared/FormInputs';
 import { ButtonPrimary } from '@/shared/Buttons';
+import { sendFeedback } from '@/api/feedback';
 
-export default function MessageForm() {
-  const MessageSchema = Yup.object().shape({
+export default function FeedbackForm() {
+  const FeedbackSchema = Yup.object().shape({
     name: Yup.string()
       .trim()
       .min(2, 'Name is too short')
@@ -19,6 +20,7 @@ export default function MessageForm() {
     message: Yup.string()
       .trim()
       .min(10, 'Message is too short')
+      .max(5000, 'Message is too long')
       .required('Message is required'),
   });
   return (
@@ -28,14 +30,20 @@ export default function MessageForm() {
         email: '',
         message: '',
       }}
-      validationSchema={MessageSchema}
+      validationSchema={FeedbackSchema}
       onSubmit={(values, { setSubmitting, resetForm }) => {
-        // same shape as initial values
-        const castValues = MessageSchema.cast(values);
-        console.log(castValues);
+        // trim values
+        const castValues = FeedbackSchema.cast(values);
 
-        // resetForm();
-        // setSubmitting(false);
+        sendFeedback({
+          name: castValues.name,
+          email: castValues.email,
+          message: castValues.message,
+        })
+          .then((res) => {
+            res && resetForm();
+          })
+          .finally(() => setSubmitting(false));
       }}
     >
       {({ errors, touched, isSubmitting }) => (

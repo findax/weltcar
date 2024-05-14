@@ -4,8 +4,13 @@ import * as Yup from 'yup';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { FormikInput, FormikPasswordInput } from '@/shared/FormInputs';
 import ForgotPassword from './ForgotPassword';
+import { singIn } from '@/api/auth';
 
-export default function Signin() {
+export default function Signin({
+  setIsModalOpen,
+}: {
+  setIsModalOpen: (isModalOpen: boolean) => void;
+}) {
   const [isOpenForgotPassword, setIsOpenForgotPassword] = useState(false);
   const [emailValue, setEmailValue] = useState('');
 
@@ -33,13 +38,18 @@ export default function Signin() {
           password: '',
         }}
         validationSchema={LoginSchema}
-        onSubmit={(values, { setSubmitting, resetForm }) => {
-          // same shape as initial values
+        onSubmit={(values, { setSubmitting }) => {
+          // trim values
           const castValues = LoginSchema.cast(values);
-          console.log(castValues);
 
-          resetForm();
-          // setSubmitting(false);
+          singIn({
+            email: castValues.email,
+            password: castValues.password,
+          })
+            .then((res) => {
+              res && setIsModalOpen(false);
+            })
+            .finally(() => setSubmitting(false));
         }}
       >
         {({ errors, touched, isSubmitting }) => (
@@ -67,7 +77,6 @@ export default function Signin() {
               type='submit'
               disabled={isSubmitting}
               loading={isSubmitting}
-              // className='mt-4'
             >
               Continue
             </ButtonPrimary>

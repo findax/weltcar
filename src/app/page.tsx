@@ -1,6 +1,5 @@
 import React from 'react';
 import SectionHero from '@/components/SectionHero';
-import SectionHero2 from '@/components/SectionHero2';
 import BgGlassmorphism from '@/components/BgGlassmorphism';
 import BackgroundSection from '@/components/BackgroundSection';
 import SectionHowItWork from '@/components/SectionHowItWork';
@@ -17,7 +16,7 @@ function PageHome() {
 
       {/* SECTION HERO */}
       <div className='container pt-16 pb-24 lg:pb-28'>
-        <SectionHero2 />
+        <SectionHero />
       </div>
 
       <div className='container relative space-y-24 mb-24 lg:space-y-28 lg:mb-28'>

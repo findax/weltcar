@@ -5,8 +5,12 @@ import SocialAuth from './components/SocialAuth';
 import SignIn from './components/SignIn';
 import Registration from './components/Registration';
 
-export default function Authorization() {
-  const [page, setPage] = useState(<SignIn />);
+export default function Authorization({
+  setIsModalOpen,
+}: {
+  setIsModalOpen: (isModalOpen: boolean) => void;
+}) {
+  const [page, setPage] = useState(<SignIn setIsModalOpen={setIsModalOpen} />);
   const [isActive, setActive] = useState(true);
 
   return (
@@ -19,7 +23,7 @@ export default function Authorization() {
           }`}
           onClick={() => {
             setActive(true);
-            setPage(<SignIn />);
+            setPage(<SignIn setIsModalOpen={setIsModalOpen} />);
           }}
         >
           SIGN IN
@@ -31,7 +35,7 @@ export default function Authorization() {
           }`}
           onClick={() => {
             setActive(false);
-            setPage(<Registration />);
+            setPage(<Registration setIsModalOpen={setIsModalOpen} />);
           }}
         >
           SIGN UP

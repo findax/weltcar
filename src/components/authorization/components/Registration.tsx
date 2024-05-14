@@ -6,8 +6,13 @@ import {
   FormikPhoneNumberInput,
   FormikPasswordInput,
 } from '@/shared/FormInputs';
+import { singUp } from '@/api/auth';
 
-export default function Registration() {
+export default function Registration({
+  setIsModalOpen,
+}: {
+  setIsModalOpen: (isModalOpen: boolean) => void;
+}) {
   // const phoneValidationPattern = /\+38 \(0\d{2}\) \d{3}-\d{2}-\d{2}/;
 
   const SignupSchema = Yup.object().shape({
@@ -40,13 +45,19 @@ export default function Registration() {
         password: '',
       }}
       validationSchema={SignupSchema}
-      onSubmit={(values, { setSubmitting, resetForm }) => {
-        // same shape as initial values
+      onSubmit={(values, { setSubmitting }) => {
+        // trim values
         const castValues = SignupSchema.cast(values);
-        console.log(castValues);
 
-        resetForm();
-        // setSubmitting(false);
+        singUp({
+          name: castValues.name,
+          email: castValues.email,
+          password: castValues.password,
+        })
+          .then((res) => {
+            res && setIsModalOpen(false);
+          })
+          .finally(() => setSubmitting(false));
       }}
     >
       {({ errors, touched, isSubmitting }) => (

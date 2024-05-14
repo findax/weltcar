@@ -9,7 +9,7 @@ import LoadingSpinner from '@/shared/LoadingSpinner';
 import SideMenuWrapper from '@/shared/SideMenuWrapper';
 import { toast } from 'react-toastify';
 
-import { getCarsListFx } from '@/app/api/cars';
+import { getCarsList } from '@/api/cars';
 
 const CarListPage = () => {
   const [isFirstLoading, setIsFirstLoading] = useState(true);
@@ -39,22 +39,23 @@ const CarListPage = () => {
   }, []);
 
   useEffect(() => {
-    isFirstLoading && setIsFirstLoading(false);
-
+    setIsFirstLoading(true);
     loadCarsList();
   }, []);
 
   const loadCarsList = async () => {
     try {
       setIsLoading(true);
-      const data = await getCarsListFx('/api/cars/list');
+      const data = await getCarsList('/api/cars/list');
 
       setCarsData(data.data);
       setFiltersState(data.filters);
+      isFirstLoading && setIsFirstLoading(false);
     } catch (error) {
       toast.error((error as Error).message);
     } finally {
       setIsLoading(false);
+      isFirstLoading && setIsFirstLoading(false);
     }
   };
 

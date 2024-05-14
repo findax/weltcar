@@ -13,6 +13,7 @@ import Authorization from '@/components/authorization/Authorization';
 import { HeartIcon, UserIcon } from '@heroicons/react/24/outline';
 import { useThemeMode } from '@/utils/useThemeMode';
 import { ToastContainer } from 'react-toastify';
+import { isUserAuth } from '@/api/auth';
 
 const Header = () => {
   const prevScrollPos = useRef(0);
@@ -20,17 +21,30 @@ const Header = () => {
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [user, setUser] = useState(null);
   //
   useThemeMode();
   //
 
   useEffect(() => {
+    if (typeof sessionStorage !== 'undefined') {
+      const user = isUserAuth();
+      setUser(user);
+    }
     setIsMobile(window.innerWidth < 768);
     const handleResize = () =>
       window.innerWidth < 768 ? setIsMobile(true) : setIsMobile(false);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    if (typeof sessionStorage !== 'undefined') {
+      const user = isUserAuth();
+      setUser(user);
+    }
+  }, [isModalOpen]);
 
   useEffect(() => {
     function handleScroll() {
@@ -81,14 +95,17 @@ const Header = () => {
               <span className='sr-only'>Enable dark mode</span>
               <HeartIcon className='w-5 md:w-7' />
             </button> */}
-            {/* <AvatarDropdown /> */}
-            <button
-              className={`self-center w-10 h-10 md:w-12 md:h-12 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center`}
-              type='button'
-              onClick={() => setIsModalOpen(true)}
-            >
-              <UserIcon className='w-5 md:w-7' />
-            </button>
+            {user ? (
+              <AvatarDropdown userData={user} />
+            ) : (
+              <button
+                className={`self-center w-10 h-10 md:w-12 md:h-12 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center`}
+                type='button'
+                onClick={() => setIsModalOpen(true)}
+              >
+                <UserIcon className='w-5 md:w-7' />
+              </button>
+            )}
             <div className='px-0.5' />
             <MenuMobile />
           </div>
@@ -96,7 +113,7 @@ const Header = () => {
       </header>
 
       <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-        <Authorization />
+        <Authorization setIsModalOpen={setIsModalOpen} />
       </Modal>
 
       <ToastContainer

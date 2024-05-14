@@ -41,12 +41,6 @@ const CarDetailsPage = ({ params }: { params: { id: string } }) => {
 
       <MobileFooterSticky onClick={handleReserve} data={price} />
 
-      {modalId === 'authorization' && (
-        <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-          <Authorization />
-        </Modal>
-      )}
-
       {modalId === 'confirm' && (
         <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
           <ConfirmForm />
