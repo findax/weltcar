@@ -119,15 +119,17 @@ export default function CardSlider({
           <div className='absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-neutral-900 opacity-50 rounded-b-lg'></div>
           <div className='flex items-center justify-center absolute bottom-2 left-1/2 transform -translate-x-1/2 space-x-1.5'>
             {images.length > 1 &&
-              images.map((_, i) => (
-                <button
-                  className={`w-1.5 h-1.5 rounded-full ${
-                    i === index ? 'bg-white' : 'bg-white/60 '
-                  }`}
-                  onClick={() => changePhotoId(i)}
-                  key={i}
-                />
-              ))}
+              images
+                .filter((_, i) => i < 5)
+                .map((_, i) => (
+                  <button
+                    className={`w-1.5 h-1.5 rounded-full ${
+                      i === index ? 'bg-white' : 'bg-white/60 '
+                    }`}
+                    onClick={() => changePhotoId(i)}
+                    key={i}
+                  />
+                ))}
           </div>
         </>
       </div>

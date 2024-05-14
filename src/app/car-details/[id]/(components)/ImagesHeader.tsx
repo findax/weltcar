@@ -1,16 +1,12 @@
 import { Suspense } from 'react';
-import CarDetailsGallery from './(car-details-gallery)/CarDetailsGallery';
-import { Squares2X2Icon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
-import type { CarGalleryImage } from '@/types/types';
 import { usePathname, useRouter } from 'next/navigation';
 import { Route } from 'next';
+import CarDetailsGallery from './(car-details-gallery)/CarDetailsGallery';
+import { Squares2X2Icon } from '@heroicons/react/24/outline';
+import { ICarGallery } from '@/types/cardetails';
 
-export default function ImagesHeader({
-  images,
-}: {
-  images: CarGalleryImage[];
-}) {
+export default function ImagesHeader({ images }: { images: ICarGallery[] }) {
   const thisPathname = usePathname();
   const router = useRouter();
 

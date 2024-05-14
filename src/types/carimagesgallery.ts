@@ -1,5 +1,3 @@
-import { CarGalleryImage } from '@/types/types';
-
 import car1 from '@/images/car-details/1.jpeg';
 import car2 from '@/images/car-details/2.jpeg';
 import car3 from '@/images/car-details/3.jpeg';
@@ -23,31 +21,32 @@ import car20 from '@/images/car-details/20.jpeg';
 import car21 from '@/images/car-details/21.jpeg';
 import car22 from '@/images/car-details/22.jpeg';
 
-// export const PHOTOS = [
-//   car1,
-//   car2,
-//   car3,
-//   car4,
-//   car5,
-//   car6,
-//   car7,
-//   car8,
-//   car9,
-//   car10,
-//   car11,
-//   car12,
-//   car13,
-//   car14,
-//   car15,
-//   car16,
-//   car17,
-//   car18,
-//   car19,
-//   car20,
-//   car21,
-//   car22,
-// ];
-export const PHOTOS: string[] = [
+export const PHOTOS_STATIC = [
+  car1,
+  car2,
+  car3,
+  car4,
+  car5,
+  car6,
+  car7,
+  car8,
+  car9,
+  car10,
+  car11,
+  car12,
+  car13,
+  car14,
+  car15,
+  car16,
+  car17,
+  car18,
+  car19,
+  car20,
+  car21,
+  car22,
+];
+
+export const PHOTOS_URL = [
   'https://images.pexels.com/photos/136872/pexels-photo-136872.jpeg?auto=compress&cs=tinysrgb&w=1600',
   'https://images.pexels.com/photos/1054211/pexels-photo-1054211.jpeg?auto=compress&cs=tinysrgb&w=1600',
   'https://images.pexels.com/photos/2127733/pexels-photo-2127733.jpeg?auto=compress&cs=tinysrgb&w=1600',
@@ -71,34 +70,3 @@ export const PHOTOS: string[] = [
   'https://images.pexels.com/photos/1210622/pexels-photo-1210622.jpeg?auto=compress&cs=tinysrgb&w=1600',
   'https://images.pexels.com/photos/303316/pexels-photo-303316.jpeg?auto=compress&cs=tinysrgb&w=1600',
 ];
-
-export const documents = [
-  {
-    title: 'Specification',
-    description: 'some description',
-    file_name: 'someName.pdf',
-    url: '<url>',
-  },
-  {
-    title: 'Way Bill',
-    description: 'some description',
-    file_name: 'someName.pdf',
-    url: '<url>',
-  },
-  {
-    title: 'Export Confirm',
-    description: 'some description',
-    file_name: 'someName.pdf',
-    url: '<url>',
-  },
-];
-
-export const DEMO_CAR_IMAGES_GALLERY: CarGalleryImage[] = [...PHOTOS].map(
-  (item, index): CarGalleryImage => {
-    return {
-      id: index,
-      // image: item,
-      url: item,
-    };
-  }
-);

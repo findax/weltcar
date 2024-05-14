@@ -1,91 +1,56 @@
-import { Event } from 'effector-next'
-
-export interface IManufacturersBlockProps {
-  title: string
-  event: Event<IFilterCheckboxItem>
-  manufacturersList: IFilterCheckboxItem[]
+export interface ICatalog {
+  data: ICar[];
+  filters: IFilters[];
+  links: ILinks;
+  meta: IMeta;
+  sort: ISort[];
 }
 
-export interface IManufacturersBlockItemProps {
-  item: IFilterCheckboxItem
-  event: Event<IFilterCheckboxItem>
+export interface ICar {
+  brand: string;
+  car_id: string;
+  id: string;
+  inner_color_hex: string;
+  inner_color_name: string;
+  is_sold: boolean;
+  model: string;
+  outer_color_hex: string;
+  outer_color_name: string;
+  photos: { thumb: string; original: string }[];
+  price: number;
+  status: string;
+  status_name: string;
+  year: number;
 }
 
-export interface IQueryParams {
-  offset: string
-  firs: string
-  boiler: string
-  parts: string
-  priceFrom: string
-  priceTo: string
-  partId: string
+export interface IFilters {
+  id: string;
+  max: number | null;
+  min: number | null;
+  name: string;
+  type: string;
+  values: { count: number; id: number; name: string; meta: [] }[] | null;
 }
 
-export interface IFilterCheckboxItem {
-  title: string
-  checked: boolean
-  id?: string
-  event: Event<IFilterCheckboxItem>
+export interface ILinks {
+  first: string | null;
+  last: string | null;
+  next: string | null;
+  prev: string | null;
 }
 
-export interface IFilterManufacturerAccordionProps {
-  manufacturersList: IFilterCheckboxItem[]
-  title: string | false
-  setManufacturer: Event<IFilterCheckboxItem[]>
-  updateManufacturer: Event<IFilterCheckboxItem>
+export interface IMeta {
+  current_page: number;
+  from: number;
+  last_page: number;
+  links: { active: boolean; label: string; url: string | null }[];
+  path: string;
+  per_page: number;
+  to: number;
+  total: number;
 }
 
-interface ICatalogBaseTypes {
-  priceRange: number[]
-  setPriceRange: (arg0: number[]) => void
-  setIsPriceRangeChanged: (arg0: boolean) => void
-}
-
-interface ICatalogFiltersBaseTypes {
-  resetFilterBtnDisabled: boolean
-  resetFilters: VoidFunction
-}
-
-export interface ICatalogFiltersProps
-  extends ICatalogBaseTypes,
-    ICatalogFiltersBaseTypes {
-  isPriceRangeChanged: boolean
-  currentPage: number
-  setIsFilterInQuery: (arg0: boolean) => void
-  closePopup: VoidFunction
-  filtersMobileOpen: boolean
-}
-
-export type IPriceRangeProps = ICatalogBaseTypes
-
-export interface ICatalogFilterDesktopProps
-  extends ICatalogBaseTypes,
-    ICatalogFiltersBaseTypes {
-  spinner: boolean
-  applyFilters: VoidFunction
-}
-
-export interface ICatalogFilterMobileProps
-  extends ICatalogBaseTypes,
-    ICatalogFiltersBaseTypes {
-  spinner: boolean
-  applyFilters: VoidFunction
-  closePopup: VoidFunction
-  filtersMobileOpen: boolean
-}
-
-export interface IFiltersPopupTop {
-  resetBtnText: string
-  title: string
-  resetFilters: VoidFunction
-  resetFilterBtnDisabled: boolean
-  closePopup: VoidFunction
-}
-
-export interface IFiltersPopupProps extends IFilterManufacturerAccordionProps {
-  resetFilterBtnDisabled: boolean
-  resetAllManufacturers: VoidFunction
-  handleClosePopup: VoidFunction
-  applyFilters: VoidFunction
-  openPopup: boolean
+export interface ISort {
+  id: string;
+  name: string;
 }

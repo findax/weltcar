@@ -1,5 +1,25 @@
-import { documents } from '@/types/carimagesgallery';
 import { DocumentArrowDownIcon } from '@heroicons/react/24/outline';
+
+const documents = [
+  {
+    title: 'Specification',
+    description: 'some description',
+    file_name: 'someName.pdf',
+    url: '<url>',
+  },
+  {
+    title: 'Way Bill',
+    description: 'some description',
+    file_name: 'someName.pdf',
+    url: '<url>',
+  },
+  {
+    title: 'Export Confirm',
+    description: 'some description',
+    file_name: 'someName.pdf',
+    url: '<url>',
+  },
+];
 
 export default function Documents() {
   return (

@@ -1,4 +1,3 @@
-import { CarDataType } from '@/types/carData';
 import BtnLikeIcon from '@/components/BtnLikeIcon';
 import SaleOffBadge from '@/components/SaleOffBadge';
 import Badge from '@/shared/Badge';
@@ -6,6 +5,7 @@ import CardSlider from '@/components/CardSlider';
 import Link from 'next/link';
 import { ButtonPrimary } from '@/shared/Buttons';
 import numberWithComma from '@/utils/numberWithComma';
+import { ICar } from '@/types/catalog';
 
 const CarCard = ({
   size = 'small',
@@ -14,9 +14,10 @@ const CarCard = ({
 }: {
   size?: 'default' | 'small';
   className?: string;
-  carData: CarDataType;
+  carData: ICar;
 }) => {
   const {
+    id,
     car_id,
     photos,
     brand,
@@ -44,7 +45,7 @@ const CarCard = ({
           {/* <BtnLikeIcon isLiked={like} className='absolute right-3 top-3 z-[1]' /> */}
           {/* {saleOff && <SaleOffBadge className='absolute left-3 top-3' />} */}
         </div>
-        <Link href={`/car-details/${car_id}`}>
+        <Link href={`/car-details/${id}`}>
           <div
             className={size === 'default' ? 'p-3 space-y-2' : 'p-3 space-y-1'}
           >

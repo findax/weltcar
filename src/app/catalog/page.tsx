@@ -10,6 +10,7 @@ import SideMenuWrapper from '@/shared/SideMenuWrapper';
 import { toast } from 'react-toastify';
 
 import { getCarsList } from '@/api/cars';
+import { ICatalog } from '@/types/catalog';
 
 const CarListPage = () => {
   const [isFirstLoading, setIsFirstLoading] = useState(true);
@@ -18,8 +19,7 @@ const CarListPage = () => {
   const [isGrid, setIsGrid] = useState(true);
   const [isFiltersVisible, setFiltersVisible] = useState(false);
 
-  const [carsData, setCarsData] = useState([]);
-  const [filtersState, setFiltersState] = useState([]);
+  const [state, setState] = useState<ICatalog | undefined>();
 
   // useEffect(() => {
   //   if (!isFirstLoading) {
@@ -46,10 +46,9 @@ const CarListPage = () => {
   const loadCarsList = async () => {
     try {
       setIsLoading(true);
-      const data = await getCarsList('/api/cars/list');
+      const data = await getCarsList('');
 
-      setCarsData(data.data);
-      setFiltersState(data.filters);
+      setState(data);
       isFirstLoading && setIsFirstLoading(false);
     } catch (error) {
       toast.error((error as Error).message);
@@ -59,8 +58,8 @@ const CarListPage = () => {
     }
   };
 
-  const handleOpenMenu = () => setFiltersVisible(true);
-  const handleCloseMenu = () => setFiltersVisible(false);
+  const handleOpenFiltersMenu = () => setFiltersVisible(true);
+  const handleCloseFiltersMenu = () => setFiltersVisible(false);
 
   return isFirstLoading ? (
     <div className='w-full h-[calc(100vh-76px)] flex justify-center items-center'>
@@ -73,30 +72,32 @@ const CarListPage = () => {
           <div className='hidden lg:block lg:col-span-4'>
             {isMobile ? (
               <SideMenuWrapper
-                handleCloseMenu={handleCloseMenu}
+                handleCloseMenu={handleCloseFiltersMenu}
                 isVisable={isFiltersVisible}
                 isLeftSide
               >
                 <Filters
-                  filtersState={filtersState}
+                  filtersState={state?.filters || []}
                   closeFilters={setFiltersVisible}
                 />
               </SideMenuWrapper>
             ) : (
               <Filters
-                filtersState={filtersState}
+                filtersState={state?.filters || []}
                 closeFilters={setFiltersVisible}
               />
             )}
           </div>
           <div className='col-span-12 lg:col-span-8'>
             <SortPanel
+              sortState={state?.sort || []}
+              results={state?.meta.total || 0}
               handleIsGrid={setIsGrid}
               isGrid={isGrid}
               openFilter={setFiltersVisible}
             />
             <CarList
-              carsData={carsData}
+              carListState={state?.data || []}
               isLoading={isLoading}
               isGrid={isGrid}
             />

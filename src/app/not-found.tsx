@@ -1,4 +1,3 @@
-import React from 'react';
 import I404Png from '@/images/404.png';
 import Image from 'next/image';
 import { ButtonPrimary } from '@/shared/Buttons';

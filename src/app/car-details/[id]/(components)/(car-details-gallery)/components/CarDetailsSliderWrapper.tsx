@@ -6,15 +6,15 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useRef, useState } from 'react';
 import useKeypress from 'react-use-keypress';
 import { getNewParam } from '../CarDetailsGallery';
-import type { CarGalleryImage } from '@/types/types';
 import CarDetailsSlider from './CarDetailsSlider';
 import { Route } from 'next';
+import { ICarGallery } from '@/types/cardetails';
 
 export default function CarDetailsSliderWrapper({
   images,
   onClose,
 }: {
-  images: CarGalleryImage[];
+  images: ICarGallery[];
   onClose?: () => void;
 }) {
   let overlayRef = useRef<HTMLDivElement>(null);
@@ -54,31 +54,29 @@ export default function CarDetailsSliderWrapper({
   });
 
   return (
-    <>
-      <Dialog
-        static
-        open={true}
-        onClose={handleClose}
-        initialFocus={overlayRef}
-        className='fixed inset-0 z-50 flex items-center justify-center '
-      >
-        <Dialog.Overlay
-          ref={overlayRef}
-          as={motion.div}
-          key='backdrop'
-          className='fixed inset-0 z-30 bg-black'
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-        />
-        <CarDetailsSlider
-          index={curIndex}
-          direction={direction}
-          images={images}
-          changePhotoId={changePhotoId}
-          closeModal={handleClose}
-          navigation={true}
-        />
-      </Dialog>
-    </>
+    <Dialog
+      static
+      open={true}
+      onClose={handleClose}
+      initialFocus={overlayRef}
+      className='fixed inset-0 z-50 flex items-center justify-center '
+    >
+      <Dialog.Overlay
+        ref={overlayRef}
+        as={motion.div}
+        key='backdrop'
+        className='fixed inset-0 z-30 bg-black'
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+      />
+      <CarDetailsSlider
+        index={curIndex}
+        direction={direction}
+        images={images}
+        changePhotoId={changePhotoId}
+        closeModal={handleClose}
+        navigation={true}
+      />
+    </Dialog>
   );
 }

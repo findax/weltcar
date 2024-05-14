@@ -16,9 +16,3 @@ export type TwMainColor =
   | 'blue'
   | 'purple'
   | 'gray';
-
-export interface CarGalleryImage {
-  id: number;
-  // image: string | StaticImageData;
-  url: string;
-}

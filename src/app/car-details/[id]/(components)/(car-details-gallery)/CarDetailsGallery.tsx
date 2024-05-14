@@ -6,10 +6,11 @@ import Image from 'next/image';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import CarDetailsSliderWrapper from './components/CarDetailsSliderWrapper';
 import ShareSaveBtns from '@/components/ShareSaveBtns';
-import type { CarGalleryImage } from '@/types/types';
 import { useLastViewedPhoto } from './utils/useLastViewedPhoto';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import { Dialog, Transition } from '@headlessui/react';
+import { ICarGallery } from '@/types/cardetails';
+
 import './styles/index.css';
 
 export const getNewParam = ({
@@ -24,7 +25,7 @@ export const getNewParam = ({
   return params.toString();
 };
 
-const CarDetailsGallery = ({ images }: { images: CarGalleryImage[] }) => {
+const CarDetailsGallery = ({ images }: { images: ICarGallery[] }) => {
   const searchParams = useSearchParams();
   const isShowModal = searchParams?.get('modal') === 'CAR_PHOTO_TOUR';
   const photoId = searchParams?.get('photoId');
@@ -50,7 +51,7 @@ const CarDetailsGallery = ({ images }: { images: CarGalleryImage[] }) => {
 
   const renderContent = () => {
     return (
-      <div className=' '>
+      <>
         {photoId && (
           <CarDetailsSliderWrapper
             images={images}
@@ -89,7 +90,7 @@ const CarDetailsGallery = ({ images }: { images: CarGalleryImage[] }) => {
             </div>
           ))}
         </div>
-      </div>
+      </>
     );
   };
 

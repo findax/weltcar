@@ -40,10 +40,8 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    if (typeof sessionStorage !== 'undefined') {
-      const user = isUserAuth();
-      setUser(user);
-    }
+    const user = isUserAuth();
+    setUser(user);
   }, [isModalOpen]);
 
   useEffect(() => {
@@ -89,12 +87,12 @@ const Header = () => {
             {/* <SearchDropdown className='flex items-center' /> */}
             {/* <LangDropdown /> */}
             <SwitchDarkMode />
-            {/* <button
+            {/* <Link href='/favorites'
               className={`self-center text-2xl md:text-3xl w-12 h-12 rounded-full text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none flex items-center justify-center`}
             >
-              <span className='sr-only'>Enable dark mode</span>
+              <span className='sr-only'>Go to Favorites</span>
               <HeartIcon className='w-5 md:w-7' />
-            </button> */}
+            </Link> */}
             {user ? (
               <AvatarDropdown userData={user} />
             ) : (

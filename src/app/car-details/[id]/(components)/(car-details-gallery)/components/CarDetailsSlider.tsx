@@ -15,12 +15,12 @@ import { useSwipeable } from 'react-swipeable';
 import { variants } from '@/utils/animationVariants';
 import downloadPhoto from '../utils/downloadPhoto';
 import { range } from '../utils/range';
-import type { CarGalleryImage } from '@/types/types';
+import { ICarGallery } from '@/types/cardetails';
 
 interface CarDetailsSliderProps {
   index: number;
-  images: CarGalleryImage[];
-  currentPhoto?: CarGalleryImage;
+  images: ICarGallery[];
+  currentPhoto?: ICarGallery;
   changePhotoId: (newVal: number) => void;
   closeModal: () => void;
   navigation: boolean;
@@ -38,7 +38,7 @@ export default function CarDetailsSlider({
 }: CarDetailsSliderProps) {
   const [loaded, setLoaded] = useState(false);
 
-  let filteredImages = images?.filter((img: CarGalleryImage) =>
+  let filteredImages = images?.filter((img: ICarGallery) =>
     range(index - 15, index + 15).includes(img.id)
   );
 
@@ -83,7 +83,6 @@ export default function CarDetailsSlider({
                 className='absolute'
               >
                 <Image
-                  // src={currentImage?.image || ''}
                   src={currentImage?.url || ''}
                   width={navigation ? 1280 : 1920}
                   height={navigation ? 853 : 1280}
@@ -126,7 +125,7 @@ export default function CarDetailsSlider({
               )}
               <div className='absolute top-0 right-0 flex items-center gap-2 md:p-2 text-white'>
                 <a
-                  // href={(currentImage?.url}
+                  href={currentImage?.url}
                   className='rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white'
                   target='_blank'
                   title='Open fullsize version'

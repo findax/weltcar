@@ -49,37 +49,41 @@ export const logout = () => {
   window.location.reload();
 };
 
-export const loginCheck = async ({ jwt }: { jwt: string }) => {
-  try {
-    const { data } = await api.get('/jwt/login', {
-      headers: { Authorization: `Bearer ${jwt}` },
-    });
+// export const loginCheck = async ({ jwt }: { jwt: string }) => {
+//   try {
+//     const { data } = await api.get('/jwt/login', {
+//       headers: { Authorization: `Bearer ${jwt}` },
+//     });
 
-    if (data?.error) {
-      await refreshToken({ jwt: jwt });
-      return;
-    }
+//     if (data?.error) {
+//       await refreshToken({ jwt: jwt });
+//       return;
+//     }
 
-    return data.user;
-  } catch (error) {
-    toast.error((error as Error).message);
-  }
-};
+//     return data.user;
+//   } catch (error) {
+//     toast.error((error as Error).message);
+//   }
+// };
 
 export const isUserAuth = () => {
-  const auth = JSON.parse(sessionStorage.getItem('auth') as string);
+  if (typeof sessionStorage !== 'undefined') {
+    const auth = JSON.parse(sessionStorage.getItem('auth') as string);
 
-  if (!auth?.data.token) {
-    return false;
+    if (!auth?.data.token) {
+      return null;
+    }
+    return auth.data;
+  } else {
+    return null;
   }
-  return auth.data;
 };
 
-export const triggerLoginCheck = () => {
-  if (!isUserAuth()) {
-    return;
-  }
-  const auth = JSON.parse(sessionStorage.getItem('auth') as string);
+// export const triggerLoginCheck = () => {
+//   if (!isUserAuth()) {
+//     return;
+//   }
+//   const auth = JSON.parse(sessionStorage.getItem('auth') as string);
 
-  loginCheck({ jwt: auth.data.token });
-};
+//   loginCheck({ jwt: auth.data.token });
+// };

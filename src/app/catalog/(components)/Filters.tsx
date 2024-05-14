@@ -7,12 +7,13 @@ import { ButtonPrimary } from '@/shared/Buttons';
 import { Checkbox } from '@/shared/FormInputs';
 import { ArrowPathIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import SearchForm from './SearchForm';
+import { IFilters } from '@/types/catalog';
 
 const Filters = ({
   filtersState,
   closeFilters,
 }: {
-  filtersState: any;
+  filtersState: IFilters[];
   closeFilters: (value: boolean) => void;
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -22,10 +23,6 @@ const Filters = ({
   //     inputRef.current.value = '';
   //   }
   // };
-
-  filtersState.map((item: any) => {
-    console.log(item);
-  });
 
   return (
     <div className='overflow-y-auto h-screen lg:visible lg:h-auto p-4 pb-24 lg:py-6 lg:px-8 lg:mb-24 bg-white dark:bg-neutral-900 lg:rounded-2xl border border-neutral-200 dark:border-neutral-700'>
