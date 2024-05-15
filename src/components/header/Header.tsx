@@ -21,28 +21,19 @@ const Header = () => {
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [user, setUser] = useState(isUserAuth() || null);
 
-  const [user, setUser] = useState(null);
   //
   useThemeMode();
   //
 
   useEffect(() => {
-    if (typeof sessionStorage !== 'undefined') {
-      const user = isUserAuth();
-      setUser(user);
-    }
     setIsMobile(window.innerWidth < 768);
     const handleResize = () =>
       window.innerWidth < 768 ? setIsMobile(true) : setIsMobile(false);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-  useEffect(() => {
-    const user = isUserAuth();
-    setUser(user);
-  }, [isModalOpen]);
 
   useEffect(() => {
     function handleScroll() {
@@ -66,6 +57,16 @@ const Header = () => {
       window.scrollY > 20 ? setScrolled(true) : setScrolled(false);
     });
   }, []);
+
+  useEffect(() => {
+    if (user) return;
+    setUser(isUserAuth());
+  }, [isModalOpen]);
+
+  function handleClick() {
+    const user = isUserAuth();
+    user ? setUser(user) : setIsModalOpen(true);
+  }
 
   return (
     <>
@@ -99,7 +100,7 @@ const Header = () => {
               <button
                 className={`self-center w-10 h-10 md:w-12 md:h-12 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center`}
                 type='button'
-                onClick={() => setIsModalOpen(true)}
+                onClick={handleClick}
               >
                 <UserIcon className='w-5 md:w-7' />
               </button>

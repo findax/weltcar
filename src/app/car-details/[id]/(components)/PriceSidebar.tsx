@@ -5,7 +5,7 @@ export default function PriceSidebar({
   onClick,
   data,
 }: {
-  onClick: (modalId: string) => void;
+  onClick: () => void;
   data: number;
 }) {
   return (
@@ -15,13 +15,11 @@ export default function PriceSidebar({
           <span className='text-2xl font-semibold'>Sum</span>
           <span className='flex-grow mb-1 border-b border-dashed border-neutral-300 dark:border-neutral-700'></span>
           <span className='text-3xl font-semibold'>
-            {numberWithComma(data)}€
+            {numberWithComma(data)} €
           </span>
         </div>
 
-        <ButtonPrimary onClick={() => onClick('confirm')}>
-          Reserve
-        </ButtonPrimary>
+        <ButtonPrimary onClick={onClick}>Reserve</ButtonPrimary>
       </div>
     </div>
   );

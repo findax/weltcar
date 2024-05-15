@@ -5,7 +5,7 @@ const MobileFooterSticky = ({
   onClick,
   data,
 }: {
-  onClick: (modalId: string) => void;
+  onClick: () => void;
   data: number;
 }) => {
   return (
@@ -13,12 +13,12 @@ const MobileFooterSticky = ({
       <div className='container flex items-center justify-between'>
         <div className=''>
           <span className='block text-xl font-semibold'>
-            {numberWithComma(data)}€
+            {numberWithComma(data)} €
           </span>
         </div>
         <ButtonPrimary
           sizeClass='px-5 sm:px-7 py-3 !rounded-2xl'
-          onClick={() => onClick('confirm')}
+          onClick={onClick}
         >
           Reserve
         </ButtonPrimary>

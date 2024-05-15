@@ -49,6 +49,7 @@ export const logout = () => {
   window.location.reload();
 };
 
+//todo: add refresh token
 // export const loginCheck = async ({ jwt }: { jwt: string }) => {
 //   try {
 //     const { data } = await api.get('/jwt/login', {

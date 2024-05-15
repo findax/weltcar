@@ -49,7 +49,6 @@ const CarListPage = () => {
       const data = await getCarsList('');
 
       setState(data);
-      isFirstLoading && setIsFirstLoading(false);
     } catch (error) {
       toast.error((error as Error).message);
     } finally {
