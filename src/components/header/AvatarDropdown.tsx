@@ -12,11 +12,11 @@ import {
   ArrowLeftStartOnRectangleIcon,
 } from '@heroicons/react/24/outline';
 import { logout } from '@/api/auth';
-import { IUser } from '@/types/user';
+import { IAuth } from '@/types/user';
 
 interface Props {
   className?: string;
-  userData?: IUser | null;
+  userData?: IAuth | null;
 }
 
 export default function AvatarDropdown({ className = '', userData }: Props) {

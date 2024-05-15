@@ -1,13 +1,23 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Label from '@/components/Label';
 import Avatar from '@/shared/Avatar';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { Input } from '@/shared/FormInputs';
 import Image from 'next/image';
 import bgImg from '@/images/bg-cars/mersedes-brabus.png';
-
-export interface AccountPageProps {}
+import { isUserAuth } from '@/api/auth';
+import AccountForm from './(components)/AccountForm';
+import { IAuth } from '@/types/user';
 
 const AccountPage = () => {
+  const [userData, setUserData] = useState<IAuth | null>(null);
+
+  useEffect(() => {
+    setUserData(isUserAuth());
+  }, []);
+
   return (
     <div className='relative space-y-6 md:space-y-8 lg:min-h-[500px]'>
       {/* HEADING */}
@@ -42,35 +52,7 @@ const AccountPage = () => {
             />
           </div>
         </div>
-        <div className='flex-grow mt-10 md:mt-0 md:pl-16 max-w-xl space-y-6'>
-          <div>
-            <Label>First name</Label>
-            <Input className='mt-1.5' defaultValue='Jon' />
-          </div>
-          {/* ---- */}
-          <div>
-            <Label>Last name</Label>
-            <Input className='mt-1.5' defaultValue='Snow' />
-          </div>
-          {/* ---- */}
-          <div>
-            <Label>Email</Label>
-            <Input className='mt-1.5' defaultValue='example@mail.com' />
-          </div>
-          {/* ---- */}
-          <div>
-            <Label>City</Label>
-            <Input className='mt-1.5' defaultValue='Hamburg' />
-          </div>
-          {/* ---- */}
-          <div>
-            <Label>Phone number</Label>
-            <Input className='mt-1.5' defaultValue='003 888 232' />
-          </div>
-          <div className='pt-2'>
-            <ButtonPrimary>Update info</ButtonPrimary>
-          </div>
-        </div>
+        {userData && <AccountForm user={userData.user} />}
       </div>
       <Image
         className='hidden md:block absolute inset-0 top-1/2 -translate-y-1/2 object-contain w-full opacity-[0.06] -z-10'

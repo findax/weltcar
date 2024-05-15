@@ -91,6 +91,7 @@ interface FormikInputProps {
   touched?: boolean;
   rounded?: string;
   sizeClass?: string;
+  disabled?: boolean;
 }
 
 export const FormikInput = ({
@@ -100,6 +101,7 @@ export const FormikInput = ({
   touched,
   rounded,
   sizeClass,
+  disabled = false,
   ...args
 }: FormikInputProps) => {
   return (
@@ -112,6 +114,7 @@ export const FormikInput = ({
       <Field
         name={name}
         className={`${commonClass} ${rounded} ${sizeClass}`}
+        disabled={disabled}
         {...args}
       />
       {error && touched ? (

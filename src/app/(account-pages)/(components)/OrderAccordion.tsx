@@ -20,7 +20,7 @@ const OrderAccordion: FC<AccordionProps> = ({
     <>
       <button
         onClick={() => setOpened(!opened)}
-        className={`relative text-sm md:text-base font-medium py-4 pr-16 grid grid-cols-2 md:grid-cols-4 gap-4 w-full ${className}`}
+        className={`relative text-sm md:text-base font-medium py-4 pr-16 grid grid-cols-2 md:grid-cols-4 gap-4 w-full hover:bg-white/40 dark:hover:bg-neutral-800/60 ${className}`}
       >
         <span className='text-nowrap text-ellipsis overflow-hidden'>
           BMW X5

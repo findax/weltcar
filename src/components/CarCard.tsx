@@ -38,7 +38,7 @@ const CarCard = ({
       <div className='relative rounded-2xl p-2'>
         <div className='relative w-full overflow-hidden'>
           <CardSlider
-            ratioClass='aspect-w-4 aspect-h-3'
+            ratioClass='aspect-w-16 aspect-h-9'
             photos={photos}
             galleryClass='rounded-xl'
           />

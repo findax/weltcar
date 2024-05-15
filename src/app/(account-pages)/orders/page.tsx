@@ -21,28 +21,28 @@ const OrdersPage = () => {
         <div className='hidden md:block border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
 
         <OrderAccordion title='BMW X5'>
-          <div className='py-6 px-6 lg:px-40 text-center bg-white dark:bg-neutral-800'>
+          <div className='py-6 px-6 lg:px-40 text-center bg-white/60 dark:bg-neutral-800/80'>
             order details
           </div>
         </OrderAccordion>
         <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
 
         <OrderAccordion title='Departure Time'>
-          <div className='py-6 px-6 lg:px-40 text-center bg-white dark:bg-neutral-800'>
+          <div className='py-6 px-6 lg:px-40 text-center bg-white/60 dark:bg-neutral-800/80'>
             order details
           </div>
         </OrderAccordion>
         <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
 
         <OrderAccordion title='Bags'>
-          <div className='py-6 px-6 lg:px-40 text-center bg-white dark:bg-neutral-800'>
+          <div className='py-6 px-6 lg:px-40 text-center bg-white/60 dark:bg-neutral-800/80'>
             order details
           </div>
         </OrderAccordion>
         <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
 
         <OrderAccordion title='Payment type'>
-          <div className='py-6 px-6 lg:px-40 text-center bg-white dark:bg-neutral-800'>
+          <div className='py-6 px-6 lg:px-40 text-center bg-white/60 dark:bg-neutral-800/80'>
             order details
           </div>
         </OrderAccordion>

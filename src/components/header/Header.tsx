@@ -21,7 +21,7 @@ const Header = () => {
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [user, setUser] = useState(isUserAuth() || null);
+  const [user, setUser] = useState(null);
 
   //
   useThemeMode();

@@ -1,10 +1,10 @@
 'use client';
 
 import { toast } from 'react-toastify';
-import { IAuth } from '@/types/forms';
+import { IAuthForm } from '@/types/forms';
 import api from './apiInstance';
 
-export const singIn = async ({ email, password }: IAuth) => {
+export const singIn = async ({ email, password }: IAuthForm) => {
   return new Promise((resolve) => {
     api
       .post('/jwt/login', { email, password })
@@ -20,13 +20,12 @@ export const singIn = async ({ email, password }: IAuth) => {
   });
 };
 
-export const singUp = async ({ name, email, password }: IAuth) => {
+export const singUp = async ({ name, email, password }: IAuthForm) => {
   return new Promise((resolve) => {
     api
       .post('/jwt/register', { name, email, password })
       .then((res) => {
-        sessionStorage.setItem('auth', JSON.stringify(res.data));
-        toast.success('Registered successfully!');
+        toast.success('Please, check your email to activate your account!');
         resolve(res);
       })
       .catch((err) => {

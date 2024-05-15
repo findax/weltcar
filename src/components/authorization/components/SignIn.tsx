@@ -21,8 +21,11 @@ export default function Signin({
       .required('Email is required'),
     password: Yup.string()
       .trim()
-      .min(4, 'Password is too short')
-      .max(50, 'Password is too long')
+      .min(8, 'Password must be at least 8 characters')
+      .max(50, 'Password must be less than 50 characters')
+      .matches(/[a-z]+/, 'Password must contain at least one lowercase letter')
+      .matches(/[A-Z]+/, 'Password must contain at least one uppercase letter')
+      .matches(/\d+/, 'Password must contain at least one number')
       .required('Password is required'),
   });
 
