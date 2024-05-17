@@ -7,8 +7,6 @@ import SortPanel from './(components)/SortPanel';
 import CarList from './(components)/CarList';
 import LoadingSpinner from '@/shared/LoadingSpinner';
 import SideMenuWrapper from '@/shared/SideMenuWrapper';
-import { toast } from 'react-toastify';
-
 import { getCarsList } from '@/api/cars';
 import { ICatalog } from '@/types/catalog';
 
