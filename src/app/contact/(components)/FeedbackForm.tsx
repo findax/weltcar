@@ -2,11 +2,17 @@
 
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import { FormikInput, FormikTextarea } from '@/shared/FormInputs';
+import {
+  FormikInput,
+  FormikPhoneNumberInput,
+  FormikTextarea,
+} from '@/shared/FormInputs';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { sendFeedback } from '@/api/feedback';
 
 export default function FeedbackForm() {
+  // const phoneValidationPattern = /\+38 \(0\d{2}\) \d{3}-\d{2}-\d{2}/;
+
   const FeedbackSchema = Yup.object().shape({
     name: Yup.string()
       .trim()
@@ -17,6 +23,8 @@ export default function FeedbackForm() {
       .trim()
       .email('Invalid email')
       .required('Email is required'),
+    phone: Yup.string().trim(),
+    // .matches(phoneValidationPattern, 'Invalid phone number')
     message: Yup.string()
       .trim()
       .min(10, 'Message is too short')
@@ -28,6 +36,7 @@ export default function FeedbackForm() {
       initialValues={{
         name: '',
         email: '',
+        phone: '',
         message: '',
       }}
       validationSchema={FeedbackSchema}
@@ -38,6 +47,7 @@ export default function FeedbackForm() {
         sendFeedback({
           name: castValues.name,
           email: castValues.email,
+          phone: castValues.phone,
           message: castValues.message,
         })
           .then((res) => {
@@ -47,7 +57,7 @@ export default function FeedbackForm() {
       }}
     >
       {({ errors, touched, isSubmitting }) => (
-        <Form className='grid grid-cols-1 gap-8 -mt-1'>
+        <Form className='grid grid-cols-1 gap-7 -mt-1'>
           <FormikInput
             name='name'
             placeholder='Enter your name'
@@ -63,6 +73,12 @@ export default function FeedbackForm() {
             title='Email address'
             error={errors.email}
             touched={touched.email}
+          />
+          {/* ---- */}
+          <FormikPhoneNumberInput
+            title='Phone number'
+            error={errors.phone}
+            touched={touched.phone}
           />
           {/* ---- */}
           <FormikTextarea

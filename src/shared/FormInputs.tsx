@@ -147,7 +147,7 @@ export const FormikPhoneNumberInput = ({
         {({ field }: any) => (
           <ReactInputMask
             {...field}
-            mask='+49 999 999999999'
+            mask='+99 999 999999999'
             maskChar={null}
             placeholder='+49 888 324324324'
             className={commonClass}
@@ -165,6 +165,7 @@ export const FormikPhoneNumberInput = ({
 };
 
 interface FormikPasswordInputProps {
+  name?: string;
   placeholder?: string;
   title: string;
   error?: string;
@@ -172,6 +173,7 @@ interface FormikPasswordInputProps {
 }
 
 export const FormikPasswordInput = ({
+  name = 'password',
   title,
   error,
   touched,
@@ -189,7 +191,7 @@ export const FormikPasswordInput = ({
       </span>
       <div className='relative'>
         <Field
-          name='password'
+          name={name}
           type={isPasswordVisible ? 'text' : 'password'}
           className={commonClass}
           {...args}

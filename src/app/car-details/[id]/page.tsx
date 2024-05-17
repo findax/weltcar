@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
 import CarDetails from './(components)/CarDetails';
-
 import api from '@/api/apiInstance';
 
 export const getCarDetails = async (id: string) => {

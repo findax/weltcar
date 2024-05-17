@@ -1,5 +1,3 @@
-import { FC } from 'react';
-import avatar1 from '@/images/avatars/Image-1.png';
 import Image, { StaticImageData } from 'next/image';
 
 export interface AvatarProps {
@@ -41,17 +39,17 @@ const avatarColors = [
   '#E208A7',
 ];
 
-const Avatar: FC<AvatarProps> = ({
+const Avatar = ({
   containerClassName = 'ring-1 ring-white dark:ring-neutral-900',
   sizeClass = 'h-6 w-6 text-sm',
   radius = 'rounded-full',
-  imgUrl = avatar1,
-  userName,
-  hasChecked,
+  imgUrl = '',
+  userName = '',
+  hasChecked = false,
   hasCheckedClass = 'w-4 h-4 -top-0.5 -right-0.5',
-}) => {
+}: AvatarProps) => {
   const url = imgUrl || '';
-  const name = userName || 'John Doe';
+  const name = userName || '';
   const _setBgColor = (name: string) => {
     const backgroundIndex = Math.floor(
       name.charCodeAt(0) % avatarColors.length
@@ -75,7 +73,7 @@ const Avatar: FC<AvatarProps> = ({
 
       {hasChecked && (
         <span
-          className={` bg-teal-500 rounded-full text-white text-xs flex items-center justify-center absolute  ${hasCheckedClass}`}
+          className={`bg-teal-500 rounded-full text-white text-xs flex items-center justify-center absolute  ${hasCheckedClass}`}
         >
           <i className='las la-check'></i>
         </span>

@@ -27,8 +27,11 @@ export default function AvatarDropdown({ className = '', userData }: Props) {
           <Menu.Button
             className={`self-center w-10 h-10 md:w-12 md:h-12 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center`}
           >
-            {/* <Avatar sizeClass='w-8 h-8 sm:w-9 sm:h-9' /> */}
-            <UserIcon className='w-5 h-5 md:w-7 md:h-7' />
+            <Avatar
+              containerClassName='flex-col'
+              sizeClass='w-8 h-8 sm:w-9 sm:h-9'
+              userName={userData?.user.name}
+            />
           </Menu.Button>
           <Transition
             as={Fragment}
@@ -43,7 +46,10 @@ export default function AvatarDropdown({ className = '', userData }: Props) {
               <div className='overflow-hidden rounded-2xl shadow-lg ring-1 ring-black ring-opacity-5'>
                 <div className='relative grid grid-cols-1 gap-6 bg-white dark:bg-neutral-800 py-7 px-6'>
                   <div className='flex items-center space-x-3'>
-                    <Avatar sizeClass='w-12 h-12' />
+                    <Avatar
+                      sizeClass='w-12 h-12'
+                      userName={userData?.user.name}
+                    />
 
                     <div className='flex-grow overflow-hidden'>
                       <h4 className='font-semibold overflow-hidden text-ellipsis'>

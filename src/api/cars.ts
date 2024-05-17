@@ -1,7 +1,18 @@
+'use client';
+
+import { toast } from 'react-toastify';
 import api from './apiInstance';
 
 export const getCarsList = async (url: string) => {
-  const { data } = await api.post(`/api/cars/list${url}`);
-
-  return data;
+  return new Promise((resolve) => {
+    api
+      .post(`/api/cars/list${url}`)
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+        resolve(false);
+      });
+  });
 };

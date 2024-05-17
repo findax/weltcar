@@ -40,22 +40,17 @@ const CarListPage = () => {
 
   useEffect(() => {
     setIsFirstLoading(true);
-    loadCarsList();
   }, []);
 
-  const loadCarsList = async () => {
-    try {
-      setIsLoading(true);
-      const data = await getCarsList('');
-
-      setState(data);
-    } catch (error) {
-      toast.error((error as Error).message);
-    } finally {
-      setIsLoading(false);
-      isFirstLoading && setIsFirstLoading(false);
-    }
-  };
+  useEffect(() => {
+    setIsLoading(true);
+    getCarsList('')
+      .then((data) => setState(data as ICatalog))
+      .finally(() => {
+        setIsLoading(false);
+        isFirstLoading && setIsFirstLoading(false);
+      });
+  }, []);
 
   const handleOpenFiltersMenu = () => setFiltersVisible(true);
   const handleCloseFiltersMenu = () => setFiltersVisible(false);

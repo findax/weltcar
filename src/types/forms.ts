@@ -8,13 +8,14 @@ export interface IAuthForm {
 export interface IFeedback {
   name: string;
   email: string;
+  phone?: string;
   message: string;
 }
 
 export interface IUserForm {
   name: string;
-  last_name?: string;
-  email: string;
+  surname?: string;
+  email?: string;
   city?: string;
   phone?: string;
 }

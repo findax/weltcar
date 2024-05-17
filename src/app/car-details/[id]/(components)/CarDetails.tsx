@@ -68,12 +68,12 @@ export default function CarDetails({
               <Descriptions description={carData?.description || ''} />
             </div>
 
-            <PriceSidebar onClick={handleReserve} data={carData?.price || 0} />
+            <PriceSidebar onClick={handleReserve} price={carData?.price || 0} />
           </main>
         </div>
       </div>
 
-      <MobileFooterSticky onClick={handleReserve} data={carData?.price || 0} />
+      <MobileFooterSticky onClick={handleReserve} price={carData?.price || 0} />
 
       {modalId === 'confirm' && (
         <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>

@@ -14,7 +14,7 @@ export default function AccountForm({ user }: { user: IUser }) {
       .min(2, 'Name is too short')
       .max(50, 'Name is too long')
       .required('Name is required'),
-    last_name: Yup.string()
+    surname: Yup.string()
       .trim()
       .min(2, 'Surname is too short')
       .max(50, 'Surname is too long'),
@@ -29,24 +29,22 @@ export default function AccountForm({ user }: { user: IUser }) {
   return (
     <Formik
       initialValues={{
-        name: user.name,
-        last_name: user.surname,
-        email: user.email,
-        city: user.city,
-        phone: user.phone,
+        name: user.name || '',
+        surname: user.surname || '',
+        email: user.email || '',
+        city: user.city || '',
+        phone: user.phone || '',
       }}
       validationSchema={AccountSchema}
       onSubmit={(values, { setSubmitting }) => {
         // trim values
         const castValues = AccountSchema.cast(values);
-        console.log(castValues);
-
         updateUser({
           name: castValues.name,
-          last_name: castValues.last_name,
-          email: user.email,
+          surname: castValues.surname,
           phone: castValues.phone,
           city: castValues.city,
+          email: user.email,
         })
           .then((res) => {
             console.log(res);
@@ -68,8 +66,8 @@ export default function AccountForm({ user }: { user: IUser }) {
             name='surname'
             placeholder='Enter your surname'
             title='Last name'
-            error={errors.last_name}
-            touched={touched.last_name}
+            error={errors.surname}
+            touched={touched.surname}
           />
           {/* ---- */}
           <FormikInput
