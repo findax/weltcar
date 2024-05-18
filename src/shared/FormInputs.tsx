@@ -44,6 +44,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 );
 
 interface CheckboxProps {
+  id: number | string;
   label?: string;
   subLabel?: string;
   className?: string;
@@ -53,6 +54,7 @@ interface CheckboxProps {
 }
 
 export const Checkbox = ({
+  id,
   subLabel = '',
   label = '',
   name,
@@ -61,9 +63,12 @@ export const Checkbox = ({
   onChange,
 }: CheckboxProps) => {
   return (
-    <label className={`flex items-center text-sm sm:text-base ${className}`}>
+    <label
+      htmlFor={id.toString()}
+      className={`flex items-center text-sm sm:text-base ${className}`}
+    >
       <input
-        id={name}
+        id={id.toString()}
         name={name}
         type='checkbox'
         className='focus:ring-action-primary h-7 w-7 text-primary-500 border-primary rounded-full border-neutral-500 bg-white dark:bg-neutral-700  dark:checked:bg-primary-500 focus:ring-primary-500 cursor-pointer'

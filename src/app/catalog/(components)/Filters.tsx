@@ -70,7 +70,11 @@ const Filters = ({
                         key={filter.id}
                         className='flex justify-between items-center'
                       >
-                        <Checkbox name={filter.name} label={filter.name} />
+                        <Checkbox
+                          id={filter.id}
+                          name={filter.name}
+                          label={filter.name}
+                        />
                         <span>{filter.count}</span>
                       </li>
                     ))}
