@@ -1,7 +1,6 @@
 import heroRightImage from '@/images/Main-Banner-About.webp';
 import premiumLogo from '@/images/premium-quality.png';
 import Image from 'next/image';
-import Link from 'next/link';
 import { ButtonPrimary } from '@/shared/Buttons';
 
 export default function SectionHeroArchivePage() {
@@ -27,11 +26,9 @@ export default function SectionHeroArchivePage() {
               Accompanying us, you have a trip full of experiences. With
               Chisfis, booking accommodation, resort villas, hotels
             </div>
-            <Link href='/catalog' className='inline-block'>
-              <ButtonPrimary sizeClass='px-5 py-4 sm:px-7'>
-                Start your search
-              </ButtonPrimary>
-            </Link>
+            <ButtonPrimary sizeClass='px-5 py-4 sm:px-7' href='/catalog'>
+              Start your search
+            </ButtonPrimary>
           </div>
           <div className='hidden lg:block flex-grow max-w-sm px-16 mx-auto opacity-90'>
             <Image src={premiumLogo} alt='premium logo' priority />

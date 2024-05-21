@@ -61,3 +61,18 @@ export const getUserOrders = async () => {
       });
   });
 };
+
+export const createOrder = async ({ car_id }: { car_id: string }) => {
+  return new Promise((resolve) => {
+    api
+      .post('/api/user/orders', { car_id })
+      .then((res) => {
+        resolve(res.data);
+        toast.success('Your order has been created successfully!');
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+        resolve(false);
+      });
+  });
+};

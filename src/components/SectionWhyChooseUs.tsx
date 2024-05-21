@@ -5,7 +5,6 @@ import Logo from '@/shared/Logo';
 import Image from 'next/image';
 import WCU1img from '@/images/icons/badge.webp';
 import WCU2img from '@/images/icons/shaking-hands.webp';
-import Link from 'next/link';
 
 export interface SectionWhyChooseUsProps {
   className?: string;
@@ -32,11 +31,9 @@ const SectionWhyChooseUs: FC<SectionWhyChooseUsProps> = ({
           booking accommodation, resort villas, hotels, private houses,
           apartments... becomes fast, convenient and easy.
         </span>
-        <Link href='/catalog'>
-          <ButtonPrimary className='mt-6 sm:mt-11'>
-            Choose your car
-          </ButtonPrimary>
-        </Link>
+        <ButtonPrimary className='mt-6 sm:mt-11' href='/catalog'>
+          Choose your car
+        </ButtonPrimary>
       </div>
       <div className='flex-grow mt-16 lg:mt-0'>
         <div className='grid grid-cols-2'>
