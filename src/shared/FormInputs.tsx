@@ -64,16 +64,17 @@ export const Checkbox = ({
 }: CheckboxProps) => {
   return (
     <label
-      htmlFor={id.toString()}
+      htmlFor={`${filterCategory}-${id.toString()}`}
       className={`flex items-center text-sm sm:text-base ${className}`}
     >
       <input
-        id={id.toString()}
+        id={`${filterCategory}-${id.toString()}`}
+        value={id.toString()}
         name={name}
         type='checkbox'
         className='focus:ring-action-primary h-7 w-7 text-primary-500 border-primary rounded-full border-neutral-500 bg-white dark:bg-neutral-700  dark:checked:bg-primary-500 focus:ring-primary-500 cursor-pointer'
         defaultChecked={defaultChecked}
-        onChange={(e) => onChange && onChange(filterCategory, e.target.id)}
+        onChange={(e) => onChange && onChange(filterCategory, e.target.value)}
       />
       {label && (
         <span className='ml-3.5 text-neutral-900 hover:text-neutral-400 dark:text-neutral-100 dark:hover:text-neutral-400 cursor-pointer'>

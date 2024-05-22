@@ -59,7 +59,7 @@ export default function RangeSlider({ rangeData }: rangeDataProps) {
             )}
             <input
               type='text'
-              name={`min-${rangeData.id}`}
+              id={`min-${rangeData.id}`}
               className='bg-transparent focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-3 sm:text-sm border-neutral-200 dark:border-neutral-700 rounded-full'
               value={rangeState[0]}
               onChange={handleMinPriceChange}
@@ -81,7 +81,7 @@ export default function RangeSlider({ rangeData }: rangeDataProps) {
             )}
             <input
               type='text'
-              name={`max-${rangeData.id}`}
+              id={`max-${rangeData.id}`}
               className='bg-transparent focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-3 sm:text-sm border-neutral-200 dark:border-neutral-700 rounded-full'
               value={rangeState[1]}
               onChange={handleMaxPriceChange}

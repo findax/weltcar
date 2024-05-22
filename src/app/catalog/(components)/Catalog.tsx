@@ -102,6 +102,9 @@ export default function Catalog() {
   };
 
   const resetQueryParams = () => {
+    document
+      .querySelectorAll('input[type=checkbox]')
+      .forEach((el) => ((el as HTMLInputElement).checked = false));
     setQueryParams({});
     setCheckedFiltersCount(0);
     updateSearchParam('page', 1, pathname);

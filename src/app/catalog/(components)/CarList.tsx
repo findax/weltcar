@@ -42,7 +42,7 @@ const CarList = ({
       ) : isLoading ? (
         <CarCardSkeleton />
       ) : carListState.length > 0 ? (
-        <div className='grid grid-cols-1 gap-4 lg:gap-6 sm:grid-cols-2'>
+        <div className='grid grid-cols-1 gap-4 lg:gap-6 sm:grid-cols-2 mb-8 md:mb-14'>
           {carListState.map((car) => (
             <CarCard key={car.id} carData={car} />
           ))}
@@ -55,7 +55,7 @@ const CarList = ({
       {pageCount > 1 && (
         <ReactPaginate
           containerClassName={
-            'flex my-8 md:my-14 justify-center items-center gap-1'
+            'flex mb-8 md:mb-14 justify-center items-center gap-1'
           }
           pageClassName={
             'flex w-11 h-11 items-center justify-center rounded-full overflow-hidden bg-white hover:bg-neutral-100 border border-neutral-200 text-neutral-600 dark:text-neutral-400 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:border-neutral-700'
