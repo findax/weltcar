@@ -1,6 +1,5 @@
 'use client';
 
-import { useRef } from 'react';
 import RangeSlider from '@/components/RangeSlider';
 import AccordionComponent from '@/components/AccordionComponent';
 import { ButtonPrimary } from '@/shared/Buttons';
@@ -12,22 +11,27 @@ import { IFilters } from '@/types/catalog';
 const Filters = ({
   filtersState,
   closeFilters,
+  checkedFiltersCount,
+  handleFilterChange,
+  resetQueryParams,
 }: {
   filtersState: IFilters[];
   closeFilters: (value: boolean) => void;
+  checkedFiltersCount: number;
+  handleFilterChange: (filterCategory: string, id: number | string) => void;
+  resetQueryParams: () => void;
 }) => {
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  // const handleClearData = () => {
-  //   if (inputRef.current) {
-  //     inputRef.current.value = '';
-  //   }
-  // };
-
   return (
     <div className='overflow-y-auto h-screen lg:visible lg:h-auto p-4 pb-24 lg:py-6 lg:px-8 lg:mb-24 bg-white dark:bg-neutral-900 lg:rounded-2xl border border-neutral-200 dark:border-neutral-700'>
       <div className='flex justify-between items-center'>
-        <h4 className='mb-6 text-2xl font-semibold'>Filters</h4>
+        <h4 className='flex justify-between items-center mb-6 text-2xl font-semibold'>
+          Filters{' '}
+          {checkedFiltersCount > 0 && (
+            <span className='inline-flex items-center justify-center w-7 h-7 ml-2 text-sm font-normal rounded-full bg-primary-700'>
+              {checkedFiltersCount}
+            </span>
+          )}
+        </h4>
         <button
           onClick={() => closeFilters(false)}
           className='p-3 -mt-5 -mr-3 rounded-full lg:hidden'
@@ -38,11 +42,6 @@ const Filters = ({
       <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
       <SearchForm />
       <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
-
-      {/* <AccordionComponent title='Pricing scale' className='py-6'>
-        <RangeSlider />
-      </AccordionComponent>
-      <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div> */}
 
       {filtersState.length > 0 &&
         filtersState.map((filterCategory: any) => {
@@ -71,9 +70,11 @@ const Filters = ({
                         className='flex justify-between items-center'
                       >
                         <Checkbox
+                          filterCategory={filterCategory.id}
                           id={filter.id}
                           name={filter.name}
                           label={filter.name}
+                          onChange={handleFilterChange}
                         />
                         <span>{filter.count}</span>
                       </li>
@@ -84,7 +85,10 @@ const Filters = ({
           }
         })}
 
-      <ButtonPrimary sizeClass='w-full gap-2 px-4 py-3 sm:px-6 mt-6'>
+      <ButtonPrimary
+        sizeClass='w-full gap-2 px-4 py-3 sm:px-6 mt-6'
+        onClick={resetQueryParams}
+      >
         <ArrowPathIcon className='w-5 h-5' />
         Reset Filters
       </ButtonPrimary>

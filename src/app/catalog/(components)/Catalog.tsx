@@ -8,7 +8,7 @@ import CarList from './CarList';
 import LoadingSpinner from '@/shared/LoadingSpinner';
 import SideMenuWrapper from '@/shared/SideMenuWrapper';
 import { getCarsList } from '@/api/cars';
-import { ICatalog } from '@/types/catalog';
+import { ICatalog, ICatalogQueryParams } from '@/types/catalog';
 import { getSearchParamsUrl, updateSearchParam } from '@/utils/catalog';
 import { usePathname, useSearchParams } from 'next/navigation';
 
@@ -22,10 +22,14 @@ export default function Catalog() {
   const searchParams = useSearchParams();
   const page = searchParams.get('page');
 
-  const [currentPage, setCurrentPage] = useState(+(page || 0));
+  const [currentPage, setCurrentPage] = useState(+(page || 1));
+  const [queryParams, setQueryParams] = useState<ICatalogQueryParams>({});
+  const [checkedFiltersCount, setCheckedFiltersCount] = useState(0);
   const pathname = usePathname();
 
-  const [state, setState] = useState<ICatalog | undefined>();
+  const [catalogData, setCatalogData] = useState<ICatalog | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     setIsMobile(window.innerWidth < 1024);
@@ -43,21 +47,67 @@ export default function Catalog() {
     setIsLoading(true);
     const urlParams = getSearchParamsUrl();
     urlParams.delete('page');
-    getCarsList(currentPage + 1, urlParams.toString())
-      .then((data) => setState(data as ICatalog))
+    getCarsList(currentPage, 10, queryParams)
+      .then((data) => setCatalogData(data as ICatalog))
       .finally(() => {
         setIsLoading(false);
         isFirstLoading && setIsFirstLoading(false);
       });
-  }, [currentPage]);
+  }, [currentPage, queryParams]);
 
   const handlePageChange = ({ selected }: { selected: number }) => {
     window.scrollTo({ top: 0 });
-    updateSearchParam('page', selected, pathname);
-    setCurrentPage(selected);
+    updateSearchParam('page', selected + 1, pathname);
+    setCurrentPage(selected + 1);
   };
 
-  const handleOpenFiltersMenu = () => setFiltersVisible(true);
+  const handleFilterChange = (filterCategory: string, id: number | string) => {
+    let newQueryParams = { ...queryParams };
+
+    if (newQueryParams.filters) {
+      let isCategoryExist = newQueryParams.filters.findIndex(
+        (item) => item.id === filterCategory
+      );
+      if (isCategoryExist === -1) {
+        newQueryParams.filters.push({ id: filterCategory, values: [id] });
+      } else {
+        (newQueryParams.filters as {}) = newQueryParams.filters.map(
+          (filter: { id: string | number; values: (string | number)[] }) => {
+            if (filter.id === filterCategory) {
+              filter.values = filter.values.includes(id)
+                ? filter.values.filter((value: string | number) => value !== id)
+                : [...filter.values, id];
+            }
+            return filter;
+          }
+        );
+
+        newQueryParams.filters = newQueryParams.filters.filter(
+          (item) => item.values.length > 0
+        );
+      }
+      setQueryParams(newQueryParams);
+    } else {
+      newQueryParams.filters = [{ id: filterCategory, values: [id] }];
+      setQueryParams(newQueryParams);
+    }
+    const checkedFilters = newQueryParams.filters.reduce(
+      (sum, { values }) => sum + values.length,
+      0
+    );
+    setCheckedFiltersCount(checkedFilters);
+
+    updateSearchParam('page', 1, pathname);
+    setCurrentPage(1);
+  };
+
+  const resetQueryParams = () => {
+    setQueryParams({});
+    setCheckedFiltersCount(0);
+    updateSearchParam('page', 1, pathname);
+    setCurrentPage(1);
+  };
+
   const handleCloseFiltersMenu = () => setFiltersVisible(false);
 
   return isFirstLoading ? (
@@ -76,32 +126,38 @@ export default function Catalog() {
                 isLeftSide
               >
                 <Filters
-                  filtersState={state?.filters || []}
+                  filtersState={catalogData?.filters || []}
                   closeFilters={setFiltersVisible}
+                  checkedFiltersCount={checkedFiltersCount}
+                  handleFilterChange={handleFilterChange}
+                  resetQueryParams={resetQueryParams}
                 />
               </SideMenuWrapper>
             ) : (
               <Filters
-                filtersState={state?.filters || []}
+                filtersState={catalogData?.filters || []}
                 closeFilters={setFiltersVisible}
+                checkedFiltersCount={checkedFiltersCount}
+                handleFilterChange={handleFilterChange}
+                resetQueryParams={resetQueryParams}
               />
             )}
           </div>
           <div className='col-span-12 lg:col-span-8'>
             <SortPanel
-              sortState={state?.sort || []}
-              results={state?.meta.total || 0}
+              sortState={catalogData?.sort || []}
+              results={catalogData?.meta.total || 0}
               handleIsGrid={setIsGrid}
               isGrid={isGrid}
               openFilter={setFiltersVisible}
             />
             <CarList
-              carListState={state?.data || []}
+              carListState={catalogData?.data || []}
               isLoading={isLoading}
               isGrid={isGrid}
               handlePageChange={handlePageChange}
               currentPage={currentPage}
-              results={state?.meta.total || 0}
+              results={catalogData?.meta.total || 0}
             />
           </div>
         </div>

@@ -44,18 +44,18 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 );
 
 interface CheckboxProps {
+  filterCategory: string;
   id: number | string;
   label?: string;
-  subLabel?: string;
   className?: string;
   name: string;
   defaultChecked?: boolean;
-  onChange?: (checked: boolean) => void;
+  onChange?: (name: string, id: number | string) => void;
 }
 
 export const Checkbox = ({
+  filterCategory,
   id,
-  subLabel = '',
   label = '',
   name,
   className = '',
@@ -73,7 +73,7 @@ export const Checkbox = ({
         type='checkbox'
         className='focus:ring-action-primary h-7 w-7 text-primary-500 border-primary rounded-full border-neutral-500 bg-white dark:bg-neutral-700  dark:checked:bg-primary-500 focus:ring-primary-500 cursor-pointer'
         defaultChecked={defaultChecked}
-        onChange={(e) => onChange && onChange(e.target.checked)}
+        onChange={(e) => onChange && onChange(filterCategory, e.target.id)}
       />
       {label && (
         <span className='ml-3.5 text-neutral-900 hover:text-neutral-400 dark:text-neutral-100 dark:hover:text-neutral-400 cursor-pointer'>
