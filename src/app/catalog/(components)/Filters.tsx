@@ -9,16 +9,24 @@ import SearchForm from './SearchForm';
 import { IFilters } from '@/types/catalog';
 
 const Filters = ({
-  filtersState,
+  filtersData,
   closeFilters,
   checkedFiltersCount,
   handleFilterChange,
+  handleRangeFilterChange,
+  resetRangeFilter,
   resetQueryParams,
 }: {
-  filtersState: IFilters[];
+  filtersData: IFilters[];
   closeFilters: (value: boolean) => void;
   checkedFiltersCount: number;
   handleFilterChange: (filterCategory: string, id: number | string) => void;
+  handleRangeFilterChange: (
+    filterCategory: string,
+    min: number,
+    max: number
+  ) => void;
+  resetRangeFilter: (filterCategory: string) => void;
   resetQueryParams: () => void;
 }) => {
   return (
@@ -43,8 +51,8 @@ const Filters = ({
       <SearchForm />
       <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
 
-      {filtersState.length > 0 &&
-        filtersState.map((filterCategory: any) => {
+      {filtersData.length > 0 &&
+        filtersData.map((filterCategory: any) => {
           if (filterCategory.type === 'range') {
             return (
               <AccordionComponent
@@ -52,7 +60,11 @@ const Filters = ({
                 title={filterCategory.name}
                 className='py-6'
               >
-                <RangeSlider rangeData={filterCategory} />
+                <RangeSlider
+                  rangeData={filterCategory}
+                  onChange={handleRangeFilterChange}
+                  resetRangeFilter={resetRangeFilter}
+                />
               </AccordionComponent>
             );
           } else if (filterCategory.type === 'multiselect') {
@@ -64,21 +76,27 @@ const Filters = ({
               >
                 <ul className='mb-6 flex flex-col gap-3'>
                   {filterCategory.values?.length > 0 &&
-                    filterCategory.values.map((filter: any) => (
-                      <li
-                        key={filter.id}
-                        className='flex justify-between items-center'
-                      >
-                        <Checkbox
-                          filterCategory={filterCategory.id}
-                          id={filter.id}
-                          name={filter.name}
-                          label={filter.name}
-                          onChange={handleFilterChange}
-                        />
-                        <span>{filter.count}</span>
-                      </li>
-                    ))}
+                    filterCategory.values.map(
+                      (filter: {
+                        id: string | number;
+                        name: string;
+                        count: number;
+                      }) => (
+                        <li
+                          key={filter.id}
+                          className='flex justify-between items-center'
+                        >
+                          <Checkbox
+                            filterCategory={filterCategory.id}
+                            id={filter.id}
+                            name={filter.name}
+                            label={filter.name}
+                            onChange={handleFilterChange}
+                          />
+                          <span>{filter.count}</span>
+                        </li>
+                      )
+                    )}
                 </ul>
               </AccordionComponent>
             );

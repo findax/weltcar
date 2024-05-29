@@ -8,7 +8,7 @@ import ReactPaginate from 'react-paginate';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 
 interface CarListProps {
-  carListState: ICar[];
+  carListData: ICar[];
   isLoading: boolean;
   isGrid: boolean;
   handlePageChange: ({ selected }: { selected: number }) => void;
@@ -17,7 +17,7 @@ interface CarListProps {
 }
 
 const CarList = ({
-  carListState,
+  carListData,
   isLoading,
   isGrid,
   handlePageChange,
@@ -32,18 +32,22 @@ const CarList = ({
       {ww > 767 && !isGrid ? (
         isLoading ? (
           <CarCardHSkeleton />
-        ) : (
-          <div className='flex flex-col gap-4 lg:gap-6'>
-            {carListState.map((car) => (
+        ) : carListData.length > 0 ? (
+          <div className='flex flex-col gap-4 lg:gap-6 mb-8 md:mb-14'>
+            {carListData.map((car) => (
               <CarCardH key={car.id} carData={car} />
             ))}
+          </div>
+        ) : (
+          <div className='h-[40vh] flex justify-center items-center flex-col bg-white/50 dark:bg-neutral-800/60'>
+            <p className=''>Sorry, nothing found</p>
           </div>
         )
       ) : isLoading ? (
         <CarCardSkeleton />
-      ) : carListState.length > 0 ? (
+      ) : carListData.length > 0 ? (
         <div className='grid grid-cols-1 gap-4 lg:gap-6 sm:grid-cols-2 mb-8 md:mb-14'>
-          {carListState.map((car) => (
+          {carListData.map((car) => (
             <CarCard key={car.id} carData={car} />
           ))}
         </div>

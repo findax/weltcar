@@ -9,9 +9,15 @@ interface rangeDataProps {
     min: number;
     name: string;
   };
+  onChange: (filterCategory: string, min: number, max: number) => void;
+  resetRangeFilter: (filterCategory: string) => void;
 }
 
-export default function RangeSlider({ rangeData }: rangeDataProps) {
+export default function RangeSlider({
+  rangeData,
+  onChange,
+  resetRangeFilter,
+}: rangeDataProps) {
   const defaultRangeState = [rangeData.min, rangeData.max];
   const [rangeState, setRangeState] = useState([rangeData.min, rangeData.max]);
 
@@ -39,6 +45,7 @@ export default function RangeSlider({ rangeData }: rangeDataProps) {
 
   const resetRange = () => {
     setRangeState(defaultRangeState);
+    resetRangeFilter(rangeData.id);
   };
 
   return (
@@ -110,7 +117,11 @@ export default function RangeSlider({ rangeData }: rangeDataProps) {
         >
           Clear
         </ButtonThird>
-        <ButtonPrimary fontSize='text-sm' sizeClass='px-5 py-2 md:px-6'>
+        <ButtonPrimary
+          fontSize='text-sm'
+          sizeClass='px-5 py-2 md:px-6'
+          onClick={() => onChange(rangeData.id, rangeState[0], rangeState[1])}
+        >
           Apply
         </ButtonPrimary>
       </div>

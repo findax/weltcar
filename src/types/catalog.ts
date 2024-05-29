@@ -63,6 +63,6 @@ export interface ICatalogQueryParams {
   }[];
   filters?: {
     id: string;
-    values: [string | number];
+    values: (string | number)[];
   }[];
 }

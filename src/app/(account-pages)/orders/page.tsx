@@ -8,14 +8,22 @@ import { getUserOrders } from '@/api/user';
 import { IUserOrdersData } from '@/types/user';
 import LoadingSpinner from '@/shared/LoadingSpinner';
 import { ButtonPrimary } from '@/shared/Buttons';
+import ErrorComponent from '@/components/ErrorComponent';
 
 const OrdersPage = () => {
   const [state, setState] = useState<IUserOrdersData | undefined>();
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     getUserOrders()
-      .then((res) => setState(res as IUserOrdersData))
+      .then((res) => {
+        if (res) {
+          setState(res as IUserOrdersData);
+        } else {
+          setIsError(true);
+        }
+      })
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -29,6 +37,8 @@ const OrdersPage = () => {
         <div className='w-full h-96 flex justify-center items-center'>
           <LoadingSpinner className='w-12' />
         </div>
+      ) : isError ? (
+        <ErrorComponent />
       ) : (
         <div className='w-full'>
           {state &&

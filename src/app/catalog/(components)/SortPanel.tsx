@@ -6,7 +6,7 @@ import {
 import { ISort } from '@/types/catalog';
 
 interface SortPanelProps {
-  sortState: ISort[];
+  sortData: ISort[];
   results: number;
   handleIsGrid: (isGrid: boolean) => void;
   isGrid: boolean;
@@ -14,7 +14,7 @@ interface SortPanelProps {
 }
 
 const SortPanel = ({
-  sortState,
+  sortData,
   results,
   handleIsGrid,
   isGrid,
@@ -62,7 +62,7 @@ const SortPanel = ({
             Sort By :
           </p>
           <select className='bg-transparent cursor-pointer w-full pl-4 pr-8 py-2 border-0 focus:ring-indigo-500 focus:border-indigo-500 rounded-full'>
-            {sortState.map((sort) => (
+            {sortData.map((sort) => (
               <option key={sort.id} id={sort.id} value={sort.name}>
                 {sort.name}
               </option>
