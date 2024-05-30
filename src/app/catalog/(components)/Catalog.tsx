@@ -65,6 +65,15 @@ export default function Catalog() {
       });
   }, [currentPage, queryParams]);
 
+  const handleSortChange = (id: string) => {
+    let newQueryParams = { ...queryParams };
+    newQueryParams.sort = [{ id }];
+
+    setQueryParams(newQueryParams);
+    updateSearchParam('page', 1, pathname);
+    setCurrentPage(1);
+  };
+
   const handlePageChange = ({ selected }: { selected: number }) => {
     window.scrollTo({ top: 0 });
     updateSearchParam('page', selected + 1, pathname);
@@ -228,6 +237,7 @@ export default function Catalog() {
               handleIsGrid={setIsGrid}
               isGrid={isGrid}
               openFilter={setFiltersVisible}
+              handleSortChange={handleSortChange}
             />
             <CarList
               carListData={catalogData?.data || []}

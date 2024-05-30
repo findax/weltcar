@@ -11,6 +11,7 @@ interface SortPanelProps {
   handleIsGrid: (isGrid: boolean) => void;
   isGrid: boolean;
   openFilter: (value: boolean) => void;
+  handleSortChange: (id: string) => void;
 }
 
 const SortPanel = ({
@@ -19,10 +20,27 @@ const SortPanel = ({
   handleIsGrid,
   isGrid,
   openFilter,
+  handleSortChange,
 }: SortPanelProps) => {
+  const handleChange = (select: HTMLSelectElement) => {
+    let tempOption = document.createElement('option');
+    tempOption.textContent = select.selectedOptions[0].textContent;
+
+    let tempSelect = document.createElement('select');
+    tempSelect.style.visibility = 'hidden';
+    tempSelect.style.position = 'fixed';
+    tempSelect.appendChild(tempOption);
+
+    select.after(tempSelect);
+    select.style.width = `${+tempSelect.clientWidth + 4}px`;
+    tempSelect.remove();
+
+    handleSortChange(select.value);
+  };
+
   return (
-    <div className='col-span-12 bg-white dark:bg-neutral-900 mb-4 py-2 px-6 lg:mb-6 border border-neutral-200 dark:border-neutral-700 rounded-xl'>
-      <ul className='flex justify-between items-center flex-wrap gap-3 '>
+    <div className='col-span-12 bg-white dark:bg-neutral-900 mb-4 py-2 pl-4 pr-1 lg:mb-6 border border-neutral-200 dark:border-neutral-700 rounded-xl'>
+      <ul className='flex justify-between items-center flex-wrap gap-2'>
         <li className='hidden lg:block'>
           <p className='mb-0 clr-neutral-500'>{results} Results</p>
         </li>
@@ -58,20 +76,22 @@ const SortPanel = ({
           </div>
         </li>
         <li className='flex items-center'>
-          <p className='mb-0 clr-neutral-500 flex-grow whitespace-nowrap'>
+          <label className='mb-0 clr-neutral-500 flex-grow whitespace-nowrap'>
             Sort By :
-          </p>
-          <select className='bg-transparent cursor-pointer w-full pl-4 pr-8 py-2 border-0 focus:ring-indigo-500 focus:border-indigo-500 rounded-full'>
-            {sortData.map((sort) => (
-              <option key={sort.id} id={sort.id} value={sort.name}>
-                {sort.name}
-              </option>
-            ))}
-            {/* <option value='1'>Price (Low to High)</option>
-            <option value='2'>Price (High to Low)</option>
-            <option value='3'>Name (A-Z)</option>
-            <option value='4'>Name (Z-A)</option> */}
-          </select>
+            <select
+              className='w-[105px] bg-transparent cursor-pointer pl-4 pr-8 py-2 border-0 focus:ring-indigo-500 focus:border-indigo-500 rounded-full'
+              defaultValue='latest'
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                handleChange(e.target)
+              }
+            >
+              {sortData.map((sort) => (
+                <option key={sort.id} id={sort.id} value={sort.id}>
+                  {sort.name}
+                </option>
+              ))}
+            </select>
+          </label>
         </li>
       </ul>
     </div>

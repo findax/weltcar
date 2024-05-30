@@ -59,7 +59,6 @@ export interface ICatalogQueryParams {
   search?: string;
   sort?: {
     id: string;
-    desc: boolean;
   }[];
   filters?: {
     id: string;

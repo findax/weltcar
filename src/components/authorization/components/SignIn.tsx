@@ -58,7 +58,9 @@ export default function Signin({
         {({ errors, touched, isSubmitting }) => (
           <Form
             className='grid grid-cols-1 gap-8'
-            onChange={(e: any) => handleFormChange(e.target)}
+            onChange={(e: React.FormEvent<HTMLFormElement>) =>
+              handleFormChange(e.target as HTMLInputElement)
+            }
           >
             <FormikInput
               name='email'

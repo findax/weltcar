@@ -35,7 +35,7 @@ const Filters = ({
         <h4 className='flex justify-between items-center mb-6 text-2xl font-semibold'>
           Filters{' '}
           {checkedFiltersCount > 0 && (
-            <span className='inline-flex items-center justify-center w-7 h-7 ml-2 text-sm font-normal rounded-full bg-primary-700'>
+            <span className='inline-flex text-white items-center justify-center w-7 h-7 ml-2 text-sm font-normal rounded-full bg-primary-700'>
               {checkedFiltersCount}
             </span>
           )}
