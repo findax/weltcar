@@ -62,10 +62,10 @@ export const getUserOrders = async () => {
   });
 };
 
-export const createOrder = async ({ car_id }: { car_id: string }) => {
+export const createOrder = async (carId: string) => {
   return new Promise((resolve) => {
     api
-      .post('/api/user/orders', { car_id })
+      .post('/api/user/orders', { car_id: carId })
       .then((res) => {
         resolve(res.data);
         toast.success('Your order has been created successfully!');

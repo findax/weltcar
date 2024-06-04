@@ -2,6 +2,7 @@ import { Poppins } from 'next/font/google';
 import LoadingProgressBar from '@/components/LoadingProgressBar';
 import Header from '../components/header/Header';
 import Footer from '@/components/Footer';
+import CookieAlert from '@/components/CookieAlert';
 import { Metadata, Viewport } from 'next';
 
 import '@/fonts/line-awesome-1.3.0/css/line-awesome.css';
@@ -43,6 +44,7 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <CookieAlert />
       </body>
     </html>
   );

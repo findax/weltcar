@@ -77,7 +77,7 @@ export default function CarDetails({
 
       {modalId === 'confirm' && (
         <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-          <ConfirmForm />
+          <ConfirmForm carId={carData?.car_id || ''} />
         </Modal>
       )}
 
