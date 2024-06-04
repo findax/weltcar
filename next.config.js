@@ -6,6 +6,7 @@ const nextConfig = {
     typedRoutes: true,
   },
   images: {
+    unoptimized: Boolean(process.env.IMAGE_OPTIMIZATION),
     remotePatterns: [
       {
         protocol: 'https',
