@@ -25,7 +25,24 @@ export const singUp = async ({ name, email, password }: IAuthForm) => {
     api
       .post('/jwt/register', { name, email, password })
       .then((res) => {
+        sessionStorage.setItem('auth', JSON.stringify(res.data));
         toast.success('Please, check your email to activate your account!');
+        resolve(res);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+        resolve(false);
+      });
+  });
+};
+
+export const activateAccount = async ({ code }: { code: string }) => {
+  return new Promise((resolve) => {
+    api
+      .post('/jwt/activate', { code })
+      .then((res) => {
+        sessionStorage.setItem('auth', JSON.stringify(res.data));
+        // toast.success('Your account has been activated!');
         resolve(res);
       })
       .catch((err) => {

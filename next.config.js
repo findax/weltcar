@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   reactStrictMode: false,
   experimental: {
     typedRoutes: true,
@@ -22,6 +23,18 @@ const nextConfig = {
         protocol: 'http',
         hostname: '49.12.230.191',
         port: '8081',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'weltcar.de',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.weltcar.de',
+        port: '',
         pathname: '/**',
       },
     ],

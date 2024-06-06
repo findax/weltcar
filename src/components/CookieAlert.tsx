@@ -34,7 +34,7 @@ export default function CookieAlert() {
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.5 }}
-        className='fixed bottom-0 inset-x-0 z-50 flex items-center justify-center px-4 sm:px-6 py-8 sm:py-6 lg:px-8 bg-white dark:bg-neutral-800 shadow-lg border-t border-neutral-100 dark:border-neutral-700'
+        className='fixed bottom-0 inset-x-0 z-50 flex items-center justify-center px-4 sm:px-6 py-8 sm:py-6 lg:px-8 bg-white dark:bg-neutral-800 shadow-xl border-t border-neutral-100 dark:border-neutral-700'
       >
         <div className='container relative flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0'>
           <p
@@ -50,12 +50,12 @@ export default function CookieAlert() {
           >
             Accept
           </ButtonPrimary>
-          <button
+          {/* <button
             onClick={() => setCookieAlertOpen(false)}
             className='p-3 absolute -top-12 sm:-top-6 -right-4 sm:-right-6 2xl:right-12 rounded-full'
           >
             <XMarkIcon className='w-6 h-6' />
-          </button>
+          </button> */}
         </div>
       </motion.div>
     )
