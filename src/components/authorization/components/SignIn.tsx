@@ -5,14 +5,16 @@ import { ButtonPrimary } from '@/shared/Buttons';
 import { FormikInput, FormikPasswordInput } from '@/shared/FormInputs';
 import ForgotPassword from './ForgotPassword';
 import { singIn } from '@/api/auth';
+import { InformationCircleIcon } from '@heroicons/react/24/outline';
 
-export default function Signin({
+export default function SignIn({
   setIsModalOpen,
 }: {
   setIsModalOpen: (isModalOpen: boolean) => void;
 }) {
   const [isOpenForgotPassword, setIsOpenForgotPassword] = useState(false);
   const [emailValue, setEmailValue] = useState('');
+  const [isResetingPassword, setIsResetingPassword] = useState(false);
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
@@ -33,7 +35,19 @@ export default function Signin({
     data.name === 'email' && setEmailValue(data.value);
   };
 
-  return (
+  return isResetingPassword ? (
+    <div className='pt-4 flex justify-center items-center'>
+      <div className='text-center space-y-10'>
+        <InformationCircleIcon className='block mx-auto w-24 h-24 text-yellow-500' />
+        <p className='px-6 text-2xl font-semibold'>
+          Please, check your email to reset your password!
+        </p>
+        <ButtonPrimary onClick={() => setIsModalOpen(false)}>
+          Got it!
+        </ButtonPrimary>
+      </div>
+    </div>
+  ) : (
     <>
       <Formik
         initialValues={{
@@ -97,7 +111,12 @@ export default function Signin({
         )}
       </Formik>
 
-      {isOpenForgotPassword && <ForgotPassword emailValue={emailValue} />}
+      {isOpenForgotPassword && (
+        <ForgotPassword
+          emailValue={emailValue}
+          setIsResetingPassword={setIsResetingPassword}
+        />
+      )}
     </>
   );
 }

@@ -1,17 +1,23 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { CheckCircleIcon } from '@heroicons/react/24/outline';
 import ErrorComponent from '@/components/ErrorComponent';
-import { updateUserPassword } from '@/api/user';
 import { FormikPasswordInput } from '@/shared/FormInputs';
 import { ButtonPrimary } from '@/shared/Buttons';
+import { restorePassword } from '@/api/auth';
 
 export default function RefreshPasswordPage() {
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [code, setCode] = useState('');
+
+  useEffect(() => {
+    const code = window.location.href.split('/').pop();
+    code && setCode(code);
+  }, []);
 
   const UpdatePasswordSchema = Yup.object().shape({
     new_password: Yup.string()
@@ -55,11 +61,17 @@ export default function RefreshPasswordPage() {
           // trim values
           const castValues = UpdatePasswordSchema.cast(values);
 
-          updateUserPassword({
+          restorePassword({
+            code: code,
             password: castValues.confirm_password,
           })
-            .then((res) => setIsSuccess(true))
-            .catch((err) => setIsError(true))
+            .then((res) => {
+              if (res) {
+                setIsSuccess(true);
+              } else {
+                setIsError(true);
+              }
+            })
             .finally(() => setSubmitting(false));
         }}
       >

@@ -8,7 +8,7 @@ export default function SearchForm() {
     search: Yup.string()
       .trim()
       .min(4, 'Name is too short')
-      .max(10, 'Name is too long')
+      .max(20, 'Name is too long')
       .required(''),
   });
 

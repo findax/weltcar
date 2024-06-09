@@ -24,11 +24,7 @@ export const singUp = async ({ name, email, password }: IAuthForm) => {
   return new Promise((resolve) => {
     api
       .post('/jwt/register', { name, email, password })
-      .then((res) => {
-        sessionStorage.setItem('auth', JSON.stringify(res.data));
-        toast.success('Please, check your email to activate your account!');
-        resolve(res);
-      })
+      .then((res) => resolve(res))
       .catch((err) => {
         toast.error(err.response.data.message);
         resolve(false);
@@ -104,3 +100,36 @@ export const isUserAuth = () => {
 
 //   loginCheck({ jwt: auth.data.token });
 // };
+
+export const resetPassword = async ({ email }: { email: string }) => {
+  return new Promise((resolve) => {
+    api
+      .post('/api/password/reset', { email })
+      .then((res) => resolve(res))
+      .catch((err) => {
+        toast.error(err.response.data.message);
+        resolve(false);
+      });
+  });
+};
+
+export const restorePassword = async ({
+  code,
+  password,
+}: {
+  code: string;
+  password: string;
+}) => {
+  return new Promise((resolve) => {
+    api
+      .post('/api/password/restore', { code, password })
+      .then((res) => {
+        sessionStorage.setItem('auth', JSON.stringify(res.data));
+        resolve(res);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+        resolve(false);
+      });
+  });
+};

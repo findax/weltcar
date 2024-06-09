@@ -17,12 +17,11 @@ export default function ConfirmRegistrationPage() {
     if (code) {
       activateAccount({ code })
         .then((res) => {
-          console.log(res);
           !res && setIsError(true);
         })
         .finally(() => setIsLoading(false));
     }
-  });
+  }, []);
 
   return isLoading ? (
     <div className='w-full h-[calc(100vh-76px)] flex justify-center items-center'>

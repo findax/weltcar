@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import SocialAuth from './components/SocialAuth';
 import SignIn from './components/SignIn';
-import Registration from './components/Registration';
+import SignUp from './components/SignUp';
 
 export default function Authorization({
   setIsModalOpen,
@@ -35,7 +35,7 @@ export default function Authorization({
           }`}
           onClick={() => {
             setActive(false);
-            setPage(<Registration setIsModalOpen={setIsModalOpen} />);
+            setPage(<SignUp setIsModalOpen={setIsModalOpen} />);
           }}
         >
           SIGN UP

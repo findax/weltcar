@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { ButtonPrimary } from '@/shared/Buttons';
@@ -7,15 +8,17 @@ import {
   FormikPasswordInput,
 } from '@/shared/FormInputs';
 import { singUp } from '@/api/auth';
+import { InformationCircleIcon } from '@heroicons/react/24/outline';
 
-export default function Registration({
+export default function SignUp({
   setIsModalOpen,
 }: {
   setIsModalOpen: (isModalOpen: boolean) => void;
 }) {
+  const [isSuccess, setIsSuccess] = useState(false);
   // const phoneValidationPattern = /\+38 \(0\d{2}\) \d{3}-\d{2}-\d{2}/;
 
-  const SignupSchema = Yup.object().shape({
+  const SignUpSchema = Yup.object().shape({
     name: Yup.string()
       .trim()
       .min(2, 'Name is too short')
@@ -39,7 +42,19 @@ export default function Registration({
       .required('Password is required'),
   });
 
-  return (
+  return isSuccess ? (
+    <div className='pt-4 flex justify-center items-center'>
+      <div className='text-center space-y-10'>
+        <InformationCircleIcon className='block mx-auto w-24 h-24 text-yellow-500' />
+        <p className='px-6 text-2xl font-semibold'>
+          Please, check your email to confirm registration!
+        </p>
+        <ButtonPrimary onClick={() => setIsModalOpen(false)}>
+          Got it!
+        </ButtonPrimary>
+      </div>
+    </div>
+  ) : (
     <Formik
       initialValues={{
         name: '',
@@ -47,10 +62,10 @@ export default function Registration({
         phone: '',
         password: '',
       }}
-      validationSchema={SignupSchema}
-      onSubmit={(values, { setSubmitting }) => {
+      validationSchema={SignUpSchema}
+      onSubmit={(values, { setSubmitting, resetForm }) => {
         // trim values
-        const castValues = SignupSchema.cast(values);
+        const castValues = SignUpSchema.cast(values);
 
         singUp({
           name: castValues.name,
@@ -58,7 +73,7 @@ export default function Registration({
           password: castValues.password,
         })
           .then((res) => {
-            res && setIsModalOpen(false);
+            res && (setIsSuccess(true), resetForm(), setSubmitting(false));
           })
           .finally(() => setSubmitting(false));
       }}
