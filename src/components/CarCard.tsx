@@ -28,6 +28,7 @@ const CarCard = ({
     inner_color_name,
     outer_color_hex,
     outer_color_name,
+    status,
   } = carData;
 
   return (
@@ -41,6 +42,7 @@ const CarCard = ({
             ratioClass='aspect-w-16 aspect-h-9'
             photos={photos}
             galleryClass='rounded-xl'
+            className={status === 'sold' ? 'grayscale' : ''}
           />
           {/* <BtnLikeIcon isLiked={like} className='absolute right-3 top-3 z-[1]' /> */}
           {/* {saleOff && <SaleOffBadge className='absolute left-3 top-3' />} */}

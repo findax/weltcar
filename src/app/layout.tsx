@@ -1,4 +1,5 @@
 import { Poppins } from 'next/font/google';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 import LoadingProgressBar from '@/components/LoadingProgressBar';
 import Header from '../components/header/Header';
 import Footer from '@/components/Footer';
@@ -40,6 +41,9 @@ export default function RootLayout({
   return (
     <html lang='en' className={poppins.className}>
       <body className='pt-16 md:pt-20 bg-neutral-100 text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200'>
+        {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (
+          <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
+        )}
         <LoadingProgressBar />
         <Header />
         {children}

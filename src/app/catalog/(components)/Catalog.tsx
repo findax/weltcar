@@ -51,8 +51,6 @@ export default function Catalog() {
     urlParams.delete('page');
     getCarsList(currentPage, 10, queryParams)
       .then((data) => {
-        console.log(data);
-
         if (data) {
           setCatalogData(data as ICatalog);
         } else {
@@ -78,6 +76,15 @@ export default function Catalog() {
     window.scrollTo({ top: 0 });
     updateSearchParam('page', selected + 1, pathname);
     setCurrentPage(selected + 1);
+  };
+
+  const handleSearchChange = (value: string) => {
+    let newQueryParams = { ...queryParams };
+    newQueryParams.search = value;
+    setQueryParams(newQueryParams);
+    setCheckedFiltersCount(checkedFiltersCount + 1);
+    updateSearchParam('page', 1, pathname);
+    setCurrentPage(1);
   };
 
   const handleFilterChange = (filterCategory: string, id: number | string) => {
@@ -173,6 +180,7 @@ export default function Catalog() {
 
   function getCheckedFiltersCount(queryParams: ICatalogQueryParams) {
     if (queryParams.filters) {
+      const searchParam = queryParams.search ? 1 : 0;
       const checkedFilters = queryParams.filters.reduce(
         (sum, { id, values }) => {
           if (id === 'year' || id === 'price') {
@@ -181,7 +189,7 @@ export default function Catalog() {
             return sum + values.length;
           }
         },
-        0
+        searchParam
       );
       setCheckedFiltersCount(checkedFilters);
     }
@@ -212,6 +220,7 @@ export default function Catalog() {
                   filtersData={catalogData?.filters || []}
                   closeFilters={setFiltersVisible}
                   checkedFiltersCount={checkedFiltersCount}
+                  handleSearchChange={handleSearchChange}
                   handleFilterChange={handleFilterChange}
                   handleRangeFilterChange={handleRangeFilterChange}
                   resetRangeFilter={resetRangeFilter}
@@ -223,6 +232,7 @@ export default function Catalog() {
                 filtersData={catalogData?.filters || []}
                 closeFilters={setFiltersVisible}
                 checkedFiltersCount={checkedFiltersCount}
+                handleSearchChange={handleSearchChange}
                 handleFilterChange={handleFilterChange}
                 handleRangeFilterChange={handleRangeFilterChange}
                 resetRangeFilter={resetRangeFilter}

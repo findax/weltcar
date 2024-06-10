@@ -3,11 +3,15 @@ import * as Yup from 'yup';
 import { ButtonCircle } from '@/shared/Buttons';
 import { FormikInput } from '@/shared/FormInputs';
 
-export default function SearchForm() {
+export default function SearchForm({
+  handleSearchChange,
+}: {
+  handleSearchChange: (value: string) => void;
+}) {
   const SearchSchema = Yup.object().shape({
     search: Yup.string()
       .trim()
-      .min(4, 'Name is too short')
+      .min(2, 'Name is too short')
       .max(20, 'Name is too long')
       .required(''),
   });
@@ -21,7 +25,9 @@ export default function SearchForm() {
       onSubmit={(values, { setSubmitting, resetForm }) => {
         // same shape as initial values
         const castValues = SearchSchema.cast(values);
-        console.log(castValues);
+
+        handleSearchChange(castValues.search);
+        setSubmitting(false);
         resetForm();
       }}
     >

@@ -29,7 +29,15 @@ export interface IFilters {
   min: number | null;
   name: string;
   type: string;
-  values: { count: number; id: number; name: string; meta: [] }[] | null;
+  values:
+    | {
+        count: number;
+        countFiltered: number;
+        id: number;
+        name: string;
+        meta: [];
+      }[]
+    | null;
 }
 
 export interface ILinks {

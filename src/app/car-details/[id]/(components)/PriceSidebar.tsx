@@ -4,9 +4,11 @@ import numberWithComma from '@/utils/numberWithComma';
 export default function PriceSidebar({
   onClick,
   price,
+  isSold,
 }: {
   onClick: () => void;
   price: string | number;
+  isSold: boolean;
 }) {
   return (
     <div className='block flex-grow mt-14 lg:mt-0'>
@@ -15,11 +17,17 @@ export default function PriceSidebar({
           <span className='text-2xl font-semibold'>Sum</span>
           <span className='flex-grow mb-1 border-b border-dashed border-neutral-300 dark:border-neutral-700'></span>
           <span className='text-3xl font-semibold'>
-            {numberWithComma(price)} €
+            {parseInt(price.toString()) ? numberWithComma(price) + ' €' : price}
           </span>
         </div>
 
-        <ButtonPrimary onClick={onClick}>Reserve</ButtonPrimary>
+        <ButtonPrimary
+          onClick={onClick}
+          disabled={isSold}
+          className={isSold ? '!bg-gray-600 hover:bg-gray-600' : ''}
+        >
+          {isSold ? 'Sold' : 'Reserve'}
+        </ButtonPrimary>
       </div>
     </div>
   );

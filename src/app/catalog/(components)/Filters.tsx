@@ -12,6 +12,7 @@ const Filters = ({
   filtersData,
   closeFilters,
   checkedFiltersCount,
+  handleSearchChange,
   handleFilterChange,
   handleRangeFilterChange,
   resetRangeFilter,
@@ -20,6 +21,7 @@ const Filters = ({
   filtersData: IFilters[];
   closeFilters: (value: boolean) => void;
   checkedFiltersCount: number;
+  handleSearchChange: (value: string) => void;
   handleFilterChange: (filterCategory: string, id: number | string) => void;
   handleRangeFilterChange: (
     filterCategory: string,
@@ -48,7 +50,7 @@ const Filters = ({
         </button>
       </div>
       <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
-      <SearchForm />
+      <SearchForm handleSearchChange={handleSearchChange} />
       <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
 
       {filtersData.length > 0 &&
