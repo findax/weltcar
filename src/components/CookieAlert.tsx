@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
 import { ButtonPrimary } from '@/shared/Buttons';
@@ -36,13 +37,18 @@ export default function CookieAlert() {
         className='fixed bottom-0 inset-x-0 z-50 flex items-center justify-center px-4 sm:px-6 py-8 sm:py-6 lg:px-8 bg-primary-100 dark:bg-neutral-800 shadow-xl border-t border-neutral-100 dark:border-neutral-700'
       >
         <div className='container relative flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0'>
-          <p
-            className='cookie-popup__text'
-            dangerouslySetInnerHTML={{
-              __html:
-                'We use cookies to improve your experience and for ads personalisation, by continuing to use this website, you are agreeing to our <a class="underline hover:no-underline" href="/cookie-policy">cookie policy</a>.',
-            }}
-          />
+          <p className='cookie-popup__text'>
+            We use cookies to improve your experience and for ads
+            personalisation, by continuing to use this website, you are agreeing
+            to our{' '}
+            <Link
+              className='underline hover:no-underline'
+              href='/cookie-policy'
+            >
+              cookie&nbsp;policy
+            </Link>
+            .
+          </p>
           <ButtonPrimary
             className='w-full sm:w-auto mx-5'
             onClick={handleAcceptCookie}

@@ -80,8 +80,11 @@ export default function CardSlider({
                   src={currentImage || ''}
                   fill
                   alt='car image'
-                  className={`object-cover ${imageClass}`}
+                  className={`object-cover transition-opacity opacity-0 duration-[500ms] ${imageClass}`}
                   onLoad={() => setLoaded(true)}
+                  onLoadingComplete={(image) => {
+                    image.classList.remove('opacity-0');
+                  }}
                   sizes='(max-width: 1025px) 100vw, 300px'
                 />
               </motion.div>

@@ -56,8 +56,8 @@ export default function Title({
           download
           className='flex flex-col items-center justify-center py-3 text-sm'
         >
-          <DocumentArrowDownIcon className='w-8' />
-          <span>PDF</span>
+          <DocumentArrowDownIcon className='w-9' />
+          <span className='font-semibold'>PDF</span>
         </a>
       </div>
 

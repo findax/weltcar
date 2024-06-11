@@ -30,7 +30,10 @@ export default function ImagesHeader({ images }: { images: ICarGallery[] }) {
               fill
               src={images[0].url}
               alt='car photo'
-              className='object-cover rounded-md sm:rounded-xl'
+              className='object-cover rounded-md sm:rounded-xl transition-opacity opacity-0 duration-[2s]'
+              onLoadingComplete={(image) => {
+                image.classList.remove('opacity-0');
+              }}
               sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw'
               priority
             />
@@ -50,7 +53,10 @@ export default function ImagesHeader({ images }: { images: ICarGallery[] }) {
                 <div className='aspect-w-16 aspect-h-9 md:aspect-w-4 md:aspect-h-3'>
                   <Image
                     fill
-                    className='object-cover w-full h-full rounded-md sm:rounded-xl'
+                    className='object-cover w-full h-full rounded-md sm:rounded-xl transition-opacity opacity-0 duration-[2s]'
+                    onLoadingComplete={(image) => {
+                      image.classList.remove('opacity-0');
+                    }}
                     src={item.url}
                     alt='photos'
                     sizes='400px'

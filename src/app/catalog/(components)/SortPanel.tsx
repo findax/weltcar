@@ -2,6 +2,7 @@ import {
   ListBulletIcon,
   Squares2X2Icon,
   AdjustmentsHorizontalIcon,
+  DocumentArrowDownIcon,
 } from '@heroicons/react/24/outline';
 import { ISort } from '@/types/catalog';
 
@@ -40,6 +41,16 @@ const SortPanel = ({
 
   return (
     <div className='col-span-12 bg-white dark:bg-neutral-900 mb-4 py-2 pl-4 pr-1 lg:mb-6 border border-neutral-200 dark:border-neutral-700 rounded-xl'>
+      <a
+        // href={pdf_url}
+        download
+        className='inline-flex items-center py-2'
+      >
+        <span className='inline-block mr-2 font-medium underline hover:no-underline'>
+          Download the catalog in PDF
+        </span>
+        <DocumentArrowDownIcon className='w-6' />
+      </a>
       <ul className='flex justify-between items-center flex-wrap gap-2'>
         <li className='hidden lg:block'>
           <p className='mb-0 clr-neutral-500'>{results} Results</p>
