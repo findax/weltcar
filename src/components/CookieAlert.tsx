@@ -50,7 +50,7 @@ export default function CookieAlert() {
             .
           </p>
           <ButtonPrimary
-            className='w-full sm:w-auto mx-5'
+            className='w-full sm:w-auto sm:ml-5'
             onClick={handleAcceptCookie}
           >
             Accept

@@ -82,7 +82,7 @@ export default function Catalog() {
     let newQueryParams = { ...queryParams };
     newQueryParams.search = value;
     setQueryParams(newQueryParams);
-    setCheckedFiltersCount(checkedFiltersCount + 1);
+    getCheckedFiltersCount(newQueryParams);
     updateSearchParam('page', 1, pathname);
     setCurrentPage(1);
   };
@@ -179,8 +179,9 @@ export default function Catalog() {
   };
 
   function getCheckedFiltersCount(queryParams: ICatalogQueryParams) {
+    const searchParam = queryParams.search ? 1 : 0;
+
     if (queryParams.filters) {
-      const searchParam = queryParams.search ? 1 : 0;
       const checkedFilters = queryParams.filters.reduce(
         (sum, { id, values }) => {
           if (id === 'year' || id === 'price') {
@@ -192,6 +193,8 @@ export default function Catalog() {
         searchParam
       );
       setCheckedFiltersCount(checkedFilters);
+    } else {
+      setCheckedFiltersCount(searchParam);
     }
   }
 

@@ -18,23 +18,34 @@ const SectionSubscribe: FC<SectionSubscribeProps> = ({ className = '' }) => {
       data-nc-id='SectionSubscribe'
     >
       <div className='flex-shrink-0 lg:w-1/2 lg:pr-16'>
-        <h2 className='font-semibold text-4xl'>📨 Join our newsletter</h2>
-        <span className='block mt-5 text-neutral-500 dark:text-neutral-400'>
+        <h2 className='font-semibold text-4xl'>📨 Join Our Newsletter</h2>
+        {/* <span className='block mt-5 text-neutral-500 dark:text-neutral-400'>
           Read and share new perspectives on just about any topic. Everyone’s
           welcome.
-        </span>
-        <ul className='space-y-4 mt-10'>
-          <li className='flex items-center space-x-4'>
-            <Badge name='01' />
-            <span className='font-medium text-neutral-700 dark:text-neutral-300'>
-              Get more discount
-            </span>
+        </span> */}
+        <ul className='space-y-8 mt-10'>
+          <li className=''>
+            <h3 className='flex items-center space-x-4 font-medium text-neutral-700 dark:text-neutral-300'>
+              <Badge name='01' className='mr-3' /> Stay Updated with WeltCar's
+              Latest News and Offers
+            </h3>
+            <p className='mt-4 text-neutral-500 dark:text-neutral-400'>
+              Sign up for our newsletter to receive exclusive insights and
+              updates on the latest VIP cars and special promotions. Don’t miss
+              out on the chance to be the first to know about our exciting
+              offers and news.
+            </p>
           </li>
-          <li className='flex items-center space-x-4'>
-            <Badge color='red' name='02' />
-            <span className='font-medium text-neutral-700 dark:text-neutral-300'>
-              Get premium magazines
-            </span>
+          <li className=''>
+            <h3 className='flex items-center space-x-4 font-medium text-neutral-700 dark:text-neutral-300'>
+              <Badge color='red' name='02' className='mr-3' /> Subscribe Now and
+              Never Miss a Deal
+            </h3>
+            <p className='mt-4 text-neutral-500 dark:text-neutral-400'>
+              Join our newsletter to stay informed and connected with the world
+              of luxury automobiles. Be a part of our elite community and enjoy
+              the benefits of being in the know.
+            </p>
           </li>
         </ul>
         <form className='mt-10 relative max-w-sm'>

@@ -26,41 +26,51 @@ const CarCardH = ({
     inner_color_name,
     outer_color_hex,
     outer_color_name,
+    status,
   } = carData;
 
   return (
     <div
-      className={`relative bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-700 rounded-2xl overflow-hidden ${className}`}
+      className={`relative flex bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-700 rounded-2xl overflow-hidden ${className}`}
     >
-      <div className='flex flex-col md:flex-row'>
-        <div className='relative w-full flex items-center justify-center md:w-[45%] flex-shrink-0 border-r border-neutral-200/80 dark:border-neutral-700'>
-          <div className='w-full'>
-            <CardSlider ratioClass='aspect-w-6 aspect-h-4' photos={photos} />
+      <div className='relative w-full rounded-r-2xl overflow-hidden'>
+        <CardSlider
+          ratioClass='pb-[63.1%]'
+          photos={photos}
+          // galleryClass='rounded-2xl'
+          className={status === 'sold' ? 'grayscale' : ''}
+        />
+        {/* <BtnLikeIcon isLiked={like} className='absolute right-3 top-3' /> */}
+        {status === 'sold' && (
+          <SaleOffBadge
+            className='absolute bottom-2 right-3 text-3xl'
+            desc='SOLD'
+          />
+        )}
+      </div>
+      <Link
+        href={`/car-details/${id}`}
+        className='w-full h-full flex justify-between flex-col p-5 space-y-4'
+      >
+        <div className='space-y-2'>
+          <div className='flex justify-between items-center'>
+            <div className='flex items-center space-x-2'>
+              {/* {status === 'sold' && <Badge name='ADS' color='green' />} */}
+              <h2 className='text-xl font-semibold'>
+                <span className='line-clamp-1'>
+                  {brand} {model}
+                </span>
+              </h2>
+            </div>
+            <span className='text-xl font-semibold'>{year}</span>
           </div>
-          {/* <BtnLikeIcon isLiked={like} className='absolute right-3 top-3' /> */}
-          {/* {saleOff && <SaleOffBadge className='absolute left-3 top-3' />} */}
-        </div>
-        <Link href={`/car-details/${id}`} className='w-full'>
-          <div className='h-full flex justify-between flex-col p-5  space-y-4'>
-            <div className='space-y-2'>
-              <div className='flex justify-between items-center'>
-                <div className='flex items-center space-x-2'>
-                  {/* {isAds && <Badge name='ADS' color='green' />} */}
-                  <h2 className='text-xl font-semibold'>
-                    <span className='line-clamp-1'>
-                      {brand} {model}
-                    </span>
-                  </h2>
-                </div>
-                <span className='text-xl font-semibold'>{year}</span>
-              </div>
-              <div className='flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-2'>
-                <span className=''>{car_id}</span>
-                {/* <span>-</span>
+          <div className='flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-2'>
+            <span className=''>{car_id}</span>
+            {/* <span>-</span>
             <span className=''>{gearshift} </span> */}
-              </div>
+          </div>
 
-              {/* <div className='columns-1 md:columns-2'>
+          {/* <div className='columns-1 md:columns-2'>
             <span className='flex items-center gap-2 pt-2'>
               <svg fill='#22804A' height='24' width='24' viewBox='0 0 24 24'>
                 <path d='M8,10H16V18H11L9,16H7V11M7,4V6H10V8H7L5,10V13H3V10H1V18H3V15H5V18H8L10,20H18V16H20V19H23V9H20V12H18V8H12V6H15V4H7Z'></path>
@@ -89,37 +99,35 @@ const CarCardH = ({
               Automatic
             </span>
           </div> */}
-            </div>
+        </div>
 
-            <div className='space-y-2 py-3'>
-              <div className='flex items-center'>
-                <span className=''>exterior color:</span>
-                <span
-                  className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500'
-                  style={{ backgroundColor: `${outer_color_hex}` }}
-                ></span>
-                <span className=''> - {outer_color_name}</span>
-              </div>
-              <div className='flex items-center'>
-                <span className=''>interior color:</span>
-                <span
-                  className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500'
-                  style={{ backgroundColor: `${inner_color_hex}` }}
-                ></span>
-                <span className=''> - {inner_color_name}</span>
-              </div>
-            </div>
-
-            <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
-            <div className='flex justify-between items-center'>
-              <span className='text-3xl font-semibold text-primary-400'>
-                {numberWithComma(price)} €
-              </span>
-              <ButtonPrimary>See more</ButtonPrimary>
-            </div>
+        <div className='space-y-2 py-3'>
+          <div className='flex items-center'>
+            <span className=''>exterior color:</span>
+            <span
+              className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500'
+              style={{ backgroundColor: `${outer_color_hex}` }}
+            ></span>
+            <span className=''> - {outer_color_name}</span>
           </div>
-        </Link>
-      </div>
+          <div className='flex items-center'>
+            <span className=''>interior color:</span>
+            <span
+              className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500'
+              style={{ backgroundColor: `${inner_color_hex}` }}
+            ></span>
+            <span className=''> - {inner_color_name}</span>
+          </div>
+        </div>
+
+        <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
+        <div className='flex justify-between items-center'>
+          <span className='text-3xl font-semibold text-primary-400'>
+            {numberWithComma(price)} €
+          </span>
+          <ButtonPrimary>See more</ButtonPrimary>
+        </div>
+      </Link>
     </div>
   );
 };

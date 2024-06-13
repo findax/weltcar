@@ -24,13 +24,14 @@ const SectionWhyChooseUs: FC<SectionWhyChooseUsProps> = ({
       <div className='flex-shrink-0 lg:pr-16 lg:w-1/2 lg:-mt-3 xl:-mt-12'>
         <Logo className='w-48' />
         <h2 className='font-semibold text-3xl sm:text-4xl mt-6 sm:mt-11'>
-          Why did you choose us?
+          Why Choose WeltCar?
         </h2>
-        <span className='block mt-6 text-neutral-500 dark:text-neutral-400'>
-          Accompanying us, you have a trip full of experiences. With Chisfis,
-          booking accommodation, resort villas, hotels, private houses,
-          apartments... becomes fast, convenient and easy.
-        </span>
+        <p className='mt-6 text-neutral-500 dark:text-neutral-400'>
+          At WeltCar, we pride ourselves on delivering exceptional service and
+          exclusive access to the world’s finest cars. Our commitment to
+          quality, personalized attention, and customer satisfaction sets us
+          apart. Choose WeltCar for a seamless, luxurious car-buying experience.
+        </p>
         <ButtonPrimary className='mt-6 sm:mt-11' href='/catalog'>
           Choose your car
         </ButtonPrimary>

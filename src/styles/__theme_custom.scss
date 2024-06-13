@@ -34,6 +34,145 @@
   @apply w-full flex flex-col rounded-2xl border-b border-t border-l border-r border-neutral-200 dark:border-neutral-700 space-y-6 xl:space-y-7 pb-10 p-2 sm:p-4 xl:px-8 xl:py-6;
 }
 
+.detailsSection__markdown {
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+
+  h1 {
+    font-size: 30px;
+    line-height: 1.33em;
+    margin-bottom: 20px;
+
+    @media screen and (min-width: 1024px) {
+      font-size: 35px;
+      line-height: 1.3em;
+      margin-bottom: 35px;
+    }
+  }
+
+  h1 + h2 {
+    @media screen and (min-width: 1024px) {
+      margin-bottom: 25px;
+    }
+  }
+
+  h2 {
+    font-size: 22px;
+    line-height: 1.36em;
+    margin-bottom: 25px;
+
+    @media screen and (min-width: 768px) {
+      margin-bottom: 30px;
+    }
+  }
+
+  h2 + h4 {
+    margin-top: -25px;
+  }
+
+  h3 {
+    font-size: 18px;
+    line-height: 1.5em;
+    margin-bottom: 25px;
+  }
+
+  h4 {
+    font-size: 16px;
+    line-height: 1.5em;
+    margin-bottom: 25px;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.5em;
+    margin-bottom: 30px;
+  }
+
+  a {
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  hr {
+    margin: 45px 0 40px;
+    background-color: grey;
+
+    @media screen and (min-width: 768px) {
+      margin: 50px 0;
+    }
+  }
+
+  ul {
+    margin: 25px 0;
+
+    @media screen and (min-width: 768px) {
+      margin: 20px 0 45px;
+      // padding-left: 30px;
+    }
+
+    li {
+      font-size: 16px;
+      line-height: 24px;
+      margin-bottom: 15px;
+      padding-left: 20px;
+      position: relative;
+
+      &::before {
+        border: 1px solid #5045e5;
+        border-radius: 50%;
+        content: '';
+        display: block;
+        height: 7px;
+        left: 0;
+        position: absolute;
+        top: 10px;
+        width: 7px;
+      }
+    }
+  }
+
+  ol {
+    counter-reset: myCounter;
+    list-style: none;
+    margin: 25px 0;
+
+    @media screen and (min-width: 768px) {
+      margin: 20px 0 45px;
+      padding-left: 10px;
+    }
+
+    li {
+      font-size: 16px;
+      line-height: 24px;
+      margin-bottom: 15px;
+      padding-left: 42px;
+      position: relative;
+
+      &::before {
+        color: #5045e5;
+        content: counter(myCounter) '.';
+        counter-increment: myCounter;
+        display: inline-block;
+        font-weight: 700;
+        left: 0;
+        position: absolute;
+        text-align: right;
+        top: 0;
+        width: 36px;
+      }
+    }
+  }
+
+  i,
+  em {
+    font-style: italic;
+  }
+}
+
 [type='button'] {
   -webkit-appearance: none !important;
 }

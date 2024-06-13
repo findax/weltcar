@@ -27,27 +27,51 @@ const DEMO_DATA = [
   {
     id: 1,
     avatar: clientSay1,
-    clientName: 'Tiana Abie',
-    clientAddress: 'Munich',
+    clientName: 'James',
+    clientAddress: 'New York, USA',
     content:
-      'This place is exactly like the picture posted on Chisfis. Great service, we had a great stay!',
+      'I had an outstanding experience with WeltCar. The personalized service and exceptional quality of the vehicles are unmatched.',
   },
   {
     id: 2,
     avatar: clientSay2,
-    clientName: 'Lennie Swiffan',
-    clientAddress: 'Hamburg',
+    clientName: 'Sophie',
+    clientAddress: 'Berlin, Germany',
     content:
-      'This place is exactly like the picture posted on Chisfis. Great service, we had a great stay!',
+      'WeltCar made my dream of owning a luxury car come true. Their attention to detail and customer care is second to none.',
   },
   {
     id: 3,
     avatar: clientSay3,
-    clientName: 'Berta Emili',
-    clientAddress: 'Berlin',
+    clientName: 'Hiroshi',
+    clientAddress: 'Tokyo, Japan',
     content:
-      'This place is exactly like the picture posted on Chisfis. Great service, we had a great stay!',
+      'Buying a car from WeltCar was a seamless process. The team is professional, and the selection of cars is truly impressive.',
   },
+  // {
+  //   id: 4,
+  //   avatar: clientSay4,
+  //   clientName: 'Hiroshi',
+  //   clientAddress: 'Tokyo, Japan',
+  //   content:
+  //     'Buying a car from WeltCar was a seamless process. The team is professional, and the selection of cars is truly impressive.',
+  // },
+  // {
+  //   id: 5,
+  //   avatar: clientSay5,
+  //   clientName: 'Isabella',
+  //   clientAddress: 'Rome, Italy',
+  //   content:
+  //     'From start to finish, WeltCar exceeded my expectations. Their expertise and dedication to customer satisfaction are truly remarkable.',
+  // },
+  // {
+  //   id: 6,
+  //   avatar: clientSay6,
+  //   clientName: 'Emma',
+  //   clientAddress: 'Vienna, Austria',
+  //   content:
+  //     "Purchasing a VIP vehicle from WeltCar was one of the best decisions I've made. The level of service and quality of cars is extraordinary.",
+  // },
 ];
 
 const SectionClientSay: FC<SectionClientSayProps> = ({
@@ -84,11 +108,11 @@ const SectionClientSay: FC<SectionClientSayProps> = ({
   return (
     <div className={`nc-SectionClientSay relative ${className}`}>
       <Heading
-        desc="Let's see what people think of WeltCar"
+        desc="Let's See What People Think of WeltCar"
         isCenter
         fontClass='!font-bold xl:text-5xl'
       >
-        Good news from far away
+        Good News from Far Away
       </Heading>
       <MotionConfig
         transition={{

@@ -21,20 +21,20 @@ const DEMO_DATA: SectionHowItWorkProps['data'] = [
   {
     id: 1,
     img: HIW1img,
-    title: 'Discover luxury',
-    desc: 'Explore our curated selection of premium automobiles, where every ride embodies elegance and sophistication',
+    title: 'Discover Luxury',
+    desc: 'Explore our curated collection of exclusive vehicles, each selected for their unparalleled quality and elegance. Begin your journey into luxury today',
   },
   {
     id: 2,
     img: HIW2img,
-    title: 'Personalized consultation',
-    desc: 'Receive expert guidance tailored to your preferences, ensuring that each vehicle aligns perfectly with your desires and lifestyle',
+    title: 'Personalized Consultation',
+    desc: 'Our expert consultants are dedicated to understanding your unique preferences and needs, providing tailored advice and support to help you find your perfect car',
   },
   {
     id: 3,
     img: HIW3img,
-    title: 'Exclusive savings',
-    desc: 'Unlock special offers and financing options, allowing you to elevate your driving experience without compromising on quality or value',
+    title: 'Exclusive Savings',
+    desc: 'Enjoy exclusive deals and savings on the most luxurious vehicles. At WeltCar, we make high-end car ownership both accessible',
   },
 ];
 
@@ -52,7 +52,7 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
         desc='Keep calm & drive on'
         fontClass='!font-bold xl:text-5xl'
       >
-        How it work
+        How It Works
       </Heading>
       <div className='relative grid md:grid-cols-3 gap-20 md:gap-6 lg:gap-20'>
         <Image

@@ -47,7 +47,7 @@ export default function Documents({
             className='flex items-center space-x-2'
           >
             <DocumentTextIcon className='w-14 flex-shrink-0' />
-            <span className='text-lg font-medium underline hover:no-underline ease-in duration-200 break-all'>
+            <span className='max-w-[350px] text-md xl:text-lg font-medium underline hover:no-underline ease-in duration-200 break-all'>
               {item.title || item.file_name}
             </span>
           </a>

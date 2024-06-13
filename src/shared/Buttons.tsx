@@ -19,6 +19,7 @@ interface ButtonProps {
   href?: Route<string>;
   targetBlank?: boolean;
   onClick?: () => void;
+  download?: boolean;
   children?: ReactNode;
 }
 
@@ -33,6 +34,7 @@ export const Button = ({
   targetBlank,
   type,
   loading,
+  download,
   onClick = () => {},
 }: ButtonProps) => {
   const CLASSES = `nc-Button relative h-auto inline-flex items-center justify-center rounded-full transition-colors ${fontSize} ${sizeClass} ${translate} ${className} `;
@@ -42,6 +44,7 @@ export const Button = ({
       <Link
         href={href}
         target={targetBlank ? '_blank' : undefined}
+        download={download}
         className={`${CLASSES} `}
         onClick={onClick}
         rel={targetBlank ? 'noopener noreferrer' : undefined}

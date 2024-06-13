@@ -12,19 +12,26 @@ export default function SectionHeroArchivePage() {
       <div className='flex flex-col space-y-14 lg:space-y-16 text-center lg:text-left'>
         <div className='flex items-center justify-between'>
           <div className='w-max space-y-5 lg:space-y-7'>
-            <h2 className='font-semibold md:font-bold text-4xl md:text-5xl xl:text-7xl leading-[110%] xl:leading-[120%]'>
-              Hamburg, Germany
+            <h1 className='font-semibold md:font-bold text-4xl md:text-5xl xl:text-6xl leading-[110%] xl:leading-[120%]'>
+              Welcome to WeltCar
+            </h1>
+            <h2 className='font-semibold md:font-bold text-lg md:text-xl xl:text-2xl leading-[110%] xl:leading-[120%]'>
+              Your Gateway to Luxury Automotive Excellence
             </h2>
-            <div className='flex justify-center lg:justify-start text-base md:text-lg text-neutral-500 dark:text-neutral-400'>
+            {/* <div className='flex justify-center lg:justify-start text-base md:text-lg text-neutral-500 dark:text-neutral-400'>
               <i className='text-2xl las la-map-marked'></i>
               <span className='ml-2.5'>Hamburg </span>
               <span className='mx-5'></span>
               <i className='text-2xl las la-car'></i>
               <span className='ml-2.5'>112 cars</span>
-            </div>
-            <div className='text-base md:text-lg text-neutral-500 dark:text-neutral-400 lg:max-w-2xl'>
-              Accompanying us, you have a trip full of experiences. With
-              Chisfis, booking accommodation, resort villas, hotels
+            </div> */}
+            <div className='text-base md:text-lg text-neutral-500 dark:text-neutral-400 lg:max-w-3xl'>
+              At WeltCar, we specialize in bringing you the finest exclusive
+              vehicles, ensuring luxury and sophistication in every drive. With
+              our vast selection of top-tier cars, personalized service, and
+              exclusive offers, we make your dream of owning a premium vehicle a
+              reality. Experience the pinnacle of automotive excellence with
+              WeltCar.
             </div>
             <ButtonPrimary sizeClass='px-5 py-4 sm:px-7' href='/catalog'>
               Start your search

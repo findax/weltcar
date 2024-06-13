@@ -60,7 +60,10 @@ export default function CardSlider({
         opacity: { duration: 0.2 },
       }}
     >
-      <div className={`relative group/cardSlider ${className}`} {...handlers}>
+      <div
+        className={`relative group/cardSlider w-full h-full ${className}`}
+        {...handlers}
+      >
         {/* Main image */}
         <div className={`w-full overflow-hidden ${galleryClass}`}>
           <div
@@ -119,7 +122,7 @@ export default function CardSlider({
           )}
 
           {/* Bottom Nav bar */}
-          <div className='absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-neutral-900 opacity-50 rounded-b-lg'></div>
+          <div className='absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-neutral-900 opacity-50'></div>
           <div className='flex items-center justify-center absolute bottom-2 left-1/2 transform -translate-x-1/2 space-x-1.5'>
             {images.length > 1 &&
               images

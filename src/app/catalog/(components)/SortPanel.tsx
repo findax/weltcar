@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   ListBulletIcon,
   Squares2X2Icon,
@@ -5,6 +6,7 @@ import {
   DocumentArrowDownIcon,
 } from '@heroicons/react/24/outline';
 import { ISort } from '@/types/catalog';
+import { ButtonPrimary } from '@/shared/Buttons';
 
 interface SortPanelProps {
   sortData: ISort[];
@@ -23,7 +25,9 @@ const SortPanel = ({
   openFilter,
   handleSortChange,
 }: SortPanelProps) => {
-  const handleChange = (select: HTMLSelectElement) => {
+  const [fileFormat, setFileFormat] = useState<string>('pdf');
+
+  const handleSortSelectChange = (select: HTMLSelectElement) => {
     let tempOption = document.createElement('option');
     tempOption.textContent = select.selectedOptions[0].textContent;
 
@@ -41,16 +45,37 @@ const SortPanel = ({
 
   return (
     <div className='col-span-12 bg-white dark:bg-neutral-900 mb-4 py-2 pl-4 pr-1 lg:mb-6 border border-neutral-200 dark:border-neutral-700 rounded-xl'>
-      <a
-        // href={pdf_url}
-        download
-        className='inline-flex items-center py-2'
-      >
-        <span className='inline-block mr-2 font-medium underline hover:no-underline'>
-          Download the catalog in PDF
-        </span>
-        <DocumentArrowDownIcon className='w-6' />
-      </a>
+      <div className='mt-2 flex flex-wrap items-center justify-between gap-4'>
+        <h2 className='text-lg md:text-xl font-semibold'>
+          Download the catalog
+        </h2>
+        <div>
+          <label className='flex flex-wrap items-center'>
+            <p className='inline-block mr-2 font-medium'>
+              <span className='hidden xl:!inline'>Select </span>File Type:
+            </p>
+            <select
+              className='bg-transparent cursor-pointer border-0 focus:ring-indigo-500 focus:border-indigo-500 rounded-full'
+              defaultValue='pdf'
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                setFileFormat(e.target.value)
+              }
+            >
+              <option value='pdf'>PDF</option>
+              <option value='xlsx'>CSV</option>
+            </select>
+            <ButtonPrimary
+              href={`https://api.weltcar.de/api/cars/list/export?type=${fileFormat}`}
+              download
+              className='!py-2 mx-2'
+            >
+              <span className='mr-2'>Download</span>
+              <DocumentArrowDownIcon className='w-6' />
+            </ButtonPrimary>
+          </label>
+        </div>
+      </div>
+      <div className='mt-4 mb-2 border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
       <ul className='flex justify-between items-center flex-wrap gap-2'>
         <li className='hidden lg:block'>
           <p className='mb-0 clr-neutral-500'>{results} Results</p>
@@ -93,7 +118,7 @@ const SortPanel = ({
               className='w-[105px] bg-transparent cursor-pointer pl-4 pr-8 py-2 border-0 focus:ring-indigo-500 focus:border-indigo-500 rounded-full'
               defaultValue='latest'
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                handleChange(e.target)
+                handleSortSelectChange(e.target)
               }
             >
               {sortData.map((sort) => (
