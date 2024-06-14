@@ -42,14 +42,9 @@ export default function AccountForm({ user }: { user: IUser }) {
         updateUser({
           name: castValues.name,
           surname: castValues.surname,
-          phone: castValues.phone,
           city: castValues.city,
-          email: user.email,
-        })
-          .then((res) => {
-            console.log(res);
-          })
-          .finally(() => setSubmitting(false));
+          phone: castValues.phone,
+        }).finally(() => setSubmitting(false));
       }}
     >
       {({ errors, touched, isSubmitting }) => (
