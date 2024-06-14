@@ -31,12 +31,12 @@ const CarCard = ({
 
   return (
     <div
-      className={`relative p-2 hover:shadow-lg border border-neutral-200 dark:border-neutral-700 rounded-2xl overflow-hidden bg-white dark:bg-neutral-900 ${className}`}
+      className={`relative hover:shadow-lg border border-neutral-200 dark:border-neutral-700 rounded-2xl overflow-hidden bg-white dark:bg-neutral-900 ${className}`}
       data-nc-id='CarCard'
     >
-      <div className='relative w-full rounded-xl overflow-hidden'>
+      <div className='relative w-full overflow-hidden'>
         <CardSlider
-          ratioClass='pb-[55%]'
+          ratioClass='pb-[58%]'
           photos={photos}
           className={status === 'sold' ? 'grayscale' : ''}
         />
@@ -48,7 +48,7 @@ const CarCard = ({
           />
         )}
       </div>
-      <Link href={`/car-details/${id}`} className='block p-3 space-y-2'>
+      <Link href={`/car-details/${id}`} className='block py-4 px-5 space-y-2'>
         <div className='space-y-2'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center space-x-2'>

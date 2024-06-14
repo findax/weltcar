@@ -8,6 +8,7 @@ export interface AvatarProps {
   userName?: string;
   hasChecked?: boolean;
   hasCheckedClass?: string;
+  fontSize?: string;
 }
 
 const avatarColors = [
@@ -47,6 +48,7 @@ const Avatar = ({
   userName = '',
   hasChecked = false,
   hasCheckedClass = 'w-4 h-4 -top-0.5 -right-0.5',
+  fontSize = 'text-lg',
 }: AvatarProps) => {
   const url = imgUrl || '';
   const name = userName || '';
@@ -69,7 +71,7 @@ const Avatar = ({
           alt={name}
         />
       )}
-      <span className='wil-avatar__name'>{name[0]}</span>
+      <span className={`wil-avatar__name ${fontSize}`}>{name[0]}</span>
 
       {hasChecked && (
         <span

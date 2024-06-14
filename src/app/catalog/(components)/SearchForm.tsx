@@ -28,7 +28,7 @@ export default function SearchForm({
 
         handleSearchChange(castValues.search);
         setSubmitting(false);
-        resetForm();
+        // resetForm();
       }}
     >
       {({ errors, touched }) => (

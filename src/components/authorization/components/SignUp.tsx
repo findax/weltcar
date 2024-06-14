@@ -70,6 +70,7 @@ export default function SignUp({
         singUp({
           name: castValues.name,
           email: castValues.email,
+          phone: castValues.phone,
           password: castValues.password,
         })
           .then((res) => {

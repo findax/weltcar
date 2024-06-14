@@ -51,21 +51,23 @@ const OrdersPage = () => {
                   <span>Sum</span>
                 </div>
                 <div className='hidden md:block border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
-                {state.data.map((order) => (
-                  <>
-                    <OrderAccordion
-                      title={`${order.car.brand} ${order.car.model}`}
-                      date={order.created_at}
-                      status={order.order_status_name}
-                      price={order.price}
-                    >
-                      <div className='py-6 px-6 lg:px-40 text-center bg-white/60 dark:bg-neutral-800/80'>
-                        order details
-                      </div>
-                    </OrderAccordion>
-                    <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
-                  </>
-                ))}
+                <ul>
+                  {state.data.map((order) => (
+                    <li key={order.id}>
+                      <OrderAccordion
+                        title={`${order.car.brand} ${order.car.model}`}
+                        date={order.created_at}
+                        status={order.order_status_name}
+                        price={order.price}
+                      >
+                        <div className='py-6 px-6 lg:px-40 text-center bg-white/60 dark:bg-neutral-800/80'>
+                          order details
+                        </div>
+                      </OrderAccordion>
+                      <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
+                    </li>
+                  ))}
+                </ul>
               </>
             ) : (
               <div className='h-[40vh] flex justify-center items-center flex-col bg-white/50 dark:bg-neutral-800/60'>

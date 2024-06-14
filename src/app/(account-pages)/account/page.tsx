@@ -7,15 +7,15 @@ import { ButtonPrimary } from '@/shared/Buttons';
 import { Input } from '@/shared/FormInputs';
 import Image from 'next/image';
 import bgImg from '@/images/bg-cars/mersedes-brabus.png';
-import { isUserAuth } from '@/api/auth';
 import AccountForm from './(components)/AccountForm';
-import { IAuth } from '@/types/user';
+import { getUser } from '@/api/user';
+import { IUser } from '@/types/user';
 
 const AccountPage = () => {
-  const [userData, setUserData] = useState<IAuth | null>(null);
+  const [userData, setUserData] = useState<IUser | null>(null);
 
   useEffect(() => {
-    setUserData(isUserAuth());
+    setUserData(getUser());
   }, []);
 
   return (
@@ -26,8 +26,12 @@ const AccountPage = () => {
       <div className='flex flex-col md:flex-row'>
         <div className='flex-shrink-0 flex items-start'>
           <div className='relative rounded-full overflow-hidden flex'>
-            <Avatar sizeClass='w-32 h-32' userName={userData?.user.name} />
-            <div className='absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-neutral-50 cursor-pointer'>
+            <Avatar
+              sizeClass='w-32 h-32'
+              userName={userData?.name}
+              fontSize='text-6xl mt-1'
+            />
+            {/* <div className='absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-neutral-50 cursor-pointer'>
               <svg
                 width='30'
                 height='30'
@@ -45,14 +49,14 @@ const AccountPage = () => {
               </svg>
 
               <span className='mt-1 text-xs'>Change Image</span>
-            </div>
+            </div> */}
             <input
               type='file'
               className='absolute inset-0 opacity-0 cursor-pointer'
             />
           </div>
         </div>
-        {userData && <AccountForm user={userData.user} />}
+        {userData && <AccountForm user={userData} />}
       </div>
       <Image
         className='hidden md:block absolute inset-0 top-1/2 -translate-y-1/2 object-contain w-full opacity-[0.06] -z-10'

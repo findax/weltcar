@@ -40,7 +40,7 @@ const CarList = ({
           </div>
         ) : (
           <div className='h-[40vh] flex justify-center items-center flex-col bg-white/50 dark:bg-neutral-800/60'>
-            <p className=''>Sorry, nothing found</p>
+            <p className='text-2xl'>Sorry, nothing found</p>
           </div>
         )
       ) : isLoading ? (
@@ -53,7 +53,7 @@ const CarList = ({
         </div>
       ) : (
         <div className='h-[40vh] flex justify-center items-center flex-col bg-white/50 dark:bg-neutral-800/60'>
-          <p className=''>Sorry, nothing found</p>
+          <p className='text-2xl'>Sorry, nothing found</p>
         </div>
       )}
       {pageCount > 1 && (

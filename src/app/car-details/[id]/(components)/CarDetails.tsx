@@ -10,7 +10,7 @@ import Modal from '@/shared/Modal';
 import ConfirmForm from './ConfirmForm';
 import { ICarDetails, ICarGallery } from '@/types/cardetails';
 import LoadingSpinner from '@/shared/LoadingSpinner';
-import { isUserAuth } from '@/api/auth';
+import { getUser } from '@/api/user';
 import Authorization from '@/components/authorization/Authorization';
 import Title from './Title';
 
@@ -36,14 +36,14 @@ export default function CarDetails({
   }, []);
 
   useEffect(() => {
-    if (!!isUserAuth() && modalId === 'authorization') {
+    if (!!getUser() && modalId === 'authorization') {
       setModalId('confirm');
       setIsModalOpen(true);
     }
   }, [isModalOpen]);
 
   function handleReserve() {
-    if (!!isUserAuth()) {
+    if (!!getUser()) {
       setModalId('confirm');
     } else {
       setModalId('authorization');
@@ -85,7 +85,10 @@ export default function CarDetails({
 
       {modalId === 'confirm' && (
         <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-          <ConfirmForm carId={carData?.car_id || ''} />
+          <ConfirmForm
+            carId={carData?.id || ''}
+            setIsModalOpen={setIsModalOpen}
+          />
         </Modal>
       )}
 

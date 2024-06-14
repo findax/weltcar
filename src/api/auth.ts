@@ -1,17 +1,24 @@
 'use client';
 
 import { toast } from 'react-toastify';
-import { IAuthForm } from '@/types/forms';
 import api from './apiInstance';
+import { setAuth } from '@/api/user';
 
-export const singIn = async ({ email, password }: IAuthForm) => {
+export const singIn = async ({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) => {
   return new Promise((resolve) => {
     api
       .post('/jwt/login', { email, password })
       .then((res) => {
-        sessionStorage.setItem('auth', JSON.stringify(res.data));
+        setAuth(res.data.data);
         toast.success('Logged in successfully!');
         resolve(res);
+        // window.location.reload();
       })
       .catch((err) => {
         toast.error(err.response.data.message);
@@ -20,10 +27,20 @@ export const singIn = async ({ email, password }: IAuthForm) => {
   });
 };
 
-export const singUp = async ({ name, email, password }: IAuthForm) => {
+export const singUp = async ({
+  name,
+  email,
+  phone,
+  password,
+}: {
+  name?: string;
+  email: string;
+  phone?: string;
+  password: string;
+}) => {
   return new Promise((resolve) => {
     api
-      .post('/jwt/register', { name, email, password })
+      .post('/jwt/register', { name, email, phone, password })
       .then((res) => resolve(res))
       .catch((err) => {
         toast.error(err.response.data.message);
@@ -37,9 +54,9 @@ export const activateAccount = async ({ code }: { code: string }) => {
     api
       .post('/jwt/activate', { code })
       .then((res) => {
-        sessionStorage.setItem('auth', JSON.stringify(res.data));
-        // toast.success('Your account has been activated!');
+        setAuth(res.data.data);
         resolve(res);
+        window.location.reload();
       })
       .catch((err) => {
         toast.error(err.response.data.message);
@@ -47,59 +64,6 @@ export const activateAccount = async ({ code }: { code: string }) => {
       });
   });
 };
-
-export const refreshToken = async ({ jwt }: { jwt: string }) => {
-  const { data } = await api.post('/jwt/refresh', { jwt });
-
-  sessionStorage.setItem('auth', JSON.stringify(data));
-
-  return data;
-};
-
-export const logout = () => {
-  sessionStorage.removeItem('auth');
-  window.location.reload();
-};
-
-//todo: add refresh token
-// export const loginCheck = async ({ jwt }: { jwt: string }) => {
-//   try {
-//     const { data } = await api.get('/jwt/login', {
-//       headers: { Authorization: `Bearer ${jwt}` },
-//     });
-
-//     if (data?.error) {
-//       await refreshToken({ jwt: jwt });
-//       return;
-//     }
-
-//     return data.user;
-//   } catch (error) {
-//     toast.error((error as Error).message);
-//   }
-// };
-
-export const isUserAuth = () => {
-  if (typeof sessionStorage !== 'undefined') {
-    const auth = JSON.parse(sessionStorage.getItem('auth') as string);
-
-    if (!auth?.data.token) {
-      return null;
-    }
-    return auth.data;
-  } else {
-    return null;
-  }
-};
-
-// export const triggerLoginCheck = () => {
-//   if (!isUserAuth()) {
-//     return;
-//   }
-//   const auth = JSON.parse(sessionStorage.getItem('auth') as string);
-
-//   loginCheck({ jwt: auth.data.token });
-// };
 
 export const resetPassword = async ({ email }: { email: string }) => {
   return new Promise((resolve) => {
@@ -124,8 +88,9 @@ export const restorePassword = async ({
     api
       .post('/api/password/restore', { code, password })
       .then((res) => {
-        sessionStorage.setItem('auth', JSON.stringify(res.data));
+        setAuth(res.data.data);
         resolve(res);
+        window.location.reload();
       })
       .catch((err) => {
         toast.error(err.response.data.message);

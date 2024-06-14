@@ -13,7 +13,7 @@ import Authorization from '@/components/authorization/Authorization';
 import { HeartIcon, UserIcon } from '@heroicons/react/24/outline';
 import { useThemeMode } from '@/utils/useThemeMode';
 import { ToastContainer } from 'react-toastify';
-import { isUserAuth } from '@/api/auth';
+import { getUser } from '@/api/user';
 
 const Header = () => {
   const prevScrollPos = useRef(0);
@@ -60,11 +60,11 @@ const Header = () => {
 
   useEffect(() => {
     if (user) return;
-    setUser(isUserAuth());
+    setUser(getUser());
   }, [isModalOpen]);
 
   function handleClick() {
-    const user = isUserAuth();
+    const user = getUser();
     user ? setUser(user) : setIsModalOpen(true);
   }
 

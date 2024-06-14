@@ -4,7 +4,13 @@ import { ButtonPrimary } from '@/shared/Buttons';
 import { FormikCheckbox } from '@/shared/FormInputs';
 import { createOrder } from '@/api/user';
 
-export default function ConfirmForm({ carId }: { carId: string }) {
+export default function ConfirmForm({
+  carId,
+  setIsModalOpen,
+}: {
+  carId: string;
+  setIsModalOpen: (isModalOpen: boolean) => void;
+}) {
   const ConfirmationSchema = Yup.object().shape({
     confirm: Yup.bool().oneOf([true], 'You need to accept the Privacy Policy'),
   });
@@ -15,7 +21,10 @@ export default function ConfirmForm({ carId }: { carId: string }) {
         confirm: false,
       }}
       validationSchema={ConfirmationSchema}
-      onSubmit={() => createOrder(carId)}
+      onSubmit={() => {
+        createOrder(carId);
+        setIsModalOpen(false);
+      }}
     >
       {({ errors, touched, isSubmitting }) => (
         <Form className='w-full grid grid-cols-1 gap-7'>

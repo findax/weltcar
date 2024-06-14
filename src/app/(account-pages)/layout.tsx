@@ -1,10 +1,10 @@
 'use client';
 
-import { isUserAuth } from '@/api/auth';
+import { getAuth } from '@/api/user';
 import { Nav } from './(components)/Nav';
 
 const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
-  if (!isUserAuth()) {
+  if (!getAuth()) {
     typeof window !== 'undefined' && (window.location.href = '/');
   }
 

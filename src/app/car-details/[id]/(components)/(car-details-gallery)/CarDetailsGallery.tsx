@@ -78,10 +78,11 @@ const CarDetailsGallery = ({ images }: { images: ICarGallery[] }) => {
             >
               <Image
                 alt='car image'
-                className='transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110 focus:outline-none'
+                className='transform rounded-lg brightness-90 transition-opacity opacity-0 duration-[2s] will-change-auto group-hover:brightness-110 focus:outline-none'
                 style={{
                   transform: 'translate3d(0, 0, 0)',
                 }}
+                onLoad={(e) => e.currentTarget.classList.remove('opacity-0')}
                 src={url}
                 width={720}
                 height={480}

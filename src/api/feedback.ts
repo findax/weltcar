@@ -1,7 +1,6 @@
 'use client';
 
 import { toast } from 'react-toastify';
-import { IFeedback } from '@/types/forms';
 import api from './apiInstance';
 
 export const sendFeedback = async ({
@@ -9,13 +8,16 @@ export const sendFeedback = async ({
   email,
   phone,
   message,
-}: IFeedback) => {
+}: {
+  name: string;
+  email: string;
+  phone?: string;
+  message: string;
+}) => {
   return new Promise((resolve) => {
     api
       .post('/api/feedbacks', { name, email, phone, message })
       .then((res) => {
-        console.log(res.data);
-
         toast.success('Message sent successfully!');
         resolve(res);
       })

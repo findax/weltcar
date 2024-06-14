@@ -33,9 +33,9 @@ const CarCardH = ({
     <div
       className={`relative flex bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-700 rounded-2xl overflow-hidden ${className}`}
     >
-      <div className='relative w-full rounded-r-2xl overflow-hidden'>
+      <div className='relative w-[55%] lg:w-[50%] xl:w-[55%] 2xl:w-[60%] overflow-hidden'>
         <CardSlider
-          ratioClass='pb-[63.1%]'
+          ratioClass='pb-[67.6%] lg:pb-[83.8%] xl:pb-[60.4%] 2xl:pb-[51.4%]'
           photos={photos}
           // galleryClass='rounded-2xl'
           className={status === 'sold' ? 'grayscale' : ''}
@@ -50,7 +50,7 @@ const CarCardH = ({
       </div>
       <Link
         href={`/car-details/${id}`}
-        className='w-full h-full flex justify-between flex-col p-5 space-y-4'
+        className='w-[45%] lg:w-[50%] xl:w-[45%] 2xl:w-[40%] flex justify-between flex-col p-5 space-y-4'
       >
         <div className='space-y-2'>
           <div className='flex justify-between items-center'>
@@ -122,7 +122,7 @@ const CarCardH = ({
 
         <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
         <div className='flex justify-between items-center'>
-          <span className='text-3xl font-semibold text-primary-400'>
+          <span className='text-2xl xl:text-3xl font-semibold text-primary-400'>
             {numberWithComma(price)} €
           </span>
           <ButtonPrimary>See more</ButtonPrimary>
