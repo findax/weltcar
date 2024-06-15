@@ -59,10 +59,7 @@ export default function SignIn({
           // trim values
           const castValues = LoginSchema.cast(values);
 
-          singIn({
-            email: castValues.email,
-            password: castValues.password,
-          })
+          singIn(castValues)
             .then((res) => {
               res && setIsModalOpen(false);
             })

@@ -119,7 +119,7 @@ const SectionVideos: FC<SectionVideosProps> = ({
         desc='Check out our hottest videos. View more and share more new
           perspectives on just about any topic. Everyone’s welcome.'
       >
-        🎬 The Videos
+        The Videos
       </Heading>
 
       <div className='relative grid grid-cols-2 grid-rows-2 lg:grid-cols-3 gap-4'>

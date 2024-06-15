@@ -44,12 +44,7 @@ export default function FeedbackForm() {
         // trim values
         const castValues = FeedbackSchema.cast(values);
 
-        sendFeedback({
-          name: castValues.name,
-          email: castValues.email,
-          phone: castValues.phone,
-          message: castValues.message,
-        })
+        sendFeedback(castValues)
           .then((res) => {
             res && resetForm();
           })

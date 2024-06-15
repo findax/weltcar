@@ -36,7 +36,9 @@ const OrdersPage = () => {
 
       {isLoading ? (
         <div className='w-full h-96 flex justify-center items-center'>
-          <LoadingSpinner className='w-12' />
+          <div className='-mt-[76px]'>
+            <LoadingSpinner className='w-12' />
+          </div>
         </div>
       ) : isError ? (
         <ErrorComponent />
@@ -46,7 +48,7 @@ const OrdersPage = () => {
             (state.data.length > 0 ? (
               <>
                 <div className='text-xl text-center font-semibold mb-6 pr-16 hidden md:grid grid-cols-4 gap-4'>
-                  <h3>Name</h3>
+                  <h3>Car</h3>
                   <h3>Date</h3>
                   <h3>Status</h3>
                   <h3>Sum</h3>

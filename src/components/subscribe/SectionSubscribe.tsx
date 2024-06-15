@@ -1,24 +1,18 @@
-import React, { FC } from 'react';
 import Image from 'next/image';
 import carImg from '@/images/car-2.webp';
 import SBS1img from '@/images/icons/message.webp';
 import SBS2img from '@/images/icons/bell.webp';
-import { Input } from '@/shared/FormInputs';
-import { ButtonCircle } from '@/shared/Buttons';
 import Badge from '@/shared/Badge';
+import SubscribeForm from './components/SubscribeForm';
 
-export interface SectionSubscribeProps {
-  className?: string;
-}
-
-const SectionSubscribe: FC<SectionSubscribeProps> = ({ className = '' }) => {
+const Subscribe = ({ className = '' }: { className?: string }) => {
   return (
     <div
-      className={`nc-SectionSubscribe relative flex flex-col lg:flex-row items-start lg:items-center gap-16 ${className}`}
-      data-nc-id='SectionSubscribe'
+      className={`nc-Subscribe relative flex flex-col lg:flex-row items-start lg:items-center gap-16 ${className}`}
+      data-nc-id='Subscribe'
     >
       <div className='flex-shrink-0 lg:w-1/2 lg:pr-16'>
-        <h2 className='font-semibold text-4xl'>📨 Join Our Newsletter</h2>
+        <h2 className='font-semibold text-4xl'>Join Our Newsletter</h2>
         {/* <span className='block mt-5 text-neutral-500 dark:text-neutral-400'>
           Read and share new perspectives on just about any topic. Everyone’s
           welcome.
@@ -48,23 +42,7 @@ const SectionSubscribe: FC<SectionSubscribeProps> = ({ className = '' }) => {
             </p>
           </li>
         </ul>
-        <form className='mt-10 relative max-w-sm'>
-          <Input
-            required
-            aria-required
-            placeholder='Enter your email'
-            type='email'
-            rounded='rounded-full'
-            sizeClass='h-12 px-5 py-3'
-          />
-          <ButtonCircle
-            type='submit'
-            className='absolute transform top-1/2 -translate-y-1/2 right-1.5'
-            size='w-10 h-10'
-          >
-            <i className='las la-arrow-right text-xl'></i>
-          </ButtonCircle>
-        </form>
+        <SubscribeForm />
       </div>
       <div className='flex-grow'>
         <div className='grid grid-cols-2'>
@@ -89,4 +67,4 @@ const SectionSubscribe: FC<SectionSubscribeProps> = ({ className = '' }) => {
   );
 };
 
-export default SectionSubscribe;
+export default Subscribe;

@@ -8,6 +8,8 @@ import ErrorComponent from '@/components/ErrorComponent';
 import { FormikPasswordInput } from '@/shared/FormInputs';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { restorePassword } from '@/api/auth';
+import Image from 'next/image';
+import bgImg from '@/images/bg-cars/bg-car-10.webp';
 
 export default function RefreshPasswordPage() {
   const [isError, setIsError] = useState(false);
@@ -33,76 +35,87 @@ export default function RefreshPasswordPage() {
       .required('Confirm password is required'),
   });
 
-  return isError ? (
-    <div className='w-full h-[calc(100vh-76px)] flex justify-center items-center'>
-      <ErrorComponent />
-    </div>
-  ) : isSuccess ? (
-    <div className='w-full h-[calc(100vh-76px)] flex justify-center items-center'>
-      <div className='text-center space-y-10'>
-        <CheckCircleIcon className='block mx-auto w-24 h-24 text-green-500' />
-        <p className='px-6 text-2xl font-semibold'>
-          Your password has been updated successfully!
-        </p>
-        <ButtonPrimary href='/catalog'>Choose your car</ButtonPrimary>
-      </div>
-    </div>
-  ) : (
-    <div className='container h-[calc(100vh-76px)] py-16 xl:py-28 relative space-y-6 sm:space-y-8'>
-      <h2 className='text-3xl font-semibold'>Update your password</h2>
-      <div className='w-14 border-b border-neutral-300 dark:border-neutral-700'></div>
-      <Formik
-        initialValues={{
-          new_password: '',
-          confirm_password: '',
-        }}
-        validationSchema={UpdatePasswordSchema}
-        onSubmit={(values, { setSubmitting }) => {
-          // trim values
-          const castValues = UpdatePasswordSchema.cast(values);
+  return (
+    <div className='container'>
+      {isError ? (
+        <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
+          <ErrorComponent />
+        </div>
+      ) : isSuccess ? (
+        <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
+          <div className='text-center space-y-10'>
+            <CheckCircleIcon className='block mx-auto w-24 h-24 text-green-500' />
+            <p className='px-6 text-2xl font-semibold'>
+              Your password has been updated successfully!
+            </p>
+            <ButtonPrimary href='/catalog'>Choose your car</ButtonPrimary>
+          </div>
+        </div>
+      ) : (
+        <div className='h-[calc(100vh-76px)] py-16 xl:py-28 relative space-y-6 sm:space-y-8'>
+          <h2 className='text-3xl font-semibold'>Update your password</h2>
+          <div className='w-14 border-b border-neutral-300 dark:border-neutral-700'></div>
+          <Formik
+            initialValues={{
+              new_password: '',
+              confirm_password: '',
+            }}
+            validationSchema={UpdatePasswordSchema}
+            onSubmit={(values, { setSubmitting }) => {
+              // trim values
+              const castValues = UpdatePasswordSchema.cast(values);
 
-          restorePassword({
-            code: code,
-            password: castValues.confirm_password,
-          })
-            .then((res) => {
-              if (res) {
-                setIsSuccess(true);
-              } else {
-                setIsError(true);
-              }
-            })
-            .finally(() => setSubmitting(false));
-        }}
-      >
-        {({ errors, touched, isSubmitting }) => (
-          <Form className='max-w-xl space-y-8'>
-            <FormikPasswordInput
-              title='New password'
-              name='new_password'
-              placeholder='Enter new password'
-              error={errors.new_password}
-              touched={touched.new_password}
-            />
-            {/* ---- */}
-            <FormikPasswordInput
-              title='Confirm password'
-              name='confirm_password'
-              placeholder='Confirm password'
-              error={errors.confirm_password}
-              touched={touched.confirm_password}
-            />
+              restorePassword({
+                code: code,
+                password: castValues.confirm_password,
+              })
+                .then((res) => {
+                  if (res) {
+                    setIsSuccess(true);
+                  } else {
+                    setIsError(true);
+                  }
+                })
+                .finally(() => setSubmitting(false));
+            }}
+          >
+            {({ errors, touched, isSubmitting }) => (
+              <Form className='grid grid-cols-1 gap-7 w-full max-w-lg'>
+                <FormikPasswordInput
+                  title='New password'
+                  name='new_password'
+                  placeholder='Enter new password'
+                  error={errors.new_password}
+                  touched={touched.new_password}
+                />
+                {/* ---- */}
+                <FormikPasswordInput
+                  title='Confirm password'
+                  name='confirm_password'
+                  placeholder='Confirm password'
+                  error={errors.confirm_password}
+                  touched={touched.confirm_password}
+                />
 
-            <ButtonPrimary
-              type='submit'
-              disabled={isSubmitting}
-              loading={isSubmitting}
-            >
-              Update password
-            </ButtonPrimary>
-          </Form>
-        )}
-      </Formik>
+                <ButtonPrimary
+                  type='submit'
+                  disabled={isSubmitting}
+                  loading={isSubmitting}
+                >
+                  Update password
+                </ButtonPrimary>
+              </Form>
+            )}
+          </Formik>
+        </div>
+      )}
+
+      <Image
+        className='hidden sm:block absolute inset-0 object-contain w-full max-w-7xl m-auto opacity-[0.08] -z-10'
+        src={bgImg}
+        alt='car background image'
+        priority
+      />
     </div>
   );
 }

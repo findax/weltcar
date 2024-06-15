@@ -67,12 +67,7 @@ export default function SignUp({
         // trim values
         const castValues = SignUpSchema.cast(values);
 
-        singUp({
-          name: castValues.name,
-          email: castValues.email,
-          phone: castValues.phone,
-          password: castValues.password,
-        })
+        singUp(castValues)
           .then((res) => {
             res && (setIsSuccess(true), resetForm(), setSubmitting(false));
           })

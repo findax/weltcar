@@ -39,12 +39,7 @@ export default function AccountForm({ user }: { user: IUser }) {
       onSubmit={(values, { setSubmitting }) => {
         // trim values
         const castValues = AccountSchema.cast(values);
-        updateUser({
-          name: castValues.name,
-          surname: castValues.surname,
-          city: castValues.city,
-          phone: castValues.phone,
-        }).finally(() => setSubmitting(false));
+        updateUser(castValues).finally(() => setSubmitting(false));
       }}
     >
       {({ errors, touched, isSubmitting }) => (

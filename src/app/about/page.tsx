@@ -1,15 +1,12 @@
-import { FC } from 'react';
 import SectionFounder from './(components)/SectionFounder';
 import SectionStatistic from './(components)/SectionStatistic';
 import SectionHero from './(components)/SectionHero';
 import BgGlassmorphism from '@/components/BgGlassmorphism';
 import BackgroundSection from '@/components/BackgroundSection';
 import SectionClientSay from '@/components/SectionClientSay';
-import SectionSubscribe from '@/components/SectionSubscribe';
+import SectionSubscribe from '@/components/subscribe/SectionSubscribe';
 
-export interface PageAboutProps {}
-
-const PageAbout: FC<PageAboutProps> = ({}) => {
+const PageAbout = () => {
   return (
     <div className={`nc-PageAbout overflow-hidden relative`}>
       {/* ======== BG GLASS ======== */}

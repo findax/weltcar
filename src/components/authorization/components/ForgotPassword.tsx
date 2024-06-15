@@ -12,7 +12,7 @@ export default function ForgotPassword({
   setIsResetingPassword: (isResetingPassword: boolean) => void;
 }) {
   const forgotPasswordSchema = Yup.object().shape({
-    forgotPassword: Yup.string()
+    email: Yup.string()
       .trim()
       .email('Invalid email')
       .required('Email is required'),
@@ -21,14 +21,14 @@ export default function ForgotPassword({
   return (
     <Formik
       initialValues={{
-        forgotPassword: emailValue,
+        email: emailValue,
       }}
       validationSchema={forgotPasswordSchema}
       onSubmit={(values, { setSubmitting, resetForm }) => {
         // same shape as initial values
         const castValues = forgotPasswordSchema.cast(values);
 
-        resetPassword({ email: castValues.forgotPassword }).then((res) => {
+        resetPassword(castValues).then((res) => {
           res &&
             (setIsResetingPassword(true), resetForm(), setSubmitting(false));
         });
@@ -37,12 +37,12 @@ export default function ForgotPassword({
       {({ errors, touched, isSubmitting }) => (
         <Form className='grid grid-cols-1 gap-4'>
           <FormikInput
-            name='forgotPassword'
+            name='email'
             type='email'
             placeholder='example@mail.com'
             title='Email address'
-            error={errors.forgotPassword}
-            touched={touched.forgotPassword}
+            error={errors.email}
+            touched={touched.email}
           />
 
           <ButtonPrimary

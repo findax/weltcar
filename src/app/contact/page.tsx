@@ -1,5 +1,5 @@
 import ContactHero from './(components)/ContactHero';
-import SectionSubscribe from '@/components/SectionSubscribe';
+import SectionSubscribe from '@/components/subscribe/SectionSubscribe';
 import BackgroundSection from '@/components/BackgroundSection';
 
 const PageContact = () => {

@@ -3,7 +3,7 @@ import SectionHero from '@/components/SectionHero';
 import BgGlassmorphism from '@/components/BgGlassmorphism';
 import BackgroundSection from '@/components/BackgroundSection';
 import SectionHowItWork from '@/components/SectionHowItWork';
-import SectionSubscribe from '@/components/SectionSubscribe';
+import SectionSubscribe from '@/components/subscribe/SectionSubscribe';
 import SectionWhyChooseUs from '@/components/SectionWhyChooseUs';
 import SectionVideos from '@/components/SectionVideos';
 import SectionClientSay from '@/components/SectionClientSay';

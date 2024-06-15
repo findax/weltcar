@@ -6,6 +6,8 @@ import { CheckCircleIcon } from '@heroicons/react/24/outline';
 import { activateAccount } from '@/api/auth';
 import LoadingSpinner from '@/shared/LoadingSpinner';
 import ErrorComponent from '@/components/ErrorComponent';
+import Image from 'next/image';
+import bgImg from '@/images/bg-cars/bg-car-7.webp';
 
 export default function ConfirmRegistrationPage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,23 +25,30 @@ export default function ConfirmRegistrationPage() {
     }
   }, []);
 
-  return isLoading ? (
-    <div className='w-full h-[calc(100vh-76px)] flex justify-center items-center'>
-      <LoadingSpinner className='w-12' />
-    </div>
-  ) : isError ? (
-    <div className='w-full h-[calc(100vh-76px)] flex justify-center items-center'>
-      <ErrorComponent />
-    </div>
-  ) : (
-    <div className='w-full h-[calc(100vh-76px)] flex justify-center items-center'>
-      <div className='text-center space-y-10'>
-        <CheckCircleIcon className='block mx-auto w-24 h-24 text-green-500' />
-        <p className='px-6 text-2xl font-semibold'>
-          Your account has been successfully created!
-        </p>
-        <ButtonPrimary href='/catalog'>Choose your car</ButtonPrimary>
-      </div>
+  return (
+    <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
+      {isLoading ? (
+        <div className='-mt-[76px]'>
+          <LoadingSpinner className='w-12' />
+        </div>
+      ) : isError ? (
+        <ErrorComponent />
+      ) : (
+        <div className='-mt-[76px] text-center space-y-10'>
+          <CheckCircleIcon className='block mx-auto w-24 h-24 text-green-500' />
+          <p className='px-6 text-2xl font-semibold'>
+            Your account has been successfully created!
+          </p>
+          <ButtonPrimary href='/catalog'>Choose your car</ButtonPrimary>
+        </div>
+      )}
+
+      <Image
+        className='hidden sm:block absolute inset-0 object-contain w-full max-w-7xl m-auto opacity-[0.08] -z-10'
+        src={bgImg}
+        alt='car background image'
+        priority
+      />
     </div>
   );
 }

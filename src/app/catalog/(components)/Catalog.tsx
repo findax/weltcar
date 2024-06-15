@@ -201,11 +201,13 @@ export default function Catalog() {
   const handleCloseFiltersMenu = () => setFiltersVisible(false);
 
   return isFirstLoading ? (
-    <div className='w-full h-[calc(100vh-76px)] flex justify-center items-center'>
-      <LoadingSpinner className='w-12' />
+    <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
+      <div className='-mt-[76px]'>
+        <LoadingSpinner className='w-12' />
+      </div>
     </div>
   ) : isError ? (
-    <div className='w-full h-[calc(100vh-76px)] flex justify-center items-center'>
+    <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
       <ErrorComponent />
     </div>
   ) : (
