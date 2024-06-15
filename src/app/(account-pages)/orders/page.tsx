@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import OrderAccordion from '../(components)/OrderAccordion';
+import OrderAccordion from './(components)/OrderAccordion';
+import OrderDetails from './(components)/OrderDetails';
 import Image from 'next/image';
 import bgImg from '@/images/bg-cars/porsche911-turbo.png';
 import { getUserOrders } from '@/api/user';
@@ -45,10 +46,10 @@ const OrdersPage = () => {
             (state.data.length > 0 ? (
               <>
                 <div className='text-xl text-center font-semibold mb-6 pr-16 hidden md:grid grid-cols-4 gap-4'>
-                  <span>Name</span>
-                  <span>Date</span>
-                  <span>Status</span>
-                  <span>Sum</span>
+                  <h3>Name</h3>
+                  <h3>Date</h3>
+                  <h3>Status</h3>
+                  <h3>Sum</h3>
                 </div>
                 <div className='hidden md:block border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
                 <ul>
@@ -60,9 +61,7 @@ const OrdersPage = () => {
                         status={order.order_status_name}
                         price={order.price}
                       >
-                        <div className='py-6 px-6 lg:px-40 text-center bg-white/60 dark:bg-neutral-800/80'>
-                          order details
-                        </div>
+                        <OrderDetails order={order} />
                       </OrderAccordion>
                       <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
                     </li>
@@ -71,7 +70,7 @@ const OrdersPage = () => {
               </>
             ) : (
               <div className='h-[40vh] flex justify-center items-center flex-col bg-white/50 dark:bg-neutral-800/60'>
-                <h3 className=''>You have no orders</h3>
+                <h3 className='text-2xl'>You have no orders</h3>
                 <ButtonPrimary className='mt-6' href='/catalog'>
                   Choose your car
                 </ButtonPrimary>
@@ -82,7 +81,7 @@ const OrdersPage = () => {
       <Image
         className='hidden md:block absolute inset-0 top-1/2 -translate-y-1/2 object-contain w-full opacity-[0.08] -z-10'
         src={bgImg}
-        alt='premium logo'
+        alt='car image'
         priority
       />
     </div>

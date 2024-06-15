@@ -31,22 +31,18 @@ const OrderAccordion = ({
     <>
       <button
         onClick={() => setOpened(!opened)}
-        className={`relative text-sm md:text-base font-medium py-4 pr-16 grid grid-cols-2 md:grid-cols-4 gap-4 w-full hover:bg-white/40 dark:hover:bg-neutral-800/60 ${className}`}
+        className={`relative text-md lg:text-lg font-medium py-4 pr-16 grid items-center grid-cols-2 md:grid-cols-4 gap-4 w-full hover:bg-white/40 dark:hover:bg-neutral-800/60 ${className}`}
       >
-        <span className='text-nowrap text-ellipsis overflow-hidden'>
-          {title}
-        </span>
-        <span className='text-nowrap text-ellipsis overflow-hidden'>
+        <h4 className='text-nowrap text-ellipsis overflow-hidden'>{title}</h4>
+        <h4 className='ttext-nowrap text-ellipsis overflow-hidden'>
           {date && correctDate(date)}
-        </span>
-        <span className='text-nowrap text-ellipsis overflow-hidden'>
-          {status}
-        </span>
-        <span className='text-nowrap text-ellipsis overflow-hidden'>
+        </h4>
+        <h4 className='text-nowrap text-ellipsis overflow-hidden'>{status}</h4>
+        <h4 className='text-nowrap text-ellipsis overflow-hidden'>
           {numberWithComma(price)} €
-        </span>
+        </h4>
         <ChevronDownIcon
-          className={`absolute top-1/2 -translate-y-1/2 right-0 w-4 duration-300 ${opened ? 'rotate-180' : ''}`}
+          className={`absolute top-1/2 -translate-y-1/2 right-4 w-5 duration-300 ${opened ? 'rotate-180' : ''}`}
         />
       </button>
       <AnimateHeight duration={300} height={opened ? 'auto' : 0}>
