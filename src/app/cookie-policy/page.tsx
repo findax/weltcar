@@ -1,8 +1,9 @@
-import React from 'react';
+import Image from 'next/image';
+import bgImg from '@/images/bg-cars/bg-car-8.webp';
 
 export default function CookiePolicyPage() {
   return (
-    <div className='container py-16 xl:py-28 space-y-6 xl:space-y-8'>
+    <div className='relative container my-12 xl:my-20 space-y-6 xl:space-y-8'>
       <h1 className='text-3xl font-semibold'>Cookie Policy</h1>
       <div className='w-14 border-b border-neutral-300 dark:border-neutral-700'></div>
       <div className='max-w-3xl space-y-6 xl:space-y-8'>
@@ -40,6 +41,12 @@ export default function CookiePolicyPage() {
           all websites you use, visit this Google page.
         </p>
       </div>
+      <Image
+        className='hidden md:block absolute inset-0 top-1/2 -translate-y-1/2 object-contain w-full opacity-[0.08] -z-10'
+        src={bgImg}
+        alt='car background image'
+        priority
+      />
     </div>
   );
 }

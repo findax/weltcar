@@ -1,3 +1,5 @@
+import { ICarDetails } from './cardetails';
+
 export interface IAuth {
   expires: string;
   token: string;
@@ -39,69 +41,90 @@ export interface IUserOrdersData {
   path: string;
   from: number;
   to: number;
-  data: [
-    {
-      id: string;
-      order_no: string;
-      price: string | number;
-      order_status: string;
-      payment_status: string;
-      order_status_name: string;
-      payment_status_name: string;
-      created_at: string;
-      updated_at: string;
-      stages: [
-        {
-          order_status: string;
-          payment_status: string;
-          order_status_name: string;
-          payment_status_name: string;
-          files: [
-            {
-              title: string | null;
-              description: string | null;
-              type: string;
-              file_name: string;
-              url: string;
-            },
-          ];
-          created_at: string;
-          updated_at: string;
-        },
-      ];
-      car: {
-        id: string;
-        car_id: string;
-        brand: string;
-        model: string;
-        year: number;
-        vin: string;
-        inner_color_hex: string;
-        inner_color_name: string;
-        outer_color_hex: string;
-        outer_color_name: string;
-        description: string;
-        photos: [
-          {
-            thumb: string;
-            original: string;
-          },
-        ];
-        documents: [
-          {
-            title: string;
-            description: string;
-            file_name: string;
-            url: string;
-          },
-        ];
-        properties: [
-          {
-            name: string;
-            value: string;
-          },
-        ];
-      };
-    },
-  ];
+  data: IOrderDetails[];
+  // data: [
+  //   {
+  //     id: string;
+  //     order_no: string;
+  //     price: string | number;
+  //     order_status: string;
+  //     payment_status: string;
+  //     order_status_name: string;
+  //     payment_status_name: string;
+  //     created_at: string;
+  //     updated_at: string;
+  //     stages: [
+  //       {
+  //         order_status: string;
+  //         payment_status: string;
+  //         order_status_name: string;
+  //         payment_status_name: string;
+  //         files: [
+  //           {
+  //             title: string | null;
+  //             description: string | null;
+  //             type: string;
+  //             file_name: string;
+  //             url: string;
+  //           },
+  //         ];
+  //         created_at: string;
+  //         updated_at: string;
+  //       },
+  //     ];
+  //     car: {
+  //       id: string;
+  //       car_id: string;
+  //       brand: string;
+  //       model: string;
+  //       year: number;
+  //       vin: string;
+  //       inner_color_hex: string;
+  //       inner_color_name: string;
+  //       outer_color_hex: string;
+  //       outer_color_name: string;
+  //       description: string;
+  //       photos: [
+  //         {
+  //           thumb: string;
+  //           original: string;
+  //         },
+  //       ];
+  //       documents: [
+  //         {
+  //           title: string;
+  //           description: string;
+  //           file_name: string;
+  //           url: string;
+  //         },
+  //       ];
+  //       properties: [
+  //         {
+  //           name: string;
+  //           value: string;
+  //         },
+  //       ];
+  //     };
+  //   },
+  // ];
+}
+
+export interface IOrderDetails {
+  car: ICarDetails;
+  created_at: string;
+  files: {
+    description: string | null;
+    file_name: string;
+    title: string | null;
+    type: string;
+    url: string;
+  }[];
+  id: string;
+  order_no: string;
+  order_status: string;
+  order_status_name: string;
+  payment_status: string;
+  payment_status_name: string;
+  price: number | string;
+  updated_at: string;
 }

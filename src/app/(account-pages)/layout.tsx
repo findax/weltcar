@@ -13,7 +13,7 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
       <div className='border-b border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800'>
         <Nav />
       </div>
-      <div className='container py-14 pb-24 lg:pb-24'>{children}</div>
+      <div className='container my-12 xl:my-14'>{children}</div>
     </div>
   );
 };

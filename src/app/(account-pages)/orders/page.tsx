@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import OrderAccordion from './(components)/OrderAccordion';
 import OrderDetails from './(components)/OrderDetails';
 import Image from 'next/image';
-import bgImg from '@/images/bg-cars/porsche911-turbo.png';
+import bgImg from '@/images/bg-cars/bg-car-5.webp';
 import { getUserOrders } from '@/api/user';
 import { IUserOrdersData } from '@/types/user';
 import LoadingSpinner from '@/shared/LoadingSpinner';
@@ -81,7 +81,7 @@ const OrdersPage = () => {
       <Image
         className='hidden md:block absolute inset-0 top-1/2 -translate-y-1/2 object-contain w-full opacity-[0.08] -z-10'
         src={bgImg}
-        alt='car image'
+        alt='car background image'
         priority
       />
     </div>

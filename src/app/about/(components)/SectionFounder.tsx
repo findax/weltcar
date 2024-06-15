@@ -36,13 +36,10 @@ const FOUNDER_DEMO: People[] = [
 const SectionFounder = () => {
   return (
     <div className='nc-SectionFounder relative'>
-      <Heading
-        desc='We’re impartial and independent, and every day we create distinctive,
-          world-class programmes and content'
-      >
-        🤓 Founders
+      <Heading desc='Our team at WeltCar is composed of industry experts dedicated to providing you with the best luxury car buying experience. We work together to ensure that every aspect of your interaction with us is seamless and satisfying, making your journey to owning a premium vehicle both enjoyable and memorable.'>
+        Our Team
       </Heading>
-      <div className='grid sm:grid-cols-3 gap-10 sm:gap-4 lg:gap-8'>
+      <div className='grid sm:grid-cols-3 gap-10 sm:gap-4 lg:gap-12'>
         {FOUNDER_DEMO.map((item) => (
           <div key={item.id} className=''>
             <div className='relative h-0 aspect-h-1 aspect-w-1 rounded-xl overflow-hidden'>
@@ -50,7 +47,7 @@ const SectionFounder = () => {
                 fill
                 className=' object-cover'
                 src={item.avatar}
-                alt=''
+                alt='team member'
                 sizes='(max-width: 768px) 100vw, (max-width: 1200px) 30vw, 30vw'
               />
             </div>

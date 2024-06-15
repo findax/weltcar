@@ -15,7 +15,7 @@ const PageAbout: FC<PageAboutProps> = ({}) => {
       {/* ======== BG GLASS ======== */}
       <BgGlassmorphism />
 
-      <div className='container py-16 xl:py-28 space-y-16 xl:space-y-28'>
+      <div className='container my-12 xl:my-20 space-y-16 xl:space-y-28'>
         <SectionHero />
         <SectionStatistic />
 

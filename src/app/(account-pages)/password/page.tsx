@@ -6,7 +6,7 @@ import { ButtonPrimary } from '@/shared/Buttons';
 import { FormikPasswordInput } from '@/shared/FormInputs';
 import { updateUserPassword } from '@/api/user';
 import Image from 'next/image';
-import bgImg from '@/images/bg-cars/audi_r8.webp';
+import bgImg from '@/images/bg-cars/bg-car-4.webp';
 
 const AccountPass = () => {
   const UpdatePasswordSchema = Yup.object().shape({
@@ -49,15 +49,11 @@ const AccountPass = () => {
 
           updateUserPassword({
             password: castValues.confirm_password,
-          })
-            .then((res) => {
-              console.log(res);
-            })
-            .finally(() => setSubmitting(false));
+          }).finally(() => setSubmitting(false));
         }}
       >
         {({ errors, touched, isSubmitting }) => (
-          <Form className='max-w-xl space-y-7'>
+          <Form className='grid grid-cols-1 gap-7 w-full max-w-lg'>
             <FormikPasswordInput
               title='Current password'
               placeholder='Enter your password'
@@ -95,7 +91,7 @@ const AccountPass = () => {
       <Image
         className='hidden md:block absolute inset-0 top-1/2 -translate-y-1/2 object-contain w-full opacity-[0.10] dark:opacity-[0.08] -z-10'
         src={bgImg}
-        alt='premium car'
+        alt='car background image'
         priority
       />
     </div>

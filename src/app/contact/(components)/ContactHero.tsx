@@ -2,7 +2,7 @@ import Heading from '@/shared/Heading';
 import SocialsList from '@/shared/SocialsList';
 import FeedbackForm from './FeedbackForm';
 import Image from 'next/image';
-import bgImg from '@/images/bg-cars/lamborghini-side.png';
+import bgImg from '@/images/bg-cars/bg-car-2.webp';
 
 const info = [
   {
@@ -23,14 +23,16 @@ export default function ContactHero() {
   return (
     <div className='relative'>
       <Heading
-        isCenter
-        className='mb-16 xl:mb-20'
+        className='mb-10 xl:mb-14'
         fontClass='!font-bold xl:text-5xl'
+        desc='Whether you have questions about our vehicles, need assistance with
+        your purchase, or want to learn more about our services, we are here
+        to help. Reach out to us through any of the following methods:'
       >
-        Contact
+        Contact Us
       </Heading>
       <div className='flex-shrink-0 grid grid-cols-1 sm:grid-cols-2 gap-12 '>
-        <div className='max-w-sm space-y-8'>
+        <div className='space-y-5 sm:space-y-8'>
           {info.map((item, index) => (
             <div key={index}>
               <h3 className='uppercase font-semibold text-sm dark:text-neutral-200 tracking-wider'>
@@ -47,6 +49,10 @@ export default function ContactHero() {
             </h3>
             <SocialsList className='mt-2' />
           </div>
+          <p className='pt-3 xl:pt-6 font-normal text-base sm:text-lg text-neutral-500 dark:text-neutral-400'>
+            We look forward to assisting you with your luxury car needs at
+            WeltCar.
+          </p>
         </div>
 
         <FeedbackForm />
@@ -55,7 +61,7 @@ export default function ContactHero() {
       <Image
         className='hidden sm:block absolute inset-0 object-contain w-full max-w-7xl m-auto opacity-[0.08] -z-10'
         src={bgImg}
-        alt='premium logo'
+        alt='car background image'
         priority
       />
     </div>

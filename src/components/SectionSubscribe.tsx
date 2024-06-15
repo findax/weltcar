@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
-import { ButtonCircle } from '@/shared/Buttons';
-import rightImg from '@/images/ferrari-yellow.webp';
-import Badge from '@/shared/Badge';
-import { Input } from '@/shared/FormInputs';
 import Image from 'next/image';
+import carImg from '@/images/car-2.webp';
 import SBS1img from '@/images/icons/message.webp';
 import SBS2img from '@/images/icons/bell.webp';
+import { Input } from '@/shared/FormInputs';
+import { ButtonCircle } from '@/shared/Buttons';
+import Badge from '@/shared/Badge';
 
 export interface SectionSubscribeProps {
   className?: string;
@@ -31,8 +31,8 @@ const SectionSubscribe: FC<SectionSubscribeProps> = ({ className = '' }) => {
             </h3>
             <p className='mt-4 text-neutral-500 dark:text-neutral-400'>
               Sign up for our newsletter to receive exclusive insights and
-              updates on the latest VIP cars and special promotions. Don’t miss
-              out on the chance to be the first to know about our exciting
+              updates on the latest luxury cars and special promotions. Don’t
+              miss out on the chance to be the first to know about our exciting
               offers and news.
             </p>
           </li>
@@ -83,7 +83,7 @@ const SectionSubscribe: FC<SectionSubscribeProps> = ({ className = '' }) => {
             />
           </div>
         </div>
-        <Image className='mt-12' alt='car' src={rightImg} />
+        <Image className='mt-12' alt='car image' src={carImg} />
       </div>
     </div>
   );

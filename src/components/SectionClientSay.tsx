@@ -2,9 +2,11 @@
 
 import Heading from '@/shared/Heading';
 import React, { FC, useState } from 'react';
-import clientSay1 from '@/images/avatars/Image-2.png';
-import clientSay2 from '@/images/avatars/Image-3.png';
-import clientSay3 from '@/images/avatars/Image-4.png';
+import James from '@/images/avatars/James.webp';
+import Sophie from '@/images/avatars/Sophie.webp';
+import Hiroshi from '@/images/avatars/Hiroshi.webp';
+import Isabella from '@/images/avatars/Isabella.webp';
+import Emma from '@/images/avatars/Emma.webp';
 import quotationImg from '@/images/quotation.png';
 import quotationImg2 from '@/images/quotation2.png';
 import {
@@ -16,7 +18,7 @@ import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 import Image from 'next/image';
 import { useSwipeable } from 'react-swipeable';
 import { variants } from '@/utils/animationVariants';
-import bgImg from '@/images/bg-cars/Urus_Performante.png';
+import bgImg from '@/images/bg-cars/bg-car-1.webp';
 
 export interface SectionClientSayProps {
   className?: string;
@@ -26,7 +28,7 @@ export interface SectionClientSayProps {
 const DEMO_DATA = [
   {
     id: 1,
-    avatar: clientSay1,
+    avatar: James,
     clientName: 'James',
     clientAddress: 'New York, USA',
     content:
@@ -34,44 +36,36 @@ const DEMO_DATA = [
   },
   {
     id: 2,
-    avatar: clientSay2,
+    avatar: Sophie,
     clientName: 'Sophie',
     clientAddress: 'Berlin, Germany',
     content:
-      'WeltCar made my dream of owning a luxury car come true. Their attention to detail and customer care is second to none.',
+      'WeltCar made my dream of owning a luxury car come true. Their attention to detail and customer care are second to none.',
   },
   {
     id: 3,
-    avatar: clientSay3,
+    avatar: Hiroshi,
     clientName: 'Hiroshi',
     clientAddress: 'Tokyo, Japan',
     content:
       'Buying a car from WeltCar was a seamless process. The team is professional, and the selection of cars is truly impressive.',
   },
-  // {
-  //   id: 4,
-  //   avatar: clientSay4,
-  //   clientName: 'Hiroshi',
-  //   clientAddress: 'Tokyo, Japan',
-  //   content:
-  //     'Buying a car from WeltCar was a seamless process. The team is professional, and the selection of cars is truly impressive.',
-  // },
-  // {
-  //   id: 5,
-  //   avatar: clientSay5,
-  //   clientName: 'Isabella',
-  //   clientAddress: 'Rome, Italy',
-  //   content:
-  //     'From start to finish, WeltCar exceeded my expectations. Their expertise and dedication to customer satisfaction are truly remarkable.',
-  // },
-  // {
-  //   id: 6,
-  //   avatar: clientSay6,
-  //   clientName: 'Emma',
-  //   clientAddress: 'Vienna, Austria',
-  //   content:
-  //     "Purchasing a VIP vehicle from WeltCar was one of the best decisions I've made. The level of service and quality of cars is extraordinary.",
-  // },
+  {
+    id: 4,
+    avatar: Isabella,
+    clientName: 'Isabella',
+    clientAddress: 'Rome, Italy',
+    content:
+      'From start to finish, WeltCar exceeded my expectations. Their expertise and dedication to customer satisfaction are truly remarkable.',
+  },
+  {
+    id: 5,
+    avatar: Emma,
+    clientName: 'Emma',
+    clientAddress: 'Vienna, Austria',
+    content:
+      "Purchasing a VIP vehicle from WeltCar was one of the best decisions I've made. The level of service and quality of cars are extraordinary.",
+  },
 ];
 
 const SectionClientSay: FC<SectionClientSayProps> = ({
@@ -187,7 +181,7 @@ const SectionClientSay: FC<SectionClientSayProps> = ({
       <Image
         className='hidden sm:block absolute inset-0 top-20 object-contain w-full opacity-[0.1] dark:opacity-[0.08] -z-10'
         src={bgImg}
-        alt='premium logo'
+        alt='car background image'
         priority
       />
     </div>

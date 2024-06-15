@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import rightImgDemo from '@/images/audi-r8-yellow.png';
-import { ButtonPrimary } from '@/shared/Buttons';
-import Logo from '@/shared/Logo';
 import Image from 'next/image';
+import carImg from '@/images/car-1.webp';
 import WCU1img from '@/images/icons/badge.webp';
 import WCU2img from '@/images/icons/shaking-hands.webp';
+import { ButtonPrimary } from '@/shared/Buttons';
+import Logo from '@/shared/Logo';
 
 export interface SectionWhyChooseUsProps {
   className?: string;
@@ -13,7 +13,7 @@ export interface SectionWhyChooseUsProps {
 
 const SectionWhyChooseUs: FC<SectionWhyChooseUsProps> = ({
   className = '',
-  rightImg = rightImgDemo,
+  rightImg = carImg,
 }) => {
   return (
     <div
@@ -24,7 +24,7 @@ const SectionWhyChooseUs: FC<SectionWhyChooseUsProps> = ({
       <div className='flex-shrink-0 lg:pr-16 lg:w-1/2 lg:-mt-3 xl:-mt-12'>
         <Logo className='w-48' />
         <h2 className='font-semibold text-3xl sm:text-4xl mt-6 sm:mt-11'>
-          Why Choose WeltCar?
+          Why Choose Us?
         </h2>
         <p className='mt-6 text-neutral-500 dark:text-neutral-400'>
           At WeltCar, we pride ourselves on delivering exceptional service and
@@ -53,7 +53,7 @@ const SectionWhyChooseUs: FC<SectionWhyChooseUsProps> = ({
             />
           </div>
         </div>
-        <Image className='mt-12' alt='car' src={rightImg} />
+        <Image className='mt-12' alt='car image' src={rightImg} />
       </div>
     </div>
   );

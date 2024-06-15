@@ -15,8 +15,8 @@ export default function SectionHeroArchivePage() {
             <h1 className='font-semibold md:font-bold text-4xl md:text-5xl xl:text-6xl leading-[110%] xl:leading-[120%]'>
               Welcome to WeltCar
             </h1>
-            <h2 className='font-semibold md:font-bold text-lg md:text-xl xl:text-2xl leading-[110%] xl:leading-[120%]'>
-              Your Gateway to Luxury Automotive Excellence
+            <h2 className='font-semibold md:font-bold text-xl md:text-2xl xl:text-3xl leading-[110%] xl:leading-[120%]'>
+              Your Gateway to Luxury&nbsp;Automotive&nbsp;Excellence
             </h2>
             {/* <div className='flex justify-center lg:justify-start text-base md:text-lg text-neutral-500 dark:text-neutral-400'>
               <i className='text-2xl las la-map-marked'></i>
@@ -26,7 +26,7 @@ export default function SectionHeroArchivePage() {
               <span className='ml-2.5'>112 cars</span>
             </div> */}
             <div className='text-base md:text-lg text-neutral-500 dark:text-neutral-400 lg:max-w-3xl'>
-              At WeltCar, we specialize in bringing you the finest exclusive
+              At WeltCar, we specialize in providing the finest exclusive
               vehicles, ensuring luxury and sophistication in every drive. With
               our vast selection of top-tier cars, personalized service, and
               exclusive offers, we make your dream of owning a premium vehicle a

@@ -6,7 +6,7 @@ import Avatar from '@/shared/Avatar';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { Input } from '@/shared/FormInputs';
 import Image from 'next/image';
-import bgImg from '@/images/bg-cars/mersedes-brabus.png';
+import bgImg from '@/images/bg-cars/bg-car-3.webp';
 import AccountForm from './(components)/AccountForm';
 import { getUser } from '@/api/user';
 import { IUser } from '@/types/user';
@@ -61,7 +61,7 @@ const AccountPage = () => {
       <Image
         className='hidden md:block absolute inset-0 top-1/2 -translate-y-1/2 object-contain w-full opacity-[0.06] -z-10'
         src={bgImg}
-        alt='premium logo'
+        alt='car background image'
         priority
       />
     </div>

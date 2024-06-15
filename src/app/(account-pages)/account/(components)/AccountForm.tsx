@@ -48,7 +48,7 @@ export default function AccountForm({ user }: { user: IUser }) {
       }}
     >
       {({ errors, touched, isSubmitting }) => (
-        <Form className='flex-grow mt-10 md:mt-0 md:pl-16 max-w-xl space-y-7'>
+        <Form className='grid grid-cols-1 gap-7 w-full max-w-xl mt-10 md:mt-0 md:pl-16'>
           <FormikInput
             name='name'
             placeholder='Enter your name'

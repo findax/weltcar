@@ -15,7 +15,7 @@ function PageHome() {
       <BgGlassmorphism />
 
       {/* SECTION HERO */}
-      <div className='container pt-16 pb-24 lg:pb-28'>
+      <div className='container pt-12 xl:pt-14 pb-24 lg:pb-28'>
         <SectionHero />
       </div>
 

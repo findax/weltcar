@@ -84,7 +84,7 @@ export default function FeedbackForm() {
           <FormikTextarea
             name='message'
             title='Message'
-            rows={6}
+            rows={3}
             error={errors.message}
             touched={touched.message}
           />

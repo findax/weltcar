@@ -2,10 +2,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import numberWithComma from '@/utils/numberWithComma';
 import { DocumentTextIcon } from '@heroicons/react/24/outline';
+import { IOrderDetails } from '@/types/user';
 
-export default function OrderDetails({ order }: any) {
-  console.log(order);
-
+export default function OrderDetails({ order }: { order: IOrderDetails }) {
   function correctDate(date: string) {
     const dateArray = date.split('T')[0].split('-');
     return `${dateArray[2]}.${dateArray[1]}.${dateArray[0]}`;
@@ -64,7 +63,7 @@ export default function OrderDetails({ order }: any) {
       <li className='flex flex-col items-start'>
         <h4 className='text-md font-semibold mr-4'>Documents:</h4>
         <ul className='ml-6 space-y-2'>
-          {order.files.map((file: any, index: any) => (
+          {order.files.map((file, index) => (
             <li key={index} className='text-md font-medium'>
               <a
                 href={file.url}

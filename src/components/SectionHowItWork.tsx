@@ -22,7 +22,7 @@ const DEMO_DATA: SectionHowItWorkProps['data'] = [
     id: 1,
     img: HIW1img,
     title: 'Discover Luxury',
-    desc: 'Explore our curated collection of exclusive vehicles, each selected for their unparalleled quality and elegance. Begin your journey into luxury today',
+    desc: 'Explore our curated collection of exclusive vehicles, each selected for its unparalleled quality and elegance. Begin your journey into luxury today',
   },
   {
     id: 2,
@@ -34,7 +34,7 @@ const DEMO_DATA: SectionHowItWorkProps['data'] = [
     id: 3,
     img: HIW3img,
     title: 'Exclusive Savings',
-    desc: 'Enjoy exclusive deals and savings on the most luxurious vehicles. At WeltCar, we make high-end car ownership both accessible',
+    desc: 'Enjoy exclusive deals and savings on the most luxurious vehicles. At WeltCar, we make high-end car ownership accessible',
   },
 ];
 
@@ -49,7 +49,7 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
     >
       <Heading
         isCenter
-        desc='Keep calm & drive on'
+        // desc='Keep calm & drive on'
         fontClass='!font-bold xl:text-5xl'
       >
         How It Works
