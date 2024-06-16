@@ -120,7 +120,6 @@ const Header = () => {
         hideProgressBar={false}
         closeOnClick
         rtl={false}
-        limit={1}
         theme={
           typeof localStorage !== 'undefined' ? localStorage.theme : 'light'
         }

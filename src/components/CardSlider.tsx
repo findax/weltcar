@@ -52,7 +52,8 @@ export default function CardSlider({
     trackMouse: true,
   });
 
-  let currentImage = images[index].thumb;
+  let currentImage = images[index]?.thumb || '';
+
   return (
     <MotionConfig
       transition={{
@@ -75,13 +76,14 @@ export default function CardSlider({
             className='absolute inset-0'
           >
             <Image
-              src={currentImage || ''}
+              src={currentImage}
               fill
               alt='car image'
               className={`object-cover transition-opacity opacity-0 duration-[500ms] ${imageClass}`}
               onLoad={(e) => {
                 setLoaded(true), e.currentTarget.classList.remove('opacity-0');
               }}
+              onError={() => setLoaded(false)}
               sizes='(max-width: 1025px) 100vw, 300px'
             />
           </motion.div>

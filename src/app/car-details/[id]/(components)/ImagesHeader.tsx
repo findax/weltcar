@@ -29,7 +29,7 @@ export default function ImagesHeader({ images }: { images: ICarGallery[] }) {
             <Image
               fill
               src={images[0].url}
-              alt='car photo'
+              alt='car image'
               className='object-cover rounded-md sm:rounded-xl transition-opacity opacity-0 duration-[1s]'
               onLoad={(e) => e.currentTarget.classList.remove('opacity-0')}
               sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw'
@@ -51,12 +51,12 @@ export default function ImagesHeader({ images }: { images: ICarGallery[] }) {
                 <div className='bg-img-placeholder aspect-w-16 aspect-h-9 md:aspect-w-4 md:aspect-h-3'>
                   <Image
                     fill
+                    src={item.url}
+                    alt='car image'
                     className='object-cover w-full h-full rounded-md sm:rounded-xl transition-opacity opacity-0 duration-[1s]'
                     onLoad={(e) =>
                       e.currentTarget.classList.remove('opacity-0')
                     }
-                    src={item.url}
-                    alt='photos'
                     sizes='400px'
                   />
 
