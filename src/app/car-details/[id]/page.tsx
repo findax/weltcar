@@ -12,7 +12,7 @@ async function getCarDetails(id: string) {
   }
 }
 
-export const revalidate = 300; // revalidate at most every 5 minutes
+export const revalidate = 180; // revalidate at most every 5 minutes
 
 export default async function CarDetailsPage({
   params: { id },

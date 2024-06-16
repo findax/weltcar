@@ -15,10 +15,15 @@ export const singIn = async ({
     api
       .post('/jwt/login', { email, password })
       .then((res) => {
-        setAuth(res.data.data);
-        toast.success('Logged in successfully!');
-        resolve(res);
-        // window.location.reload();
+        if (res.data.message) {
+          toast.error(res.data.message);
+          resolve(false);
+        } else {
+          setAuth(res.data.data);
+          toast.success('Logged in successfully!');
+          resolve(res.data.data);
+          // window.location.reload();
+        }
       })
       .catch((err) => {
         toast.error(err.response.data.message);

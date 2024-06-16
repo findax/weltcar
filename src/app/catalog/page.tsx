@@ -14,7 +14,7 @@ async function getCarsList() {
   }
 }
 
-export const revalidate = 300; // revalidate at most every 5 minutes
+export const revalidate = 180; // revalidate at most every 3 minutes
 
 export default async function CatalogPage() {
   const carListData = await getCarsList();
