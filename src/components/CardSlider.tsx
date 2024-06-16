@@ -61,44 +61,35 @@ export default function CardSlider({
       }}
     >
       <div
-        className={`relative group/cardSlider w-full h-full ${className}`}
+        className={`${loaded ? '' : 'bg-img-placeholder'} relative group/cardSlider w-full h-full flex items-center justify-center overflow-hidden ${className}`}
         {...handlers}
       >
-        {/* Main image */}
-        <div className={`w-full overflow-hidden ${galleryClass}`}>
-          <div
-            className={`relative flex items-center justify-center ${ratioClass}`}
+        <AnimatePresence initial={false} custom={direction}>
+          <motion.div
+            key={index}
+            custom={direction}
+            variants={variants(340, 1)}
+            initial='enter'
+            animate='center'
+            exit='exit'
+            className='absolute inset-0'
           >
-            <AnimatePresence initial={false} custom={direction}>
-              <motion.div
-                key={index}
-                custom={direction}
-                variants={variants(340, 1)}
-                initial='enter'
-                animate='center'
-                exit='exit'
-                className='absolute inset-0'
-              >
-                <Image
-                  src={currentImage || ''}
-                  fill
-                  alt='car image'
-                  className={`object-cover transition-opacity opacity-0 duration-[500ms] ${imageClass}`}
-                  onLoad={(e) => {
-                    setLoaded(true),
-                      e.currentTarget.classList.remove('opacity-0');
-                  }}
-                  sizes='(max-width: 1025px) 100vw, 300px'
-                />
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
+            <Image
+              src={currentImage || ''}
+              fill
+              alt='car image'
+              className={`object-cover transition-opacity opacity-0 duration-[500ms] ${imageClass}`}
+              onLoad={(e) => {
+                setLoaded(true), e.currentTarget.classList.remove('opacity-0');
+              }}
+              sizes='(max-width: 1025px) 100vw, 300px'
+            />
+          </motion.div>
+        </AnimatePresence>
 
         {/* Buttons + bottom nav bar */}
-        <>
-          {/* Buttons */}
-          {loaded && navigation && (
+        {loaded && navigation && (
+          <>
             <div className='opacity-0 group-hover/cardSlider:opacity-100 transition-opacity '>
               {index > 0 && (
                 <button
@@ -119,25 +110,24 @@ export default function CardSlider({
                 </button>
               )}
             </div>
-          )}
 
-          {/* Bottom Nav bar */}
-          <div className='absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-neutral-900 opacity-50'></div>
-          <div className='flex items-center justify-center absolute bottom-2 left-1/2 transform -translate-x-1/2 space-x-1.5'>
-            {images.length > 1 &&
-              images
-                .filter((_, i) => i < 5)
-                .map((_, i) => (
-                  <button
-                    className={`w-1.5 h-1.5 rounded-full ${
-                      i === index ? 'bg-white' : 'bg-white/60 '
-                    }`}
-                    onClick={() => changePhotoId(i)}
-                    key={i}
-                  />
-                ))}
-          </div>
-        </>
+            <div className='absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-neutral-900 opacity-50'></div>
+            <div className='flex items-center justify-center absolute bottom-2 left-1/2 transform -translate-x-1/2 space-x-1.5'>
+              {images.length > 1 &&
+                images
+                  .filter((_, i) => i < 5)
+                  .map((_, i) => (
+                    <button
+                      className={`w-1.5 h-1.5 rounded-full ${
+                        i === index ? 'bg-white' : 'bg-white/60 '
+                      }`}
+                      onClick={() => changePhotoId(i)}
+                      key={i}
+                    />
+                  ))}
+            </div>
+          </>
+        )}
       </div>
     </MotionConfig>
   );

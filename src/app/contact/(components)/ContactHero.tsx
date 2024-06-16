@@ -4,21 +4,6 @@ import FeedbackForm from './FeedbackForm';
 import Image from 'next/image';
 import bgImg from '@/images/bg-cars/bg-car-2.webp';
 
-const info = [
-  {
-    title: '🗺 ADDRESS',
-    desc: 'Neuer Weg 11, 11111 Hamburg',
-  },
-  {
-    title: '💌 EMAIL',
-    desc: 'nc.example@example.com',
-  },
-  {
-    title: '☎ PHONE',
-    desc: '000-123-456-7890',
-  },
-];
-
 export default function ContactHero() {
   return (
     <div className='relative'>
@@ -32,28 +17,53 @@ export default function ContactHero() {
         Contact Us
       </Heading>
       <div className='flex-shrink-0 grid grid-cols-1 sm:grid-cols-2 gap-12 '>
-        <div className='space-y-5 sm:space-y-8'>
-          {info.map((item, index) => (
-            <div key={index}>
-              <h3 className='uppercase font-semibold text-sm dark:text-neutral-200 tracking-wider'>
-                {item.title}
-              </h3>
-              <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>
-                {item.desc}
-              </span>
-            </div>
-          ))}
-          <div>
+        <ul className='space-y-5 sm:space-y-8'>
+          <li>
+            <h3 className='uppercase font-semibold text-sm dark:text-neutral-200 tracking-wider'>
+              📍 ADDRESS
+            </h3>
+            <a
+              className='block mt-2 text-neutral-500 dark:text-neutral-400'
+              href='https://www.google.com/maps?q=FinDax+GmbH,+Theodor-Fontane-Stra%C3%9Fe+2,+22848+Norderstedt,+Germany&ftid=0x47b229e490544979:0x29213d5a4a4d551b&entry=gps&lucs=,94224825,94227247,94227248,94222042,47071704,47069508,94214172,94218641,94203019,47084304,94208458,94208447&g_ep=CAISDTYuMTE5LjEuNjYwNTAYACCenQoqbCw5NDIyNDgyNSw5NDIyNzI0Nyw5NDIyNzI0OCw5NDIyMjA0Miw0NzA3MTcwNCw0NzA2OTUwOCw5NDIxNDE3Miw5NDIxODY0MSw5NDIwMzAxOSw0NzA4NDMwNCw5NDIwODQ1OCw5NDIwODQ0N0ICRUU%3D&g_st=com.google.maps.preview.copy'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              Theodor-Fontane-Straße 2, 22848 Norderstedt
+            </a>
+          </li>
+          <li>
+            <h3 className='uppercase font-semibold text-sm dark:text-neutral-200 tracking-wider'>
+              ✉️ EMAIL
+            </h3>
+            <a
+              className='block mt-2 text-neutral-500 dark:text-neutral-400'
+              href='mailto:info@findax.eu'
+            >
+              info@findax.eu
+            </a>
+          </li>
+          <li>
+            <h3 className='uppercase font-semibold text-sm dark:text-neutral-200 tracking-wider'>
+              📞 PHONE
+            </h3>
+            <a
+              className='block mt-2 text-neutral-500 dark:text-neutral-400'
+              href='tel:+4915902465256'
+            >
+              +49 1590 2465256
+            </a>
+          </li>
+          <li>
             <h3 className='uppercase font-semibold text-sm dark:text-neutral-200 tracking-wider'>
               🌏 SOCIALS
             </h3>
             <SocialsList className='mt-2' />
-          </div>
-          <p className='pt-3 xl:pt-6 font-normal text-base sm:text-lg text-neutral-500 dark:text-neutral-400'>
+          </li>
+          <li className='pt-3 xl:pt-6 font-normal text-base sm:text-lg text-neutral-500 dark:text-neutral-400'>
             We look forward to assisting you with your luxury car needs at
             WeltCar.
-          </p>
-        </div>
+          </li>
+        </ul>
 
         <FeedbackForm />
       </div>

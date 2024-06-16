@@ -1,8 +1,8 @@
-import SectionFounder from './(components)/SectionFounder';
-import SectionStatistic from './(components)/SectionStatistic';
-import SectionHero from './(components)/SectionHero';
 import BgGlassmorphism from '@/components/BgGlassmorphism';
+import SectionHero from './(components)/SectionHero';
+import SectionStatistic from './(components)/SectionStatistic';
 import BackgroundSection from '@/components/BackgroundSection';
+import SectionOurTeam from './(components)/SectionOurTeam';
 import SectionClientSay from '@/components/SectionClientSay';
 import SectionSubscribe from '@/components/subscribe/SectionSubscribe';
 
@@ -18,7 +18,7 @@ const PageAbout = () => {
 
         <div className='relative py-16'>
           <BackgroundSection />
-          <SectionFounder />
+          <SectionOurTeam />
         </div>
 
         {/* <div className='relative py-16'>

@@ -35,10 +35,8 @@ const CarCardH = ({
     >
       <div className='relative w-[55%] lg:w-[50%] xl:w-[55%] 2xl:w-[60%] overflow-hidden'>
         <CardSlider
-          ratioClass='pb-[67.6%] lg:pb-[83.8%] xl:pb-[60.4%] 2xl:pb-[51.4%]'
           photos={photos}
-          // galleryClass='rounded-2xl'
-          className={status === 'sold' ? 'grayscale' : ''}
+          className={`pb-[67.6%] lg:pb-[83.8%] xl:pb-[60.4%] 2xl:pb-[51.4%] ${status === 'sold' ? 'grayscale' : ''}`}
         />
         {/* <BtnLikeIcon isLiked={like} className='absolute right-3 top-3' /> */}
         {status === 'sold' && (

@@ -86,7 +86,11 @@ export default function CarDetails({
       />
 
       {modalId === 'confirm' && (
-        <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
+        <Modal
+          maxWidth='max-w-3xl'
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+        >
           <ConfirmForm
             carId={carData?.id || ''}
             setIsModalOpen={setIsModalOpen}

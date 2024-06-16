@@ -74,11 +74,11 @@ const CarDetailsGallery = ({ images }: { images: ICarGallery[] }) => {
                 router.push(`${thisPathname}/?${newPathname}` as Route);
               }}
               ref={id === Number(lastViewedPhoto) ? lastViewedPhotoRef : null}
-              className='after:content relative mb-5 block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight focus:outline-none'
+              className='bg-img-placeholder after:content relative mb-5 block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight focus:outline-none'
             >
               <Image
                 alt='car image'
-                className='transform rounded-lg brightness-90 transition-opacity opacity-0 duration-[2s] will-change-auto group-hover:brightness-110 focus:outline-none'
+                className='transform rounded-lg brightness-90 transition-opacity opacity-0 duration-[1s] will-change-auto group-hover:brightness-110 focus:outline-none'
                 style={{
                   transform: 'translate3d(0, 0, 0)',
                 }}

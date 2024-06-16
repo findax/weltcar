@@ -30,7 +30,7 @@ export default function ConfirmForm({
         <Form className='w-full grid grid-cols-1 gap-7'>
           <FormikCheckbox
             name='confirm'
-            label='I Agree to Privacy Policy'
+            label="I agree to the Privacy Policy and Company's Policy and confirm that by clicking the 'Continue and Reserve' button, I am confirming my intention to purchase the car and my readiness to make a prepayment."
             className='rounded-lg'
             error={errors.confirm}
             touched={touched.confirm}
@@ -42,7 +42,7 @@ export default function ConfirmForm({
             loading={isSubmitting}
             className='mt-4'
           >
-            Continue
+            Continue and Reserve
           </ButtonPrimary>
         </Form>
       )}

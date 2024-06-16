@@ -17,6 +17,7 @@ const Subscribe = ({ className = '' }: { className?: string }) => {
           Read and share new perspectives on just about any topic. Everyone’s
           welcome.
         </span> */}
+        <SubscribeForm />
         <ul className='space-y-8 mt-10'>
           <li className=''>
             <h3 className='flex items-center space-x-4 font-medium text-neutral-700 dark:text-neutral-300'>
@@ -42,7 +43,6 @@ const Subscribe = ({ className = '' }: { className?: string }) => {
             </p>
           </li>
         </ul>
-        <SubscribeForm />
       </div>
       <div className='flex-grow'>
         <div className='grid grid-cols-2'>

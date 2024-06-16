@@ -23,14 +23,14 @@ export default function ImagesHeader({ images }: { images: ICarGallery[] }) {
       <div className='mt-8 md:mt-11 rounded-md sm:rounded-xl'>
         <div className='relative grid grid-rows-3 grid-cols-2 md:grid-rows-2 md:grid-cols-4 gap-1 sm:gap-2'>
           <div
-            className='relative row-span-2 col-span-2 md:col-span-3 rounded-md sm:rounded-xl overflow-hidden cursor-pointer'
+            className='bg-img-placeholder relative row-span-2 col-span-2 md:col-span-3 rounded-md sm:rounded-xl overflow-hidden cursor-pointer'
             onClick={handleOpenModalImageGallery}
           >
             <Image
               fill
               src={images[0].url}
               alt='car photo'
-              className='object-cover rounded-md sm:rounded-xl transition-opacity opacity-0 duration-[2s]'
+              className='object-cover rounded-md sm:rounded-xl transition-opacity opacity-0 duration-[1s]'
               onLoad={(e) => e.currentTarget.classList.remove('opacity-0')}
               sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw'
               priority
@@ -48,10 +48,10 @@ export default function ImagesHeader({ images }: { images: ICarGallery[] }) {
                   index >= 2 ? 'block' : ''
                 }`}
               >
-                <div className='aspect-w-16 aspect-h-9 md:aspect-w-4 md:aspect-h-3'>
+                <div className='bg-img-placeholder aspect-w-16 aspect-h-9 md:aspect-w-4 md:aspect-h-3'>
                   <Image
                     fill
-                    className='object-cover w-full h-full rounded-md sm:rounded-xl transition-opacity opacity-0 duration-[2s]'
+                    className='object-cover w-full h-full rounded-md sm:rounded-xl transition-opacity opacity-0 duration-[1s]'
                     onLoad={(e) =>
                       e.currentTarget.classList.remove('opacity-0')
                     }

@@ -51,7 +51,7 @@ const OrdersPage = () => {
                   <h3>Car</h3>
                   <h3>Date</h3>
                   <h3>Status</h3>
-                  <h3>Sum</h3>
+                  <h3>Price</h3>
                 </div>
                 <div className='hidden md:block border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
                 <ul>
