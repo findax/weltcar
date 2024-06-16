@@ -6,14 +6,17 @@ import Filters from './Filters';
 import SortPanel from './SortPanel';
 import CarList from './CarList';
 import ErrorComponent from '@/components/ErrorComponent';
-import LoadingSpinner from '@/shared/LoadingSpinner';
 import SideMenuWrapper from '@/shared/SideMenuWrapper';
 import { getCarsList } from '@/api/cars';
 import { ICatalog, ICatalogQueryParams } from '@/types/catalog';
 import { getSearchParamsUrl, updateSearchParam } from '@/utils/catalog';
 import { usePathname, useSearchParams } from 'next/navigation';
 
-export default function Catalog() {
+export default function Catalog({
+  carListData,
+}: {
+  carListData: ICatalog | undefined;
+}) {
   const [isFirstLoading, setIsFirstLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -29,9 +32,7 @@ export default function Catalog() {
   const [checkedFiltersCount, setCheckedFiltersCount] = useState(0);
   const pathname = usePathname();
 
-  const [catalogData, setCatalogData] = useState<ICatalog | undefined>(
-    undefined
-  );
+  const [catalogData, setCatalogData] = useState(carListData);
 
   useEffect(() => {
     setIsMobile(window.innerWidth < 1024);
@@ -42,10 +43,11 @@ export default function Catalog() {
   }, []);
 
   useEffect(() => {
-    setIsFirstLoading(true);
+    carListData && setIsFirstLoading(false);
   }, []);
 
   useEffect(() => {
+    if (isFirstLoading) return;
     setIsLoading(true);
     const urlParams = getSearchParamsUrl();
     urlParams.delete('page');
@@ -57,10 +59,7 @@ export default function Catalog() {
           setIsError(true);
         }
       })
-      .finally(() => {
-        setIsLoading(false);
-        isFirstLoading && setIsFirstLoading(false);
-      });
+      .finally(() => setIsLoading(false));
   }, [currentPage, queryParams]);
 
   const handleSortChange = (id: string) => {
@@ -200,13 +199,7 @@ export default function Catalog() {
 
   const handleCloseFiltersMenu = () => setFiltersVisible(false);
 
-  return isFirstLoading ? (
-    <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
-      <div className='-mt-[76px]'>
-        <LoadingSpinner className='w-12' />
-      </div>
-    </div>
-  ) : isError ? (
+  return isError ? (
     <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
       <ErrorComponent />
     </div>

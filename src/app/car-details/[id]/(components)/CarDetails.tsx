@@ -9,7 +9,6 @@ import MobileFooterSticky from './MobileFooterSticky';
 import Modal from '@/shared/Modal';
 import ConfirmForm from './ConfirmForm';
 import { ICarDetails, ICarGallery } from '@/types/cardetails';
-import LoadingSpinner from '@/shared/LoadingSpinner';
 import { getUser } from '@/api/user';
 import Authorization from '@/components/authorization/Authorization';
 import Title from './Title';
@@ -19,7 +18,6 @@ export default function CarDetails({
 }: {
   carData: ICarDetails | undefined;
 }) {
-  const [isLoading, setIsLoading] = useState(true);
   const [carGallery, setCarGallery] = useState<ICarGallery[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalId, setModalId] = useState('');
@@ -31,7 +29,6 @@ export default function CarDetails({
         url: item.original,
       }));
       setCarGallery(modifiedPhotosArray);
-      setIsLoading(false);
     }
   }, []);
 
@@ -51,13 +48,7 @@ export default function CarDetails({
     setIsModalOpen(true);
   }
 
-  return isLoading ? (
-    <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
-      <div className='-mt-[76px]'>
-        <LoadingSpinner className='w-12' />
-      </div>
-    </div>
-  ) : (
+  return (
     <div className='CarDetailsPage'>
       <div className='container CarDetailsPage__content'>
         <div className={` nc-CarDetailsPage `}>

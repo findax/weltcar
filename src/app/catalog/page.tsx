@@ -1,8 +1,26 @@
+import api from '@/api/apiInstance';
+import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import LoadingSpinner from '@/shared/LoadingSpinner';
 import Catalog from './(components)/Catalog';
 
-export default function CatalogPage() {
+async function getCarsList() {
+  try {
+    const res = await api.post('/api/cars/list');
+    if (!res) return undefined;
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const revalidate = 300; // revalidate at most every 5 minutes
+
+export default async function CatalogPage() {
+  const carListData = await getCarsList();
+
+  if (!carListData) return notFound();
+
   return (
     <Suspense
       fallback={
@@ -13,7 +31,7 @@ export default function CatalogPage() {
         </div>
       }
     >
-      <Catalog />
+      <Catalog carListData={carListData} />
     </Suspense>
   );
 }
