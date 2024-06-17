@@ -1,5 +1,4 @@
 import { SocialType } from '@/shared/SocialsShare';
-import React, { FC } from 'react';
 
 export interface SocialsListProps {
   className?: string;
@@ -14,11 +13,11 @@ const socialsDemo: SocialType[] = [
   { name: 'Instagram', icon: 'lab la-instagram', href: '#' },
 ];
 
-const SocialsList: FC<SocialsListProps> = ({
+const SocialsList = ({
   className = '',
   itemClass = 'block',
   socials = socialsDemo,
-}) => {
+}: SocialsListProps) => {
   return (
     <nav
       className={`nc-SocialsList flex space-x-2.5 text-2xl text-neutral-600 dark:text-neutral-300 ${className}`}
@@ -27,7 +26,7 @@ const SocialsList: FC<SocialsListProps> = ({
       {socials.map((item, i) => (
         <a
           key={i}
-          className={`${itemClass}`}
+          className={itemClass}
           href={item.href}
           target='_blank'
           rel='noopener noreferrer'

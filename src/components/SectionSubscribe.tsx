@@ -3,7 +3,7 @@ import carImg from '@/images/car-2.webp';
 import SBS1img from '@/images/icons/message.webp';
 import SBS2img from '@/images/icons/bell.webp';
 import Badge from '@/shared/Badge';
-import SubscribeForm from './components/SubscribeForm';
+import SubscribeForm from '@/components/SubscribeForm';
 
 const Subscribe = ({ className = '' }: { className?: string }) => {
   return (
@@ -12,7 +12,7 @@ const Subscribe = ({ className = '' }: { className?: string }) => {
       data-nc-id='Subscribe'
     >
       <div className='flex-shrink-0 lg:w-1/2 lg:pr-16'>
-        <h2 className='font-semibold text-4xl'>Join Our Newsletter</h2>
+        <h2 className='mb-10 font-semibold text-4xl'>Join Our Newsletter</h2>
         {/* <span className='block mt-5 text-neutral-500 dark:text-neutral-400'>
           Read and share new perspectives on just about any topic. Everyone’s
           welcome.

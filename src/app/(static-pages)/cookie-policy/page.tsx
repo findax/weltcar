@@ -9,6 +9,12 @@ export const metadata: Metadata = {
 export default function CookiePolicyPage() {
   return (
     <div className='markdown-styles relative container my-12 xl:my-20'>
+      <Image
+        className='hidden md:block absolute inset-0 top-1/2 -translate-y-1/2 object-contain w-full max-w-7xl m-auto opacity-[0.08] -z-10'
+        src={bgImg}
+        alt='car background image'
+        priority
+      />
       <div className='max-w-3xl'>
         <h1>Cookie Policy</h1>
         <div className='w-14 border-b border-neutral-300 dark:border-neutral-700 mb-6 lg:mb-8'></div>
@@ -46,12 +52,6 @@ export default function CookiePolicyPage() {
           all websites you use, visit this Google page.
         </p>
       </div>
-      <Image
-        className='hidden md:block absolute inset-0 top-1/2 -translate-y-1/2 object-contain w-full max-w-7xl m-auto opacity-[0.08] -z-10'
-        src={bgImg}
-        alt='car background image'
-        priority
-      />
     </div>
   );
 }

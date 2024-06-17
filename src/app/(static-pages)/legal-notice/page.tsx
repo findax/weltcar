@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import Image from 'next/image';
 import bgImg from '@/images/bg-cars/bg-car-9.webp';
 
@@ -9,7 +10,14 @@ export const metadata: Metadata = {
 export default function CookiePolicyPage() {
   return (
     <div className='markdown-styles relative container my-12 xl:my-20'>
-      <div className='max-w-3xl'>
+      <Image
+        className='hidden md:block h-[46vh] sticky inset-0 top-1/2 -translate-y-1/2 object-contain w-full max-w-7xl m-auto opacity-[0.08] -z-10'
+        src={bgImg}
+        alt='car background image'
+        priority
+      />
+
+      <div className='md:-mt-[46vh]'>
         <h1>Legal Notice</h1>
         <div className='w-14 border-b border-neutral-300 dark:border-neutral-700 mb-6 lg:mb-8'></div>
         <p className='space-y-6 text-neutral-600 dark:text-neutral-300'>
@@ -21,8 +29,8 @@ export default function CookiePolicyPage() {
           Tax Number: 44/780/03655 <br /> <br />
           VAT ID No. DE300567500 <br />
           HRB 126671 <br /> <br />
-          Email: <a href='mailto:info@findax.eu'>info@findax.eu</a> <br />
-          Website: <a href='https://www.weltcar.de'>www.weltcar.de</a>
+          Email: <Link href='mailto:info@findax.eu'>info@findax.eu</Link> <br />
+          Website: <Link href='https://www.weltcar.de'>www.weltcar.de</Link>
         </p>
 
         <h2 className='font-semibold'>The Website</h2>
@@ -57,12 +65,6 @@ export default function CookiePolicyPage() {
           </p>
         </div>
       </div>
-      <Image
-        className='hidden md:block absolute inset-0 top-1/2 -translate-y-1/2 object-contain w-full max-w-7xl m-auto opacity-[0.08] -z-10'
-        src={bgImg}
-        alt='car background image'
-        priority
-      />
     </div>
   );
 }

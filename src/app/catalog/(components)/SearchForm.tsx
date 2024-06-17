@@ -44,7 +44,7 @@ export default function SearchForm({
           />
           <ButtonCircle
             type='submit'
-            className='absolute transform top-1/2 -translate-y-1/2 right-1.5'
+            className='absolute transform top-1/2 -translate-y-1/2 right-1'
             size='w-10 h-10'
           >
             <i className='las la-search text-xl'></i>

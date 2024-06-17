@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import Image from 'next/image';
 import bgImg from '@/images/bg-cars/bg-car-12.webp';
 
@@ -9,7 +10,14 @@ export const metadata: Metadata = {
 export default function CookiePolicyPage() {
   return (
     <div className='markdown-styles relative container my-12 xl:my-20'>
-      <div className='max-w-3xl'>
+      <Image
+        className='hidden md:block h-[40vh] sticky inset-0 top-1/2 -translate-y-1/2 object-contain w-full max-w-7xl m-auto opacity-[0.08] -z-10'
+        src={bgImg}
+        alt='car background image'
+        priority
+      />
+
+      <div className='md:-mt-[40vh]'>
         <h1>Privacy Policy</h1>
         <div className='w-14 border-b border-neutral-300 dark:border-neutral-700 mb-6 lg:mb-8'></div>
         <h2>General Information and Mandatory Notices</h2>
@@ -25,8 +33,9 @@ export default function CookiePolicyPage() {
             Tax Number: 44/780/03655 <br /> <br />
             VAT ID No. DE300567500 <br />
             HRB 126671 <br /> <br />
-            Email: <a href='mailto:info@findax.eu'>info@findax.eu</a> <br />
-            Website: <a href='https://www.weltcar.de'>www.weltcar.de</a>
+            Email: <Link href='mailto:info@findax.eu'>info@findax.eu</Link>
+            <br />
+            Website: <Link href='https://www.weltcar.de'>www.weltcar.de</Link>
           </p>
           <p>
             The responsible party, alone or together with others, decides on the
@@ -52,13 +61,13 @@ export default function CookiePolicyPage() {
           issues is the state data protection officer of the federal state in
           which our company is headquartered. The following link provides a list
           of data protection officers and their contact details:{' '}
-          <a
+          <Link
             href='https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html'
             target='_blank'
             rel='noopener'
           >
             https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html
-          </a>
+          </Link>
           .
         </p>
 
@@ -190,13 +199,13 @@ export default function CookiePolicyPage() {
           <p>
             For details on the handling of user data, please refer to YouTube's
             privacy policy at:{' '}
-            <a
+            <Link
               href='https://www.google.de/intl/de/policies/privacy'
               target='_blank'
               rel='noopener'
             >
               https://www.google.de/intl/de/policies/privacy
-            </a>
+            </Link>
             .
           </p>
         </div>
@@ -254,13 +263,13 @@ export default function CookiePolicyPage() {
           <p>
             For details on the handling of user data, please refer to Google's
             privacy policy at:{' '}
-            <a
+            <Link
               href='https://support.google.com/analytics/answer/6004245?hl=de'
               target='_blank'
               rel='noopener'
             >
               https://support.google.com/analytics/answer/6004245?hl=de
-            </a>
+            </Link>
             .
           </p>
         </div>
@@ -273,13 +282,6 @@ export default function CookiePolicyPage() {
           visit will be subject to the new privacy policy.
         </p>
       </div>
-
-      <Image
-        className='hidden md:block fixed inset-0 top-1/2 -translate-y-1/2 object-contain w-full max-w-7xl m-auto opacity-[0.08] -z-10'
-        src={bgImg}
-        alt='car background image'
-        priority
-      />
     </div>
   );
 }

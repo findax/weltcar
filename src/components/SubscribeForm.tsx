@@ -29,19 +29,19 @@ export default function SubscribeForm() {
       }}
     >
       {({ errors, touched }) => (
-        <Form className='mt-10 relative max-w-sm'>
+        <Form className='relative max-w-sm'>
           <FormikInput
             name='email'
             type='email'
             placeholder='example@mail.com'
             rounded='rounded-full'
-            sizeClass='h-12 px-5 py-3'
+            sizeClass='h-12 px-0 py-3 p-0'
             error={errors.email}
             touched={touched.email}
           />
           <ButtonCircle
             type='submit'
-            className='absolute transform top-1/2 -translate-y-1/2 right-1.5'
+            className='absolute transform top-1/2 -translate-y-1/2 right-1'
             size='w-10 h-10'
           >
             <i className='las la-arrow-right text-xl'></i>

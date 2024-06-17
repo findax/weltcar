@@ -5,7 +5,7 @@ import SectionStatistic from './(components)/SectionStatistic';
 import BackgroundSection from '@/components/BackgroundSection';
 import SectionOurTeam from './(components)/SectionOurTeam';
 import SectionClientSay from '@/components/SectionClientSay';
-import SectionSubscribe from '@/components/subscribe/SectionSubscribe';
+import SectionSubscribe from '@/components/SectionSubscribe';
 
 export const metadata: Metadata = {
   title: 'WeltCar - About us',
