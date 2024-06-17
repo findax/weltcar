@@ -4,6 +4,7 @@ import SocialsList from '@/shared/SocialsList';
 import FeedbackForm from './FeedbackForm';
 import Image from 'next/image';
 import bgImg from '@/images/bg-cars/bg-car-2.webp';
+import { WatsappIcon } from '@/shared/icons';
 
 export default function ContactHero() {
   return (
@@ -50,6 +51,20 @@ export default function ContactHero() {
             <Link
               className='inline-block mt-2 text-neutral-500 dark:text-neutral-400 hover:underline'
               href='tel:+4915902465256'
+            >
+              +49 1590 2465256
+            </Link>
+          </li>
+          <li>
+            <h3 className='uppercase font-semibold text-sm dark:text-neutral-200 tracking-wider'>
+              <WatsappIcon className='w-4 inline-block mr-1' />
+              MESSENGER
+            </h3>
+            <Link
+              className='inline-block mt-2 text-neutral-500 dark:text-neutral-400 hover:underline'
+              href='https://wa.me/&#x2B;4915902465256'
+              target='_blank'
+              rel='noreferrer noopener'
             >
               +49 1590 2465256
             </Link>
