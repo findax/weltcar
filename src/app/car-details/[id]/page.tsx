@@ -1,6 +1,11 @@
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import CarDetails from './(components)/CarDetails';
 import api from '@/api/apiInstance';
+
+export const metadata: Metadata = {
+  title: 'WeltCar - Car Details',
+};
 
 async function getCarDetails(id: string) {
   try {

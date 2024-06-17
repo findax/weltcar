@@ -22,7 +22,11 @@ export const sendFeedback = async ({
         resolve(res);
       })
       .catch((err) => {
-        toast.error(err.response.data.message);
+        if (err.response?.data.message) {
+          toast.error(err.response.data.message);
+        } else {
+          toast.error('Something went wrong!');
+        }
         resolve(false);
       });
   });

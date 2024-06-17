@@ -26,7 +26,11 @@ export const singIn = async ({
         }
       })
       .catch((err) => {
-        toast.error(err.response.data.message);
+        if (err.response?.data.message) {
+          toast.error(err.response.data.message);
+        } else {
+          toast.error('Something went wrong!');
+        }
         resolve(false);
       });
   });
@@ -48,7 +52,11 @@ export const singUp = async ({
       .post('/jwt/register', { name, email, phone, password })
       .then((res) => resolve(res))
       .catch((err) => {
-        toast.error(err.response.data.message);
+        if (err.response?.data.message) {
+          toast.error(err.response.data.message);
+        } else {
+          toast.error('Something went wrong!');
+        }
         resolve(false);
       });
   });
@@ -64,7 +72,11 @@ export const activateAccount = async ({ code }: { code: string }) => {
         window.location.reload();
       })
       .catch((err) => {
-        toast.error(err.response.data.message);
+        if (err.response?.data.message) {
+          toast.error(err.response.data.message);
+        } else {
+          toast.error('Something went wrong!');
+        }
         resolve(false);
       });
   });
@@ -76,7 +88,11 @@ export const resetPassword = async ({ email }: { email: string }) => {
       .post('/api/password/reset', { email })
       .then((res) => resolve(res))
       .catch((err) => {
-        toast.error(err.response.data.message);
+        if (err.response?.data.message) {
+          toast.error(err.response.data.message);
+        } else {
+          toast.error('Something went wrong!');
+        }
         resolve(false);
       });
   });
@@ -98,7 +114,11 @@ export const restorePassword = async ({
         window.location.reload();
       })
       .catch((err) => {
-        toast.error(err.response.data.message);
+        if (err.response?.data.message) {
+          toast.error(err.response.data.message);
+        } else {
+          toast.error('Something went wrong!');
+        }
         resolve(false);
       });
   });

@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import BgGlassmorphism from '@/components/BgGlassmorphism';
 import SectionHero from './(components)/SectionHero';
 import SectionStatistic from './(components)/SectionStatistic';
@@ -5,6 +6,10 @@ import BackgroundSection from '@/components/BackgroundSection';
 import SectionOurTeam from './(components)/SectionOurTeam';
 import SectionClientSay from '@/components/SectionClientSay';
 import SectionSubscribe from '@/components/subscribe/SectionSubscribe';
+
+export const metadata: Metadata = {
+  title: 'WeltCar - About us',
+};
 
 const PageAbout = () => {
   return (

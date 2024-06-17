@@ -1,8 +1,13 @@
+import { Metadata } from 'next';
 import api from '@/api/apiInstance';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import LoadingSpinner from '@/shared/LoadingSpinner';
 import Catalog from './(components)/Catalog';
+
+export const metadata: Metadata = {
+  title: 'WeltCar - Catalog',
+};
 
 async function getCarsList() {
   try {

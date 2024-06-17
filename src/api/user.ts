@@ -95,7 +95,11 @@ export const updateUser = async ({
         resolve(res);
       })
       .catch((err) => {
-        toast.error(err.response.data.message);
+        if (err.response?.data.message) {
+          toast.error(err.response.data.message);
+        } else {
+          toast.error('Something went wrong!');
+        }
         resolve(false);
       });
   });
@@ -114,7 +118,11 @@ export const updateUserPassword = async ({
         resolve(res);
       })
       .catch((err) => {
-        toast.error(err.response.data.message);
+        if (err.response?.data.message) {
+          toast.error(err.response.data.message);
+        } else {
+          toast.error('Something went wrong!');
+        }
         resolve(false);
       });
   });
@@ -126,7 +134,11 @@ export const getUserOrders = async () => {
       .get('/api/user/orders')
       .then((res) => resolve(res.data))
       .catch((err) => {
-        toast.error(err.response.data.message);
+        if (err.response?.data.message) {
+          toast.error(err.response.data.message);
+        } else {
+          toast.error('Something went wrong!');
+        }
         resolve(false);
       });
   });
@@ -141,7 +153,11 @@ export const createOrder = async (carId: string) => {
         toast.success('Your order has been created successfully!');
       })
       .catch((err) => {
-        toast.error(err.response.data.message);
+        if (err.response?.data.message) {
+          toast.error(err.response.data.message);
+        } else {
+          toast.error('Something went wrong!');
+        }
         resolve(false);
       });
   });

@@ -1,12 +1,17 @@
+import { Metadata } from 'next';
 import Image from 'next/image';
 import bgImg from '@/images/bg-cars/bg-car-8.webp';
 
+export const metadata: Metadata = {
+  title: 'Cookie Policy',
+};
+
 export default function CookiePolicyPage() {
   return (
-    <div className='markdown-style relative container my-12 xl:my-20 space-y-6 xl:space-y-8'>
-      <h1 className='text-3xl font-semibold'>Cookie Policy</h1>
-      <div className='w-14 border-b border-neutral-300 dark:border-neutral-700'></div>
-      <div className='max-w-3xl space-y-6 xl:space-y-8'>
+    <div className='markdown-styles relative container my-12 xl:my-20'>
+      <div className='max-w-3xl'>
+        <h1>Cookie Policy</h1>
+        <div className='w-14 border-b border-neutral-300 dark:border-neutral-700 mb-6 lg:mb-8'></div>
         <p className='text-neutral-600 dark:text-neutral-300'>
           We may collect information about your computer, including your IP
           address, operating system and browser type, for system administration

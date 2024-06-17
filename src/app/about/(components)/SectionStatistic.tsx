@@ -7,7 +7,7 @@ export interface Statistic {
   subHeading: string;
 }
 
-const FOUNDER_DEMO: Statistic[] = [
+const STATISTIC: Statistic[] = [
   {
     id: '1',
     heading: 'Over 500 Premium Vehicles Sold Annually',
@@ -42,7 +42,7 @@ const SectionStatistic: FC<SectionStatisticProps> = ({ className = '' }) => {
         Fast Facts About WeltCar
       </Heading>
       <div className='grid md:grid-cols-2 gap-6 lg:grid-cols-3 xl:gap-8'>
-        {FOUNDER_DEMO.map((item) => (
+        {STATISTIC.map((item) => (
           <div
             key={item.id}
             className='flex flex-col p-6 bg-neutral-50 dark:bg-neutral-800 rounded-2xl dark:border-neutral-800'

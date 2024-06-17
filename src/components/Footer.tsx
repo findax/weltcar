@@ -101,7 +101,7 @@ const Footer: React.FC = () => {
             rel='noreferrer noopener'
           >
             <svg
-              xmlns='http://www.w3.org/2000/svg'
+              xmlns='https://www.w3.org/2000/svg'
               viewBox='0 0 175.216 175.552'
               className='w-6 h-6 mr-3'
             >

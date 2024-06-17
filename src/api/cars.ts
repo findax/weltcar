@@ -15,7 +15,11 @@ export const getCarsList = async (
       .post(`/api/cars/list?page=${page}&perPage=${perPage}`, queryParams)
       .then((res) => resolve(res.data))
       .catch((err) => {
-        toast.error(err.response.data.message);
+        if (err.response?.data.message) {
+          toast.error(err.response.data.message);
+        } else {
+          toast.error('Something went wrong!');
+        }
         resolve(false);
       });
   });

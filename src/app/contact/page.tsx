@@ -1,6 +1,11 @@
+import { Metadata } from 'next';
 import ContactHero from './(components)/ContactHero';
 import SectionSubscribe from '@/components/subscribe/SectionSubscribe';
 import BackgroundSection from '@/components/BackgroundSection';
+
+export const metadata: Metadata = {
+  title: 'WeltCar - Contact us',
+};
 
 const PageContact = () => {
   return (
