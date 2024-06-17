@@ -96,7 +96,7 @@ const Footer: React.FC = () => {
         <div className='flex items-center justify-start'>
           <a
             className='flex items-center text-xs sm:text-base lg:text-lg border border-neutral-200 dark:border-neutral-700 rounded-xl py-3 px-4 hover:bg-neutral-100 dark:hover:bg-neutral-800'
-            href='https://wa.me/&#x2B;491747466665'
+            href='https://wa.me/&#x2B;4915902465256'
             target='_blank'
             rel='noreferrer noopener'
           >

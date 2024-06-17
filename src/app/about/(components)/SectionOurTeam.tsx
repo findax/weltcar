@@ -7,35 +7,35 @@ import teamImg3 from '@/images/team/t3.webp';
 import teamImg4 from '@/images/team/t4.webp';
 import teamImg5 from '@/images/team/t5.webp';
 
-const TEAM_DEMO = [
+const TEAM = [
   {
     id: '1',
-    name: `Niamh O'Shea`,
-    job: 'Co-founder and Chief Executive',
+    name: 'Oleg',
+    job: 'Founder, Director',
     avatar: teamImg1,
   },
   {
     id: '2',
-    name: `Dara Frazier`,
-    job: 'Co-founder and Chief Executive',
+    name: 'Nataliia',
+    job: 'Founder, Director',
     avatar: teamImg2,
   },
   {
     id: '3',
-    name: `Danien Jame`,
-    job: 'Co-Founder, Chief Strategy Officer',
+    name: 'Sergey',
+    job: 'Director, Partner',
     avatar: teamImg3,
   },
   {
     id: '4',
-    name: `Danien Jame`,
-    job: 'Co-Founder, Chief Strategy Officer',
+    name: 'Alexander',
+    job: 'Purchasing Manager',
     avatar: teamImg4,
   },
   {
     id: '5',
-    name: `Danien Jame`,
-    job: 'Co-Founder, Chief Strategy Officer',
+    name: 'Agassi',
+    job: 'Administrative Manager',
     avatar: teamImg5,
   },
 ];
@@ -47,7 +47,7 @@ const SectionOurTeam = () => {
         Our Team
       </Heading>
       <div className='flex flex-wrap justify-center gap-10 sm:gap-4'>
-        {TEAM_DEMO.map((item) => (
+        {TEAM.map((item) => (
           <div
             key={item.id}
             className='w-full sm:w-[calc(33%-9px)] lg:w-[calc(20%-13px)]'

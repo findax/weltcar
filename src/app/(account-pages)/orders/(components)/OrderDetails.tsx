@@ -41,7 +41,7 @@ export default function OrderDetails({ order }: { order: IOrderDetails }) {
             </span>
           </div>
           <Image
-            src={order.car.photos[0].thumb || ''}
+            src={order.car.photos[0]?.thumb || ''}
             alt='car image'
             className={`transition-opacity opacity-0 duration-[500ms] group-hover:opacity-80`}
             onLoad={(e) => e.currentTarget.classList.remove('opacity-0')}
