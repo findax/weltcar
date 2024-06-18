@@ -1,11 +1,9 @@
 'use client';
 
 import { toast } from 'react-toastify';
-import { IAuth } from '@/types/user';
 import api from './apiInstance';
-
-export const setAuth = (data: IAuth) =>
-  sessionStorage.setItem('auth', JSON.stringify(data));
+import { setAuth } from './auth';
+import { IAuth } from '@/types/user';
 
 export const getAuth = () => {
   if (typeof sessionStorage !== 'undefined') {
@@ -31,9 +29,9 @@ export const getUser = () => {
 
 api.interceptors.request.use(
   (config) => {
-    // checkIsTokenValid();
     const auth = getAuth();
     if (auth) {
+      checkAndRefreshToken(auth);
       config.headers.Authorization = `Bearer ${auth.token}`;
     }
     return config;
@@ -43,30 +41,32 @@ api.interceptors.request.use(
   }
 );
 
-// const checkIsTokenValid = () => {
-//   const daysBeforeExpireCheck = 5;
-//   const auth = getAuth();
-//   if (!auth) return true;
-//   const dateExpired = auth.expires;
-//   const isValid =
-//     new Date(dateExpired) >=
-//     new Date(new Date().getDate() - daysBeforeExpireCheck);
-//   console.log(isValid);
+const checkAndRefreshToken = async (auth: IAuth) => {
+  const daysBeforeExpireCheck = process.env.DAYS_BEFORE_TOKEN_EXPIRE_CHECK;
+  const dateExpired = auth.expires;
+  const isValid =
+    new Date(dateExpired) >=
+    new Date(new Date().getDate() - Number(daysBeforeExpireCheck));
 
-//   if (isValid) {
-//     try {
-//       api.post('/jwt/refresh').then((res) => {
-//         console.log(res);
-//       });
-//       // const newAccessToken = response.data.accessToken;
-
-//       // originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-//     } catch (error) {
-//       logout();
-//     }
-//   }
-//   return true;
-// };
+  if (!isValid) {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/jwt/refresh`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${auth.token}`,
+          },
+        }
+      );
+      const responseData = await response.json();
+      setAuth(responseData.data);
+    } catch (error) {
+      logout();
+    }
+  }
+};
 
 export const updateUser = async ({
   name,

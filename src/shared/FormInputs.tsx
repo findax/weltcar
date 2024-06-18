@@ -11,6 +11,10 @@ import {
 
 const commonClass =
   'block w-full border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl text-sm font-normal h-11 px-4 py-3';
+const commonTitleClass =
+  'inline-block text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-1';
+const commonErrorClass =
+  'absolute top-full flex items-center text-left text-xs text-red-500 py-2';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   sizeClass?: string;
@@ -112,11 +116,7 @@ export const FormikInput = ({
 }: FormikInputProps) => {
   return (
     <fieldset className='relative'>
-      {title && (
-        <span className='inline-block text-sm text-neutral-800 dark:text-neutral-200 mb-1'>
-          {title}
-        </span>
-      )}
+      {title && <span className={commonTitleClass}>{title}</span>}
       <Field
         name={name}
         className={`${commonClass} ${rounded} ${sizeClass}`}
@@ -124,7 +124,7 @@ export const FormikInput = ({
         {...args}
       />
       {error && touched ? (
-        <div className='absolute top-full flex items-center text-left text-xs text-red-500 py-2'>
+        <div className={commonErrorClass}>
           <InformationCircleIcon className='w-4 inline-block mr-1' />
           {error}
         </div>
@@ -146,9 +146,7 @@ export const FormikPhoneNumberInput = ({
 }: FormikPhoneNumberInputProps) => {
   return (
     <fieldset className='relative'>
-      <span className='inline-block text-sm text-neutral-800 dark:text-neutral-200 mb-1'>
-        {title}
-      </span>
+      <span className={commonTitleClass}>{title}</span>
       <Field name='phone' type='tel'>
         {({ field }: any) => (
           <ReactInputMask
@@ -161,7 +159,7 @@ export const FormikPhoneNumberInput = ({
         )}
       </Field>
       {error && touched ? (
-        <div className='absolute top-full flex items-center text-left text-xs text-red-500 py-2'>
+        <div className={commonErrorClass}>
           <InformationCircleIcon className='w-4 inline-block mr-1' />
           {error}
         </div>
@@ -192,9 +190,7 @@ export const FormikPasswordInput = ({
 
   return (
     <fieldset className='relative'>
-      <span className='inline-block text-sm text-neutral-800 dark:text-neutral-200 mb-1'>
-        {title}
-      </span>
+      <span className={commonTitleClass}>{title}</span>
       <div className='relative'>
         <Field
           name={name}
@@ -215,7 +211,7 @@ export const FormikPasswordInput = ({
         </button>
       </div>
       {error && touched ? (
-        <div className='absolute top-full flex items-center text-left text-xs text-red-500 py-2'>
+        <div className={commonErrorClass}>
           <InformationCircleIcon className='w-4 inline-block mr-1' />
           <span>{error}</span>
         </div>
@@ -256,7 +252,7 @@ export const FormikCheckbox = ({
         </span>
       </label>
       {error && touched ? (
-        <div className='absolute top-full flex items-center text-left text-xs text-red-500 py-2'>
+        <div className={commonErrorClass}>
           <InformationCircleIcon className='w-4 inline-block mr-1' />
           {error}
         </div>
@@ -286,11 +282,7 @@ export const FormikTextarea = ({
 }: FormikTextareaProps) => {
   return (
     <fieldset className='relative'>
-      {title && (
-        <span className='inline-block text-sm text-neutral-800 dark:text-neutral-200 mb-1'>
-          {title}
-        </span>
-      )}
+      {title && <span className={commonTitleClass}>{title}</span>}
       <Field
         as='textarea'
         name={name}
@@ -299,7 +291,7 @@ export const FormikTextarea = ({
         {...args}
       />
       {error && touched ? (
-        <div className='absolute top-full flex items-center text-left text-xs text-red-500 py-2'>
+        <div className={commonErrorClass}>
           <InformationCircleIcon className='w-4 inline-block mr-1' />
           {error}
         </div>

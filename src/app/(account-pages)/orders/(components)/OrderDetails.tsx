@@ -42,7 +42,7 @@ export default function OrderDetails({ order }: { order: IOrderDetails }) {
           </div>
           <Image
             src={order.car.photos[0]?.thumb || ''}
-            alt='car image'
+            alt={order.car.brand + ' ' + order.car.model}
             className={`transition-opacity opacity-0 duration-[500ms] group-hover:opacity-80`}
             onLoad={(e) => e.currentTarget.classList.remove('opacity-0')}
             height={100}

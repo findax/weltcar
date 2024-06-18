@@ -2,7 +2,10 @@
 
 import { toast } from 'react-toastify';
 import api from './apiInstance';
-import { setAuth } from '@/api/user';
+import { IAuth } from '@/types/user';
+
+export const setAuth = (data: IAuth) =>
+  sessionStorage.setItem('auth', JSON.stringify(data));
 
 export const singIn = async ({
   email,
