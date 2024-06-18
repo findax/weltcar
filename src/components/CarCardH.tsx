@@ -2,10 +2,11 @@ import BtnLikeIcon from '@/components/BtnLikeIcon';
 import SaleOffBadge from '@/components/SaleOffBadge';
 import Badge from '@/shared/Badge';
 import CardSlider from '@/components/CardSlider';
-import Link from 'next/link';
+import TooltipComponent from '@/shared/TooltipComponent';
 import { ButtonPrimary } from '@/shared/Buttons';
 import numberWithComma from '@/utils/numberWithComma';
 import { ICar } from '@/types/catalog';
+import Link from 'next/link';
 
 const CarCardH = ({
   className = '',
@@ -46,10 +47,7 @@ const CarCardH = ({
           />
         )}
       </div>
-      <Link
-        href={`/car-details/${id}`}
-        className='w-[45%] lg:w-[50%] xl:w-[45%] 2xl:w-[40%] flex justify-between flex-col p-5 space-y-4'
-      >
+      <div className='w-[45%] lg:w-[50%] xl:w-[45%] 2xl:w-[40%] flex justify-between flex-col p-5 space-y-4'>
         <div className='space-y-2'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center space-x-2'>
@@ -99,23 +97,33 @@ const CarCardH = ({
           </div> */}
         </div>
 
-        <div className='space-y-2 py-3'>
-          <div className='flex items-center'>
-            <span className=''>exterior color:</span>
+        <div className='py-3 space-y-2'>
+          <h4 className='flex items-center'>
+            exterior&nbsp;color:&nbsp;
             <span
               className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500'
               style={{ backgroundColor: `${outer_color_hex}` }}
-            ></span>
-            <span className=''> - {outer_color_name}</span>
-          </div>
-          <div className='flex items-center'>
-            <span className=''>interior color:</span>
+              data-tooltip-id={`${id}-exterior-color`}
+            >
+              <TooltipComponent
+                id={`${id}-exterior-color`}
+                content={outer_color_name}
+              />
+            </span>
+          </h4>
+          <h4 className='flex items-center'>
+            interior&nbsp;color:&nbsp;
             <span
               className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500'
               style={{ backgroundColor: `${inner_color_hex}` }}
-            ></span>
-            <span className=''> - {inner_color_name}</span>
-          </div>
+              data-tooltip-id={`${id}-interior-color`}
+            >
+              <TooltipComponent
+                id={`${id}-interior-color`}
+                content={inner_color_name}
+              />
+            </span>
+          </h4>
         </div>
 
         <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
@@ -123,9 +131,11 @@ const CarCardH = ({
           <span className='text-2xl xl:text-3xl font-semibold text-primary-400'>
             {numberWithComma(price)} €
           </span>
-          <ButtonPrimary>See more</ButtonPrimary>
+          <Link href={`/car-details/${id}`}>
+            <ButtonPrimary>See more</ButtonPrimary>
+          </Link>
         </div>
-      </Link>
+      </div>
     </div>
   );
 };

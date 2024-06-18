@@ -10,7 +10,7 @@ export default function CookiePolicyPage() {
   return (
     <div className='markdown-styles relative container my-12 xl:my-20'>
       <Image
-        className='hidden md:block absolute inset-0 top-1/2 -translate-y-1/2 object-contain w-full max-w-7xl m-auto opacity-[0.08] -z-10'
+        className='hidden md:block absolute inset-0 top-1/2 -translate-y-1/2 object-contain w-full max-w-7xl m-auto opacity-[0.09] dark:opacity-[0.12] -z-10'
         src={bgImg}
         alt='car background image'
         priority

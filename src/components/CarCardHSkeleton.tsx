@@ -17,20 +17,14 @@ export default function CarCardHSkeleton() {
                 <div className='h-8 bg-neutral-300 dark:bg-neutral-700 rounded'></div>
                 <div className='h-5 w-2/5 bg-neutral-300 dark:bg-neutral-700 rounded'></div>
               </div>
-              <div className='space-y-2.5 py-3'>
-                <div className='flex items-center justify-between'>
-                  <div className='h-5 w-2/5 bg-neutral-300 dark:bg-neutral-700 rounded col-span-1'></div>
-                  <div className='h-5 w-2/5 bg-neutral-300 dark:bg-neutral-700 rounded col-span-2'></div>
-                </div>
-                <div className='flex items-center justify-between'>
-                  <div className='h-5 w-2/5 bg-neutral-300 dark:bg-neutral-700 rounded col-span-1'></div>
-                  <div className='h-5 w-2/5 bg-neutral-300 dark:bg-neutral-700 rounded col-span-2'></div>
-                </div>
+              <div className='space-y-2 py-3'>
+                <div className='h-5 w-2/5 bg-neutral-300 dark:bg-neutral-700 rounded'></div>
+                <div className='h-5 w-2/5 bg-neutral-300 dark:bg-neutral-700 rounded'></div>
               </div>
               <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
               <div className='flex items-center justify-between pt-1'>
-                <div className='h-10 w-1/3 bg-neutral-300 dark:bg-neutral-700 rounded col-span-1'></div>
-                <div className='h-11 w-2/5 bg-neutral-300 dark:bg-neutral-700 rounded-full col-span-1'></div>
+                <div className='h-10 w-1/3 bg-neutral-300 dark:bg-neutral-700 rounded'></div>
+                <div className='h-11 w-2/5 bg-neutral-300 dark:bg-neutral-700 rounded-full'></div>
               </div>
             </div>
           </div>
