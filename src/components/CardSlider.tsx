@@ -65,69 +65,74 @@ export default function CardSlider({
         className={`${loaded ? '' : 'bg-img-placeholder'} relative group/cardSlider w-full h-full flex items-center justify-center overflow-hidden ${className}`}
         {...handlers}
       >
-        <AnimatePresence initial={false} custom={direction}>
-          <motion.div
-            key={index}
-            custom={direction}
-            variants={variants(340, 1)}
-            initial='enter'
-            animate='center'
-            exit='exit'
-            className='absolute inset-0'
-          >
-            <Image
-              src={currentImage}
-              fill
-              alt='car image'
-              className={`object-cover transition-opacity opacity-0 duration-[500ms] ${imageClass}`}
-              onLoad={(e) => {
-                setLoaded(true), e.currentTarget.classList.remove('opacity-0');
-              }}
-              onError={() => setLoaded(false)}
-              sizes='(max-width: 1025px) 100vw, 300px'
-            />
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Buttons + bottom nav bar */}
-        {loaded && navigation && (
+        {currentImage && (
           <>
-            <div className='opacity-0 group-hover/cardSlider:opacity-100 transition-opacity '>
-              {index > 0 && (
-                <button
-                  className='absolute w-9 h-9 left-3 top-[calc(50%-16px)] bg-white/80 dark:bg-neutral-900/90 border border-neutral-200 dark:border-neutral-600 dark:hover:border-neutral-500 rounded-full flex items-center justify-center hover:border-neutral-300 focus:outline-none'
-                  style={{ transform: 'translate3d(0, 0, 0)' }}
-                  onClick={() => changePhotoId(index - 1)}
-                >
-                  <ChevronLeftIcon className='w-5 mr-0.5' />
-                </button>
-              )}
-              {index + 1 < images.length && (
-                <button
-                  className='absolute w-9 h-9 right-3 top-[calc(50%-16px)] bg-white/80 dark:bg-neutral-900/90 border border-neutral-200 dark:border-neutral-600 dark:hover:border-neutral-500 rounded-full flex items-center justify-center hover:border-neutral-300 focus:outline-none'
-                  style={{ transform: 'translate3d(0, 0, 0)' }}
-                  onClick={() => changePhotoId(index + 1)}
-                >
-                  <ChevronRightIcon className='w-5 ml-0.5' />
-                </button>
-              )}
-            </div>
+            <AnimatePresence initial={false} custom={direction}>
+              <motion.div
+                key={index}
+                custom={direction}
+                variants={variants(340, 1)}
+                initial='enter'
+                animate='center'
+                exit='exit'
+                className='absolute inset-0'
+              >
+                <Image
+                  src={currentImage}
+                  fill
+                  alt='car image'
+                  className={`object-cover transition-opacity opacity-0 duration-[500ms] ${imageClass}`}
+                  onLoad={(e) => {
+                    setLoaded(true),
+                      e.currentTarget.classList.remove('opacity-0');
+                  }}
+                  onError={() => setLoaded(false)}
+                  sizes='(max-width: 1025px) 100vw, 300px'
+                />
+              </motion.div>
+            </AnimatePresence>
 
-            <div className='absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-neutral-900 opacity-50'></div>
-            <div className='flex items-center justify-center absolute bottom-2 left-1/2 transform -translate-x-1/2 space-x-1.5'>
-              {images.length > 1 &&
-                images
-                  .filter((_, i) => i < 5)
-                  .map((_, i) => (
+            {/* Buttons + bottom nav bar */}
+            {loaded && navigation && (
+              <>
+                <div className='opacity-0 group-hover/cardSlider:opacity-100 transition-opacity '>
+                  {index > 0 && (
                     <button
-                      className={`w-1.5 h-1.5 rounded-full ${
-                        i === index ? 'bg-white' : 'bg-white/60 '
-                      }`}
-                      onClick={() => changePhotoId(i)}
-                      key={i}
-                    />
-                  ))}
-            </div>
+                      className='absolute w-9 h-9 left-3 top-[calc(50%-16px)] bg-white/80 dark:bg-neutral-900/90 border border-neutral-200 dark:border-neutral-600 dark:hover:border-neutral-500 rounded-full flex items-center justify-center hover:border-neutral-300 focus:outline-none'
+                      style={{ transform: 'translate3d(0, 0, 0)' }}
+                      onClick={() => changePhotoId(index - 1)}
+                    >
+                      <ChevronLeftIcon className='w-5 mr-0.5' />
+                    </button>
+                  )}
+                  {index + 1 < images.length && (
+                    <button
+                      className='absolute w-9 h-9 right-3 top-[calc(50%-16px)] bg-white/80 dark:bg-neutral-900/90 border border-neutral-200 dark:border-neutral-600 dark:hover:border-neutral-500 rounded-full flex items-center justify-center hover:border-neutral-300 focus:outline-none'
+                      style={{ transform: 'translate3d(0, 0, 0)' }}
+                      onClick={() => changePhotoId(index + 1)}
+                    >
+                      <ChevronRightIcon className='w-5 ml-0.5' />
+                    </button>
+                  )}
+                </div>
+
+                <div className='absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-neutral-900 opacity-50'></div>
+                <div className='flex items-center justify-center absolute bottom-2 left-1/2 transform -translate-x-1/2 space-x-1.5'>
+                  {images.length > 1 &&
+                    images
+                      .filter((_, i) => i < 5)
+                      .map((_, i) => (
+                        <button
+                          className={`w-1.5 h-1.5 rounded-full ${
+                            i === index ? 'bg-white' : 'bg-white/60 '
+                          }`}
+                          onClick={() => changePhotoId(i)}
+                          key={i}
+                        />
+                      ))}
+                </div>
+              </>
+            )}
           </>
         )}
       </div>

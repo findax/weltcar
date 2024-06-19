@@ -8,6 +8,7 @@ import {
   EyeIcon,
   InformationCircleIcon,
 } from '@heroicons/react/24/outline';
+import TooltipComponent from './TooltipComponent';
 
 const commonClass =
   'block w-full border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl text-sm font-normal h-11 px-4 py-3';
@@ -48,42 +49,60 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 );
 
 interface CheckboxProps {
+  className?: string;
   filterCategory: string;
   id: number | string;
   label?: string;
-  className?: string;
   name: string;
+  color?: string;
   defaultChecked?: boolean;
   onChange?: (name: string, id: number | string) => void;
 }
 
 export const Checkbox = ({
+  className = '',
   filterCategory,
   id,
   label = '',
   name,
-  className = '',
+  color,
   defaultChecked,
   onChange,
 }: CheckboxProps) => {
+  console.log(color);
+
   return (
     <label
       htmlFor={`${filterCategory}-${id.toString()}`}
-      className={`flex items-center text-sm sm:text-base ${className}`}
+      className={`flex items-center text-sm sm:text-base cursor-pointer overflow-hidden ${className}`}
     >
       <input
         id={`${filterCategory}-${id.toString()}`}
         value={id.toString()}
         name={name}
         type='checkbox'
-        className='focus:ring-action-primary h-7 w-7 text-primary-500 border-primary rounded-full border-neutral-500 bg-white dark:bg-neutral-700  dark:checked:bg-primary-500 focus:ring-primary-500 cursor-pointer'
+        className='mr-3.5 h-7 w-7 text-primary-500 border-primary rounded-full border-neutral-500 bg-white dark:bg-neutral-700  dark:checked:bg-primary-500 cursor-pointer'
         defaultChecked={defaultChecked}
         onChange={(e) => onChange && onChange(filterCategory, e.target.value)}
       />
       {label && (
-        <span className='ml-3.5 text-neutral-900 hover:text-neutral-400 dark:text-neutral-100 dark:hover:text-neutral-400 cursor-pointer'>
-          {label}
-        </span>
+        <>
+          {color && (
+            <span
+              className='w-6 h-6 mr-2 rounded-full inline-block border border-neutral-500 flex-shrink-0'
+              style={{ backgroundColor: `${color}` }}
+              data-tooltip-id={`${filterCategory}-${id.toString()}`}
+            >
+              <TooltipComponent
+                id={`${filterCategory}-${id.toString()}`}
+                content={label}
+              />
+            </span>
+          )}
+          <span className='mr-4 whitespace-nowrap overflow-hidden text-ellipsis text-neutral-900 hover:text-neutral-400 dark:text-neutral-100 dark:hover:text-neutral-400'>
+            {label}
+          </span>
+        </>
       )}
     </label>
   );
@@ -96,6 +115,7 @@ interface FormikInputProps {
   name: string;
   type?: string;
   placeholder?: string;
+  value?: string;
   title?: string;
   error?: string;
   touched?: boolean;
@@ -106,6 +126,7 @@ interface FormikInputProps {
 
 export const FormikInput = ({
   name,
+  value,
   title,
   error,
   touched,
@@ -118,8 +139,9 @@ export const FormikInput = ({
     <fieldset className='relative'>
       {title && <span className={commonTitleClass}>{title}</span>}
       <Field
-        name={name}
         className={`${commonClass} ${rounded} ${sizeClass}`}
+        name={name}
+        value={value}
         disabled={disabled}
         {...args}
       />
@@ -244,7 +266,7 @@ export const FormikCheckbox = ({
           id={name}
           name={name}
           type='checkbox'
-          className={`focus:ring-action-primary h-7 w-7 text-primary-500 border-primary border-neutral-500 bg-white dark:bg-neutral-700  dark:checked:bg-primary-500 focus:ring-primary-500 cursor-pointer ${className}`}
+          className={`h-7 w-7 text-primary-500 border-primary border-neutral-500 bg-white dark:bg-neutral-700  dark:checked:bg-primary-500 cursor-pointer ${className}`}
           defaultChecked={defaultChecked}
         />
         <span className='ml-3.5 text-neutral-900 hover:text-neutral-400 dark:text-neutral-100 dark:hover:text-neutral-400'>

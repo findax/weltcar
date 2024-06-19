@@ -101,7 +101,7 @@ const CarCard = ({
           <h4 className='flex items-center'>
             exterior&nbsp;color:&nbsp;
             <span
-              className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500'
+              className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 flex-shrink-0'
               style={{ backgroundColor: `${outer_color_hex}` }}
               data-tooltip-id={`${id}-exterior-color`}
             >
@@ -114,7 +114,7 @@ const CarCard = ({
           <h4 className='flex items-center'>
             interior&nbsp;color:&nbsp;
             <span
-              className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500'
+              className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 flex-shrink-0'
               style={{ backgroundColor: `${inner_color_hex}` }}
               data-tooltip-id={`${id}-interior-color`}
             >

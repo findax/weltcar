@@ -12,7 +12,7 @@ const Filters = ({
   filtersData,
   closeFilters,
   checkedFiltersCount,
-  handleSearchChange,
+  handleSearchQuery,
   handleFilterChange,
   handleRangeFilterChange,
   resetRangeFilter,
@@ -21,7 +21,7 @@ const Filters = ({
   filtersData: IFilters[];
   closeFilters: (value: boolean) => void;
   checkedFiltersCount: number;
-  handleSearchChange: (value: string) => void;
+  handleSearchQuery: (value: string) => void;
   handleFilterChange: (filterCategory: string, id: number | string) => void;
   handleRangeFilterChange: (
     filterCategory: string,
@@ -32,9 +32,17 @@ const Filters = ({
   resetQueryParams: () => void;
 }) => {
   return (
-    <div className='overflow-y-auto h-screen lg:visible lg:h-auto p-4 pb-24 lg:py-6 lg:px-8 lg:mb-24 bg-white dark:bg-neutral-900 lg:rounded-2xl border border-neutral-200 dark:border-neutral-700'>
-      <div className='flex justify-between items-center'>
-        <h4 className='flex justify-between items-center mb-6 text-2xl font-semibold'>
+    <div className='max-lg:overflow-y-auto h-screen lg:visible lg:h-auto p-4 pb-24 lg:py-6 lg:px-8 lg:mb-24 bg-white dark:bg-neutral-900 lg:rounded-2xl border border-neutral-200 dark:border-neutral-700'>
+      <button
+        onClick={() => closeFilters(false)}
+        className='block p-3 ml-auto mb-2 -mt-3 -mr-4 rounded-full lg:hidden'
+      >
+        <XMarkIcon className='w-6 h-6' />
+      </button>
+      <SearchForm handleSearchChange={handleSearchQuery} />
+      <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
+      <div className='sticky top:0 lg:top-20 flex justify-between items-center bg-white dark:bg-neutral-900 z-10'>
+        <h4 className='flex justify-between items-center my-6 text-2xl font-semibold'>
           Filters{' '}
           {checkedFiltersCount > 0 && (
             <span className='inline-flex text-white items-center justify-center w-7 h-7 ml-2 text-sm font-normal rounded-full bg-primary-700'>
@@ -42,15 +50,13 @@ const Filters = ({
             </span>
           )}
         </h4>
-        <button
-          onClick={() => closeFilters(false)}
-          className='p-3 -mt-5 -mr-3 rounded-full lg:hidden'
-        >
-          <XMarkIcon className='w-6 h-6' />
-        </button>
+        {checkedFiltersCount > 0 && (
+          <ButtonPrimary sizeClass='gap-2 px-4 py-2' onClick={resetQueryParams}>
+            <ArrowPathIcon className='w-4' />
+            Clear<span className='lg:hidden xl:inline-block'> Filters</span>
+          </ButtonPrimary>
+        )}
       </div>
-      <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
-      <SearchForm handleSearchChange={handleSearchChange} />
       <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
 
       {filtersData.length > 0 &&
@@ -83,6 +89,7 @@ const Filters = ({
                         id: string | number;
                         name: string;
                         count: number;
+                        meta: { value: string };
                       }) => (
                         <li
                           key={filter.id}
@@ -94,6 +101,7 @@ const Filters = ({
                             name={filter.name}
                             label={filter.name}
                             onChange={handleFilterChange}
+                            color={filter.meta.value}
                           />
                           <span>{filter.count}</span>
                         </li>
@@ -104,14 +112,6 @@ const Filters = ({
             );
           }
         })}
-
-      <ButtonPrimary
-        sizeClass='w-full gap-2 px-4 py-3 sm:px-6 mt-6'
-        onClick={resetQueryParams}
-      >
-        <ArrowPathIcon className='w-5 h-5' />
-        Reset Filters
-      </ButtonPrimary>
     </div>
   );
 };

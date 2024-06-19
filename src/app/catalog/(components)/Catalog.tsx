@@ -77,17 +77,22 @@ export default function Catalog({
     setCurrentPage(selected + 1);
   };
 
-  const handleSearchChange = (value: string) => {
-    let newQueryParams = { ...queryParams };
+  const handleSearchQuery = (value: string) => {
+    let newQueryParams: { search?: string } = {};
     newQueryParams.search = value;
     setQueryParams(newQueryParams);
-    getCheckedFiltersCount(newQueryParams);
+    document
+      .querySelectorAll('input[type=checkbox]')
+      .forEach((el) => ((el as HTMLInputElement).checked = false));
+    setCheckedFiltersCount(0);
     updateSearchParam('page', 1, pathname);
     setCurrentPage(1);
+    isFiltersVisible && setFiltersVisible(false);
   };
 
   const handleFilterChange = (filterCategory: string, id: number | string) => {
     let newQueryParams = { ...queryParams };
+    delete newQueryParams.search;
 
     if (newQueryParams.filters) {
       let isCategoryExist = newQueryParams.filters.findIndex(
@@ -120,6 +125,7 @@ export default function Catalog({
 
     updateSearchParam('page', 1, pathname);
     setCurrentPage(1);
+    isFiltersVisible && setFiltersVisible(false);
   };
 
   const handleRangeFilterChange = (
@@ -154,10 +160,12 @@ export default function Catalog({
 
     updateSearchParam('page', 1, pathname);
     setCurrentPage(1);
+    isFiltersVisible && setFiltersVisible(false);
   };
 
   const resetRangeFilter = (filterCategory: string) => {
     let newQueryParams = { ...queryParams };
+
     newQueryParams.filters = newQueryParams.filters?.filter(
       (item) => item.id !== filterCategory
     );
@@ -165,6 +173,7 @@ export default function Catalog({
     getCheckedFiltersCount(newQueryParams);
     updateSearchParam('page', 1, pathname);
     setCurrentPage(1);
+    isFiltersVisible && setFiltersVisible(false);
   };
 
   const resetQueryParams = () => {
@@ -175,11 +184,10 @@ export default function Catalog({
     setCheckedFiltersCount(0);
     updateSearchParam('page', 1, pathname);
     setCurrentPage(1);
+    isFiltersVisible && setFiltersVisible(false);
   };
 
   function getCheckedFiltersCount(queryParams: ICatalogQueryParams) {
-    const searchParam = queryParams.search ? 1 : 0;
-
     if (queryParams.filters) {
       const checkedFilters = queryParams.filters.reduce(
         (sum, { id, values }) => {
@@ -189,11 +197,9 @@ export default function Catalog({
             return sum + values.length;
           }
         },
-        searchParam
+        0
       );
       setCheckedFiltersCount(checkedFilters);
-    } else {
-      setCheckedFiltersCount(searchParam);
     }
   }
 
@@ -204,58 +210,57 @@ export default function Catalog({
       <ErrorComponent />
     </div>
   ) : (
-    <div className='relative overflow-hidden'>
-      <div className='container'>
-        <div className='grid grid-cols-12 gap-4 lg:gap-6 pt-6'>
-          <div className='hidden lg:block lg:col-span-4'>
-            {isMobile ? (
-              <SideMenuWrapper
-                handleCloseMenu={handleCloseFiltersMenu}
-                isVisable={isFiltersVisible}
-                isLeftSide
-              >
-                <Filters
-                  filtersData={catalogData?.filters || []}
-                  closeFilters={setFiltersVisible}
-                  checkedFiltersCount={checkedFiltersCount}
-                  handleSearchChange={handleSearchChange}
-                  handleFilterChange={handleFilterChange}
-                  handleRangeFilterChange={handleRangeFilterChange}
-                  resetRangeFilter={resetRangeFilter}
-                  resetQueryParams={resetQueryParams}
-                />
-              </SideMenuWrapper>
-            ) : (
+    <div className='relative container'>
+      <div className='grid grid-cols-12 gap-4 lg:gap-6 pt-6'>
+        <div className='hidden lg:block lg:col-span-4'>
+          {isMobile ? (
+            <SideMenuWrapper
+              handleCloseMenu={handleCloseFiltersMenu}
+              isVisable={isFiltersVisible}
+              isLeftSide
+            >
               <Filters
                 filtersData={catalogData?.filters || []}
                 closeFilters={setFiltersVisible}
                 checkedFiltersCount={checkedFiltersCount}
-                handleSearchChange={handleSearchChange}
+                handleSearchQuery={handleSearchQuery}
                 handleFilterChange={handleFilterChange}
                 handleRangeFilterChange={handleRangeFilterChange}
                 resetRangeFilter={resetRangeFilter}
                 resetQueryParams={resetQueryParams}
               />
-            )}
-          </div>
-          <div className='col-span-12 lg:col-span-8'>
-            <SortPanel
-              sortData={catalogData?.sort || []}
-              results={catalogData?.meta.total || 0}
-              handleIsGrid={setIsGrid}
-              isGrid={isGrid}
-              openFilter={setFiltersVisible}
-              handleSortChange={handleSortChange}
+            </SideMenuWrapper>
+          ) : (
+            <Filters
+              filtersData={catalogData?.filters || []}
+              closeFilters={setFiltersVisible}
+              checkedFiltersCount={checkedFiltersCount}
+              handleSearchQuery={handleSearchQuery}
+              handleFilterChange={handleFilterChange}
+              handleRangeFilterChange={handleRangeFilterChange}
+              resetRangeFilter={resetRangeFilter}
+              resetQueryParams={resetQueryParams}
             />
-            <CarList
-              carListData={catalogData?.data || []}
-              isLoading={isLoading}
-              isGrid={isGrid}
-              handlePageChange={handlePageChange}
-              currentPage={currentPage}
-              results={catalogData?.meta.total || 0}
-            />
-          </div>
+          )}
+        </div>
+        <div className='col-span-12 lg:col-span-8'>
+          <SortPanel
+            sortData={catalogData?.sort || []}
+            results={catalogData?.meta.total || 0}
+            isGrid={isGrid}
+            checkedFiltersCount={checkedFiltersCount}
+            handleIsGrid={setIsGrid}
+            openFilter={setFiltersVisible}
+            handleSortChange={handleSortChange}
+          />
+          <CarList
+            carListData={catalogData?.data || []}
+            isLoading={isLoading}
+            isGrid={isGrid}
+            handlePageChange={handlePageChange}
+            currentPage={currentPage}
+            results={catalogData?.meta.total || 0}
+          />
         </div>
       </div>
     </div>

@@ -11,6 +11,10 @@ input {
   font-size: 16px !important;
 }
 
+input[type='checkbox']:focus {
+  box-shadow: none;
+}
+
 .bg-img-placeholder {
   background-image: url('../images/image-placeholder-light.png');
   background-position: center;

@@ -11,8 +11,9 @@ import { ButtonPrimary } from '@/shared/Buttons';
 interface SortPanelProps {
   sortData: ISort[];
   results: number;
-  handleIsGrid: (isGrid: boolean) => void;
   isGrid: boolean;
+  checkedFiltersCount: number;
+  handleIsGrid: (isGrid: boolean) => void;
   openFilter: (value: boolean) => void;
   handleSortChange: (id: string) => void;
 }
@@ -20,8 +21,9 @@ interface SortPanelProps {
 const SortPanel = ({
   sortData,
   results,
-  handleIsGrid,
   isGrid,
+  checkedFiltersCount,
+  handleIsGrid,
   openFilter,
   handleSortChange,
 }: SortPanelProps) => {
@@ -86,7 +88,12 @@ const SortPanel = ({
             className={`focus:outline-none flex items-center justify-center py-2.5 rounded-lg text-neutral-700 dark:text-neutral-300`}
           >
             <span className='inline-block font-medium'>Filters</span>
-            <AdjustmentsHorizontalIcon className='h-5 w-5 ml-1' />
+            <AdjustmentsHorizontalIcon className='h-5 w-5 ml-1' />{' '}
+            {checkedFiltersCount > 0 && (
+              <span className='inline-flex text-white items-center justify-center w-7 h-7 ml-2 text-sm font-normal rounded-full bg-primary-700'>
+                {checkedFiltersCount}
+              </span>
+            )}
           </button>
         </li>
         <li className='flex-grow'>

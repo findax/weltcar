@@ -36,7 +36,7 @@ export default function Title({
           <div className='flex items-center'>
             <span className=''>exterior color:</span>
             <span
-              className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500'
+              className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 flex-shrink-0'
               style={{ backgroundColor: `${outer_color_hex}` }}
             ></span>
             <span className=''> - {outer_color_name}</span>
@@ -44,7 +44,7 @@ export default function Title({
           <div className='flex items-center'>
             <span className=''>interior color:</span>
             <span
-              className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500'
+              className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 flex-shrink-0'
               style={{ backgroundColor: `${inner_color_hex}` }}
             ></span>
             <span className=''> - {inner_color_name}</span>

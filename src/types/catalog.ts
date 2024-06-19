@@ -35,7 +35,7 @@ export interface IFilters {
         countFiltered: number;
         id: number;
         name: string;
-        meta: [];
+        meta: { value: string } | [];
       }[]
     | null;
 }
