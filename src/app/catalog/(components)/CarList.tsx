@@ -26,16 +26,23 @@ const CarList = ({
 }: CarListProps) => {
   const ww = typeof window !== 'undefined' ? window.innerWidth : 1000;
   const pageCount = Math.ceil((results || 10) / 10);
+  const paddingBottomGrid = 'pb-[61.8%]';
+  const paddingBottomHorizontal =
+    'pb-[67.6%] lg:pb-[83.8%] xl:pb-[63%] 2xl:pb-[60%]';
 
   return (
     <>
       {ww > 767 && !isGrid ? (
         isLoading ? (
-          <CarCardHSkeleton />
+          <CarCardHSkeleton paddingBottomHorizontal={paddingBottomHorizontal} />
         ) : carListData.length > 0 ? (
           <div className='flex flex-col gap-4 lg:gap-6 mb-8 md:mb-14'>
             {carListData.map((car) => (
-              <CarCardH key={car.id} carData={car} />
+              <CarCardH
+                key={car.id}
+                carData={car}
+                paddingBottomHorizontal={paddingBottomHorizontal}
+              />
             ))}
           </div>
         ) : (
@@ -44,11 +51,15 @@ const CarList = ({
           </div>
         )
       ) : isLoading ? (
-        <CarCardSkeleton />
+        <CarCardSkeleton paddingBottomGrid={paddingBottomGrid} />
       ) : carListData.length > 0 ? (
         <div className='grid grid-cols-1 gap-4 lg:gap-6 sm:grid-cols-2 mb-8 md:mb-14'>
           {carListData.map((car) => (
-            <CarCard key={car.id} carData={car} />
+            <CarCard
+              key={car.id}
+              carData={car}
+              paddingBottomGrid={paddingBottomGrid}
+            />
           ))}
         </div>
       ) : (

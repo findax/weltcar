@@ -1,4 +1,8 @@
-export default function CarCardSkeleton() {
+export default function CarCardSkeleton({
+  paddingBottomGrid,
+}: {
+  paddingBottomGrid: string;
+}) {
   return (
     <ul className='grid grid-cols-1 gap-4 lg:gap-6 sm:grid-cols-2'>
       {Array.from(new Array(6)).map((_, i) => (
@@ -7,7 +11,7 @@ export default function CarCardSkeleton() {
           className='bg-white dark:bg-transparent border border-neutral-200 dark:border-neutral-700 rounded-2xl overflow-hidden'
         >
           <div className='animate-pulse'>
-            <div className='relative pb-[58%] overflow-hidden'>
+            <div className={`relative overflow-hidden ${paddingBottomGrid}`}>
               <div className='absolute inset-0 bg-neutral-300 dark:bg-neutral-700'></div>
             </div>
             <div className='py-4 px-5 space-y-2'>
