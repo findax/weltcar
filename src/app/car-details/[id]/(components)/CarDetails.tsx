@@ -56,9 +56,17 @@ export default function CarDetails({
 
           <main className=' relative z-10 my-11 flex flex-col lg:flex-row '>
             <div className='w-full lg:w-3/5 xl:w-2/3 space-y-8 lg:pr-10 lg:space-y-10'>
-              <Title carData={carData} />
-              <Documents documents={carData?.documents || []} />
-              <Descriptions description={carData?.description || ''} />
+              {carData && (
+                <>
+                  <Title carData={carData} />
+                  {carData.documents.length > 0 && (
+                    <Documents documents={carData.documents} />
+                  )}
+                  {carData.description && (
+                    <Descriptions description={carData.description} />
+                  )}
+                </>
+              )}
             </div>
 
             <PriceSidebar

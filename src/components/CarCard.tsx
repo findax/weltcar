@@ -37,7 +37,7 @@ const CarCard = ({
       <div className='relative w-full overflow-hidden'>
         <CardSlider
           photos={photos}
-          className={`pb-[58%] ${status === 'sold' ? 'grayscale' : ''}`}
+          className={`pb-[61.8%] ${status === 'sold' ? 'grayscale' : ''}`}
         />
         {/* <BtnLikeIcon isLiked={like} className='absolute right-3 top-3 z-[1]' /> */}
         {status === 'sold' && (

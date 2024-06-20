@@ -8,7 +8,6 @@ import {
   EyeIcon,
   InformationCircleIcon,
 } from '@heroicons/react/24/outline';
-import TooltipComponent from './TooltipComponent';
 
 const commonClass =
   'block w-full border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl text-sm font-normal h-11 px-4 py-3';
@@ -69,8 +68,6 @@ export const Checkbox = ({
   defaultChecked,
   onChange,
 }: CheckboxProps) => {
-  console.log(color);
-
   return (
     <label
       htmlFor={`${filterCategory}-${id.toString()}`}
@@ -91,13 +88,7 @@ export const Checkbox = ({
             <span
               className='w-6 h-6 mr-2 rounded-full inline-block border border-neutral-500 flex-shrink-0'
               style={{ backgroundColor: `${color}` }}
-              data-tooltip-id={`${filterCategory}-${id.toString()}`}
-            >
-              <TooltipComponent
-                id={`${filterCategory}-${id.toString()}`}
-                content={label}
-              />
-            </span>
+            ></span>
           )}
           <span className='mr-4 whitespace-nowrap overflow-hidden text-ellipsis text-neutral-900 hover:text-neutral-400 dark:text-neutral-100 dark:hover:text-neutral-400'>
             {label}
@@ -115,7 +106,6 @@ interface FormikInputProps {
   name: string;
   type?: string;
   placeholder?: string;
-  value?: string;
   title?: string;
   error?: string;
   touched?: boolean;
@@ -126,7 +116,6 @@ interface FormikInputProps {
 
 export const FormikInput = ({
   name,
-  value,
   title,
   error,
   touched,
@@ -141,7 +130,6 @@ export const FormikInput = ({
       <Field
         className={`${commonClass} ${rounded} ${sizeClass}`}
         name={name}
-        value={value}
         disabled={disabled}
         {...args}
       />

@@ -39,7 +39,10 @@ const Filters = ({
       >
         <XMarkIcon className='w-6 h-6' />
       </button>
-      <SearchForm handleSearchChange={handleSearchQuery} />
+      <SearchForm
+        handleSearchChange={handleSearchQuery}
+        resetQueryParams={resetQueryParams}
+      />
       <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
       <div className='sticky top:0 lg:top-20 flex justify-between items-center bg-white dark:bg-neutral-900 z-10'>
         <h4 className='flex justify-between items-center my-6 text-2xl font-semibold'>

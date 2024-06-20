@@ -56,11 +56,15 @@ const CarDetailsGallery = ({ images }: { images: ICarGallery[] }) => {
           <CarDetailsSliderWrapper
             images={images}
             onClose={() => {
-              // @ts-ignore
-              setLastViewedPhoto(photoId);
-              let params = new URLSearchParams(document.location.search);
-              params.delete('photoId');
-              router.push(`${thisPathname}/?${params.toString()}` as Route);
+              if (images.length > 1) {
+                // @ts-ignore
+                setLastViewedPhoto(photoId);
+                let params = new URLSearchParams(document.location.search);
+                params.delete('photoId');
+                router.push(`${thisPathname}/?${params.toString()}` as Route);
+              } else {
+                handleClose();
+              }
             }}
           />
         )}

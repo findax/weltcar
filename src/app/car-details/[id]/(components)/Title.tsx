@@ -31,33 +31,37 @@ export default function Title({
         <div className='mt-3 font-semibold text-neutral-400'>{car_id}</div>
       </div>
 
-      <div className='flex flex-wrap items-center justify-between'>
-        <div className='space-y-2 text-sm whitespace-nowrap mr-4'>
-          <div className='flex items-center'>
-            <span className=''>exterior color:</span>
-            <span
-              className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 flex-shrink-0'
-              style={{ backgroundColor: `${outer_color_hex}` }}
-            ></span>
-            <span className=''> - {outer_color_name}</span>
+      <div className='flex flex-wrap justify-between gap-4'>
+        <div className='flex flex-col justify-betwee space-y-2 text-base mr-4'>
+          <div className='my-2 flex items-center flex-wrap gap-1'>
+            <div className='flex items-center'>
+              <span className=''>exterior color:</span>
+              <span
+                className='w-6 h-6 mx-3 rounded-full inline-block border border-neutral-500 flex-shrink-0'
+                style={{ backgroundColor: `${outer_color_hex}` }}
+              ></span>
+            </div>
+            <span className=''>{outer_color_name}</span>
           </div>
-          <div className='flex items-center'>
-            <span className=''>interior color:</span>
-            <span
-              className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 flex-shrink-0'
-              style={{ backgroundColor: `${inner_color_hex}` }}
-            ></span>
-            <span className=''> - {inner_color_name}</span>
+          <div className='mt-auto my-2 flex items-center flex-wrap gap-1'>
+            <div className='flex items-center'>
+              <span className=''>interior color:</span>
+              <span
+                className='w-6 h-6 mx-3 rounded-full inline-block border border-neutral-500 flex-shrink-0'
+                style={{ backgroundColor: `${inner_color_hex}` }}
+              ></span>
+            </div>
+            <span className=''>{inner_color_name}</span>
           </div>
         </div>
 
         <a
           href={pdf_url}
           download
-          className='flex flex-col items-center justify-center py-3 text-sm'
+          className='flex flex-col items-center justify-center'
         >
-          <DocumentArrowDownIcon className='w-9' />
-          <span className='font-semibold'>PDF</span>
+          <DocumentArrowDownIcon className='w-12' />
+          <span className='text-lg font-semibold'>PDF</span>
         </a>
       </div>
 
