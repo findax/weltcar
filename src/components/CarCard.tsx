@@ -18,19 +18,21 @@ const CarCard = ({
   paddingBottomGrid: string;
 }) => {
   const {
-    id,
-    car_id,
-    photos,
     brand,
-    model,
-    year,
-    price,
+    car_id,
+    id,
     inner_color_hex,
     inner_color_name,
+    model,
     outer_color_hex,
     outer_color_name,
+    photos,
+    price,
     status,
+    specification,
+    year,
   } = carData;
+
   return (
     <div
       className={`relative flex flex-col hover:shadow-lg border border-neutral-200 dark:border-neutral-700 rounded-2xl overflow-hidden bg-white dark:bg-neutral-900 ${className}`}
@@ -56,7 +58,8 @@ const CarCard = ({
           <h3 className='flex justify-between capitalize text-xl font-semibold'>
             {/* {status !== 'sold' && <Badge name='ADS' color='green' />} */}
             <span className='mr-4'>
-              {brand} {model}
+              {brand} {model}{' '}
+              <span className='whitespace-nowrap'>{specification}</span>
             </span>
             <span>{year}</span>
           </h3>

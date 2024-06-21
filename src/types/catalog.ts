@@ -18,6 +18,7 @@ export interface ICar {
   outer_color_name: string;
   photos: { thumb: string; original: string }[];
   price: number;
+  specification: string;
   status: string;
   status_name: string;
   year: number;

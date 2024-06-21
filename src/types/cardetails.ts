@@ -1,24 +1,25 @@
 export interface ICarDetails {
-  id: string;
-  car_id: string;
-  status: string;
-  price: string | number;
   brand: string;
-  model: string;
-  year: number;
-  vin: string;
+  car_id: string;
+  description: string;
+  documents: ICarDocuments[];
+  id: string;
   inner_color_hex: string;
   inner_color_name: string;
+  model: string;
   outer_color_hex: string;
   outer_color_name: string;
-  description: string;
   pdf_url: string;
   photos: {
     thumb: string;
     original: string;
   }[];
-  documents: ICarDocuments[];
+  price: string | number;
   properties: [];
+  specification: string;
+  status: string;
+  vin: string;
+  year: number;
 }
 
 export interface ICarDocuments {

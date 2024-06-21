@@ -8,15 +8,16 @@ export default function Title({
 }) {
   const {
     brand,
-    model,
-    year,
     car_id,
-    vin,
-    outer_color_hex,
-    outer_color_name,
     inner_color_hex,
     inner_color_name,
+    model,
+    outer_color_hex,
+    outer_color_name,
     pdf_url,
+    specification,
+    vin,
+    year,
   } = carData || {};
 
   return (
@@ -24,7 +25,8 @@ export default function Title({
       <div>
         <h2 className='flex justify-between text-2xl sm:text-3xl lg:text-4xl font-semibold'>
           <span className='mr-4'>
-            {brand} {model}
+            {brand} {model}{' '}
+            <span className='whitespace-nowrap'>{specification}</span>
           </span>
           <span>{year}</span>
         </h2>
