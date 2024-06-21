@@ -177,6 +177,7 @@ export default function Catalog({
   };
 
   const resetQueryParams = () => {
+    window.scrollTo({ top: 0 });
     document
       .querySelectorAll('input[type=checkbox]')
       .forEach((el) => ((el as HTMLInputElement).checked = false));

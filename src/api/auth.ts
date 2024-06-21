@@ -25,7 +25,6 @@ export const singIn = async ({
           setAuth(res.data.data);
           toast.success('Logged in successfully!');
           resolve(res.data.data);
-          // window.location.reload();
         }
       })
       .catch((err) => {
@@ -72,7 +71,6 @@ export const activateAccount = async ({ code }: { code: string }) => {
       .then((res) => {
         setAuth(res.data.data);
         resolve(res);
-        window.location.reload();
       })
       .catch((err) => {
         if (err.response?.data.message) {
@@ -114,7 +112,6 @@ export const restorePassword = async ({
       .then((res) => {
         setAuth(res.data.data);
         resolve(res);
-        window.location.reload();
       })
       .catch((err) => {
         if (err.response?.data.message) {
