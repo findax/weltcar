@@ -12,7 +12,7 @@ import PriceSidebar from './PriceSidebar';
 import MobileFooterSticky from './MobileFooterSticky';
 import ConfirmForm from './ConfirmForm';
 import { ICarDetails, ICarGallery } from '@/types/cardetails';
-import { getUser } from '@/api/user';
+import useStore from '@/stores/user-store';
 
 export default function CarDetails({
   carData,
@@ -23,6 +23,8 @@ export default function CarDetails({
   const [carGallery, setCarGallery] = useState<ICarGallery[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalId, setModalId] = useState('');
+
+  const user = useStore((state) => state.user);
 
   useEffect(() => {
     if (carData) {
@@ -36,14 +38,14 @@ export default function CarDetails({
   }, []);
 
   useEffect(() => {
-    if (!!getUser() && modalId === 'authorization') {
+    if (!!user && modalId === 'authorization') {
       setModalId('confirm');
       setIsModalOpen(true);
     }
   }, [isModalOpen]);
 
   function handleReserve() {
-    if (!!getUser()) {
+    if (!!user) {
       setModalId('confirm');
     } else {
       setModalId('authorization');

@@ -18,15 +18,6 @@ export const getAuth = () => {
   }
 };
 
-export const getUser = () => {
-  const storage = sessionStorage.getItem('auth');
-
-  if (storage) {
-    return JSON.parse(storage).user;
-  }
-  return null;
-};
-
 api.interceptors.request.use(
   (config) => {
     const auth = getAuth();
@@ -92,7 +83,7 @@ export const updateUser = async ({
         auth.user = res.data.data;
         setAuth(auth);
         toast.success('Your profile has been updated!');
-        resolve(res);
+        resolve(auth.user);
       })
       .catch((err) => {
         if (err.response?.data.message) {
@@ -115,7 +106,7 @@ export const updateUserPassword = async ({
       .put('/api/user/password', { password })
       .then((res) => {
         toast.success('Your password has been updated!');
-        resolve(res);
+        resolve(res.data.data.user);
       })
       .catch((err) => {
         if (err.response?.data.message) {

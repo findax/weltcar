@@ -58,7 +58,7 @@ const OrdersPage = () => {
                   {state.data.map((order) => (
                     <li key={order.id}>
                       <OrderAccordion
-                        title={`${order.car.brand} ${order.car.model}`}
+                        title={`${order.car.brand} ${order.car.model} ${order.car.specification}`}
                         date={order.created_at}
                         status={order.order_status_name}
                         price={order.price}

@@ -1,6 +1,6 @@
 'use client';
 
-import { Route } from '@/routers/types';
+import { Route } from '@/types/routers';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 

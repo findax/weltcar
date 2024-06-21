@@ -1,5 +1,5 @@
 import { TwMainColor } from '@/types/types';
-import { Route } from '@/routers/types';
+import { Route } from '@/types/routers';
 import Link from 'next/link';
 import React, { FC, ReactNode } from 'react';
 

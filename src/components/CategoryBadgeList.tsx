@@ -1,4 +1,4 @@
-import { Route } from '@/routers/types';
+import { Route } from '@/types/routers';
 import Badge from '@/shared/Badge';
 
 export interface CategoryBadgeListProps {

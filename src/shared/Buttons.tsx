@@ -2,7 +2,7 @@
 
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 import Link from 'next/link';
-import { Route } from '@/routers/types';
+import { Route } from '@/types/routers';
 import LoadingSpinner from './LoadingSpinner';
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import twFocusClass from '@/utils/twFocusClass';

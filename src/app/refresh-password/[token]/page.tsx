@@ -10,11 +10,14 @@ import { ButtonPrimary } from '@/shared/Buttons';
 import { restorePassword } from '@/api/auth';
 import Image from 'next/image';
 import bgImg from '@/images/bg-cars/bg-car-10.webp';
+import useStore from '@/stores/user-store';
 
 export default function RefreshPasswordPage() {
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [code, setCode] = useState('');
+
+  const updateUserState = useStore((state: any) => state.updateUserState);
 
   useEffect(() => {
     const code = window.location.href.split('/').pop();
@@ -71,6 +74,7 @@ export default function RefreshPasswordPage() {
               })
                 .then((res) => {
                   if (res) {
+                    updateUserState(res);
                     setIsSuccess(true);
                   } else {
                     setIsError(true);

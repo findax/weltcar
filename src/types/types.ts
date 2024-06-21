@@ -1,4 +1,4 @@
-import { Route } from '@/routers/types';
+import { Route } from '@/types/routers';
 
 //  ######  CustomLink  ######## //
 export interface CustomLink {

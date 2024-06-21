@@ -31,7 +31,8 @@ export default function OrderDetails({ order }: { order: IOrderDetails }) {
         >
           <div className='mr-4'>
             <h4 className='text-xl font-semibold underline transition-all duration-[500ms] group-hover:no-underline'>
-              {order.car.brand} {order.car.model} ({order.car.year})
+              {order.car.brand} {order.car.model} {order.car.specification} (
+              {order.car.year})
             </h4>
             <span className='block mt-1 text-sm font-semibold text-neutral-500 dark:text-neutral-400'>
               {order.car.car_id}

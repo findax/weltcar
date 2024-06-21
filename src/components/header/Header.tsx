@@ -13,7 +13,7 @@ import Authorization from '@/components/authorization/Authorization';
 import { HeartIcon, UserIcon } from '@heroicons/react/24/outline';
 import { useThemeMode } from '@/utils/useThemeMode';
 import { ToastContainer } from 'react-toastify';
-import { getUser } from '@/api/user';
+import useStore from '@/stores/user-store';
 
 const Header = () => {
   const prevScrollPos = useRef(0);
@@ -21,7 +21,8 @@ const Header = () => {
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [user, setUser] = useState(null);
+
+  const user = useStore((state) => state.user);
 
   //
   useThemeMode();
@@ -58,16 +59,6 @@ const Header = () => {
     });
   }, []);
 
-  useEffect(() => {
-    if (user) return;
-    setUser(getUser());
-  }, [isModalOpen]);
-
-  function handleClick() {
-    const user = getUser();
-    user ? setUser(user) : setIsModalOpen(true);
-  }
-
   return (
     <>
       <header
@@ -100,7 +91,7 @@ const Header = () => {
               <button
                 className={`self-center w-10 h-10 md:w-12 md:h-12 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center`}
                 type='button'
-                onClick={handleClick}
+                onClick={() => setIsModalOpen(true)}
               >
                 <UserIcon className='w-5 md:w-7' />
               </button>

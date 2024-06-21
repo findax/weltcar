@@ -7,8 +7,11 @@ import { FormikPasswordInput } from '@/shared/FormInputs';
 import { updateUserPassword } from '@/api/user';
 import Image from 'next/image';
 import bgImg from '@/images/bg-cars/bg-car-4.webp';
+import useStore from '@/stores/user-store';
 
 const AccountPass = () => {
+  const updateUserState = useStore((state: any) => state.updateUserState);
+
   const UpdatePasswordSchema = Yup.object().shape({
     password: Yup.string()
       .trim()
@@ -49,7 +52,9 @@ const AccountPass = () => {
 
           updateUserPassword({
             password: castValues.confirm_password,
-          }).finally(() => setSubmitting(false));
+          })
+            .then((res) => updateUserState(res))
+            .finally(() => setSubmitting(false));
         }}
       >
         {({ errors, touched, isSubmitting }) => (

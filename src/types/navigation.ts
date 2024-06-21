@@ -1,6 +1,6 @@
 import { NavItemType } from '@/shared/Navigation/NavigationItem';
 import ncNanoId from '@/utils/ncNanoId';
-import { Route } from '@/routers/types';
+import { Route } from '@/types/routers';
 
 export const NAVIGATION_DEMO: NavItemType[] = [
   {

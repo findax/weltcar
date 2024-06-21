@@ -8,15 +8,10 @@ import { Input } from '@/shared/FormInputs';
 import Image from 'next/image';
 import bgImg from '@/images/bg-cars/bg-car-3.webp';
 import AccountForm from './(components)/AccountForm';
-import { getUser } from '@/api/user';
-import { IUser } from '@/types/user';
+import useStore from '@/stores/user-store';
 
 const AccountPage = () => {
-  const [userData, setUserData] = useState<IUser | null>(null);
-
-  useEffect(() => {
-    setUserData(getUser());
-  }, []);
+  const user = useStore((state) => state.user);
 
   return (
     <div className='relative space-y-6 md:space-y-8 lg:min-h-[500px]'>
@@ -28,7 +23,7 @@ const AccountPage = () => {
           <div className='relative rounded-full overflow-hidden flex'>
             <Avatar
               sizeClass='w-32 h-32'
-              userName={userData?.name}
+              userName={user?.name}
               fontSize='text-6xl mt-1'
             />
             {/* <div className='absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-neutral-50 cursor-pointer'>
@@ -56,7 +51,7 @@ const AccountPage = () => {
             />
           </div>
         </div>
-        {userData && <AccountForm user={userData} />}
+        {user && <AccountForm user={user} />}
       </div>
       <Image
         className='hidden md:block absolute inset-0 top-1/2 -translate-y-1/2 object-contain w-full opacity-[0.06] -z-10'

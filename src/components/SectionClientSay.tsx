@@ -75,7 +75,9 @@ const SectionClientSay = ({
   className = '',
   data = TESTIMONIALS_DATA,
 }: SectionClientSayProps) => {
-  const [swiper, setSwiper] = useState(null);
+  const [swiper, setSwiper] = useState<any>(null);
+  const [isBeginning, setBeginning] = useState(true);
+  const [isEnd, setEnd] = useState(false);
 
   return (
     <div className={`nc-SectionClientSay relative ${className}`}>
@@ -88,12 +90,15 @@ const SectionClientSay = ({
       </Heading>
 
       <Swiper
-        // loop={true}
         modules={[EffectFade]}
         effect='fade'
         speed={600}
         fadeEffect={{ crossFade: true }}
-        onSwiper={(swiper: any) => setSwiper(swiper)}
+        onSwiper={(swiper) => setSwiper(swiper)}
+        onSlideChange={(swiper) => {
+          setBeginning(swiper.isBeginning);
+          setEnd(swiper.isEnd);
+        }}
         className='mt-12 lg:mt-16 max-w-4xl mx-auto'
       >
         <Image
@@ -115,7 +120,7 @@ const SectionClientSay = ({
             <Image
               src={item.avatar}
               alt={item.clientName}
-              height={390}
+              height={300}
               width={300}
               className='w-28 mx-auto mb-8 rounded-full transition-opacity opacity-0 duration-[500ms]'
               onLoad={(e) => e.currentTarget.classList.remove('opacity-0')}
@@ -135,23 +140,17 @@ const SectionClientSay = ({
 
       <div className='mt-10 flex items-center justify-center space-x-3'>
         <button
-          className='w-11 h-11 rounded-full flex items-center justify-center bg-primary-600 hover:bg-primary-700 focus:outline-none'
+          className={`w-11 h-11 rounded-full flex items-center justify-center bg-primary-600 hover:bg-primary-700 focus:outline-none ${isBeginning ? '!bg-primary-400 dark:!bg-primary-900 cursor-default' : 'hover:bg-primary-700'}`}
           style={{ transform: 'translate3d(0, 0, 0)' }}
-          onClick={() => {
-            // @ts-ignore
-            swiper.slidePrev();
-          }}
+          onClick={() => swiper.slidePrev()}
         >
           <ChevronLeftIcon className='w-6 mr-0.5' color='white' />
         </button>
 
         <button
-          className='w-11 h-11 rounded-full flex items-center justify-center bg-primary-600 hover:bg-primary-700 focus:outline-none'
+          className={`w-11 h-11 rounded-full flex items-center justify-center bg-primary-600 hover:bg-primary-700 focus:outline-none ${isEnd ? '!bg-primary-400 dark:!bg-primary-900 cursor-default' : 'hover:bg-primary-700'}`}
           style={{ transform: 'translate3d(0, 0, 0)' }}
-          onClick={() => {
-            // @ts-ignore
-            swiper.slideNext();
-          }}
+          onClick={() => swiper.slideNext()}
         >
           <ChevronRightIcon className='w-6 ml-0.5' color='white' />
         </button>

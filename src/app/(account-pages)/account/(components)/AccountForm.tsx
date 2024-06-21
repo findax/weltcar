@@ -4,9 +4,11 @@ import { ButtonPrimary } from '@/shared/Buttons';
 import { FormikInput, FormikPhoneNumberInput } from '@/shared/FormInputs';
 import { IUser } from '@/types/user';
 import { updateUser } from '@/api/user';
+import useStore from '@/stores/user-store';
 
 export default function AccountForm({ user }: { user: IUser }) {
   // const phoneValidationPattern = /\+38 \(0\d{2}\) \d{3}-\d{2}-\d{2}/;
+  const updateUserState = useStore((state: any) => state.updateUserState);
 
   const AccountSchema = Yup.object().shape({
     name: Yup.string()
@@ -39,7 +41,9 @@ export default function AccountForm({ user }: { user: IUser }) {
       onSubmit={(values, { setSubmitting }) => {
         // trim values
         const castValues = AccountSchema.cast(values);
-        updateUser(castValues).finally(() => setSubmitting(false));
+        updateUser(castValues)
+          .then((res) => updateUserState(res))
+          .finally(() => setSubmitting(false));
       }}
     >
       {({ errors, touched, isSubmitting }) => (

@@ -98,21 +98,19 @@ const CarCard = ({
             </span>
           </h4>
         </div>
-        <div>
-          <div className='mb-4 border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
-          <div className='flex justify-between items-center'>
-            <span className='text-2xl font-semibold text-primary-400'>
-              {numberWithComma(price)} €
-            </span>
-            <Link href={`/car-details/${id}`}>
-              <ButtonPrimary
-                fontSize='text-sm'
-                sizeClass='px-5 py-2 md:px-6 md:py-3'
-              >
-                See more
-              </ButtonPrimary>
-            </Link>
-          </div>
+
+        <div className='pt-4 flex justify-between items-center border-t border-dashed border-neutral-300 dark:border-neutral-700'>
+          <span className='text-2xl font-semibold text-primary-400'>
+            {numberWithComma(price)} €
+          </span>
+          <Link href={`/car-details/${id}`}>
+            <ButtonPrimary
+              fontSize='text-sm'
+              sizeClass='px-5 py-2 md:px-6 md:py-3'
+            >
+              See more
+            </ButtonPrimary>
+          </Link>
         </div>
       </div>
     </div>

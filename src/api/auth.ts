@@ -24,7 +24,7 @@ export const singIn = async ({
         } else {
           setAuth(res.data.data);
           toast.success('Logged in successfully!');
-          resolve(res.data.data);
+          resolve(res.data.data.user);
         }
       })
       .catch((err) => {
@@ -70,7 +70,7 @@ export const activateAccount = async ({ code }: { code: string }) => {
       .post('/jwt/activate', { code })
       .then((res) => {
         setAuth(res.data.data);
-        resolve(res);
+        resolve(res.data.data.user);
       })
       .catch((err) => {
         if (err.response?.data.message) {
@@ -83,11 +83,11 @@ export const activateAccount = async ({ code }: { code: string }) => {
   });
 };
 
-export const resetPassword = async ({ email }: { email: string }) => {
+export const sendForgotPassword = async ({ email }: { email: string }) => {
   return new Promise((resolve) => {
     api
       .post('/api/password/reset', { email })
-      .then((res) => resolve(res))
+      .then((res) => resolve(res.data))
       .catch((err) => {
         if (err.response?.data.message) {
           toast.error(err.response.data.message);
@@ -111,7 +111,7 @@ export const restorePassword = async ({
       .post('/api/password/restore', { code, password })
       .then((res) => {
         setAuth(res.data.data);
-        resolve(res);
+        resolve(res.data.data.user);
       })
       .catch((err) => {
         if (err.response?.data.message) {

@@ -21,9 +21,10 @@ export default function ConfirmForm({
         confirm: false,
       }}
       validationSchema={ConfirmationSchema}
-      onSubmit={() => {
-        createOrder(carId);
-        setIsModalOpen(false);
+      onSubmit={(value, { setSubmitting }) => {
+        createOrder(carId)
+          .then((res) => res && setIsModalOpen(false))
+          .finally(() => setSubmitting(false));
       }}
     >
       {({ errors, touched, isSubmitting }) => (

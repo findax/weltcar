@@ -98,16 +98,13 @@ const CarCardH = ({
           </h4>
         </div>
 
-        <div>
-          <div className='mb-5 border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
-          <div className='flex justify-between items-center'>
-            <span className='text-2xl xl:text-3xl font-semibold text-primary-400'>
-              {numberWithComma(price)} €
-            </span>
-            <Link href={`/car-details/${id}`}>
-              <ButtonPrimary>See more</ButtonPrimary>
-            </Link>
-          </div>
+        <div className='pt-5 flex justify-between items-center border-t border-dashed border-neutral-300 dark:border-neutral-700'>
+          <span className='text-2xl xl:text-3xl font-semibold text-primary-400'>
+            {numberWithComma(price)} €
+          </span>
+          <Link href={`/car-details/${id}`}>
+            <ButtonPrimary>See more</ButtonPrimary>
+          </Link>
         </div>
       </div>
     </div>

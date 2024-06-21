@@ -4,7 +4,7 @@ import { CustomLink } from '@/types/types';
 import { FC } from 'react';
 import twFocusClass from '@/utils/twFocusClass';
 import Link from 'next/link';
-import { Route } from '@/routers/types';
+import { Route } from '@/types/routers';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 
 const DEMO_PAGINATION: CustomLink[] = [

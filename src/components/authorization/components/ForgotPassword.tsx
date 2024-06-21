@@ -2,7 +2,7 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { FormikInput } from '@/shared/FormInputs';
-import { resetPassword } from '@/api/auth';
+import { sendForgotPassword } from '@/api/auth';
 
 export default function ForgotPassword({
   emailValue,
@@ -28,10 +28,11 @@ export default function ForgotPassword({
         // same shape as initial values
         const castValues = forgotPasswordSchema.cast(values);
 
-        resetPassword(castValues).then((res) => {
-          res &&
-            (setIsResetingPassword(true), resetForm(), setSubmitting(false));
-        });
+        sendForgotPassword(castValues)
+          .then((res) => {
+            res && (setIsResetingPassword(true), resetForm());
+          })
+          .finally(() => setSubmitting(false));
       }}
     >
       {({ errors, touched, isSubmitting }) => (

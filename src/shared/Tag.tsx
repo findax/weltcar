@@ -1,4 +1,4 @@
-import { Route } from '@/routers/types';
+import { Route } from '@/types/routers';
 import Link from 'next/link';
 import React, { FC } from 'react';
 
