@@ -25,7 +25,7 @@ import 'swiper/css/effect-fade';
 
 export interface SectionClientSayProps {
   className?: string;
-  data: typeof TESTIMONIALS_DATA;
+  data?: typeof TESTIMONIALS_DATA;
 }
 
 const TESTIMONIALS_DATA = [
