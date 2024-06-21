@@ -69,7 +69,7 @@ export default function CardSlider({
                   style={{ transform: 'translate3d(0, 0, 0)' }}
                   onClick={() => {
                     // @ts-ignore
-                    swiper.slideNext();
+                    swiper.slidePrev();
                   }}
                 >
                   <ChevronLeftIcon className='w-5 mr-0.5' />
@@ -79,7 +79,7 @@ export default function CardSlider({
                   style={{ transform: 'translate3d(0, 0, 0)' }}
                   onClick={() => {
                     // @ts-ignore
-                    swiper.slidePrev();
+                    swiper.slideNext();
                   }}
                 >
                   <ChevronRightIcon className='w-5 ml-0.5' />
