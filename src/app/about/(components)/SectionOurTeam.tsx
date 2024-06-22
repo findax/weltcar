@@ -57,7 +57,7 @@ const SectionOurTeam = () => {
                 fill
                 className=' object-cover'
                 src={item.avatar}
-                alt='team member'
+                alt={item.name + ' ' + item.job}
                 sizes='(max-width: 768px) 100vw, (max-width: 1200px) 30vw, 30vw'
               />
             </div>

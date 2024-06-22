@@ -6,7 +6,6 @@ const nextConfig = {
     typedRoutes: true,
   },
   images: {
-    unoptimized: Boolean(process.env.IMAGE_OPTIMIZATION),
     remotePatterns: [
       {
         protocol: 'https',
@@ -16,13 +15,13 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: process.env.NEXT_PUBLIC_SERVER_URL,
+        hostname: process.env.NEXT_PUBLIC_SERVER_HOSTNAME,
         port: '',
         pathname: '/**',
       },
       {
         protocol: 'https',
-        hostname: process.env.NEXT_PUBLIC_APP_URL,
+        hostname: process.env.NEXT_PUBLIC_APP_HOSTNAME,
         port: '',
         pathname: '/**',
       },
