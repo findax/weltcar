@@ -29,7 +29,7 @@ const OrdersPage = () => {
   }, []);
 
   return (
-    <div className='relative space-y-6 md:space-y-8 lg:min-h-[500px]'>
+    <div className='relative space-y-6 md:space-y-8 lg:min-h-[600px]'>
       {/* HEADING */}
       <h2 className='text-3xl font-semibold'>Your orders</h2>
       <div className='w-14 border-b border-neutral-300 dark:border-neutral-700'></div>

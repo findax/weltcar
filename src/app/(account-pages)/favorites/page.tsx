@@ -6,7 +6,7 @@ import CarCard from '@/components/CarCard';
 import { Fragment, useState } from 'react';
 import { ButtonSecondary } from '@/shared/Buttons';
 
-const AccountSavelists = () => {
+const FavoritesPage = () => {
   let [categories] = useState(['Stays', 'Experiences', 'Cars']);
 
   const renderSection1 = () => {
@@ -67,4 +67,4 @@ const AccountSavelists = () => {
   return renderSection1();
 };
 
-export default AccountSavelists;
+export default FavoritesPage;

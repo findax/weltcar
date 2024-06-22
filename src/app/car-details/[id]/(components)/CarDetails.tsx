@@ -12,7 +12,7 @@ import PriceSidebar from './PriceSidebar';
 import MobileFooterSticky from './MobileFooterSticky';
 import ConfirmForm from './ConfirmForm';
 import { ICarDetails, ICarGallery } from '@/types/cardetails';
-import useStore from '@/stores/user-store';
+import { useUserStore } from '@/stores/user-store';
 
 export default function CarDetails({
   carData,
@@ -24,7 +24,7 @@ export default function CarDetails({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalId, setModalId] = useState('');
 
-  const user = useStore((state) => state.user);
+  const user = useUserStore((state) => state.user);
 
   useEffect(() => {
     if (carData) {

@@ -12,14 +12,15 @@ import {
   ArrowLeftStartOnRectangleIcon,
 } from '@heroicons/react/24/outline';
 import { logout } from '@/api/user';
-import { IUser } from '@/types/user';
+import { useUserStore } from '@/stores/user-store';
 
-interface Props {
+export default function AvatarDropdown({
+  className = '',
+}: {
   className?: string;
-  userData?: IUser | null;
-}
+}) {
+  const user = useUserStore((state) => state.user);
 
-export default function AvatarDropdown({ className = '', userData }: Props) {
   return (
     <Menu as='div' className={`AvatarDropdown relative flex ${className}`}>
       {({ open, close }) => (
@@ -30,7 +31,7 @@ export default function AvatarDropdown({ className = '', userData }: Props) {
             <Avatar
               containerClassName='flex-col'
               sizeClass='w-8 h-8 sm:w-9 sm:h-9'
-              userName={userData?.name}
+              userName={user?.name}
             />
           </Menu.Button>
           <Transition
@@ -46,14 +47,14 @@ export default function AvatarDropdown({ className = '', userData }: Props) {
               <div className='overflow-hidden rounded-2xl shadow-lg ring-1 ring-black ring-opacity-5'>
                 <div className='relative grid grid-cols-1 gap-6 bg-white dark:bg-neutral-800 py-7 px-6'>
                   <div className='flex items-center space-x-3'>
-                    <Avatar sizeClass='w-12 h-12' userName={userData?.name} />
+                    <Avatar sizeClass='w-12 h-12' userName={user?.name} />
 
                     <div className='flex-grow overflow-hidden'>
                       <h4 className='font-semibold overflow-hidden text-ellipsis'>
-                        {userData?.name} {userData?.surname}
+                        {user?.name} {user?.surname}
                       </h4>
                       <p className='text-xs mt-0.5 text-ellipsis'>
-                        {userData?.city}
+                        {user?.city}
                       </p>
                     </div>
                   </div>

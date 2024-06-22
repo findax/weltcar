@@ -1,5 +1,3 @@
-'use client';
-
 import { toast } from 'react-toastify';
 import api from './apiInstance';
 import { setAuth } from './auth';
@@ -79,11 +77,8 @@ export const updateUser = async ({
         phone,
       })
       .then((res) => {
-        let auth = getAuth();
-        auth.user = res.data.data;
-        setAuth(auth);
         toast.success('Your profile has been updated!');
-        resolve(auth.user);
+        resolve(res.data.data);
       })
       .catch((err) => {
         if (err.response?.data.message) {
@@ -155,6 +150,7 @@ export const createOrder = async (carId: string) => {
 };
 
 export const logout = () => {
+  localStorage.clear();
   sessionStorage.clear();
   window.location.reload();
 };

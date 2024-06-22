@@ -1,5 +1,3 @@
-'use client';
-
 import { toast } from 'react-toastify';
 import api from './apiInstance';
 import { IAuth } from '@/types/user';

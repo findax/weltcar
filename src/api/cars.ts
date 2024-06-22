@@ -1,5 +1,3 @@
-'use client';
-
 import { toast } from 'react-toastify';
 import api from './apiInstance';
 import { ICatalogQueryParams } from '@/types/catalog';

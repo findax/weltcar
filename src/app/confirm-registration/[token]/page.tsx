@@ -8,13 +8,14 @@ import LoadingSpinner from '@/shared/LoadingSpinner';
 import ErrorComponent from '@/components/ErrorComponent';
 import Image from 'next/image';
 import bgImg from '@/images/bg-cars/bg-car-7.webp';
-import useStore from '@/stores/user-store';
+import { useUserStore } from '@/stores/user-store';
+import { IUser } from '@/types/user';
 
 export default function ConfirmRegistrationPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
-  const updateUserState = useStore((state: any) => state.updateUserState);
+  const updateUserState = useUserStore((state) => state.updateUserState);
 
   useEffect(() => {
     const code = window.location.href.split('/').pop();
@@ -22,11 +23,7 @@ export default function ConfirmRegistrationPage() {
     if (code) {
       activateAccount({ code })
         .then((res) => {
-          if (res) {
-            updateUserState(res);
-          } else {
-            setIsError(true);
-          }
+          res ? updateUserState(res as IUser) : setIsError(true);
         })
         .finally(() => setIsLoading(false));
     }

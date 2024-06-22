@@ -8,13 +8,13 @@ import { Input } from '@/shared/FormInputs';
 import Image from 'next/image';
 import bgImg from '@/images/bg-cars/bg-car-3.webp';
 import AccountForm from './(components)/AccountForm';
-import useStore from '@/stores/user-store';
+import { useUserStore } from '@/stores/user-store';
 
 const AccountPage = () => {
-  const user = useStore((state) => state.user);
+  const user = useUserStore((state) => state.user);
 
   return (
-    <div className='relative space-y-6 md:space-y-8 lg:min-h-[500px]'>
+    <div className='relative space-y-6 md:space-y-8 lg:min-h-[650px]'>
       {/* HEADING */}
       <h2 className='text-3xl font-semibold'>Account information</h2>
       <div className='w-14 border-b border-neutral-300 dark:border-neutral-700'></div>
@@ -51,7 +51,7 @@ const AccountPage = () => {
             />
           </div>
         </div>
-        {user && <AccountForm user={user} />}
+        {user && <AccountForm />}
       </div>
       <Image
         className='hidden md:block absolute inset-0 top-1/2 -translate-y-1/2 object-contain w-full opacity-[0.06] -z-10'

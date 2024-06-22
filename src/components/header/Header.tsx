@@ -13,7 +13,7 @@ import Authorization from '@/components/authorization/Authorization';
 import { HeartIcon, UserIcon } from '@heroicons/react/24/outline';
 import { useThemeMode } from '@/utils/useThemeMode';
 import { ToastContainer } from 'react-toastify';
-import useStore from '@/stores/user-store';
+import { useUserStore } from '@/stores/user-store';
 
 const Header = () => {
   const prevScrollPos = useRef(0);
@@ -22,11 +22,15 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const user = useStore((state) => state.user);
+  const user = useUserStore((state) => state.user);
 
   //
   useThemeMode();
   //
+
+  useEffect(() => {
+    useUserStore.persist.rehydrate();
+  }, []);
 
   useEffect(() => {
     setIsMobile(window.innerWidth < 768);
@@ -86,7 +90,7 @@ const Header = () => {
               <HeartIcon className='w-5 md:w-7' />
             </Link> */}
             {user ? (
-              <AvatarDropdown userData={user} />
+              <AvatarDropdown />
             ) : (
               <button
                 className={`self-center w-10 h-10 md:w-12 md:h-12 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center`}

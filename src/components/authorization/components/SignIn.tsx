@@ -6,7 +6,8 @@ import { FormikInput, FormikPasswordInput } from '@/shared/FormInputs';
 import ForgotPassword from './ForgotPassword';
 import { singIn } from '@/api/auth';
 import { InformationCircleIcon } from '@heroicons/react/24/outline';
-import useStore from '@/stores/user-store';
+import { useUserStore } from '@/stores/user-store';
+import { IUser } from '@/types/user';
 
 export default function SignIn({
   setIsModalOpen,
@@ -17,7 +18,7 @@ export default function SignIn({
   const [emailValue, setEmailValue] = useState('');
   const [isResetingPassword, setIsResetingPassword] = useState(false);
 
-  const updateUserState = useStore((state: any) => state.updateUserState);
+  const updateUserState = useUserStore((state) => state.updateUserState);
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
@@ -64,7 +65,7 @@ export default function SignIn({
 
           singIn(castValues)
             .then((res) => {
-              res && (updateUserState(res), setIsModalOpen(false));
+              res && (updateUserState(res as IUser), setIsModalOpen(false));
             })
             .finally(() => setSubmitting(false));
         }}
