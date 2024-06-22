@@ -31,7 +31,8 @@ api.interceptors.request.use(
 );
 
 const checkAndRefreshToken = async (auth: IAuth) => {
-  const daysBeforeExpireCheck = process.env.DAYS_BEFORE_TOKEN_EXPIRE_CHECK;
+  const daysBeforeExpireCheck =
+    process.env.NEXT_PUBLIC_DAYS_BEFORE_TOKEN_EXPIRE_CHECK;
   const dateExpired = auth.expires;
   const isValid =
     new Date(dateExpired) >=

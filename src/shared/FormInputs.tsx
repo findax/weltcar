@@ -75,12 +75,11 @@ export const Checkbox = ({
     >
       <input
         id={`${filterCategory}-${id.toString()}`}
-        value={id.toString()}
         name={name}
         type='checkbox'
         className='mr-3.5 h-7 w-7 text-primary-500 border-primary rounded-full border-neutral-500 bg-white dark:bg-neutral-700  dark:checked:bg-primary-500 cursor-pointer'
         defaultChecked={defaultChecked}
-        onChange={(e) => onChange && onChange(filterCategory, e.target.value)}
+        onChange={(e) => onChange && onChange(filterCategory, id)}
       />
       {label && (
         <>

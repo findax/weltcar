@@ -31,5 +31,5 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
 };
-console.log(nextConfig);
+
 module.exports = nextConfig;
