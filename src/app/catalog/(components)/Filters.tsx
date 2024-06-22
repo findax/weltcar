@@ -1,7 +1,7 @@
 'use client';
 
-import RangeSlider from '@/components/RangeSlider';
-import AccordionComponent from '@/components/AccordionComponent';
+import RangeSlider from '@/shared/RangeSlider';
+import AccordionComponent from '@/shared/AccordionComponent';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { Checkbox } from '@/shared/FormInputs';
 import { ArrowPathIcon, XMarkIcon } from '@heroicons/react/24/outline';

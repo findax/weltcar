@@ -122,7 +122,7 @@ const SortPanel = ({
           <label className='mb-0 clr-neutral-500 flex-grow whitespace-nowrap'>
             Sort By :
             <select
-              className='w-[105px] bg-transparent cursor-pointer pl-4 pr-8 py-2 border-0 focus:ring-indigo-500 focus:border-indigo-500 rounded-full'
+              className='w-[105px] pl-4 pr-8 py-2 bg-transparent cursor-pointer border-0 focus:ring-indigo-500 focus:border-indigo-500 rounded-full'
               defaultValue='latest'
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                 handleSortSelectChange(e.target)

@@ -1,6 +1,5 @@
 'use client';
 
-import __CarList from '@/mock/__carList.json';
 import { Tab } from '@headlessui/react';
 import CarCard from '@/components/CarCard';
 import { Fragment, useState } from 'react';
@@ -39,7 +38,7 @@ const FavoritesPage = () => {
             <Tab.Panels>
               <Tab.Panel className='mt-8'>
                 <div className='grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-                  {__CarList.filter((_, i) => i < 6).map(car => (
+                  {carList.filter((_, i) => i < 6).map(car => (
                     <CarCard key={car.id} carData={car} />
                   ))}
                 </div>
@@ -50,7 +49,7 @@ const FavoritesPage = () => {
             </Tab.Panels>
           </Tab.Group> */}
           {/* <div className='grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-            {__CarList
+            {carList
               .filter((_, i) => i < 6)
               .map((car) => (
                 <CarCard key={car.id} carData={car} />

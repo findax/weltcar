@@ -1,6 +1,5 @@
 'use client';
 
-// import __CarList from '@/mock/__carList.json';
 import { useState, useEffect } from 'react';
 import Filters from './Filters';
 import SortPanel from './SortPanel';

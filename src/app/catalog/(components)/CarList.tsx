@@ -1,11 +1,10 @@
-import Pagination from '@/shared/Pagination';
+import ReactPaginate from 'react-paginate';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 import CarCard from '@/components/CarCard';
 import CarCardH from '@/components/CarCardH';
 import CarCardHSkeleton from '@/components/CarCardHSkeleton';
 import CarCardSkeleton from '@/components/CarCardSkeleton';
 import { ICar } from '@/types/catalog';
-import ReactPaginate from 'react-paginate';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 
 interface CarListProps {
   carListData: ICar[];

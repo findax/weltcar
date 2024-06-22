@@ -15,18 +15,6 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'images.unsplash.com',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'http',
-        hostname: '49.12.230.191',
-        port: '8081',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
         hostname: 'weltcar.de',
         port: '',
         pathname: '/**',
@@ -43,5 +31,5 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
 };
-
+console.log(nextConfig);
 module.exports = nextConfig;
