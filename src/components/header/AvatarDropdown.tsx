@@ -11,7 +11,7 @@ import {
   LifebuoyIcon,
   ArrowLeftStartOnRectangleIcon,
 } from '@heroicons/react/24/outline';
-import { logout } from '@/api/user';
+import { logout } from '@/api/auth';
 import { useUserStore } from '@/stores/user-store';
 
 export default function AvatarDropdown({

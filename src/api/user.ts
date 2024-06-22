@@ -1,7 +1,5 @@
 import { toast } from 'react-toastify';
 import api from './apiInstance';
-import { setAuth } from './auth';
-import { IAuth } from '@/types/user';
 
 export const getAuth = () => {
   if (typeof sessionStorage !== 'undefined') {
@@ -20,7 +18,6 @@ api.interceptors.request.use(
   (config) => {
     const auth = getAuth();
     if (auth) {
-      checkAndRefreshToken(auth);
       config.headers.Authorization = `Bearer ${auth.token}`;
     }
     return config;
@@ -29,34 +26,6 @@ api.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-
-const checkAndRefreshToken = async (auth: IAuth) => {
-  const daysBeforeExpireCheck =
-    process.env.NEXT_PUBLIC_DAYS_BEFORE_TOKEN_EXPIRE_CHECK;
-  const dateExpired = auth.expires;
-  const isValid =
-    new Date(dateExpired) >=
-    new Date(new Date().getDate() - Number(daysBeforeExpireCheck));
-
-  if (!isValid) {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/jwt/refresh`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${auth.token}`,
-          },
-        }
-      );
-      const responseData = await response.json();
-      setAuth(responseData.data);
-    } catch (error) {
-      logout();
-    }
-  }
-};
 
 export const updateUser = async ({
   name,
@@ -148,10 +117,4 @@ export const createOrder = async (carId: string) => {
         resolve(false);
       });
   });
-};
-
-export const logout = () => {
-  localStorage.clear();
-  sessionStorage.clear();
-  window.location.reload();
 };

@@ -1,9 +1,20 @@
 import { toast } from 'react-toastify';
 import api from './apiInstance';
 import { IAuth } from '@/types/user';
+import { getAuth } from './user';
 
 export const setAuth = (data: IAuth) =>
   sessionStorage.setItem('auth', JSON.stringify(data));
+
+api.interceptors.response.use(
+  (response) => {
+    checkAndRefreshToken();
+    return response;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 export const singIn = async ({
   email,
@@ -34,6 +45,37 @@ export const singIn = async ({
         resolve(false);
       });
   });
+};
+
+const checkAndRefreshToken = async () => {
+  const auth = getAuth();
+  if (auth) {
+    const daysBeforeExpireCheck =
+      process.env.NEXT_PUBLIC_DAYS_BEFORE_TOKEN_EXPIRE_CHECK;
+    const dateExpired = auth.expires;
+    const isValid =
+      new Date(dateExpired) >=
+      new Date(new Date().getDate() - Number(daysBeforeExpireCheck));
+
+    if (!isValid) {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/jwt/refresh`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${auth.token}`,
+            },
+          }
+        );
+        const responseData = await response.json();
+        setAuth(responseData.data);
+      } catch (error) {
+        logout();
+      }
+    }
+  }
 };
 
 export const singUp = async ({
@@ -120,4 +162,10 @@ export const restorePassword = async ({
         resolve(false);
       });
   });
+};
+
+export const logout = () => {
+  localStorage.removeItem('user');
+  sessionStorage.clear();
+  window.location.reload();
 };

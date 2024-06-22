@@ -6,6 +6,7 @@ const nextConfig = {
     typedRoutes: true,
   },
   images: {
+    unoptimized: Boolean(process.env.IMAGE_OPTIMIZATION),
     remotePatterns: [
       {
         protocol: 'https',
@@ -15,13 +16,13 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'weltcar.de',
+        hostname: process.env.NEXT_PUBLIC_SERVER_URL,
         port: '',
         pathname: '/**',
       },
       {
         protocol: 'https',
-        hostname: 'api.weltcar.de',
+        hostname: process.env.NEXT_PUBLIC_APP_URL,
         port: '',
         pathname: '/**',
       },
