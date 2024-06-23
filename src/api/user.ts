@@ -1,32 +1,6 @@
 import { toast } from 'react-toastify';
 import api from './apiInstance';
 
-export const getAuth = () => {
-  if (typeof sessionStorage !== 'undefined') {
-    const storage = sessionStorage.getItem('auth');
-
-    if (storage) {
-      return JSON.parse(storage);
-    }
-    return null;
-  } else {
-    return null;
-  }
-};
-
-api.interceptors.request.use(
-  (config) => {
-    const auth = getAuth();
-    if (auth) {
-      config.headers.Authorization = `Bearer ${auth.token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
 export const updateUser = async ({
   name,
   surname,

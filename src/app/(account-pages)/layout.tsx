@@ -1,6 +1,6 @@
 'use client';
 
-import { getAuth } from '@/api/user';
+import { getAuth } from '@/api/apiInstance';
 import { Nav } from './(components)/Nav';
 
 const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
