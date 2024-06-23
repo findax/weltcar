@@ -1,14 +1,10 @@
 import { useState } from 'react';
 import Slider from 'rc-slider';
 import { ButtonPrimary, ButtonThird } from '@/shared/Buttons';
+import { IFilters } from '@/types/catalog';
 
 interface rangeDataProps {
-  rangeData: {
-    id: string;
-    max: number;
-    min: number;
-    name: string;
-  };
+  rangeData: IFilters;
   onChange: (filterCategory: string, min: number, max: number) => void;
   resetRangeFilter: (filterCategory: string) => void;
 }
@@ -27,7 +23,7 @@ export default function RangeSlider({
       return;
     }
     const newMinPrice = parseInt(e.currentTarget.value);
-    if (newMinPrice <= rangeState[1]) {
+    if (rangeState[1] && newMinPrice <= rangeState[1]) {
       setRangeState([newMinPrice, rangeState[1]]);
     }
   };
@@ -68,7 +64,7 @@ export default function RangeSlider({
               type='text'
               id={`min-${rangeData.id}`}
               className='bg-transparent focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-3 sm:text-sm border-neutral-200 dark:border-neutral-700 rounded-full'
-              value={rangeState[0]}
+              value={rangeState[0]?.toString()}
               onChange={handleMinPriceChange}
             />
           </div>
@@ -90,7 +86,7 @@ export default function RangeSlider({
               type='text'
               id={`max-${rangeData.id}`}
               className='bg-transparent focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-3 sm:text-sm border-neutral-200 dark:border-neutral-700 rounded-full'
-              value={rangeState[1]}
+              value={rangeState[1]?.toString()}
               onChange={handleMaxPriceChange}
             />
           </div>
@@ -102,9 +98,9 @@ export default function RangeSlider({
           range
           allowCross={false}
           className='block mx-auto w-11/12 text-primary-600'
-          min={rangeData.min}
-          max={rangeData.max}
-          value={rangeState}
+          min={rangeData.min || 0}
+          max={rangeData.max || 0}
+          value={rangeState as number[]}
           onChange={(e) => setRangeState(e as number[])}
         />
       </div>
@@ -120,7 +116,9 @@ export default function RangeSlider({
         <ButtonPrimary
           fontSize='text-sm'
           sizeClass='px-5 py-2 md:px-6'
-          onClick={() => onChange(rangeData.id, rangeState[0], rangeState[1])}
+          onClick={() =>
+            onChange(rangeData.id, rangeState[0] ?? 0, rangeState[1] ?? 0)
+          }
         >
           Apply
         </ButtonPrimary>

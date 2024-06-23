@@ -57,6 +57,7 @@ const checkAndRefreshToken = async () => {
         );
         const responseData = await response.json();
         setAuth(responseData.data);
+        window.location.reload();
       } catch (error) {
         logout();
       }

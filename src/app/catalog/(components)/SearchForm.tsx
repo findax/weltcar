@@ -35,7 +35,7 @@ export default function SearchForm({
       }}
     >
       {({ values, errors, touched }) => (
-        <Form className='mb-7 relative w-full'>
+        <Form className='mb-6 relative w-full'>
           <FormikInput
             name='search'
             type='text'

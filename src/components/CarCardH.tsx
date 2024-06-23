@@ -52,7 +52,7 @@ const CarCardH = ({
           />
         )}
       </div>
-      <div className='w-[45%] lg:w-[50%] xl:w-[45%] 2xl:w-[40%] flex flex-col justify-between p-5 space-y-4 2xl:gap-5'>
+      <div className='w-[45%] lg:w-[50%] xl:w-[45%] 2xl:w-[40%] flex flex-col justify-between px-5 py-4 xl:py-5 space-y-4 2xl:gap-5'>
         <div className='space-y-2'>
           <h3 className='flex justify-between capitalize text-xl font-semibold'>
             {/* {status !== 'sold' && <Badge name='ADS' color='green' />} */}
@@ -98,7 +98,7 @@ const CarCardH = ({
           </h4>
         </div>
 
-        <div className='pt-5 flex justify-between items-center border-t border-dashed border-neutral-300 dark:border-neutral-700'>
+        <div className='pt-4 xl:pt-5 flex justify-between items-center border-t border-dashed border-neutral-300 dark:border-neutral-700'>
           <span className='text-2xl xl:text-3xl font-semibold text-primary-400'>
             {numberWithComma(price)} €
           </span>

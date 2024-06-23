@@ -10,7 +10,7 @@ import SectionClientSay from '@/components/SectionClientSay';
 
 function PageHome() {
   return (
-    <main className='nc-PageHome relative overflow-hidden'>
+    <div className='nc-PageHome relative overflow-hidden'>
       {/* GLASSMOPHIN */}
       <BgGlassmorphism />
 
@@ -42,7 +42,7 @@ function PageHome() {
           <SectionSubscribe />
         </div>
       </div>
-    </main>
+    </div>
   );
 }
 

@@ -41,13 +41,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' className={poppins.className}>
-      <body className='pt-16 md:pt-20 bg-neutral-100 text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200'>
+      <body className='pt-16 md:pt-20 flex flex-col min-h-screen text-base bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200'>
         {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (
           <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
         )}
         <LoadingProgressBar />
         <Header />
-        {children}
+        <main className='flex-grow'>{children}</main>
         <Footer />
         <CookieAlert />
       </body>

@@ -30,15 +30,15 @@ export interface IFilters {
   min: number | null;
   name: string;
   type: string;
-  values:
-    | {
-        count: number;
-        countFiltered: number;
-        id: number;
-        name: string;
-        meta: { value: string } | [];
-      }[]
-    | null;
+  values: IFilter[] | null;
+}
+
+export interface IFilter {
+  count: number;
+  countFiltered: number;
+  id: number;
+  name: string;
+  meta: { selected: boolean; value: string };
 }
 
 export interface ILinks {

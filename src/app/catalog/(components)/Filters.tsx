@@ -6,7 +6,7 @@ import { ButtonPrimary } from '@/shared/Buttons';
 import { Checkbox } from '@/shared/FormInputs';
 import { ArrowPathIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import SearchForm from './SearchForm';
-import { IFilters } from '@/types/catalog';
+import { IFilters, IFilter } from '@/types/catalog';
 
 const Filters = ({
   filtersData,
@@ -63,7 +63,7 @@ const Filters = ({
       <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
 
       {filtersData.length > 0 &&
-        filtersData.map((filterCategory: any) => {
+        filtersData.map((filterCategory: IFilters) => {
           if (filterCategory.type === 'range') {
             return (
               <AccordionComponent
@@ -86,30 +86,24 @@ const Filters = ({
                 className='py-6'
               >
                 <ul className='mb-6 flex flex-col gap-3'>
-                  {filterCategory.values?.length > 0 &&
-                    filterCategory.values.map(
-                      (filter: {
-                        id: string | number;
-                        name: string;
-                        count: number;
-                        meta: { value: string };
-                      }) => (
-                        <li
-                          key={filter.id}
-                          className='flex justify-between items-center'
-                        >
-                          <Checkbox
-                            filterCategory={filterCategory.id}
-                            id={filter.id}
-                            name={filter.name}
-                            label={filter.name}
-                            onChange={handleFilterChange}
-                            color={filter.meta.value}
-                          />
-                          <span>{filter.count}</span>
-                        </li>
-                      )
-                    )}
+                  {filterCategory.values &&
+                    filterCategory.values.map((filter: IFilter) => (
+                      <li
+                        key={filter.id}
+                        className='flex justify-between items-center'
+                      >
+                        <Checkbox
+                          filterCategory={filterCategory.id}
+                          id={filter.id}
+                          name={filter.name}
+                          label={filter.name}
+                          defaultChecked={filter.meta.selected}
+                          color={filter.meta.value}
+                          onChange={handleFilterChange}
+                        />
+                        <span>{filter.count}</span>
+                      </li>
+                    ))}
                 </ul>
               </AccordionComponent>
             );
