@@ -5,33 +5,32 @@ import {
   AdjustmentsHorizontalIcon,
   DocumentArrowDownIcon,
 } from '@heroicons/react/24/outline';
-import { ICatalogQueryParams, ISort } from '@/types/catalog';
+import { ISort } from '@/types/catalog';
+import { useQueryParams } from '@/hooks/useQueryParams';
 import { ButtonPrimary } from '@/shared/Buttons';
 
 interface SortPanelProps {
   sortData: ISort[];
-  queryState: ICatalogQueryParams;
   results: number;
   isGrid: boolean;
   checkedFiltersCount: number;
   handleIsGrid: (isGrid: boolean) => void;
   openFilter: (value: boolean) => void;
-  handleSortChange: (id: string) => void;
 }
 
 const SortPanel = ({
   sortData,
-  queryState,
   results,
   isGrid,
   checkedFiltersCount,
   handleIsGrid,
   openFilter,
-  handleSortChange,
 }: SortPanelProps) => {
   const [fileFormat, setFileFormat] = useState<string>('pdf');
+  const { queryParams, handleSortChange } = useQueryParams();
+
   const isSelectorShortWidth =
-    (queryState && queryState.sort && queryState.sort[0].id === 'oldest') !==
+    (queryParams && queryParams.sort && queryParams.sort[0].id === 'oldest') !==
     false;
 
   function handleSortSelectChange(select: HTMLSelectElement) {
@@ -114,7 +113,7 @@ const SortPanel = ({
             Sort By :
             <select
               className={`${isSelectorShortWidth ? 'w-[105px]' : ''} pl-4 pr-8 py-2 bg-transparent cursor-pointer border-0 focus:ring-indigo-500 focus:border-indigo-500 rounded-full`}
-              defaultValue={`${(queryState && queryState.sort && queryState.sort[0].id) || 'latest'}`}
+              defaultValue={`${(queryParams && queryParams.sort && queryParams.sort[0].id) || 'latest'}`}
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                 handleSortSelectChange(e.target)
               }

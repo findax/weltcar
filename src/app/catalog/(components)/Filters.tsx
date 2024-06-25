@@ -6,33 +6,25 @@ import { ButtonPrimary } from '@/shared/Buttons';
 import { Checkbox } from '@/shared/FormInputs';
 import { ArrowPathIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import SearchForm from './SearchForm';
-import { IFilters, IFilter, ICatalogQueryParams } from '@/types/catalog';
+import { IFilters, IFilter } from '@/types/catalog';
+import { useQueryParams } from '@/hooks/useQueryParams';
 
 const Filters = ({
   filtersData,
-  queryState,
   closeFilters,
   checkedFiltersCount,
-  handleSearchQuery,
-  handleFilterChange,
-  handleRangeFilterChange,
-  resetRangeFilter,
-  resetFilters,
 }: {
   filtersData: IFilters[];
-  queryState: ICatalogQueryParams | null;
   closeFilters: (value: boolean) => void;
   checkedFiltersCount: number;
-  handleSearchQuery: (value: string) => void;
-  handleFilterChange: (filterCategory: string, id: number | string) => void;
-  handleRangeFilterChange: (
-    filterCategory: string,
-    min: number,
-    max: number
-  ) => void;
-  resetRangeFilter: (filterCategory: string) => void;
-  resetFilters: () => void;
 }) => {
+  const {
+    handleFilterChange,
+    handleRangeFilterChange,
+    resetRangeFilter,
+    resetFilters,
+  } = useQueryParams();
+
   return (
     <div className='max-lg:overflow-y-auto h-screen lg:visible lg:h-auto p-4 pb-24 lg:py-6 lg:px-8 lg:mb-24 bg-white dark:bg-neutral-900 lg:rounded-2xl border border-neutral-200 dark:border-neutral-700'>
       <button
@@ -41,11 +33,7 @@ const Filters = ({
       >
         <XMarkIcon className='w-6 h-6' />
       </button>
-      <SearchForm
-        queryState={queryState}
-        handleSearchChange={handleSearchQuery}
-        resetFilters={resetFilters}
-      />
+      <SearchForm />
       <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
       <div className='sticky top:0 lg:top-20 flex justify-between items-center bg-white dark:bg-neutral-900 z-10'>
         <h4 className='flex justify-between items-center my-6 text-2xl font-semibold'>

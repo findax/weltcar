@@ -1,19 +1,13 @@
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 import { ButtonCircle } from '@/shared/Buttons';
 import { FormikInput } from '@/shared/FormInputs';
-import { XMarkIcon } from '@heroicons/react/24/outline';
-import { ICatalogQueryParams } from '@/types/catalog';
+import { useQueryParams } from '@/hooks/useQueryParams';
 
-export default function SearchForm({
-  queryState,
-  handleSearchChange,
-  resetFilters,
-}: {
-  queryState: ICatalogQueryParams | null;
-  handleSearchChange: (value: string) => void;
-  resetFilters: (searchQuery?: boolean) => void;
-}) {
+export default function SearchForm() {
+  const { queryParams, handleSearchChange, resetFilters } = useQueryParams();
+
   const SearchSchema = Yup.object().shape({
     search: Yup.string()
       .trim()
@@ -25,7 +19,7 @@ export default function SearchForm({
   return (
     <Formik
       initialValues={{
-        search: queryState?.search || '',
+        search: queryParams?.search || '',
       }}
       validationSchema={SearchSchema}
       onSubmit={(values, { setSubmitting, resetForm }) => {

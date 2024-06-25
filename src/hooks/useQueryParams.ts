@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useQueryState, parseAsJson, parseAsInteger } from 'nuqs';
 import { ICatalogQueryParams } from '@/types/catalog';
+import { useQueryStore } from '@/stores/query-store';
 
 export const useQueryParams = () => {
   const [isFiltersVisible, setFiltersVisible] = useState(false);
-  const [pageParam, setPageParam] = useQueryState(
+  const [currentPage, setPageParam] = useQueryState(
     'page',
     parseAsInteger.withDefault(1)
   );
@@ -13,10 +14,8 @@ export const useQueryParams = () => {
     parseAsJson()
   );
 
-  const [currentPage, setCurrentPage] = useState<number>(pageParam);
-  const [queryState, updateQueryState] = useState<ICatalogQueryParams | null>(
-    queryParams
-  );
+  const queryState = useQueryStore((state) => state.query);
+  const updateQueryState = useQueryStore((state) => state.updateQueryState);
 
   const handleSortChange = (id: string) => {
     let newQueryState = { ...queryState };
@@ -27,12 +26,13 @@ export const useQueryParams = () => {
   };
 
   const handlePageChange = ({ selected }: { selected: number }) => {
+    queryParams !== queryState && updateQueryState(queryParams);
+    const page = selected + 1 === 1 ? null : selected + 1;
     window.scrollTo({ top: 0 });
-    setPageParam(selected + 1);
-    setCurrentPage(selected + 1);
+    setPageParam(page);
   };
 
-  const handleSearchQuery = (value: string) => {
+  const handleSearchChange = (value: string) => {
     let newQueryState = { ...queryParams };
     delete newQueryState.filters;
     newQueryState.search = value;
@@ -143,16 +143,15 @@ export const useQueryParams = () => {
     updateQueryParams(newQueryState);
     updateQueryState(newQueryState);
     setPageParam(null);
-    setCurrentPage(1);
     isFiltersVisible && setFiltersVisible(false);
   }
 
   return {
-    queryState,
+    queryParams,
     currentPage,
     handleSortChange,
     handlePageChange,
-    handleSearchQuery,
+    handleSearchChange,
     handleFilterChange,
     handleRangeFilterChange,
     resetRangeFilter,

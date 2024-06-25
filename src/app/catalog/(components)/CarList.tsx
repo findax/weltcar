@@ -5,24 +5,18 @@ import CarCardH from '@/components/CarCardH';
 import CarCardHSkeleton from '@/components/CarCardHSkeleton';
 import CarCardSkeleton from '@/components/CarCardSkeleton';
 import { ICar } from '@/types/catalog';
+import { useQueryParams } from '@/hooks/useQueryParams';
 
 interface CarListProps {
   carListData: ICar[];
   isLoading: boolean;
   isGrid: boolean;
-  handlePageChange: ({ selected }: { selected: number }) => void;
-  currentPage: number;
   results?: number;
 }
 
-const CarList = ({
-  carListData,
-  isLoading,
-  isGrid,
-  handlePageChange,
-  currentPage,
-  results,
-}: CarListProps) => {
+const CarList = ({ carListData, isLoading, isGrid, results }: CarListProps) => {
+  const { currentPage, handlePageChange } = useQueryParams();
+
   const ww = typeof window !== 'undefined' ? window.innerWidth : 1000;
   const pageCount = Math.ceil((results || 10) / 10);
   const paddingBottomGrid = 'pb-[61.8%]';

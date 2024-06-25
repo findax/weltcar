@@ -11,6 +11,7 @@ import { getCarsList } from '@/api/cars';
 import { ICatalog, ICatalogQueryParams } from '@/types/catalog';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useQueryParams } from '@/hooks/useQueryParams';
+import { useQueryStore } from '@/stores/query-store';
 
 export default function Catalog() {
   const [isFirstLoading, setFirstLoading] = useState(true);
@@ -21,27 +22,18 @@ export default function Catalog() {
   const [checkedFiltersCount, setCheckedFiltersCount] = useState(0);
   const [catalogData, setCatalogData] = useState({} as ICatalog);
 
-  const {
-    queryState,
-    currentPage,
-    handleSortChange,
-    handlePageChange,
-    handleSearchQuery,
-    handleFilterChange,
-    handleRangeFilterChange,
-    resetRangeFilter,
-    resetFilters,
-    isFiltersVisible,
-    setFiltersVisible,
-  } = useQueryParams();
+  const queryState = useQueryStore((state) => state.query);
+  const { queryParams, currentPage, isFiltersVisible, setFiltersVisible } =
+    useQueryParams();
 
   useEffect(() => {
+    const query = isFirstLoading ? queryParams : queryState;
     setLoading(true);
-    getCarsList(currentPage, 10, queryState as ICatalogQueryParams)
+    getCarsList(currentPage, 10, query as ICatalogQueryParams)
       .then((data) => {
         if (data) {
           setCatalogData(data as ICatalog);
-          getCheckedFiltersCount(queryState as ICatalogQueryParams);
+          getCheckedFiltersCount(query as ICatalogQueryParams);
         } else {
           setError(true);
         }
@@ -92,47 +84,31 @@ export default function Catalog() {
             >
               <Filters
                 filtersData={catalogData?.filters || []}
-                queryState={queryState}
                 closeFilters={setFiltersVisible}
                 checkedFiltersCount={checkedFiltersCount}
-                handleSearchQuery={handleSearchQuery}
-                handleFilterChange={handleFilterChange}
-                handleRangeFilterChange={handleRangeFilterChange}
-                resetRangeFilter={resetRangeFilter}
-                resetFilters={resetFilters}
               />
             </SideMenuWrapper>
           ) : (
             <Filters
               filtersData={catalogData?.filters || []}
-              queryState={queryState}
               closeFilters={setFiltersVisible}
               checkedFiltersCount={checkedFiltersCount}
-              handleSearchQuery={handleSearchQuery}
-              handleFilterChange={handleFilterChange}
-              handleRangeFilterChange={handleRangeFilterChange}
-              resetRangeFilter={resetRangeFilter}
-              resetFilters={resetFilters}
             />
           )}
         </div>
         <div className='col-span-12 lg:col-span-8'>
           <SortPanel
             sortData={catalogData?.sort || []}
-            queryState={queryState as ICatalogQueryParams}
             results={catalogData?.meta.total || 0}
             isGrid={isGrid}
             checkedFiltersCount={checkedFiltersCount}
             handleIsGrid={setGrid}
             openFilter={setFiltersVisible}
-            handleSortChange={handleSortChange}
           />
           <CarList
             carListData={catalogData?.data || []}
             isLoading={isLoading}
             isGrid={isGrid}
-            handlePageChange={handlePageChange}
-            currentPage={currentPage}
             results={catalogData?.meta.total || 0}
           />
         </div>
