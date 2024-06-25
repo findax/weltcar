@@ -6,19 +6,21 @@ import { ButtonPrimary } from '@/shared/Buttons';
 import { Checkbox } from '@/shared/FormInputs';
 import { ArrowPathIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import SearchForm from './SearchForm';
-import { IFilters, IFilter } from '@/types/catalog';
+import { IFilters, IFilter, ICatalogQueryParams } from '@/types/catalog';
 
 const Filters = ({
   filtersData,
+  queryState,
   closeFilters,
   checkedFiltersCount,
   handleSearchQuery,
   handleFilterChange,
   handleRangeFilterChange,
   resetRangeFilter,
-  resetQueryParams,
+  resetFilters,
 }: {
   filtersData: IFilters[];
+  queryState: ICatalogQueryParams | null;
   closeFilters: (value: boolean) => void;
   checkedFiltersCount: number;
   handleSearchQuery: (value: string) => void;
@@ -29,7 +31,7 @@ const Filters = ({
     max: number
   ) => void;
   resetRangeFilter: (filterCategory: string) => void;
-  resetQueryParams: () => void;
+  resetFilters: () => void;
 }) => {
   return (
     <div className='max-lg:overflow-y-auto h-screen lg:visible lg:h-auto p-4 pb-24 lg:py-6 lg:px-8 lg:mb-24 bg-white dark:bg-neutral-900 lg:rounded-2xl border border-neutral-200 dark:border-neutral-700'>
@@ -40,8 +42,9 @@ const Filters = ({
         <XMarkIcon className='w-6 h-6' />
       </button>
       <SearchForm
+        queryState={queryState}
         handleSearchChange={handleSearchQuery}
-        resetQueryParams={resetQueryParams}
+        resetFilters={resetFilters}
       />
       <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
       <div className='sticky top:0 lg:top-20 flex justify-between items-center bg-white dark:bg-neutral-900 z-10'>
@@ -54,7 +57,10 @@ const Filters = ({
           )}
         </h4>
         {checkedFiltersCount > 0 && (
-          <ButtonPrimary sizeClass='gap-2 px-4 py-2' onClick={resetQueryParams}>
+          <ButtonPrimary
+            sizeClass='gap-2 px-4 py-2'
+            onClick={() => resetFilters()}
+          >
             <ArrowPathIcon className='w-4' />
             Clear<span className='lg:hidden xl:inline-block'> Filters</span>
           </ButtonPrimary>

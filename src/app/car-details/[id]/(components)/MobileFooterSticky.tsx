@@ -1,5 +1,5 @@
 import { ButtonPrimary } from '@/shared/Buttons';
-import numberWithComma from '@/utils/numberWithComma';
+import priceWithComma from '@/utils/priceWithComma';
 
 const MobileFooterSticky = ({
   onClick,
@@ -15,7 +15,7 @@ const MobileFooterSticky = ({
       <div className='container flex items-center justify-between'>
         <div className=''>
           <span className='block text-xl font-semibold'>
-            {parseInt(price.toString()) ? numberWithComma(price) + ' €' : price}
+            {priceWithComma(price)}
           </span>
         </div>
         <ButtonPrimary

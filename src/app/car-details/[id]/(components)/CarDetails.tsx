@@ -75,6 +75,10 @@ export default function CarDetails({
                 {carData.description && (
                   <Descriptions description={carData.description} />
                 )}
+                <p className='sm:px-2 text-sm text-neutral-600 dark:text-neutral-300'>
+                  <sup>*</sup>Vehicle specifications and configurations may vary
+                  slightly due to potential discrepancies in the description.
+                </p>
               </>
             )}
           </div>

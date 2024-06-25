@@ -1,10 +1,10 @@
 import BtnLikeIcon from '@/components/BtnLikeIcon';
-import SaleOffBadge from '@/components/SaleOffBadge';
+import SoldBadge from '@/components/SoldBadge';
 import Badge from '@/shared/Badge';
 import CardSlider from '@/components/CardSlider';
 import TooltipComponent from '@/shared/TooltipComponent';
 import { ButtonPrimary } from '@/shared/Buttons';
-import numberWithComma from '@/utils/numberWithComma';
+import priceWithComma from '@/utils/priceWithComma';
 import { ICar } from '@/types/catalog';
 import Link from 'next/link';
 
@@ -45,12 +45,7 @@ const CarCardH = ({
           carName={`${brand} ${model}`}
         />
         {/* <BtnLikeIcon isLiked={like} className='absolute right-3 top-3' /> */}
-        {status === 'sold' && (
-          <SaleOffBadge
-            className='absolute bottom-2 right-3 text-3xl'
-            desc='SOLD'
-          />
-        )}
+        {status === 'sold' && <SoldBadge />}
       </div>
       <div className='w-[45%] lg:w-[50%] xl:w-[45%] 2xl:w-[40%] flex flex-col justify-between px-5 py-4 xl:py-5 space-y-4 2xl:gap-5'>
         <div className='space-y-2'>
@@ -100,7 +95,7 @@ const CarCardH = ({
 
         <div className='pt-4 xl:pt-5 flex justify-between items-center border-t border-dashed border-neutral-300 dark:border-neutral-700'>
           <span className='text-2xl xl:text-3xl font-semibold text-primary-400'>
-            {numberWithComma(price)} €
+            {priceWithComma(price)}
           </span>
           <Link href={`/car-details/${id}`}>
             <ButtonPrimary>See more</ButtonPrimary>

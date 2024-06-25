@@ -1,26 +1,28 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
+import { ToastContainer } from 'react-toastify';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useThemeMode } from '@/hooks/useThemeMode';
+import { HeartIcon, UserIcon } from '@heroicons/react/24/outline';
 import SearchDropdown from './SearchDropdown';
 import MenuMobile from './MenuMobile';
 import SwitchDarkMode from './SwitchDarkMode';
 import LangDropdown from './LangDropdown';
 import AvatarDropdown from './AvatarDropdown';
+import Authorization from '@/components/authorization/Authorization';
 import Logo from '@/shared/Logo';
 import Navigation from '@/shared/Navigation/Navigation';
 import Modal from '@/shared/Modal';
-import Authorization from '@/components/authorization/Authorization';
-import { HeartIcon, UserIcon } from '@heroicons/react/24/outline';
-import { useThemeMode } from '@/utils/useThemeMode';
-import { ToastContainer } from 'react-toastify';
 import { useUserStore } from '@/stores/user-store';
 
 const Header = () => {
   const prevScrollPos = useRef(0);
-  const [isMobile, setIsMobile] = useState(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-  const [scrolled, setScrolled] = useState(false);
+  const [isScrolled, setScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const isMobile = useMediaQuery(1024);
 
   const user = useUserStore((state) => state.user);
 
@@ -33,16 +35,8 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-    const handleResize = () =>
-      window.innerWidth < 768 ? setIsMobile(true) : setIsMobile(false);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
     function handleScroll() {
-      const currentScrollPos = window.pageYOffset;
+      const currentScrollPos = window.scrollY;
       const isHeaderVisible =
         currentScrollPos > 60 ? prevScrollPos.current > currentScrollPos : true;
 
@@ -67,7 +61,7 @@ const Header = () => {
     <>
       <header
         className={`bg-white dark:bg-neutral-900 shadow-sm fixed top-0 inset-x-0 z-30 dark:border-b dark:border-neutral-700 ${!isHeaderVisible ? 'nc-Header--hide' : ''} ${
-          scrolled
+          isScrolled
             ? 'shadow-md bg-opacity-90 dark:bg-opacity-90 backdrop-blur'
             : ''
         } transition-transform duration-300 ease-in-out`}

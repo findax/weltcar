@@ -8,7 +8,9 @@ import SectionClientSay from '@/components/SectionClientSay';
 import SectionSubscribe from '@/components/SectionSubscribe';
 
 export const metadata: Metadata = {
-  title: 'WeltCar - About us',
+  title: 'About Us | Elite Car Sales & Global Delivery Services',
+  description:
+    'Learn more about our commitment to providing the finest luxury cars with exceptional global delivery services. Discover our mission, values, and why we are the preferred choice for elite vehicles worldwide.',
 };
 
 const PageAbout = () => {

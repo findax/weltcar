@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import BtnLikeIcon from '@/components/BtnLikeIcon';
-import SaleOffBadge from '@/components/SaleOffBadge';
+import SoldBadge from '@/components/SoldBadge';
 import Badge from '@/shared/Badge';
 import CardSlider from '@/components/CardSlider';
 import TooltipComponent from '@/shared/TooltipComponent';
 import { ButtonPrimary } from '@/shared/Buttons';
-import numberWithComma from '@/utils/numberWithComma';
+import priceWithComma from '@/utils/priceWithComma';
 import { ICar } from '@/types/catalog';
 
 const CarCard = ({
@@ -46,12 +46,7 @@ const CarCard = ({
           carName={`${brand} ${model}`}
         />
         {/* <BtnLikeIcon isLiked={like} className='absolute right-3 top-3 z-[1]' /> */}
-        {status === 'sold' && (
-          <SaleOffBadge
-            className='absolute bottom-2 right-3 text-3xl'
-            desc='SOLD'
-          />
-        )}
+        {status === 'sold' && <SoldBadge />}
       </div>
       <div className='flex flex-grow flex-col justify-between py-4 px-5 space-y-2'>
         <div className='space-y-2'>
@@ -101,7 +96,7 @@ const CarCard = ({
 
         <div className='pt-4 flex justify-between items-center border-t border-dashed border-neutral-300 dark:border-neutral-700'>
           <span className='text-2xl font-semibold text-primary-400'>
-            {numberWithComma(price)} €
+            {priceWithComma(price)}
           </span>
           <Link href={`/car-details/${id}`}>
             <ButtonPrimary

@@ -3,13 +3,16 @@ import * as Yup from 'yup';
 import { ButtonCircle } from '@/shared/Buttons';
 import { FormikInput } from '@/shared/FormInputs';
 import { XMarkIcon } from '@heroicons/react/24/outline';
+import { ICatalogQueryParams } from '@/types/catalog';
 
 export default function SearchForm({
+  queryState,
   handleSearchChange,
-  resetQueryParams,
+  resetFilters,
 }: {
+  queryState: ICatalogQueryParams | null;
   handleSearchChange: (value: string) => void;
-  resetQueryParams: () => void;
+  resetFilters: (searchQuery?: boolean) => void;
 }) {
   const SearchSchema = Yup.object().shape({
     search: Yup.string()
@@ -22,7 +25,7 @@ export default function SearchForm({
   return (
     <Formik
       initialValues={{
-        search: '',
+        search: queryState?.search || '',
       }}
       validationSchema={SearchSchema}
       onSubmit={(values, { setSubmitting, resetForm }) => {
@@ -55,7 +58,7 @@ export default function SearchForm({
           {values.search !== '' && (
             <button
               onClick={() => {
-                resetQueryParams();
+                resetFilters(!!values.search);
                 values.search = '';
               }}
               className='absolute top-1/2 -translate-y-1/2 right-12 p-2 rounded-full bg-neutral-200 dark:bg-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-400'

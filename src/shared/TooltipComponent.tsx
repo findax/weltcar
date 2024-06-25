@@ -1,5 +1,5 @@
 import { Tooltip } from 'react-tooltip';
-import { useThemeMode } from '@/utils/useThemeMode';
+import { useThemeMode } from '@/hooks/useThemeMode';
 
 export default function TooltipComponent({
   id,

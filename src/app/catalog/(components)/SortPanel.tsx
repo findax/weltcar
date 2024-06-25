@@ -5,11 +5,12 @@ import {
   AdjustmentsHorizontalIcon,
   DocumentArrowDownIcon,
 } from '@heroicons/react/24/outline';
-import { ISort } from '@/types/catalog';
+import { ICatalogQueryParams, ISort } from '@/types/catalog';
 import { ButtonPrimary } from '@/shared/Buttons';
 
 interface SortPanelProps {
   sortData: ISort[];
+  queryState: ICatalogQueryParams;
   results: number;
   isGrid: boolean;
   checkedFiltersCount: number;
@@ -20,6 +21,7 @@ interface SortPanelProps {
 
 const SortPanel = ({
   sortData,
+  queryState,
   results,
   isGrid,
   checkedFiltersCount,
@@ -28,8 +30,11 @@ const SortPanel = ({
   handleSortChange,
 }: SortPanelProps) => {
   const [fileFormat, setFileFormat] = useState<string>('pdf');
+  const isSelectorShortWidth =
+    (queryState && queryState.sort && queryState.sort[0].id === 'oldest') !==
+    false;
 
-  const handleSortSelectChange = (select: HTMLSelectElement) => {
+  function handleSortSelectChange(select: HTMLSelectElement) {
     let tempOption = document.createElement('option');
     tempOption.textContent = select.selectedOptions[0].textContent;
 
@@ -43,7 +48,7 @@ const SortPanel = ({
     tempSelect.remove();
 
     handleSortChange(select.value);
-  };
+  }
 
   return (
     <div className='col-span-12 bg-white dark:bg-neutral-900 mb-4 py-2 pl-4 pr-1 lg:mb-6 border border-neutral-200 dark:border-neutral-700 rounded-xl'>
@@ -79,22 +84,8 @@ const SortPanel = ({
       </div>
       <div className='mt-4 mb-2 border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
       <ul className='flex justify-between items-center flex-wrap gap-2'>
-        <li className='hidden lg:block'>
+        <li className='py-2.5 lg:py-0'>
           <p className='mb-0 clr-neutral-500'>{results} Results</p>
-        </li>
-        <li className='lg:hidden'>
-          <button
-            onClick={() => openFilter(true)}
-            className={`focus:outline-none flex items-center justify-center py-2.5 rounded-lg text-neutral-700 dark:text-neutral-300`}
-          >
-            <span className='inline-block font-medium'>Filters</span>
-            <AdjustmentsHorizontalIcon className='h-5 w-5 ml-1' />{' '}
-            {checkedFiltersCount > 0 && (
-              <span className='inline-flex text-white items-center justify-center w-7 h-7 ml-2 text-sm font-normal rounded-full bg-primary-700'>
-                {checkedFiltersCount}
-              </span>
-            )}
-          </button>
         </li>
         <li className='flex-grow'>
           <div className='hidden md:flex flex-wrap justify-center justify-content-lg-start justify-content-xl-center gap-4'>
@@ -122,8 +113,8 @@ const SortPanel = ({
           <label className='mb-0 clr-neutral-500 flex-grow whitespace-nowrap'>
             Sort By :
             <select
-              className='w-[105px] pl-4 pr-8 py-2 bg-transparent cursor-pointer border-0 focus:ring-indigo-500 focus:border-indigo-500 rounded-full'
-              defaultValue='latest'
+              className={`${isSelectorShortWidth ? 'w-[105px]' : ''} pl-4 pr-8 py-2 bg-transparent cursor-pointer border-0 focus:ring-indigo-500 focus:border-indigo-500 rounded-full`}
+              defaultValue={`${(queryState && queryState.sort && queryState.sort[0].id) || 'latest'}`}
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                 handleSortSelectChange(e.target)
               }
@@ -135,6 +126,20 @@ const SortPanel = ({
               ))}
             </select>
           </label>
+        </li>
+        <li className='w-full lg:hidden'>
+          <button
+            onClick={() => openFilter(true)}
+            className={`py-2.5 flex items-center justify-center rounded-lg text-xl text-neutral-700 dark:text-neutral-300 focus:outline-none`}
+          >
+            <span className='inline-block font-bold'>Filters</span>
+            <AdjustmentsHorizontalIcon className='w-7 ml-1' />{' '}
+            {checkedFiltersCount > 0 && (
+              <span className='inline-flex text-white items-center justify-center w-7 h-7 ml-2 text-sm font-normal rounded-full bg-primary-700'>
+                {checkedFiltersCount}
+              </span>
+            )}
+          </button>
         </li>
       </ul>
     </div>

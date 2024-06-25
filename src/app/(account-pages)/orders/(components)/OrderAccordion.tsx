@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import AnimateHeight from 'react-animate-height';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
-import numberWithComma from '@/utils/numberWithComma';
+import priceWithComma from '@/utils/priceWithComma';
 
 export interface AccordionProps {
   className?: string;
@@ -39,7 +39,7 @@ const OrderAccordion = ({
         </h4>
         <h4 className='text-nowrap text-ellipsis overflow-hidden'>{status}</h4>
         <h4 className='text-nowrap text-ellipsis overflow-hidden'>
-          {numberWithComma(price)} €
+          {priceWithComma(price)}
         </h4>
         <ChevronDownIcon
           className={`absolute top-1/2 -translate-y-1/2 right-4 w-5 duration-300 ${opened ? 'rotate-180' : ''}`}

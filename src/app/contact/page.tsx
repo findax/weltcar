@@ -4,7 +4,9 @@ import SectionSubscribe from '@/components/SectionSubscribe';
 import BackgroundSection from '@/components/BackgroundSection';
 
 export const metadata: Metadata = {
-  title: 'WeltCar - Contact us',
+  title: 'Contact Us | Elite Car Sales & Global Delivery Inquiries',
+  description:
+    'Get in touch with us for inquiries about our luxury cars and global delivery services. Contact our team for assistance with purchasing elite vehicles and delivery to countries like Germany, Switzerland, Dubai, and China.',
 };
 
 const PageContact = () => {

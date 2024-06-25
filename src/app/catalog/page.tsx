@@ -1,31 +1,15 @@
 import { Metadata } from 'next';
-import api from '@/api/apiInstance';
-import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import LoadingSpinner from '@/shared/LoadingSpinner';
 import Catalog from './(components)/Catalog';
 
 export const metadata: Metadata = {
-  title: 'WeltCar - Catalog',
+  title: 'Luxury Car Catalog | Browse Our Elite Vehicle Collection',
+  description:
+    'Explore our extensive catalog of elite cars available for global delivery. Find your dream car from top brands, with special services for Germany, Switzerland, Dubai, and China.',
 };
 
-async function getCarsList() {
-  try {
-    const res = await api.post('/api/cars/list');
-    if (!res) return undefined;
-    return res.data;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-export const revalidate = 180; // revalidate at most every 3 minutes
-
 export default async function CatalogPage() {
-  const carListData = await getCarsList();
-
-  if (!carListData) return notFound();
-
   return (
     <Suspense
       fallback={
@@ -36,7 +20,7 @@ export default async function CatalogPage() {
         </div>
       }
     >
-      <Catalog carListData={carListData} />
+      <Catalog />
     </Suspense>
   );
 }

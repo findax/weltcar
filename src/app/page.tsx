@@ -1,4 +1,4 @@
-import React from 'react';
+import { Metadata } from 'next/types';
 import SectionHero from '@/components/SectionHero';
 import BgGlassmorphism from '@/components/BgGlassmorphism';
 import BackgroundSection from '@/components/BackgroundSection';
@@ -7,6 +7,12 @@ import SectionSubscribe from '@/components/SectionSubscribe';
 import SectionWhyChooseUs from '@/components/SectionWhyChooseUs';
 import SectionVideos from '@/components/SectionVideos';
 import SectionClientSay from '@/components/SectionClientSay';
+
+export const metadata: Metadata = {
+  title: 'Elite Car Sales & Global Delivery | Luxury Vehicles Worldwide',
+  description:
+    'Discover our collection of elite cars with global delivery to all countries, including Germany, Switzerland, Dubai, and China. Experience luxury and performance with our exclusive vehicle range.',
+};
 
 function PageHome() {
   return (

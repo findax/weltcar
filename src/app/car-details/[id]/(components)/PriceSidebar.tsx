@@ -1,5 +1,5 @@
 import { ButtonPrimary } from '@/shared/Buttons';
-import numberWithComma from '@/utils/numberWithComma';
+import priceWithComma from '@/utils/priceWithComma';
 
 export default function PriceSidebar({
   onClick,
@@ -17,7 +17,7 @@ export default function PriceSidebar({
           <span className='text-2xl font-semibold'>Price</span>
           <span className='flex-grow mb-1 border-b border-dashed border-neutral-300 dark:border-neutral-700'></span>
           <span className='text-3xl font-semibold'>
-            {parseInt(price.toString()) ? numberWithComma(price) + ' €' : price}
+            {priceWithComma(price)}
           </span>
         </div>
 

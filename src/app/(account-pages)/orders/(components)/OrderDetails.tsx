@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import numberWithComma from '@/utils/numberWithComma';
+import priceWithComma from '@/utils/priceWithComma';
 import { DocumentTextIcon } from '@heroicons/react/24/outline';
 import { IOrderDetails } from '@/types/user';
 
@@ -38,7 +38,7 @@ export default function OrderDetails({ order }: { order: IOrderDetails }) {
               {order.car.car_id}
             </span>
             <span className='block mt-1 text-xl font-semibold'>
-              {numberWithComma(order.car.price)} €
+              {priceWithComma(order.car.price)}
             </span>
           </div>
           <Image

@@ -20,9 +20,9 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'WeltCar - Premium Automobiles',
+  title: 'Elite Car Sales & Global Delivery | Luxury Vehicles Worldwide',
   description:
-    'Explore our curated selection of premium automobiles, where every ride embodies elegance and sophistication',
+    'Discover our collection of elite cars with global delivery to all countries, including Germany, Switzerland, Dubai, and China. Experience luxury and performance with our exclusive vehicle range.',
   keywords: 'Cars, Vehicles, Automobiles',
 };
 
