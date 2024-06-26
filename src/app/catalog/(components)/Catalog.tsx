@@ -19,7 +19,7 @@ export default function Catalog() {
   const [isError, setError] = useState(false);
   const [isGrid, setGrid] = useState(true);
   const isMobile = useMediaQuery(1024);
-  const [checkedFiltersCount, setCheckedFiltersCount] = useState(0);
+  const [activeFiltersCount, setActiveFiltersCount] = useState(0);
   const [catalogData, setCatalogData] = useState({} as ICatalog);
 
   const queryState = useQueryStore((state) => state.query);
@@ -33,7 +33,7 @@ export default function Catalog() {
       .then((data) => {
         if (data) {
           setCatalogData(data as ICatalog);
-          getCheckedFiltersCount(query as ICatalogQueryParams);
+          getActiveFiltersCount(query as ICatalogQueryParams);
         } else {
           setError(true);
         }
@@ -44,7 +44,7 @@ export default function Catalog() {
       });
   }, [currentPage, queryState]);
 
-  function getCheckedFiltersCount(queryParams: ICatalogQueryParams) {
+  function getActiveFiltersCount(queryParams: ICatalogQueryParams) {
     if (queryParams?.filters) {
       const checkedFilters = queryParams.filters.reduce(
         (sum, { id, values }) => {
@@ -56,9 +56,9 @@ export default function Catalog() {
         },
         0
       );
-      setCheckedFiltersCount(checkedFilters);
+      setActiveFiltersCount(checkedFilters);
     } else {
-      setCheckedFiltersCount(0);
+      setActiveFiltersCount(0);
     }
   }
 
@@ -85,14 +85,14 @@ export default function Catalog() {
               <Filters
                 filtersData={catalogData?.filters || []}
                 closeFilters={setFiltersVisible}
-                checkedFiltersCount={checkedFiltersCount}
+                activeFiltersCount={activeFiltersCount}
               />
             </SideMenuWrapper>
           ) : (
             <Filters
               filtersData={catalogData?.filters || []}
               closeFilters={setFiltersVisible}
-              checkedFiltersCount={checkedFiltersCount}
+              activeFiltersCount={activeFiltersCount}
             />
           )}
         </div>
@@ -101,7 +101,7 @@ export default function Catalog() {
             sortData={catalogData?.sort || []}
             results={catalogData?.meta.total || 0}
             isGrid={isGrid}
-            checkedFiltersCount={checkedFiltersCount}
+            activeFiltersCount={activeFiltersCount}
             handleIsGrid={setGrid}
             openFilter={setFiltersVisible}
           />

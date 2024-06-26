@@ -20,7 +20,7 @@ export default function SubscribeForm() {
       }}
       validationSchema={SubscribeSchema}
       onSubmit={(values, { setSubmitting, resetForm }) => {
-        // same shape as initial values
+        // trim values
         const castValues = SubscribeSchema.cast(values);
 
         sendSubscribeEmail(castValues)

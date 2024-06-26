@@ -25,7 +25,7 @@ export default function ForgotPassword({
       }}
       validationSchema={forgotPasswordSchema}
       onSubmit={(values, { setSubmitting, resetForm }) => {
-        // same shape as initial values
+        // trim values
         const castValues = forgotPasswordSchema.cast(values);
 
         sendForgotPassword(castValues)

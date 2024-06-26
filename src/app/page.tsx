@@ -9,7 +9,8 @@ import SectionVideos from '@/components/SectionVideos';
 import SectionClientSay from '@/components/SectionClientSay';
 
 export const metadata: Metadata = {
-  title: 'Elite Car Sales & Global Delivery | Luxury Vehicles Worldwide',
+  title:
+    'Elite Car Sales & Global Delivery | Luxury Vehicles Worldwide | WeltCar',
   description:
     'Discover our collection of elite cars with global delivery to all countries, including Germany, Switzerland, Dubai, and China. Experience luxury and performance with our exclusive vehicle range.',
 };

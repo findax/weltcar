@@ -12,11 +12,11 @@ import { useQueryParams } from '@/hooks/useQueryParams';
 const Filters = ({
   filtersData,
   closeFilters,
-  checkedFiltersCount,
+  activeFiltersCount,
 }: {
   filtersData: IFilters[];
   closeFilters: (value: boolean) => void;
-  checkedFiltersCount: number;
+  activeFiltersCount: number;
 }) => {
   const {
     handleFilterChange,
@@ -38,13 +38,13 @@ const Filters = ({
       <div className='sticky top:0 lg:top-20 flex justify-between items-center bg-white dark:bg-neutral-900 z-10'>
         <h4 className='flex justify-between items-center my-6 text-2xl font-semibold'>
           Filters{' '}
-          {checkedFiltersCount > 0 && (
+          {activeFiltersCount > 0 && (
             <span className='inline-flex text-white items-center justify-center w-7 h-7 ml-2 text-sm font-normal rounded-full bg-primary-700'>
-              {checkedFiltersCount}
+              {activeFiltersCount}
             </span>
           )}
         </h4>
-        {checkedFiltersCount > 0 && (
+        {activeFiltersCount > 0 && (
           <ButtonPrimary
             sizeClass='gap-2 px-4 py-2'
             onClick={() => resetFilters()}

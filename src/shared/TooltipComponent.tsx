@@ -9,6 +9,7 @@ export default function TooltipComponent({
   content: string;
 }) {
   const { isDarkMode } = useThemeMode();
+
   return (
     <Tooltip
       id={id}

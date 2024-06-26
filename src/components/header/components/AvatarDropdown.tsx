@@ -1,7 +1,7 @@
 import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import Avatar from '@/shared/Avatar';
-import SwitchDarkMode2 from '@/shared/SwitchDarkMode2';
+import SwitchDarkMode2 from '@/components/header/components/SwitchDarkMode2';
 import Link from 'next/link';
 import {
   UserIcon,

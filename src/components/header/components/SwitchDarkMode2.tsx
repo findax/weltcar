@@ -2,22 +2,16 @@
 
 import { useThemeMode } from '@/hooks/useThemeMode';
 import { Switch } from '@headlessui/react';
-import React from 'react';
 
-export interface SwitchDarkMode2Props {
-  className?: string;
-}
-const SwitchDarkMode2: React.FC<SwitchDarkMode2Props> = ({
-  className = '',
-}) => {
-  const { _toogleDarkMode, isDarkMode, toDark, toLight } = useThemeMode();
+const SwitchDarkMode2 = ({ className = '' }: { className?: string }) => {
+  const { isDarkMode, toggleTheme } = useThemeMode();
 
   return (
     <div className='inline-flex'>
       <span className='sr-only'>Enable dark mode</span>
       <Switch
         checked={isDarkMode}
-        onChange={_toogleDarkMode}
+        onChange={toggleTheme}
         className={`${isDarkMode ? 'bg-teal-900' : 'bg-teal-600'}
           relative inline-flex h-[22px] w-[42px] shrink-0 cursor-pointer rounded-full border-4 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
       >

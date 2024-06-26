@@ -15,8 +15,8 @@ export async function generateMetadata({
   const resMetadata = await data.json();
 
   return {
-    title: `${resMetadata.data.brand + ' ' + resMetadata.data.model} - Elite Car for Sale | Global Delivery Available`,
-    description: `Purchase the ${resMetadata.data.brand + ' ' + resMetadata.data.model} and experience unparalleled luxury and performance. We offer global delivery, including services to Germany, Switzerland, Dubai, and China. Explore detailed specifications and exclusive features.`,
+    title: `${resMetadata.data.brand + ' ' + resMetadata.data.model + ' ' + resMetadata.data.specification + ' ' + resMetadata.data.year} - Elite Car for Sale | Global Delivery Available | WeltCar`,
+    description: `Purchase the ${resMetadata.data.brand + ' ' + resMetadata.data.model + ' ' + resMetadata.data.specification + ' ' + resMetadata.data.year} and experience unparalleled luxury and performance. We offer global delivery, including services to Germany, Switzerland, Dubai, and China. Explore detailed specifications and exclusive features.`,
   };
 }
 

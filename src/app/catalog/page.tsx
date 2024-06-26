@@ -4,7 +4,7 @@ import LoadingSpinner from '@/shared/LoadingSpinner';
 import Catalog from './(components)/Catalog';
 
 export const metadata: Metadata = {
-  title: 'Luxury Car Catalog | Browse Our Elite Vehicle Collection',
+  title: 'Luxury Car Catalog | Browse Our Elite Vehicle Collection | WeltCar',
   description:
     'Explore our extensive catalog of elite cars available for global delivery. Find your dream car from top brands, with special services for Germany, Switzerland, Dubai, and China.',
 };

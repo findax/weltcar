@@ -1,5 +1,6 @@
 'use client';
 
+import { Fragment } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import {
@@ -10,7 +11,6 @@ import {
   CurrencyRupeeIcon,
   BanknotesIcon,
 } from '@heroicons/react/24/outline';
-import { Fragment } from 'react';
 
 export const headerCurrency = [
   {

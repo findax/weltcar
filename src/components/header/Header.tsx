@@ -5,11 +5,11 @@ import { ToastContainer } from 'react-toastify';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useThemeMode } from '@/hooks/useThemeMode';
 import { HeartIcon, UserIcon } from '@heroicons/react/24/outline';
-import SearchDropdown from './SearchDropdown';
-import MenuMobile from './MenuMobile';
-import SwitchDarkMode from './SwitchDarkMode';
-import LangDropdown from './LangDropdown';
-import AvatarDropdown from './AvatarDropdown';
+import SearchDropdown from './components/SearchDropdown';
+import MenuMobile from './components/MenuMobile';
+import SwitchDarkMode from './components/SwitchDarkMode';
+import LangDropdown from './components/LangDropdown';
+import AvatarDropdown from './components/AvatarDropdown';
 import Authorization from '@/components/authorization/Authorization';
 import Logo from '@/shared/Logo';
 import Navigation from '@/shared/Navigation/Navigation';
@@ -21,14 +21,9 @@ const Header = () => {
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [isScrolled, setScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const { isDarkMode } = useThemeMode();
   const isMobile = useMediaQuery(1024);
-
   const user = useUserStore((state) => state.user);
-
-  //
-  useThemeMode();
-  //
 
   useEffect(() => {
     useUserStore.persist.rehydrate();
@@ -109,9 +104,7 @@ const Header = () => {
         hideProgressBar={false}
         closeOnClick
         rtl={false}
-        theme={
-          typeof localStorage !== 'undefined' ? localStorage.theme : 'light'
-        }
+        theme={isDarkMode ? 'dark' : 'light'}
       />
     </>
   );

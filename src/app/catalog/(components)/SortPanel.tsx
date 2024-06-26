@@ -13,7 +13,7 @@ interface SortPanelProps {
   sortData: ISort[];
   results: number;
   isGrid: boolean;
-  checkedFiltersCount: number;
+  activeFiltersCount: number;
   handleIsGrid: (isGrid: boolean) => void;
   openFilter: (value: boolean) => void;
 }
@@ -22,7 +22,7 @@ const SortPanel = ({
   sortData,
   results,
   isGrid,
-  checkedFiltersCount,
+  activeFiltersCount,
   handleIsGrid,
   openFilter,
 }: SortPanelProps) => {
@@ -133,9 +133,9 @@ const SortPanel = ({
           >
             <span className='inline-block font-bold'>Filters</span>
             <AdjustmentsHorizontalIcon className='w-7 ml-1' />{' '}
-            {checkedFiltersCount > 0 && (
+            {activeFiltersCount > 0 && (
               <span className='inline-flex text-white items-center justify-center w-7 h-7 ml-2 text-sm font-normal rounded-full bg-primary-700'>
-                {checkedFiltersCount}
+                {activeFiltersCount}
               </span>
             )}
           </button>

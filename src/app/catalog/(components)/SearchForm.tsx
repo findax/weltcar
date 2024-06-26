@@ -23,7 +23,7 @@ export default function SearchForm() {
       }}
       validationSchema={SearchSchema}
       onSubmit={(values, { setSubmitting, resetForm }) => {
-        // same shape as initial values
+        // trim values
         const castValues = SearchSchema.cast(values);
 
         handleSearchChange(castValues.search);

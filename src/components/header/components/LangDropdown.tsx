@@ -109,8 +109,8 @@ const LangDropdown: FC<LangDropdownProps> = ({
       {({ open, close }) => (
         <>
           <Menu.Button
-            className="
-             self-center h-10 sm:h-12 px-3 py-1.5 inline-flex items-center text-sm md:text-lg font-medium rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none"
+            className='
+             self-center h-10 sm:h-12 px-3 py-1.5 inline-flex items-center text-sm md:text-lg font-medium rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none'
           >
             <GlobeAltIcon className='w-5 h-5 md:w-7 md:h-7 opacity-80' />
             <span className='mx-1'>/</span>
