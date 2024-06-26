@@ -29,6 +29,7 @@ const SectionHero = () => {
             src={rightImg}
             alt='Luxury Vehicles'
             sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw'
+            priority
           />
         </div>
       </div>

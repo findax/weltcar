@@ -28,6 +28,7 @@ export default function OrderDetails({ order }: { order: IOrderDetails }) {
         <Link
           href={`/car-details/${order.car.id}`}
           className='group inline-flex flex-wrap'
+          target='_blank'
         >
           <div className='mr-4'>
             <h4 className='text-xl font-semibold underline transition-all duration-[500ms] group-hover:no-underline'>

@@ -66,7 +66,9 @@ export default function Catalog() {
 
   return isFirstLoading ? (
     <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
-      <LoadingSpinner className='w-12' />
+      <div className='-mt-[76px]'>
+        <LoadingSpinner className='w-12' />
+      </div>
     </div>
   ) : isError ? (
     <div className='h-[calc(100vh-76px)] flex justify-center items-center'>

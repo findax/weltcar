@@ -44,8 +44,8 @@ export default function SectionHeroArchivePage() {
         <Image
           src={heroRightImage}
           alt='hero'
-          priority
           sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw'
+          priority
         />
       </div>
     </div>

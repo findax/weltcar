@@ -98,7 +98,7 @@ const CarCard = ({
           <span className='text-2xl font-semibold text-primary-400'>
             {priceWithComma(price)}
           </span>
-          <Link href={`/car-details/${id}`}>
+          <Link href={`/car-details/${id}`} target='_blank'>
             <ButtonPrimary
               fontSize='text-sm'
               sizeClass='px-5 py-2 md:px-6 md:py-3'
