@@ -16,7 +16,7 @@ const TEAM = [
   },
   {
     id: '2',
-    name: 'Nataliia',
+    name: 'Natalia',
     job: 'Founder, Director',
     avatar: teamImg2,
   },
