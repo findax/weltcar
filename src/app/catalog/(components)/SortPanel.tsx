@@ -71,7 +71,7 @@ const SortPanel = ({
               <option value='xlsx'>CSV</option>
             </select>
             <ButtonPrimary
-              href={`${process.env.NEXT_PUBLIC_SERVER_URL}/api/cars/list/export?type=${fileFormat}`}
+              href={`https://stageapi.weltcar.de/api/cars/list/export?type=${fileFormat}`}
               download
               className='!py-2 mx-2'
             >
