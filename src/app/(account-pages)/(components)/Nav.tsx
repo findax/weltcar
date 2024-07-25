@@ -8,7 +8,7 @@ export const Nav = () => {
   const pathname = usePathname();
 
   // const listNav: Route[] = ['/account', '/password', '/favorites', '/orders'];
-  const listNav: Route[] = ['/account', '/password', '/orders'];
+  const listNav: Route[] = ['/account', '/password', '/orders', '/car-subscriptions'];
 
   return (
     <div className='container'>
