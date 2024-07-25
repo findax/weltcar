@@ -268,7 +268,7 @@ const CarSelector = () => {
             <div className={`flex items-center w-[90%] flex-wrap gap-1 border border-${isDark ? 'neutral-700' : 'neutral-200'} bg-${ isDark ? 'neutral-800' : 'white'} rounded-2xl px-4 py-2`}>
               {tagsToDisplay.map((tag) => (
                 tag.models.map((model, index) => 
-                  <div 
+                  <div
                     key={index} 
                     className={`px-3 py-1 border border-${isDark ? 'neutral-700' : 'neutral-200'} rounded-xl text-${ isDark ? 'white' : 'black'} inline-block bg-${ isDark ? '' : 'neutral-100' }`}
                   >
