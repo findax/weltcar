@@ -236,12 +236,14 @@ const CarSelector = () => {
         )
       );
     } else {
+      //@ts-ignore
       setFilteredCars(filterCars())
     }
   }, [inputValue]);
 
   useEffect(() => {
     if (tagsToRequest.length >= 0) {
+      //@ts-ignore
       setFilteredCars(filterCars())
     }
   }, [tagsToRequest]);
