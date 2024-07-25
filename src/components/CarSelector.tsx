@@ -11,7 +11,7 @@ import { ButtonPrimary } from "@/shared/Buttons";
 import { IoIosClose } from "react-icons/io";
 
 
-const CarSelector = () => {
+const CarSelector = () => { 
   const [isFirstLoading, setFirstLoading] = useState(true);
   const [isLoading, setLoading] = useState(true);
   const [isError, setError] = useState(false);
