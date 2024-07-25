@@ -63,3 +63,24 @@ export interface IOrderDetails {
   price: number | string;
   updated_at: string;
 }
+
+export interface IModel {
+  model_id: number;
+  model_name: string;
+  is_selected: boolean;
+}
+
+export interface IBrand {
+  brand_id: number;
+  brand_name: string;
+  is_selected: boolean;
+  is_all_models_selected: boolean;
+  models: IModel[];
+}
+
+export interface ICarDataToRequest<T> {
+  brand_id: number;
+  models: Array<T>;
+}
+
+export interface ICarData extends Array<IBrand> {}
