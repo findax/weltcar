@@ -26,7 +26,7 @@ const CarSelector = () => {
   const { currentPage } = useQueryParams();
   const [isDark, setDark] = useState(false);
   
-  const filterCars = () => {
+  const filterCars = () => { 
     const filtered = 
         cars.map((car) => {
           const searchedCar = tagsToRequest.find(el => el.brand_id === car.brand_id)
