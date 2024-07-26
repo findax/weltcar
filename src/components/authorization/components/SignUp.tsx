@@ -9,6 +9,8 @@ import {
 } from '@/shared/FormInputs';
 import { singUp } from '@/api/auth';
 import { InformationCircleIcon } from '@heroicons/react/24/outline';
+import SwitchAuthorizationPage from './SwitchAuthorizationPage';
+import SignUpPartner from './SignUpPartner';
 
 export default function SignUp({
   setIsModalOpen,
@@ -16,7 +18,12 @@ export default function SignUp({
   setIsModalOpen: (isModalOpen: boolean) => void;
 }) {
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isCustomer, setIsCustomer] = useState(false);
   // const phoneValidationPattern = /\+38 \(0\d{2}\) \d{3}-\d{2}-\d{2}/;
+
+  const handleChangeClient = (isClientSwitch: boolean) => {
+    setIsCustomer(isClientSwitch);
+  }
 
   const SignUpSchema = Yup.object().shape({
     name: Yup.string()
@@ -55,66 +62,84 @@ export default function SignUp({
       </div>
     </div>
   ) : (
-    <Formik
-      initialValues={{
-        name: '',
-        email: '',
-        phone: '',
-        password: '',
-      }}
-      validationSchema={SignUpSchema}
-      onSubmit={(values, { setSubmitting, resetForm }) => {
-        // trim values
-        const castValues = SignUpSchema.cast(values);
+    <>
+    <div className='flex text-sm w-full justify-center'>
+      <p>I`am a customer</p>
+      <SwitchAuthorizationPage 
+        className='mx-2'
+        isClientSwitch={isCustomer} 
+        onChange={handleChangeClient}
+      />
+      <p>I`am a partner</p>
+    </div>
+    {isCustomer 
+      ? (
+          <SignUpPartner setIsModalOpen={setIsModalOpen} />
+        )
+      : (
+          <Formik
+          initialValues={{
+            name: '',
+            email: '',
+            phone: '',
+            password: '',
+          }}
+          validationSchema={SignUpSchema}
+          onSubmit={(values, { setSubmitting, resetForm }) => {
+            // trim values
+            const castValues = SignUpSchema.cast(values);
 
-        singUp(castValues)
-          .then((res) => {
-            res && (setIsSuccess(true), resetForm(), setSubmitting(false));
-          })
-          .finally(() => setSubmitting(false));
-      }}
-    >
-      {({ errors, touched, isSubmitting }) => (
-        <Form className='grid grid-cols-1 gap-8'>
-          <FormikInput
-            name='name'
-            placeholder='Enter your name'
-            title='Name'
-            error={errors.name}
-            touched={touched.name}
-          />
-          {/* ---- */}
-          <FormikInput
-            name='email'
-            type='email'
-            placeholder='example@mail.com'
-            title='Email address'
-            error={errors.email}
-            touched={touched.email}
-          />
-          {/* ---- */}
-          <FormikPhoneNumberInput
-            title='Phone number'
-            error={errors.phone}
-            touched={touched.phone}
-          />
-          {/* ---- */}
-          <FormikPasswordInput
-            title='Password'
-            placeholder='Enter your password'
-            error={errors.password}
-            touched={touched.password}
-          />
+            singUp(castValues)
+              .then((res) => {
+                res && (setIsSuccess(true), resetForm(), setSubmitting(false));
+              })
+              .finally(() => setSubmitting(false));
+          }}
+        >
+          {({ errors, touched, isSubmitting }) => (
+            <Form className='grid grid-cols-1 gap-8'>
+              <FormikInput
+                name='name'
+                placeholder='Enter your name'
+                title='Name'
+                error={errors.name}
+                touched={touched.name}
+              />
+              {/* ---- */}
+              <FormikInput
+                name='email'
+                type='email'
+                placeholder='example@mail.com'
+                title='Email address'
+                error={errors.email}
+                touched={touched.email}
+              />
+              {/* ---- */}
+              <FormikPhoneNumberInput
+                title='Phone number'
+                error={errors.phone}
+                touched={touched.phone}
+              />
+              {/* ---- */}
+              <FormikPasswordInput
+                title='Password'
+                placeholder='Enter your password'
+                error={errors.password}
+                touched={touched.password}
+              />
 
-          <ButtonPrimary
-            type='submit'
-            disabled={isSubmitting}
-            loading={isSubmitting}
-          >
-            Continue
-          </ButtonPrimary>
-        </Form>
-      )}
-    </Formik>
+              <ButtonPrimary
+                type='submit'
+                disabled={isSubmitting}
+                loading={isSubmitting}
+              >
+                Continue
+              </ButtonPrimary>
+            </Form>
+          )}
+          </Formik>
+        )
+    }
+    </>
   );
 }
