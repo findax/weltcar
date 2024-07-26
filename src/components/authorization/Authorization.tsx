@@ -4,6 +4,7 @@ import { useState } from 'react';
 import SocialAuth from './components/SocialAuth';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
+import { AuthorizationPages } from '@/types/authorization';
 
 export default function Authorization({
   setIsModalOpen,
@@ -11,7 +12,7 @@ export default function Authorization({
   setIsModalOpen: (isModalOpen: boolean) => void;
 }) {
   const [page, setPage] = useState(<SignIn setIsModalOpen={setIsModalOpen} />);
-  const [isActive, setActive] = useState(true);
+  const [currentPage, setCurrentPage] = useState<AuthorizationPages>(AuthorizationPages.login);
 
   return (
     <div className='w-full max-w-md mx-auto space-y-6'>
@@ -19,10 +20,10 @@ export default function Authorization({
         <button
           id='login'
           className={`w-1/2 text-xl pb-4 border-b-4 ${
-            isActive ? 'border-primary-500 font-semibold' : 'border-transparent'
+            currentPage === AuthorizationPages.login ? 'border-primary-500 font-semibold' : 'border-transparent'
           }`}
           onClick={() => {
-            setActive(true);
+            setCurrentPage(AuthorizationPages.login);
             setPage(<SignIn setIsModalOpen={setIsModalOpen} />);
           }}
         >
@@ -31,10 +32,10 @@ export default function Authorization({
         <button
           id='signup'
           className={`w-1/2 text-xl pb-4 border-b-4 ${
-            isActive ? 'border-transparent' : 'border-primary-500 font-semibold'
+            currentPage === AuthorizationPages.signup ? 'border-primary-500 font-semibold' : 'border-transparent'
           }`}
           onClick={() => {
-            setActive(false);
+            setCurrentPage(AuthorizationPages.signup);
             setPage(<SignUp setIsModalOpen={setIsModalOpen} />);
           }}
         >

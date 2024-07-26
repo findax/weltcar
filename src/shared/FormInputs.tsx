@@ -7,7 +7,9 @@ import {
   EyeSlashIcon,
   EyeIcon,
   InformationCircleIcon,
+  DocumentTextIcon,
 } from '@heroicons/react/24/outline';
+import { array } from 'yup';
 
 const commonClass =
   'block w-full border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl text-sm font-normal h-11 px-4 py-3';
@@ -269,6 +271,7 @@ export const FormikCheckbox = ({
     </fieldset>
   );
 };
+
 interface FormikTextareaProps {
   name: string;
   type?: string;
@@ -299,6 +302,75 @@ export const FormikTextarea = ({
         className={`${commonClass} ${sizeClass}`}
         {...args}
       />
+      {error && touched ? (
+        <div className={commonErrorClass}>
+          <InformationCircleIcon className='w-4 inline-block mr-1' />
+          {error}
+        </div>
+      ) : null}
+    </fieldset>
+  );
+};
+
+interface FormikFileProps {
+  name: string;
+  label?: string;
+  error?: string;
+  touched?: boolean;
+  accept?: string; // MIME types or file extensions
+  multiple?: boolean;
+}
+
+export const FormikFile = ({
+  name,
+  label = '',
+  error,
+  touched,
+  accept,
+  multiple = false,
+}: FormikFileProps) => {
+  const [file, setFile] = useState<FileList | null>(null);
+  return (
+    <fieldset className='relative'>
+      {label && <span className={commonTitleClass}>{label}</span>}
+      <Field name={name}>
+        {({ form }: any) => (
+          <>
+            <label
+              className="w-full py-2 px-4 flex border border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-900 justify-between items-center rounded-2xl border-input-file file-input-label cursor-pointer"
+              htmlFor={name}
+            >
+              <div className="flex items-center gap-4">
+                <DocumentTextIcon className='w-8 flex-shrink-0' />
+                <div className="flex flex-col justify-beetwen">
+                  <p className="text-neutral-500">{ file ? `You have added ${file?.length} files` : 'Select a file' }</p>
+                  <p className="text-primary-400 text-sm pt-2.5">JPG, JPEG, PNG or PDF</p>
+                </div>
+              </div>
+            </label>
+            <input
+              style={{ display: 'none' }}
+              hidden
+              type='file'
+              id={name}
+              name={name}
+              accept={accept}
+              multiple={multiple}
+              className={commonClass}
+              onChange={(event) => {
+                const files = event.currentTarget.files;
+                if (files && files.length > 0) {
+                  setFile(files);
+                  form.setFieldValue(name, Array.from(files)); // Convert FileList to Array
+                } else {
+                  setFile(null);
+                  form.setFieldValue(name, []); // Set an empty array if no files selected
+                }
+              }}
+            />
+          </>
+        )}
+      </Field>
       {error && touched ? (
         <div className={commonErrorClass}>
           <InformationCircleIcon className='w-4 inline-block mr-1' />
