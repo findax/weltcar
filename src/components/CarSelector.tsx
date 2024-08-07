@@ -310,8 +310,11 @@ const CarSelector = () => {
             <div className={`border border-${isDark ? 'neutral-700' : 'neutral-200'} mt-[1px] rounded-2xl absolute w-full bg-${isDark ? 'neutral-800' : 'white' } z-10 max-h-[400px] overflow-y-auto`}>
               {filteredCars.map((car) => (
                 <div key={car.brand_id} className={`cursor-pointer dropdown-item`}>
-                  <div className={`text-${isDark ? 'white' : 'black'} hover:text-${isDark ? 'black' : ''} flex px-3 py-2 hover:bg-${isDark ? 'neutral-300' : 'neutral-100'} justify-between items-center`}>
-                    <p onMouseDown={() => handleAddTag(car)}>Brand: {car.brand_name}</p> 
+                  <div 
+                    className={`text-${isDark ? 'white' : 'black'} hover:text-${isDark ? 'black' : ''} flex px-3 py-2 hover:bg-${isDark ? 'neutral-300' : 'neutral-100'} justify-between items-center`}
+                    onMouseDown={() => handleAddTag(car)}
+                  >
+                    <p>{car.brand_name} - All models</p> 
                   </div>
                   <div className="px-4">
                     {car.models.map((model) => (

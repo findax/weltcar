@@ -7,6 +7,7 @@ export interface IAuth {
 }
 
 export interface IUser {
+  contractor_id: number;
   activated_at: string;
   city: string | null;
   country: string | null;
