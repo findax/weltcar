@@ -8,6 +8,7 @@ import {
 import { ISort } from '@/types/catalog';
 import { useQueryParams } from '@/hooks/useQueryParams';
 import { ButtonPrimary } from '@/shared/Buttons';
+import { Route } from '@/types/routers';
 
 interface SortPanelProps {
   sortData: ISort[];
@@ -28,6 +29,7 @@ const SortPanel = ({
 }: SortPanelProps) => {
   const [fileFormat, setFileFormat] = useState<string>('pdf');
   const { queryParams, handleSortChange } = useQueryParams();
+  const apiDownloadUrl: Route<string> = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/cars/list/export?type=${fileFormat}` as  Route<string>;
 
   const isSelectorShortWidth =
     (queryParams && queryParams.sort && queryParams.sort[0].id === 'oldest') !==
@@ -71,7 +73,7 @@ const SortPanel = ({
               <option value='xlsx'>CSV</option>
             </select>
             <ButtonPrimary
-              href={`https://stageapi.weltcar.de/api/cars/list/export?type=${fileFormat}`}
+              href={apiDownloadUrl}
               download
               className='!py-2 mx-2'
             >

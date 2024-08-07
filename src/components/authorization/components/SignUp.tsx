@@ -6,11 +6,13 @@ import {
   FormikInput,
   FormikPhoneNumberInput,
   FormikPasswordInput,
+  FormikCheckbox,
 } from '@/shared/FormInputs';
 import { singUp } from '@/api/auth';
 import { InformationCircleIcon } from '@heroicons/react/24/outline';
 import SwitchAuthorizationPage from './SwitchAuthorizationPage';
 import SignUpPartner from './SignUpPartner';
+import { Route } from 'next';
 
 export default function SignUp({
   setIsModalOpen,
@@ -20,6 +22,7 @@ export default function SignUp({
   const [isSuccess, setIsSuccess] = useState(false);
   const [isCustomer, setIsCustomer] = useState(false);
   // const phoneValidationPattern = /\+38 \(0\d{2}\) \d{3}-\d{2}-\d{2}/;
+  const termsAcceptedLink = "https://weltcar.de/privacy-policy" as Route<string>
 
   const handleChangeClient = (isClientSwitch: boolean) => {
     setIsCustomer(isClientSwitch);
@@ -47,8 +50,11 @@ export default function SignUp({
       .matches(/[A-Z]+/, 'Password must contain at least one uppercase letter')
       .matches(/\d+/, 'Password must contain at least one number')
       .required('Password is required'),
+    termsAccepted: Yup.boolean()
+      .oneOf([true], 'You must accept the terms and conditions of the privacy policy')
+      .required('You must accept the terms and conditions of the privacy policy'),
   });
-
+  
   return isSuccess ? (
     <div className='pt-4 flex justify-center items-center'>
       <div className='text-center space-y-10'>
@@ -83,6 +89,7 @@ export default function SignUp({
             email: '',
             phone: '',
             password: '',
+            termsAccepted: false
           }}
           validationSchema={SignUpSchema}
           onSubmit={(values, { setSubmitting, resetForm }) => {
@@ -126,6 +133,14 @@ export default function SignUp({
                 placeholder='Enter your password'
                 error={errors.password}
                 touched={touched.password}
+              />
+
+              <FormikCheckbox
+                name='termsAccepted'
+                label='I agree with the privacy policy'
+                href={termsAcceptedLink}
+                error={errors.termsAccepted}
+                touched={touched.termsAccepted}
               />
 
               <ButtonPrimary

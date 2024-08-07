@@ -11,6 +11,7 @@ import SocialsList from '@/shared/SocialsList';
 import SwitchDarkMode from './SwitchDarkMode';
 import SideMenuWrapper from '@/shared/SideMenuWrapper';
 import { NAVIGATION_DEMO } from '@/types/navigation';
+import { useUserStore } from '@/stores/user-store';
 
 interface MenuMobileProps {
   className?: string;
@@ -24,6 +25,7 @@ const MenuMobile = ({
 }: MenuMobileProps) => {
   const [isVisable, setIsVisable] = useState(false);
   const pathname = usePathname();
+  const user = useUserStore((state) => state.user);
 
   useEffect(() => {
     setIsVisable(false);
@@ -31,6 +33,14 @@ const MenuMobile = ({
 
   const handleOpenMenu = () => setIsVisable(true);
   const handleCloseMenu = () => setIsVisable(false);
+
+
+  const filteredNavigationItems = data.filter(item => {
+    if (!user?.contractor_id) {
+      return item.href !== '/account-partner' && item.href !== '/partner-cars';
+    }
+    return true;
+  });
 
   return (
     <>
@@ -64,7 +74,7 @@ const MenuMobile = ({
             </span>
           </div>
           <ul className='flex flex-col py-6 px-2 space-y-1'>
-            {data.map((item, index) => (
+            {filteredNavigationItems.map((item, index) => (
               <Disclosure
                 key={item.id}
                 as='li'

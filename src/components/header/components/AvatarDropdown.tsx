@@ -1,5 +1,5 @@
 import { Menu, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import Avatar from '@/shared/Avatar';
 import SwitchDarkMode2 from '@/components/header/components/SwitchDarkMode2';
 import Link from 'next/link';
@@ -13,6 +13,8 @@ import {
 } from '@heroicons/react/24/outline';
 import { logout } from '@/api/auth';
 import { useUserStore } from '@/stores/user-store';
+import { getPartner } from '@/api/partner';
+import { IPartnerResponse } from '@/types/partner';
 
 export default function AvatarDropdown({
   className = '',
@@ -20,6 +22,16 @@ export default function AvatarDropdown({
   className?: string;
 }) {
   const user = useUserStore((state) => state.user);
+  const [partner, setPartner] = useState<IPartnerResponse>();
+  
+  useEffect(() => {
+    getPartner()
+      .then((partner) => {
+        if(partner){
+          setPartner(partner);
+        }
+      })
+  },[]);
 
   return (
     <Menu as='div' className={`AvatarDropdown relative flex ${className}`}>
@@ -31,7 +43,7 @@ export default function AvatarDropdown({
             <Avatar
               containerClassName='flex-col'
               sizeClass='w-8 h-8 sm:w-9 sm:h-9'
-              userName={user?.name}
+              userName={partner ? partner.name : user?.name}
             />
           </Menu.Button>
           <Transition
@@ -47,14 +59,14 @@ export default function AvatarDropdown({
               <div className='overflow-hidden rounded-2xl shadow-lg ring-1 ring-black ring-opacity-5'>
                 <div className='relative grid grid-cols-1 gap-6 bg-white dark:bg-neutral-800 py-7 px-6'>
                   <div className='flex items-center space-x-3'>
-                    <Avatar sizeClass='w-12 h-12' userName={user?.name} />
+                    <Avatar sizeClass='w-12 h-12' userName={partner ? partner.name : user?.name} />
 
                     <div className='flex-grow overflow-hidden'>
                       <h4 className='font-semibold overflow-hidden text-ellipsis'>
-                        {user?.name} {user?.surname}
+                        {partner ? partner.name : user?.name} {partner ? " " : user?.surname}
                       </h4>
                       <p className='text-xs mt-0.5 text-ellipsis'>
-                        {user?.city}
+                        {partner ? " " : user?.city}
                       </p>
                     </div>
                   </div>
@@ -63,7 +75,7 @@ export default function AvatarDropdown({
 
                   {/* ------------------ 1 --------------------- */}
                   <Link
-                    href={'/account'}
+                    href={ user?.contractor_id ? '/account-partner' : '/account'}
                     className='flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50'
                     onClick={close}
                   >
