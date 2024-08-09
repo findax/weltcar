@@ -38,7 +38,7 @@ export const Nav = () => {
                     : 'border-transparent'
                 }`}
               />
-            ) : <></>
+            ) : <div key={item} style={{ display: 'none'}}></div>
           );
         })}
       </div>

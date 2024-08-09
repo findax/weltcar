@@ -31,46 +31,42 @@ export const getCarsList = async (
 };
 
 export const createPartnerCar = async (car: ICarPartnerToRequest) => {
-  return new Promise((resolve) => {
-    api
-      .post(`/api/user/contractor/cars`, car, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-      .then((res) => resolve(res.data))
-      .catch((err) => {
-        if (err.response?.data.message) {
-          toast.error(err.response.data.message);
-        } else {
-          toast.error('Something went wrong!');
-        }
-        resolve(false);
-      });
-  });
+  try {
+    const response = await api.post(`/api/user/contractor/cars`, car, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data.data;
+  } catch (err: any) {
+    if (err.response?.data?.message) {
+      toast.error(err.response.data.message);
+    } else {
+      toast.error('Something went wrong!');
+    }
+    return err;
+  }
 };
 
 export const updatePartnerCar = async (
   car: ICarPartnerToRequestUpdate,
   id: string
-) => {
-  return new Promise<ICarPartner | false>((resolve) => {
-    api
-      .post(`/api/user/contractor/cars/${id}`, car, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-      .then((res) => resolve(res.data.data))
-      .catch((err) => {
-        if (err.response?.data.message) {
-          toast.error(err.response.data.message);
-        } else {
-          toast.error('Something went wrong!');
-        }
-        resolve(false);
-      });
-  });
+): Promise<ICarPartner | any> => {
+  try {
+    const response = await api.post(`/api/user/contractor/cars/${id}`, car, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data.data;
+  } catch (err: any) {
+    if (err.response?.data?.message) {
+      toast.error(err.response.data.message);
+    } else {
+      toast.error('Something went wrong!');
+    }
+    return err;
+  }
 };
 
 export const deletePartnerCar = async (id: string) => {

@@ -66,7 +66,11 @@ export const singUp = async ({
 export const singUpPartner = async (data: IPartnerCreate) => {
   return new Promise((resolve) => {
     api
-      .post('/jwt/register', data)
+      .post('/jwt/register', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
       .then((res) => resolve(res))
       .catch((err) => {
         if (err.response?.data.message) {

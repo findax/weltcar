@@ -1,5 +1,5 @@
 import CarPartnerCard from "@/components/CarPartnerCard"
-import { ICarPartner, ICarsPartner } from "@/types/partner";
+import { ICarsPartner } from "@/types/partner";
 
 interface IProp {
   carsListData: ICarsPartner[];

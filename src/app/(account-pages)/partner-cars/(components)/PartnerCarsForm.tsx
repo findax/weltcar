@@ -11,6 +11,9 @@ import { getCountries } from '@/api/countries';
 import { InformationCircleIcon } from '@heroicons/react/24/outline';
 import Modal from '@/shared/Modal';
 import { IoMdClose } from "react-icons/io";
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { Route } from 'next';
 
 const ModelSchema = Yup.object().shape({
   id: Yup.number().required('ID is required'),
@@ -26,13 +29,17 @@ const CountrySchema = Yup.object().shape({
 interface IProps {
   partner: IPartnerResponse;
   partnerCar?: ICarPartner;
+  setId?: (id: string | null) => void;
 }
 
 export default function PartnerCarsForm({ 
+  setId,
   partner,
   partnerCar
 }:IProps) {
+  const router = useRouter();
   const [car, setCar] = useState<ICarPartner | null>(partnerCar ? partnerCar : null);
+  const [responseCarId, setResponseCarId] = useState<string>();
   const [isSuccess, setIsSuccess] = useState(false);
   const [countries, setCountries] = useState<ICountries>([]);
   const [models, setModels] = useState<IModels>([]);
@@ -69,7 +76,7 @@ export default function PartnerCarsForm({
     specification: car?.specification,
     year: car?.year,
     vin: car?.vin,
-    price: car?.price.toString(),
+    price: car?.price,
     photos: undefined,
     description: car?.description,
     innerColor: car?.inner_color_name,
@@ -82,7 +89,7 @@ export default function PartnerCarsForm({
     postCode: car?.post_code,
     commentary: car?.contractor_comment
   });
-
+ 
   const PartnerCarsSchema = Yup.object().shape({
     model: ModelSchema.required('Model is required'),
     specification: Yup
@@ -184,15 +191,23 @@ export default function PartnerCarsForm({
   }
 
   const renderAttachedPhotos = () => {
-    if(attachedPhotos) {
+    if(attachedPhotos && attachedPhotos.length > 0) {
       return (
         <div>
           <p className='inline-block text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-1'>Uploaded Files</p>
           <div className='flex flex-col gap-1 block w-full border border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl text-sm font-normal px-4 py-3'>
             {attachedPhotos.map((photo) => (
-              <div key={photo.id} className='flex items-center w-fit border rounded-2xl px-3 py-2'>
-                <p className="text-neutral-500">{photo.original.split('/').pop()}</p>
-                <button onClick={(event) => handleDeleteAttachedPhotos(event, photo)} className='ml-1'><IoMdClose/></button>
+              <div key={photo.id} className='relative flex items-center w-fit rounded-2xl px-1 py-2'>
+                <img 
+                  src={photo.thumb} 
+                  className='h-[70px] w-[70px] rounded-lg' 
+                  alt="photo" 
+                />
+                <button 
+                  onClick={(event) => handleDeleteAttachedPhotos(event, photo)} 
+                  className='absolute bg-white dark:bg-neutral-900 top-0 right-0 ml-1 p-1 border rounded-full'>
+                    <IoMdClose/>
+                  </button>
               </div>
             ))}
           </div>
@@ -217,14 +232,16 @@ export default function PartnerCarsForm({
   }
 
   const renderAttachedDocuments = () => {
-    if(attachedDocuments) {
+    if(attachedDocuments && attachedDocuments.length > 0) {
       return (
         <div>
           <p className='inline-block text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-1'>Uploaded Files</p>
           <div className='flex flex-col gap-1 block w-full border border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl text-sm font-normal px-4 py-3'>
             {attachedDocuments.map((document) => (
               <div key={document.file_name} className='flex items-center w-fit border rounded-2xl px-3 py-2'>
-                <p className="text-neutral-500">{document.file_name}</p>
+                <Link href={document.url as Route} target='_blank'>
+                  <p className="text-neutral-500">{document.file_name}</p>
+                </Link>
                 <button onClick={(event) => handleDeleteAttachedDocuments(event, document)} className='ml-1'><IoMdClose/></button>
               </div>
             ))}
@@ -263,14 +280,16 @@ export default function PartnerCarsForm({
 
       updatePartnerCar(carDataToRequest, car.id)
         .then((data) => {
-          if(data){
-            console.log(data)
+          if(data && !data.message){
             setCar(data);
             setAttachedDocuments(data.documents);
             setAttachedPhotos(data.photos);
             setSubmitting(false);
+          }else {
+            setSubmitting(false);
           }
         })
+      
     } else {
       const carDataToRequest: ICarPartnerToRequest = {
         model_id: values.model.id.toString(),
@@ -292,14 +311,26 @@ export default function PartnerCarsForm({
 
       createPartnerCar(carDataToRequest)
         .then((data) => {
-          if(data){
+          if(data && !data.message){
+            setId && setId(data.id);
+            setResponseCarId(data.id);
+            setSubmitting(false);
+            setIsSuccess(true);
+          }else {
             setSubmitting(false);
           }
         })
-        .finally(() => {
-          setIsSuccess(true);
-        })
     }
+  }
+
+  const handleKeyPressNumber = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!/^[0-9]$/.test(event.key)) {
+      event.preventDefault();
+    }
+  };
+
+  const handleRedirectOnEdit = () => {
+    responseCarId && router.push(`/partner-cars?id=${responseCarId}`)
   }
 
   useEffect(() => {
@@ -339,6 +370,36 @@ export default function PartnerCarsForm({
     }
   }, [car]);
 
+  useEffect(() => {
+    if(partnerCar) {
+      setCar(partnerCar)
+      setInitialValueFilled({
+        model: {
+          id: partnerCar?.model_id,
+          brand_name: partnerCar?.brand,
+          model_name: partnerCar?.model,
+        },
+        specification: partnerCar?.specification,
+        year: partnerCar?.year,
+        vin: partnerCar?.vin,
+        price: partnerCar?.price.toString(),
+        photos: undefined,
+        description: partnerCar?.description,
+        innerColor: partnerCar?.inner_color_name,
+        outerColor: partnerCar?.outer_color_name,
+        documents: undefined,
+        country: {
+          id: partnerCar?.country.id,
+          name: partnerCar?.country.name
+        },
+        postCode: partnerCar?.post_code,
+        commentary: partnerCar?.contractor_comment
+      })
+      setAttachedPhotos(partnerCar.photos);
+      setAttachedDocuments(partnerCar.documents)
+    }
+  },[partnerCar])
+
   return (
     <>
       <Formik
@@ -356,6 +417,7 @@ export default function PartnerCarsForm({
         {({ errors, touched, isSubmitting }) => (
           <Form className='grid grid-cols-1 gap-7 w-full max-w-xl mt-10 md:mt-0 md:pl-16'>
             <FormikInputCarSelector 
+              disabled={car?.is_verified}
               name='model'
               placeholder='Chose model'
               title='Model name'
@@ -365,6 +427,7 @@ export default function PartnerCarsForm({
             />
             {/* ---- */}
             <FormikInput
+              disabled={car?.is_verified}
               name='specification'
               placeholder='Enter specification'
               title='Specification'
@@ -373,6 +436,8 @@ export default function PartnerCarsForm({
             />
             {/* ---- */}
             <FormikInput
+              disabled={car?.is_verified}
+              onKeyPress={handleKeyPressNumber}
               name='year'
               placeholder='Enter year'
               title='Year of manufacture'
@@ -381,6 +446,7 @@ export default function PartnerCarsForm({
             />
             {/* ---- */}
             <FormikInput
+              disabled={car?.is_verified}
               name='vin'
               placeholder='Enter VIN'
               title='VIN'
@@ -389,6 +455,7 @@ export default function PartnerCarsForm({
             />
             {/* ---- */}
             <FormikInput
+              onKeyPress={handleKeyPressNumber}
               name='price'
               placeholder='Enter price'
               title='Price'
@@ -397,6 +464,8 @@ export default function PartnerCarsForm({
             />
             {/* ---- */}
             <FormikFile 
+              disabled={car?.is_verified}
+              variant='photo'
               initialValues={ car ? initialValueFilled : null}
               name='photos'
               label='Upload your car photo'
@@ -407,6 +476,7 @@ export default function PartnerCarsForm({
             {renderAttachedPhotos()}
             {/* ---- */}
             <FormikTextarea
+              disabled={car?.is_verified}
               rows={4}
               name='description'
               placeholder='Description'
@@ -416,6 +486,7 @@ export default function PartnerCarsForm({
             />
             {/* ---- */}
             <FormikInput
+              disabled={car?.is_verified}
               name='innerColor'
               placeholder='Inside color'
               title='Inside color'
@@ -424,6 +495,7 @@ export default function PartnerCarsForm({
             />
             {/* ---- */}
             <FormikInput
+              disabled={car?.is_verified}
               name='outerColor'
               placeholder='External color'
               title='External color'
@@ -432,6 +504,7 @@ export default function PartnerCarsForm({
             />
             {/* ---- */}
             <FormikFile 
+              disabled={car?.is_verified}
               initialValues={ car ? initialValueFilled : null}
               name='documents'
               label='Upload your documents'
@@ -442,6 +515,7 @@ export default function PartnerCarsForm({
             {renderAttachedDocuments()}
             {/* ---- */}
             <FormikInputSelector 
+              disabled={car?.is_verified}
               name='country'
               placeholder='Chose country'
               title='Country'
@@ -451,6 +525,7 @@ export default function PartnerCarsForm({
             />
             {/* ---- */}
             <FormikInput
+              disabled={car?.is_verified}
               name='postCode'
               placeholder='Post code'
               title='Post code'
@@ -459,6 +534,7 @@ export default function PartnerCarsForm({
             />
             {/* ---- */}
             <FormikTextarea
+              disabled={car?.is_verified}
               rows={4}
               name='commentary'
               placeholder='Commentary'
@@ -483,10 +559,11 @@ export default function PartnerCarsForm({
         title='Thank you!' 
         isModalOpen={isSuccess} 
         setIsModalOpen={setIsSuccess}
+        handleChange={handleRedirectOnEdit}
       >
         <div className='text-center space-y-10'>
           <InformationCircleIcon className='block mx-auto w-24 h-24 text-yellow-500' />
-          <p className='px-3 text-2xl font-semibold'>
+          <p className='px-3 text-md font-semibold'>
             Thank you, your request has been accepted. Soon it will be processed and the car will appear on the website. If there is not enough information, our manager will contact you.
           </p>
         </div>

@@ -8,6 +8,8 @@ import { updatePartner } from '@/api/partner';
 import { File } from 'buffer';
 import { useEffect, useState } from 'react';
 import { IoMdClose } from "react-icons/io";
+import { Route } from 'next';
+import Link from 'next/link';
 
 export default function AccountPartnerForm({ partner }:{ partner: IPartnerResponse }) {
   const [partnerUser, setPartnerUser] = useState(partner ? partner : null);
@@ -76,16 +78,18 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
   }
 
   const renderAttachedFiles = () => {
-    if(attachedFiles) {
+    if(attachedFiles && attachedFiles.length > 0) {
       return (
         <div>
           <p className='inline-block text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-1'>Uploaded Files</p>
           <div className='flex flex-col gap-1 block w-full border border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl text-sm font-normal px-4 py-3'>
             {attachedFiles.map((file) => (
               <div key={file.file_name} className='flex items-center w-fit border rounded-2xl px-3 py-2'>
+              <Link href={file.url as Route } target='_blank'>
                 <p className="text-neutral-500">{file.file_name}</p>
-                <button onClick={(event) => handleDeleteAttachedFiles(event, file)} className='ml-1'><IoMdClose/></button>
-              </div>
+              </Link>
+              <button onClick={(event) => handleDeleteAttachedFiles(event, file)} className='ml-1'><IoMdClose/></button>
+            </div>
             ))}
           </div>
         </div>

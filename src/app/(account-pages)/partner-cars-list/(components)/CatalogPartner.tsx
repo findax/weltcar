@@ -1,4 +1,4 @@
-import { ICarPartner, ICarsPartner } from "@/types/partner"
+import { ICarsPartner } from "@/types/partner"
 import { CarsListPartner } from "./CarsListPartner"
 import { useEffect, useState } from "react";
 import { getPartnerCars } from "@/api/cars";

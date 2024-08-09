@@ -20,6 +20,7 @@ const CarPartnerCard = ({
   paddingBottomGrid: string;
 }) => {
   const {
+    vin,
     brand,
     id,
     inner_color_hex,
@@ -48,8 +49,6 @@ const CarPartnerCard = ({
     if(!is_verified){
       return <InactiveBadge />
     } 
-    
-    //return <DeletedBadge />
   } 
 
   return (
@@ -77,11 +76,14 @@ const CarPartnerCard = ({
             </span>
             <span>{year}</span>
           </h3>
-          {/* <div className='flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-2'>
-            <span className=''>{vin}</span>
-            <span>-</span>
-            <span className=''>{'VIN'} </span>
-          </div> */}
+          {
+            vin && 
+            <div className='flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-2'>
+              <span className=''>{vin}</span>
+              <span>-</span>
+              <span className=''>{'VIN'} </span>
+            </div>
+          }
         </div>
 
         <div className='flex-grow py-3 text-sm space-y-2'>
