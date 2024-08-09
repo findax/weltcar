@@ -15,7 +15,7 @@ import { useSearchParams } from 'next/navigation';
 
 const PartnerCarsPage = () => {
   const searchParams = useSearchParams()
-  const id = searchParams.get('id');
+  const [id, setId] = useState(searchParams.get('id'));
   const [isFirstLoading, setFirstLoading] = useState(true);
   const [isError, setError] = useState(false);
   const [partner, setPartner] = useState<IPartnerResponse>();
@@ -46,6 +46,20 @@ const PartnerCarsPage = () => {
         }); 
     }
   },[isFirstLoading]);
+
+  useEffect(() => {
+    if(id){
+      getPartnerCarId(id)
+        .then((partnerCar) => {
+          if(partnerCar){
+            setPartnerCar(partnerCar);
+          }
+        })
+        .finally(() => {
+          isFirstLoading && setFirstLoading(false);
+        }); 
+    }
+  },[id])
 
   return isFirstLoading ? (
     <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
@@ -96,7 +110,7 @@ const PartnerCarsPage = () => {
               />
             </div>
           </div>
-            {partner && <PartnerCarsForm partnerCar={partnerCar} partner={partner} />}
+            {partner && <PartnerCarsForm setId={setId} partnerCar={partnerCar} partner={partner} />}
         </div>
         <Image
           className='hidden md:block absolute inset-0 top-1/2 -translate-y-1/2 object-contain w-full opacity-[0.06] -z-10'

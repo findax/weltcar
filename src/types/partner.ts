@@ -40,6 +40,7 @@ export interface ICarPartnerToRequestUpdate {
 }
 
 export interface ICarsPartner {
+  vin: string;
   brand: string;
   car_id: string;
   id: string;

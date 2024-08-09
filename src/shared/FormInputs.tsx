@@ -117,12 +117,14 @@ interface FormikInputProps {
   rounded?: string;
   sizeClass?: string;
   disabled?: boolean;
+  onKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 export const FormikInput = ({
   name,
   title,
   error,
+  onKeyPress,
   touched,
   rounded,
   sizeClass,
@@ -135,6 +137,7 @@ export const FormikInput = ({
       <Field
         className={`${commonClass} ${rounded} ${sizeClass}`}
         name={name}
+        onKeyPress={onKeyPress}
         disabled={disabled}
         {...args}
       />
@@ -321,6 +324,7 @@ interface FormikTextareaProps {
   touched?: boolean;
   rows?: number;
   sizeClass?: string;
+  disabled?: boolean;
 }
 
 export const FormikTextarea = ({
@@ -330,12 +334,14 @@ export const FormikTextarea = ({
   touched,
   rows,
   sizeClass = 'h-auto',
+  disabled,
   ...args
 }: FormikTextareaProps) => {
   return (
     <fieldset className='relative'>
       {title && <span className={commonTitleClass}>{title}</span>}
       <Field
+        disabled={disabled}
         as='textarea'
         name={name}
         rows={rows}
@@ -362,22 +368,26 @@ interface IPropsInitialValues {
 
 interface FormikFileProps {
   name: string;
+  variant?: string;
   label?: string;
   error?: string;
   touched?: boolean;
   accept?: string; // MIME types or file extensions
   multiple?: boolean;
   initialValues?: IPropsInitialValues | any | null;
+  disabled?: boolean;
 }
 
 export const FormikFile = ({
   name,
   label = '',
   error,
+  variant,
   touched,
   accept,
   multiple = false,
-  initialValues
+  initialValues,
+  disabled = false
 }: FormikFileProps) => {
   const [files, setFiles] = useState<File[] | null>(null);
 
@@ -420,14 +430,34 @@ export const FormikFile = ({
 
   const renderFiles = (form: any) => {
     if(files && files.length > 0){
-      return files.map((file, index) => {
-        return (
-          <div key={file.name} className='flex text-sm items-center'>
-            <p className="text-neutral-500" key={file.name}>{file.name}</p>
-            <button onClick={(event) => handleDeleteFile(event, file, form)} className='ml-1'><IoMdClose/></button>
-          </div>
-        )
-    })
+      return files.map((file, index) => (
+        variant === 'photo' 
+        ? 
+          (
+            <div key={file.name} className='relative flex text-sm items-center py-1.5 w-fit'>
+              <img 
+                src={URL.createObjectURL(file)} 
+                className='h-[70px] w-[70px] rounded-lg' 
+                alt="photo" 
+              />
+              <button 
+                onClick={(event) => handleDeleteFile(event, file, form)} 
+                className='absolute bg-white dark:bg-neutral-900 top-0 right-0 ml-1 p-1 border rounded-full'>
+                  <IoMdClose/>
+              </button>
+            </div>
+            
+          )
+        : 
+          (
+            <div key={file.name} className='flex text-sm items-center z-10'>
+              <Link href={file.name as Route} target='_blank'>
+                <p className="text-neutral-500" key={file.name}>{file.name}</p>  
+              </Link>
+              <button onClick={(event) => handleDeleteFile(event, file, form)} className='ml-1'><IoMdClose/></button>
+            </div>
+          )
+      ))
     }else {
       return <p className="text-neutral-500">Select a file</p>
     }
@@ -446,12 +476,15 @@ export const FormikFile = ({
               <div className="flex items-center gap-4">
                 <DocumentTextIcon className='w-8 flex-shrink-0' />
                 <div className="flex flex-col justify-beetwen">
-                  {renderFiles(form)}
+                  <div className={`${variant === 'photo' ? "flex flex-wrap gap-2" : "flex flex-col gap-1"}`}>
+                    {renderFiles(form)}
+                  </div>
                   <p className="text-primary-400 text-sm pt-2.5">JPG, JPEG, PNG or PDF</p>
                 </div>
               </div>
             </label>
-            <input
+            <input 
+              disabled={disabled}
               style={{ display: 'none' }}
               hidden
               type='file'
@@ -482,7 +515,7 @@ interface FormikInputSelectorProps {
   error?: string;
   touched?: boolean;
   options: ICountries;
-  onAddOption?: (newOption: string) => void; // Optional callback to handle adding new options
+  disabled?: boolean; // Optional callback to handle adding new options
 }
 
 export const FormikInputSelector = ({
@@ -492,7 +525,7 @@ export const FormikInputSelector = ({
   error,
   touched,
   options,
-  onAddOption,
+  disabled,
 }: FormikInputSelectorProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isHighlighted, setIsHighlighted] = useState(false);
@@ -524,6 +557,7 @@ export const FormikInputSelector = ({
       {title && <span className={commonTitleClass}>{title}</span>}
       <div className='relative' ref={dropDownRef} >
         <button
+          disabled={disabled}
           type='button'
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           className={`border text-md text-neutral-500 block w-full border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl font-normal h-11 px-4 py-3 text-left flex items-center justify-between`}
@@ -584,7 +618,7 @@ interface FormikInputSelectorCarProps {
   error?: string;
   touched?: boolean;
   options: IModels;
-  onAddOption?: (newOption: string) => void; // Optional callback to handle adding new options
+  disabled?: boolean;
 }
 
 export const FormikInputCarSelector = ({
@@ -594,7 +628,7 @@ export const FormikInputCarSelector = ({
   error,
   touched,
   options,
-  onAddOption,
+  disabled = false
 }: FormikInputSelectorCarProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isHighlighted, setIsHighlighted] = useState(false);
@@ -626,6 +660,7 @@ export const FormikInputCarSelector = ({
       {title && <span className={commonTitleClass}>{title}</span>}
       <div className='relative' ref={dropDownRef}>
         <button
+          disabled={disabled}
           type='button'
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           className={`border text-md text-neutral-500 block w-full border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl font-normal h-11 px-4 py-3 text-left flex items-center justify-between`}
@@ -637,7 +672,7 @@ export const FormikInputCarSelector = ({
           {isDropdownOpen ? <IoIosArrowUp/> : <IoIosArrowDown/> }
         </button>
         {isDropdownOpen && (
-          <div className='absolute z-10 mt-1 w-full bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-2xl shadow-lg'>
+          <div className='absolute max-h-[600px] overflow-y-auto z-10 mt-1 w-full bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-2xl shadow-lg'>
             <div className='py-2 px-2'>
               <div className='flex items-center w-full border border-neutral-200 dark:border-neutral-700 rounded-lg px-2 py-1'>
                 <input
