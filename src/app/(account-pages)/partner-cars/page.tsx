@@ -13,53 +13,49 @@ import LoadingSpinner from '@/shared/LoadingSpinner';
 import { getPartnerCarId } from '@/api/cars';
 import { useSearchParams } from 'next/navigation';
 
+
 const PartnerCarsPage = () => {
   const searchParams = useSearchParams()
   const [id, setId] = useState(searchParams.get('id'));
   const [isFirstLoading, setFirstLoading] = useState(true);
   const [isError, setError] = useState(false);
   const [partner, setPartner] = useState<IPartnerResponse>();
-  const [partnerCar, setPartnerCar] = useState<ICarPartner>();
+  const [partnerCar, setPartnerCar] = useState<ICarPartner>()
 
   useEffect(() => {
-    if(isFirstLoading && !id){
-      getPartner()
-        .then((partner) => {
-          if(partner){
-            setPartner(partner);
-          }
-        })
-        .finally(() => {
-          isFirstLoading && setFirstLoading(false);
-        }); 
-    }
-    if(isFirstLoading && id){
-      Promise.all([getPartner(), getPartnerCarId(id)])
-        .then(([partner, partnerCar]) => {
-          if(partner && partnerCar){
-            setPartner(partner);
-            setPartnerCar(partnerCar);
-          }
-        })
-        .finally(() => {
-          isFirstLoading && setFirstLoading(false);
-        }); 
-    }
-  },[isFirstLoading]);
+    const fetchData = async () => {
+      setFirstLoading(true);
+      try {
+        if (!id) {
+          const partner = await getPartner();
+          setPartner(partner as IPartnerResponse);
+        } else {
+          const [partner, partnerCar] = await Promise.all([
+            getPartner(),
+            getPartnerCarId(id as string),
+          ]);
+          setPartner(partner as IPartnerResponse);
+          setPartnerCar(partnerCar as ICarPartner);
+        }
+      } catch (error) {
+        setError(true);
+      } finally {
+        setFirstLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [id]);
 
   useEffect(() => {
-    if(id){
-      getPartnerCarId(id)
-        .then((partnerCar) => {
-          if(partnerCar){
-            setPartnerCar(partnerCar);
-          }
-        })
-        .finally(() => {
-          isFirstLoading && setFirstLoading(false);
-        }); 
+    const idParam = searchParams.get('id');
+    if (!idParam) {
+      setId(null);
+      setPartnerCar(undefined);
+    } else {
+      setId(idParam);
     }
-  },[id])
+  }, [searchParams]);
 
   return isFirstLoading ? (
     <div className='h-[calc(100vh-76px)] flex justify-center items-center'>

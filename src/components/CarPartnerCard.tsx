@@ -125,7 +125,7 @@ const CarPartnerCard = ({
           <span className='text-2xl font-semibold text-primary-400'>
             {priceWithComma(price)}
           </span>
-          <div className='flex gap-1'>
+          <div style={{ display: `${ is_deleted ? "none" : "display"}`}} className='flex gap-1'>
             <ButtonPrimary
               onClick={handleDeleteCarCard}
               fontSize='text-sm'

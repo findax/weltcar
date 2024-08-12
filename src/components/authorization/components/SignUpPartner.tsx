@@ -18,8 +18,10 @@ export const SUPPORTED_FORMATS = ['image/png','image/jpeg','image/jpg', 'applica
 
 export default function SignUpPartner({
   setIsModalOpen,
+  setIsDispatched,
 }: {
   setIsModalOpen: (isModalOpen: boolean) => void;
+  setIsDispatched: (isDispatched: boolean) => void;
 }) {
   const [isSuccess, setIsSuccess] = useState(false);
   const termsAcceptedLink = 'https://weltcar.de/partner-agreement' as Route<string>;
@@ -111,9 +113,9 @@ export default function SignUpPartner({
           phone, 
           password })
           .then((res) => {
-            res && (setIsSuccess(true), resetForm(), setSubmitting(false));
+            res && (setIsSuccess(true), resetForm(), setSubmitting(false), setIsDispatched(true));
           })
-          .finally(() => setSubmitting(false));
+          .finally(() => (setSubmitting(false), setIsDispatched(true)));
         }}
     >
       {({ errors, touched, isSubmitting }) => (

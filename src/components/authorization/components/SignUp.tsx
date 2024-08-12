@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { ButtonPrimary } from '@/shared/Buttons';
@@ -15,10 +15,15 @@ import SignUpPartner from './SignUpPartner';
 import { Route } from 'next';
 
 export default function SignUp({
+  isDispatched,
   setIsModalOpen,
+  setIsDispatched,
 }: {
+  isDispatched: boolean,
   setIsModalOpen: (isModalOpen: boolean) => void;
+  setIsDispatched: (isDispatched: boolean) => void;
 }) {
+  const [isDispatchedPartner, setIsDispatchedPartner] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isCustomer, setIsCustomer] = useState(false);
   // const phoneValidationPattern = /\+38 \(0\d{2}\) \d{3}-\d{2}-\d{2}/;
@@ -54,6 +59,10 @@ export default function SignUp({
       .oneOf([true], 'You must accept the terms and conditions of the privacy policy')
       .required('You must accept the terms and conditions of the privacy policy'),
   });
+
+  useEffect(() => {
+    isDispatchedPartner && setIsDispatched(true);
+  },[isDispatchedPartner])
   
   return isSuccess ? (
     <div className='pt-4 flex justify-center items-center'>
@@ -69,7 +78,7 @@ export default function SignUp({
     </div>
   ) : (
     <>
-    <div className='flex text-sm w-full justify-center'>
+    <div style={{ display: `${isDispatchedPartner ? 'none' : 'display'}`}} className='flex text-sm w-full justify-center'>
       <p>I`am a customer</p>
       <SwitchAuthorizationPage 
         className='mx-2'
@@ -80,7 +89,9 @@ export default function SignUp({
     </div>
     {isCustomer 
       ? (
-          <SignUpPartner setIsModalOpen={setIsModalOpen} />
+          <SignUpPartner 
+            setIsDispatched={setIsDispatchedPartner}
+            setIsModalOpen={setIsModalOpen} />
         )
       : (
           <Formik
@@ -98,9 +109,9 @@ export default function SignUp({
 
             singUp(castValues)
               .then((res) => {
-                res && (setIsSuccess(true), resetForm(), setSubmitting(false));
+                res && (setIsSuccess(true), resetForm(), setSubmitting(false), setIsDispatched(true));
               })
-              .finally(() => setSubmitting(false));
+              .finally(() => (setSubmitting(false), setIsDispatched(true)));
           }}
         >
           {({ errors, touched, isSubmitting }) => (

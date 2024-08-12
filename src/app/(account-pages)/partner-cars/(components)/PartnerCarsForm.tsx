@@ -41,6 +41,7 @@ export default function PartnerCarsForm({
   const [car, setCar] = useState<ICarPartner | null>(partnerCar ? partnerCar : null);
   const [responseCarId, setResponseCarId] = useState<string>();
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isSuccessUpdate, setIsSuccessUpdate] = useState(false);
   const [countries, setCountries] = useState<ICountries>([]);
   const [models, setModels] = useState<IModels>([]);
   const [attachedPhotos, setAttachedPhotos] = useState<IPartnerPhotoList[] | null>(partnerCar ? partnerCar.photos : null);
@@ -143,28 +144,15 @@ export default function PartnerCarsForm({
       .string()
       .trim()
       .required('Outer color is required'),
-    documents: car 
-    ? (Yup.array()
-        .of(
-          Yup.mixed<File>()
-            .test('fileType', 'Unsupported file type', (value) => {
-              return value && SUPPORTED_FORMATS.includes(value.type);
-            })
-            .required('Document is required')
-        )
-        .max(20, 'Document is too long')
+    documents: Yup.array()
+      .of(
+        Yup.mixed<File>()
+          .test('fileType', 'Unsupported file type', (value) => {
+            return value && SUPPORTED_FORMATS.includes(value.type);
+          })
+          .required('Document is required')
       )
-    : (Yup.array()
-        .of(
-          Yup.mixed<File>()
-            .test('fileType', 'Unsupported file type', (value) => {
-              return value && SUPPORTED_FORMATS.includes(value.type);
-            })
-            .required('Document is required')
-        )
-        .max(20, 'Document is too long')
-        .required('Documents is required')
-      ),
+      .max(20, 'Document is too long'),
     country: CountrySchema.required('Country is required'),
     postCode: Yup
       .string()
@@ -253,7 +241,7 @@ export default function PartnerCarsForm({
     }
   }
 
-  const handleCheckFetch = (car: ICarPartner | null, values: any, setSubmitting = (isSubmitting: boolean) => {}) => {
+  const handleCheckFetch = (car: ICarPartner | null, values: any, setSubmitting = (isSubmitting: boolean) => {}, resetForm = () => {}) => {
     if(car){
       const attachedPhotosToRequest = attachedPhotos?.map((attachedPhoto) => attachedPhoto.id);
       const attachedDocumentsToRequest = attachedDocuments?.map((attachedDocument) => attachedDocument.id);
@@ -285,6 +273,7 @@ export default function PartnerCarsForm({
             setAttachedDocuments(data.documents);
             setAttachedPhotos(data.photos);
             setSubmitting(false);
+            setIsSuccessUpdate(true);
           }else {
             setSubmitting(false);
           }
@@ -306,7 +295,7 @@ export default function PartnerCarsForm({
         post_сode: values.postCode,
         description: values.description,
         photos: values.photos,
-        documents: values.documents
+        documents: values.documents ? values.documents : []
       };
 
       createPartnerCar(carDataToRequest)
@@ -315,6 +304,7 @@ export default function PartnerCarsForm({
             setId && setId(data.id);
             setResponseCarId(data.id);
             setSubmitting(false);
+            resetForm()
             setIsSuccess(true);
           }else {
             setSubmitting(false);
@@ -406,11 +396,11 @@ export default function PartnerCarsForm({
         enableReinitialize
         initialValues={ car ? initialValueFilled : initialValueDefault}
         validationSchema={PartnerCarsSchema}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values, { setSubmitting, resetForm }) => {
           // trim values
           const castValues = PartnerCarsSchema.cast(values);
           
-          handleCheckFetch(car, castValues, setSubmitting);
+          handleCheckFetch(car, castValues, setSubmitting, resetForm);
 
         }}
       >
@@ -468,7 +458,7 @@ export default function PartnerCarsForm({
               variant='photo'
               initialValues={ car ? initialValueFilled : null}
               name='photos'
-              label='Upload your car photo'
+              label='Upload car photos'
               multiple
               error={errors.photos}
               touched={touched.photos}
@@ -507,31 +497,37 @@ export default function PartnerCarsForm({
               disabled={car?.is_verified}
               initialValues={ car ? initialValueFilled : null}
               name='documents'
-              label='Upload your documents'
+              label='Upload extra car documents'
               multiple
               error={errors.documents}
               touched={touched.documents}
             />
             {renderAttachedDocuments()}
             {/* ---- */}
-            <FormikInputSelector 
-              disabled={car?.is_verified}
-              name='country'
-              placeholder='Chose country'
-              title='Country'
-              options={countries}
-              error={errors.country?.name}
-              touched={touched.country?.name}
-            />
-            {/* ---- */}
-            <FormikInput
-              disabled={car?.is_verified}
-              name='postCode'
-              placeholder='Post code'
-              title='Post code'
-              error={errors.postCode}
-              touched={touched.postCode}
-            />
+            <div className='flex gap-2'>
+              <div className='w-full'>
+                <FormikInputSelector 
+                  disabled={car?.is_verified}
+                  name='country'
+                  placeholder='Chose country'
+                  title='Car location, Country'
+                  options={countries}
+                  error={errors.country?.name}
+                  touched={touched.country?.name}
+                />
+              </div>
+              {/* ---- */}
+              <div className='w-full'>
+                <FormikInput
+                  disabled={car?.is_verified}
+                  name='postCode'
+                  placeholder='Post code'
+                  title='Post code'
+                  error={errors.postCode}
+                  touched={touched.postCode}
+                />
+              </div>
+            </div>
             {/* ---- */}
             <FormikTextarea
               disabled={car?.is_verified}
@@ -542,7 +538,6 @@ export default function PartnerCarsForm({
               error={errors.commentary}
               touched={touched.commentary}
             />
-
 
             <ButtonPrimary
               type='submit'
@@ -557,16 +552,28 @@ export default function PartnerCarsForm({
       </Formik>
       <Modal 
         title='Thank you!' 
-        isModalOpen={isSuccess} 
-        setIsModalOpen={setIsSuccess}
-        handleChange={handleRedirectOnEdit}
+        isModalOpen={isSuccess ? isSuccess : isSuccessUpdate} 
+        setIsModalOpen={ isSuccess ? setIsSuccess : setIsSuccessUpdate}
+        handleChange={ isSuccess ? handleRedirectOnEdit : undefined}
       >
-        <div className='text-center space-y-10'>
-          <InformationCircleIcon className='block mx-auto w-24 h-24 text-yellow-500' />
-          <p className='px-3 text-md font-semibold'>
-            Thank you, your request has been accepted. Soon it will be processed and the car will appear on the website. If there is not enough information, our manager will contact you.
-          </p>
-        </div>
+        {isSuccess 
+          ? (
+              <div className='text-center space-y-10'>
+                <InformationCircleIcon className='block mx-auto w-24 h-24 text-yellow-500' />
+                <p className='px-3 text-md font-semibold'>
+                  Thank you, your request has been accepted. Soon it will be processed and the car will appear on the website. If there is not enough information, our manager will contact you.
+                </p>
+              </div>
+            )
+          :  (
+              <div className='text-center space-y-10'>
+                <InformationCircleIcon className='block mx-auto w-24 h-24 text-yellow-500' />
+                <p className='px-3 text-md font-semibold'>
+                  Thank you, your update has been accepted.
+                </p>
+              </div>
+            )
+        }
       </Modal>
     </>
   );
