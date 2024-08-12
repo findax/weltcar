@@ -337,6 +337,13 @@ export const FormikTextarea = ({
   disabled,
   ...args
 }: FormikTextareaProps) => {
+  const { values, setFieldValue } = useFormikContext<any>();
+
+  // function stripHtmlTags(html: string) {
+  //   const doc = new DOMParser().parseFromString(html, 'text/html');
+  //   return doc.body.textContent || "";
+  // }
+
   return (
     <fieldset className='relative'>
       {title && <span className={commonTitleClass}>{title}</span>}

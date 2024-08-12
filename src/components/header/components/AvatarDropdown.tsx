@@ -25,12 +25,14 @@ export default function AvatarDropdown({
   const [partner, setPartner] = useState<IPartnerResponse>();
   
   useEffect(() => {
-    getPartner()
-      .then((partner) => {
-        if(partner){
-          setPartner(partner);
-        }
-      })
+    if(!!user?.contractor_id !== false){
+      getPartner()
+        .then((partner) => {
+          if(partner){
+            setPartner(partner);
+          }
+        })
+    }
   },[]);
 
   return (

@@ -1,26 +1,74 @@
 'use client';
 
-import { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { CatalogPartner } from './(components)/CatalogPartner';
 import { ProtectedRoute, UserRole } from '@/utils/protectedRoute';
 import LoadingSpinner from '@/shared/LoadingSpinner';
+import { ICarsPartner } from '@/types/partner';
+import { getPartnerCars } from '@/api/cars';
+import ErrorComponent from '@/components/ErrorComponent';
+import { ButtonPrimary } from '@/shared/Buttons';
 
 
 const PartnerCarsListPage = () => {
-  return (
-    <Suspense
-      fallback={
-        <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
-          <div className='-mt-[76px]'>
-            <LoadingSpinner className='w-12' />
-          </div>
-        </div>
+  const [isFirstLoading, setFirstLoading] = useState(true);
+  const [isError, setError] = useState(false)
+  const [carListData, setCarListData] = useState<ICarsPartner[]>([]);
+
+  useEffect(() => {
+    if(isFirstLoading){
+      getPartnerCars(1,10)
+        .then((data) => {
+          data && setCarListData(data);
+        })
+        .finally(() => {
+          isFirstLoading && setFirstLoading(false);
+        }); 
+    }
+  },[isFirstLoading]);
+
+  return isFirstLoading ? (
+    <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
+      <div className='-mt-[76px]'>
+        <LoadingSpinner className='w-12' />
+      </div>
+    </div>
+  ) : isError ? (
+    <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
+      <ErrorComponent />
+    </div>
+  ) :(
+    <div className='w-full'>
+      {carListData && 
+        (carListData.length > 0 
+          ? (
+              <Suspense
+                fallback={
+                  <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
+                    <div className='-mt-[76px]'>
+                      <LoadingSpinner className='w-12' />
+                    </div>
+                  </div>
+                }
+              >
+                <ProtectedRoute role={UserRole.partner}>
+                  <CatalogPartner carListData={carListData} />
+                </ProtectedRoute>
+              </Suspense>
+            )
+          : (
+              <div className='h-[40vh] flex justify-center items-center flex-col bg-white/50 dark:bg-neutral-800/60'>
+                <h3 className='text-2xl'>You have no added the cars</h3>
+                <ButtonPrimary className='mt-6' href='/partner-cars'>
+                  Add car
+                </ButtonPrimary>
+              </div>
+            )
+        )
+
       }
-    >
-      <ProtectedRoute role={UserRole.partner}>
-        <CatalogPartner />
-      </ProtectedRoute>
-    </Suspense>
+    </div>
+
   );
 };
 
