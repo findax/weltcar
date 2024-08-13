@@ -14,6 +14,7 @@ import { IoMdClose } from "react-icons/io";
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Route } from 'next';
+import { toast } from 'react-toastify';
 
 const ModelSchema = Yup.object().shape({
   id: Yup.number().required('ID is required'),
@@ -274,6 +275,7 @@ export default function PartnerCarsForm({
             setAttachedPhotos(data.photos);
             setSubmitting(false);
             setIsSuccessUpdate(true);
+            toast.success('Thank you, your update has been accepted.')
           }else {
             setSubmitting(false);
           }
@@ -541,8 +543,7 @@ export default function PartnerCarsForm({
 
             <ButtonPrimary
               type='submit'
-              disabled={isSubmitting}
-              //disabled={partner.is_verified ? isSubmitting : true}
+              disabled={!!partner.is_verified ? isSubmitting : true}
               loading={isSubmitting}
             >
               Continue

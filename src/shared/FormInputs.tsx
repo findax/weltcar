@@ -155,17 +155,19 @@ interface FormikPhoneNumberInputProps {
   title: string;
   error?: string;
   touched?: boolean;
+  disabled?: boolean;
 }
 
 export const FormikPhoneNumberInput = ({
   title,
   error,
   touched,
+  disabled = false
 }: FormikPhoneNumberInputProps) => {
   return (
     <fieldset className='relative'>
       <span className={commonTitleClass}>{title}</span>
-      <Field name='phone' type='tel'>
+      <Field name='phone' type='tel' disabled={disabled}>
         {({ field }: any) => (
           <ReactInputMask
             {...field}
