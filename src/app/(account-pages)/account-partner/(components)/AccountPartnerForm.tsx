@@ -131,6 +131,7 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
       {({ errors, touched, isSubmitting }) => (
         <Form className='grid grid-cols-1 gap-7 w-full max-w-xl mt-10 md:mt-0 md:pl-16'>
            <FormikInput
+            disabled={partner?.is_verified}
             name='companyName'
             placeholder='Enter your company name'
             title='Company name'
@@ -139,6 +140,7 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
           />
           {/* ---- */}
           <FormikInput
+            disabled={partner?.is_verified}
             name='taxNumber'
             placeholder='Enter your tax number'
             title='Tax number'
@@ -147,6 +149,7 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
           />
           {/* ---- */}
           <FormikFile 
+            disabled={partner?.is_verified}
             initialValues={initialValues}
             name='documents'
             label='Upload your passport and company registration'
@@ -157,6 +160,7 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
           {renderAttachedFiles()}
           {/* ---- */}
           <FormikInput
+            disabled={partner?.is_verified}
             name='email'
             type='email'
             placeholder='example@mail.com'
@@ -166,18 +170,21 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
           />
           {/* ---- */}
           <FormikPhoneNumberInput
+            disabled={partner?.is_verified}
             title='Phone number'
             error={errors.phone}
             touched={touched.phone}
           />
 
-          <ButtonPrimary
-            type='submit'
-            disabled={partner.is_verified ? true : isSubmitting}
-            loading={isSubmitting}
-          >
-            Update info
-          </ButtonPrimary>
+          { !partner.is_verified &&
+            <ButtonPrimary
+              type='submit'
+              disabled={isSubmitting}
+              loading={isSubmitting}
+            >
+              Update info
+            </ButtonPrimary>
+          }
         </Form>
       )}
     </Formik>
