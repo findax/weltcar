@@ -10,11 +10,11 @@ export const Nav = () => {
   const pathname = usePathname();
   const user = useUserStore((state) => state.user);
 
-  const listNav: Route[] = ['/account', '/password', '/orders', '/car-subscriptions', '/partner-cars-list'];
+  const listNav: Route[] = ['/account-partner','/account', '/password', '/orders', '/car-subscriptions', '/partner-cars-list'];
 
   const filteredNavigationItems = listNav.filter(item => {
     if (!user?.contractor_id) {
-      return item !== '/partner-cars-list';
+      return item !== '/partner-cars-list' && item !== '/account-partner'
     }
     if (user?.contractor_id) {
       return item !== '/account';

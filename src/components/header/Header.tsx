@@ -15,6 +15,8 @@ import Logo from '@/shared/Logo';
 import Navigation from '@/shared/Navigation/Navigation';
 import Modal from '@/shared/Modal';
 import { useUserStore } from '@/stores/user-store';
+import Link from 'next/link';
+import ButtonAddCar from './components/ButtonAddCar';
 
 const Header = () => {
   const prevScrollPos = useRef(0);
@@ -69,6 +71,7 @@ const Header = () => {
           </div>
 
           <div className='flex flex-shrink-0 justify-end flex-1 lg:flex-none text-neutral-700 dark:text-neutral-100 space-x-0.5'>
+            <ButtonAddCar />
             {/* <SearchDropdown className='flex items-center' /> */}
             {/* <LangDropdown /> */}
             <SwitchDarkMode />
