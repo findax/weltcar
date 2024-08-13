@@ -10,7 +10,7 @@ import { ButtonPrimary, ButtonClose } from '@/shared/Buttons';
 import SocialsList from '@/shared/SocialsList';
 import SwitchDarkMode from './SwitchDarkMode';
 import SideMenuWrapper from '@/shared/SideMenuWrapper';
-import { NAVIGATION_DEMO } from '@/types/navigation';
+import { NAVIGATION_DEMO_MOBILE } from '@/types/navigation';
 import { useUserStore } from '@/stores/user-store';
 
 interface MenuMobileProps {
@@ -21,7 +21,7 @@ interface MenuMobileProps {
 const MenuMobile = ({
   className = '',
   iconClassName = 'h-8 w-8',
-  data = NAVIGATION_DEMO,
+  data = NAVIGATION_DEMO_MOBILE,
 }: MenuMobileProps) => {
   const [isVisable, setIsVisable] = useState(false);
   const pathname = usePathname();

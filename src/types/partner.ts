@@ -7,7 +7,7 @@ export interface ICarPartnerToRequest {
   year: number;
   specification: string;
   vin: string;
-  post_сode: string;
+  post_code: string;
   country: number;
   inner_color_hex: string;
   inner_color_name: string;
@@ -25,7 +25,7 @@ export interface ICarPartnerToRequestUpdate {
   year: number;
   specification: string;
   vin: string;
-  post_сode: string;
+  post_code: string;
   country: number;
   inner_color_hex: string;
   inner_color_name: string;

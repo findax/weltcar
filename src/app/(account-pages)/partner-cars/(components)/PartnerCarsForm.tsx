@@ -258,7 +258,7 @@ export default function PartnerCarsForm({
         outer_color_name: values.outerColor,
         contractor_comment: values.commentary,
         country: values.country.id,
-        post_сode: values.postCode,
+        post_code: values.postCode,
         description: values.description,
         photos: values.photos ? values.photos : [],
         documents: values.documents ? values.documents : [],
@@ -292,7 +292,7 @@ export default function PartnerCarsForm({
         outer_color_name: values.outerColor,
         contractor_comment: values.commentary,
         country: values.country.id,
-        post_сode: values.postCode,
+        post_code: values.postCode,
         description: values.description,
         photos: values.photos,
         documents: values.documents ? values.documents : []

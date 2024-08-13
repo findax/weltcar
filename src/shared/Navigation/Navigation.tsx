@@ -8,7 +8,7 @@ function Navigation() {
 
   const filteredNavigationItems = NAVIGATION_DEMO.filter(item => {
     if (!user?.contractor_id) {
-      return item.href !== '/account-partner' && item.href !== '/partner-cars';
+      return item.href !== '/partner-cars';
     }
     return true;
   });
