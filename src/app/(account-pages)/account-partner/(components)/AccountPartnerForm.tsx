@@ -88,7 +88,7 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
               <Link href={file.url as Route } target='_blank'>
                 <p className="text-neutral-500">{file.file_name}</p>
               </Link>
-              <button onClick={(event) => handleDeleteAttachedFiles(event, file)} className='ml-1'><IoMdClose/></button>
+              <button disabled={partner.is_verified} onClick={(event) => handleDeleteAttachedFiles(event, file)} className='ml-1'><IoMdClose/></button>
             </div>
             ))}
           </div>

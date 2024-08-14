@@ -12,16 +12,19 @@ import SwitchDarkMode from './SwitchDarkMode';
 import SideMenuWrapper from '@/shared/SideMenuWrapper';
 import { NAVIGATION_DEMO_MOBILE } from '@/types/navigation';
 import { useUserStore } from '@/stores/user-store';
+import { IPartnerResponse } from '@/types/partner';
 
 interface MenuMobileProps {
   className?: string;
   iconClassName?: string;
   data?: NavItemType[];
+  partner?: IPartnerResponse;
 }
 const MenuMobile = ({
   className = '',
   iconClassName = 'h-8 w-8',
   data = NAVIGATION_DEMO_MOBILE,
+  partner = undefined
 }: MenuMobileProps) => {
   const [isVisable, setIsVisable] = useState(false);
   const pathname = usePathname();
@@ -37,7 +40,10 @@ const MenuMobile = ({
 
   const filteredNavigationItems = data.filter(item => {
     if (!user?.contractor_id) {
-      return item.href !== '/account-partner' && item.href !== '/partner-cars';
+      return item.href !== '/partner-cars';
+    }
+    if(!partner?.is_verified) {
+      return item.href !== '/partner-cars';
     }
     return true;
   });

@@ -15,8 +15,9 @@ import Logo from '@/shared/Logo';
 import Navigation from '@/shared/Navigation/Navigation';
 import Modal from '@/shared/Modal';
 import { useUserStore } from '@/stores/user-store';
-import Link from 'next/link';
 import ButtonAddCar from './components/ButtonAddCar';
+import { getPartner } from '@/api/partner';
+import { IPartnerResponse } from '@/types/partner';
 
 const Header = () => {
   const prevScrollPos = useRef(0);
@@ -26,9 +27,17 @@ const Header = () => {
   const { isDarkMode } = useThemeMode();
   const isMobile = useMediaQuery(1024);
   const user = useUserStore((state) => state.user);
+  const [partner, setPartner] = useState<IPartnerResponse>();
 
   useEffect(() => {
     useUserStore.persist.rehydrate();
+
+    user && getPartner()
+    .then((data) => {
+      if(data){
+        setPartner(data);
+      }
+    })
   }, []);
 
   useEffect(() => {
@@ -71,7 +80,7 @@ const Header = () => {
           </div>
 
           <div className='flex flex-shrink-0 justify-end flex-1 lg:flex-none text-neutral-700 dark:text-neutral-100 space-x-0.5'>
-            <ButtonAddCar />
+            {partner?.is_verified && <ButtonAddCar />}
             {/* <SearchDropdown className='flex items-center' /> */}
             {/* <LangDropdown /> */}
             <SwitchDarkMode />
