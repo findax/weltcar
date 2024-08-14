@@ -547,6 +547,7 @@ export default function PartnerCarsForm({
               touched={touched.commentary}
             />
 
+
             <ButtonPrimary
               type='submit'
               disabled={!!partner.is_verified ? isSubmitting : true}
@@ -560,9 +561,9 @@ export default function PartnerCarsForm({
       
       <Modal 
         title='Thank you!' 
-        isModalOpen={isCreateModalOpen} 
-        setIsModalOpen={ setIsCreateModalOpen }
-        handleChange={ handleRedirectOnEdit }
+        isModalOpen={isCreateModalOpen ? isCreateModalOpen : isUpdateModalOpen} 
+        setIsModalOpen={ isCreateModalOpen ? setIsCreateModalOpen : setIsUpdateModalOpen }
+        handleChange={ isCreateModalOpen ? handleRedirectOnEdit : undefined }
       >
         {isCreateModalOpen 
           ? (
