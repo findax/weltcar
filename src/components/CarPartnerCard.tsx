@@ -9,6 +9,10 @@ import { ICarsPartner } from '@/types/partner';
 import InactiveBadge from './InactiveBadge';
 import { deletePartnerCar } from '@/api/cars';
 import DeletedBadge from './deletedBadge';
+import Modal from '@/shared/Modal';
+import { InformationCircleIcon } from '@heroicons/react/24/solid';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const CarPartnerCard = ({
   className = '',
@@ -19,6 +23,7 @@ const CarPartnerCard = ({
   carData: ICarsPartner;
   paddingBottomGrid: string;
 }) => {
+  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
   const {
     vin,
     brand,
@@ -38,8 +43,14 @@ const CarPartnerCard = ({
     is_deleted
   } = carData;
 
+  const handleModalDeleteOpen = () => {
+    setIsModalDeleteOpen(true);
+  }
+
   const handleDeleteCarCard = () => {
-    deletePartnerCar(id)
+    deletePartnerCar(id);
+    toast.success('Car deleted');
+    setIsModalDeleteOpen(false);
   }
 
   const renderBadge = () => {
@@ -48,103 +59,137 @@ const CarPartnerCard = ({
     }
     if(!is_verified){
       return <InactiveBadge />
-    } 
+    } else {
+      return null
+    }
   } 
 
   return (
-    <div
-      className={`relative flex flex-col hover:shadow-lg border border-neutral-200 dark:border-neutral-700 rounded-2xl overflow-hidden bg-white dark:bg-neutral-900 ${className}`}
-      data-nc-id='CarCard'
-    >
-      <div className='relative w-full overflow-hidden'>
-        <CardSlider
-          photos={photos}
-          paddingBottom={paddingBottomGrid}
-          grayscale={`${!is_verified ? 'grayscale' : ''}`}
-          carName={`${brand} ${model}`}
-        />
-        {/* <BtnLikeIcon isLiked={like} className='absolute right-3 top-3 z-[1]' /> */}
-        {renderBadge()}
-      </div>
-      <div className='flex flex-grow flex-col justify-between py-4 px-5 space-y-2'>
-        <div className='space-y-2'>
-          <h3 className='flex justify-between capitalize text-xl font-semibold'>
-            {is_sold && <Badge name='ADS' color='green' />}
-            <span className='mr-4'>
-              {brand} {model}{' '}
-              <span className='whitespace-nowrap'>{specification}</span>
+    <>
+      <div
+        className={`relative flex flex-col hover:shadow-lg border border-neutral-200 dark:border-neutral-700 rounded-2xl overflow-hidden bg-white dark:bg-neutral-900 ${className}`}
+        data-nc-id='CarCard'
+      >
+        <div className='relative w-full overflow-hidden'>
+          <CardSlider
+            photos={photos}
+            paddingBottom={paddingBottomGrid}
+            grayscale={`${!is_verified ? 'grayscale' : ''}`}
+            carName={`${brand} ${model}`}
+          />
+          {/* <BtnLikeIcon isLiked={like} className='absolute right-3 top-3 z-[1]' /> */}
+          {renderBadge()}
+        </div>
+        <div className='flex flex-grow flex-col justify-between py-4 px-5 space-y-2'>
+          <div className='space-y-2'>
+            <h3 className='flex justify-between capitalize text-xl font-semibold'>
+              {is_sold && <Badge name='ADS' color='green' />}
+              <span className='mr-4'>
+                {brand} {model}{' '}
+                <span className='whitespace-nowrap'>{specification}</span>
+              </span>
+              <span>{year}</span>
+            </h3>
+            {
+              vin && 
+              <div className='flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-2'>
+                <span className=''>{vin}</span>
+                <span>-</span>
+                <span className=''>{'VIN'} </span>
+              </div>
+            }
+          </div>
+
+          <div className='flex-grow py-3 text-sm space-y-2'>
+            <h4 className='flex items-center'>
+              exterior&nbsp;color:&nbsp;
+              <span
+                className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 flex-shrink-0'
+                style={{ backgroundColor: `${outer_color_hex}` }}
+                data-tooltip-id={`${id}-exterior-color`}
+              >
+                <TooltipComponent
+                  id={`${id}-exterior-color`}
+                  content={outer_color_name}
+                />
+              </span>
+            </h4>
+            <h4 className='flex items-center'>
+              interior&nbsp;color:&nbsp;
+              <span
+                className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 flex-shrink-0'
+                style={{ backgroundColor: `${inner_color_hex}` }}
+                data-tooltip-id={`${id}-interior-color`}
+              >
+                <TooltipComponent
+                  id={`${id}-interior-color`}
+                  content={inner_color_name}
+                />
+              </span>
+            </h4>
+          </div>
+
+          <div className='flex-grow py-3 text-sm space-y-2'>
+            <h4 className='flex items-center'>
+              {contractor_comment}
+            </h4>
+          </div>
+
+          <div className='pt-4 flex justify-between items-center border-t border-dashed border-neutral-300 dark:border-neutral-700'>
+            <span className='text-2xl font-semibold text-primary-400'>
+              {priceWithComma(price)}
             </span>
-            <span>{year}</span>
-          </h3>
-          {
-            vin && 
-            <div className='flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-2'>
-              <span className=''>{vin}</span>
-              <span>-</span>
-              <span className=''>{'VIN'} </span>
+            <div style={{ display: `${ is_deleted ? "none" : "display"}`}} className='flex gap-1'>
+              <ButtonPrimary
+                onClick={handleModalDeleteOpen}
+                fontSize='text-sm'
+                sizeClass='px-3 py-2 md:px-4 md:py-2'
+                >
+                  Delete
+              </ButtonPrimary>
+              <Link href={`/partner-cars?id=${id}`} target='_blank'>
+                <ButtonPrimary
+                  fontSize='text-sm'
+                  sizeClass='px-3 py-2 md:px-4 md:py-2'
+                >
+                  Edit
+                </ButtonPrimary>
+              </Link>
             </div>
-          }
+          </div>
         </div>
-
-        <div className='flex-grow py-3 text-sm space-y-2'>
-          <h4 className='flex items-center'>
-            exterior&nbsp;color:&nbsp;
-            <span
-              className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 flex-shrink-0'
-              style={{ backgroundColor: `${outer_color_hex}` }}
-              data-tooltip-id={`${id}-exterior-color`}
-            >
-              <TooltipComponent
-                id={`${id}-exterior-color`}
-                content={outer_color_name}
-              />
-            </span>
-          </h4>
-          <h4 className='flex items-center'>
-            interior&nbsp;color:&nbsp;
-            <span
-              className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 flex-shrink-0'
-              style={{ backgroundColor: `${inner_color_hex}` }}
-              data-tooltip-id={`${id}-interior-color`}
-            >
-              <TooltipComponent
-                id={`${id}-interior-color`}
-                content={inner_color_name}
-              />
-            </span>
-          </h4>
-        </div>
-
-        <div className='flex-grow py-3 text-sm space-y-2'>
-          <h4 className='flex items-center'>
-            {contractor_comment}
-          </h4>
-        </div>
-
-        <div className='pt-4 flex justify-between items-center border-t border-dashed border-neutral-300 dark:border-neutral-700'>
-          <span className='text-2xl font-semibold text-primary-400'>
-            {priceWithComma(price)}
-          </span>
-          <div style={{ display: `${ is_deleted ? "none" : "display"}`}} className='flex gap-1'>
+      </div>
+      <Modal 
+        title='Are you sure ?' 
+        isModalOpen={isModalDeleteOpen} 
+        setIsModalOpen={setIsModalDeleteOpen}
+      >
+        <div className='flex flex-col'>
+          <div className='text-center space-y-5'>
+            <InformationCircleIcon className='block mx-auto w-24 h-24 text-yellow-500' />
+            <p className='px-3 text-md font-semibold'>
+              Are you sure you want to delete this vehicle? This action is irreversible, and the data cannot be restored.
+            </p>
+          </div>
+          <div className='flex gap-3 pt-5 m-auto'>
+            <ButtonPrimary
+              onClick={() => setIsModalDeleteOpen(false)}
+              fontSize='text-sm'
+              sizeClass='px-3 py-2 md:px-4 md:py-2'
+              >
+                Cancel
+            </ButtonPrimary>
             <ButtonPrimary
               onClick={handleDeleteCarCard}
               fontSize='text-sm'
               sizeClass='px-3 py-2 md:px-4 md:py-2'
               >
-                Remove
+                Delete
             </ButtonPrimary>
-            <Link href={`/partner-cars?id=${id}`} target='_blank'>
-              <ButtonPrimary
-                fontSize='text-sm'
-                sizeClass='px-3 py-2 md:px-4 md:py-2'
-              >
-                Edit
-              </ButtonPrimary>
-            </Link>
           </div>
         </div>
-      </div>
-    </div>
+      </Modal>
+    </>
   );
 };
 

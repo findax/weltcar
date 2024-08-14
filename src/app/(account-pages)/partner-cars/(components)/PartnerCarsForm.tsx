@@ -30,19 +30,15 @@ const CountrySchema = Yup.object().shape({
 interface IProps {
   partner: IPartnerResponse;
   partnerCar?: ICarPartner;
-  setId?: (id: string | null) => void;
 }
 
 export default function PartnerCarsForm({ 
-  setId,
   partner,
   partnerCar
 }:IProps) {
   const router = useRouter();
   const [car, setCar] = useState<ICarPartner | null>(partnerCar ? partnerCar : null);
   const [responseCarId, setResponseCarId] = useState<string>();
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [isSuccessUpdate, setIsSuccessUpdate] = useState(false);
   const [countries, setCountries] = useState<ICountries>([]);
   const [models, setModels] = useState<IModels>([]);
   const [attachedPhotos, setAttachedPhotos] = useState<IPartnerPhotoList[] | null>(partnerCar ? partnerCar.photos : null);
@@ -91,6 +87,8 @@ export default function PartnerCarsForm({
     postCode: car?.post_code,
     commentary: car?.contractor_comment
   });
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
  
   const PartnerCarsSchema = Yup.object().shape({
     model: ModelSchema.required('Model is required'),
@@ -242,6 +240,14 @@ export default function PartnerCarsForm({
     }
   }
 
+  const handleModalUpdateOpen = () => {
+    setIsUpdateModalOpen(true);
+  }
+
+  const handleModalCreateOpen = () => {
+    setIsCreateModalOpen(true);
+  }
+
   const handleCheckFetch = (car: ICarPartner | null, values: any, setSubmitting = (isSubmitting: boolean) => {}, resetForm = () => {}) => {
     if(car){
       const attachedPhotosToRequest = attachedPhotos?.map((attachedPhoto) => attachedPhoto.id);
@@ -274,7 +280,7 @@ export default function PartnerCarsForm({
             setAttachedDocuments(data.documents);
             setAttachedPhotos(data.photos);
             setSubmitting(false);
-            setIsSuccessUpdate(true);
+            handleModalUpdateOpen();
             toast.success('Thank you, your update has been accepted.')
           }else {
             setSubmitting(false);
@@ -303,11 +309,11 @@ export default function PartnerCarsForm({
       createPartnerCar(carDataToRequest)
         .then((data) => {
           if(data && !data.message){
-            setId && setId(data.id);
             setResponseCarId(data.id);
             setSubmitting(false);
             resetForm()
-            setIsSuccess(true);
+            handleModalCreateOpen();
+            toast.success('Thank you, your request has been accepted.')
           }else {
             setSubmitting(false);
           }
@@ -322,7 +328,7 @@ export default function PartnerCarsForm({
   };
 
   const handleRedirectOnEdit = () => {
-    responseCarId && router.push(`/partner-cars?id=${responseCarId}`)
+    responseCarId && router.push(`/partner-cars-list`)
   }
 
   useEffect(() => {
@@ -395,7 +401,7 @@ export default function PartnerCarsForm({
   return (
     <>
       <Formik
-        enableReinitialize
+        //enableReinitialize
         initialValues={ car ? initialValueFilled : initialValueDefault}
         validationSchema={PartnerCarsSchema}
         onSubmit={(values, { setSubmitting, resetForm }) => {
@@ -551,13 +557,14 @@ export default function PartnerCarsForm({
           </Form>
         )}
       </Formik>
+      
       <Modal 
         title='Thank you!' 
-        isModalOpen={isSuccess ? isSuccess : isSuccessUpdate} 
-        setIsModalOpen={ isSuccess ? setIsSuccess : setIsSuccessUpdate}
-        handleChange={ isSuccess ? handleRedirectOnEdit : undefined}
+        isModalOpen={isCreateModalOpen} 
+        setIsModalOpen={ setIsCreateModalOpen }
+        handleChange={ handleRedirectOnEdit }
       >
-        {isSuccess 
+        {isCreateModalOpen 
           ? (
               <div className='text-center space-y-10'>
                 <InformationCircleIcon className='block mx-auto w-24 h-24 text-yellow-500' />
