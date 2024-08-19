@@ -31,14 +31,18 @@ const Header = () => {
 
   useEffect(() => {
     useUserStore.persist.rehydrate();
-
-    user && getPartner()
-    .then((data) => {
-      if(data){
-        setPartner(data);
-      }
-    })
   }, []);
+
+  useEffect(() => {
+    if(user?.contractor_id){
+      getPartner()
+        .then((data) => {
+          if(data){
+            setPartner(data);
+          }
+        })
+    }
+  }, [user]);
 
   useEffect(() => {
     function handleScroll() {
@@ -102,7 +106,7 @@ const Header = () => {
               </button>
             )}
             <div className='px-0.5' />
-            <MenuMobile />
+            <MenuMobile partner={partner ? partner : undefined}/>
           </div>
         </div>
       </header>
