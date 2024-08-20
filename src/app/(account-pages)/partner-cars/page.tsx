@@ -1,31 +1,74 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import Label from '@/components/Label';
 import Avatar from '@/shared/Avatar';
-import { ButtonPrimary } from '@/shared/Buttons';
-import { Input } from '@/shared/FormInputs';
 import Image from 'next/image';
 import bgImg from '@/images/bg-cars/bg-car-3.webp';
-import AccountForm from './(components)/AccountForm';
-import { useUserStore } from '@/stores/user-store';
+import PartnerCarsForm from './(components)/PartnerCarsForm';
 import { ProtectedRoute, UserRole } from '@/utils/protectedRoute';
+import { useEffect, useState } from 'react';
+import { getPartner } from '@/api/partner';
+import { ICarPartner, IPartnerResponse } from '@/types/partner';
+import ErrorComponent from '@/components/ErrorComponent';
+import LoadingSpinner from '@/shared/LoadingSpinner';
+import { getPartnerCarId } from '@/api/cars';
+import { useSearchParams } from 'next/navigation';
 
-const AccountPage = () => {
-  const user = useUserStore((state) => state.user);
 
-  return (
-    <ProtectedRoute role={UserRole.user}>
+const PartnerCarsPage = () => {
+  const searchParams = useSearchParams()
+  const id = searchParams.get('id')
+  const [isFirstLoading, setFirstLoading] = useState(true);
+  const [isError, setError] = useState(false);
+  const [partner, setPartner] = useState<IPartnerResponse>();
+  const [partnerCar, setPartnerCar] = useState<ICarPartner>()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setFirstLoading(true);
+      try {
+        if (!id) {
+          const partner = await getPartner();
+          setPartner(partner as IPartnerResponse);
+        } else {
+          const [partner, partnerCar] = await Promise.all([
+            getPartner(),
+            getPartnerCarId(id as string),
+          ]);
+          setPartner(partner as IPartnerResponse);
+          setPartnerCar(partnerCar as ICarPartner);
+        }
+      } catch (error) {
+        setError(true);
+      } finally {
+        setFirstLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  return isFirstLoading ? (
+    <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
+      <div className='-mt-[76px]'>
+        <LoadingSpinner className='w-12' />
+      </div>
+    </div>
+  ) : isError ? (
+    <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
+      <ErrorComponent />
+    </div>
+  ) : (
+    <ProtectedRoute role={UserRole.partner}>
       <div className='relative space-y-6 md:space-y-8 lg:min-h-[650px]'>
         {/* HEADING */}
-        <h2 className='text-3xl font-semibold'>Account information</h2>
+        <h2 className='text-3xl font-semibold'>Account Partner cars</h2>
         <div className='w-14 border-b border-neutral-300 dark:border-neutral-700'></div>
         <div className='flex flex-col md:flex-row'>
           <div className='flex-shrink-0 flex items-start'>
             <div className='relative rounded-full overflow-hidden flex'>
               <Avatar
                 sizeClass='w-32 h-32'
-                userName={user?.name}
+                userName={partner?.name}
                 fontSize='text-6xl mt-1'
               />
               {/* <div className='absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-neutral-50 cursor-pointer'>
@@ -53,7 +96,7 @@ const AccountPage = () => {
               />
             </div>
           </div>
-          <AccountForm />
+            {partner && <PartnerCarsForm partnerCar={partnerCar} partner={partner} />}
         </div>
         <Image
           className='hidden md:block absolute inset-0 top-1/2 -translate-y-1/2 object-contain w-full opacity-[0.06] -z-10'
@@ -66,4 +109,4 @@ const AccountPage = () => {
   );
 };
 
-export default AccountPage;
+export default PartnerCarsPage;

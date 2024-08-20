@@ -2,6 +2,7 @@
 
 import { getAuth } from '@/api/apiInstance';
 import { Nav } from './(components)/Nav';
+import { Suspense } from 'react';
 
 const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
   if (!getAuth()) {
@@ -13,7 +14,9 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
       <div className='border-b border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800'>
         <Nav />
       </div>
-      <div className='container my-12 xl:my-14'>{children}</div>
+      <Suspense>
+        <div className='container my-12 xl:my-14'>{children}</div>
+      </Suspense>
     </div>
   );
 };

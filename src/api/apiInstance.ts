@@ -66,8 +66,8 @@ const checkAndRefreshToken = async () => {
 };
 
 export const getAuth = () => {
-  if (typeof sessionStorage !== 'undefined') {
-    const storage = sessionStorage.getItem('auth');
+  if (typeof localStorage !== 'undefined') {
+    const storage = localStorage.getItem('auth');
 
     if (storage) {
       return JSON.parse(storage);

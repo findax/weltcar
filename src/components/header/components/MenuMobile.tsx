@@ -10,20 +10,25 @@ import { ButtonPrimary, ButtonClose } from '@/shared/Buttons';
 import SocialsList from '@/shared/SocialsList';
 import SwitchDarkMode from './SwitchDarkMode';
 import SideMenuWrapper from '@/shared/SideMenuWrapper';
-import { NAVIGATION_DEMO } from '@/types/navigation';
+import { NAVIGATION_DEMO_MOBILE } from '@/types/navigation';
+import { useUserStore } from '@/stores/user-store';
+import { IPartnerResponse } from '@/types/partner';
 
 interface MenuMobileProps {
   className?: string;
   iconClassName?: string;
   data?: NavItemType[];
+  partner?: IPartnerResponse;
 }
 const MenuMobile = ({
   className = '',
   iconClassName = 'h-8 w-8',
-  data = NAVIGATION_DEMO,
+  data = NAVIGATION_DEMO_MOBILE,
+  partner = undefined
 }: MenuMobileProps) => {
   const [isVisable, setIsVisable] = useState(false);
   const pathname = usePathname();
+  const user = useUserStore((state) => state.user);
 
   useEffect(() => {
     setIsVisable(false);
@@ -31,6 +36,17 @@ const MenuMobile = ({
 
   const handleOpenMenu = () => setIsVisable(true);
   const handleCloseMenu = () => setIsVisable(false);
+
+
+  const filteredNavigationItems = data.filter(item => {
+    if (!user?.contractor_id) {
+      return item.href !== '/partner-cars';
+    }
+    if(!partner?.is_verified) {
+      return item.href !== '/partner-cars';
+    }
+    return true;
+  });
 
   return (
     <>
@@ -64,7 +80,7 @@ const MenuMobile = ({
             </span>
           </div>
           <ul className='flex flex-col py-6 px-2 space-y-1'>
-            {data.map((item, index) => (
+            {filteredNavigationItems.map((item, index) => (
               <Disclosure
                 key={item.id}
                 as='li'

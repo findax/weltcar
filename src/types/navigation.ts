@@ -27,3 +27,14 @@ export const NAVIGATION_DEMO: NavItemType[] = [
   //   ],
   // },
 ];
+
+export const NAVIGATION_DEMO_MOBILE: NavItemType[] = [
+  {
+    id: ncNanoId(),
+    href: '/catalog',
+    name: 'Catalog',
+  },
+  { id: ncNanoId(), href: '/about', name: 'About us' },
+  { id: ncNanoId(), href: '/contact', name: 'Contact us' },
+  { id: ncNanoId(), href: '/partner-cars', name: 'Add Car' },
+];

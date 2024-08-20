@@ -4,21 +4,27 @@ import { ReactNode, Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { ButtonClose } from '@/shared/Buttons';
 
+interface IProps {
+  title?: string;
+  maxWidth?: string;
+  isModalOpen: boolean;
+  handleChange?: () => void;
+  setIsModalOpen: (isModalOpen: boolean) => void;
+  children: ReactNode;
+}
+
 export default function Modal({
   title = '',
   maxWidth = 'max-w-lg',
   isModalOpen = false,
   setIsModalOpen,
+  handleChange = () => {},
   children,
-}: {
-  title?: string;
-  maxWidth?: string;
-  isModalOpen: boolean;
-  setIsModalOpen: (isModalOpen: boolean) => void;
-  children: ReactNode;
-}) {
-  const closeModal = () => setIsModalOpen(false);
-
+}:IProps) {
+  const closeModal = () => {
+    setIsModalOpen(false);
+    handleChange();
+  }
   return (
     <Transition appear show={isModalOpen} as={Fragment}>
       <Dialog as='div' className='relative z-50' onClose={closeModal}>

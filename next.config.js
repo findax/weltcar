@@ -6,6 +6,7 @@ const nextConfig = {
     typedRoutes: true,
   },
   images: {
+    domains: ['localhost', 'weltcar.de'],
     unoptimized: Boolean(process.env.IMAGE_OPTIMIZATION),
     remotePatterns: [
       {

@@ -1,31 +1,58 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import Label from '@/components/Label';
 import Avatar from '@/shared/Avatar';
-import { ButtonPrimary } from '@/shared/Buttons';
-import { Input } from '@/shared/FormInputs';
 import Image from 'next/image';
 import bgImg from '@/images/bg-cars/bg-car-3.webp';
-import AccountForm from './(components)/AccountForm';
+import AccountPartnerForm from './(components)/AccountPartnerForm';
 import { useUserStore } from '@/stores/user-store';
 import { ProtectedRoute, UserRole } from '@/utils/protectedRoute';
+import { useEffect, useState } from 'react';
+import { getPartner } from '@/api/partner';
+import LoadingSpinner from '@/shared/LoadingSpinner';
+import ErrorComponent from '@/components/ErrorComponent';
+import { IPartnerResponse } from '@/types/partner';
 
-const AccountPage = () => {
-  const user = useUserStore((state) => state.user);
+const AccountPartnerPage = () => {
+  const [isFirstLoading, setFirstLoading] = useState(true);
+  const [isError, setError] = useState(false);
+  const [partner, setPartner] = useState<IPartnerResponse>();
 
-  return (
-    <ProtectedRoute role={UserRole.user}>
+  useEffect(() => {
+    if(isFirstLoading){
+      getPartner()
+        .then((data) => {
+          if(data){
+            setPartner(data);
+          }
+        })
+        .finally(() => {
+          isFirstLoading && setFirstLoading(false);
+        }); 
+    }
+  },[isFirstLoading]);
+
+  return isFirstLoading ? (
+    <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
+      <div className='-mt-[76px]'>
+        <LoadingSpinner className='w-12' />
+      </div>
+    </div>
+  ) : isError ? (
+    <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
+      <ErrorComponent />
+    </div>
+  ) : (
+    <ProtectedRoute role={UserRole.partner}>
       <div className='relative space-y-6 md:space-y-8 lg:min-h-[650px]'>
         {/* HEADING */}
-        <h2 className='text-3xl font-semibold'>Account information</h2>
+        <h2 className='text-3xl font-semibold'>Account Partner information</h2>
         <div className='w-14 border-b border-neutral-300 dark:border-neutral-700'></div>
         <div className='flex flex-col md:flex-row'>
           <div className='flex-shrink-0 flex items-start'>
             <div className='relative rounded-full overflow-hidden flex'>
               <Avatar
                 sizeClass='w-32 h-32'
-                userName={user?.name}
+                userName={partner?.name}
                 fontSize='text-6xl mt-1'
               />
               {/* <div className='absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-neutral-50 cursor-pointer'>
@@ -53,17 +80,19 @@ const AccountPage = () => {
               />
             </div>
           </div>
-          <AccountForm />
+            {partner && (
+              <AccountPartnerForm partner={partner}/>
+            )}
         </div>
         <Image
           className='hidden md:block absolute inset-0 top-1/2 -translate-y-1/2 object-contain w-full opacity-[0.06] -z-10'
           src={bgImg}
           alt='car background image'
           priority
-        />
+          />
       </div>
     </ProtectedRoute>
   );
 };
 
-export default AccountPage;
+export default AccountPartnerPage;
