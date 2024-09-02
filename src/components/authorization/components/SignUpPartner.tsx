@@ -14,7 +14,7 @@ import { File } from 'buffer';
 import { Route } from 'next';
 import { singUpPartner } from '@/api/auth';
 
-export const SUPPORTED_FORMATS = ['image/png','image/jpeg','image/jpg', 'application/pdf'];
+export const SUPPORTED_FORMATS = ['image/png','image/jpeg','image/jpg'];
 
 export default function SignUpPartner({
   setIsModalOpen,

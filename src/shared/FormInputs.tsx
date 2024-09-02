@@ -488,7 +488,7 @@ export const FormikFile = ({
                   <div className={`${variant === 'photo' ? "flex flex-wrap gap-2" : "flex flex-col gap-1"}`}>
                     {renderFiles(form)}
                   </div>
-                  <p className="text-primary-400 text-sm pt-2.5">JPG, JPEG, PNG or PDF</p>
+                  <p className="text-primary-400 text-sm pt-2.5">JPG, JPEG, or PNG</p>
                 </div>
               </div>
             </label>

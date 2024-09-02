@@ -161,7 +161,6 @@ export default function PartnerCarsForm({
       .string()
       .trim()
       .max(1000, 'Model is too long')
-      .required('Commentary is required'),
   });
 
   const handleDeleteAttachedPhotos = (event: React.MouseEvent<HTMLButtonElement>, photo: IPartnerPhotoList) => {
@@ -263,7 +262,7 @@ export default function PartnerCarsForm({
         inner_color_name: values.innerColor,
         outer_color_hex: values.outerColor,
         outer_color_name: values.outerColor,
-        contractor_comment: values.commentary,
+        contractor_comment: values.commentary ? values.commentary : '',
         country: values.country.id,
         post_code: values.postCode,
         description: values.description,
@@ -298,7 +297,7 @@ export default function PartnerCarsForm({
         inner_color_name: values.innerColor,
         outer_color_hex: values.outerColor,
         outer_color_name: values.outerColor,
-        contractor_comment: values.commentary,
+        contractor_comment: values.commentary ? values.commentary : '',
         country: values.country.id,
         post_code: values.postCode,
         description: values.description,
@@ -485,20 +484,20 @@ export default function PartnerCarsForm({
             {/* ---- */}
             <FormikInput
               disabled={car?.is_verified}
-              name='innerColor'
-              placeholder='Inside color'
-              title='Inside color'
-              error={errors.innerColor}
-              touched={touched.innerColor}
-            />
-            {/* ---- */}
-            <FormikInput
-              disabled={car?.is_verified}
               name='outerColor'
               placeholder='External color'
               title='External color'
               error={errors.outerColor}
               touched={touched.outerColor}
+            />
+            {/* ---- */}
+            <FormikInput
+              disabled={car?.is_verified}
+              name='innerColor'
+              placeholder='Inside color'
+              title='Inside color'
+              error={errors.innerColor}
+              touched={touched.innerColor}
             />
             {/* ---- */}
             <FormikFile 
@@ -550,7 +549,7 @@ export default function PartnerCarsForm({
 
             <ButtonPrimary
               type='submit'
-              disabled={!!partner.is_verified ? isSubmitting : true}
+              //disabled={!!partner.is_verified ? isSubmitting : true}
               loading={isSubmitting}
             >
               Continue
