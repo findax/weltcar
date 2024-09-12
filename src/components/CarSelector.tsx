@@ -277,73 +277,77 @@ const CarSelector = () => {
           <ErrorComponent />
         ) : 
       (
-        <div style={{ position: 'relative' }}>
-          <div className="flex gap-3 items-center w-full">
-            <div className={`flex items-center w-[90%] flex-wrap gap-1 border border-${isDark ? 'neutral-700' : 'neutral-200'} bg-${ isDark ? 'neutral-800' : 'white'} rounded-2xl px-4 py-2`}>
-              {tagsToDisplay.map((tag) => (
-                tag.models.map((model, index) => 
-                  <div
-                    key={index} 
-                    className={`px-3 py-1 border border-${isDark ? 'neutral-700' : 'neutral-200'} rounded-xl text-${ isDark ? 'white' : 'black'} inline-block bg-${ isDark ? '' : 'neutral-100' }`}
-                  >
-                    <span className="flex items-center">
-                      {model} 
-                      <button 
-                        onClick={() => handleRemoveTag(tag.brand_id, index)}
-                        className="ml-1"
-                      >
-                        <IoIosClose />
-                      </button>
-                    </span>
+        <div>
+          <h1 className="mb-2">Your Subscription</h1>
+          <div style={{ position: 'relative' }}>
+            <div className="flex gap-3 items-center w-full">
+              <div className={`flex items-center w-[90%] flex-wrap gap-1 border border-${isDark ? 'neutral-700' : 'neutral-200'} bg-${ isDark ? 'neutral-800' : 'white'} rounded-2xl px-4 py-2`}>
+                {tagsToDisplay.map((tag) => (
+                  tag.models.map((model, index) => 
+                    <div
+                      key={index} 
+                      className={`px-3 py-1 border border-${isDark ? 'neutral-700' : 'neutral-200'} rounded-xl text-${ isDark ? 'white' : 'black'} inline-block bg-${ isDark ? '' : 'neutral-100' }`}
+                    >
+                      <span className="flex items-center">
+                        {model} 
+                        <button 
+                          onClick={() => handleRemoveTag(tag.brand_id, index)}
+                          className="ml-1"
+                        >
+                          <IoIosClose />
+                        </button>
+                      </span>
+                    </div>
+                  )
+                ))}
+                <input 
+                  type="text" 
+                  value={inputValue}
+                  className={`bg-${isDark ? 'neutral-900' : "white"} border-none grow py-1 px-2 border-transparent focus:border-transparent focus:ring-0 focus-visible:outline-none rounded-lg text-red`}
+                  onChange={handleInputChange}
+                  onFocus={() => setIsShowDropdown(true)}
+                  onBlur={() => setIsShowDropdown(false)}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Enter car"
+                />
+              </div>
+              <div>
+                <ButtonPrimary
+                  fontSize='text-sm'
+                  sizeClass='px-5 py-2 md:px-6 md:py-3'
+                  onClick={handleOnSubmit}
+                >
+                  Save
+                </ButtonPrimary>
+              </div>
+            </div>
+            {isShowDropdown && (
+              <div className={`border border-${isDark ? 'neutral-700' : 'neutral-200'} mt-[1px] rounded-2xl absolute w-full bg-${isDark ? 'neutral-800' : 'white' } z-10 max-h-[400px] overflow-y-auto`}>
+                {filteredCars.map((car) => (
+                  <div key={car.brand_id} className={`cursor-pointer dropdown-item`}>
+                    <div 
+                      className={`text-${isDark ? 'white' : 'black'} hover:text-${isDark ? 'black' : ''} flex px-3 py-2 hover:bg-${isDark ? 'neutral-300' : 'neutral-100'} justify-between items-center`}
+                      onMouseDown={() => handleAddTag(car)}
+                    >
+                      <p>{car.brand_name} - All models</p> 
+                    </div>
+                    <div className="px-4">
+                      {car.models.map((model) => (
+                        <div 
+                          key={model.model_id} 
+                          className={`px-3 py-1 rounded-lg hover:bg-${isDark ? 'neutral-300' : 'neutral-100'} text-${isDark ? 'white' : 'neutral-600'} hover:text-${isDark ? 'black' : ''} cursor-pointer`}
+                          onMouseDown={() => handleAddTagModel(car, model.model_id)}
+                        >
+                          <p>Model: {model.model_name}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                )
-              ))}
-              <input 
-                type="text" 
-                value={inputValue}
-                className={`bg-${isDark ? 'neutral-900' : "white"} border-none grow py-1 px-2 border-transparent focus:border-transparent focus:ring-0 focus-visible:outline-none rounded-lg text-red`}
-                onChange={handleInputChange}
-                onFocus={() => setIsShowDropdown(true)}
-                onBlur={() => setIsShowDropdown(false)}
-                onKeyDown={handleKeyDown}
-                placeholder="Enter car"
-              />
-            </div>
-            <div>
-              <ButtonPrimary
-                fontSize='text-sm'
-                sizeClass='px-5 py-2 md:px-6 md:py-3'
-                onClick={handleOnSubmit}
-              >
-                Save
-              </ButtonPrimary>
-            </div>
+                ))}
+              </div>
+            )}
           </div>
-          {isShowDropdown && (
-            <div className={`border border-${isDark ? 'neutral-700' : 'neutral-200'} mt-[1px] rounded-2xl absolute w-full bg-${isDark ? 'neutral-800' : 'white' } z-10 max-h-[400px] overflow-y-auto`}>
-              {filteredCars.map((car) => (
-                <div key={car.brand_id} className={`cursor-pointer dropdown-item`}>
-                  <div 
-                    className={`text-${isDark ? 'white' : 'black'} hover:text-${isDark ? 'black' : ''} flex px-3 py-2 hover:bg-${isDark ? 'neutral-300' : 'neutral-100'} justify-between items-center`}
-                    onMouseDown={() => handleAddTag(car)}
-                  >
-                    <p>{car.brand_name} - All models</p> 
-                  </div>
-                  <div className="px-4">
-                    {car.models.map((model) => (
-                      <div 
-                        key={model.model_id} 
-                        className={`px-3 py-1 rounded-lg hover:bg-${isDark ? 'neutral-300' : 'neutral-100'} text-${isDark ? 'white' : 'neutral-600'} hover:text-${isDark ? 'black' : ''} cursor-pointer`}
-                        onMouseDown={() => handleAddTagModel(car, model.model_id)}
-                      >
-                        <p>Model: {model.model_name}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+          <p className="text-xs mt-1"> Type the model name or brand, select from the dropdown list, and click "Save."</p>
         </div>
       )}
     </>

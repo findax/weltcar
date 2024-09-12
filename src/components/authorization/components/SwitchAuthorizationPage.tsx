@@ -1,7 +1,7 @@
 'use client';
 
 import { Switch } from '@headlessui/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface IProps {
   isClientSwitch: boolean;
@@ -16,6 +16,10 @@ const SwitchAuthorizationPage = ({
 }:IProps) => {
   const [isToggle, setIsToggle] = useState(isClientSwitch);
 
+  useEffect(() => {
+    setIsToggle(isClientSwitch);
+  }, [isClientSwitch]);
+  
   const handleChangeToggle = () => {
     setIsToggle(!isToggle);
     onChange(!isToggle);
