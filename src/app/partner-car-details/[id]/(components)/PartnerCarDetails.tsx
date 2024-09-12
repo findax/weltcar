@@ -4,20 +4,21 @@ import { useEffect, useState } from 'react';
 import LoadingSpinner from '@/shared/LoadingSpinner';
 import Modal from '@/shared/Modal';
 import Authorization from '@/components/authorization/Authorization';
-import ImagesHeader from './ImagesHeader';
-import Title from './Title';
-import Documents from './Documents';
-import Descriptions from './Descriptions';
-import PriceSidebar from './PriceSidebar';
-import MobileFooterSticky from './MobileFooterSticky';
-import ConfirmForm from './ConfirmForm';
-import { ICarDetails, ICarGallery } from '@/types/cardetails';
+import ImagesHeader from '../../../car-details/[id]/(components)/ImagesHeader';
+import Title from '../../../car-details/[id]/(components)/Title';
+import Documents from '../../../car-details/[id]/(components)/Documents';
+import Descriptions from '../../../car-details/[id]/(components)/Descriptions';
+import PriceSidebar from '../../../car-details/[id]/(components)/PriceSidebar';
+import MobileFooterSticky from '../../../car-details/[id]/(components)/MobileFooterSticky';
+import ConfirmForm from '../../../car-details/[id]/(components)/ConfirmForm';
+import { ICarGallery } from '@/types/cardetails';
 import { useUserStore } from '@/stores/user-store';
+import { ICarPartner } from '@/types/partner';
 
-export default function CarDetails({
+export default function PartnerCarDetails({
   carData,
 }: {
-  carData: ICarDetails | undefined;
+  carData: ICarPartner | null;
 }) {
   const [isLoading, setIsLoading] = useState(true);
   const [carGallery, setCarGallery] = useState<ICarGallery[]>([]);
@@ -26,7 +27,6 @@ export default function CarDetails({
 
   const user = useUserStore((state) => state.user);
 
-  console.log(carData)
   useEffect(() => {
     if (carData) {
       const modifiedPhotosArray = [...carData.photos].map((item, index) => ({
@@ -36,7 +36,7 @@ export default function CarDetails({
       setCarGallery(modifiedPhotosArray);
       setIsLoading(false);
     }
-  }, []);
+  }, [carData]);
 
   useEffect(() => {
     if (!!user && modalId === 'authorization') {
@@ -45,6 +45,7 @@ export default function CarDetails({
     }
   }, [isModalOpen]);
 
+  console.log(!!user, user)
   function handleReserve() {
     if (!!user) {
       setModalId('confirm');
@@ -53,6 +54,8 @@ export default function CarDetails({
     }
     setIsModalOpen(true);
   }
+
+  console.log(carData);
 
   return isLoading ? (
     <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
