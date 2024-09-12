@@ -1,10 +1,11 @@
 import { ICarDetails } from '@/types/cardetails';
+import { ICarPartner } from '@/types/partner';
 import { DocumentArrowDownIcon } from '@heroicons/react/24/outline';
 
 export default function Title({
   carData,
 }: {
-  carData: ICarDetails | undefined;
+  carData: ICarDetails | ICarPartner | undefined;
 }) {
   const {
     brand,
@@ -71,7 +72,14 @@ export default function Title({
 
       <div className='w-full border-b border-neutral-300 dark:border-neutral-700' />
 
-      <div className='font-semibold'>VIN: {vin}</div>
+      {
+        vin && 
+          <div 
+            className='font-semibold'
+          >
+            VIN: {vin}
+          </div>
+      }
     </div>
   );
 }

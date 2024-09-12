@@ -136,23 +136,31 @@ const CarPartnerCard = ({
           </div>
 
           <div className='pt-4 flex justify-between items-center border-t border-dashed border-neutral-300 dark:border-neutral-700'>
-            <span className='text-2xl font-semibold text-primary-400'>
+            <span className='2xl:text-2xl xl:text-xl text-sm font-semibold text-primary-400'>
               {priceWithComma(price)}
             </span>
             <div style={{ display: `${ is_deleted ? "none" : "display"}`}} className='flex gap-1'>
               <ButtonPrimary
                 onClick={handleModalDeleteOpen}
-                fontSize='text-sm'
-                sizeClass='px-3 py-2 md:px-4 md:py-2'
+                fontSize='md:text-sm text-xs'
+                sizeClass='px-2 py-1.5'
                 >
                   Delete
               </ButtonPrimary>
               <Link href={`/partner-cars?id=${id}`} target='_blank'>
                 <ButtonPrimary
-                  fontSize='text-sm'
-                  sizeClass='px-3 py-2 md:px-4 md:py-2'
+                  fontSize='md:text-sm text-xs'
+                  sizeClass='px-2 py-1.5 '
                 >
                   Edit
+                </ButtonPrimary>
+              </Link>
+              <Link href={`/partner-car-details/${id}`} target='_blank'>
+                <ButtonPrimary
+                  fontSize='md:text-sm text-xs'
+                  sizeClass='px-2 py-1.5 '
+                >
+                  See more
                 </ButtonPrimary>
               </Link>
             </div>
