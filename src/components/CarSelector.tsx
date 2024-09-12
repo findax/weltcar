@@ -112,6 +112,18 @@ const CarSelector = () => {
     setInputValue(value);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Backspace' && inputValue === '') {
+      if (tagsToRequest.length > 0) {
+        const lastTag = tagsToRequest[tagsToRequest.length - 1];
+        console.log(lastTag)
+        if (lastTag.models.length > 0) {
+          handleRemoveTag(lastTag.brand_id, lastTag.models.length - 1);
+        }
+      }
+    }
+  };
+
   const handleAddTag = (car: IBrand) => {
     const exitingTag = tagsToRequest.find((tag) => tag.brand_id === car.brand_id); 
     const exitingTagToDisplay = tagsToDisplay.find((tag) => tag.brand_id === car.brand_id); 
@@ -293,6 +305,7 @@ const CarSelector = () => {
                 onChange={handleInputChange}
                 onFocus={() => setIsShowDropdown(true)}
                 onBlur={() => setIsShowDropdown(false)}
+                onKeyDown={handleKeyDown}
                 placeholder="Enter car"
               />
             </div>
