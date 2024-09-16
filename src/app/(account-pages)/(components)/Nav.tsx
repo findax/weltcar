@@ -44,8 +44,8 @@ export const Nav = ({
                       : 'border-transparent'
                     }
                   ${isScrolled
-                    ? 'py-2 md:py-3'
-                    : 'py-5 md:py-6'
+                    ? 'py-2 md:py-3 duration-300'
+                    : 'py-5 md:py-6 duration-300'
                   }
                 `}
               />
