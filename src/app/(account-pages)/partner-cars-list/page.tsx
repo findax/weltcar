@@ -53,9 +53,12 @@ const PartnerCarsListPage = () => {
                   </div>
                 }
               >
-                <ProtectedRoute role={UserRole.partner}>
-                  <CatalogPartner carListData={carListData} />
-                </ProtectedRoute>
+                <div>
+                  <h1 className="mb-2">Your Cars</h1>
+                  <ProtectedRoute role={UserRole.partner}>
+                    <CatalogPartner carListData={carListData} />
+                  </ProtectedRoute>
+                </div>
               </Suspense>
             )
           : (
