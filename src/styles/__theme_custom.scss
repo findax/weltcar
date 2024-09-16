@@ -50,6 +50,10 @@
   @apply -translate-y-full;
 }
 
+.transform {
+  transition: transform 0.5s ease-in-out;
+}
+
 .markdown-styles {
   h1,
   h2,

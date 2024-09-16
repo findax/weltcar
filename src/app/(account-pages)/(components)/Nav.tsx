@@ -6,7 +6,13 @@ import { usePathname } from 'next/navigation';
 import { NavItem } from './NavItem';
 import { useUserStore } from '@/stores/user-store';
 
-export const Nav = () => {
+interface IProps {
+  isScrolled?: boolean;
+}
+
+export const Nav = ({
+  isScrolled = false
+}: IProps ) => {
   const pathname = usePathname();
   const user = useUserStore((state) => state.user);
 
@@ -32,11 +38,16 @@ export const Nav = () => {
               <NavItem
                 key={item}
                 item={item}
-                className={`block py-5 md:py-6 border-b-2 flex-shrink-0 capitalize ${
-                  isActive
-                    ? 'border-primary-500 font-medium'
-                    : 'border-transparent'
-                }`}
+                className={`block border-b-2 flex-shrink-0 capitalize 
+                  ${isActive 
+                      ? 'border-primary-500 font-medium'
+                      : 'border-transparent'
+                    }
+                  ${isScrolled
+                    ? 'py-2 md:py-3'
+                    : 'py-5 md:py-6'
+                  }
+                `}
               />
             ) : <div key={item} style={{ display: 'none'}}></div>
           );
