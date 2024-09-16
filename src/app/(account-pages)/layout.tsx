@@ -43,7 +43,7 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
       <div className={`fixed inset-x-0 top-0 z-30 border-b border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 
         ${!isHeaderVisible 
             ? 'nc-Header--hide transform -translate-y-full' 
-            : 'top-[81px] transform translate-y-0'
+            : 'md:top-[81px] top-[65px] transform translate-y-0'
           } 
         ${isScrolled
             ? 'shadow-md bg-opacity-90 dark:bg-opacity-90 backdrop-blur'
