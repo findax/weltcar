@@ -93,7 +93,7 @@ const SectionClientSay = ({
         Good News from Far Away
       </Heading>
 
-      <div className='relative'>
+      <div className='relative mt-16'>
         <Swiper
           modules={[Grid]}
           speed={600}

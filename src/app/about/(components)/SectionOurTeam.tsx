@@ -1,11 +1,11 @@
 import Heading from '@/shared/Heading';
 import Image from 'next/image';
 import React from 'react';
-import teamImg1 from '@/images/team/t1.webp';
-import teamImg2 from '@/images/team/t2.webp';
-import teamImg3 from '@/images/team/t3.webp';
-import teamImg4 from '@/images/team/t4.webp';
-import teamImg5 from '@/images/team/t5.webp';
+import teamImg1 from '@/images/team/t1.svg';
+import teamImg2 from '@/images/team/t2.svg';
+import teamImg3 from '@/images/team/t3.svg';
+import teamImg4 from '@/images/team/t4.svg';
+import teamImg5 from '@/images/team/t5.svg';
 
 const TEAM = [
   {
@@ -43,9 +43,13 @@ const TEAM = [
 const SectionOurTeam = () => {
   return (
     <div className='nc-SectionFounder relative'>
-      <Heading desc='Our team at WeltCar is composed of industry experts dedicated to providing you with the best luxury car buying experience. We work together to ensure that every aspect of your interaction with us is seamless and satisfying, making your journey to owning a premium vehicle both enjoyable and memorable.'>
-        Our Team
-      </Heading>
+      <div>
+        <h2 className='text-5xl font-bold text-neutral-1050 dark:text-white '>Our Team</h2>
+        <span className='block w-[480px] my-14 text-lg text-neutral-500 dark:text-neutral-400'>
+          Our team at WeltCar is composed of industry experts dedicated to providing you with the best luxury car buying experience. We work together to ensure that every aspect of your interaction with us is seamless and satisfying, making your journey to owning 
+          a premium vehicle both enjoyable and memorable.
+        </span>
+      </div>
       <div className='flex flex-wrap justify-center gap-10 sm:gap-4'>
         {TEAM.map((item) => (
           <div
@@ -62,10 +66,10 @@ const SectionOurTeam = () => {
               />
             </div>
 
-            <h3 className='text-lg font-semibold text-neutral-900 mt-4 md:text-xl dark:text-neutral-200'>
+            <h3 className='text-xl font-bold text-neutral-900 mt-4 md:text-2xl dark:text-neutral-200'>
               {item.name}
             </h3>
-            <span className='block text-sm text-neutral-500 sm:text-base dark:text-neutral-400'>
+            <span className='block text-sm text-neutral-500 sm:text-lg dark:text-neutral-400'>
               {item.job}
             </span>
           </div>

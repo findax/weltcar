@@ -26,7 +26,9 @@ const metadata: Metadata = {
 };
 
 function PageHome() {
-  const { isDarkMode } = useThemeMode();
+  const { isDarkMode, mounted } = useThemeMode();
+
+  if (!mounted) return null;
   
   return (
     <div className='nc-PageHome relative overflow-hidden'>
@@ -55,7 +57,7 @@ function PageHome() {
         className='bg-[#5046E5] -right-[315px] top-[14%]' 
       />
       <BackgroundShaadowSection 
-        className='bg-[#5046E5] left-[25] bottom-[40%]' 
+        className='bg-[#5046E5] left-[25px] bottom-[40%]' 
       />
       <BackgroundShaadowSection 
         className='bg-[#DFE172] -right-[145px] bottom-[8%]' 
