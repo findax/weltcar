@@ -29,7 +29,7 @@ export default function SubscribeForm() {
       }}
     >
       {({ errors, touched }) => (
-        <Form className='relative max-w-sm'>
+        <Form className='relative w-full'>
           <FormikInput
             name='email'
             type='email'
