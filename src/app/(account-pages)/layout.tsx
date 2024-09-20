@@ -10,6 +10,7 @@ import accountImg from '@/images/car-5.png'
 import accountImgLight from '@/images/car-5-light.png'
 import passwordImg from '@/images/car-6.png'
 import passwordImgLight from '@/images/car-6-light.png'
+import orderImg from '@/images/car-7.png'
 import { useThemeMode } from '@/hooks/useThemeMode';
 import triangleBackgroundImg from '@/images/bg-figures/triangle-1.png'
 import triangleBackgroundImgBigger from '@/images/bg-figures/triangle-4.png'
@@ -81,12 +82,18 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
         )
       case NavigationRoutes.Orders:
         return (
-          <div className='absolute top-0 right-0'>
+          <>
             <Image
-              src={passwordImgLight}
+              className='absolute bottom-[19%] right-0'
+              src={orderImg}
               alt='car background'
             />
-          </div>
+            <Image 
+                src={triangleBackgroundImgBigger} 
+                alt='triangle background'
+                className='absolute top-[10%] left-[0] -z-10'
+            />
+          </>
         )
       case NavigationRoutes.Password:
         return (
@@ -99,7 +106,7 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
             <Image 
               src={triangleBackgroundImgBigger} 
               alt='triangle background'
-              className='absolute -top-[3%] left-[0px] -z-10'
+              className='absolute top-[0%] left-[0px] -z-10'
             />
           </>
         )
@@ -136,7 +143,12 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
         />
       </div>
       <Suspense>
-        <div className='container my-12 xl:my-20 pt-16'>{children}</div>
+        <div className={ `
+          container my-12 xl:my-20 pt-16
+          ${NavigationRoutes.Password === activePage ? 'xl:mt-20 xl:mb-32' : ''}
+          ${NavigationRoutes.Orders === activePage ? 'xl:mt-20 xl:mb-40' : ''}
+
+        `}>{children}</div>
         {renderCarImage()}
       </Suspense>
     </div>

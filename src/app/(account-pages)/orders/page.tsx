@@ -3,8 +3,6 @@
 import { useEffect, useState } from 'react';
 import OrderAccordion from './(components)/OrderAccordion';
 import OrderDetails from './(components)/OrderDetails';
-import Image from 'next/image';
-import bgImg from '@/images/bg-cars/bg-car-5.webp';
 import { getUserOrders } from '@/api/user';
 import { IUserOrdersData } from '@/types/user';
 import LoadingSpinner from '@/shared/LoadingSpinner';
@@ -29,10 +27,9 @@ const OrdersPage = () => {
   }, []);
 
   return (
-    <div className='relative space-y-6 md:space-y-8 lg:min-h-[600px]'>
+    <div className='relative space-y-10 md:space-y-14 lg:min-h-[600px]'>
       {/* HEADING */}
-      <h2 className='text-3xl font-semibold'>Your orders</h2>
-      <div className='w-14 border-b border-neutral-300 dark:border-neutral-700'></div>
+      <h2 className='text-4xl font-bold'>Your orders</h2>
 
       {isLoading ? (
         <div className='w-full h-96 flex justify-center items-center'>
@@ -71,21 +68,15 @@ const OrdersPage = () => {
                 </ul>
               </>
             ) : (
-              <div className='h-[40vh] flex justify-center items-center flex-col bg-white/50 dark:bg-neutral-800/60'>
-                <h3 className='text-2xl'>You have no orders</h3>
+              <div className='mb-28 rounded-3xl h-[40vh] flex justify-center items-center flex-col bg-white dark:bg-neutral-950'>
+                <h3 className='text-2xl font-bold'>You have no orders</h3>
                 <ButtonPrimary className='mt-6' href='/catalog'>
-                  Choose your car
+                  Choose Your Car
                 </ButtonPrimary>
               </div>
             ))}
         </div>
       )}
-      <Image
-        className='hidden md:block absolute inset-0 top-1/2 -translate-y-1/2 object-contain w-full opacity-[0.08] -z-10'
-        src={bgImg}
-        alt='car background image'
-        priority
-      />
     </div>
   );
 };
