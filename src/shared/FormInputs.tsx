@@ -203,6 +203,8 @@ interface FormikPasswordInputProps {
   title: string;
   error?: string;
   touched?: boolean;
+  rounded?: string;
+  sizeClass?: string;
 }
 
 export const FormikPasswordInput = ({
@@ -210,6 +212,8 @@ export const FormikPasswordInput = ({
   title,
   error,
   touched,
+  rounded,
+  sizeClass,
   ...args
 }: FormikPasswordInputProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -224,12 +228,12 @@ export const FormikPasswordInput = ({
         <Field
           name={name}
           type={isPasswordVisible ? 'text' : 'password'}
-          className={commonClass}
+          className={`${commonClass} ${rounded} ${sizeClass}`}
           {...args}
         />
         <button
           type='button'
-          className='absolute top-1/2 -translate-y-1/2 right-0 pr-3 flex items-center'
+          className='absolute top-1/2 -translate-y-1/2 right-0 pr-7 flex items-center'
           onClick={togglePasswordVisibility}
         >
           {isPasswordVisible ? (

@@ -8,8 +8,11 @@ import { NavigationRoutes } from '@/types/navigation';
 import Image from 'next/image';
 import accountImg from '@/images/car-5.png'
 import accountImgLight from '@/images/car-5-light.png'
+import passwordImg from '@/images/car-6.png'
+import passwordImgLight from '@/images/car-6-light.png'
 import { useThemeMode } from '@/hooks/useThemeMode';
 import triangleBackgroundImg from '@/images/bg-figures/triangle-1.png'
+import triangleBackgroundImgBigger from '@/images/bg-figures/triangle-4.png'
 
 const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
   const prevScrollPos = useRef(0);
@@ -55,12 +58,11 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
       case NavigationRoutes.Account:
         return (
           <>
-            <div className='absolute top-[24%] right-0'>
-              <Image
-                src={isDarkMode ? accountImg : accountImgLight}
-                alt='car background'
-              />
-            </div>
+            <Image
+              className='absolute top-[24%] right-0'
+              src={isDarkMode ? accountImg : accountImgLight}
+              alt='car background'
+            />
             <Image 
               src={triangleBackgroundImg} 
               alt='triangle background'
@@ -72,7 +74,7 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
         return (
           <div className='absolute top-0 right-0'>
             <Image
-              src={accountImg}
+              src={passwordImg}
               alt='car background'
             />
           </div>
@@ -81,19 +83,25 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
         return (
           <div className='absolute top-0 right-0'>
             <Image
-              src={accountImg}
+              src={passwordImgLight}
               alt='car background'
             />
           </div>
         )
       case NavigationRoutes.Password:
         return (
-          <div className='absolute top-0 right-0'>
+          <>
             <Image
-              src={accountImg}
+              className='absolute top-[16%] right-0'
+              src={isDarkMode ? passwordImg : passwordImgLight}
               alt='car background'
             />
-          </div>
+            <Image 
+              src={triangleBackgroundImgBigger} 
+              alt='triangle background'
+              className='absolute -top-[3%] left-[0px] -z-10'
+            />
+          </>
         )
       case NavigationRoutes.CarSubscriptions:
         return (
@@ -128,7 +136,7 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
         />
       </div>
       <Suspense>
-        <div className='container my-12 xl:my-14 pt-16'>{children}</div>
+        <div className='container my-12 xl:my-20 pt-16'>{children}</div>
         {renderCarImage()}
       </Suspense>
     </div>

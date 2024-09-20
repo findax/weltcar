@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { NavItem } from './NavItem';
 import { useUserStore } from '@/stores/user-store';
+import { useEffect } from 'react';
 
 interface IProps {
   isScrolled?: boolean;
@@ -30,7 +31,11 @@ export const Nav = ({
     return true;
   });
 
-  pathname && setPathPage(pathname.slice(1));
+  useEffect(() => {
+    if (pathname) {
+      setPathPage(pathname.slice(1));
+    }
+  }, [pathname]);
   
   return (
     <div className='container'>
