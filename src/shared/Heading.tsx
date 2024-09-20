@@ -16,6 +16,8 @@ const Heading: React.FC<HeadingProps> = ({
   fontClass,
   ...args
 }) => {
+  console.log(className)
+
   return (
     <div
       className={`nc-Section-Heading relative mb-10 text-neutral-900 dark:text-neutral-50 ${isCenter ? 'text-center w-full max-w-2xl mx-auto mb-4' : 'max-w-2xl'} ${className}`}

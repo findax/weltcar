@@ -18,7 +18,7 @@ import { ICountries, IModels, IPartnerResponse } from '@/types/partner';
 const commonClass =
   'block w-full border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl text-sm font-normal h-11 px-4 py-3';
 const commonTitleClass =
-  'inline-block text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-1';
+  'inline-block text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-3';
 const commonErrorClass =
   'absolute top-full flex items-center text-left text-xs text-red-500 py-2';
 
@@ -154,6 +154,8 @@ export const FormikInput = ({
 interface FormikPhoneNumberInputProps {
   title: string;
   error?: string;
+  sizeClass?: string;
+  rounded?: string;
   touched?: boolean;
   disabled?: boolean;
 }
@@ -161,20 +163,26 @@ interface FormikPhoneNumberInputProps {
 export const FormikPhoneNumberInput = ({
   title,
   error,
+  sizeClass,
+  rounded,
   touched,
   disabled = false
 }: FormikPhoneNumberInputProps) => {
   return (
     <fieldset className='relative'>
       <span className={commonTitleClass}>{title}</span>
-      <Field name='phone' type='tel' disabled={disabled}>
+      <Field 
+        name='phone' 
+        type='tel' 
+        disabled={disabled} 
+      >
         {({ field }: any) => (
           <ReactInputMask
             {...field}
             mask='+99 999 999999999'
             maskChar={null}
             placeholder='+49 888 324324324'
-            className={commonClass}
+            className={`${commonClass} ${rounded} ${sizeClass}`}
           />
         )}
       </Field>
@@ -325,6 +333,7 @@ interface FormikTextareaProps {
   error?: string;
   touched?: boolean;
   rows?: number;
+  rounded?: string;
   sizeClass?: string;
   disabled?: boolean;
 }
@@ -335,6 +344,7 @@ export const FormikTextarea = ({
   error,
   touched,
   rows,
+  rounded,
   sizeClass = 'h-auto',
   disabled,
   ...args
@@ -354,7 +364,7 @@ export const FormikTextarea = ({
         as='textarea'
         name={name}
         rows={rows}
-        className={`${commonClass} ${sizeClass}`}
+        className={`${commonClass} ${rounded} ${sizeClass}`}
         {...args}
       />
       {error && touched ? (
