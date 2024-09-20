@@ -103,7 +103,9 @@ export default function Footer() {
               <p className='text-neutral-600 dark:text-neutral-400'>
                 Subscribe our newsletter to get our latest update & news
               </p>
-              <SubscribeForm />
+              <SubscribeForm 
+                isButtonShow={true}
+              />
             </div>
           </div>
         </div>

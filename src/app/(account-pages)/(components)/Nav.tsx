@@ -8,10 +8,12 @@ import { useUserStore } from '@/stores/user-store';
 
 interface IProps {
   isScrolled?: boolean;
+  setPathPage: (path: string) => void;
 }
 
 export const Nav = ({
-  isScrolled = false
+  isScrolled = false,
+  setPathPage
 }: IProps ) => {
   const pathname = usePathname();
   const user = useUserStore((state) => state.user);
@@ -28,6 +30,8 @@ export const Nav = ({
     return true;
   });
 
+  pathname && setPathPage(pathname.slice(1));
+  
   return (
     <div className='container'>
       <div className='flex space-x-8 md:space-x-14 overflow-x-auto hiddenScrollbar'>

@@ -13,10 +13,11 @@ import { IoIosArrowDown, IoIosArrowUp, IoMdClose } from "react-icons/io";
 import { HiOutlineSearch } from "react-icons/hi";
 import { Route } from 'next';
 import Link from 'next/link';
-import { ICountries, IModels, IPartnerResponse } from '@/types/partner';
+import { ICountries, IModels, IPartnerResponse } from '@/types/partner'; 
+
 
 const commonClass =
-  'block w-full border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl text-sm font-normal h-11 px-4 py-3';
+  'block w-full border-neutral-200 focus:border-primary-300 focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:bg-neutral-950 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl !text-xl font-normal h-11 px-7 py-3';
 const commonTitleClass =
   'inline-block text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-3';
 const commonErrorClass =
@@ -135,7 +136,7 @@ export const FormikInput = ({
     <fieldset className='relative'>
       {title && <span className={commonTitleClass}>{title}</span>}
       <Field
-        className={`${commonClass} ${rounded} ${sizeClass}`}
+        className={`${commonClass} ${rounded} ${sizeClass} .custom-input`}
         name={name}
         onKeyPress={onKeyPress}
         disabled={disabled}

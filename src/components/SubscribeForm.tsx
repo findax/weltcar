@@ -5,8 +5,15 @@ import * as Yup from 'yup';
 import { FormikInput } from '@/shared/FormInputs';
 import { ButtonCircle } from '@/shared/Buttons';
 import { sendSubscribeEmail } from '@/api/subscribe';
+import { ChevronRightIcon } from '@heroicons/react/24/outline';
 
-export default function SubscribeForm() {
+interface IProps {
+  isButtonShow?: boolean;
+}
+
+export default function SubscribeForm({
+  isButtonShow = false
+}: IProps) {
   const SubscribeSchema = Yup.object().shape({
     email: Yup.string()
       .trim()
@@ -39,13 +46,13 @@ export default function SubscribeForm() {
             error={errors.email}
             touched={touched.email}
           />
-          {/* <ButtonCircle
+          {isButtonShow && <ButtonCircle
             type='submit'
             className='absolute transform top-1/2 -translate-y-1/2 right-1'
             size='w-10 h-10'
           >
-            <i className='las la-arrow-right text-xl'></i>
-          </ButtonCircle> */}
+            <ChevronRightIcon className='w-8 ml-0.5' color='white' />
+          </ButtonCircle>}
         </Form>
       )}
     </Formik>

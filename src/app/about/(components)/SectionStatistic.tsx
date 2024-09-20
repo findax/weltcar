@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import Heading from '@/shared/Heading';
 
 export interface Statistic {
   id: string;

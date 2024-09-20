@@ -4,13 +4,21 @@ import { getAuth } from '@/api/apiInstance';
 import { Nav } from './(components)/Nav';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { NavigationRoutes } from '@/types/navigation';
+import Image from 'next/image';
+import accountImg from '@/images/car-5.png'
+import accountImgLight from '@/images/car-5-light.png'
+import { useThemeMode } from '@/hooks/useThemeMode';
+import triangleBackgroundImg from '@/images/bg-figures/triangle-1.png'
 
 const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
   const prevScrollPos = useRef(0);
   const [isScrolled, setScrolled] = useState(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const [activePage, setActivePage] = useState('');
   const isMobile = useMediaQuery(1024);
-
+  const { isDarkMode, mounted } = useThemeMode();
+  
   if (!getAuth()) {
     typeof window !== 'undefined' && (window.location.href = '/');
   }
@@ -37,6 +45,71 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
       window.scrollY > 20 ? setScrolled(true) : setScrolled(false);
     });
   }, []);
+
+  const handleSetActivePage = (pathPage: string) => {
+    setActivePage(pathPage);
+  }
+
+  const renderCarImage = () => {
+    switch (activePage) {
+      case NavigationRoutes.Account:
+        return (
+          <>
+            <div className='absolute top-[24%] right-0'>
+              <Image
+                src={isDarkMode ? accountImg : accountImgLight}
+                alt='car background'
+              />
+            </div>
+            <Image 
+              src={triangleBackgroundImg} 
+              alt='triangle background'
+              className='absolute top-[10%] -left-[300px] -z-10 rotate-12'
+            />
+          </>
+        )
+      case NavigationRoutes.AccountPartner:
+        return (
+          <div className='absolute top-0 right-0'>
+            <Image
+              src={accountImg}
+              alt='car background'
+            />
+          </div>
+        )
+      case NavigationRoutes.Orders:
+        return (
+          <div className='absolute top-0 right-0'>
+            <Image
+              src={accountImg}
+              alt='car background'
+            />
+          </div>
+        )
+      case NavigationRoutes.Password:
+        return (
+          <div className='absolute top-0 right-0'>
+            <Image
+              src={accountImg}
+              alt='car background'
+            />
+          </div>
+        )
+      case NavigationRoutes.CarSubscriptions:
+        return (
+          <div className='absolute top-0 right-0'>
+            <Image
+              src={accountImg}
+              alt='car background'
+            />
+          </div>
+        )
+      default:
+        return <div>Completed</div>;
+    }
+  };
+  
+  if (!mounted) return null;
   
   return (
     <div className='nc-CommonLayoutAccount'>
@@ -49,10 +122,14 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
             ? 'shadow-md bg-opacity-90 dark:bg-opacity-90 backdrop-blur'
             : ''
         } transition-transform duration-500 ase-in-out`}>
-        <Nav isScrolled={isScrolled} />
+        <Nav 
+          isScrolled={isScrolled} 
+          setPathPage={handleSetActivePage}
+        />
       </div>
       <Suspense>
         <div className='container my-12 xl:my-14 pt-16'>{children}</div>
+        {renderCarImage()}
       </Suspense>
     </div>
   );

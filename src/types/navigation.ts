@@ -38,3 +38,11 @@ export const NAVIGATION_DEMO_MOBILE: NavItemType[] = [
   { id: ncNanoId(), href: '/contact', name: 'Contact us' },
   { id: ncNanoId(), href: '/partner-cars', name: 'Add Car' },
 ];
+
+export enum NavigationRoutes {
+  Account = 'account',
+  AccountPartner = 'account-partner',
+  Password = 'password',
+  Orders = 'orders',
+  CarSubscriptions = 'car-subscriptions',
+}
