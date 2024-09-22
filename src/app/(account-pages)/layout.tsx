@@ -11,8 +11,10 @@ import accountImgLight from '@/images/car-5-light.png'
 import passwordImg from '@/images/car-6.png'
 import passwordImgLight from '@/images/car-6-light.png'
 import orderImg from '@/images/car-7.png'
+import carSubscriptionsImg from '@/images/car-8.png'
 import { useThemeMode } from '@/hooks/useThemeMode';
 import triangleBackgroundImg from '@/images/bg-figures/triangle-1.png'
+import triangleBackgroundImgFive from '@/images/bg-figures/triangle-5.png'
 import triangleBackgroundImgBigger from '@/images/bg-figures/triangle-4.png'
 
 const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
@@ -104,23 +106,27 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
               alt='car background'
             />
             <Image 
+              className='absolute top-[0%] left-[0px] -z-10'
               src={triangleBackgroundImgBigger} 
               alt='triangle background'
-              className='absolute top-[0%] left-[0px] -z-10'
             />
           </>
         )
       case NavigationRoutes.CarSubscriptions:
         return (
-          <div className='absolute top-0 right-0'>
+          <>
             <Image
-              src={accountImg}
+              className='absolute bottom-[12%] right-0 w-full h-[370px] object-cover'
+              src={carSubscriptionsImg}
               alt='car background'
             />
-          </div>
+            <Image
+              className='absolute top-[1%] right-0 -z-10 rotate-0'
+              src={triangleBackgroundImgFive}
+              alt='triangle background'
+            />
+          </>
         )
-      default:
-        return <div>Completed</div>;
     }
   };
   

@@ -47,7 +47,7 @@ export const Nav = ({
               <NavItem
                 key={item}
                 item={item}
-                className={`block border-b-2 flex-shrink-0 capitalize 
+                className={`block border-b-2 flex-shrink-0 capitalize text-neutral-1050 dark:text-white 
                   ${isActive 
                       ? 'border-primary-500 font-medium'
                       : 'border-transparent'

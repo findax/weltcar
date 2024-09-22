@@ -42,7 +42,7 @@ export default function SubscribeForm({
             type='email'
             placeholder='example@mail.com'
             rounded='rounded-full'
-            sizeClass='h-12 px-0 py-3 p-0 h-12'
+            sizeClass='px-0 py-3 p-0 h-14'
             error={errors.email}
             touched={touched.email}
           />
