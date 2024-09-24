@@ -38,7 +38,7 @@ const PageAbout = () => {
       <Image 
         src={triangleBackgroundImgTwo} 
         alt='triangle background'
-        className='absolute top-[28%] -right-[5px] -z-10'
+        className='hidden lg:block absolute top-[28%] -right-[5px] -z-10'
       />
       <Image 
         src={triangleBackgroundImgThird} 
@@ -46,16 +46,16 @@ const PageAbout = () => {
         className='absolute rotate-3 -bottom-[14%] -left-[22px] -z-10'
       />
       <BackgroundShaadowSection 
-        className='bg-[#DFE172] -left-[350px] top-[4%]' 
+        className='bg-[#DFE172] -left-[350px] top-[3%] lg:top-[4%]' 
       />
       <BackgroundShaadowSection 
-        className='bg-[#5046E5] -right-[315px] top-[13%]' 
+        className='hidden lg:block bg-[#5046E5] -right-[315px] top-[13%]' 
       />
       <BackgroundShaadowSection 
-        className='bg-[#5046E5] left-[25px] bottom-[42%]' 
+        className='bg-[#5046E5] -left-[260px] bottom-[27%] lg:left-[25px] lg:bottom-[42%]' 
       />
       <BackgroundShaadowSection 
-        className='bg-[#DFE172] -right-[145px] bottom-[6%]' 
+        className='bg-[#DFE172] -right-[80%] -bottom-[2%] md:-right-[15%] md:bottom-[2%] lg:-right-[145px] lg:bottom-[6%]' 
       />
 
       <div className='container my-12 xl:my-20 '>
@@ -74,11 +74,11 @@ const PageAbout = () => {
           <SectionSubscribe />
         </div>
       </div>
-      <div className='flex justify-center w-full'>
+      <div className='flex relative sm:bottom-0 sm:h-full -bottom-[30px] h-72 justify-center w-full'>
         <Image 
-          src={isDarkMode ? carsBackgroundDarkImg : carsBackgroundLightImg} 
+          src={isDarkMode ? carsBackgroundDarkImg : carsBackgroundLightImg } 
           alt='cars image'
-          className='w-full'
+          className='w-full h-full object-cover'
         />
       </div>
     </div>
