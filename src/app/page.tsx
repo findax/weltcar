@@ -43,24 +43,24 @@ function PageHome() {
       <Image 
         src={triangleBackgroundImgTwo} 
         alt='triangle background'
-        className='absolute top-[25%] -right-[5px] -z-10'
+        className='hidden lg:block absolute top-[25%] -right-[5px] -z-10'
       />
       <Image 
         src={triangleBackgroundImgThird} 
         alt='triangle background'
-        className='absolute rotate-3 -bottom-[14%] -left-[22px] -z-10'
+        className='absolute rotate-3 bottom-[13%] -left-[8px] lg:-bottom-[12%] lg:-left-[22px] -z-10'
       />
       <BackgroundShaadowSection 
-        className='bg-[#DFE172] -left-[350px] top-[4%]' 
+        className='bg-[#DFE172] h-[532px] w-[532px] lg:h-[627px] lg:w-[627px] -left-[350px] top-[4%]' 
       />
       <BackgroundShaadowSection 
-        className='bg-[#5046E5] -right-[315px] top-[14%]' 
+        className='hidden lg:block bg-[#5046E5] -right-[315px] top-[14%]' 
       />
       <BackgroundShaadowSection 
-        className='bg-[#5046E5] left-[25px] bottom-[40%]' 
+        className='h-[441px] w-[441px] lg:h-[627px] lg:w-[627px] bg-[#5046E5] -left-[200px] bottom-[34%] lg:left-[25px] lg:bottom-[40%]' 
       />
       <BackgroundShaadowSection 
-        className='bg-[#DFE172] -right-[145px] bottom-[8%]' 
+        className='h-[441px] w-[441px] lg:h-[627px] lg:w-[627px] bottom-[2%] sm:bottom-[9%] bg-[#DFE172] -right-[145px] lg:bottom-[8%]' 
       />
 
       {/* SECTION HERO */}
@@ -68,16 +68,16 @@ function PageHome() {
         <SectionHero />
       </div>
 
-      <div className='container relative space-y-24 mb-24 lg:space-y-28 lg:mb-28 mt-40'>
+      <div className='container relative space-y-24 mb-0 sm:mb-24 lg:space-y-28 lg:mb-28 mt-40'>
         <div className='relative py-16'>
           <SectionHowItWork />
         </div>
 
         {/* <SectionVideos /> */}
 
-        <div className='relative flex py-20'>
+        <div className='relative flex pb-20 lg:py-20'>
           <SectionWhyChooseUs />
-          <div className='flex-grow absolute -top-10 -right-24'>
+          <div className='lg:max-w-[70%] xl:max-w-full absolute top-[80%] md:top-[65%] lg:top-20 xl:-top-10 -right-24'>
             <Image 
               alt='car image' 
               src={carImg}  
@@ -85,21 +85,27 @@ function PageHome() {
           </div>
         </div>
 
-        <div className='relative  py-16'>
+        <div className='relative pt-64 sm:pt-96 lg:py-16'>
           <SectionClientSay />
         </div>
 
         <div className='relative py-16'>
           <SectionSubscribe />
         </div>
-
       </div>
 
-      <div className='flex justify-center w-full'>
+      {/* <div className='flex-grow absolute top-[1530px] -right-0'>
+        <Image 
+          alt='car image' 
+          src={carImg}  
+        />
+      </div> */}
+
+      <div className='flex relative sm:bottom-0 sm:h-full -bottom-[30px] h-72 justify-center w-full'>
         <Image 
           src={isDarkMode ? carsBackgroundDarkImg : carsBackgroundLightImg } 
           alt='cars image'
-          className='w-full'
+          className='w-full h-full object-cover'
         />
       </div>
     </div>

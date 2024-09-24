@@ -15,16 +15,16 @@ const SectionWhyChooseUs: FC<SectionWhyChooseUsProps> = ({
       data-nc-id='SectionWhyChooseUs'
     >
       <div className='flex-shrink-0 lg:pr-40 lg:-mt-3 xl:-mt-12 lg:w-1/2'>
-        <h2 className='font-bold text-5xl mt-6 sm:mt-11 text-neutral-1050 dark:text-white'>
+        <h2 className='font-bold text-3xl md:text-4xl xl:text-5xl mt-6 sm:mt-11 text-neutral-1050 dark:text-white'>
           Why Choose Us?
         </h2>
-        <p className='mt-12 text-neutral-500 dark:text-neutral-400 text-lg'>
+        <p className='mt-12 md:text-lg text-neutral-500 dark:text-neutral-400'>
           At WeltCar, we pride ourselves on delivering exceptional service and
           exclusive access to the world’s finest cars. Our commitment to
           quality, personalized attention, and customer satisfaction sets us
           apart. Choose WeltCar for a seamless, luxurious car-buying experience.
         </p>
-        <ButtonPrimary className='mt-6 sm:mt-11' href='/catalog'>
+        <ButtonPrimary className='text-base md:text-lg mt-6 sm:mt-11' href='/catalog'>
           Choose your car
         </ButtonPrimary>
       </div>

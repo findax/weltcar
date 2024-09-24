@@ -4,6 +4,7 @@ export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
   fontClass?: string;
   desc?: ReactNode;
   descColor?: ReactNode;
+  descStyle?: string;
   isCenter?: boolean;
 }
 
@@ -11,6 +12,7 @@ const Heading: React.FC<HeadingProps> = ({
   children,
   desc,
   descColor,
+  descStyle,
   className,
   isCenter = false,
   fontClass,
@@ -27,9 +29,9 @@ const Heading: React.FC<HeadingProps> = ({
         {children || `Section Heading`}
       </h2>
       {desc && (
-        <span className='block mt-4 md:mt-6 font-normal text-base sm:text-lg text-neutral-700 dark:text-neutral-400'>
+        <span className={`block mt-4 md:mt-6 font-normal text-base sm:text-lg text-neutral-700 dark:text-neutral-400 ${descStyle}`}>
           {desc}
-          <span className='text-primary-600'>{descColor}</span>
+          <span className='pl-2 text-primary-600'>{descColor}</span>
         </span>
       )}
     </div>

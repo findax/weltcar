@@ -50,15 +50,15 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
       <Heading
         isCenter
         // desc='Keep calm & drive on'
-        fontClass='!font-bold xl:text-5xl text-neutral-1050 dark:text-white'
+        fontClass='!font-bold text-3xl md:text-4xl xl:text-5xl text-neutral-1050 dark:text-white'
       >
         How It Works
       </Heading>
-      <div className='grid md:grid-cols-3 gap-5 md:gap-6 lg:gap-5 mt-14'>
+      <div className='flex flex-col gap-5 lg:flex-row justify-around mt-14'>
         {data.map((item) => (
           <div
             key={item.id}
-            className='flex flex-col max-w-sm py-10 px-7 bg-white dark:bg-neutral-950 rounded-3xl'
+            className='flex flex-col max-w-full lg:w-full py-10 px-7 bg-white dark:bg-neutral-950 rounded-3xl'
           >
             <div className='h-14 w-14 flex items-center justify-center'>
               <Image
@@ -67,9 +67,9 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
                 src={item.img}
               />
             </div>
-            <div className='mt-8 '>
-              <h3 className='text-xl font-bold text-neutral-1050 dark:text-white '>{item.title}</h3>
-              <span className='block mt-5 md:text-sm xl:text-base text-neutral-500 dark:text-neutral-400'>
+            <div className='mt-4 md:mt-8'>
+              <h3 className='text-lg md:text-2xl font-bold text-neutral-1050 dark:text-white '>{item.title}</h3>
+              <span className='block mt-5 md:text-lg text-neutral-500 dark:text-neutral-400'>
                 {item.desc}
               </span>
             </div>
