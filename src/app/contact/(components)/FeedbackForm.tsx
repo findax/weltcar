@@ -95,7 +95,7 @@ export default function FeedbackForm() {
             type='submit'
             disabled={isSubmitting}
             loading={isSubmitting}
-            className='mt-5 w-[102px]'
+            className='!text-lg mt-5 w-[102px]'
           >
             Send
           </ButtonPrimary>

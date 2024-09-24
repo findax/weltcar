@@ -30,10 +30,10 @@ const PageContact = () => {
         className='absolute rotate-2 -bottom-[25%] -left-[22px] -z-10'
       />
       <BackgroundShaadowSection 
-        className='bg-[#5046E5] -right-[330px] top-[1%]' 
+        className='bg-[#5046E5] -right-[330px] top-[4%] lg:top-[1%]' 
       />
       <BackgroundShaadowSection 
-        className='bg-[#DFE172] -right-[100px] bottom-[8%]' 
+        className='bg-[#DFE172] -right-[300px] -bottom-[3%] lg:-right-[100px] lg:bottom-[8%]' 
       />
       <div className='container my-12 xl:my-20 space-y-16 xl:space-y-28'>
         <ContactHero />
@@ -42,11 +42,11 @@ const PageContact = () => {
           <SectionSubscribe />
         </div>
       </div>
-      <div className='flex justify-center w-full'>
+      <div className='flex relative sm:bottom-0 sm:h-full -bottom-[30px] h-72 justify-center w-full'>
         <Image 
           src={isDarkMode ? carsBackgroundDarkImg : carsBackgroundLightImg } 
           alt='cars image'
-          className='w-full'
+          className='w-full h-full object-cover'
         />
       </div>
     </div>
