@@ -10,6 +10,7 @@ export const NAVIGATION_DEMO: NavItemType[] = [
   },
   { id: ncNanoId(), href: '/about', name: 'About us' },
   { id: ncNanoId(), href: '/contact', name: 'Contact us' },
+  { id: ncNanoId(), href: '/find-car', name: 'Find car' },
 
   // {
   //   id: ncNanoId(),
