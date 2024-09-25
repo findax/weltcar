@@ -34,9 +34,9 @@ const PasswordPage = () => {
   });
 
   return (
-    <div className='relative space-y-8 sm:space-y-12 lg:min-h-[500px]'>
+    <div className='relative min-h-[900px] space-y-8 sm:space-y-12 lg:min-h-[500px]'>
       {/* HEADING */}
-      <h2 className='text-4xl font-bold'>Update your password</h2>
+      <h2 className='text-2xl lg:text-4xl font-bold'>Update your password</h2>
       <Formik
         initialValues={{
           password: '',
@@ -90,7 +90,7 @@ const PasswordPage = () => {
               type='submit'
               disabled={isSubmitting}
               loading={isSubmitting}
-              className='w-56'
+              className='text-base lg:text-lg w-56'
             >
               Update password
             </ButtonPrimary>

@@ -61,7 +61,7 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
       case NavigationRoutes.Account:
         return (
           <>
-            <div className='absolute w-full lg-w-auto bottom-[0%] left-0 object-cover h-[400px] lg:h-fit lg:bottom-auto lg:w-7/12 lg:left-auto lg:top-[32%] lg:right-0 xl:top-[10%] xl:w-[1000px]'>
+            <div className='absolute w-full lg-w-auto bottom-[0%] left-0 h-[400px] lg:h-fit lg:bottom-auto lg:w-7/12 lg:left-auto lg:top-[32%] lg:right-0 xl:top-[10%] xl:w-[1000px]'>
               <Image
                 className='object-cover w-full h-full'
                 src={isDarkMode ? accountImg : accountImgLight}
@@ -87,11 +87,13 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
       case NavigationRoutes.Orders:
         return (
           <>
-            <Image
-              className='absolute bottom-[19%] right-0'
-              src={orderImg}
-              alt='car background'
-            />
+            <div>
+              <Image
+                className='absolute bottom-[19%] right-0'
+                src={orderImg}
+                alt='car background'
+              />
+            </div>
             <Image 
                 src={triangleBackgroundImgBigger} 
                 alt='triangle background'
@@ -102,11 +104,13 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
       case NavigationRoutes.Password:
         return (
           <>
-            <Image
-              className='absolute top-[16%] right-0'
-              src={isDarkMode ? passwordImg : passwordImgLight}
-              alt='car background'
-            />
+            <div className='absolute lg-w-auto bottom-[0%] -left-[30%] xsS:right-0 xsS:left-auto xsS:w-full h-[400px] lg:h-fit lg:bottom-auto lg:w-7/12 lg:left-auto lg:top-[32%] lg:right-0 xl:top-[10%] xl:w-[1000px]'>
+              <Image
+                className='object-cover w-full h-full'
+                src={isDarkMode ? passwordImg : passwordImgLight}
+                alt='car background'
+              />
+            </div>
             <Image 
               className='absolute top-[0%] left-[0px] -z-10'
               src={triangleBackgroundImgBigger} 
