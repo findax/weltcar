@@ -48,7 +48,7 @@ export default function AccountForm() {
       }}
     >
       {({ errors, touched, isSubmitting }) => (
-        <Form className='grid grid-cols-1 gap-7 w-full max-w-xl mt-10 md:mt-0 md:pr-32'>
+        <Form className='grid grid-cols-1 gap-7 w-full max-w-xl mt-10 md:pr-32'>
           <FormikInput
             name='name'
             placeholder='Enter your name'
@@ -101,7 +101,7 @@ export default function AccountForm() {
             type='submit'
             disabled={isSubmitting}
             loading={isSubmitting}
-            className='w-40'
+            className='text-base lg:text-lg w-40'
           >
             Update info
           </ButtonPrimary>

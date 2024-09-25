@@ -61,11 +61,13 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
       case NavigationRoutes.Account:
         return (
           <>
-            <Image
-              className='absolute top-[24%] right-0'
-              src={isDarkMode ? accountImg : accountImgLight}
-              alt='car background'
-            />
+            <div className='absolute w-full lg-w-auto bottom-[0%] left-0 object-cover h-[400px] lg:h-fit lg:bottom-auto lg:w-7/12 lg:left-auto lg:top-[32%] lg:right-0 xl:top-[10%] xl:w-[1000px]'>
+              <Image
+                className='object-cover w-full h-full'
+                src={isDarkMode ? accountImg : accountImgLight}
+                alt='car background'
+              />
+            </div>
             <Image 
               src={triangleBackgroundImg} 
               alt='triangle background'
@@ -133,7 +135,7 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
   if (!mounted) return null;
   
   return (
-    <div className='nc-CommonLayoutAccount'>
+    <div className='relative nc-CommonLayoutAccount'>
       <div className={`fixed inset-x-0 top-0 z-30 border-b border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 
         ${!isHeaderVisible 
             ? 'nc-Header--hide transform -translate-y-full' 
