@@ -121,11 +121,13 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
       case NavigationRoutes.CarSubscriptions:
         return (
           <>
-            <Image
-              className='absolute bottom-[12%] right-0 w-full h-[370px] object-cover'
-              src={carSubscriptionsImg}
-              alt='car background'
-            />
+            <div className='absolute -bottom-[11%] right-0 w-full h-[280px] lg:h-[350px]'>
+              <Image
+                className='h-full w-full object-cover'
+                src={carSubscriptionsImg}
+                alt='car background'
+              />
+            </div>
             <Image
               className='absolute top-[1%] right-0 -z-10 rotate-0'
               src={triangleBackgroundImgFive}
@@ -140,10 +142,10 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
   
   return (
     <div className='relative nc-CommonLayoutAccount'>
-      <div className={`fixed inset-x-0 top-0 z-30 border-b border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 
+      <div className={`fixed inset-x-0 top-0 z-20 border-b border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 
         ${!isHeaderVisible 
             ? 'nc-Header--hide transform -translate-y-full' 
-            : 'md:top-[81px] top-[65px] transform translate-y-0'
+            : 'md:top-[80px] top-[64px] transform translate-y-0'
           } 
         ${isScrolled
             ? 'shadow-md bg-opacity-90 dark:bg-opacity-90 backdrop-blur'

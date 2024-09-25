@@ -6,8 +6,8 @@ import CarSubscriptions from "./(components)/CarSubscriptions";
 
 const CarSubscribtionsPage = () => {
   return (
-    <div className='relative space-y-10 md:space-y-14 lg:min-h-[650px]'>
-      <h2 className='text-4xl font-bold text-neutral-1050 dark:text-white'>Car Subscriptions</h2>
+    <div className='relative min-h-[500px] space-y-10 md:space-y-14 lg:min-h-[650px]'>
+      <h2 className='text-2xl lg:text-4xl font-bold text-neutral-1050 dark:text-white'>Car Subscriptions</h2>
       <CarSubscriptions />
     </div>
   );

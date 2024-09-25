@@ -69,7 +69,7 @@ export default function ContactHero() {
             <h3 className='uppercase font-semibold text-sm dark:text-neutral-200 tracking-wider'>
               <span className='mr-3'>🌏</span>SOCIALS
             </h3>
-            <SocialsList className='mt-4 lg:mt-2' />
+            <SocialsList itemClass='text-neutral-600 dark:hover:text-white hover:text-black dark:text-neutral-200' className='mt-4 lg:mt-2' />
           </div>
         </div>
 

@@ -60,7 +60,7 @@ function PageHome() {
         className='bg-[#5046E5] -left-[200px] bottom-[34%] lg:left-[25px] lg:bottom-[40%]' 
       />
       <BackgroundShaadowSection 
-        className='bottom-[2%] sm:bottom-[9%] bg-[#DFE172] -right-[145px] lg:bottom-[8%]' 
+        className='-bottom-[2%] -right-[80%] sm:bottom-[9%] bg-[#DFE172] lg:-right-[145px] lg:bottom-[8%]' 
       />
 
       {/* SECTION HERO */}

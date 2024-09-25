@@ -270,9 +270,9 @@ const CarSelector = () => {
           <ErrorComponent />
         ) : 
       (
-        <div style={{ position: 'relative' }}>
-          <div className="flex gap-3 items-center w-full">
-            <div className='flex items-center w-[90%] flex-wrap gap-1 border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-950 rounded-full px-4 py-2'>
+        <div>
+          <div className="flex flex-wrap md:flex-nowrap gap-3 items-center w-full">
+            <div className='relative flex w-full items-center lg:w-[90%] flex-wrap gap-1 border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-950 rounded-full px-4 py-2'>
               {tagsToDisplay.map((tag) => (
                 tag.models.map((model, index) => 
                   <div
@@ -301,11 +301,36 @@ const CarSelector = () => {
                 onKeyDown={handleKeyDown}
                 placeholder="Enter car"
               />
+              {isShowDropdown && (
+                <div className={`border left-0 top-[58px] w-[90%] border-neutral-200 mt-[1px] rounded-2xl absolute w-full bg-white z-10 max-h-[400px] overflow-y-auto dark:border-neutral-700 dark:bg-neutral-950`}>
+                  {filteredCars.map((car) => (
+                    <div key={car.brand_id} className={`cursor-pointer dropdown-item`}>
+                      <div 
+                        className='text-neutral-1050 dark:text-white dark:hover:text-neutral-1050 flex px-3 py-2 dark:hover:bg-neutral-300 hover:bg-neutral-100 justify-between items-center'
+                        onMouseDown={() => handleAddTag(car)}
+                      >
+                        <p>{car.brand_name} - All models</p> 
+                      </div>
+                      <div className="px-4">
+                        {car.models.map((model) => (
+                          <div 
+                            key={model.model_id} 
+                            className='px-3 py-1 rounded-lg hover:bg-neutral-100 dark:hover:neutral-300 text-neutral-600 dark:text-white dark:hover:text-neutral-1050 cursor-pointer'
+                            onMouseDown={() => handleAddTagModel(car, model.model_id)}
+                          >
+                            <p>Model: {model.model_name}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
             <div className="h-14">
               <ButtonPrimary
                 className="h-full w-28"
-                fontSize='text-lg font-medium'
+                fontSize='text-base lg:text-lg font-medium'
                 sizeClass='px-5 py-2 md:px-6 md:py-3'
                 onClick={handleOnSubmit}
               >
@@ -313,7 +338,7 @@ const CarSelector = () => {
               </ButtonPrimary>
             </div>
           </div>
-          {isShowDropdown && (
+          {/* {isShowDropdown && (
             <div className={`border w-[90%] border-neutral-200 mt-[1px] rounded-2xl absolute w-full bg-white z-10 max-h-[400px] overflow-y-auto dark:border-neutral-700 dark:bg-neutral-950`}>
               {filteredCars.map((car) => (
                 <div key={car.brand_id} className={`cursor-pointer dropdown-item`}>
@@ -337,7 +362,7 @@ const CarSelector = () => {
                 </div>
               ))}
             </div>
-          )}
+          )} */}
         </div>
       )}
     </>
