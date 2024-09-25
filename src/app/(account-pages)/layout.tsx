@@ -87,9 +87,9 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
       case NavigationRoutes.Orders:
         return (
           <>
-            <div>
+            <div className='absolute h-[160px] bottom-[4%] right-[0%] xsS:right-auto xsS:left-[25%] md:h-[210px] md:-bottom-[2%] lg:h-auto lg:left-auto lg:-bottom-[1%] lg:right-0 xl:-bottom-[12%]'>
               <Image
-                className='absolute bottom-[19%] right-0'
+                className='h-full object-cover object-left'
                 src={orderImg}
                 alt='car background'
               />
@@ -97,7 +97,7 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
             <Image 
                 src={triangleBackgroundImgBigger} 
                 alt='triangle background'
-                className='absolute top-[10%] left-[0] -z-10'
+                className='absolute -top-[6%] left-[0] -z-10'
             />
           </>
         )
@@ -112,7 +112,7 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
               />
             </div>
             <Image 
-              className='absolute top-[0%] left-[0px] -z-10'
+              className='absolute -top-[28%] left-[0px] -z-10'
               src={triangleBackgroundImgBigger} 
               alt='triangle background'
             />

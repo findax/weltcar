@@ -27,9 +27,9 @@ const OrdersPage = () => {
   }, []);
 
   return (
-    <div className='relative space-y-10 md:space-y-14 lg:min-h-[600px]'>
+    <div className='relative min-h-[540px] space-y-10 md:space-y-14 lg:min-h-[650px] xl:min-h-[600px]'>
       {/* HEADING */}
-      <h2 className='text-4xl font-bold'>Your orders</h2>
+      <h2 className='text-2xl lg:text-4xl font-bold'>Your orders</h2>
 
       {isLoading ? (
         <div className='w-full h-96 flex justify-center items-center'>
@@ -68,9 +68,9 @@ const OrdersPage = () => {
                 </ul>
               </>
             ) : (
-              <div className='mb-28 rounded-3xl h-[40vh] flex justify-center items-center flex-col bg-white dark:bg-neutral-950'>
-                <h3 className='text-2xl font-bold'>You have no orders</h3>
-                <ButtonPrimary className='mt-6' href='/catalog'>
+              <div className='mb-28 rounded-3xl h-[360px] md:h-[380px] lg:h-[420px] flex justify-center items-center flex-col bg-white dark:bg-neutral-950'>
+                <h3 className='text-lg lg:text-2xl font-bold'>You have no orders</h3>
+                <ButtonPrimary className='text-base lg:text-lg mt-6' href='/catalog'>
                   Choose Your Car
                 </ButtonPrimary>
               </div>
