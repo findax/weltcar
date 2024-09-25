@@ -21,10 +21,7 @@ const CarSelector = () => {
   const [tagsToDisplay, setTagsToDisplay] = useState<ICarDataToRequest<string>[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
   const [isShowDropdown, setIsShowDropdown] = useState<boolean>(false);
-  
-  const { isDarkMode } = useThemeMode();
   const { currentPage } = useQueryParams();
-  const [isDark, setDark] = useState(false);
   
   const filterCars = () => { 
     const filtered = 
@@ -260,10 +257,6 @@ const CarSelector = () => {
     }
   }, [tagsToRequest]);
 
-  useEffect(() => {
-    isDarkMode ? setDark(true) : setDark(false);
-  }, [isDarkMode]);
-
   return (
     <>
       {isLoading ? 
@@ -278,76 +271,98 @@ const CarSelector = () => {
         ) : 
       (
         <div>
-          <h1 className="mb-2">Your Subscription</h1>
-          <div style={{ position: 'relative' }}>
-            <div className="flex gap-3 items-center w-full">
-              <div className={`flex items-center w-[90%] flex-wrap gap-1 border border-${isDark ? 'neutral-700' : 'neutral-200'} bg-${ isDark ? 'neutral-800' : 'white'} rounded-2xl px-4 py-2`}>
-                {tagsToDisplay.map((tag) => (
-                  tag.models.map((model, index) => 
-                    <div
-                      key={index} 
-                      className={`px-3 py-1 border border-${isDark ? 'neutral-700' : 'neutral-200'} rounded-xl text-${ isDark ? 'white' : 'black'} inline-block bg-${ isDark ? '' : 'neutral-100' }`}
-                    >
-                      <span className="flex items-center">
-                        {model} 
-                        <button 
-                          onClick={() => handleRemoveTag(tag.brand_id, index)}
-                          className="ml-1"
-                        >
-                          <IoIosClose />
-                        </button>
-                      </span>
-                    </div>
-                  )
-                ))}
-                <input 
-                  type="text" 
-                  value={inputValue}
-                  className={`bg-${isDark ? 'neutral-900' : "white"} border-none grow py-1 px-2 border-transparent focus:border-transparent focus:ring-0 focus-visible:outline-none rounded-lg text-red`}
-                  onChange={handleInputChange}
-                  onFocus={() => setIsShowDropdown(true)}
-                  onBlur={() => setIsShowDropdown(false)}
-                  onKeyDown={handleKeyDown}
-                  placeholder="Enter car"
-                />
-              </div>
-              <div>
-                <ButtonPrimary
-                  fontSize='text-sm'
-                  sizeClass='px-5 py-2 md:px-6 md:py-3'
-                  onClick={handleOnSubmit}
-                >
-                  Save
-                </ButtonPrimary>
-              </div>
-            </div>
-            {isShowDropdown && (
-              <div className={`border border-${isDark ? 'neutral-700' : 'neutral-200'} mt-[1px] rounded-2xl absolute w-full bg-${isDark ? 'neutral-800' : 'white' } z-10 max-h-[400px] overflow-y-auto`}>
-                {filteredCars.map((car) => (
-                  <div key={car.brand_id} className={`cursor-pointer dropdown-item`}>
-                    <div 
-                      className={`text-${isDark ? 'white' : 'black'} hover:text-${isDark ? 'black' : ''} flex px-3 py-2 hover:bg-${isDark ? 'neutral-300' : 'neutral-100'} justify-between items-center`}
-                      onMouseDown={() => handleAddTag(car)}
-                    >
-                      <p>{car.brand_name} - All models</p> 
-                    </div>
-                    <div className="px-4">
-                      {car.models.map((model) => (
-                        <div 
-                          key={model.model_id} 
-                          className={`px-3 py-1 rounded-lg hover:bg-${isDark ? 'neutral-300' : 'neutral-100'} text-${isDark ? 'white' : 'neutral-600'} hover:text-${isDark ? 'black' : ''} cursor-pointer`}
-                          onMouseDown={() => handleAddTagModel(car, model.model_id)}
-                        >
-                          <p>Model: {model.model_name}</p>
-                        </div>
-                      ))}
-                    </div>
+          <div className="flex flex-wrap md:flex-nowrap gap-3 items-center w-full">
+            <div className='relative flex w-full items-center lg:w-[90%] flex-wrap gap-1 border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-950 rounded-full px-4 py-2'>
+              {tagsToDisplay.map((tag) => (
+                tag.models.map((model, index) => 
+                  <div
+                    key={index} 
+                    className='px-3 py-1 border border-neutral-200 dark:border-neutral-700 rounded-xl text-black dark:text-white inline-block bg-neutral-100 dark:bg-neutral-950'
+                  >
+                    <span className="flex items-center">
+                      {model} 
+                      <button 
+                        onClick={() => handleRemoveTag(tag.brand_id, index)}
+                        className="ml-1"
+                      >
+                        <IoIosClose />
+                      </button>
+                    </span>
                   </div>
-                ))}
-              </div>
-            )}
+                )
+              ))}
+              <input 
+                type="text" 
+                value={inputValue}
+                className={`bg-white dark:bg-neutral-950 border-none grow py-1 px-2 border-transparent focus:border-transparent focus:ring-0 focus-visible:outline-none text-2xl`}
+                onChange={handleInputChange}
+                onFocus={() => setIsShowDropdown(true)}
+                onBlur={() => setIsShowDropdown(false)}
+                onKeyDown={handleKeyDown}
+                placeholder="Enter car"
+              />
+              {isShowDropdown && (
+                <div className={`border left-0 top-[58px] w-[90%] border-neutral-200 mt-[1px] rounded-2xl absolute w-full bg-white z-10 max-h-[400px] overflow-y-auto dark:border-neutral-700 dark:bg-neutral-950`}>
+                  {filteredCars.map((car) => (
+                    <div key={car.brand_id} className={`cursor-pointer dropdown-item`}>
+                      <div 
+                        className='text-neutral-1050 dark:text-white dark:hover:text-neutral-1050 flex px-3 py-2 dark:hover:bg-neutral-300 hover:bg-neutral-100 justify-between items-center'
+                        onMouseDown={() => handleAddTag(car)}
+                      >
+                        <p>{car.brand_name} - All models</p> 
+                      </div>
+                      <div className="px-4">
+                        {car.models.map((model) => (
+                          <div 
+                            key={model.model_id} 
+                            className='px-3 py-1 rounded-lg hover:bg-neutral-100 dark:hover:neutral-300 text-neutral-600 dark:text-white dark:hover:text-neutral-1050 cursor-pointer'
+                            onMouseDown={() => handleAddTagModel(car, model.model_id)}
+                          >
+                            <p>Model: {model.model_name}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            <div className="h-14">
+              <ButtonPrimary
+                className="h-full w-28"
+                fontSize='text-base lg:text-lg font-medium'
+                sizeClass='px-5 py-2 md:px-6 md:py-3'
+                onClick={handleOnSubmit}
+              >
+                Save
+              </ButtonPrimary>
+            </div>
           </div>
-          <p className="text-xs mt-1"> Type the model name or brand, select from the dropdown list, and click "Save."</p>
+          {/* {isShowDropdown && (
+            <div className={`border w-[90%] border-neutral-200 mt-[1px] rounded-2xl absolute w-full bg-white z-10 max-h-[400px] overflow-y-auto dark:border-neutral-700 dark:bg-neutral-950`}>
+              {filteredCars.map((car) => (
+                <div key={car.brand_id} className={`cursor-pointer dropdown-item`}>
+                  <div 
+                    className='text-neutral-1050 dark:text-white dark:hover:text-neutral-1050 flex px-3 py-2 dark:hover:bg-neutral-300 hover:bg-neutral-100 justify-between items-center'
+                    onMouseDown={() => handleAddTag(car)}
+                  >
+                    <p>{car.brand_name} - All models</p> 
+                  </div>
+                  <div className="px-4">
+                    {car.models.map((model) => (
+                      <div 
+                        key={model.model_id} 
+                        className='px-3 py-1 rounded-lg hover:bg-neutral-100 dark:hover:neutral-300 text-neutral-600 dark:text-white dark:hover:text-neutral-1050 cursor-pointer'
+                        onMouseDown={() => handleAddTagModel(car, model.model_id)}
+                      >
+                        <p>Model: {model.model_name}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )} */}
         </div>
       )}
     </>

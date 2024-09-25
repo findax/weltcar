@@ -32,6 +32,11 @@ module.exports = {
     // },
 
     extend: {
+      screens: {
+        xsX: '425px',
+        xs: '455px',
+        xsS: '520px',
+      },
       colors: {
         primary: {
           50: customColors('--c-primary-50'),
@@ -68,6 +73,9 @@ module.exports = {
           700: customColors('--c-neutral-700'),
           800: customColors('--c-neutral-800'),
           900: customColors('--c-neutral-900'),
+          950: customColors('--c-neutral-950'),
+          1000: customColors('--c-neutral-1000'),
+          1050: customColors('--c-neutral-1050'),
         },
       },
     },

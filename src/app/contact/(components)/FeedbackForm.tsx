@@ -57,6 +57,8 @@ export default function FeedbackForm() {
             name='name'
             placeholder='Enter your name'
             title='Full name'
+            rounded='rounded-full'
+            sizeClass='h-14'
             error={errors.name}
             touched={touched.name}
           />
@@ -66,12 +68,16 @@ export default function FeedbackForm() {
             type='email'
             placeholder='example@mail.com'
             title='Email address'
+            rounded='rounded-full'
+            sizeClass='h-14'
             error={errors.email}
             touched={touched.email}
           />
           {/* ---- */}
           <FormikPhoneNumberInput
             title='Phone number'
+            rounded='rounded-full'
+            sizeClass='h-14'
             error={errors.phone}
             touched={touched.phone}
           />
@@ -79,7 +85,8 @@ export default function FeedbackForm() {
           <FormikTextarea
             name='message'
             title='Message'
-            rows={3}
+            rows={6}
+            rounded='rounded-[40px]'
             error={errors.message}
             touched={touched.message}
           />
@@ -88,8 +95,9 @@ export default function FeedbackForm() {
             type='submit'
             disabled={isSubmitting}
             loading={isSubmitting}
+            className='!text-lg mt-5 w-[102px]'
           >
-            Send Message
+            Send
           </ButtonPrimary>
         </Form>
       )}

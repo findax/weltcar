@@ -5,13 +5,16 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { NavItem } from './NavItem';
 import { useUserStore } from '@/stores/user-store';
+import { useEffect } from 'react';
 
 interface IProps {
   isScrolled?: boolean;
+  setPathPage: (path: string) => void;
 }
 
 export const Nav = ({
-  isScrolled = false
+  isScrolled = false,
+  setPathPage
 }: IProps ) => {
   const pathname = usePathname();
   const user = useUserStore((state) => state.user);
@@ -28,6 +31,12 @@ export const Nav = ({
     return true;
   });
 
+  useEffect(() => {
+    if (pathname) {
+      setPathPage(pathname.slice(1));
+    }
+  }, [pathname]);
+  
   return (
     <div className='container'>
       <div className='flex space-x-8 md:space-x-14 overflow-x-auto hiddenScrollbar'>
@@ -38,7 +47,7 @@ export const Nav = ({
               <NavItem
                 key={item}
                 item={item}
-                className={`block border-b-2 flex-shrink-0 capitalize 
+                className={`block border-b-2 flex-shrink-0 capitalize text-neutral-1050 dark:text-white 
                   ${isActive 
                       ? 'border-primary-500 font-medium'
                       : 'border-transparent'

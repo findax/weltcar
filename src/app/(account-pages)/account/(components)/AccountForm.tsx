@@ -48,11 +48,13 @@ export default function AccountForm() {
       }}
     >
       {({ errors, touched, isSubmitting }) => (
-        <Form className='grid grid-cols-1 gap-7 w-full max-w-xl mt-10 md:mt-0 md:pl-16'>
+        <Form className='grid grid-cols-1 gap-7 w-full max-w-xl mt-10 md:pr-32'>
           <FormikInput
             name='name'
             placeholder='Enter your name'
             title='First name'
+            rounded='rounded-full'
+            sizeClass='h-14'
             error={errors.name}
             touched={touched.name}
           />
@@ -61,6 +63,8 @@ export default function AccountForm() {
             name='surname'
             placeholder='Enter your surname'
             title='Last name'
+            rounded='rounded-full'
+            sizeClass='h-14'
             error={errors.surname}
             touched={touched.surname}
           />
@@ -70,6 +74,8 @@ export default function AccountForm() {
             type='email'
             placeholder='example@mail.com'
             title='Email address'
+            rounded='rounded-full'
+            sizeClass='h-14'
             disabled
           />
           {/* ---- */}
@@ -77,12 +83,16 @@ export default function AccountForm() {
             name='city'
             placeholder='Enter your city'
             title='City'
+            rounded='rounded-full'
+            sizeClass='h-14'
             error={errors.city}
             touched={touched.city}
           />
           {/* ---- */}
           <FormikPhoneNumberInput
             title='Phone number'
+            rounded='rounded-full'
+            sizeClass='h-14'
             error={errors.phone}
             touched={touched.phone}
           />
@@ -91,6 +101,7 @@ export default function AccountForm() {
             type='submit'
             disabled={isSubmitting}
             loading={isSubmitting}
+            className='text-base lg:text-lg w-40'
           >
             Update info
           </ButtonPrimary>

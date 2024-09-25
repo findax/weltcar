@@ -1,24 +1,53 @@
+'use client'
+
+import Image from 'next/image';
 import { Metadata } from 'next';
 import ContactHero from './(components)/ContactHero';
 import SectionSubscribe from '@/components/SectionSubscribe';
-import BackgroundSection from '@/components/BackgroundSection';
+import { useThemeMode } from '@/hooks/useThemeMode';
+import carsBackgroundDarkImg from '@/images/car-dark-1.png'
+import carsBackgroundLightImg from '@/images/car-dark-2.png'
+import triangleBackgroundImgThird from '@/images/bg-figures/triangle-3.png'
+import BackgroundShaadowSection from '@/components/BackgroundShaadowSection';
 
-export const metadata: Metadata = {
+
+const metadata: Metadata = {
   title: 'Contact Us | Elite Car Sales & Global Delivery Inquiries | WeltCar',
   description:
     'Get in touch with us for inquiries about our luxury cars and global delivery services. Contact our team for assistance with purchasing elite vehicles and delivery to countries like Germany, Switzerland, Dubai, and China.',
 };
 
 const PageContact = () => {
+  const { isDarkMode, mounted } = useThemeMode();
+
+  if (!mounted) return null;
+  
   return (
-    <div className={`nc-PageContact overflow-hidden`}>
+    <div className={`nc-PageContact relative overflow-hidden`}>
+      <Image 
+        src={triangleBackgroundImgThird} 
+        alt='triangle background'
+        className='absolute rotate-2 -bottom-[25%] -left-[22px] -z-10'
+      />
+      <BackgroundShaadowSection 
+        className='bg-[#5046E5] -right-[330px] top-[4%] lg:top-[1%]' 
+      />
+      <BackgroundShaadowSection 
+        className='bg-[#DFE172] -right-[300px] -bottom-[3%] lg:-right-[100px] lg:bottom-[8%]' 
+      />
       <div className='container my-12 xl:my-20 space-y-16 xl:space-y-28'>
         <ContactHero />
 
-        <div className='relative py-16 mb-24 lg:md-32'>
-          <BackgroundSection />
+        <div className='relative pt-16 mb-24 lg:md-32'>
           <SectionSubscribe />
         </div>
+      </div>
+      <div className='flex relative sm:bottom-0 sm:h-full -bottom-[30px] h-72 justify-center w-full'>
+        <Image 
+          src={isDarkMode ? carsBackgroundDarkImg : carsBackgroundLightImg } 
+          alt='cars image'
+          className='w-full h-full object-cover'
+        />
       </div>
     </div>
   );

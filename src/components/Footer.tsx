@@ -17,10 +17,10 @@ export default function Footer() {
                 <br />
                 Luxury Automotive Excellence
               </p>
-              <SocialsList1 className='flex items-center space-x-3 md:space-x-0 md:flex-col md:space-y-2.5 md:items-start' />
+              <SocialsList1 className='flex gap-2 items-center space-x-3 md:space-x-0 md:flex-col md:space-y-2.5 md:items-start' />
             </div>
             <div className='col-span-12 md:col-span-6 xl:col-span-3 space-y-6'>
-              <h4 className='text-2xl font-semibold'>Quick Link</h4>
+              <h4 className='text-2xl text-neytral-1050 font-bold dark:text-white'>Quick Link</h4>
               <ul className='flex flex-col gap-2'>
                 <li>
                   <Link
@@ -49,7 +49,7 @@ export default function Footer() {
               </ul>
             </div>
             <div className='col-span-12 md:col-span-6 xl:col-span-3 space-y-6'>
-              <h4 className='text-2xl font-semibold'>Contact</h4>
+              <h4 className='text-2xl text-neytral-1050 font-bold dark:text-white'>Contact</h4>
               <ul className='flex flex-col gap-6'>
                 <li className='flex items-center gap-4'>
                   {/* <i className='las la-map-marker-alt text-xl p-2 rounded-full border border-neutral-200 dark:border-neutral-700'></i> */}
@@ -99,11 +99,13 @@ export default function Footer() {
               </ul>
             </div>
             <div className='col-span-12 md:col-span-6 xl:col-span-3 space-y-6'>
-              <h4 className='text-2xl font-semibold'>Newsletter</h4>
+              <h4 className='text-2xl text-neytral-1050 font-bold dark:text-white'>Newsletter</h4>
               <p className='text-neutral-600 dark:text-neutral-400'>
                 Subscribe our newsletter to get our latest update & news
               </p>
-              <SubscribeForm />
+              <SubscribeForm 
+                isButtonShow={true}
+              />
             </div>
           </div>
         </div>

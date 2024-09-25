@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import HIW1img from '@/images/icons/dimond.webp';
-import HIW2img from '@/images/icons/persolan.webp';
-import HIW3img from '@/images/icons/saving.webp';
+import HIW1img from '@/images/icons/dimond.svg';
+import HIW2img from '@/images/icons/persolan.svg';
+import HIW3img from '@/images/icons/saving.svg';
 import VectorImg from '@/images/VectorHIW.svg';
 import Image, { StaticImageData } from 'next/image';
 import Heading from '@/shared/Heading';
@@ -50,31 +50,26 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
       <Heading
         isCenter
         // desc='Keep calm & drive on'
-        fontClass='!font-bold xl:text-5xl'
+        fontClass='!font-bold text-3xl md:text-4xl xl:text-5xl text-neutral-1050 dark:text-white'
       >
         How It Works
       </Heading>
-      <div className='relative grid md:grid-cols-3 gap-20 md:gap-6 lg:gap-20'>
-        <Image
-          className='hidden md:block absolute inset-x-0 top-16 lg:top-1/4 -translate-y-1/2'
-          src={VectorImg}
-          alt='vector'
-        />
+      <div className='flex flex-col gap-5 lg:flex-row justify-around mt-14'>
         {data.map((item) => (
           <div
             key={item.id}
-            className='relative  flex flex-col items-center max-w-sm mx-auto'
+            className='flex flex-col max-w-full lg:w-full py-10 px-7 bg-white dark:bg-neutral-950 rounded-3xl'
           >
-            <div className='relative after:content after:absolute after:inset-0 w-5/12 md:w-1/2 lg:w-7/12 after:rounded-full after:shadow-2xl after:shadow-[#fed800]'>
+            <div className='h-14 w-14 flex items-center justify-center'>
               <Image
                 alt={item.title}
-                className='opacity-[0.82] dark:opacity-100'
+                className='opacity-[0.82] dark:opacity-100 '
                 src={item.img}
               />
             </div>
-            <div className='mt-8 text-center'>
-              <h3 className='text-xl font-bold'>{item.title}</h3>
-              <span className='block mt-5 md:text-sm xl:text-base text-neutral-500 dark:text-neutral-400'>
+            <div className='mt-4 md:mt-8'>
+              <h3 className='text-lg md:text-2xl font-bold text-neutral-1050 dark:text-white '>{item.title}</h3>
+              <span className='block mt-5 md:text-lg text-neutral-500 dark:text-neutral-400'>
                 {item.desc}
               </span>
             </div>

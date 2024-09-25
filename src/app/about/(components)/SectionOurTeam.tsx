@@ -1,11 +1,11 @@
 import Heading from '@/shared/Heading';
 import Image from 'next/image';
 import React from 'react';
-import teamImg1 from '@/images/team/t1.webp';
-import teamImg2 from '@/images/team/t2.webp';
-import teamImg3 from '@/images/team/t3.webp';
-import teamImg4 from '@/images/team/t4.webp';
-import teamImg5 from '@/images/team/t5.webp';
+import teamImg1 from '@/images/team/t1.svg';
+import teamImg2 from '@/images/team/t2.svg';
+import teamImg3 from '@/images/team/t3.svg';
+import teamImg4 from '@/images/team/t4.svg';
+import teamImg5 from '@/images/team/t5.svg';
 
 const TEAM = [
   {
@@ -43,16 +43,20 @@ const TEAM = [
 const SectionOurTeam = () => {
   return (
     <div className='nc-SectionFounder relative'>
-      <Heading desc='Our team at WeltCar is composed of industry experts dedicated to providing you with the best luxury car buying experience. We work together to ensure that every aspect of your interaction with us is seamless and satisfying, making your journey to owning a premium vehicle both enjoyable and memorable.'>
-        Our Team
-      </Heading>
-      <div className='flex flex-wrap justify-center gap-10 sm:gap-4'>
+      <div>
+        <h2 className='text-3xl md:text-4xl xl:text-5xl font-bold text-neutral-1050 dark:text-white '>Our Team</h2>
+        <span className='block lg:w-[480px] my-14 lg:text-lg text-neutral-500 dark:text-neutral-400'>
+          Our team at WeltCar is composed of industry experts dedicated to providing you with the best luxury car buying experience. We work together to ensure that every aspect of your interaction with us is seamless and satisfying, making your journey to owning 
+          a premium vehicle both enjoyable and memorable.
+        </span>
+      </div>
+      <div className='flex flex-wrap justify-center gap-4 sm:gap-4'>
         {TEAM.map((item) => (
           <div
             key={item.id}
-            className='w-full sm:w-[calc(33%-9px)] lg:w-[calc(20%-13px)]'
+            className='w-[45%] sm:w-[calc(33%-9px)] lg:w-[calc(20%-13px)]'
           >
-            <div className='relative h-0 aspect-h-1 aspect-w-1 rounded-xl overflow-hidden'>
+            <div className='relative h-[200px] aspect-h-1 aspect-w-1 rounded-xl overflow-hidden'>
               <Image
                 fill
                 className=' object-cover'
@@ -62,10 +66,10 @@ const SectionOurTeam = () => {
               />
             </div>
 
-            <h3 className='text-lg font-semibold text-neutral-900 mt-4 md:text-xl dark:text-neutral-200'>
+            <h3 className='text-lg lg:text-2xl font-bold text-neutral-900 mt-4 md:text-2xl dark:text-neutral-200'>
               {item.name}
             </h3>
-            <span className='block text-sm text-neutral-500 sm:text-base dark:text-neutral-400'>
+            <span className='block lg:text-lg text-neutral-500 sm:text-lg dark:text-neutral-400'>
               {item.job}
             </span>
           </div>
