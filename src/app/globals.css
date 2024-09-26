@@ -16,12 +16,12 @@ input[type='checkbox']:focus {
 }
 
 .bg-img-placeholder {
-  background-image: url('../images/image-placeholder-light.png');
+  background-image: url('../images/placeholder-light.svg');
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  /* background-size: cover; */
 }
 
 .dark .bg-img-placeholder {
-  background-image: url('../images/image-placeholder-dark.png');
+  background-image: url('../images/placeholder-light.svg');
 }
