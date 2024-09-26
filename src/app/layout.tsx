@@ -13,6 +13,8 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import 'react-tooltip/dist/react-tooltip.css';
 import './globals.css';
 import '@/styles/index.scss';
+import { Head } from 'next/document';
+import Script from 'next/script';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -43,6 +45,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' className={poppins.className} suppressHydrationWarning>
+      <head>
+        <script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window, document, "clarity", "script", "o5v1ijna7p");
+            `,
+          }}
+        />
+      </head>
       <body className='pt-16 md:pt-20 flex flex-col min-h-screen text-base bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200'>
         {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (
           <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />

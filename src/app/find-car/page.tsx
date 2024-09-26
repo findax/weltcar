@@ -2,14 +2,11 @@
 
 import Image from 'next/image';
 import { Metadata } from 'next';
-// import ContactHero from './(components)/ContactHero';
-import SectionSubscribe from '@/components/SectionSubscribe';
 import { useThemeMode } from '@/hooks/useThemeMode';
 import carsBackgroundDarkImg from '@/images/car-dark-1.png'
 import carsBackgroundLightImg from '@/images/car-dark-2.png'
 import triangleBackgroundImgThird from '@/images/bg-figures/triangle-3.png'
 import BackgroundShaadowSection from '@/components/BackgroundShaadowSection';
-import FindCarForm from './(components)/FindCarForm';
 import FindCarHero from './(components)/FindCarHero';
 
 
@@ -32,10 +29,10 @@ const PageFindCar = () => {
         className='absolute rotate-3 bottom-[13%] -left-[8px] lg:bottom-[20%] lg:-left-[22px] -z-10'
       />
       <BackgroundShaadowSection 
-        className='lg:block bg-[#5046E5] -right-[315px] top-[8%]' 
+        className='lg:block bg-[#5046E5] -right-[440px] lg:-right-[315px] top-[8%]' 
       />
       <BackgroundShaadowSection 
-        className='bottom-[20%] -right-[45%] sm:bottom-[10%] bg-[#DFE172] lg:-right-[145px] lg:bottom-[20%]' 
+        className='hidden lg:block bg-[#DFE172] lg:-right-[145px] lg:bottom-[20%]' 
       />
 
       <div className='container my-12 xl:my-20'>

@@ -1,7 +1,3 @@
-import Link from 'next/link';
-import SocialsList from '@/shared/SocialsList';
-import Image from 'next/image';
-import carImg from '@/images/car-4.png';
 import FindCarForm from './FindCarForm';
 
 export default function FindCarHero() {
@@ -14,8 +10,6 @@ export default function FindCarHero() {
         </span>
       </div>
       <div className=''>
-        
-
         <div className='flex justify-center'>
           <div className='w-full lg:w-[480px]'>
             <FindCarForm />
