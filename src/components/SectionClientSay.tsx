@@ -5,12 +5,18 @@ import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Grid } from 'swiper/modules';
 import Heading from '@/shared/Heading';
-import James from '@/images/avatars/James.webp';
-import Sophie from '@/images/avatars/Sophie.webp';
-import Hiroshi from '@/images/avatars/Hiroshi.webp';
-import Isabella from '@/images/avatars/Isabella.webp';
-import Emma from '@/images/avatars/Emma.webp';
-import imgSlide from '@/images/car.svg';
+import James from '@/images/avatars/James.svg';
+import Sophie from '@/images/avatars/Sophie.svg';
+import Maria from '@/images/avatars/Maria.svg';
+import David from '@/images/avatars/David.svg';
+import Emma from '@/images/avatars/Emma.svg';
+import Toshiba from '@/images/avatars/Toshiba.svg';
+import bgSlideCar from '@/images/bg-slider-cars/bg-slider-car.svg';
+import bgSlideCar2 from '@/images/bg-slider-cars/bg-slider-car-2.png';
+import bgSlideCar3 from '@/images/bg-slider-cars/bg-slider-car-3.png';
+import bgSlideCar4 from '@/images/bg-slider-cars/bg-slider-car-4.png';
+import bgSlideCar5 from '@/images/bg-slider-cars/bg-slider-car-5.png';
+import bgSlideCar6 from '@/images/bg-slider-cars/bg-slider-car-6.png';
 
 import {
   ChevronLeftIcon,
@@ -25,8 +31,6 @@ import 'swiper/css/pagination';
 export interface SectionClientSayProps {
   className?: string;
   data?: typeof TESTIMONIALS_DATA;
-  carImgLeft?: string;
-  carImgRight?: string;
 }
 
 const TESTIMONIALS_DATA = [
@@ -34,48 +38,61 @@ const TESTIMONIALS_DATA = [
     id: 1,
     avatar: James,
     clientName: 'James',
+    clientSliderImage: bgSlideCar,
     clientAddress: 'New York, USA',
     content:
       'Buying a car from WeltCar was a seamless process. The team is professional, and the selection of cars is truly impressive.',
   },
   {
     id: 2,
-    avatar: Sophie,
+    avatar: Maria,
     clientName: 'Maria',
+    clientSliderImage: bgSlideCar2,
     clientAddress: 'Rome, Italy',
     content:
       'From start to finish, WeltCar exceeded my expectations. Their expertise and dedication to customer satisfaction are truly remarkable.',
   },
   {
     id: 3,
-    avatar: Hiroshi,
-    clientName: 'Hiroshi',
-    clientAddress: 'Tokyo, Japan',
+    avatar: David,
+    clientName: 'David',
+    clientSliderImage: bgSlideCar3,
+    clientAddress: 'Washington, USA',
     content:
-      'Buying a car from WeltCar was a seamless process. The team is professional, and the selection of cars is truly impressive.',
+      'Thank you for your help, without you I would not have found exactly the car I wanted. Everything went at the highest level!',
   },
   {
     id: 4,
-    avatar: Isabella,
-    clientName: 'Isabella',
-    clientAddress: 'Rome, Italy',
+    avatar: Sophie,
+    clientName: 'Sophie',
+    clientSliderImage: bgSlideCar4,
+    clientAddress: 'Berlin, Germany',
     content:
-      'From start to finish, WeltCar exceeded my expectations. Their expertise and dedication to customer satisfaction are truly remarkable.',
+      'WeltCar made my dream of owning a luxury car come true. Their attention to detail and customer care are second to none.',
   },
   {
     id: 5,
+    avatar: Toshiba,
+    clientName: 'Toshiba',
+    clientSliderImage: bgSlideCar5,
+    clientAddress: 'Tokyo, Japan',
+    content:
+      "I had an outstanding experience with WeltCar. The personalized service and exceptional quality of the vehicles are unmatched.",
+  },
+  {
+    id: 6,
     avatar: Emma,
     clientName: 'Emma',
-    clientAddress: 'Vienna, Austria',
+    clientSliderImage: bgSlideCar6,
+    clientAddress: 'Vienna, Austia',
     content:
-      "Purchasing a VIP vehicle from WeltCar was one of the best decisions I've made. The level of service and quality of cars are extraordinary.",
+      "Purchasing a VIP vehicle from WeltCar was one of the best decisions I’ve made. The level of service and quality of cars are extraordinary.",
   },
 ];
 
 const SectionClientSay = ({
   className = '',
   data = TESTIMONIALS_DATA,
-  carImgLeft = imgSlide,
 }: SectionClientSayProps) => {
   const [swiper, setSwiper] = useState<any>(null);
   const [isBeginning, setBeginning] = useState(true);
@@ -150,7 +167,7 @@ const SectionClientSay = ({
                       </div>
                       <div className='flex flex-grow w-full lg:w-[380px]'>
                         <Image 
-                          src={carImgLeft} 
+                          src={item.clientSliderImage} 
                           alt="car background" 
                           className='object-cover w-full h-full rounded-3xl'
                         />
@@ -161,7 +178,7 @@ const SectionClientSay = ({
                     <div className='flex flex-col-reverse lg:flex-row gap-5'>
                       <div className='flex flex-grow w-full lg:w-[380px]'>
                         <Image 
-                          src={carImgLeft} 
+                          src={item.clientSliderImage} 
                           alt="car background" 
                           className='object-cover w-full h-full rounded-3xl'
                         />
