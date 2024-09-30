@@ -9,7 +9,10 @@ import SectionWhyChooseUs from '@/components/SectionWhyChooseUs';
 import SectionVideos from '@/components/SectionVideos';
 import SectionClientSay from '@/components/SectionClientSay';
 import Image from 'next/image';
-import carImg from '@/images/car-2.png';
+import arrowDownLightImg from '@/images/bg-figures/arrow-down.svg';
+import arrowDownDarkImg from '@/images/bg-figures/arrow-down-dark.svg';
+import carBackgroundDarkImg from '@/images/car-2.png';
+import carBackgroundLightImg from '@/images/car-2-light.png';
 import carsBackgroundDarkImg from '@/images/car-dark-1.png'
 import carsBackgroundLightImg from '@/images/car-dark-2.png'
 import triangleBackgroundImg from '@/images/bg-figures/triangle-1.png'
@@ -66,6 +69,13 @@ function PageHome() {
       {/* SECTION HERO */}
       <div className='relative container pt-12 xl:pt-14 pb-24 lg:pb-28'>
         <SectionHero />
+        <div className='hidden lg:block absolute -bottom-[10%] right-[48%]'>
+          <Image 
+            className='w-8 h-7'
+            alt='arrow down image' 
+            src={isDarkMode ? arrowDownLightImg : arrowDownDarkImg}  
+          />
+        </div>
       </div>
 
       <div className='container relative space-y-24 mb-0 sm:mb-24 lg:space-y-28 lg:mb-28 mt-40'>
@@ -80,7 +90,7 @@ function PageHome() {
           <div className='lg:max-w-[70%] xl:max-w-full absolute top-[80%] md:top-[65%] lg:top-20 xl:-top-10 -right-24'>
             <Image 
               alt='car image' 
-              src={carImg}  
+              src={isDarkMode ? carBackgroundDarkImg : carBackgroundLightImg}  
             />
           </div>
         </div>
