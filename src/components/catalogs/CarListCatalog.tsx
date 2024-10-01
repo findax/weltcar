@@ -14,7 +14,7 @@ interface CarListProps {
   results?: number;
 }
 
-const CarList = ({ carListData, isLoading, isGrid, results }: CarListProps) => {
+const CarListCatalog = ({ carListData, isLoading, isGrid, results }: CarListProps) => {
   const { currentPage, handlePageChange } = useQueryParams();
 
   const ww = typeof window !== 'undefined' ? window.innerWidth : 1000;
@@ -93,4 +93,4 @@ const CarList = ({ carListData, isLoading, isGrid, results }: CarListProps) => {
   );
 };
 
-export default CarList;
+export default CarListCatalog;

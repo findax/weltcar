@@ -4,16 +4,16 @@ import { useState, useEffect } from 'react';
 import LoadingSpinner from '@/shared/LoadingSpinner';
 import ErrorComponent from '@/components/ErrorComponent';
 import SideMenuWrapper from '@/shared/SideMenuWrapper';
-import { getCarsList } from '@/api/cars';
+import { getSoldCarsList } from '@/api/cars';
 import { ICatalog, ICatalogQueryParams } from '@/types/catalog';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useQueryParams } from '@/hooks/useQueryParams';
 import { useQueryStore } from '@/stores/query-store';
 import FiltersCatalog from '@/components/catalogs/FiltersCatalog';
-import SortPanelCatalog from '@/components/catalogs/SortPanelCatalog';
 import CarListCatalog from '@/components/catalogs/CarListCatalog';
+import SortPanelCatalog from '@/components/catalogs/SortPanelCatalog';
 
-export default function Catalog() {
+export default function SoldCarCatalog() {
   const [isFirstLoading, setFirstLoading] = useState(true);
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
@@ -23,13 +23,14 @@ export default function Catalog() {
   const [catalogData, setCatalogData] = useState({} as ICatalog);
 
   const queryState = useQueryStore((state) => state.query);
+
   const { queryParams, currentPage, isFiltersVisible, setFiltersVisible } =
     useQueryParams();
 
   useEffect(() => {
     const query = isFirstLoading ? queryParams : queryState;
     setLoading(true);
-    getCarsList(currentPage, 10, query as ICatalogQueryParams)
+    getSoldCarsList(currentPage, 10, query as ICatalogQueryParams)
       .then((data) => {
         if (data) {
           setCatalogData(data as ICatalog);

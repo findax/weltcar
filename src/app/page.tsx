@@ -2,7 +2,6 @@
 
 import { Metadata } from 'next/types';
 import SectionHero from '@/components/SectionHero';
-import BgGlassmorphism from '@/components/BgGlassmorphism';
 import SectionHowItWork from '@/components/SectionHowItWork';
 import SectionSubscribe from '@/components/SectionSubscribe';
 import SectionWhyChooseUs from '@/components/SectionWhyChooseUs';
@@ -46,12 +45,12 @@ function PageHome() {
       <Image 
         src={triangleBackgroundImgTwo} 
         alt='triangle background'
-        className='hidden lg:block absolute top-[25%] -right-[5px] -z-10'
+        className='hidden md:block absolute top-[28%] -right-[5px] -z-10'
       />
       <Image 
         src={triangleBackgroundImgThird} 
         alt='triangle background'
-        className='absolute rotate-3 bottom-[13%] -left-[8px] lg:-bottom-[12%] lg:-left-[22px] -z-10'
+        className='absolute rotate-3 bottom-[3%] -left-[8px] sm:-bottom-[7%] lg:-left-[22px] -z-10'
       />
       <BackgroundShaadowSection 
         className='bg-[#DFE172] -left-[350px] top-[4%]' 

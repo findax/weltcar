@@ -5,11 +5,12 @@ import AccordionComponent from '@/shared/AccordionComponent';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { Checkbox } from '@/shared/FormInputs';
 import { ArrowPathIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import SearchForm from './SearchForm';
+
 import { IFilters, IFilter } from '@/types/catalog';
 import { useQueryParams } from '@/hooks/useQueryParams';
+import SearchFormCatalog from './SearchFormCatalog';
 
-const Filters = ({
+const FiltersCatalog = ({
   filtersData,
   closeFilters,
   activeFiltersCount,
@@ -33,7 +34,7 @@ const Filters = ({
       >
         <XMarkIcon className='w-6 h-6' />
       </button>
-      <SearchForm />
+      <SearchFormCatalog />
       <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
       <div className='sticky top:0 lg:top-20 flex justify-between items-center bg-white dark:bg-neutral-900 z-10'>
         <h4 className='flex justify-between items-center my-6 text-2xl font-semibold'>
@@ -107,4 +108,4 @@ const Filters = ({
   );
 };
 
-export default Filters;
+export default FiltersCatalog;
