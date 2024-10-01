@@ -5,7 +5,7 @@ import { ButtonCircle } from '@/shared/Buttons';
 import { FormikInput } from '@/shared/FormInputs';
 import { useQueryParams } from '@/hooks/useQueryParams';
 
-export default function SearchForm() {
+export default function SearchFormCatalog() {
   const { queryParams, handleSearchChange, resetFilters } = useQueryParams();
 
   const SearchSchema = Yup.object().shape({

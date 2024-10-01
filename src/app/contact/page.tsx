@@ -27,7 +27,7 @@ const PageContact = () => {
       <Image 
         src={triangleBackgroundImgThird} 
         alt='triangle background'
-        className='absolute rotate-2 -bottom-[25%] -left-[22px] -z-10'
+        className='absolute rotate-2 bottom-[3%] sm:-bottom-[8%] -left-[22px] -z-10'
       />
       <BackgroundShaadowSection 
         className='bg-[#5046E5] -right-[330px] top-[4%] lg:top-[1%]' 

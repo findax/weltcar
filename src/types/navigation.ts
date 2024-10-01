@@ -11,22 +11,6 @@ export const NAVIGATION_DEMO: NavItemType[] = [
   { id: ncNanoId(), href: '/about', name: 'About us' },
   { id: ncNanoId(), href: '/contact', name: 'Contact us' },
   { id: ncNanoId(), href: '/find-car', name: 'Find car' },
-
-  // {
-  //   id: ncNanoId(),
-  //   href: '/#',
-  //   name: 'Other pages',
-  //   type: 'dropdown',
-  //   children: [
-  //     { id: ncNanoId(), href: '/#', name: 'Blog page' },
-  //     { id: ncNanoId(), href: '/blog/single' as Route, name: 'Blog single' },
-  //     {
-  //       id: ncNanoId(),
-  //       href: '/subscription',
-  //       name: 'Subscription',
-  //     },
-  //   ],
-  // },
 ];
 
 export const NAVIGATION_DEMO_MOBILE: NavItemType[] = [

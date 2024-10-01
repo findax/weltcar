@@ -31,6 +31,29 @@ export const getCarsList = async (
   });
 };
 
+export const getSoldCarsList = async (
+  page: number,
+  perPage: number,
+  queryParams?: ICatalogQueryParams
+) => {
+  return new Promise((resolve) => {
+    api
+      .post(
+        `/api/cars/list?page=${page}&perPage=${perPage}&soldOnly=${true}`,
+        queryParams
+      )
+      .then((res) => resolve(res.data))
+      .catch((err) => {
+        if (err.response?.data.message) {
+          toast.error(err.response.data.message);
+        } else {
+          toast.error('Something went wrong!');
+        }
+        resolve(false);
+      });
+  });
+};
+
 export const createPartnerCar = async (car: ICarPartnerToRequest) => {
   try {
     const response = await api.post(`/api/user/contractor/cars`, car, {

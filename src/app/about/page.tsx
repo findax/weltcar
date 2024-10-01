@@ -43,7 +43,7 @@ const PageAbout = () => {
       <Image 
         src={triangleBackgroundImgThird} 
         alt='triangle background'
-        className='absolute rotate-3 -bottom-[14%] -left-[22px] -z-10'
+        className='absolute rotate-3 bottom-[3%] sm:-bottom-[7%] -left-[22px] -z-10'
       />
       <BackgroundShaadowSection 
         className='bg-[#DFE172] -left-[350px] top-[3%] lg:top-[4%]' 

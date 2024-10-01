@@ -19,7 +19,7 @@ interface SortPanelProps {
   openFilter: (value: boolean) => void;
 }
 
-const SortPanel = ({
+const SortPanelCatalog = ({
   sortData,
   results,
   isGrid,
@@ -147,4 +147,4 @@ const SortPanel = ({
   );
 };
 
-export default SortPanel;
+export default SortPanelCatalog;
