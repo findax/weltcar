@@ -39,7 +39,7 @@ const PageFindCar = () => {
         <FindCarHero />
       </div>
 
-      <div className='flex relative sm:bottom-0 sm:h-full -bottom-[30px] h-72 justify-center w-full'>
+      <div className='flex relative sm:bottom-0 sm:h-full -bottom-[30px] h-72 justify-center w-full md:pt-12 xl:pt-0'>
         <Image 
           src={isDarkMode ? carsBackgroundDarkImg : carsBackgroundLightImg } 
           alt='cars image'

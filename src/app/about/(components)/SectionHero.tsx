@@ -20,7 +20,7 @@ const SectionHero = () => {
               Start your search
             </ButtonPrimary>
           </div>
-          <div className='absolute -z-10 -bottom-[52%] xsX:-bottom-[80%] -right-[35%] xsX:-right-[25%] sm:max-w-[90%] md:w-[70%] lg:w-2/3 md:top-[74%] lg:top-[27%] md:right-0 flex-grow'>
+          <div className='absolute -z-10 -bottom-[52%] xsX:-bottom-[80%] -right-[35%] xsX:-right-[25%] sm:max-w-[90%] md:w-[70%] lg:w-2/3 xl:w-fit md:top-[74%] lg:top-[27%] md:right-0 flex-grow'>
             <Image 
               src={carImg}  
               alt='premium logo background' 

@@ -19,6 +19,7 @@ import triangleBackgroundImgTwo from '@/images/bg-figures/triangle-2.png'
 import triangleBackgroundImgThird from '@/images/bg-figures/triangle-3.png'
 import BackgroundShaadowSection from '@/components/BackgroundShaadowSection';
 import { useThemeMode } from '@/hooks/useThemeMode';
+import { useRef } from 'react';
 
 const metadata: Metadata = {
   title:
@@ -29,6 +30,12 @@ const metadata: Metadata = {
 
 function PageHome() {
   const { isDarkMode, mounted } = useThemeMode();
+
+  const targetSectionRef: any = useRef(null);
+
+  const scrollToSection = () => {
+    targetSectionRef.current.scrollIntoView()
+  };
 
   if (!mounted) return null;
   
@@ -42,11 +49,11 @@ function PageHome() {
         alt='triangle background'
         className='absolute top-[11%] -left-[5px] -z-10'
       />
-      <Image 
+      {/* <Image 
         src={triangleBackgroundImgTwo} 
         alt='triangle background'
         className='hidden md:block absolute top-[28%] -right-[5px] -z-10'
-      />
+      /> */}
       <Image 
         src={triangleBackgroundImgThird} 
         alt='triangle background'
@@ -62,13 +69,13 @@ function PageHome() {
         className='bg-[#5046E5] -left-[200px] bottom-[34%] lg:left-[25px] lg:bottom-[40%]' 
       />
       <BackgroundShaadowSection 
-        className='-bottom-[2%] -right-[80%] sm:bottom-[9%] bg-[#DFE172] lg:-right-[145px] lg:bottom-[8%]' 
+        className='-bottom-[2%] -right-[80%] bg-[#DFE172] lg:-right-[145px] lg:bottom-[8%]' 
       />
 
       {/* SECTION HERO */}
       <div className='relative container pt-12 xl:pt-14 pb-24 lg:pb-28'>
         <SectionHero />
-        <div className='hidden lg:block absolute -bottom-[10%] right-[48%]'>
+        <div onClick={scrollToSection} className='hidden lg:block absolute -bottom-[10%] right-[48%] cursor-pointer animate-pulse'>
           <Image 
             className='w-8 h-7'
             alt='arrow down image' 
@@ -77,7 +84,7 @@ function PageHome() {
         </div>
       </div>
 
-      <div className='container relative space-y-24 mb-0 sm:mb-24 lg:space-y-28 lg:mb-28 mt-40'>
+      <div ref={targetSectionRef}  className='container relative space-y-24 mb-0 sm:mb-24 lg:space-y-28 lg:mb-28 mt-40'>
         <div className='relative py-16'>
           <SectionHowItWork />
         </div>
@@ -94,11 +101,11 @@ function PageHome() {
           </div>
         </div>
 
-        <div className='relative pt-64 sm:pt-96 lg:py-16'>
+        {/* <div className='relative pt-64 sm:pt-96 lg:py-16'>
           <SectionClientSay />
-        </div>
+        </div> */}
 
-        <div className='relative py-16'>
+        <div className='relative pt-64 sm:pt-96 lg:pt-0 xl:pt-16 py-16'>
           <SectionSubscribe />
         </div>
       </div>
