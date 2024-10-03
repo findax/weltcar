@@ -84,9 +84,10 @@ export default function FeedbackForm() {
           {/* ---- */}
           <FormikTextarea
             name='message'
+            placeholder='Enter message'
             title='Message'
             rows={6}
-            rounded='rounded-[40px]'
+            rounded='rounded-[25px]'
             error={errors.message}
             touched={touched.message}
           />

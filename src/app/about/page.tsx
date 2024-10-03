@@ -35,11 +35,11 @@ const PageAbout = () => {
         alt='triangle background'
         className='absolute top-[11%] -left-[5px] -z-10'
       />
-      <Image 
+      {/* <Image 
         src={triangleBackgroundImgTwo} 
         alt='triangle background'
         className='hidden lg:block absolute top-[28%] -right-[5px] -z-10'
-      />
+      /> */}
       <Image 
         src={triangleBackgroundImgThird} 
         alt='triangle background'
@@ -66,9 +66,9 @@ const PageAbout = () => {
           <SectionOurTeam />
         </div>
 
-        <div className='relative mt-44'>
+        {/* <div className='relative mt-44'>
           <SectionClientSay />
-        </div>
+        </div> */}
 
         <div className='relative mt-44'>
           <SectionSubscribe />

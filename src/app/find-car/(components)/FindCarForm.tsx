@@ -14,6 +14,7 @@ import { FindCarProps } from '@/types/car';
 import Modal from '@/shared/Modal';
 import { InformationCircleIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
+import { useUserStore } from '@/stores/user-store';
 
 const EngineTypesSchema = Yup.object().shape({
   id: Yup.number().required('ID is required'),
@@ -27,13 +28,50 @@ const RequestTimeSchema = Yup.object().shape({
 
 export default function FindCarForm() {
   const [isSeuccessRequest, setIsSuccessRequest] = useState(false);
-
+  const user = useUserStore((state) => state.user);
   const phoneValidationPattern = /\+?[\d]+/;
+  
+  const initialValueDefault = {
+    name: '',
+    email: '',
+    phone: '',
+    brand: '',
+    model: '',
+    color: '',
+    specification: '',
+    additional: '',
+    engineType: {
+      id: '',
+      name: ''
+    },
+    requestTime: {
+      id: '',
+      name: ''
+    },
+  }
+  const initialValueFilled = {
+    name: user?.name,
+    email: user?.email,
+    phone: user?.phone,
+    brand: '',
+    model: '',
+    color: '',
+    specification: '',
+    additional: '',
+    engineType: {
+      id: '',
+      name: ''
+    },
+    requestTime: {
+      id: '',
+      name: ''
+    },
+  }
 
   const engineTypes = [
     {
       "id": 1,
-      "name": "Gas"
+      "name": "Petrol"
     },
     {
       "id": 2,
@@ -101,10 +139,6 @@ export default function FindCarForm() {
       .trim()
       .min(2, 'Additional details is too short')
       .max(5000, 'Additional details is too long'),
-    comment: Yup.string()
-      .trim()
-      .min(10, 'Comment is too short')
-      .max(5000, 'Comment is too long'),
     engineType: EngineTypesSchema.required('Engine type is required'),
     requestTime: RequestTimeSchema.required('Request time is required'),
   });
@@ -119,25 +153,7 @@ export default function FindCarForm() {
   return (
     <>
       <Formik
-        initialValues={{
-          name: '',
-          email: '',
-          phone: '',
-          brand: '',
-          model: '',
-          color: '',
-          specification: '',
-          additional: '',
-          comment: '',
-          engineType: {
-            id: '',
-            name: ''
-          },
-          requestTime: {
-            id: '',
-            name: ''
-          },
-        }}
+        initialValues={user ? initialValueFilled : initialValueDefault}
         validationSchema={FindCarSchema}
         onSubmit={(values, { setSubmitting, resetForm }) => {
           // trim values
@@ -152,7 +168,7 @@ export default function FindCarForm() {
         }}
       >
         {({ errors, touched, isSubmitting }) => (
-          <Form className='grid grid-cols-1 gap-7 -mt-1'>
+          <Form className='grid grid-cols-1 md:grid-cols-3 gap-7 -mt-1'>
             <FormikInput
               name='name'
               placeholder='Anthony Rother'
@@ -203,16 +219,6 @@ export default function FindCarForm() {
             />
             {/* ---- */}
             <FormikInput
-              name='color'
-              placeholder='Black magenta'
-              title='Color'
-              sizeClass='h-14'
-              rounded='rounded-full'
-              error={errors.color}
-              touched={touched.color}
-            />
-            {/* ---- */}
-            <FormikInput
               name='specification'
               placeholder='R44'
               title='Specification'
@@ -220,26 +226,6 @@ export default function FindCarForm() {
               rounded='rounded-full'
               error={errors.specification}
               touched={touched.specification}
-            />
-            {/* ---- */}
-            <FormikTextarea
-              name='additional'
-              placeholder='Enter additional details'
-              title='Additional'
-              rows={3}
-              rounded='rounded-[40px]'
-              error={errors.additional}
-              touched={touched.additional}
-            />
-            {/* ---- */}
-            <FormikTextarea
-              name='comment'
-              placeholder='Enter comment'
-              title='Comment'
-              rows={3}
-              rounded='rounded-[40px]'
-              error={errors.comment}
-              touched={touched.comment}
             />
             {/* ---- */}
             <FormikInputSelector 
@@ -253,6 +239,16 @@ export default function FindCarForm() {
               touched={touched.engineType?.name}
             />
             {/* ---- */}
+            <FormikInput
+              name='color'
+              placeholder='Black magenta'
+              title='Color'
+              sizeClass='h-14'
+              rounded='rounded-full'
+              error={errors.color}
+              touched={touched.color}
+            />
+            {/* ---- */}
             <FormikInputSelector 
               name='requestTime'
               placeholder='Enter request time'
@@ -263,15 +259,30 @@ export default function FindCarForm() {
               error={errors.requestTime?.name}
               touched={touched.requestTime?.name}
             />
+            {/* ---- */}
+            <div className='w-full md:absolute md:bottom-[0] md:left-0'>
+              <FormikTextarea
+                name='additional'
+                placeholder='Enter additional details'
+                title='Additional'
+                rows={5}
+                rounded='rounded-[40px]'
+                error={errors.additional}
+                touched={touched.additional}
+              />
+            </div>
 
-            <ButtonPrimary
-              type='submit'
-              disabled={isSubmitting}
-              loading={isSubmitting}
-              className='!text-lg mt-5 w-[102px]'
-            >
-              Send
-            </ButtonPrimary>
+            <div className='md:absolute md:-bottom-[88px] md:right-0 md:w-[32%] flex items-end'>
+              <ButtonPrimary
+                type='submit'
+                disabled={isSubmitting}
+                loading={isSubmitting}
+                className='!text-lg w-full'
+                sizeClass='!h-14 items-center'
+              >
+                Send
+              </ButtonPrimary>
+            </div>
           </Form>
         )}
       </Formik>
