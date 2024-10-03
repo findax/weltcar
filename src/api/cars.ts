@@ -8,6 +8,7 @@ import {
   ICarsPartner,
   IModels,
 } from '@/types/partner';
+import { FindCarProps } from '@/types/car';
 
 export const getCarsList = async (
   page: number,
@@ -18,6 +19,29 @@ export const getCarsList = async (
     api
       // .post(`/api/cars/list${url}`)
       .post(`/api/cars/list?page=${page}&perPage=${perPage}`, queryParams)
+      .then((res) => resolve(res.data))
+      .catch((err) => {
+        if (err.response?.data.message) {
+          toast.error(err.response.data.message);
+        } else {
+          toast.error('Something went wrong!');
+        }
+        resolve(false);
+      });
+  });
+};
+
+export const getSoldCarsList = async (
+  page: number,
+  perPage: number,
+  queryParams?: ICatalogQueryParams
+) => {
+  return new Promise((resolve) => {
+    api
+      .post(
+        `/api/cars/list?page=${page}&perPage=${perPage}&soldOnly=${true}`,
+        queryParams
+      )
       .then((res) => resolve(res.data))
       .catch((err) => {
         if (err.response?.data.message) {
@@ -128,6 +152,49 @@ export const getPartnerCarId = async (id: string) => {
       .get(`api/user/contractor/cars/${id}`)
       .then((res) => {
         resolve(res.data.data);
+      })
+      .catch((err) => {
+        if (err.response?.data.message) {
+          toast.error(err.response.data.message);
+        } else {
+          toast.error('Something went wrong!');
+        }
+        resolve(false);
+      });
+  });
+};
+
+export const findCar = async ({
+  name,
+  email,
+  phone,
+  brand,
+  model,
+  color,
+  specification,
+  additional,
+  comment,
+  engineType,
+  requestTime,
+}: FindCarProps) => {
+  return new Promise((resolve) => {
+    api
+      .post('/api/car-search-request', {
+        name,
+        email,
+        phone,
+        brand,
+        model,
+        color,
+        specification,
+        additional,
+        comment,
+        engine_type: engineType.toLowerCase(),
+        request_time: requestTime.toLowerCase(),
+      })
+      .then((res) => {
+        toast.success('Message sent successfully!');
+        resolve(res);
       })
       .catch((err) => {
         if (err.response?.data.message) {

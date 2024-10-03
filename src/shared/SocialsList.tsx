@@ -1,4 +1,9 @@
 import { SocialType } from '@/shared/SocialsShare';
+import youTubeImg from '@/images/socials/youTube.svg'
+import facebookImg from '@/images/socials/facebook.svg'
+import twitterImg from '@/images/socials/twitter.svg'
+import instagramImg from '@/images/socials/instagram.svg'
+import Image from 'next/image';
 
 export interface SocialsListProps {
   className?: string;
@@ -7,10 +12,10 @@ export interface SocialsListProps {
 }
 
 const socialsDemo: SocialType[] = [
-  { name: 'Facebook', icon: 'lab la-facebook-square', href: '#' },
-  { name: 'Twitter', icon: 'lab la-twitter', href: '#' },
-  { name: 'Youtube', icon: 'lab la-youtube', href: '#' },
-  { name: 'Instagram', icon: 'lab la-instagram', href: '#' },
+  { name: 'Youtube', icon: youTubeImg, href: '#' },
+  { name: 'Facebook', icon: facebookImg, href: '#' },
+  { name: 'Twitter', icon: twitterImg, href: '#' },
+  { name: 'Instagram', icon: instagramImg, href: '#' },
 ];
 
 const SocialsList = ({
@@ -20,7 +25,7 @@ const SocialsList = ({
 }: SocialsListProps) => {
   return (
     <nav
-      className={`nc-SocialsList flex space-x-2.5 text-2xl text-neutral-600 dark:text-neutral-300 ${className}`}
+      className={`nc-SocialsList flex gap-4 text-2xl text-neutral-600 dark:text-neutral-300 ${className}`}
       data-nc-id='SocialsList'
     >
       {socials.map((item, i) => (
@@ -32,7 +37,10 @@ const SocialsList = ({
           rel='noopener noreferrer'
           title={item.name}
         >
-          <i className={item.icon}></i>
+          <Image 
+            src={item.icon}
+            alt={item.name}
+          />
         </a>
       ))}
     </nav>

@@ -86,6 +86,7 @@ export interface ICarPartner {
   status: string;
   status_name: string;
   year: number;
+  pdf_url?: string;
   is_deleted: boolean;
   contractor_comment: string;
   country: {

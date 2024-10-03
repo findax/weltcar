@@ -42,12 +42,24 @@
 .rc-slider-track {
   @apply bg-primary-400;
 }
+
 .rc-slider-handle {
   @apply border-primary-300;
 }
 
+.rs-swiper-slide{
+  height: calc((100% - 30px) / 2) !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .nc-Header--hide {
   @apply -translate-y-full;
+}
+
+.transform {
+  transition: transform 0.5s ease-in-out;
 }
 
 .markdown-styles {

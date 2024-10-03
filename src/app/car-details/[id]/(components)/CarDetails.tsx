@@ -26,6 +26,7 @@ export default function CarDetails({
 
   const user = useUserStore((state) => state.user);
 
+  console.log(carData)
   useEffect(() => {
     if (carData) {
       const modifiedPhotosArray = [...carData.photos].map((item, index) => ({

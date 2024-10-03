@@ -5,8 +5,6 @@ import * as Yup from 'yup';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { FormikPasswordInput } from '@/shared/FormInputs';
 import { updateUserPassword } from '@/api/user';
-import Image from 'next/image';
-import bgImg from '@/images/bg-cars/bg-car-4.webp';
 import { useUserStore } from '@/stores/user-store';
 import { IUser } from '@/types/user';
 
@@ -36,10 +34,9 @@ const PasswordPage = () => {
   });
 
   return (
-    <div className='relative space-y-6 sm:space-y-8 lg:min-h-[500px]'>
+    <div className='relative min-h-[900px] space-y-8 sm:space-y-12 lg:min-h-[500px]'>
       {/* HEADING */}
-      <h2 className='text-3xl font-semibold'>Update your password</h2>
-      <div className='w-14 border-b border-neutral-300 dark:border-neutral-700'></div>
+      <h2 className='text-2xl lg:text-4xl font-bold'>Update your password</h2>
       <Formik
         initialValues={{
           password: '',
@@ -63,6 +60,8 @@ const PasswordPage = () => {
             <FormikPasswordInput
               title='Current password'
               placeholder='Enter your password'
+              rounded='rounded-full'
+              sizeClass='h-14'
               error={errors.password}
               touched={touched.password}
             />
@@ -71,6 +70,8 @@ const PasswordPage = () => {
               title='New password'
               name='new_password'
               placeholder='Enter new password'
+              rounded='rounded-full'
+              sizeClass='h-14'
               error={errors.new_password}
               touched={touched.new_password}
             />
@@ -79,6 +80,8 @@ const PasswordPage = () => {
               title='Confirm password'
               name='confirm_password'
               placeholder='Confirm password'
+              rounded='rounded-full'
+              sizeClass='h-14'
               error={errors.confirm_password}
               touched={touched.confirm_password}
             />
@@ -87,19 +90,13 @@ const PasswordPage = () => {
               type='submit'
               disabled={isSubmitting}
               loading={isSubmitting}
+              className='text-base lg:text-lg w-56'
             >
               Update password
             </ButtonPrimary>
           </Form>
         )}
       </Formik>
-
-      <Image
-        className='hidden md:block absolute inset-0 top-1/2 -translate-y-1/2 object-contain w-full opacity-[0.10] dark:opacity-[0.08] -z-10'
-        src={bgImg}
-        alt='car background image'
-        priority
-      />
     </div>
   );
 };

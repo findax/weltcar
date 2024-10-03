@@ -1,9 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Filters from './Filters';
-import SortPanel from './SortPanel';
-import CarList from './CarList';
 import LoadingSpinner from '@/shared/LoadingSpinner';
 import ErrorComponent from '@/components/ErrorComponent';
 import SideMenuWrapper from '@/shared/SideMenuWrapper';
@@ -12,6 +9,9 @@ import { ICatalog, ICatalogQueryParams } from '@/types/catalog';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useQueryParams } from '@/hooks/useQueryParams';
 import { useQueryStore } from '@/stores/query-store';
+import FiltersCatalog from '@/components/catalogs/FiltersCatalog';
+import SortPanelCatalog from '@/components/catalogs/SortPanelCatalog';
+import CarListCatalog from '@/components/catalogs/CarListCatalog';
 
 export default function Catalog() {
   const [isFirstLoading, setFirstLoading] = useState(true);
@@ -84,14 +84,14 @@ export default function Catalog() {
               isVisable={isFiltersVisible}
               isLeftSide
             >
-              <Filters
+              <FiltersCatalog
                 filtersData={catalogData?.filters || []}
                 closeFilters={setFiltersVisible}
                 activeFiltersCount={activeFiltersCount}
               />
             </SideMenuWrapper>
           ) : (
-            <Filters
+            <FiltersCatalog
               filtersData={catalogData?.filters || []}
               closeFilters={setFiltersVisible}
               activeFiltersCount={activeFiltersCount}
@@ -99,7 +99,7 @@ export default function Catalog() {
           )}
         </div>
         <div className='col-span-12 lg:col-span-8'>
-          <SortPanel
+          <SortPanelCatalog
             sortData={catalogData?.sort || []}
             results={catalogData?.meta.total || 0}
             isGrid={isGrid}
@@ -107,7 +107,7 @@ export default function Catalog() {
             handleIsGrid={setGrid}
             openFilter={setFiltersVisible}
           />
-          <CarList
+          <CarListCatalog
             carListData={catalogData?.data || []}
             isLoading={isLoading}
             isGrid={isGrid}
