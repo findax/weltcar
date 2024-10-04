@@ -30,7 +30,7 @@ export default function FindCarForm() {
   const [isSeuccessRequest, setIsSuccessRequest] = useState(false);
   const user = useUserStore((state) => state.user);
   const phoneValidationPattern = /\+?[\d]+/;
-  
+
   const initialValueDefault = {
     name: '',
     email: '',
@@ -200,7 +200,7 @@ export default function FindCarForm() {
             {/* ---- */}
             <FormikInput
               name='brand'
-              placeholder='Toyota'
+              placeholder='Lamborghini'
               title='Brand'
               sizeClass='h-14'
               rounded='rounded-full'
@@ -210,7 +210,7 @@ export default function FindCarForm() {
             {/* ---- */}
             <FormikInput
               name='model'
-              placeholder='Prius'
+              placeholder='Urus'
               title='Model'
               sizeClass='h-14'
               rounded='rounded-full'
@@ -228,7 +228,7 @@ export default function FindCarForm() {
               touched={touched.specification}
             />
             {/* ---- */}
-            <FormikInputSelector 
+            <FormikInputSelector
               name='engineType'
               placeholder='Enter engine type'
               title='Engine Type'
@@ -249,7 +249,7 @@ export default function FindCarForm() {
               touched={touched.color}
             />
             {/* ---- */}
-            <FormikInputSelector 
+            <FormikInputSelector
               name='requestTime'
               placeholder='Enter request time'
               title='Request Time'
@@ -286,10 +286,10 @@ export default function FindCarForm() {
           </Form>
         )}
       </Formik>
-        
-      <Modal 
-        title='Thank you!' 
-        isModalOpen={isSeuccessRequest} 
+
+      <Modal
+        title='Thank you!'
+        isModalOpen={isSeuccessRequest}
         setIsModalOpen={setIsSuccessRequest}
       >
         <div className='text-center space-y-10'>

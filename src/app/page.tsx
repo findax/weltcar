@@ -19,7 +19,7 @@ import triangleBackgroundImgTwo from '@/images/bg-figures/triangle-2.png'
 import triangleBackgroundImgThird from '@/images/bg-figures/triangle-3.png'
 import BackgroundShaadowSection from '@/components/BackgroundShaadowSection';
 import { useThemeMode } from '@/hooks/useThemeMode';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 const metadata: Metadata = {
   title:
@@ -34,7 +34,31 @@ function PageHome() {
   const targetSectionRef: any = useRef(null);
 
   const scrollToSection = () => {
-    targetSectionRef.current.scrollIntoView()
+    const element = targetSectionRef.current;
+    const targetPosition = element.getBoundingClientRect().top + window.pageYOffset - 100;
+
+    slowScrollTo(targetPosition, 1300);
+  };
+
+  const slowScrollTo = (targetY: number, duration: number) => {
+    const startY = window.pageYOffset;
+    const distance = targetY - startY;
+    const startTime = Date.now();
+
+
+    const scrollStep = () => {
+      const now = Date.now();
+      const elapsedTime = now - startTime;
+      const progress = Math.min(elapsedTime / duration, 1);
+
+      window.scrollTo(0, startY + distance * progress);
+
+      if (progress < 1) {
+        setTimeout(scrollStep, 10);
+      }
+    };
+
+    scrollStep();
   };
 
   if (!mounted) return null;
