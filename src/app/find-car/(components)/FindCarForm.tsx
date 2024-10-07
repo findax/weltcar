@@ -174,7 +174,7 @@ export default function FindCarForm() {
               placeholder='Anthony Rother'
               title='Full name'
               rounded='rounded-full'
-              sizeClass='h-14'
+              sizeClass='h-14 !text-base'
               error={errors.name}
               touched={touched.name}
             />
@@ -185,7 +185,7 @@ export default function FindCarForm() {
               placeholder='some@email.com'
               title='Email address'
               rounded='rounded-full'
-              sizeClass='h-14'
+              sizeClass='h-14 !text-base'
               error={errors.email}
               touched={touched.email}
             />
@@ -193,7 +193,7 @@ export default function FindCarForm() {
             <FormikPhoneNumberInput
               title='Phone number'
               rounded='rounded-full'
-              sizeClass='h-14'
+              sizeClass='h-14 !text-base'
               error={errors.phone}
               touched={touched.phone}
             />
@@ -202,7 +202,7 @@ export default function FindCarForm() {
               name='brand'
               placeholder='Lamborghini'
               title='Brand'
-              sizeClass='h-14'
+              sizeClass='h-14 !text-base'
               rounded='rounded-full'
               error={errors.brand}
               touched={touched.brand}
@@ -212,7 +212,7 @@ export default function FindCarForm() {
               name='model'
               placeholder='Urus'
               title='Model'
-              sizeClass='h-14'
+              sizeClass='h-14 !text-base'
               rounded='rounded-full'
               error={errors.model}
               touched={touched.model}
@@ -222,7 +222,7 @@ export default function FindCarForm() {
               name='specification'
               placeholder='R44'
               title='Specification'
-              sizeClass='h-14'
+              sizeClass='h-14 !text-base'
               rounded='rounded-full'
               error={errors.specification}
               touched={touched.specification}
@@ -230,11 +230,11 @@ export default function FindCarForm() {
             {/* ---- */}
             <FormikInputSelector
               name='engineType'
-              placeholder='Enter engine type'
+              placeholder='Enter'
               title='Engine Type'
               options={engineTypes}
               rounded='rounded-full'
-              sizeClass='h-14'
+              sizeClass='h-14 !text-base'
               error={errors.engineType?.name}
               touched={touched.engineType?.name}
             />
@@ -243,7 +243,7 @@ export default function FindCarForm() {
               name='color'
               placeholder='Black magenta'
               title='Color'
-              sizeClass='h-14'
+              sizeClass='h-14 !text-base'
               rounded='rounded-full'
               error={errors.color}
               touched={touched.color}
@@ -251,11 +251,11 @@ export default function FindCarForm() {
             {/* ---- */}
             <FormikInputSelector
               name='requestTime'
-              placeholder='Enter request time'
+              placeholder='Enter'
               title='Request Time'
               options={requestTime}
               rounded='rounded-full'
-              sizeClass='h-14'
+              sizeClass='h-14 !text-base'
               error={errors.requestTime?.name}
               touched={touched.requestTime?.name}
             />
@@ -263,10 +263,11 @@ export default function FindCarForm() {
             <div className='w-full md:absolute md:bottom-[0] md:left-0'>
               <FormikTextarea
                 name='additional'
-                placeholder='Enter additional details'
+                placeholder='Enter'
                 title='Additional'
                 rows={5}
                 rounded='rounded-[40px]'
+                sizeClass='!text-base'
                 error={errors.additional}
                 touched={touched.additional}
               />
@@ -277,7 +278,7 @@ export default function FindCarForm() {
                 type='submit'
                 disabled={isSubmitting}
                 loading={isSubmitting}
-                className='!text-lg w-full'
+                className='!text-base w-full'
                 sizeClass='!h-14 items-center'
               >
                 Send

@@ -350,7 +350,7 @@ export const FormikTextarea = ({
   touched,
   rows,
   rounded,
-  sizeClass = 'h-auto',
+  sizeClass,
   disabled,
   ...args
 }: FormikTextareaProps) => {
@@ -369,7 +369,7 @@ export const FormikTextarea = ({
         as='textarea'
         name={name}
         rows={rows}
-        className={`${commonClass} ${rounded} ${sizeClass}`}
+        className={`${commonClass} ${rounded} ${sizeClass} h-auto`}
         {...args}
       />
       {error && touched ? (
