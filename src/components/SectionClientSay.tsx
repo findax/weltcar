@@ -155,7 +155,7 @@ const SectionClientSay = ({
                             />
                           </div>
                           <div className='flex gap-2 flex-col'>
-                            <span className='block text-2xl lg:ext-3xl font-bold text-neutral-1050 dark:text-white'>
+                            <span className='block text-2xl lg:text-3xl font-bold text-neutral-1050 dark:text-white'>
                               {item.clientName}
                             </span>
                             <span className='block text-neutral-700 dark:text-neutral-400 text-base lg:text-lg'>

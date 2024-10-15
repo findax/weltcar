@@ -205,3 +205,74 @@
     font-style: italic;
   }
 }
+
+.markdown-blog-styles {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 30px;
+    color: rgba(16, 24, 39);
+
+    @media screen and (min-width: 1024px) {
+      font-size: 32px;
+      line-height: 39px;
+    }
+  }
+
+  a {
+    line-height: 27px;
+    color: rgba(80, 70, 229, 1);
+
+    @media screen and (min-width: 1024px) {
+      font-size: 18px;
+    }
+  }
+  .dark & a {
+    color: rgba(223, 225, 114, 1);
+  }
+
+  .dark & h1,
+  .dark & h2,
+  .dark & h3,
+  .dark & h4,
+  .dark & h5,
+  .dark & h6 {
+    color: rgba(255, 255, 255, 1);
+  }
+
+  p {
+    margin: 24px 0 24px;
+    line-height: 27px;
+    color: rgba(55, 65, 81, 1);
+
+    @media screen and (min-width: 1024px) {
+      font-size: 18px;
+    }
+  }
+
+  .dark & p {
+    color: rgba(156, 163, 175, 1);
+  }
+
+  ol,
+  ul {
+    padding: 0 0 0 30px;
+    list-style-type: disc;
+    line-height: 27px;
+    color: rgba(55, 65, 81, 1);
+
+    @media screen and (min-width: 1024px) {
+      font-size: 18px;
+    }
+  }
+
+  .dark & ol,
+  .dark & ul {
+    color: rgba(156, 163, 175, 1);
+  }
+}

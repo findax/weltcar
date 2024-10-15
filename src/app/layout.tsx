@@ -13,8 +13,6 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import 'react-tooltip/dist/react-tooltip.css';
 import './globals.css';
 import '@/styles/index.scss';
-import { Head } from 'next/document';
-import Script from 'next/script';
 
 const poppins = Poppins({
   subsets: ['latin'],

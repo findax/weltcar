@@ -61,6 +61,7 @@ module.exports = {
           700: customColors('--c-secondary-700'),
           800: customColors('--c-secondary-800'),
           900: customColors('--c-secondary-900'),
+          950: customColors('--c-secondary-950'),
         },
         neutral: {
           50: customColors('--c-neutral-50'),

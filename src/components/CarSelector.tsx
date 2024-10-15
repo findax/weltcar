@@ -113,7 +113,6 @@ const CarSelector = () => {
     if (event.key === 'Backspace' && inputValue === '') {
       if (tagsToRequest.length > 0) {
         const lastTag = tagsToRequest[tagsToRequest.length - 1];
-        console.log(lastTag)
         if (lastTag.models.length > 0) {
           handleRemoveTag(lastTag.brand_id, lastTag.models.length - 1);
         }

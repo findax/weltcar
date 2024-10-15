@@ -45,7 +45,6 @@ export default function PartnerCarDetails({
     }
   }, [isModalOpen]);
 
-  console.log(!!user, user)
   function handleReserve() {
     if (!!user) {
       setModalId('confirm');
@@ -54,8 +53,6 @@ export default function PartnerCarDetails({
     }
     setIsModalOpen(true);
   }
-
-  console.log(carData);
 
   return isLoading ? (
     <div className='h-[calc(100vh-76px)] flex justify-center items-center'>

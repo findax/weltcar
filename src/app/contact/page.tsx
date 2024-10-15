@@ -9,6 +9,7 @@ import carsBackgroundDarkImg from '@/images/car-dark-1.png'
 import carsBackgroundLightImg from '@/images/car-dark-2.png'
 import triangleBackgroundImgThird from '@/images/bg-figures/triangle-3.png'
 import BackgroundShaadowSection from '@/components/BackgroundShaadowSection';
+import { useEffect } from 'react';
 
 
 const metadata: Metadata = {
@@ -20,6 +21,10 @@ const metadata: Metadata = {
 const PageContact = () => {
   const { isDarkMode, mounted } = useThemeMode();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   if (!mounted) return null;
   
   return (
