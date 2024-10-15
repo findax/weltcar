@@ -14,6 +14,7 @@ import triangleBackgroundImg from '@/images/bg-figures/triangle-1.png'
 import triangleBackgroundImgTwo from '@/images/bg-figures/triangle-2.png'
 import triangleBackgroundImgThird from '@/images/bg-figures/triangle-3.png'
 import BackgroundShaadowSection from '@/components/BackgroundShaadowSection';
+import { useEffect } from 'react';
 
 const metadata: Metadata = {
   title: 'About Us | Elite Car Sales & Global Delivery Services | WeltCar',
@@ -23,9 +24,12 @@ const metadata: Metadata = {
 
 const PageAbout = () => {
   const { isDarkMode, mounted } = useThemeMode();
-
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   if (!mounted) return null;
-
   return (
     <div className={`nc-PageAbout overflow-hidden relative`}>
       {/* ======== BG GLASS ======== */}
