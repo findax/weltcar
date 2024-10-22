@@ -1,9 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { getPartnerCarId } from '@/api/cars';
-import PartnerCarDetails from './(components)/BlogDetails';
-import { ICarPartner } from '@/types/partner';
 import { notFound } from 'next/navigation';
 import { Article } from '@/types/blogDetails';
 import { getBlogsBySlug } from '@/api/blog';

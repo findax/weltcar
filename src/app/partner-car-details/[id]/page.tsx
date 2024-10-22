@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { getPartnerCarId } from '@/api/cars';
 import PartnerCarDetails from './(components)/PartnerCarDetails';
-import { ICarPartner } from '@/types/partner';
+import { ICarPartnerDetails } from '@/types/partner';
 import { notFound } from 'next/navigation';
 
 export default function PartnerCarDetailsPage({
@@ -11,7 +11,7 @@ export default function PartnerCarDetailsPage({
 }: {
   params: { id: string };
 }) {
-  const [carData, setCarData] = useState<ICarPartner | null>(null);
+  const [carData, setCarData] = useState<ICarPartnerDetails | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 

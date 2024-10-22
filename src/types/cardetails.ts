@@ -20,6 +20,8 @@ export interface ICarDetails {
   status: string;
   vin: string;
   year: number;
+  videos?: ICarVideos[] | null;
+  is_partner_car: boolean;
 }
 
 export interface ICarDocuments {
@@ -30,6 +32,15 @@ export interface ICarDocuments {
 }
 
 export interface ICarGallery {
+  id: number;
+  url: string;
+}
+
+export interface ICarVideos {
+  description?: string | null;
+  title?: string | null;
+  type: string;
+  file_name: string;
   id: number;
   url: string;
 }

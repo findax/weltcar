@@ -11,17 +11,19 @@ import Descriptions from '../../../car-details/[id]/(components)/Descriptions';
 import PriceSidebar from '../../../car-details/[id]/(components)/PriceSidebar';
 import MobileFooterSticky from '../../../car-details/[id]/(components)/MobileFooterSticky';
 import ConfirmForm from '../../../car-details/[id]/(components)/ConfirmForm';
-import { ICarGallery } from '@/types/cardetails';
+import { ICarGallery, ICarVideos } from '@/types/cardetails';
 import { useUserStore } from '@/stores/user-store';
-import { ICarPartner } from '@/types/partner';
+import { ICarPartnerDetails } from '@/types/partner';
+import PartnerLogoSidebar from './PartnerLogoSidebar';
 
 export default function PartnerCarDetails({
   carData,
 }: {
-  carData: ICarPartner | null;
+  carData: ICarPartnerDetails | null;
 }) {
   const [isLoading, setIsLoading] = useState(true);
   const [carGallery, setCarGallery] = useState<ICarGallery[]>([]);
+  const [carVideos, setCarVideos] = useState<ICarVideos[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalId, setModalId] = useState('');
 
@@ -34,6 +36,7 @@ export default function PartnerCarDetails({
         url: item.original,
       }));
       setCarGallery(modifiedPhotosArray);
+      carData.videos && setCarVideos([...carData.videos]);
       setIsLoading(false);
     }
   }, [carData]);
@@ -54,6 +57,8 @@ export default function PartnerCarDetails({
     setIsModalOpen(true);
   }
 
+  console.log(carData?.is_partner_car)
+
   return isLoading ? (
     <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
       <div className='-mt-[76px]'>
@@ -63,10 +68,10 @@ export default function PartnerCarDetails({
   ) : (
     <>
       <div className='container'>
-        {carGallery.length > 0 && <ImagesHeader images={carGallery} />}
+        {carGallery.length > 0 && <ImagesHeader images={carGallery} videos={carVideos.length > 0 ? carVideos : null} />}
 
-        <div className=' relative z-10 my-11 flex flex-col lg:flex-row '>
-          <div className='w-full lg:w-3/5 xl:w-2/3 space-y-8 lg:pr-10 lg:space-y-10'>
+        <div className=' relative z-10 my-11  grid grid-rows-3 grid-cols-2 md:grid-rows-2 md:grid-cols-3 gap-2 sm:gap-4'>
+          <div className='w-full col-span-3 lg:col-span-2 space-y-8 lg:space-y-10'>
             {carData && (
               <>
                 <Title carData={carData} />
@@ -76,6 +81,12 @@ export default function PartnerCarDetails({
                 {carData.description && (
                   <Descriptions description={carData.description} />
                 )}
+                {carData.is_partner_car && (
+                  <PartnerLogoSidebar
+                    onClick={() => {}}
+                    className='!flex lg:!hidden'
+                  />
+                )}
                 <p className='sm:px-2 text-sm text-neutral-600 dark:text-neutral-300'>
                   <sup>*</sup>Vehicle specifications and configurations may vary
                   slightly due to potential discrepancies in the description.
@@ -84,11 +95,28 @@ export default function PartnerCarDetails({
             )}
           </div>
 
-          <PriceSidebar
-            onClick={handleReserve}
-            price={carData?.price || 0}
-            isSold={carData?.status === 'sold'}
-          />
+          {carData?.is_partner_car ? (
+              <div className='space-y-8 lg:space-y-10'>
+                <PriceSidebar
+                  onClick={handleReserve}
+                  price={carData?.price || 0}
+                  isSold={carData?.status === 'sold'}
+                />
+    
+                <PartnerLogoSidebar
+                  onClick={() => {}}
+                  className='!hidden lg:!flex'
+                />
+              </div>
+            )
+           : (
+              <PriceSidebar
+                onClick={handleReserve}
+                price={carData?.price || 0}
+                isSold={carData?.status === 'sold'}
+              />
+            )
+          }
         </div>
       </div>
 

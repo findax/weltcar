@@ -1,5 +1,5 @@
 import { File } from 'buffer';
-import { ICarDocuments } from './cardetails';
+import { ICarVideos } from './cardetails';
 
 export interface ICarPartnerToRequest {
   model_id: string;
@@ -66,7 +66,7 @@ export interface ICarsPartner {
   is_verified: boolean;
 }
 
-export interface ICarPartner {
+export interface ICarPartnerDetails {
   model_id: number;
   vin: string;
   description: string;
@@ -95,6 +95,8 @@ export interface ICarPartner {
   };
   post_code: string | null;
   is_verified: boolean;
+  videos: ICarVideos[];
+  is_partner_car: boolean;
 }
 
 interface ICountry {

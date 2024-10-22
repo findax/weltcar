@@ -7,7 +7,7 @@ import PartnerCarsForm from './(components)/PartnerCarsForm';
 import { ProtectedRoute, UserRole } from '@/utils/protectedRoute';
 import { useEffect, useState } from 'react';
 import { getPartner } from '@/api/partner';
-import { ICarPartner, IPartnerResponse } from '@/types/partner';
+import { ICarPartnerDetails, IPartnerResponse } from '@/types/partner';
 import ErrorComponent from '@/components/ErrorComponent';
 import LoadingSpinner from '@/shared/LoadingSpinner';
 import { getPartnerCarId } from '@/api/cars';
@@ -20,7 +20,7 @@ const PartnerCarsPage = () => {
   const [isFirstLoading, setFirstLoading] = useState(true);
   const [isError, setError] = useState(false);
   const [partner, setPartner] = useState<IPartnerResponse>();
-  const [partnerCar, setPartnerCar] = useState<ICarPartner>()
+  const [partnerCar, setPartnerCar] = useState<ICarPartnerDetails>()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,7 +35,7 @@ const PartnerCarsPage = () => {
             getPartnerCarId(id as string),
           ]);
           setPartner(partner as IPartnerResponse);
-          setPartnerCar(partnerCar as ICarPartner);
+          setPartnerCar(partnerCar as ICarPartnerDetails);
         }
       } catch (error) {
         setError(true);
