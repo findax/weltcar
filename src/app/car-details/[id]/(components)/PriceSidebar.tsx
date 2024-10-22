@@ -15,8 +15,7 @@ export default function PriceSidebar({
       <div className='detailsSectionSidebar__wrap sticky top-28 bg-white dark:bg-neutral-900 !hidden lg:!flex'>
         <div className='flex justify-between items-end gap-1'>
           <span className='text-2xl font-semibold'>Price</span>
-          <span className='flex-grow mb-1 border-b border-dashed border-neutral-300 dark:border-neutral-700'></span>
-          <span className='text-3xl font-semibold'>
+          <span className='text-5xl leading-10 font-semibold'>
             {priceWithComma(price)}
           </span>
         </div>

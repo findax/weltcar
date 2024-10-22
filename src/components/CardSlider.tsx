@@ -28,7 +28,7 @@ export default function CardSlider({
   const images = photos;
   images.length = Math.min(images.length, 5);
 
-  let currentImage = images[0]?.thumb || '';
+  let currentImage = images.length ? images[0].thumb : "";
 
   return (
     <div
@@ -91,19 +91,22 @@ export default function CardSlider({
           <div className='swiper-pagination card-slider-pagination'></div>
         </Swiper>
       ) : (
-        <div className='absolute inset-0 w-full h-full'>
-          <Image
-            className='w-full h-full object-cover transition-opacity opacity-0 duration-[500ms]'
-            src={currentImage}
-            alt={carName}
-            height={280}
-            width={400}
-            onLoad={(e) => {
-              setLoaded(true), e.currentTarget.classList.remove('opacity-0');
-            }}
-            onError={() => setLoaded(false)}
-          />
-        </div>
+        currentImage && (
+          <div className={`absolute inset-0 w-full h-full ${grayscale}`}>
+            <Image
+              className='w-full h-full object-cover transition-opacity opacity-0 duration-[500ms]'
+              src={currentImage}
+              alt={carName}
+              height={280}
+              width={400}
+              priority
+              onLoad={(e) => {
+                setLoaded(true), e.currentTarget.classList.remove('opacity-0');
+              }}
+              onError={() => setLoaded(false)}
+            />
+          </div>
+        )
       )}
     </div>
   );
