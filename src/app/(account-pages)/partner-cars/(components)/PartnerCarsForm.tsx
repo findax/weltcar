@@ -4,7 +4,7 @@ import { ButtonPrimary } from '@/shared/Buttons';
 import { FormikFile, FormikInput, FormikInputCarSelector, FormikInputSelector, FormikTextarea } from '@/shared/FormInputs';
 import { SUPPORTED_FORMATS } from '@/components/authorization/components/SignUpPartner';
 import { File } from 'buffer';
-import { ICarPartner, ICarPartnerToRequest, ICarPartnerToRequestUpdate, ICountries, IModels, IPartnerFileList, IPartnerPhotoList, IPartnerResponse } from '@/types/partner';
+import { ICarPartnerDetails, ICarPartnerToRequest, ICarPartnerToRequestUpdate, ICountries, IModels, IPartnerFileList, IPartnerPhotoList, IPartnerResponse } from '@/types/partner';
 import { createPartnerCar, getPartnerModels, updatePartnerCar } from '@/api/cars';
 import { useEffect, useState } from 'react';
 import { getCountries } from '@/api/countries';
@@ -29,7 +29,7 @@ const CountrySchema = Yup.object().shape({
 
 interface IProps {
   partner: IPartnerResponse;
-  partnerCar?: ICarPartner;
+  partnerCar?: ICarPartnerDetails;
 }
 
 export default function PartnerCarsForm({ 
@@ -37,7 +37,7 @@ export default function PartnerCarsForm({
   partnerCar
 }:IProps) {
   const router = useRouter();
-  const [car, setCar] = useState<ICarPartner | null>(partnerCar ? partnerCar : null);
+  const [car, setCar] = useState<ICarPartnerDetails | null>(partnerCar ? partnerCar : null);
   const [responseCarId, setResponseCarId] = useState<string>();
   const [countries, setCountries] = useState<ICountries>([]);
   const [models, setModels] = useState<IModels>([]);
@@ -247,7 +247,7 @@ export default function PartnerCarsForm({
     setIsCreateModalOpen(true);
   }
 
-  const handleCheckFetch = (car: ICarPartner | null, values: any, setSubmitting = (isSubmitting: boolean) => {}, resetForm = () => {}) => {
+  const handleCheckFetch = (car: ICarPartnerDetails | null, values: any, setSubmitting = (isSubmitting: boolean) => {}, resetForm = () => {}) => {
     if(car){
       const attachedPhotosToRequest = attachedPhotos?.map((attachedPhoto) => attachedPhoto.id);
       const attachedDocumentsToRequest = attachedDocuments?.map((attachedDocument) => attachedDocument.id);

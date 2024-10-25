@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 import api from './apiInstance';
 import { ICatalogQueryParams } from '@/types/catalog';
 import {
-  ICarPartner,
+  ICarPartnerDetails,
   ICarPartnerToRequest,
   ICarPartnerToRequestUpdate,
   ICarsPartner,
@@ -75,7 +75,7 @@ export const createPartnerCar = async (car: ICarPartnerToRequest) => {
 export const updatePartnerCar = async (
   car: ICarPartnerToRequestUpdate,
   id: string
-): Promise<ICarPartner | any> => {
+): Promise<ICarPartnerDetails | any> => {
   try {
     const response = await api.post(`/api/user/contractor/cars/${id}`, car, {
       headers: {
@@ -147,7 +147,7 @@ export const getPartnerCars = async (page: number, perPage: number) => {
 };
 
 export const getPartnerCarId = async (id: string) => {
-  return new Promise<ICarPartner | false>((resolve) => {
+  return new Promise<ICarPartnerDetails | false>((resolve) => {
     api
       .get(`api/user/contractor/cars/${id}`)
       .then((res) => {
