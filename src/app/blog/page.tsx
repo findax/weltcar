@@ -2,6 +2,18 @@ import { Metadata } from 'next';
 import BlogHero from './(components)/BlogHero';
 import BlogCatalog from './(components)/BlogCatalog';
 import { Suspense } from 'react';
+import Breadcrumbs from '@/components/Breadcrumbs';
+
+const blogPages = [
+  {
+    pageName: 'Main',
+    pageHref: '/'
+  },
+  {
+    pageName: 'Blog',
+    pageHref: '/blog'
+  }
+];
 
 export const metadata: Metadata = {
   title: 'Blog | Elite Car Sales & Global Delivery Services | WeltCar',
@@ -9,15 +21,21 @@ export const metadata: Metadata = {
     'Learn more about our commitment to providing the finest luxury cars with exceptional global delivery services. Discover our mission, values, and why we are the preferred choice for elite vehicles worldwide.',
 };
 
+
 const PageBlog = () => {
   return (
-    <div className={`nc-PageAbout overflow-hidden relative`}>
+    <div className={`nc-PageBlog overflow-hidden relative`}>
       {/* ======== BG GLASS ======== */}
 
-      <div className='container my-12 xl:my-20'>
-        <BlogHero />
+      <div className='container mt-8 mb-44'>
+        <div className="space-y-6">
+          <Breadcrumbs 
+            pages={blogPages}
+          />
+          <BlogHero />
+        </div>
 
-        <div className='relative flex pb-20 py-12 lg:py-20'>
+        <div className='relative flex pb-20 py-12'>
           <Suspense>
             <BlogCatalog />
           </Suspense>

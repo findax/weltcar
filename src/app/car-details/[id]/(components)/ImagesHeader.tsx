@@ -51,20 +51,35 @@ export default function ImagesHeader({
 
       <div className='mt-8 md:mt-11 rounded-3xl'>
         {images.length < 3 ? (
-          <div
-            className='relative bg-img-placeholder w-full max-w-6xl m-auto pb-[44%] rounded-3xl overflow-hidden cursor-pointer'
-            onClick={handleOpenModalImageGallery}
-          >
-            <Image
-              fill
-              src={images[0].url}
-              alt='car image'
-              className='absolute inset-0 object-cover transition-opacity opacity-0 duration-[1s]'
-              onLoad={(e) => e.currentTarget.classList.remove('opacity-0')}
-              sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw'
-              priority
-            />
-            <div className='absolute inset-0 bg-neutral-900 bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity'></div>
+          <div className='relative w-full h-fit'>
+            <div
+              className='relative bg-img-placeholder w-full max-w-6xl m-auto pb-[44%] rounded-3xl overflow-hidden cursor-pointer'
+              onClick={handleOpenModalImageGallery}
+            >
+              <Image
+                fill
+                src={images[0].url}
+                alt='car image'
+                className='absolute inset-0 object-cover transition-opacity opacity-0 duration-[1s]'
+                onLoad={(e) => e.currentTarget.classList.remove('opacity-0')}
+                sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw'
+                priority
+              />
+              <div className='absolute inset-0 bg-neutral-900 bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity'></div>
+
+            </div>
+
+            { 
+              videos && (
+                <BtnDetails 
+                  className='flex items-center justify-center left-3 bottom-3 xl:left-[60px] 2xl:left-[108px] md:bottom-3'
+                  title="Watch Video"
+                  ico={<PlayIcon className='h-4 w-4 md:h-5 md:w-5' />}
+                  handleOpenModal={handleOpenModalVideoGallery}
+                />
+              )
+            }
+
           </div>
         ) : ( 
           <div className='relative grid grid-rows-3 grid-cols-2 md:grid-rows-2 md:grid-cols-3 gap-2 sm:gap-4'>
