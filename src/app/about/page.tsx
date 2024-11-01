@@ -15,6 +15,7 @@ import triangleBackgroundImgTwo from '@/images/bg-figures/triangle-2.png'
 import triangleBackgroundImgThird from '@/images/bg-figures/triangle-3.png'
 import BackgroundShaadowSection from '@/components/BackgroundShaadowSection';
 import { useEffect } from 'react';
+import SectionOurPartners from '@/components/SectionOurPartners';
 
 const metadata: Metadata = {
   title: 'About Us | Elite Car Sales & Global Delivery Services | WeltCar',
@@ -73,6 +74,10 @@ const PageAbout = () => {
         {/* <div className='relative mt-44'>
           <SectionClientSay />
         </div> */}
+
+        <div className='relative mt-44'>
+          <SectionOurPartners />
+        </div>
 
         <div className='relative mt-44'>
           <SectionSubscribe />

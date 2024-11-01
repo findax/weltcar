@@ -52,8 +52,8 @@ const CarDetailsVideos = ({ videos }: { videos: ICarVideos[] | null }) => {
   const renderContent = () => {
     return (
       <>
-        {videos?.map(({ id, url }) => (
-          <CustomVideoPlayer url={url} key={id}/>
+        {videos?.map(( video, index ) => (
+          index === 0 && <CustomVideoPlayer url={video.url} key={video.id}/>
         ))}
       </>
     );
