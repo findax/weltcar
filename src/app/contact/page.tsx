@@ -13,7 +13,7 @@ import { useEffect } from 'react';
 
 
 const metadata: Metadata = {
-  title: 'Contact Us | Elite Car Sales & Global Delivery Inquiries | WeltCar',
+  title: 'Contact | Elite Car Sales & Global Delivery | Luxury Vehicles Worldwide | WeltCar',
   description:
     'Get in touch with us for inquiries about our luxury cars and global delivery services. Contact our team for assistance with purchasing elite vehicles and delivery to countries like Germany, Switzerland, Dubai, and China.',
 };

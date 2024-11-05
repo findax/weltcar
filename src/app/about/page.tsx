@@ -18,7 +18,7 @@ import { useEffect } from 'react';
 import SectionOurPartners from '@/components/SectionOurPartners';
 
 const metadata: Metadata = {
-  title: 'About Us | Elite Car Sales & Global Delivery Services | WeltCar',
+  title: 'About Us | Elite Car Sales & Global Delivery | Luxury Vehicles Worldwide | WeltCar',
   description:
     'Learn more about our commitment to providing the finest luxury cars with exceptional global delivery services. Discover our mission, values, and why we are the preferred choice for elite vehicles worldwide.',
 };

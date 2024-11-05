@@ -31,8 +31,8 @@ const OurPartners = () => {
     <div className={`nc-OurPartners relative`}>
       <h2 className='text-3xl md:text-4xl xl:text-5xl text-center font-bold text-neutral-1050 dark:text-white'>Our Partners</h2>
       <div className='grid lg:grid-cols-3 gap-5 mt-16'>
-        {PARTNERS.map((partner) => (
-          <div className='p-7 lg:p-10 bg-white dark:bg-neutral-950 rounded-3xl space-y-6'>
+        {PARTNERS.map((partner, index) => (
+          <div key={index} className='p-7 lg:p-10 bg-white dark:bg-neutral-950 rounded-3xl space-y-6'>
             <div className='h-6/3'>
               <Image 
                 src={partner.partnerImg}
