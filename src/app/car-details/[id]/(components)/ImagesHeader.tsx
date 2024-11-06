@@ -49,7 +49,7 @@ export default function ImagesHeader({
         <CarDetailsVideos videos={videos ? videos : null} />
       </Suspense>
 
-      <div className='mt-8 md:mt-11 rounded-3xl'>
+      <div className='mt-4 rounded-3xl'>
         {images.length < 3 ? (
           <div className='relative w-full h-fit'>
             <div

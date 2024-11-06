@@ -13,6 +13,12 @@ import MobileFooterSticky from './MobileFooterSticky';
 import ConfirmForm from './ConfirmForm';
 import { ICarDetails, ICarGallery, ICarVideos } from '@/types/cardetails';
 import { useUserStore } from '@/stores/user-store';
+import Breadcrumbs from '@/components/Breadcrumbs';
+
+interface IPages {
+  pageName: string;
+  pageHref: string;
+};
 
 export default function CarDetails({
   carData,
@@ -25,6 +31,16 @@ export default function CarDetails({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPartnerLogo, setIsPartnerLogo] = useState(false);
   const [modalId, setModalId] = useState('');
+  const [breadcrumbsPages, setBreadcrumbsPages] = useState<IPages[]>([
+    {
+      pageName: 'Main',
+      pageHref: '/'
+    },
+    {
+      pageName: 'Catalog',
+      pageHref: '/catalog'
+    }
+  ]);
 
   const user = useUserStore((state) => state.user);
 
@@ -35,6 +51,18 @@ export default function CarDetails({
         url: item.original,
       }));
       setCarGallery(modifiedPhotosArray);
+      const carTitle = `${carData.brand} ${carData.model}`
+      setBreadcrumbsPages((prevPages) => {
+        const isTitleExists = prevPages.some(
+          (page) => page.pageName === carTitle
+        );
+
+        if (!isTitleExists) {
+          return [...prevPages, { pageName: carTitle, pageHref: '' }];
+        }
+        return prevPages;
+      });
+      setIsLoading(false);
       carData.videos && setCarVideos([...carData.videos]);
       carData.is_partner_car && setIsPartnerLogo(carData.is_partner_car);
       setIsLoading(false);
@@ -66,6 +94,9 @@ export default function CarDetails({
   ) : (
     <>
       <div className='container'>
+        <div className='mt-8'>
+          <Breadcrumbs pages={breadcrumbsPages} />
+        </div>
         {carGallery.length > 0 && <ImagesHeader images={carGallery} videos={carVideos.length > 0 ? carVideos : null }/>}
 
         <div className='relative z-10 my-11 grid grid-rows-1 grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4'>
