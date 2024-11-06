@@ -14,6 +14,12 @@ import ConfirmForm from '../../../car-details/[id]/(components)/ConfirmForm';
 import { ICarGallery, ICarVideos } from '@/types/cardetails';
 import { useUserStore } from '@/stores/user-store';
 import { ICarPartnerDetails } from '@/types/partner';
+import Breadcrumbs from '@/components/Breadcrumbs';
+
+interface IPages {
+  pageName: string;
+  pageHref: string;
+};
 
 export default function PartnerCarDetails({
   carData,
@@ -26,6 +32,16 @@ export default function PartnerCarDetails({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPartnerLogo, setIsPartnerLogo] = useState(false);
   const [modalId, setModalId] = useState('');
+  const [breadcrumbsPages, setBreadcrumbsPages] = useState<IPages[]>([
+    {
+      pageName: 'Main',
+      pageHref: '/'
+    },
+    {
+      pageName: 'Partner car-list',
+      pageHref: '/partner-cars-list'
+    }
+  ]);
 
   const user = useUserStore((state) => state.user);
 
@@ -36,6 +52,17 @@ export default function PartnerCarDetails({
         url: item.original,
       }));
       setCarGallery(modifiedPhotosArray);
+      const carTitle = `${carData.brand} ${carData.model}`
+      setBreadcrumbsPages((prevPages) => {
+        const isTitleExists = prevPages.some(
+          (page) => page.pageName === carTitle
+        );
+
+        if (!isTitleExists) {
+          return [...prevPages, { pageName: carTitle, pageHref: '' }];
+        }
+        return prevPages;
+      });
       carData.videos && setCarVideos([...carData.videos]);
       carData.is_partner_car && setIsPartnerLogo(carData.is_partner_car);
       setIsLoading(false);
@@ -67,6 +94,9 @@ export default function PartnerCarDetails({
   ) : (
     <>
       <div className='container'>
+        <div className='mt-8'>
+          <Breadcrumbs pages={breadcrumbsPages} />
+        </div>
         {carGallery.length > 0 && <ImagesHeader images={carGallery} videos={carVideos.length > 0 ? carVideos : null} />}
 
         <div className='relative z-10 my-11 grid grid-rows-1 grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4'>
