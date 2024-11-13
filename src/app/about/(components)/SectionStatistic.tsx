@@ -27,7 +27,7 @@ const STATISTIC: Statistic[] = [
     heading: '20+',
     title: 'Years of Experience in the Luxury Auto Industry',
     subHeading:
-      'Our deep industry knowledge and long-standing relationships with top car manufacturers guarantee that you receive the best vehicles and services available',
+      'We provide expert support in custom website and ERP development, ensuring your digital platforms run smoothly. Our team is ready to solve  any technical challenges.',
   },
 ];
 
