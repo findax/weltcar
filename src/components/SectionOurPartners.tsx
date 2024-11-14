@@ -21,7 +21,7 @@ const PARTNERS = [
   {
     partnerImg: technicalImg,
     title: "IT Support",
-    subTitle: "We provide expert technical assistance for website development, ensuring your digital platforms are always up and running smoothly. Our team is ready to tackle any technical challenges you may face.",
+    subTitle: "We provide expert support in custom website and ERP development, ensuring your digital platforms run smoothly. Our team is ready to solve any technical challenges.",
     href: '/support/technical'
   }
 ]
@@ -34,7 +34,7 @@ const OurPartners = () => {
         {PARTNERS.map((partner, index) => (
           <div key={index} className='p-7 lg:p-10 bg-white dark:bg-neutral-950 rounded-3xl space-y-6'>
             <div className='h-6/3'>
-              <Image 
+              <Image
                 src={partner.partnerImg}
                 alt={partner.title}
                 className='h-full w-full rounded-[20px]'
