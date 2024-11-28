@@ -25,7 +25,6 @@ const PARTNERS = [
     href: '/support/technical'
   }
 ]
-
 const OurPartners = () => {
   return (
     <div className={`nc-OurPartners relative`}>
