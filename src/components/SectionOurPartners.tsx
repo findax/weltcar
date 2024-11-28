@@ -21,7 +21,7 @@ const PARTNERS = [
   {
     partnerImg: technicalImg,
     title: "IT Support",
-    subTitle: "We provide expert technical assistance for website development, ensuring your digital platforms are always up and running smoothly. Our team is ready to tackle any technical challenges you may face.",
+    subTitle: "We provide expert support in custom website and ERP development, ensuring your digital platforms run smoothly. Our team is ready to solve any technical challenges.",
     href: '/support/technical'
   }
 ]
