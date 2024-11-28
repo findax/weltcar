@@ -15,7 +15,7 @@ const socialsDemo: SocialType[] = [
   { name: 'Youtube', icon: youTubeImg, href: '#' },
   { name: 'Facebook', icon: facebookImg, href: '#' },
   { name: 'Twitter', icon: twitterImg, href: '#' },
-  { name: 'Instagram', icon: instagramImg, href: '#' },
+  { name: 'Instagram', icon: instagramImg, href: 'https://www.instagram.com/weltcar.de' },
 ];
 
 const SocialsList = ({

@@ -7,8 +7,8 @@ import SectionOurTeam from './(components)/SectionOurTeam';
 import SectionClientSay from '@/components/SectionClientSay';
 import SectionSubscribe from '@/components/SectionSubscribe';
 import Image from 'next/image';
-import carsBackgroundDarkImg from '@/images/car-dark-1.png'
-import carsBackgroundLightImg from '@/images/car-dark-2.png'
+import carsBackgroundDarkImg from '@/images/car-dark.png'
+import carsBackgroundLightImg from '@/images/car-light.png'
 import { useThemeMode } from '@/hooks/useThemeMode';
 import triangleBackgroundImg from '@/images/bg-figures/triangle-1.png'
 import triangleBackgroundImgTwo from '@/images/bg-figures/triangle-2.png'

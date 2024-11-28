@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import logisticsImg from '@/images/bg-partners/logistic.jpg';
-import legalImg from '@/images/bg-partners/legal.jpg';
-import technicalImg from '@/images/bg-partners/technical.jpg';
+import logisticsImg from '@/images/bg-partners/logistic.jpeg';
+import legalImg from '@/images/bg-partners/legal.png';
+import technicalImg from '@/images/bg-partners/technical.jpeg';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { Route } from 'next';
 
@@ -25,15 +25,14 @@ const PARTNERS = [
     href: '/support/technical'
   }
 ]
-
 const OurPartners = () => {
   return (
     <div className={`nc-OurPartners relative`}>
       <h2 className='text-3xl md:text-4xl xl:text-5xl text-center font-bold text-neutral-1050 dark:text-white'>Our Partners</h2>
       <div className='grid lg:grid-cols-3 gap-5 mt-16'>
         {PARTNERS.map((partner, index) => (
-          <div key={index} className='p-7 lg:p-10 bg-white dark:bg-neutral-950 rounded-3xl space-y-6'>
-            <div className='h-6/3'>
+          <div key={index} className='p-7 lg:p-10 bg-white dark:bg-neutral-950 rounded-[25px] space-y-6'>
+            <div className='h-[211px] xsS:h-[270px] sm:h-[350px] md:h-[400px] lg:h-[190px] xl:h-[240px]'>
               <Image
                 src={partner.partnerImg}
                 alt={partner.title}
