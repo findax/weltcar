@@ -33,7 +33,7 @@ const OurPartners = () => {
         {PARTNERS.map((partner, index) => (
           <div key={index} className='p-7 lg:p-10 bg-white dark:bg-neutral-950 rounded-[25px] space-y-6'>
             <div className='h-[211px] xsS:h-[270px] sm:h-[350px] md:h-[400px] lg:h-[190px] xl:h-[240px]'>
-              <Image 
+              <Image
                 src={partner.partnerImg}
                 alt={partner.title}
                 className='h-full w-full rounded-[20px]'
