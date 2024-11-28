@@ -12,8 +12,8 @@ import arrowDownLightImg from '@/images/bg-figures/arrow-down.svg';
 import arrowDownDarkImg from '@/images/bg-figures/arrow-down-dark.svg';
 import carBackgroundDarkImg from '@/images/car-2.png';
 import carBackgroundLightImg from '@/images/car-2-light.png';
-import carsBackgroundDarkImg from '@/images/car-dark-1.png'
-import carsBackgroundLightImg from '@/images/car-dark-2.png'
+import carsBackgroundDarkImg from '@/images/car-dark.png'
+import carsBackgroundLightImg from '@/images/car-light.png'
 import triangleBackgroundImg from '@/images/bg-figures/triangle-1.png'
 import triangleBackgroundImgTwo from '@/images/bg-figures/triangle-2.png'
 import triangleBackgroundImgThird from '@/images/bg-figures/triangle-3.png'

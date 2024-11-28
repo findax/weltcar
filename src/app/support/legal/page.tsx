@@ -9,7 +9,7 @@ export async function generateMetadata(): Promise<Metadata> {
     `${process.env.NEXT_PUBLIC_SERVER_URL}/api/pages/support-legal`
   );
   const resMetadata = await data.json() as SupportData;
-
+  console.log(resMetadata)
   return {
     title: resMetadata.title,
     description: resMetadata.seo_description,

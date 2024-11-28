@@ -5,8 +5,8 @@ import { Metadata } from 'next';
 import ContactHero from './(components)/ContactHero';
 import SectionSubscribe from '@/components/SectionSubscribe';
 import { useThemeMode } from '@/hooks/useThemeMode';
-import carsBackgroundDarkImg from '@/images/car-dark-1.png'
-import carsBackgroundLightImg from '@/images/car-dark-2.png'
+import carsBackgroundDarkImg from '@/images/car-dark.png'
+import carsBackgroundLightImg from '@/images/car-light.png'
 import triangleBackgroundImgThird from '@/images/bg-figures/triangle-3.png'
 import BackgroundShaadowSection from '@/components/BackgroundShaadowSection';
 import { useEffect } from 'react';

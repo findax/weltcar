@@ -14,13 +14,14 @@ const socials: SocialType[] = [
   { name: 'Facebook', icon: facebookImg, href: '#' },
   { name: 'Twitter', icon: twitterImg, href: '#' },
   { name: 'Youtube', icon: youTubeImg, href: '#' },
-  { name: 'Instagram', icon: instagramImg, href: '#' },
+  { name: 'Instagram', icon: instagramImg, href: 'https://www.instagram.com/weltcar.de' },
 ];
 
 const SocialsList1: FC<SocialsList1Props> = ({ className = 'space-y-2.5' }) => {
   const renderItem = (item: SocialType, index: number) => {
     return (
       <a
+        target='_blank'
         href={item.href}
         className='flex items-center text-2xl text-neutral-600 hover:text-black dark:text-neutral-400 dark:hover:text-white leading-none space-x-2 group'
         key={index}

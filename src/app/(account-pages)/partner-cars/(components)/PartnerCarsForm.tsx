@@ -89,7 +89,7 @@ export default function PartnerCarsForm({
   });
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
- 
+  
   const PartnerCarsSchema = Yup.object().shape({
     model: ModelSchema.required('Model is required'),
     specification: Yup
@@ -549,7 +549,7 @@ export default function PartnerCarsForm({
 
             <ButtonPrimary
               type='submit'
-              //disabled={!!partner.is_verified ? isSubmitting : true}
+              disabled={!!partner.is_verified ? isSubmitting : true}
               loading={isSubmitting}
             >
               Continue
