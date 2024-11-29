@@ -1,19 +1,18 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import api from '@/api/apiInstance';
-import { SupportData } from '@/types/support';
 import LegalDetails from './(components)/LegalDetails';
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/api/pages/support-legal`
   );
-  const resMetadata = await data.json() as SupportData;
-  console.log(resMetadata)
+  const resMetadata = await data.json();
+  
   return {
-    title: resMetadata.title,
-    description: resMetadata.seo_description,
-    keywords: resMetadata.seo_keywords
+    title: resMetadata.data.seo_title,
+    keywords: resMetadata.data.seo_keywords ,
+    description: resMetadata.data.seo_description,
   };
 }
 
