@@ -17,7 +17,7 @@ import { ICountries, IModels, IPartnerResponse } from '@/types/partner';
 
 
 const commonClass =
-  'block w-full border-neutral-200 focus:border-primary-300 focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:bg-neutral-950 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl !text-xl font-normal h-11 px-7 py-3';
+  'block w-full border-neutral-200 focus:border-primary-300 focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-1100 dark:focus:bg-neutral-1100 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-1150 rounded-2xl !text-xl font-normal h-11 px-7 py-3';
 const commonTitleClass =
   'inline-block text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-3';
 const commonErrorClass =
@@ -503,7 +503,7 @@ export const FormikFile = ({
                   <div className={`${variant === 'photo' ? "flex flex-wrap gap-2" : "flex flex-col gap-1"}`}>
                     {renderFiles(form)}
                   </div>
-                  <p className="text-primary-400 text-sm pt-2.5">JPG, JPEG, or PNG</p>
+                  <p className="text-primary-1000 dark:text-primary-400 text-sm pt-2.5">JPG, JPEG, or PNG</p>
                 </div>
               </div>
             </label>
@@ -588,7 +588,7 @@ export const FormikInputSelector = ({
           disabled={disabled}
           type='button'
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-          className={`border text-md text-neutral-500 ${sizeClass} ${rounded} block w-full border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl font-normal h-11 px-7 lg:text-lg py-3 text-left flex items-center justify-between`}
+          className={`border text-md text-neutral-500 ${sizeClass} ${rounded} block w-full border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-1100 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-1150 rounded-2xl font-normal h-11 px-7 lg:text-lg py-3 text-left flex items-center justify-between`}
         >
           {values[name]?.name.length > 0 
             ? ( <p className='text-black dark:text-neutral-200'>{values[name]?.name}</p> ) 
@@ -597,12 +597,12 @@ export const FormikInputSelector = ({
           {isDropdownOpen ? <IoIosArrowUp/> : <IoIosArrowDown/> }
         </button>
         {isDropdownOpen && (
-          <div className='absolute max-h-[400px] overflow-y-auto z-10 mt-1 w-full bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-2xl shadow-lg'>
+          <div className='absolute max-h-[400px] overflow-y-auto z-10 mt-1 w-full bg-white dark:bg-neutral-1150 border border-neutral-200 dark:border-neutral-1100 rounded-2xl shadow-lg'>
             <div className='py-2 px-2'>
-              <div className='flex items-center w-full border border-neutral-200 dark:border-neutral-700 rounded-lg px-2 py-1'>
+              <div className='flex items-center w-full border border-neutral-200 dark:border-neutral-1100 rounded-lg px-2 py-1'>
                 <input
                   type='text'
-                  className='w-full dark:bg-neutral-900 focus:ring-0 focus-visible:outline-none border-none p-0'
+                  className='w-full dark:bg-neutral-1150 focus:ring-0 focus-visible:outline-none border-none p-0'
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                 />
@@ -614,7 +614,7 @@ export const FormikInputSelector = ({
                 <li
                   onMouseEnter={() => setIsHighlighted(false)}
                   key={option.id}
-                  className={`py-1 px-3 dark:hover:text-black ${(isHighlighted && option.id === values[name]?.id) ? 'dark:text-black dark:bg-neutral-300 bg-neutral-100' : ''} hover:bg-neutral-100 dark:hover:bg-neutral-300 cursor-pointer`}
+                  className={`py-1 px-3 dark:hover:text-black ${(isHighlighted && option.id === values[name]?.id) ? 'dark:text-black dark:bg-neutral-300 bg-neutral-100' : ''} hover:bg-neutral-100 dark:hover:bg-neutral-1100 cursor-pointer`}
                   onClick={() => {
                     setFieldValue(name, option);
                     setIsHighlighted(true);

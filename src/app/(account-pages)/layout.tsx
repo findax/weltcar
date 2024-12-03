@@ -71,7 +71,7 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
             <Image 
               src={triangleBackgroundImg} 
               alt='triangle background'
-              className='absolute top-[10%] -left-[300px] -z-10 rotate-12'
+              className='absolute top-[10%] -left-[82px] lg:-left-[300px] -z-10 rotate-12'
             />
           </>
         )
@@ -121,7 +121,7 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
       case NavigationRoutes.CarSubscriptions:
         return (
           <>
-            <div className='absolute -bottom-[11%] right-0 w-full h-[280px] lg:h-[350px]'>
+            <div className='mt-auto w-full h-[20vh] lg:h-[30vh]'>
               <Image
                 className='h-full w-full object-cover'
                 src={carSubscriptionsImg}
@@ -129,7 +129,7 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
               />
             </div>
             <Image
-              className='absolute top-[1%] right-0 -z-10 rotate-0'
+              className='absolute top-[1%] w-full lg:w-1/2 right-0 -z-10 h-auto'
               src={triangleBackgroundImgFive}
               alt='triangle background'
             />
@@ -142,7 +142,7 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
   
   return (
     <div className='relative nc-CommonLayoutAccount'>
-      <div className={`fixed inset-x-0 top-0 z-20 border-b border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 
+      <div className={`fixed inset-x-0 top-0 z-20  bg-white dark:bg-neutral-950 
         ${!isHeaderVisible 
             ? 'nc-Header--hide transform -translate-y-full' 
             : 'md:top-[80px] top-[64px] transform translate-y-0'

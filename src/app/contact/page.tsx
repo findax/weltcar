@@ -35,10 +35,10 @@ const PageContact = () => {
         className='absolute rotate-2 bottom-[3%] sm:-bottom-[8%] -left-[22px] -z-10'
       />
       <BackgroundShaadowSection 
-        className='bg-[#5046E5] -right-[330px] top-[4%] lg:top-[1%]' 
+        className='bg-[#00668451] dark:bg-[#123D4A] dark:opacity-[10] -right-[330px] top-[4%] lg:top-[1%]' 
       />
       <BackgroundShaadowSection 
-        className='bg-[#DFE172] -right-[300px] -bottom-[3%] lg:-right-[100px] lg:bottom-[8%]' 
+        className='bg-[#DFE172] opacity-[0.30] -right-[300px] -bottom-[3%] lg:-right-[100px] lg:bottom-[8%]' 
       />
       <div className='container my-12 xl:my-20 space-y-16 xl:space-y-28'>
         <ContactHero />

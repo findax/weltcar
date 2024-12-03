@@ -94,7 +94,7 @@ const CarCardH = ({
         </div>
 
         <div className='pt-4 xl:pt-5 flex justify-between items-center border-t border-dashed border-neutral-300 dark:border-neutral-700'>
-          <span className='text-2xl xl:text-3xl font-semibold text-primary-400'>
+          <span className='text-2xl xl:text-3xl font-semibold text-primary-1000 dark:text-primary-400'>
             {priceWithComma(price)}
           </span>
           <Link href={`/car-details/${id}`} target='_blank'>

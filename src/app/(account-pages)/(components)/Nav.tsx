@@ -49,7 +49,7 @@ export const Nav = ({
                 item={item}
                 className={`block border-b-2 flex-shrink-0 capitalize text-neutral-1050 dark:text-white 
                   ${isActive 
-                      ? 'border-primary-500 font-medium'
+                      ? 'border-primary-950 font-medium'
                       : 'border-transparent'
                     }
                   ${isScrolled

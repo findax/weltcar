@@ -90,7 +90,7 @@ const PasswordPage = () => {
               type='submit'
               disabled={isSubmitting}
               loading={isSubmitting}
-              className='text-base lg:text-lg w-56'
+              className='text-base lg:text-lg w-full sm:w-56'
             >
               Update password
             </ButtonPrimary>

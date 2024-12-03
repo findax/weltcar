@@ -12,7 +12,7 @@ export default function SectionHeroArchivePage() {
         <div className='flex items-center justify-between'>
           <div className='w-max space-y-5 lg:space-y-7'>
             <h1 className='text-neutral-1050 font-bold text-4xl lg:text-6xl xl:text-[83px] xl:leading-[120%] xl:tracking-wide dark:text-white'>
-              Welcome to <span className='text-primary-600'>WeltCar</span>
+              Welcome to <span className='text-primary-600 dark:text-primary-950'>WeltCar</span>
             </h1>
             <div className='relative flex justify-between gap-20'>
               <div className='lg:w-[423px] xl:w-[495px]'>
@@ -27,7 +27,7 @@ export default function SectionHeroArchivePage() {
                   reality. Experience the pinnacle of automotive excellence with
                   WeltCar.
                 </div>
-                <ButtonPrimary className='xl:text-lg' sizeClass='px-5 py-4 sm:px-7' href='/catalog'>
+                <ButtonPrimary className='xl:text-lg w-full sm:w-fit' sizeClass='px-5 py-4 sm:px-7' href='/catalog'>
                   Start your search
                 </ButtonPrimary>
               </div>

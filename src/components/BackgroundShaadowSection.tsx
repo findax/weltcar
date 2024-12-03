@@ -9,7 +9,7 @@ const BackgroundShaadowSection: FC<IProps> = ({
 }) => {
   return (
     <div
-      className={`absolute blur-[200px] w-[627px] h-[627px] z-[-1000] opacity-[0.22] rounded-full ${className}`}/>
+      className={`absolute blur-[200px] w-[627px] h-[627px] z-[-1000] rounded-full ${className}`}/>
   );
 };
 

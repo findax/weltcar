@@ -19,12 +19,14 @@ interface MenuMobileProps {
   iconClassName?: string;
   data?: NavItemType[];
   partner?: IPartnerResponse;
+  isDark?: boolean;
 }
 const MenuMobile = ({
   className = '',
   iconClassName = 'h-8 w-8',
   data = NAVIGATION_DEMO_MOBILE,
-  partner = undefined
+  partner = undefined,
+  isDark = false
 }: MenuMobileProps) => {
   const [isVisable, setIsVisable] = useState(false);
   const pathname = usePathname();
@@ -60,7 +62,7 @@ const MenuMobile = ({
       <SideMenuWrapper handleCloseMenu={handleCloseMenu} isVisable={isVisable}>
         <div className='overflow-y-auto w-full h-screen py-2 transition transform shadow-lg ring-1 dark:ring-neutral-700 bg-white dark:bg-neutral-900 divide-y-2 divide-neutral-100 dark:divide-neutral-800'>
           <div className='py-6 px-5'>
-            <Logo />
+            <Logo isDark={isDark}/>
             <div className='flex flex-col mt-5 text-neutral-700 dark:text-neutral-300 text-sm'>
               <p className='text-neutral-600 dark:text-neutral-300'>
                 Welcome to WeltCar - Your Gateway to

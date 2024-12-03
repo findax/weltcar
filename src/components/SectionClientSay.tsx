@@ -222,7 +222,7 @@ const SectionClientSay = ({
         </div>
         <div className='absolute z-10 flex items-center justify-around lg:justify-between bottom-[0%] right-0 w-full lg:top-0 lg:right-0 xl:top-0 xl:right-12 xl:w-[92%] '>
           <button
-            className={`w-14 h-14 rounded-full flex items-center justify-center bg-primary-600 hover:bg-primary-700 focus:outline-none ${isBeginning ? '!bg-primary-400 dark:!bg-primary-900 cursor-default' : 'hover:bg-primary-700'}`}
+            className={`w-14 h-14 rounded-full flex items-center justify-center bg-primary-600 dark:!bg-primary-950 focus:outline-none ${isBeginning ? '!bg-primary-600 dark:!bg-primary-950 cursor-default' : ''}`}
             style={{ transform: 'translate3d(0, 0, 0)' }}
             onClick={() => swiper.slidePrev()}
           >
@@ -230,7 +230,7 @@ const SectionClientSay = ({
           </button>
 
           <button
-            className={`w-14 h-14 rounded-full flex items-center justify-center bg-primary-600 hover:bg-primary-700 focus:outline-none ${isEnd ? '!bg-primary-400 dark:!bg-primary-900 cursor-default' : 'hover:bg-primary-700'}`}
+            className={`w-14 h-14 rounded-full flex items-center justify-center bg-primary-600 dark:!bg-primary-950 focus:outline-none ${isEnd ? '!bg-primary-600 dark:!bg-primary-950 cursor-default' : ''}`}
             style={{ transform: 'translate3d(0, 0, 0)' }}
             onClick={() => swiper.slideNext()}
           >

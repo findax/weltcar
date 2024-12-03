@@ -47,7 +47,7 @@ export default function SearchFormCatalog() {
             className='absolute transform top-1/2 -translate-y-1/2 right-1'
             size='w-10 h-10'
           >
-            <i className='las la-search text-xl'></i>
+            <i className='las la-search text-xl dark:text-black text-white'></i>
           </ButtonCircle>
           {values.search !== '' && (
             <button

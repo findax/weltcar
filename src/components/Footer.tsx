@@ -1,17 +1,24 @@
+'use client'
+
 import Link from 'next/link';
 import Logo from '@/shared/Logo';
 import SocialsList1 from '@/shared/SocialsList1';
 import SubscribeForm from '@/components/SubscribeForm';
 import { WatsappIcon } from '@/shared/icons';
+import { useThemeMode } from '@/hooks/useThemeMode';
 
 export default function Footer() {
+  const { isDarkMode, mounted } = useThemeMode();
+
+  if (!mounted) return null;
+
   return (
     <footer className='nc-Footer relative bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-700'>
       <div className='container'>
         <div className='py-24 lg:py-28'>
           <div className='grid grid-cols-12 gap-y-14 gap-x-6 px-3 xl:px-0'>
-            <div className='-mt-3 col-span-12 md:col-span-6 xl:col-span-3'>
-              <Logo />
+            <div className='hidden md:block -mt-3 col-span-12 md:col-span-6 xl:col-span-3'>
+              <Logo isDark={isDarkMode} />
               <p className='mt-2 mb-6 text-neutral-600 dark:text-neutral-400'>
                 WeltCar - Your Gateway to
                 <br />
@@ -19,7 +26,7 @@ export default function Footer() {
               </p>
               <SocialsList1 className='flex gap-2 items-center space-x-3 md:space-x-0 md:flex-col md:space-y-2.5 md:items-start' />
             </div>
-            <div className='col-span-12 md:col-span-6 xl:col-span-3 space-y-6'>
+            <div className='hidden md:block col-span-12 md:col-span-6 xl:col-span-3 space-y-6'>
               <h4 className='text-2xl text-neytral-1050 font-bold dark:text-white'>Quick Link</h4>
               <ul className='flex flex-col gap-2'>
                 <li>
@@ -55,6 +62,55 @@ export default function Footer() {
                   </Link>
                 </li>
               </ul>
+            </div>
+            <div className='md:hidden col-span-12'>
+              <Logo isDark={isDarkMode} />
+              <p className='mt-2 mb-6 text-neutral-600 dark:text-neutral-400'>
+                WeltCar - Your Gateway to
+                <br />
+                Luxury Automotive Excellence
+              </p>
+              <div className='flex justify-between'>
+                <SocialsList1 className='flex flex-col justify-between items-center space-x-3 md:space-x-0 md:flex-col md:space-y-2.5 md:items-start' />
+
+                <div>
+                  <h4 className='text-2xl text-neytral-1050 font-bold dark:text-white'>Quick Link</h4>
+                  <ul className='flex flex-col gap-2'>
+                    <li>
+                      <Link
+                        href='/catalog'
+                        className='text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
+                      >
+                        Catalog
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href='/about'
+                        className='text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
+                      >
+                        About
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href='/contact'
+                        className='text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
+                      >
+                        Contact
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href='/sold-car'
+                        className='text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
+                      >
+                        Sold Car
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
             <div className='col-span-12 md:col-span-6 xl:col-span-3 space-y-6'>
               <h4 className='text-2xl text-neytral-1050 font-bold dark:text-white'>Contact</h4>
@@ -95,7 +151,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    className='inline-flex items-center py-1.5 text-xl border border-primary-200 dark:border-neutral-700 rounded-full bg-primary-100/30 dark:bg-neutral-800 hover:bg-primary-100 dark:hover:bg-neutral-900 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
+                    className='inline-flex items-center py-1.5 text-xl border border-primary-200 dark:border-neutral-1100 rounded-full bg-primary-100/30 dark:bg-neutral-1150 hover:bg-primary-100 dark:hover:bg-neutral-900 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
                     href='https://wa.me/&#x2B;4915902465256'
                     target='_blank'
                     rel='noreferrer noopener'

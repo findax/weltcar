@@ -34,10 +34,10 @@ const PageFindCar = () => {
         className='absolute rotate-3 bottom-[13%] -left-[8px] lg:bottom-[20%] lg:-left-[22px] -z-10'
       />
       <BackgroundShaadowSection 
-        className='lg:block bg-[#5046E5] -right-[440px] lg:-right-[315px] top-[8%]' 
+        className='lg:block bg-[#00668451] dark:bg-[#123D4A] dark:opacity-[10] -right-[440px] lg:-right-[315px] top-[8%]' 
       />
       <BackgroundShaadowSection 
-        className='hidden lg:block bg-[#DFE172] lg:-right-[145px] lg:bottom-[20%]' 
+        className='hidden lg:block bg-[#DFE172] opacity-[0.30] lg:-right-[145px] lg:bottom-[20%]' 
       />
 
       <div className='container my-12 xl:my-20'>
