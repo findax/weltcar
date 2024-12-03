@@ -14,6 +14,7 @@ import ConfirmForm from './ConfirmForm';
 import { ICarDetails, ICarGallery, ICarVideos } from '@/types/cardetails';
 import { useUserStore } from '@/stores/user-store';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import { IUser } from '@/types/user';
 
 interface IPages {
   pageName: string;
@@ -123,6 +124,7 @@ export default function CarDetails({
             price={carData?.price || 0}
             isSold={carData?.status === 'sold'}
             isShowPartnerLogo={isPartnerLogo}
+            userData={user ? user : null}
           />
         </div>
       </div>

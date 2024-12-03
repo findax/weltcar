@@ -43,7 +43,7 @@ const OurPartners = () => {
               <h3 className='text-lg lg:text-2xl font-bold text-neutral-1050 md:text-2xl dark:text-white'>{partner.title}</h3>
               <span className='block lg:text-lg text-neutral-500 text-base dark:text-neutral-400'>{partner.subTitle}</span>
             </div>
-            <ButtonPrimary className='mt-5 sm:mt-8' href={`${partner.href as Route<string>}`}>
+            <ButtonPrimary className='mt-5 sm:mt-8 w-full sm:w-fit' href={`${partner.href as Route<string>}`}>
               Learn More
             </ButtonPrimary>
           </div>

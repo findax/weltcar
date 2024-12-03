@@ -51,7 +51,7 @@ export default function SubscribeForm({
             className='absolute transform top-1/2 -translate-y-1/2 right-1'
             size='w-10 h-10'
           >
-            <ChevronRightIcon className='w-8 ml-0.5' color='white' />
+            <ChevronRightIcon className='w-8 ml-0.5 text-white dark:text-black' />
           </ButtonCircle>}
         </Form>
       )}

@@ -12,7 +12,7 @@ const Subscribe = ({ className = '' }: { className?: string }) => {
       <div className='w-full lg:w-[506px]'>
         <h2 className='mb-10 lg:mb-20 font-bold text-neutral-1050 dark:text-white text-3xl md:text-4xl xl:text-5xl'>Join Our Newsletter</h2>
         <SubscribeForm />
-        <ButtonPrimary className='mt-5 sm:mt-8' href='/catalog'>
+        <ButtonPrimary className='mt-5 sm:mt-8 w-full sm:w-fit' href='/catalog'>
           Send email
         </ButtonPrimary>
       </div>

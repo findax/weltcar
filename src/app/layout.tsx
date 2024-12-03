@@ -56,6 +56,11 @@ export default function RootLayout({
             `,
           }}
         />
+        <link
+          rel="icon"
+          href="/favicon.ico"
+          sizes="any"
+          />
       </head>
       <body className='pt-16 md:pt-20 flex flex-col min-h-screen text-base bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200'>
         {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (
@@ -64,7 +69,7 @@ export default function RootLayout({
         <LoadingProgressBar />
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <Header />
-          <main className='flex-grow'>{children}</main>
+          <main className='flex-grow overflow-hidden'>{children}</main>
           <Footer />
           <CookieAlert />
         </ThemeProvider>

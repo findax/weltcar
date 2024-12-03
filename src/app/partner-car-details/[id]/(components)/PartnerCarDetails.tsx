@@ -15,6 +15,7 @@ import { ICarGallery, ICarVideos } from '@/types/cardetails';
 import { useUserStore } from '@/stores/user-store';
 import { ICarPartnerDetails } from '@/types/partner';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import { IUser } from '@/types/user';
 
 interface IPages {
   pageName: string;
@@ -51,6 +52,7 @@ export default function PartnerCarDetails({
         id: index,
         url: item.original,
       }));
+      console.log(carData);
       setCarGallery(modifiedPhotosArray);
       const carTitle = `${carData.brand} ${carData.model}`
       setBreadcrumbsPages((prevPages) => {
@@ -123,6 +125,7 @@ export default function PartnerCarDetails({
             price={carData?.price || 0}
             isSold={carData?.status === 'sold'}
             isShowPartnerLogo={isPartnerLogo}
+            userData={user ? user : null}
           />
         </div>
       </div>

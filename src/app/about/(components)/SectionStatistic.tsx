@@ -39,7 +39,7 @@ const SectionStatistic: FC<SectionStatisticProps> = ({ className = '' }) => {
   return (
     <div className={`nc-SectionStatistic mt-72 lg:mt-60 relative ${className}`}>
       <h2 className='my-4 text-neutral-1050 dark:text-white text-center font-bold text-3xl md:text-4xl xl:text-5xl'>
-        Fast Facts About <span className='text-primary-600'>WeltCar</span>
+        Fast Facts About <span className='dark:text-primary-950 text-primary-600'>WeltCar</span>
       </h2>
       <div className='grid mt-16 gap-6 lg:grid-cols-3 xl:gap-8'>
         {STATISTIC.map((item) => (

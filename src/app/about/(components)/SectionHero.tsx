@@ -7,8 +7,8 @@ const SectionHero = () => {
     <div className='nc-SectionHero relative'>
       <div className='relative flex items-center flex-col lg:flex-row space-y-14 lg:space-y-0 lg:space-x-6 2xl:space-x-0 justify-between text-left'>
         <div className='lg:w-max'>
-          <h1 className='text-neutral-1050 dark:text-white font-bold text-4xl lg:text-6xl xl:text-[80px]'>
-            About <span className='text-primary-600'>WeltCar</span>
+          <h1 className='text-neutral-1050 dark:text-white font-bold text-4xl lg:text-6xl xl:text-[80px] flex flex-col gap-2'>
+            About <span className='text-primary-600 dark:text-primary-950'>WeltCar</span>
           </h1>
           <div className='w-full lg:w-[400px] xl:w-[520px]'>
             <div className='mt-10 mb-8 xl:text-lg text-neutral-500 dark:text-neutral-400 lg:max-w-3xl'>
@@ -16,7 +16,7 @@ const SectionHero = () => {
               is to provide discerning clients with a curated selection of VIP vehicles, exceptional customer service, and exclusive benefits. With years 
               of expertise in the high-end car market, we ensure that each interaction is tailored to meet your specific needs and desires. Discover a world where luxury meets excellence with WeltCar.
             </div>
-            <ButtonPrimary className='xl:text-lg' sizeClass='px-5 py-4 sm:px-7' href='/catalog'>
+            <ButtonPrimary className='xl:text-lg w-full sm:w-fit' sizeClass='px-5 py-4 sm:px-7' href='/catalog'>
               Start your search
             </ButtonPrimary>
           </div>

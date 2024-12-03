@@ -70,7 +70,7 @@ export const Button = ({
 export const ButtonPrimary = ({ className = '', ...args }: ButtonProps) => {
   return (
     <Button
-      className={`ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-600 hover:bg-primary-700 text-neutral-50 ${className}`}
+      className={`ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-600 dark:bg-primary-950 hover:bg-primary-1000 text-neutral-50 dark:text-black ${className}`}
       {...args}
     />
   );
@@ -103,7 +103,7 @@ export const ButtonCircle = ({
 }: ButtonCircleProps) => {
   return (
     <button
-      className={`ttnc-ButtonCircle flex items-center justify-center rounded-full !leading-none disabled:bg-opacity-70 bg-primary-600 hover:bg-primary-700 text-neutral-50 ${className} ${size} `}
+      className={`ttnc-ButtonCircle flex items-center justify-center rounded-full !leading-none disabled:bg-opacity-70 bg-primary-600 dark:bg-primary-950 hover:bg-primary-1000 text-neutral-50 ${className} ${size} `}
       {...args}
     />
   );

@@ -24,7 +24,7 @@ const Header = () => {
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [isScrolled, setScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { isDarkMode } = useThemeMode();
+  const { isDarkMode, mounted } = useThemeMode();
   const isMobile = useMediaQuery(1024);
   const user = useUserStore((state) => state.user);
   const [partner, setPartner] = useState<IPartnerResponse>();
@@ -67,6 +67,8 @@ const Header = () => {
     });
   }, []);
 
+  if (!mounted) return null;
+
   return (
     <>
       <header
@@ -78,7 +80,10 @@ const Header = () => {
       >
         <div className='px-4 h-16 md:h-20 lg:container relative flex justify-between'>
           <div className='flex justify-start flex-1 space-x-4 sm:space-x-10'>
-            <Logo className='self-center w-40 md:w-52' />
+            <Logo 
+              className='self-center'
+              isDark={isDarkMode} 
+            />
 
             <Navigation />
           </div>
@@ -98,7 +103,7 @@ const Header = () => {
               </button>
             )}
             <div className='px-0.5' />
-            <MenuMobile partner={partner ? partner : undefined}/>
+            <MenuMobile isDark={isDarkMode} partner={partner ? partner : undefined}/>
           </div>
         </div>
       </header>

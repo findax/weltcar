@@ -87,7 +87,7 @@ export default function FeedbackForm() {
             placeholder='Enter message'
             title='Message'
             rows={6}
-            rounded='rounded-[25px]'
+            rounded='rounded-[40px]'
             error={errors.message}
             touched={touched.message}
           />
@@ -96,7 +96,7 @@ export default function FeedbackForm() {
             type='submit'
             disabled={isSubmitting}
             loading={isSubmitting}
-            className='!text-lg mt-5 w-[102px]'
+            className='!text-lg mt-5 w-full sm:w-[102px]'
           >
             Send
           </ButtonPrimary>

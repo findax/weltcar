@@ -101,7 +101,7 @@ export default function AccountForm() {
             type='submit'
             disabled={isSubmitting}
             loading={isSubmitting}
-            className='text-base lg:text-lg w-40'
+            className='text-base lg:text-lg w-full sm:w-40'
           >
             Update info
           </ButtonPrimary>

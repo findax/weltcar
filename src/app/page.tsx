@@ -84,16 +84,16 @@ function PageHome() {
         className='absolute rotate-3 bottom-[3%] -left-[8px] sm:-bottom-[7%] lg:-left-[22px] -z-10'
       />
       <BackgroundShaadowSection 
-        className='bg-[#DFE172] -left-[350px] top-[4%]' 
+        className='bg-[#DFE172] opacity-[0.30] -left-[350px] top-[4%]' 
       />
       <BackgroundShaadowSection 
-        className='hidden lg:block bg-[#5046E5] -right-[315px] top-[14%]' 
+        className='hidden lg:block dark:bg-[#123D4A] bg-[#00668451] dark:opacity-[10] -right-[315px] top-[14%]' 
       />
       <BackgroundShaadowSection 
-        className='bg-[#5046E5] -left-[200px] bottom-[34%] lg:left-[25px] lg:bottom-[40%]' 
+        className='dark:bg-[#123D4A] bg-[#00668451] dark:opacity-[10] -left-[200px] bottom-[34%] lg:left-[25px] lg:bottom-[40%]' 
       />
       <BackgroundShaadowSection 
-        className='-bottom-[2%] -right-[80%] bg-[#DFE172] lg:-right-[145px] lg:bottom-[8%]' 
+        className='-bottom-[2%] -right-[80%] bg-[#DFE172] opacity-[0.30] lg:-right-[145px] lg:bottom-[8%]' 
       />
 
       {/* SECTION HERO */}
