@@ -81,7 +81,7 @@ module.exports = {
           1050: customColors('--c-neutral-1050'),
           1100: customColors('--c-neutral-1100'),
           1150: customColors('--c-neutral-1150'),
-          1200: customColors('--c-neutral-1150'),
+          1200: customColors('--c-neutral-1200'),
         },
       },
     },
