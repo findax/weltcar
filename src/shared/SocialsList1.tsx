@@ -30,7 +30,7 @@ const SocialsList1: FC<SocialsList1Props> = ({ className = 'space-y-2.5' }) => {
           src={item.icon}
           alt={item.name}
         />
-        <span className='hidden md:block text-sm'>{item.name}</span>
+        <span className='text-sm'>{item.name}</span>
       </a>
     );
   };
