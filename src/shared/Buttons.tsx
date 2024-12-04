@@ -70,7 +70,7 @@ export const Button = ({
 export const ButtonPrimary = ({ className = '', ...args }: ButtonProps) => {
   return (
     <Button
-      className={`ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-600 dark:bg-primary-950 hover:bg-primary-1000 text-neutral-50 dark:text-black ${className}`}
+      className={`ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-600 dark:bg-primary-950 hover:bg-primary-1000 dark:hover:bg-[#72909D] text-neutral-50 dark:text-black ${className}`}
       {...args}
     />
   );

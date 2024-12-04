@@ -77,12 +77,20 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
         )
       case NavigationRoutes.AccountPartner:
         return (
-          <div className='absolute top-0 right-0'>
-            <Image
-              src={passwordImg}
-              alt='car background'
+          <>
+            <div className='absolute w-full lg-w-auto bottom-[0%] left-0 h-[400px] lg:h-fit lg:bottom-auto lg:w-7/12 lg:left-auto lg:top-[32%] lg:right-0 xl:top-[10%] xl:w-[1000px]'>
+              <Image
+                className='object-cover w-full h-full'
+                src={isDarkMode ? accountImg : accountImgLight}
+                alt='car background'
+              />
+            </div>
+            <Image 
+              src={triangleBackgroundImg} 
+              alt='triangle background'
+              className='absolute top-[10%] -left-[82px] lg:-left-[300px] -z-10 rotate-12'
             />
-          </div>
+          </>
         )
       case NavigationRoutes.Orders:
         return (

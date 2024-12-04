@@ -129,12 +129,14 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
       }}
     >
       {({ errors, touched, isSubmitting }) => (
-        <Form className='grid grid-cols-1 gap-7 w-full max-w-xl mt-10 md:mt-0 md:pl-16'>
+        <Form className='grid grid-cols-1 gap-7 w-full max-w-xl mt-10 md:pr-32'>
            <FormikInput
             disabled={partner?.is_verified}
             name='companyName'
             placeholder='Enter your company name'
             title='Company name'
+            rounded='rounded-full'
+            sizeClass='h-14'
             error={errors.companyName}
             touched={touched.companyName}
           />
@@ -144,6 +146,8 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
             name='taxNumber'
             placeholder='Enter your tax number'
             title='Tax number'
+            rounded='rounded-full'
+            sizeClass='h-14'
             error={errors.taxNumber}
             touched={touched.taxNumber}
           />
@@ -165,6 +169,8 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
             type='email'
             placeholder='example@mail.com'
             title='Email address'
+            rounded='rounded-full'
+            sizeClass='h-14'
             error={errors.email}
             touched={touched.email}
           />
@@ -172,6 +178,8 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
           <FormikPhoneNumberInput
             disabled={partner?.is_verified}
             title='Phone number'
+            rounded='rounded-full'
+            sizeClass='h-14'
             error={errors.phone}
             touched={touched.phone}
           />
@@ -181,6 +189,7 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
               type='submit'
               disabled={isSubmitting}
               loading={isSubmitting}
+              className='text-base lg:text-lg w-full sm:w-40'
             >
               Update info
             </ButtonPrimary>

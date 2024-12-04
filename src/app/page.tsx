@@ -93,7 +93,7 @@ function PageHome() {
         className='dark:bg-[#123D4A] bg-[#00668451] dark:opacity-[10] -left-[200px] bottom-[34%] lg:left-[25px] lg:bottom-[40%]' 
       />
       <BackgroundShaadowSection 
-        className='-bottom-[2%] -right-[80%] bg-[#DFE172] opacity-[0.30] lg:-right-[145px] lg:bottom-[8%]' 
+        className='-bottom-[2%] -right-[80%] bg-[#DFE172] opacity-[0.30] lg:-right-[367px] lg:bottom-[13%]' 
       />
 
       {/* SECTION HERO */}
