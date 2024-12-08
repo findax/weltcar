@@ -20,7 +20,11 @@ export const getLanguages = async () => {
 export const getLanguagesTranslations = async () => {
   return new Promise((resolve) => {
     api
-      .get('api/languages/translations')
+      .get('api/languages/translations', {
+        headers: {
+          'Accept-Language': `en`,
+        },
+      })
       .then((res) => resolve(res.data))
       .catch((err) => {
         if (err.response?.data.message) {
