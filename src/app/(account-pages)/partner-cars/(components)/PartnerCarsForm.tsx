@@ -478,6 +478,7 @@ export default function PartnerCarsForm({
               name='description'
               placeholder='Description'
               title='Description'
+              rounded='rounded-[40px]'
               error={errors.description}
               touched={touched.description}
             />
@@ -542,6 +543,7 @@ export default function PartnerCarsForm({
               name='commentary'
               placeholder='Commentary'
               title='Commentary'
+              rounded='rounded-[40px]'
               error={errors.commentary}
               touched={touched.commentary}
             />
