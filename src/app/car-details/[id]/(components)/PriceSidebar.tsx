@@ -38,7 +38,7 @@ export default function PriceSidebar({
         <ButtonPrimary
           onClick={onClick}
           disabled={toggleIsDisabled(isSold, price)}
-          className={isSold ? '!bg-gray-600 hover:bg-gray-600' : ''}
+          className={isSold || isNaN(Number(price)) ? '!bg-gray-600 hover:bg-gray-600' : ''}
         >
           {isSold ? 'Sold' : 'Reserve'}
         </ButtonPrimary>
