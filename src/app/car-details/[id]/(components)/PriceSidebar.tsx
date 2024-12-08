@@ -16,6 +16,11 @@ export default function PriceSidebar({
   isShowPartnerLogo?: boolean;
   userData?: IUser | null;
 }) {
+
+  const toggleIsDisabled = (isSold: boolean, price: string | number): boolean => {
+    return isSold || isNaN(Number(price));
+  };
+
   return (
     <div className='block flex-grow mt-14 lg:mt-0'>
       <div className='detailsSectionSidebar__wrap sticky top-28 bg-white dark:bg-neutral-900 !hidden lg:!flex'>
@@ -32,7 +37,7 @@ export default function PriceSidebar({
 
         <ButtonPrimary
           onClick={onClick}
-          disabled={isSold}
+          disabled={toggleIsDisabled(isSold, price)}
           className={isSold ? '!bg-gray-600 hover:bg-gray-600' : ''}
         >
           {isSold ? 'Sold' : 'Reserve'}
