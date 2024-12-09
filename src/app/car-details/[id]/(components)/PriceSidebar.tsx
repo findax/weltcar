@@ -2,6 +2,7 @@ import PartnerLogoSidebar from '@/app/partner-car-details/[id]/(components)/Part
 import { ButtonPrimary } from '@/shared/Buttons';
 import { IUser } from '@/types/user';
 import priceWithComma from '@/utils/priceWithComma';
+import { useEffect, useState } from 'react';
 
 export default function PriceSidebar({
   onClick,
@@ -16,10 +17,14 @@ export default function PriceSidebar({
   isShowPartnerLogo?: boolean;
   userData?: IUser | null;
 }) {
+  const [isPriceVisible, setIsPriceVisible] = useState<boolean>(true);
 
-  const toggleIsDisabled = (isSold: boolean, price: string | number): boolean => {
-    return isSold || isNaN(Number(price));
-  };
+  const isDisabled = isSold || isNaN(Number(price));
+  const buttonClass = isDisabled ? '!bg-gray-600 hover:bg-gray-600' : '';
+
+  useEffect(() => {
+    setIsPriceVisible(!isNaN(Number(price)));
+  }, [price]);
 
   return (
     <div className='block flex-grow mt-14 lg:mt-0'>
@@ -28,8 +33,10 @@ export default function PriceSidebar({
           <PartnerLogoSidebar userData={userData} />
         )}
 
-        <div className='flex justify-between items-end gap-1'>
-          <span className='text-2xl font-semibold'>Price</span>
+        <div className={`${isPriceVisible ? 'flex justify-between items-end gap-1 ' : 'flex justify-center items-end gap-1 '}`}>
+          {isPriceVisible 
+            && <span className='text-2xl font-semibold'>Price</span>
+          }
           <span className='text-5xl leading-10 font-semibold'>
             {priceWithComma(price)}
           </span>
@@ -37,8 +44,8 @@ export default function PriceSidebar({
 
         <ButtonPrimary
           onClick={onClick}
-          disabled={toggleIsDisabled(isSold, price)}
-          className={isSold || isNaN(Number(price)) ? '!bg-gray-600 hover:bg-gray-600' : ''}
+          disabled={isDisabled}
+          className={buttonClass}
         >
           {isSold ? 'Sold' : 'Reserve'}
         </ButtonPrimary>
