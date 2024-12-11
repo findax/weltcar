@@ -21,7 +21,8 @@ export interface ICarDetails {
   vin: string;
   year: number;
   videos?: ICarVideos[] | null;
-  is_partner_car: boolean;
+  partner_phone: string | null;
+  partner_name: string | null;
 }
 
 export interface ICarDocuments {
