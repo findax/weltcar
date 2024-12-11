@@ -2,11 +2,13 @@ import { IUser } from '@/types/user';
 import { UserGroupIcon } from '@heroicons/react/24/outline';
 
 interface IProps {
-  userData: IUser;
+  partnerPhone: string | null;
+  partnerName: string | null;
 }
 
 export default function PartnerLogoSidebar({
-  userData
+  partnerPhone,
+  partnerName,
 }:IProps) {
   return (
     <div className='flex gap-2 flex-col'>
@@ -15,8 +17,8 @@ export default function PartnerLogoSidebar({
         <span className='font-medium'>Partner’s Car</span>
       </div>
       <div className='flex gap-1'>
-        <span className='font-medium'>{userData.name}</span>
-        <span className='font-medium'>{userData.phone}</span>
+        <span className='font-medium'>{partnerName}</span>
+        <span className='font-medium'>{partnerPhone}</span>
       </div>
     </div>
   );

@@ -9,13 +9,15 @@ export default function PriceSidebar({
   price,
   isSold,
   isShowPartnerLogo,
-  userData,
+  partnerPhone,
+  partnerName,
 }: {
   onClick: () => void;
   price: string | number;
   isSold: boolean;
   isShowPartnerLogo?: boolean;
-  userData?: IUser | null;
+  partnerPhone: string | null;
+  partnerName: string | null;
 }) {
   const [isPriceVisible, setIsPriceVisible] = useState<boolean>(true);
 
@@ -29,12 +31,12 @@ export default function PriceSidebar({
   return (
     <div className='block flex-grow mt-14 lg:mt-0'>
       <div className='detailsSectionSidebar__wrap sticky top-28 bg-white dark:bg-neutral-900 !hidden lg:!flex'>
-        {isShowPartnerLogo && userData && (
-          <PartnerLogoSidebar userData={userData} />
+        {isShowPartnerLogo && partnerName && (
+          <PartnerLogoSidebar partnerPhone={partnerPhone} partnerName={partnerName} />
         )}
 
         <div className={`${isPriceVisible ? 'flex justify-between items-end gap-1 ' : 'flex justify-center items-end gap-1 '}`}>
-          {isPriceVisible 
+          {isPriceVisible
             && <span className='text-2xl font-semibold'>Price</span>
           }
           <span className='text-5xl leading-10 font-semibold'>

@@ -125,7 +125,8 @@ export default function PartnerCarDetails({
             price={carData?.price || 0}
             isSold={carData?.status === 'sold'}
             isShowPartnerLogo={isPartnerLogo}
-            userData={user ? user : null}
+            partnerPhone={carData?.partner_phone || null}
+            partnerName={carData?.partner_name || null}
           />
         </div>
       </div>

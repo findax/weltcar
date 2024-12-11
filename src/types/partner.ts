@@ -97,6 +97,8 @@ export interface ICarPartnerDetails {
   is_verified: boolean;
   videos: ICarVideos[];
   is_partner_car: boolean;
+  partner_phone: string | null;
+  partner_name: string | null;
 }
 
 interface ICountry {
