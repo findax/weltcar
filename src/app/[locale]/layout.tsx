@@ -40,14 +40,16 @@ export const viewport: Viewport = {
 
 export default async function RootLayout({
   children,
+  params
 }: {
   children: React.ReactNode;
+  params: {locale: string};
 }) {
   const messages = await getMessages()
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <html lang='en' className={poppins.className} suppressHydrationWarning>
+      <html lang={params.locale} className={poppins.className} suppressHydrationWarning>
         <head>
           <script
             type="text/javascript"

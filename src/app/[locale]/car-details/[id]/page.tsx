@@ -1,45 +1,57 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import CarDetails from './(components)/CarDetails';
-import api from '@/api/apiInstance';
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { id: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-}): Promise<Metadata> {
-  const data = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/cars/view/${params.id}`
-  );
-  const resMetadata = await data.json();
-
-  return {
-    title: `${resMetadata.data.brand + ' ' + resMetadata.data.model + ' ' + resMetadata.data.specification + ' ' + resMetadata.data.year} - Elite Car for Sale | Global Delivery Available | WeltCar`,
-    description: `Purchase the ${resMetadata.data.brand + ' ' + resMetadata.data.model + ' ' + resMetadata.data.specification + ' ' + resMetadata.data.year} and experience unparalleled luxury and performance. We offer global delivery, including services to Germany, Switzerland, Dubai, and China. Explore detailed specifications and exclusive features.`,
-  };
-}
-
-async function getCarDetails(id: string) {
+async function fetchCarData(id: string) {
   try {
-    const res = await api.get(`/api/cars/view/${id}`);
-    if (!res) return undefined;
-    return res.data.data;
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/cars/view/${id}`, {
+      cache: 'no-store',
+    });
+    if (!response.ok) {
+      throw new Error('Car data not found');
+    }
+    const { data } = await response.json();
+    return data;
   } catch (error) {
-    console.log(error);
+    console.error(`Error fetching car data for ID: ${id}`, error);
+    return null;
   }
 }
 
-export const revalidate = 180; // revalidate at most every 5 minutes
+export async function generateMetadata({
+  params,
+}:{
+  params: { id: string };
+  // searchParams: { [key: string]: string | string[] | undefined };
+}): Promise<Metadata> {
+  const resMetadata = await fetchCarData(params.id)
+
+  if (!resMetadata) {
+    return {
+      title: 'Car Not Found - WeltCar',
+      description: 'The requested car could not be found.',
+    };
+  }
+
+  const { brand, model, specification, year } = resMetadata;
+
+  return {
+    title: `${brand} ${model} ${specification} ${year} - Elite Car for Sale | Global Delivery Available | WeltCar`,
+    description: `Purchase the ${brand} ${model} ${specification} ${year} and experience unparalleled luxury and performance. We offer global delivery, including services to Germany, Switzerland, Dubai, and China. Explore detailed specifications and exclusive features.`,
+  };
+
+}
+
+export const revalidate = 180;
 
 export default async function CarDetailsPage({
-  params: { id },
-}: {
+  params
+} : {
   params: { id: string };
 }) {
-  const carData = await getCarDetails(id);
-
-  if (!carData) return notFound();
-
-  return <CarDetails carData={carData} />;
+  const data = await fetchCarData(params.id);
+  
+  if(!data) return notFound();
+  
+  return <CarDetails carId={params.id} />;
 }
