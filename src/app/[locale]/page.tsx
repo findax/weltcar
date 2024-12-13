@@ -20,7 +20,7 @@ import triangleBackgroundImgThird from '@/images/bg-figures/triangle-3.png'
 import BackgroundShaadowSection from '@/components/BackgroundShaadowSection';
 import { useThemeMode } from '@/hooks/useThemeMode';
 import { useEffect, useRef } from 'react';
-import { getLanguages } from '@/api/languages';
+import { useTranslations } from "next-intl"
 
 const metadata: Metadata = {
   title:
@@ -61,26 +61,16 @@ function PageHome() {
 
     scrollStep();
   };
-
-  // useEffect(() => {
-  //   getLanguages()
-  //     .then((languages) => {
-  //       if(languages) {
-  //         console.log(languages);
-  //       }
-  //     })
-  //     .finally(() => {
-  //     })
-  // },[])
   
-  if (!mounted) return null;
+  const t = useTranslations()
 
+  if (!mounted) return null;
 
   return (
     <div className='nc-PageHome relative overflow-hidden'>
       {/* GLASSMOPHIN */}
       {/* <BgGlassmorphism /> */}
-
+      <h1>{t("welcome.title")}</h1>
       <Image 
         src={triangleBackgroundImg} 
         alt='triangle background'
