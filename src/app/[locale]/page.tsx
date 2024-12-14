@@ -70,7 +70,6 @@ function PageHome() {
     <div className='nc-PageHome relative overflow-hidden'>
       {/* GLASSMOPHIN */}
       {/* <BgGlassmorphism /> */}
-      <h1>{t("welcome.title")}</h1>
       <Image 
         src={triangleBackgroundImg} 
         alt='triangle background'
