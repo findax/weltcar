@@ -9,6 +9,7 @@ import {
   IModels,
 } from '@/types/partner';
 import { FindCarProps } from '@/types/car';
+import { ICarDetails } from '@/types/cardetails';
 
 export const getCarsList = async (
   page: number,
@@ -20,6 +21,24 @@ export const getCarsList = async (
       // .post(`/api/cars/list${url}`)
       .post(`/api/cars/list?page=${page}&perPage=${perPage}`, queryParams)
       .then((res) => resolve(res.data))
+      .catch((err) => {
+        if (err.response?.data.message) {
+          toast.error(err.response.data.message);
+        } else {
+          toast.error('Something went wrong!');
+        }
+        resolve(false);
+      });
+  });
+};
+
+export const getCarId = async (id: string) => {
+  return new Promise<ICarDetails | false>((resolve) => {
+    api
+      .get(`/api/cars/view/${id}`)
+      .then((res) => {
+        resolve(res.data.data);
+      })
       .catch((err) => {
         if (err.response?.data.message) {
           toast.error(err.response.data.message);

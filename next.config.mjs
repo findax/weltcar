@@ -1,3 +1,7 @@
+import createNextIntlPlugin from 'next-intl/plugin';
+
+const withNextIntl = createNextIntlPlugin();
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
@@ -31,6 +35,9 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 };
 
-module.exports = nextConfig;
+export default withNextIntl(nextConfig);

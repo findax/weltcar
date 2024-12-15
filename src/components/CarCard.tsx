@@ -7,6 +7,7 @@ import TooltipComponent from '@/shared/TooltipComponent';
 import { ButtonPrimary } from '@/shared/Buttons';
 import priceWithComma from '@/utils/priceWithComma';
 import { ICar } from '@/types/catalog';
+import { Route } from 'next';
 
 const CarCard = ({
   className = '',
@@ -98,7 +99,7 @@ const CarCard = ({
           <span className='text-2xl font-semibold text-primary-1000 dark:text-primary-400'>
             {priceWithComma(price)}
           </span>
-          <Link href={`/car-details/${id}`} target='_blank'>
+          <Link href={`/car-details/${id}` as Route } target='_blank'>
             <ButtonPrimary
               fontSize='text-sm'
               sizeClass='px-5 py-2 md:px-6 md:py-3'

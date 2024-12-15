@@ -19,7 +19,7 @@ export const Nav = ({
   const pathname = usePathname();
   const user = useUserStore((state) => state.user);
 
-  const listNav: Route[] = ['/account-partner','/account', '/password', '/orders', '/car-subscriptions', '/partner-cars-list'];
+  const listNav = ['/account-partner','/account', '/password', '/orders', '/car-subscriptions', '/partner-cars-list'];
 
   const filteredNavigationItems = listNav.filter(item => {
     if (!user?.contractor_id) {
@@ -46,7 +46,7 @@ export const Nav = ({
             user ? (
               <NavItem
                 key={item}
-                item={item}
+                item={item as Route}
                 className={`block border-b-2 flex-shrink-0 capitalize text-neutral-1050 dark:text-white 
                   ${isActive 
                       ? 'border-primary-950 font-medium'

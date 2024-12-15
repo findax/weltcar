@@ -31,8 +31,7 @@ const BlogCard = ({
   if (!mounted) return null;
   
   return (
-    <Link   href={`/blog-details/${slug}`
-    } target='_blank'>
+    <Link href={`/blog-details/${slug}` as Route} target='_blank'>
       <div
         className={`w-full h-full cursor-pointer hover:shadow-lg flex flex-col border-neutral-950 bg-white dark:bg-neutral-950 rounded-3xl ${className}`}
         data-nc-id='BlogCard'

@@ -7,6 +7,7 @@ import { ButtonPrimary } from '@/shared/Buttons';
 import priceWithComma from '@/utils/priceWithComma';
 import { ICar } from '@/types/catalog';
 import Link from 'next/link';
+import { Route } from 'next';
 
 const CarCardH = ({
   className = '',
@@ -97,7 +98,7 @@ const CarCardH = ({
           <span className='text-2xl xl:text-3xl font-semibold text-primary-1000 dark:text-primary-400'>
             {priceWithComma(price)}
           </span>
-          <Link href={`/car-details/${id}`} target='_blank'>
+          <Link href={`/car-details/${id}` as Route} target='_blank'>
             <ButtonPrimary>See more</ButtonPrimary>
           </Link>
         </div>

@@ -1,4 +1,4 @@
-import PartnerLogoSidebar from '@/app/partner-car-details/[id]/(components)/PartnerLogoSidebar';
+import PartnerLogoSidebar from '@/app/[locale]/partner-car-details/[id]/(components)/PartnerLogoSidebar';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { IUser } from '@/types/user';
 import priceWithComma from '@/utils/priceWithComma';

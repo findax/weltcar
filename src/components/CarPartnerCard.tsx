@@ -13,6 +13,7 @@ import Modal from '@/shared/Modal';
 import { InformationCircleIcon } from '@heroicons/react/24/solid';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { Route } from 'next';
 
 const CarPartnerCard = ({
   className = '',
@@ -147,7 +148,7 @@ const CarPartnerCard = ({
                 >
                   Delete
               </ButtonPrimary>
-              <Link href={`/partner-cars?id=${id}`} target='_blank'>
+              <Link href={`/partner-cars?id=${id}` as Route} target='_blank'>
                 <ButtonPrimary
                   fontSize='md:text-sm text-xs'
                   sizeClass='px-2 py-1.5 '
@@ -155,7 +156,7 @@ const CarPartnerCard = ({
                   Edit
                 </ButtonPrimary>
               </Link>
-              <Link href={`/partner-car-details/${id}`} target='_blank'>
+              <Link href={`/partner-car-details/${id}` as Route} target='_blank'>
                 <ButtonPrimary
                   fontSize='md:text-sm text-xs'
                   sizeClass='px-2 py-1.5 '

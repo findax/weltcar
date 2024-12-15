@@ -15,6 +15,7 @@ import { ICarDetails, ICarGallery, ICarVideos } from '@/types/cardetails';
 import { useUserStore } from '@/stores/user-store';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { IUser } from '@/types/user';
+import { getCarId } from '@/api/cars';
 
 interface IPages {
   pageName: string;
@@ -22,10 +23,11 @@ interface IPages {
 };
 
 export default function CarDetails({
-  carData,
+  carId,
 }: {
-  carData: ICarDetails | undefined;
+  carId: string;
 }) {
+  const [carData, setCarData] = useState<ICarDetails>();
   const [isLoading, setIsLoading] = useState(true);
   const [carGallery, setCarGallery] = useState<ICarGallery[]>([]);
   const [carVideos, setCarVideos] = useState<ICarVideos[]>([]);
@@ -46,29 +48,33 @@ export default function CarDetails({
   const user = useUserStore((state) => state.user);
 
   useEffect(() => {
-    if (carData) {
-      const modifiedPhotosArray = [...carData.photos].map((item, index) => ({
-        id: index,
-        url: item.original,
-      }));
-      setCarGallery(modifiedPhotosArray);
-      const carTitle = `${carData.brand} ${carData.model}`
-      setBreadcrumbsPages((prevPages) => {
-        const isTitleExists = prevPages.some(
-          (page) => page.pageName === carTitle
-        );
+    getCarId(carId)
+      .then((carData) => {
+        if(carData){
+          setCarData(carData);
+          const modifiedPhotosArray = [...carData.photos].map((item, index) => ({
+            id: index,
+            url: item.original,
+          }));
+          setCarGallery(modifiedPhotosArray);
+          const carTitle = `${carData.brand} ${carData.model}`
+          setBreadcrumbsPages((prevPages) => {
+            const isTitleExists = prevPages.some(
+              (page) => page.pageName === carTitle
+            );
+    
+            if (!isTitleExists) {
+              return [...prevPages, { pageName: carTitle, pageHref: '' }];
+            }
+            return prevPages;
+          });
+          carData.videos && setCarVideos([...carData.videos]);
+          carData.is_partner_car && setIsPartnerLogo(carData.is_partner_car);
 
-        if (!isTitleExists) {
-          return [...prevPages, { pageName: carTitle, pageHref: '' }];
         }
-        return prevPages;
-      });
-      setIsLoading(false);
-      carData.videos && setCarVideos([...carData.videos]);
-      carData.is_partner_car && setIsPartnerLogo(carData.is_partner_car);
-      setIsLoading(false);
-    }
-  }, []);
+      })
+      .finally(() => setIsLoading(false));
+  }, [carId]);
 
   useEffect(() => {
     if (!!user && modalId === 'authorization') {
