@@ -1,8 +1,11 @@
-import Link from 'next/link';
+// import Link from 'next/link';
 import Image from 'next/image';
 import priceWithComma from '@/utils/priceWithComma';
 import { DocumentTextIcon } from '@heroicons/react/24/outline';
 import { IOrderDetails } from '@/types/user';
+import Link from 'next/link';
+import { UrlObject } from 'url';
+import { Route } from 'next';
 
 export default function OrderDetails({ order }: { order: IOrderDetails }) {
   function correctDate(date: string) {
@@ -26,7 +29,7 @@ export default function OrderDetails({ order }: { order: IOrderDetails }) {
       </li>
       <li>
         <Link
-          href={`/car-details/${order.car.id}`}
+          href={`/car-details/${order.car.id}` as Route}
           className='group inline-flex flex-wrap'
           target='_blank'
         >
