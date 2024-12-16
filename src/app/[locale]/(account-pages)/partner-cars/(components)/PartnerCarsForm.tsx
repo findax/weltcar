@@ -32,7 +32,7 @@ interface IProps {
   partnerCar?: ICarPartnerDetails;
 }
 
-export default function PartnerCarsForm({ 
+export default function PartnerCarsForm({
   partner,
   partnerCar
 }:IProps) {
@@ -89,7 +89,7 @@ export default function PartnerCarsForm({
   });
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-  
+
   const PartnerCarsSchema = Yup.object().shape({
     model: ModelSchema.required('Model is required'),
     specification: Yup
@@ -108,7 +108,7 @@ export default function PartnerCarsForm({
       .string()
       .trim()
       .required("Price is required"),
-    photos: car 
+    photos: car
     ? (Yup.array()
         .of(
           Yup.mixed<File>()
@@ -133,7 +133,7 @@ export default function PartnerCarsForm({
     description: Yup
       .string()
       .trim()
-      .max(5000, 'Description is too long')
+      .max(50000, 'Description is too long')
       .required('Description is required'),
     innerColor: Yup
       .string()
@@ -184,13 +184,13 @@ export default function PartnerCarsForm({
           <div className='flex flex-col gap-1 block w-full border border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl text-sm font-normal px-4 py-3'>
             {attachedPhotos.map((photo) => (
               <div key={photo.id} className='relative flex items-center w-fit rounded-2xl px-1 py-2'>
-                <img 
-                  src={photo.thumb} 
-                  className='h-[70px] w-[70px] rounded-lg' 
-                  alt="photo" 
+                <img
+                  src={photo.thumb}
+                  className='h-[70px] w-[70px] rounded-lg'
+                  alt="photo"
                 />
-                <button 
-                  onClick={(event) => handleDeleteAttachedPhotos(event, photo)} 
+                <button
+                  onClick={(event) => handleDeleteAttachedPhotos(event, photo)}
                   className='absolute bg-white dark:bg-neutral-900 top-0 right-0 ml-1 p-1 border rounded-full'>
                     <IoMdClose/>
                   </button>
@@ -285,7 +285,7 @@ export default function PartnerCarsForm({
             setSubmitting(false);
           }
         })
-      
+
     } else {
       const carDataToRequest: ICarPartnerToRequest = {
         model_id: values.model.id.toString(),
@@ -406,14 +406,14 @@ export default function PartnerCarsForm({
         onSubmit={(values, { setSubmitting, resetForm }) => {
           // trim values
           const castValues = PartnerCarsSchema.cast(values);
-          
+
           handleCheckFetch(car, castValues, setSubmitting, resetForm);
 
         }}
       >
         {({ errors, touched, isSubmitting }) => (
           <Form className='grid grid-cols-1 gap-7 w-full max-w-xl mt-10 md:mt-0 md:pl-16'>
-            <FormikInputCarSelector 
+            <FormikInputCarSelector
               disabled={car?.is_verified}
               name='model'
               placeholder='Chose model'
@@ -460,7 +460,7 @@ export default function PartnerCarsForm({
               touched={touched.price}
             />
             {/* ---- */}
-            <FormikFile 
+            <FormikFile
               disabled={car?.is_verified}
               variant='photo'
               initialValues={ car ? initialValueFilled : null}
@@ -501,7 +501,7 @@ export default function PartnerCarsForm({
               touched={touched.innerColor}
             />
             {/* ---- */}
-            <FormikFile 
+            <FormikFile
               disabled={car?.is_verified}
               initialValues={ car ? initialValueFilled : null}
               name='documents'
@@ -514,7 +514,7 @@ export default function PartnerCarsForm({
             {/* ---- */}
             <div className='flex gap-2'>
               <div className='w-full'>
-                <FormikInputSelector 
+                <FormikInputSelector
                   disabled={car?.is_verified}
                   name='country'
                   placeholder='Chose country'
@@ -559,14 +559,14 @@ export default function PartnerCarsForm({
           </Form>
         )}
       </Formik>
-      
-      <Modal 
-        title='Thank you!' 
-        isModalOpen={isCreateModalOpen ? isCreateModalOpen : isUpdateModalOpen} 
+
+      <Modal
+        title='Thank you!'
+        isModalOpen={isCreateModalOpen ? isCreateModalOpen : isUpdateModalOpen}
         setIsModalOpen={ isCreateModalOpen ? setIsCreateModalOpen : setIsUpdateModalOpen }
         handleChange={ isCreateModalOpen ? handleRedirectOnEdit : undefined }
       >
-        {isCreateModalOpen 
+        {isCreateModalOpen
           ? (
               <div className='text-center space-y-10'>
                 <InformationCircleIcon className='block mx-auto w-24 h-24 text-yellow-500' />
