@@ -133,7 +133,7 @@ export default function PartnerCarsForm({
     description: Yup
       .string()
       .trim()
-      .max(500, 'Description is too long')
+      .max(5000, 'Description is too long')
       .required('Description is required'),
     innerColor: Yup
       .string()
