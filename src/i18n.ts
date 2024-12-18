@@ -6,7 +6,7 @@ export default getRequestConfig(async ({ locale }) => {
   const localesRes = await getLanguages();
 
   let locales = localesRes
-    ? localesRes.data.map((el) => el.locale)
+    ? localesRes?.data.map((el) => el.locale)
     : ['en', 'de'];
 
   if (!locales.includes(locale)) notFound();
