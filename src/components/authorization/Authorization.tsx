@@ -5,12 +5,14 @@ import SocialAuth from './components/SocialAuth';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import { AuthorizationPages } from '@/types/authorization';
+import { useTranslations } from 'next-intl';
 
 export default function Authorization({
   setIsModalOpen,
 }: {
   setIsModalOpen: (isModalOpen: boolean) => void;
 }) {
+  const translate = useTranslations();
   const [isDispatched, setIsDispatched] = useState(false);
   const [page, setPage] = useState(<SignIn setIsModalOpen={setIsModalOpen} />);
   const [currentPage, setCurrentPage] = useState<AuthorizationPages>(AuthorizationPages.login);
@@ -28,7 +30,7 @@ export default function Authorization({
             setPage(<SignIn setIsModalOpen={setIsModalOpen} />);
           }}
         >
-          SIGN IN
+          {translate('authorization.button.signIn')}
         </button>
         <button
           id='signup'
@@ -40,7 +42,7 @@ export default function Authorization({
             setPage(<SignUp setIsDispatched={setIsDispatched} isDispatched={isDispatched} setIsModalOpen={setIsModalOpen} />);
           }}
         >
-          SIGN UP
+          {translate('authorization.button.signUp')}
         </button>
       </div>
       {/* <SocialAuth /> */}

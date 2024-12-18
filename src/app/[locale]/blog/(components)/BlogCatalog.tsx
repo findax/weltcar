@@ -7,6 +7,7 @@ import { useQueryParams } from '@/hooks/useQueryParams';
 import LoadingSpinner from '@/shared/LoadingSpinner';
 import ErrorComponent from '@/components/ErrorComponent';
 import BlogList from './BlogList';
+import { useTranslations } from 'next-intl';
 
 const BlogCatalog = () => {
   const [isFirstLoading, setFirstLoading] = useState(true);
@@ -15,6 +16,7 @@ const BlogCatalog = () => {
   const [articles, setArticles] = useState<Article[]>([]);
 
   const { currentPage } = useQueryParams();
+  const translate = useTranslations();
 
   const sortArticleMassive = (articlesData: IBlog) => {
     const sortedArticles = [...articlesData.data].sort((a, b) => {
@@ -52,6 +54,7 @@ const BlogCatalog = () => {
     <BlogList 
       articleListData={articles || []}
       results={blogData?.meta.total || 0}
+      translate={translate}
     />
   );
 };

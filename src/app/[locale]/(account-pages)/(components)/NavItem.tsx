@@ -2,20 +2,25 @@ import { Route } from "next";
 import Link from "next/link";
 
 interface IProps {
-  item: Route<string>;
+  item: string;
+  href: string;
   className?: string; 
+  translate: any;
 }
 
 export const NavItem = ({
   item,
-  className
+  href,
+  className,
+  translate
 }:IProps) => {
+  const name = translate(item);
   return (
     <Link
-      href={item}
+      href={href as Route}
       className={className}
     >
-      {item.replace('-', ' ').replace('/', ' ')}
+      {name.replace('-', ' ').replace('/', ' ')}
     </Link>
   );
 }

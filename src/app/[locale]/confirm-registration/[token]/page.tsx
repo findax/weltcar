@@ -10,10 +10,12 @@ import Image from 'next/image';
 import bgImg from '@/images/bg-cars/bg-car-7.webp';
 import { useUserStore } from '@/stores/user-store';
 import { IUser } from '@/types/user';
+import { useTranslations } from 'next-intl';
 
 export default function ConfirmRegistrationPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const translate = useTranslations();
 
   const updateUserState = useUserStore((state) => state.updateUserState);
 
@@ -41,9 +43,9 @@ export default function ConfirmRegistrationPage() {
         <div className='-mt-[76px] text-center space-y-10'>
           <CheckCircleIcon className='block mx-auto w-24 h-24 text-green-500' />
           <p className='px-6 text-2xl font-semibold'>
-            Your account has been successfully created!
+            {translate('confirmRegister.successfully.title')}
           </p>
-          <ButtonPrimary href='/catalog'>Choose your car</ButtonPrimary>
+          <ButtonPrimary href='/catalog'>{translate('confirmRegister.button.choose')}</ButtonPrimary>
         </div>
       )}
 

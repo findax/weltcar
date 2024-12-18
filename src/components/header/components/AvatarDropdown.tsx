@@ -18,8 +18,10 @@ import { IPartnerResponse } from '@/types/partner';
 
 export default function AvatarDropdown({
   className = '',
+  translate
 }: {
   className?: string;
+  translate: any;
 }) {
   const user = useUserStore((state) => state.user);
   const [partner, setPartner] = useState<IPartnerResponse>();
@@ -85,7 +87,7 @@ export default function AvatarDropdown({
                       <UserIcon className='w-7' />
                     </div>
                     <div className='ml-4'>
-                      <p className='font-medium'>My Account</p>
+                      <p className='font-medium'>{translate("userMenu.options.myAccount")}</p>
                     </div>
                   </Link>
 
@@ -98,7 +100,7 @@ export default function AvatarDropdown({
                       <ClipboardDocumentListIcon className='w-7' />
                     </div>
                     <div className='ml-4'>
-                      <p className='font-medium'>My orders</p>
+                      <p className='font-medium'>{translate("userMenu.options.myOrders")}</p>
                     </div>
                   </Link>
 
@@ -124,7 +126,7 @@ export default function AvatarDropdown({
                         <LightBulbIcon className='w-7' />
                       </div>
                       <div className='ml-4'>
-                        <p className='font-medium'>Dark theme</p>
+                        <p className='font-medium'>{translate("userMenu.options.darkTheme")}</p>
                       </div>
                     </div>
                     <SwitchDarkMode2 />
@@ -152,7 +154,7 @@ export default function AvatarDropdown({
                       <ArrowLeftStartOnRectangleIcon className='w-7' />
                     </div>
                     <div className='ml-4'>
-                      <p className='font-medium'>Log out</p>
+                      <p className='font-medium'>{translate("userMenu.options.button.logOut")}</p>
                     </div>
                   </button>
                 </div>

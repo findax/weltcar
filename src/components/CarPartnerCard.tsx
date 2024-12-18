@@ -14,6 +14,7 @@ import { InformationCircleIcon } from '@heroicons/react/24/solid';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { Route } from 'next';
+import { useTranslations } from 'next-intl';
 
 const CarPartnerCard = ({
   className = '',
@@ -24,6 +25,7 @@ const CarPartnerCard = ({
   carData: ICarsPartner;
   paddingBottomGrid: string;
 }) => {
+  const translate = useTranslations();
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
   const {
     vin,
@@ -50,7 +52,8 @@ const CarPartnerCard = ({
 
   const handleDeleteCarCard = () => {
     deletePartnerCar(id);
-    toast.success('Car deleted');
+    let delateMessage = translate('yourCars.toast.success.delete');
+    toast.success(delateMessage);
     setIsModalDeleteOpen(false);
   }
 
@@ -103,7 +106,10 @@ const CarPartnerCard = ({
 
           <div className='flex-grow py-3 text-sm space-y-2'>
             <h4 className='flex items-center'>
-              exterior&nbsp;color:&nbsp;
+              {translate('yourCars.exterior.label')}
+              &nbsp;
+              {translate('yourCars.exterior.color')}
+              &nbsp;
               <span
                 className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 flex-shrink-0'
                 style={{ backgroundColor: `${outer_color_hex}` }}
@@ -116,7 +122,10 @@ const CarPartnerCard = ({
               </span>
             </h4>
             <h4 className='flex items-center'>
-              interior&nbsp;color:&nbsp;
+              {translate('yourCars.interior.label')}
+              &nbsp;
+              {translate('yourCars.interior.color')}
+              &nbsp;
               <span
                 className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 flex-shrink-0'
                 style={{ backgroundColor: `${inner_color_hex}` }}
@@ -146,14 +155,14 @@ const CarPartnerCard = ({
                 fontSize='md:text-sm text-xs'
                 sizeClass='px-2 py-1.5'
                 >
-                  Delete
+                  {translate('yourCars.button.delete')}
               </ButtonPrimary>
               <Link href={`/partner-cars?id=${id}` as Route} target='_blank'>
                 <ButtonPrimary
                   fontSize='md:text-sm text-xs'
                   sizeClass='px-2 py-1.5 '
                 >
-                  Edit
+                  {translate('yourCars.button.edit')}
                 </ButtonPrimary>
               </Link>
               <Link href={`/partner-car-details/${id}` as Route} target='_blank'>
@@ -161,7 +170,7 @@ const CarPartnerCard = ({
                   fontSize='md:text-sm text-xs'
                   sizeClass='px-2 py-1.5 '
                 >
-                  See more
+                  {translate('yourCars.button.seeMore')}
                 </ButtonPrimary>
               </Link>
             </div>
@@ -169,7 +178,7 @@ const CarPartnerCard = ({
         </div>
       </div>
       <Modal 
-        title='Are you sure ?' 
+        title='yourCars.modal.title' 
         isModalOpen={isModalDeleteOpen} 
         setIsModalOpen={setIsModalDeleteOpen}
       >
@@ -177,7 +186,7 @@ const CarPartnerCard = ({
           <div className='text-center space-y-5'>
             <InformationCircleIcon className='block mx-auto w-24 h-24 text-yellow-500' />
             <p className='px-3 text-md font-semibold'>
-              Are you sure you want to delete this vehicle? This action is irreversible, and the data cannot be restored.
+              {translate('yourCars.modal.label')}
             </p>
           </div>
           <div className='flex gap-3 pt-5 m-auto'>
@@ -186,14 +195,14 @@ const CarPartnerCard = ({
               fontSize='text-sm'
               sizeClass='px-3 py-2 md:px-4 md:py-2'
               >
-                Cancel
+                {translate('yourCars.modal.button.cancel')}
             </ButtonPrimary>
             <ButtonPrimary
               onClick={handleDeleteCarCard}
               fontSize='text-sm'
               sizeClass='px-3 py-2 md:px-4 md:py-2'
               >
-                Delete
+                {translate('yourCars.modal.button.cancel')}
             </ButtonPrimary>
           </div>
         </div>

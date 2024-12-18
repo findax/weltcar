@@ -1,18 +1,24 @@
 import FindCarForm from './FindCarForm';
 
-export default function FindCarHero() {
+interface IProps {
+  translate: any;
+}
+
+export default function FindCarHero({
+  translate
+}: IProps) {
   return (
     <div className='relative md:h-[742px] lg:h-[884px]'>
       <div>
-        <h1 className='text-4xl lg:text-6xl xl:text-[80px] font-bold text-neutral-1050 dark:text-white '>Find Car</h1>
+        <h1 className='text-4xl lg:text-6xl xl:text-[80px] font-bold text-neutral-1050 dark:text-white '>{translate('findCar.title')}</h1>
         <span className='block lg:w-[480px] my-9 lg:my-14 lg:text-lg text-neutral-500 dark:text-neutral-400'>
-          If you are looking for a specific car, please fill out the form, and our specialist will contact you to provide all the necessary information. We strive to make the process of searching for and purchasing a car as convenient as possible for you.
+          {translate('findCar.description')}
         </span>
       </div>
       <div>
         <div className='flex justify-center'>
           <div className='w-full'>
-            <FindCarForm />
+            <FindCarForm translate={translate}/>
           </div>
         </div>
       </div>

@@ -10,6 +10,7 @@ import carsBackgroundLightImg from '@/images/car-light.png'
 import triangleBackgroundImgThird from '@/images/bg-figures/triangle-3.png'
 import BackgroundShaadowSection from '@/components/BackgroundShaadowSection';
 import { useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 
 
 const metadata: Metadata = {
@@ -20,6 +21,7 @@ const metadata: Metadata = {
 
 const PageContact = () => {
   const { isDarkMode, mounted } = useThemeMode();
+  const translate = useTranslations();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -41,10 +43,10 @@ const PageContact = () => {
         className='bg-[#DFE172] opacity-[0.30] -right-[300px] -bottom-[3%] lg:-right-[100px] lg:bottom-[8%]' 
       />
       <div className='container my-12 xl:my-20 space-y-16 xl:space-y-28'>
-        <ContactHero />
+        <ContactHero translate={translate} />
 
         <div className='relative pt-16 mb-24 lg:md-32'>
-          <SectionSubscribe />
+          <SectionSubscribe translate={translate} />
         </div>
       </div>
       <div className='flex relative sm:bottom-0 sm:h-full -bottom-[30px] h-72 justify-center w-full'>

@@ -16,6 +16,7 @@ import { useUserStore } from '@/stores/user-store';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { IUser } from '@/types/user';
 import { getCarId } from '@/api/cars';
+import { useTranslations } from 'next-intl';
 
 interface IPages {
   pageName: string;
@@ -27,6 +28,7 @@ export default function CarDetails({
 }: {
   carId: string;
 }) {
+  const translate = useTranslations();
   const [carData, setCarData] = useState<ICarDetails>();
   const [isLoading, setIsLoading] = useState(true);
   const [carGallery, setCarGallery] = useState<ICarGallery[]>([]);
@@ -36,11 +38,11 @@ export default function CarDetails({
   const [modalId, setModalId] = useState('');
   const [breadcrumbsPages, setBreadcrumbsPages] = useState<IPages[]>([
     {
-      pageName: 'Main',
+      pageName: 'carDetails.breadcrumbs.main',
       pageHref: '/'
     },
     {
-      pageName: 'Catalog',
+      pageName: 'carDetails.breadcrumbs.catalog',
       pageHref: '/catalog'
     }
   ]);
@@ -118,8 +120,7 @@ export default function CarDetails({
                   <Descriptions description={carData.description} />
                 )}
                 <p className='sm:px-2 text-sm text-neutral-600 dark:text-neutral-300'>
-                  <sup>*</sup>Vehicle specifications and configurations may vary
-                  slightly due to potential discrepancies in the description.
+                  <sup>*</sup>{translate('carDetails.vehicle.description')}
                 </p>
               </>
             )}

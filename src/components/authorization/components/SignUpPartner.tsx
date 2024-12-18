@@ -13,6 +13,7 @@ import { InformationCircleIcon } from '@heroicons/react/24/outline';
 import { File } from 'buffer';
 import { Route } from 'next';
 import { singUpPartner } from '@/api/auth';
+import { useTranslations } from 'next-intl';
 
 export const SUPPORTED_FORMATS = ['image/png','image/jpeg','image/jpg'];
 
@@ -23,6 +24,7 @@ export default function SignUpPartner({
   setIsModalOpen: (isModalOpen: boolean) => void;
   setIsDispatched: (isDispatched: boolean) => void;
 }) {
+  const translate = useTranslations();
   const [isSuccess, setIsSuccess] = useState(false);
   const termsAcceptedLink = 'https://weltcar.de/partner-agreement' as Route<string>;
   // const phoneValidationPattern = /\+38 \(0\d{2}\) \d{3}-\d{2}-\d{2}/;
@@ -31,41 +33,41 @@ export default function SignUpPartner({
     company_name: Yup
       .string()
       .trim()
-      .min(2, 'Company name is too short')
-      .max(50, 'Company name is too long')
-      .required('Company name is required'),
+      .min(2, 'signUpPartnerSchema.companyName.min')
+      .max(50, 'signUpPartnerSchema.companyName.max')
+      .required('signUpPartnerSchema.companyName.required'),
     tax_number: Yup
       .string()
       .trim()
-      .required('Tax number is required'),
+      .required('signUpPartnerSchema.tax.required'),
     files: Yup.array()
       .of(
         Yup.mixed<File>()
-          .test('fileType', 'Unsupported file type', (value) => {
+          .test('fileType', 'signUpPartnerSchema.files.unsupported', (value) => {
             return value && SUPPORTED_FORMATS.includes(value.type);
           })
-          .required('Document is required')
+          .required('signUpPartnerSchema.files.fRequired')
       )
-      .required('Documents is required'),
+      .required('signUpPartnerSchema.files.required'),
     email: Yup.string()
       .trim()
-      .email('Invalid email')
-      .required('Email is required'),
+      .email('signUpPartnerSchema.email.invalid')
+      .required('signUpPartnerSchema.email.required'),
     phone: Yup.string()
       .trim()
       // .matches(phoneValidationPattern, 'Invalid phone number')
-      .required('Phone number is required'),
+      .required('signUpPartnerSchema.phone.required'),
     password: Yup.string()
       .trim()
-      .min(8, 'Password must be at least 8 characters')
-      .max(50, 'Password must be less than 50 characters')
-      .matches(/[a-z]+/, 'Password must contain at least one lowercase letter')
-      .matches(/[A-Z]+/, 'Password must contain at least one uppercase letter')
-      .matches(/\d+/, 'Password must contain at least one number')
-      .required('Password is required'),
+      .min(8, 'signUpPartnerSchema.password.min')
+      .max(50, 'signUpPartnerSchema.password.max')
+      .matches(/[a-z]+/, 'signUpPartnerSchema.password.matchesLow')
+      .matches(/[A-Z]+/, 'signUpPartnerSchema.password.matchesUp')
+      .matches(/\d+/, 'signUpPartnerSchema.password.matchesNumb')
+      .required('signUpPartnerSchema.password.required'),
     termsAccepted: Yup.boolean()
-      .oneOf([true], 'You must accept the terms and conditions of the partner agreement')
-      .required('You must accept the terms and conditions of the partner agreement'),
+      .oneOf([true], 'signUpPartnerSchema.term.oneOf')
+      .required('signUpPartnerSchema.term.required'),
   });
 
   return isSuccess ? (
@@ -73,10 +75,10 @@ export default function SignUpPartner({
       <div className='text-center space-y-10'>
         <InformationCircleIcon className='block mx-auto w-24 h-24 text-yellow-500' />
         <p className='px-6 text-2xl font-semibold'>
-          Please, check your email to confirm registration!
+          {translate('authorization.signUp.confirmReg.title')}
         </p>
         <ButtonPrimary onClick={() => setIsModalOpen(false)}>
-          Got it!
+          {translate('authorization.signUp.confirmReg.title')}
         </ButtonPrimary>
       </div>
     </div>
@@ -122,23 +124,23 @@ export default function SignUpPartner({
         <Form className='grid grid-cols-1 gap-8'>
           <FormikInput
             name='company_name'
-            placeholder='Enter your company name'
-            title='Company name'
+            placeholder='authorization.signUp.company.placeholder'
+            title='authorization.signUp.company.title'
             error={errors.company_name}
             touched={touched.company_name}
           />
           {/* ---- */}
           <FormikInput
             name='tax_number'
-            placeholder='Enter your tax number'
-            title='Tax number'
+            placeholder='authorization.signUp.taxNumber.placeholder'
+            title='authorization.signUp.taxNumber.title'
             error={errors.tax_number}
             touched={touched.tax_number}
           />
           {/* ---- */}
           <FormikFile 
             name='files'
-            label='Upload your passport and company registration'
+            label='authorization.signUp.files.label'
             multiple
             error={errors.files}
             touched={touched.files}
@@ -147,28 +149,28 @@ export default function SignUpPartner({
           <FormikInput
             name='email'
             type='email'
-            placeholder='example@mail.com'
-            title='Email address'
+            placeholder='authorization.signUp.email.placeholder'
+            title='authorization.signUp.email.title'
             error={errors.email}
             touched={touched.email}
           />
           {/* ---- */}
           <FormikPhoneNumberInput
-            title='Phone number'
+            title='authorization.phone.email.title'
             error={errors.phone}
             touched={touched.phone}
           />
           {/* ---- */}
           <FormikPasswordInput
-            title='Password'
-            placeholder='Enter your password'
+            title='authorization.password.email.title'
+            placeholder='authorization.password.email.placeholder'
             error={errors.password}
             touched={touched.password}
           />
           {/* ---- */}
           <FormikCheckbox
             name='termsAccepted'
-            label='I agree with the partners agreement'
+            label='authorization.signUp.termAccept.label'
             href={termsAcceptedLink}
             error={errors.termsAccepted}
             touched={touched.termsAccepted}
@@ -180,7 +182,7 @@ export default function SignUpPartner({
             loading={isSubmitting}
             className='mt-4'
           >
-            Continue
+            {translate('authorization.signUp.button.continue')}
           </ButtonPrimary>
         </Form>
       )}

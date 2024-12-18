@@ -17,16 +17,22 @@ import { useState } from 'react';
 import { useUserStore } from '@/stores/user-store';
 
 const EngineTypesSchema = Yup.object().shape({
-  id: Yup.number().required('ID is required'),
-  name: Yup.string().trim().required('Engine types is required'),
+  id: Yup.number().required('findCarSchema.engine.idRequired'),
+  name: Yup.string().trim().required('findCarSchema.engine.typeRequired'),
 });
 
 const RequestTimeSchema = Yup.object().shape({
-  id: Yup.number().required('ID is required'),
-  name: Yup.string().trim().required('Request time is required'),
+  id: Yup.number().required('findCarSchema.request.idRequired'),
+  name: Yup.string().trim().required('findCarSchema.request.typeRequired'),
 });
 
-export default function FindCarForm() {
+interface IProps {
+  translate: any;
+}
+
+export default function FindCarForm({
+  translate
+}: IProps) {
   const [isSeuccessRequest, setIsSuccessRequest] = useState(false);
   const user = useUserStore((state) => state.user);
   const phoneValidationPattern = /\+?[\d]+/;
@@ -71,76 +77,76 @@ export default function FindCarForm() {
   const engineTypes = [
     {
       "id": 1,
-      "name": "Petrol"
+      "name": "findCar.form.engineType.petrol.value"
     },
     {
       "id": 2,
-      "name": "Diesel"
+      "name": "findCar.form.engineType.diesel.value"
     },
     {
       "id": 3,
-      "name": "Electrical"
+      "name": "findCar.form.engineType.electrical.value"
     },
     {
       "id": 4,
-      "name": "Hybrid"
+      "name": "findCar.form.engineType.hybrid.value"
     }
   ]
 
   const requestTime = [
     {
       "id": 1,
-      "name": "Immediate"
+      "name": "findCar.form.requestTime.immediate.value"
     },
     {
       "id": 2,
-      "name": "Month"
+      "name": "findCar.form.requestTime.month.value"
     },
     {
       "id": 3,
-      "name": "Ready to wait"
+      "name": "findCar.form.requestTime.readyToWait.value"
     }
   ]
 
   const FindCarSchema = Yup.object().shape({
     name: Yup.string()
       .trim()
-      .min(2, 'Name is too short')
-      .max(50, 'Name is too long')
-      .required('Name is required'),
+      .min(2, 'findCarSchema.name.min')
+      .max(50, 'findCarSchema.name.max')
+      .required('findCarSchema.name.required'),
     email: Yup.string()
       .trim()
-      .email('Invalid email')
-      .required('Email is required'),
+      .email('findCarSchema.email.invalid')
+      .required('findCarSchema.email.required'),
     phone: Yup.string()
       .trim()
-      .matches(phoneValidationPattern, 'Invalid phone number')
-      .required('Email is required'),
+      .matches(phoneValidationPattern, 'findCarSchema.phone.matches')
+      .required('findCarSchema.phone.required'),
     brand: Yup.string()
       .trim()
-      .min(2, 'Brand name is too short')
-      .max(50, 'Brand name is too long')
-      .required('Brand name is required'),
+      .min(2, 'findCarSchema.brand.min')
+      .max(50, 'findCarSchema.brand.max')
+      .required('findCarSchema.brand.required'),
     model: Yup.string()
       .trim()
-      .min(2, 'Model name is too short')
-      .max(255, 'Model name is too long')
-      .required('Model name is required'),
+      .min(2, 'findCarSchema.model.min')
+      .max(255, 'findCarSchema.model.max')
+      .required('findCarSchema.model.required'),
     color: Yup.string()
       .trim()
-      .min(2, 'Color name is too short')
-      .max(255, 'Color name is too long')
-      .required('Color name is required'),
+      .min(2, 'findCarSchema.color.min')
+      .max(255, 'findCarSchema.color.max')
+      .required('findCarSchema.color.required'),
     specification: Yup.string()
       .trim()
-      .min(2, 'Specification is too short')
-      .max(255, 'Specification is too long'),
+      .min(2, 'findCarSchema.specification.min')
+      .max(255, 'findCarSchema.specification.max'),
     additional: Yup.string()
       .trim()
-      .min(2, 'Additional details is too short')
-      .max(5000, 'Additional details is too long'),
-    engineType: EngineTypesSchema.required('Engine type is required'),
-    requestTime: RequestTimeSchema.required('Request time is required'),
+      .min(2, 'findCarSchema.additional.min')
+      .max(5000, 'findCarSchema.additional.max'),
+    engineType: EngineTypesSchema.required('findCarSchema.engine.required'),
+    requestTime: RequestTimeSchema.required('findCarSchema.request.required'),
   });
 
   const returnFindCarDataToRequest = (data: any) => {
@@ -172,7 +178,7 @@ export default function FindCarForm() {
             <FormikInput
               name='name'
               placeholder='Anthony Rother'
-              title='Full name'
+              title='findCar.form.fullName.label'
               rounded='rounded-full'
               sizeClass='h-14 !text-base'
               error={errors.name}
@@ -182,8 +188,8 @@ export default function FindCarForm() {
             <FormikInput
               name='email'
               type='email'
-              placeholder='some@email.com'
-              title='Email address'
+              placeholder='findCar.form.emailAddress.placeholder'
+              title='findCar.form.emailAddress.label'
               rounded='rounded-full'
               sizeClass='h-14 !text-base'
               error={errors.email}
@@ -191,7 +197,7 @@ export default function FindCarForm() {
             />
             {/* ---- */}
             <FormikPhoneNumberInput
-              title='Phone number'
+              title='findCar.form.phoneNumber.label'
               rounded='rounded-full'
               sizeClass='h-14 !text-base'
               error={errors.phone}
@@ -201,7 +207,7 @@ export default function FindCarForm() {
             <FormikInput
               name='brand'
               placeholder='Lamborghini'
-              title='Brand'
+              title='findCar.form.brand.label'
               sizeClass='h-14 !text-base'
               rounded='rounded-full'
               error={errors.brand}
@@ -211,7 +217,7 @@ export default function FindCarForm() {
             <FormikInput
               name='model'
               placeholder='Urus'
-              title='Model'
+              title='findCar.form.model.label'
               sizeClass='h-14 !text-base'
               rounded='rounded-full'
               error={errors.model}
@@ -221,7 +227,7 @@ export default function FindCarForm() {
             <FormikInput
               name='specification'
               placeholder='R44'
-              title='Specification'
+              title='findCar.form.specification.label'
               sizeClass='h-14 !text-base'
               rounded='rounded-full'
               error={errors.specification}
@@ -230,8 +236,8 @@ export default function FindCarForm() {
             {/* ---- */}
             <FormikInputSelector
               name='engineType'
-              placeholder='Enter'
-              title='Engine Type'
+              placeholder='findCar.form.engineType.placeholder'
+              title='findCar.form.engineType.label'
               options={engineTypes}
               rounded='rounded-full'
               sizeClass='h-14 !text-base'
@@ -241,8 +247,8 @@ export default function FindCarForm() {
             {/* ---- */}
             <FormikInput
               name='color'
-              placeholder='Black magenta'
-              title='Color'
+              placeholder='findCar.form.color.placeholder'
+              title='findCar.form.color.label'
               sizeClass='h-14 !text-base'
               rounded='rounded-full'
               error={errors.color}
@@ -251,8 +257,8 @@ export default function FindCarForm() {
             {/* ---- */}
             <FormikInputSelector
               name='requestTime'
-              placeholder='Enter'
-              title='Request Time'
+              placeholder='findCar.form.requestTime.placeholder'
+              title='findCar.form.requestTime.label'
               options={requestTime}
               rounded='rounded-full'
               sizeClass='h-14 !text-base'
@@ -263,8 +269,8 @@ export default function FindCarForm() {
             <div className='w-full md:absolute md:bottom-[0] md:left-0'>
               <FormikTextarea
                 name='additional'
-                placeholder='Enter'
-                title='Additional'
+                placeholder='findCar.form.additional.placeholder'
+                title='findCar.form.additional.label'
                 rows={5}
                 rounded='rounded-[40px]'
                 sizeClass='!text-base'
@@ -281,7 +287,7 @@ export default function FindCarForm() {
                 className='!text-base w-full'
                 sizeClass='!h-14 items-center'
               >
-                Send
+                {translate('findCar.form.button.send')}
               </ButtonPrimary>
             </div>
           </Form>
@@ -289,14 +295,14 @@ export default function FindCarForm() {
       </Formik>
 
       <Modal
-        title='Thank you!'
+        title='findCar.modal.title'
         isModalOpen={isSeuccessRequest}
         setIsModalOpen={setIsSuccessRequest}
       >
         <div className='text-center space-y-10'>
           <InformationCircleIcon className='block mx-auto w-24 h-24 text-yellow-500' />
           <p className='px-3 text-md font-semibold'>
-            Thank you, your request has been accepted. Soon it will be processed.
+            {translate('findCar.modal.description')}
           </p>
         </div>
       </Modal>

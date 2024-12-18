@@ -14,10 +14,12 @@ const FiltersCatalog = ({
   filtersData,
   closeFilters,
   activeFiltersCount,
+  translate
 }: {
   filtersData: IFilters[];
   closeFilters: (value: boolean) => void;
   activeFiltersCount: number;
+  translate: any;
 }) => {
   const {
     handleFilterChange,
@@ -38,7 +40,7 @@ const FiltersCatalog = ({
       <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
       <div className='sticky top:0 lg:top-20 flex justify-between items-center bg-white dark:bg-neutral-900 z-10'>
         <h4 className='flex justify-between items-center my-6 text-2xl font-semibold'>
-          Filters{' '}
+          {translate('filters.title')}{' '}
           {activeFiltersCount > 0 && (
             <span className='inline-flex text-white items-center justify-center w-7 h-7 ml-2 text-sm font-normal rounded-full bg-primary-700'>
               {activeFiltersCount}
@@ -51,7 +53,7 @@ const FiltersCatalog = ({
             onClick={() => resetFilters()}
           >
             <ArrowPathIcon className='w-4' />
-            Clear<span className='lg:hidden xl:inline-block'> Filters</span>
+            {translate('filters.button.clear')}<span className='lg:hidden xl:inline-block'>{translate('filters.button.filters')}</span>
           </ButtonPrimary>
         )}
       </div>

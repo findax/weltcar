@@ -12,9 +12,16 @@ interface CarListProps {
   isLoading: boolean;
   isGrid: boolean;
   results?: number;
+  translate: any;
 }
 
-const CarListCatalog = ({ carListData, isLoading, isGrid, results }: CarListProps) => {
+const CarListCatalog = ({ 
+  carListData, 
+  isLoading, 
+  isGrid, 
+  results,
+  translate 
+}: CarListProps) => {
   const { currentPage, handlePageChange } = useQueryParams();
 
   const ww = typeof window !== 'undefined' ? window.innerWidth : 1000;
@@ -35,12 +42,13 @@ const CarListCatalog = ({ carListData, isLoading, isGrid, results }: CarListProp
                 key={car.id}
                 carData={car}
                 paddingBottomHorizontal={paddingBottomHorizontal}
+                translate={translate}
               />
             ))}
           </div>
         ) : (
           <div className='h-[40vh] flex justify-center items-center flex-col bg-white/50 dark:bg-neutral-800/60'>
-            <p className='text-2xl'>Sorry, nothing found</p>
+            <p className='text-2xl'>{translate('catalog.notFound.title')}</p>
           </div>
         )
       ) : isLoading ? (
@@ -52,12 +60,13 @@ const CarListCatalog = ({ carListData, isLoading, isGrid, results }: CarListProp
               key={car.id}
               carData={car}
               paddingBottomGrid={paddingBottomGrid}
+              translate={translate}
             />
           ))}
         </div>
       ) : (
         <div className='h-[40vh] flex justify-center items-center flex-col bg-white/50 dark:bg-neutral-800/60'>
-          <p className='text-2xl'>Sorry, nothing found</p>
+          <p className='text-2xl'>{translate('catalog.notFound.title')}</p>
         </div>
       )}
       {pageCount > 1 && (

@@ -10,8 +10,10 @@ import { useEffect, useState } from 'react';
 import { IoMdClose } from "react-icons/io";
 import { Route } from 'next';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 export default function AccountPartnerForm({ partner }:{ partner: IPartnerResponse }) {
+  const translate = useTranslations();
   const [partnerUser, setPartnerUser] = useState(partner ? partner : null);
   const [attachedFiles, setAttachedFiles] = useState<IPartnerFileList[] | null>(partner ? partner.files : null);
   const [initialValues, setInitialValues] = useState({
@@ -39,29 +41,29 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
     companyName: Yup
       .string()
       .trim()
-      .min(2, 'Company name is too short')
-      .max(50, 'Company name is too long')
-      .required('Company name is required'),
+      .min(2, 'accountPartnerSchema.companyName.min')
+      .max(50, 'accountPartnerSchema.companyName.max')
+      .required('accountPartnerSchema.companyName.required'),
     taxNumber: Yup
       .string()
       .trim()
-      .required('Tax number is required'),
+      .required('accountPartnerSchema.taxNumber.required'),
     documents: Yup.array()
     .of(
       Yup.mixed<File>()
-        .test('fileType', 'Unsupported file type', (value) => {
+        .test('fileType', 'accountPartnerSchema.documents.unsuported', (value) => {
           return value && SUPPORTED_FORMATS.includes(value.type);
         })
-        .required('Document is required')
+        .required('accountPartnerSchema.documents.required')
     ),
     email: Yup.string()
       .trim()
-      .email('Invalid email')
-      .required('Email is required'),
+      .email('accountPartnerSchema.email.invalid')
+      .required('accountPartnerSchema.email.required'),
     phone: Yup.string()
       .trim()
       // .matches(phoneValidationPattern, 'Invalid phone number')
-      .required('Phone number is required')
+      .required('accountPartnerSchema.phone.required')
   });
 
   const handleDeleteAttachedFiles = (event: React.MouseEvent<HTMLButtonElement>, file: IPartnerFileList) => {
@@ -81,7 +83,7 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
     if(attachedFiles && attachedFiles.length > 0) {
       return (
         <div>
-          <p className='inline-block text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-1'>Uploaded Files</p>
+          <p className='inline-block text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-1'>{translate('accountPartner.form.uploadedFiles.label')}</p>
           <div className='flex flex-col gap-1 block w-full border border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl text-sm font-normal px-4 py-3'>
             {attachedFiles.map((file) => (
               <div key={file.file_name} className='flex items-center w-fit border rounded-2xl px-3 py-2'>
@@ -133,8 +135,8 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
            <FormikInput
             disabled={partner?.is_verified}
             name='companyName'
-            placeholder='Enter your company name'
-            title='Company name'
+            placeholder='accountPartner.form.companyName.placeholder'
+            title='accountPartner.form.companyName.label'
             rounded='rounded-full'
             sizeClass='h-14'
             error={errors.companyName}
@@ -144,8 +146,8 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
           <FormikInput
             disabled={partner?.is_verified}
             name='taxNumber'
-            placeholder='Enter your tax number'
-            title='Tax number'
+            placeholder='accountPartner.form.taxNumber.placeholder'
+            title='accountPartner.form.taxNumber.label'
             rounded='rounded-full'
             sizeClass='h-14'
             error={errors.taxNumber}
@@ -156,7 +158,7 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
             disabled={partner?.is_verified}
             initialValues={initialValues}
             name='documents'
-            label='Upload your passport and company registration'
+            label='accountPartner.form.uploadDocuments.label'
             multiple
             error={errors.documents}
             touched={touched.documents}
@@ -167,8 +169,8 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
             disabled={partner?.is_verified}
             name='email'
             type='email'
-            placeholder='example@mail.com'
-            title='Email address'
+            placeholder='accountPartner.form.emailAddress.placeholder'
+            title='accountPartner.form.emailAddress.label'
             rounded='rounded-full'
             sizeClass='h-14'
             error={errors.email}
@@ -177,7 +179,7 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
           {/* ---- */}
           <FormikPhoneNumberInput
             disabled={partner?.is_verified}
-            title='Phone number'
+            title='accountPartner.form.phoneNumber.label'
             rounded='rounded-full'
             sizeClass='h-14'
             error={errors.phone}
@@ -191,7 +193,7 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
               loading={isSubmitting}
               className='text-base lg:text-lg w-full sm:w-40'
             >
-              Update info
+              {translate('accountPartner.form.buttn.update')}
             </ButtonPrimary>
           }
         </Form>

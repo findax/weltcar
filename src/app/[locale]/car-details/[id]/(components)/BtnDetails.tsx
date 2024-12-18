@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import { ReactNode } from 'react';
 
 interface IProps {
@@ -15,7 +16,7 @@ export default function BtnDetails({
   className,
   handleOpenModal
 }: IProps) {
-
+  const translate = useTranslations();
   const onChange = () => {
     handleOpenModal();
   }
@@ -28,7 +29,7 @@ export default function BtnDetails({
       {ico}
 
       <span className={`ml-1 md:ml-2 text-neutral-800 text-sm md:text-base font-medium ${titleStyle}`}>
-        {title}
+        {translate(title)}
       </span>
     </div>
   );

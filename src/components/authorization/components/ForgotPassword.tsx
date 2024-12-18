@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { FormikInput } from '@/shared/FormInputs';
 import { sendForgotPassword } from '@/api/auth';
+import { useTranslations } from 'next-intl';
 
 export default function ForgotPassword({
   emailValue,
@@ -14,9 +15,10 @@ export default function ForgotPassword({
   const forgotPasswordSchema = Yup.object().shape({
     email: Yup.string()
       .trim()
-      .email('Invalid email')
-      .required('Email is required'),
+      .email('forgotPasswordSchema.email.invalid')
+      .required('forgotPasswordSchema.email.required'),
   });
+  const translate = useTranslations();
 
   return (
     <Formik
@@ -40,8 +42,8 @@ export default function ForgotPassword({
           <FormikInput
             name='email'
             type='email'
-            placeholder='example@mail.com'
-            title='Email address'
+            placeholder='forgotPassword.email.placeholder'
+            title='forgotPassword.email.title'
             error={errors.email}
             touched={touched.email}
           />
@@ -51,7 +53,7 @@ export default function ForgotPassword({
             disabled={isSubmitting}
             loading={isSubmitting}
           >
-            Send
+            {translate('forgotPassword.button.send')}
           </ButtonPrimary>
         </Form>
       )}

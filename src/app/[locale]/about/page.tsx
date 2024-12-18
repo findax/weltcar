@@ -16,6 +16,7 @@ import triangleBackgroundImgThird from '@/images/bg-figures/triangle-3.png'
 import BackgroundShaadowSection from '@/components/BackgroundShaadowSection';
 import { useEffect } from 'react';
 import SectionOurPartners from '@/components/SectionOurPartners';
+import { useTranslations } from 'next-intl';
 
 const metadata: Metadata = {
   title: 'About Us | Elite Car Sales & Global Delivery | Luxury Vehicles Worldwide | WeltCar',
@@ -25,6 +26,7 @@ const metadata: Metadata = {
 
 const PageAbout = () => {
   const { isDarkMode, mounted } = useThemeMode();
+  const translate = useTranslations();
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -64,11 +66,11 @@ const PageAbout = () => {
       />
 
       <div className='container my-12 xl:my-20 '>
-        <SectionHero />
-        <SectionStatistic />
+        <SectionHero translate={translate} />
+        <SectionStatistic translate={translate} />
 
         <div className='relative mt-44'>
-          <SectionOurTeam />
+          <SectionOurTeam translate={translate} />
         </div>
 
         {/* <div className='relative mt-44'>
@@ -76,11 +78,11 @@ const PageAbout = () => {
         </div> */}
 
         <div className='relative mt-44'>
-          <SectionOurPartners />
+          <SectionOurPartners translate={translate} />
         </div>
 
         <div className='relative mt-44'>
-          <SectionSubscribe />
+          <SectionSubscribe translate={translate}/>
         </div>
       </div>
       <div className='flex relative sm:bottom-0 sm:h-full -bottom-[30px] h-72 justify-center w-full'>

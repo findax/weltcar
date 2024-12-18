@@ -9,9 +9,11 @@ import ErrorComponent from "./ErrorComponent";
 import LoadingSpinner from "@/shared/LoadingSpinner";
 import { ButtonPrimary } from "@/shared/Buttons";
 import { IoIosClose } from "react-icons/io";
+import { useTranslations } from "next-intl";
 
 
 const CarSelector = () => { 
+  const translate = useTranslations();
   const [isFirstLoading, setFirstLoading] = useState(true);
   const [isLoading, setLoading] = useState(true);
   const [isError, setError] = useState(false);
@@ -298,7 +300,7 @@ const CarSelector = () => {
                 onFocus={() => setIsShowDropdown(true)}
                 onBlur={() => setIsShowDropdown(false)}
                 onKeyDown={handleKeyDown}
-                placeholder="Enter car"
+                placeholder={translate('carSubscriptions.input.placeholder')}
               />
               {isShowDropdown && (
                 <div className={`border left-0 top-[58px] w-[90%] border-neutral-200 mt-[1px] rounded-2xl absolute w-full bg-white z-10 max-h-[400px] overflow-y-auto dark:border-neutral-1100 dark:bg-neutral-1150`}>
@@ -308,7 +310,7 @@ const CarSelector = () => {
                         className='text-neutral-1050 dark:text-white dark:hover:text-black flex px-3 py-2 dark:hover:bg-neutral-1100 hover:bg-neutral-100 justify-between items-center'
                         onMouseDown={() => handleAddTag(car)}
                       >
-                        <p>{car.brand_name} - All models</p> 
+                        <p>{car.brand_name} - {translate('carSubscriptions.models.title')}</p> 
                       </div>
                       <div className="px-4">
                         {car.models.map((model) => (
@@ -317,7 +319,7 @@ const CarSelector = () => {
                             className='px-3 py-1 rounded-lg hover:bg-neutral-1100 dark:hover:neutral-300 text-neutral-600 dark:text-white dark:hover:text-black cursor-pointer'
                             onMouseDown={() => handleAddTagModel(car, model.model_id)}
                           >
-                            <p>Model: {model.model_name}</p>
+                            <p>{translate('carSubscriptions.model.title')} {model.model_name}</p>
                           </div>
                         ))}
                       </div>
@@ -333,7 +335,7 @@ const CarSelector = () => {
                 sizeClass='px-5 py-2 md:px-6 md:py-3'
                 onClick={handleOnSubmit}
               >
-                Save
+                {translate('carSubscriptions.button.save')}
               </ButtonPrimary>
             </div>
           </div>

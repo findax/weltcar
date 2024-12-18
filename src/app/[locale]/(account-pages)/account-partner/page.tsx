@@ -7,11 +7,13 @@ import { getPartner } from '@/api/partner';
 import LoadingSpinner from '@/shared/LoadingSpinner';
 import ErrorComponent from '@/components/ErrorComponent';
 import { IPartnerResponse } from '@/types/partner';
+import { useTranslations } from 'next-intl';
 
 const AccountPartnerPage = () => {
   const [isFirstLoading, setFirstLoading] = useState(true);
   const [isError, setError] = useState(false);
   const [partner, setPartner] = useState<IPartnerResponse>();
+  const translate = useTranslations();
 
   useEffect(() => {
     if(isFirstLoading){
@@ -41,7 +43,7 @@ const AccountPartnerPage = () => {
     <ProtectedRoute role={UserRole.partner}>
       <div className='relative min-h-[1200px] lg:min-h-[650px]'>
         {/* HEADING */}
-        <h2 className='text-2xl lg:text-4xl font-bold'>Account Partner information</h2>
+        <h2 className='text-2xl lg:text-4xl font-bold'>{translate('accountPartner.title')}</h2>
         <div className='flex flex-col md:flex-row'>
           {partner && (
             <AccountPartnerForm partner={partner}/>

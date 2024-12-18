@@ -1,6 +1,7 @@
 import { ICarDetails } from '@/types/cardetails';
 import { ICarPartnerDetails } from '@/types/partner';
 import { DocumentArrowDownIcon } from '@heroicons/react/24/outline';
+import { useTranslations } from 'next-intl';
 
 export default function Title({
   carData,
@@ -20,6 +21,7 @@ export default function Title({
     vin,
     year,
   } = carData || {};
+  const translate = useTranslations();
 
   return (
     <div className='detailsSection__wrap sm:bg-white dark:bg-neutral-900'>
@@ -38,7 +40,7 @@ export default function Title({
         <div className='flex flex-col justify-betwee space-y-2 text-base mr-4'>
           <div className='my-2 flex items-center flex-wrap gap-1'>
             <div className='flex items-center'>
-              <span className=''>exterior color:</span>
+              <span className=''>{translate('exterior.color"')}:</span>
               <span
                 className='w-6 h-6 mx-3 rounded-full inline-block border border-neutral-500 flex-shrink-0'
                 style={{ backgroundColor: `${outer_color_hex}` }}
@@ -48,7 +50,7 @@ export default function Title({
           </div>
           <div className='mt-auto my-2 flex items-center flex-wrap gap-1'>
             <div className='flex items-center'>
-              <span className=''>interior color:</span>
+              <span className=''>{translate('interior.color"')}:</span>
               <span
                 className='w-6 h-6 mx-3 rounded-full inline-block border border-neutral-500 flex-shrink-0'
                 style={{ backgroundColor: `${inner_color_hex}` }}

@@ -1,8 +1,15 @@
 import sectionHeroCar from '@/images/car-1.png';
 import Image from 'next/image';
 import { ButtonPrimary } from '@/shared/Buttons';
+import { Route } from 'next';
 
-export default function SectionHeroArchivePage() {
+interface IProps {
+  translate: any;
+}
+
+export default function SectionHeroArchivePage({
+  translate
+}:IProps) {
   return (
     <div
       className='nc-SectionHeroArchivePage flex flex-col relative'
@@ -17,18 +24,13 @@ export default function SectionHeroArchivePage() {
             <div className='relative flex justify-between gap-20'>
               <div className='lg:w-[423px] xl:w-[495px]'>
                 <h2 className='font-bold text-neutral-1050 text-lg md:text-xl xl:text-2xl dark:text-white'>
-                  Your Gateway to Luxury Automotive Excellence
+                  {translate('welcome.subtitle')}
                 </h2>
                 <div className='mt-5 mb-8 xl:text-lg text-neutral-500 dark:text-neutral-400 lg:max-w-3xl'>
-                  At WeltCar, we specialize in providing the finest exclusive
-                  vehicles, ensuring luxury and sophistication in every drive. With
-                  our vast selection of top-tier cars, personalized service, and
-                  exclusive offers, we make your dream of owning a premium vehicle a
-                  reality. Experience the pinnacle of automotive excellence with
-                  WeltCar.
+                  {translate("welcome.description")}
                 </div>
-                <ButtonPrimary className='xl:text-lg w-full sm:w-fit' sizeClass='px-5 py-4 sm:px-7' href='/catalog'>
-                  Start your search
+                <ButtonPrimary className='xl:text-lg w-full sm:w-fit' sizeClass='px-5 py-4 sm:px-7' href={'/catalog' as Route}>
+                  {translate("welcome.button.startSearch")}
                 </ButtonPrimary>
               </div>
             </div>

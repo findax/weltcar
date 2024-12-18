@@ -6,9 +6,12 @@ import SocialsList1 from '@/shared/SocialsList1';
 import SubscribeForm from '@/components/SubscribeForm';
 import { WatsappIcon } from '@/shared/icons';
 import { useThemeMode } from '@/hooks/useThemeMode';
+import { useTranslations } from 'next-intl';
 
 export default function Footer() {
   const { isDarkMode, mounted } = useThemeMode();
+
+  const translate = useTranslations()
 
   if (!mounted) return null;
 
@@ -62,21 +65,21 @@ export default function Footer() {
             <div className='-mt-3 col-span-12 md:col-span-6 xl:col-span-3'>
               <Logo isDark={isDarkMode} />
               <p className='mt-2 mb-6 text-neutral-600 dark:text-neutral-400'>
-                WeltCar - Your Gateway to
+                {translate('footer.title.weltcarTo')}
                 <br />
-                Luxury Automotive Excellence
+                {translate('footer.title.luxury')}
               </p>
               <SocialsList1 className='flex gap-2 items-center space-x-3 md:space-x-0 md:flex-col md:space-y-2.5 md:items-start' />
             </div>
             <div className='col-span-12 md:col-span-6 xl:col-span-3 space-y-6'>
-              <h4 className='text-2xl text-neytral-1050 font-bold dark:text-white'>Quick Link</h4>
+              <h4 className='text-2xl text-neytral-1050 font-bold dark:text-white'>{translate('footer.quickLink.title')}</h4>
               <ul className='flex flex-col gap-2'>
                 <li>
                   <Link
                     href='/catalog'
                     className='text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
                   >
-                    Catalog
+                    {translate('footer.quickLink.catalog')}
                   </Link>
                 </li>
                 <li>
@@ -84,7 +87,7 @@ export default function Footer() {
                     href='/about'
                     className='text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
                   >
-                    About
+                    {translate('footer.quickLink.about')}
                   </Link>
                 </li>
                 <li>
@@ -92,7 +95,7 @@ export default function Footer() {
                     href='/contact'
                     className='text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
                   >
-                    Contact
+                    {translate('footer.quickLink.contact')}
                   </Link>
                 </li>
                 <li>
@@ -100,13 +103,13 @@ export default function Footer() {
                     href='/sold-car'
                     className='text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
                   >
-                    Sold Car
+                    {translate('footer.quickLink.soldCar')}
                   </Link>
                 </li>
               </ul>
             </div>
             <div className='col-span-12 md:col-span-6 xl:col-span-3 space-y-6'>
-              <h4 className='text-2xl text-neytral-1050 font-bold dark:text-white'>Contact</h4>
+              <h4 className='text-2xl text-neytral-1050 font-bold dark:text-white'>{translate('footer.contact.title')}</h4>
               <ul className='flex flex-col gap-6'>
                 <li className='flex items-center gap-4'>
                   {/* <i className='las la-map-marker-alt text-xl p-2 rounded-full border border-neutral-200 dark:border-neutral-700'></i> */}
@@ -117,9 +120,9 @@ export default function Footer() {
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    Theodor-Fontane-Straße 2,
+                    {translate('footer.contact.street')}
                     <br />
-                    22848 Norderstedt
+                    {translate('footer.contact.streetCode')}
                   </Link>
                 </li>
                 <li className='flex items-center gap-4'>
@@ -156,9 +159,9 @@ export default function Footer() {
               </ul>
             </div>
             <div className='col-span-12 md:col-span-6 xl:col-span-3 space-y-6'>
-              <h4 className='text-2xl text-neytral-1050 font-bold dark:text-white'>Newsletter</h4>
+              <h4 className='text-2xl text-neytral-1050 font-bold dark:text-white'>{translate('footer.newsletter.title')}</h4>
               <p className='text-neutral-600 dark:text-neutral-400'>
-                Subscribe our newsletter to get our latest update & news
+                {translate('footer.newsletter.description')}
               </p>
               <SubscribeForm 
                 isButtonShow={true}
@@ -180,7 +183,7 @@ export default function Footer() {
                     href='/privacy-policy'
                     className='text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white'
                   >
-                    Privacy Policy
+                    {translate('footer.privacy')}
                   </Link>
                 </li>
                 <li>
@@ -188,7 +191,7 @@ export default function Footer() {
                     href='/legal-notice'
                     className='text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white'
                   >
-                    Legal Notice
+                    {translate('footer.legal')}
                   </Link>
                 </li>
                 <li>
@@ -196,7 +199,7 @@ export default function Footer() {
                     href='/cookie-policy'
                     className='text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white'
                   >
-                    Cookie Policy
+                    {translate('footer.cookie')}
                   </Link>
                 </li>
               </ul>

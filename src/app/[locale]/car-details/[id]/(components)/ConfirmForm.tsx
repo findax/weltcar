@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { FormikCheckbox } from '@/shared/FormInputs';
 import { createOrder } from '@/api/user';
+import { useTranslations } from 'next-intl';
 
 export default function ConfirmForm({
   carId,
@@ -12,8 +13,10 @@ export default function ConfirmForm({
   setIsModalOpen: (isModalOpen: boolean) => void;
 }) {
   const ConfirmationSchema = Yup.object().shape({
-    confirm: Yup.bool().oneOf([true], 'You need to accept the Privacy Policy'),
+    confirm: Yup.bool().oneOf([true], 'confirmSchema.confirm.oneOf'),
   });
+
+  const translate = useTranslations();
 
   return (
     <Formik
@@ -43,7 +46,7 @@ export default function ConfirmForm({
             loading={isSubmitting}
             className='mt-4'
           >
-            Continue and Reserve
+            {translate('carDetails.confirm.button')}
           </ButtonPrimary>
         </Form>
       )}

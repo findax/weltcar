@@ -10,44 +10,49 @@ import teamImg5 from '@/images/team/t5.svg';
 const TEAM = [
   {
     id: '1',
-    name: 'Oleg',
-    job: 'Founder, Director',
+    name: 'team.members.oleg.name',
+    job: 'team.members.oleg.position',
     avatar: teamImg1,
   },
   {
     id: '2',
-    name: 'Natalia',
-    job: 'Founder, Director',
+    name: 'team.members.natalia.name',
+    job: 'team.members.natalia.position',
     avatar: teamImg2,
   },
   {
     id: '3',
-    name: 'Sergey',
-    job: 'Director, Partner',
+    name: 'team.members.sergey.name',
+    job: 'team.members.sergey.position',
     avatar: teamImg3,
   },
   {
     id: '4',
-    name: 'Alexander',
-    job: 'Purchasing Manager',
+    name: 'team.members.alexander.name',
+    job: 'team.members.alexander.position',
     avatar: teamImg4,
   },
   {
     id: '5',
-    name: 'Agassi',
-    job: 'Administrative Manager',
+    name: 'team.members.agassi.name',
+    job: 'team.members.agassi.position',
     avatar: teamImg5,
   },
 ];
 
-const SectionOurTeam = () => {
+interface IProps {
+  translate: any;
+}
+
+const SectionOurTeam = ({
+  translate
+}: IProps) => {
   return (
     <div className='nc-SectionFounder relative'>
       <div>
-        <h2 className='text-3xl md:text-4xl xl:text-5xl font-bold text-neutral-1050 dark:text-white '>Our Team</h2>
+        <h2 className='text-3xl md:text-4xl xl:text-5xl font-bold text-neutral-1050 dark:text-white '>{translate('team.title')}</h2>
         <span className='block lg:w-[480px] my-14 lg:text-lg text-neutral-500 dark:text-neutral-400'>
-          Our team at WeltCar is composed of industry experts dedicated to providing you with the best luxury car buying experience. We work together to ensure that every aspect of your interaction with us is seamless and satisfying, making your journey to owning 
-          a premium vehicle both enjoyable and memorable.
+          {translate('team.description')}
         </span>
       </div>
       <div className='flex flex-wrap justify-center gap-4 sm:gap-4'>
@@ -67,10 +72,10 @@ const SectionOurTeam = () => {
             </div>
 
             <h3 className='text-lg lg:text-2xl font-bold text-neutral-900 mt-4 md:text-2xl dark:text-neutral-200'>
-              {item.name}
+              {translate(item.name)}
             </h3>
             <span className='block lg:text-lg text-neutral-500 sm:text-lg dark:text-neutral-400'>
-              {item.job}
+              {translate(item.job)}
             </span>
           </div>
         ))}

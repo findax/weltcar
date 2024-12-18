@@ -12,6 +12,7 @@ import { useQueryStore } from '@/stores/query-store';
 import FiltersCatalog from '@/components/catalogs/FiltersCatalog';
 import CarListCatalog from '@/components/catalogs/CarListCatalog';
 import SortPanelCatalog from '@/components/catalogs/SortPanelCatalog';
+import { useTranslations } from 'next-intl';
 
 export default function SoldCarCatalog() {
   const [isFirstLoading, setFirstLoading] = useState(true);
@@ -23,6 +24,7 @@ export default function SoldCarCatalog() {
   const [catalogData, setCatalogData] = useState({} as ICatalog);
 
   const queryState = useQueryStore((state) => state.query);
+  const translate = useTranslations();
 
   const { queryParams, currentPage, isFiltersVisible, setFiltersVisible } =
     useQueryParams();
@@ -89,6 +91,7 @@ export default function SoldCarCatalog() {
                 filtersData={catalogData?.filters || []}
                 closeFilters={setFiltersVisible}
                 activeFiltersCount={activeFiltersCount}
+                translate={translate}
               />
             </SideMenuWrapper>
           ) : (
@@ -96,6 +99,7 @@ export default function SoldCarCatalog() {
               filtersData={catalogData?.filters || []}
               closeFilters={setFiltersVisible}
               activeFiltersCount={activeFiltersCount}
+              translate={translate}
             />
           )}
         </div>
@@ -107,12 +111,14 @@ export default function SoldCarCatalog() {
             activeFiltersCount={activeFiltersCount}
             handleIsGrid={setGrid}
             openFilter={setFiltersVisible}
+            translate={translate}
           />
           <CarListCatalog
             carListData={catalogData?.data || []}
             isLoading={isLoading}
             isGrid={isGrid}
             results={catalogData?.meta.total || 0}
+            translate={translate}
           />
         </div>
       </div>

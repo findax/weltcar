@@ -3,6 +3,7 @@
 import { ReactNode, Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { ButtonClose } from '@/shared/Buttons';
+import { useTranslations } from 'next-intl';
 
 interface IProps {
   title?: string;
@@ -21,6 +22,7 @@ export default function Modal({
   handleChange = () => {},
   children,
 }:IProps) {
+  const translate = useTranslations();
   const closeModal = () => {
     setIsModalOpen(false);
     handleChange();
@@ -59,7 +61,7 @@ export default function Modal({
                     as='div'
                     className='relative flex-shrink-0 text-center px-6 py-4 border-b border-neutral-200 dark:border-neutral-800'
                   >
-                    <h3 className='text-lg font-medium leading-6'>{title}</h3>
+                    <h3 className='text-lg font-medium leading-6'>{translate(title)}</h3>
                   </Dialog.Title>
                 )}
                 <ButtonClose

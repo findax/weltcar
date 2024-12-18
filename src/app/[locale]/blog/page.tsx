@@ -6,11 +6,11 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 
 const blogPages = [
   {
-    pageName: 'Main',
+    pageName: 'Blog.breadcrump.main',
     pageHref: '/'
   },
   {
-    pageName: 'Blog',
+    pageName: 'Blog.breadcrump.blog',
     pageHref: '/blog'
   }
 ];

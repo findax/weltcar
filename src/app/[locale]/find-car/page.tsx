@@ -9,6 +9,7 @@ import triangleBackgroundImgThird from '@/images/bg-figures/triangle-3.png'
 import BackgroundShaadowSection from '@/components/BackgroundShaadowSection';
 import FindCarHero from './(components)/FindCarHero';
 import { useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 
 
 const metadata: Metadata = {
@@ -19,6 +20,7 @@ const metadata: Metadata = {
 
 const PageFindCar = () => {
   const { isDarkMode, mounted } = useThemeMode();
+  const translate = useTranslations();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -41,7 +43,7 @@ const PageFindCar = () => {
       />
 
       <div className='container my-12 xl:my-20'>
-        <FindCarHero />
+        <FindCarHero translate={translate} />
       </div>
 
       <div className='flex relative sm:bottom-0 sm:h-full -bottom-[30px] h-72 justify-center w-full md:pt-12 xl:pt-0'>

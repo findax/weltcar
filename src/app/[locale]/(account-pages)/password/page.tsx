@@ -7,36 +7,38 @@ import { FormikPasswordInput } from '@/shared/FormInputs';
 import { updateUserPassword } from '@/api/user';
 import { useUserStore } from '@/stores/user-store';
 import { IUser } from '@/types/user';
+import { useTranslations } from 'next-intl';
 
 const PasswordPage = () => {
+  const translate = useTranslations();
   const updateUserState = useUserStore((state) => state.updateUserState);
 
   const UpdatePasswordSchema = Yup.object().shape({
     password: Yup.string()
       .trim()
-      .min(8, 'Password must be at least 8 characters')
-      .max(50, 'Password must be less than 50 characters')
-      .matches(/[a-z]+/, 'Password must contain at least one lowercase letter')
-      .matches(/[A-Z]+/, 'Password must contain at least one uppercase letter')
-      .matches(/\d+/, 'Password must contain at least one number')
-      .required('Password is required'),
+      .min(8, 'updatePassSchema.password.min')
+      .max(50, 'updatePassSchema.password.max')
+      .matches(/[a-z]+/, 'updatePassSchema.password.matchesLow')
+      .matches(/[A-Z]+/, 'updatePassSchema.password.matchesUp')
+      .matches(/\d+/, 'updatePassSchema.password.matchesNumb')
+      .required('updatePassSchema.password.required'),
     new_password: Yup.string()
       .trim()
-      .min(8, 'Password must be at least 8 characters')
-      .max(50, 'Password must be less than 50 characters')
-      .matches(/[a-z]+/, 'Password must contain at least one lowercase letter')
-      .matches(/[A-Z]+/, 'Password must contain at least one uppercase letter')
-      .matches(/\d+/, 'Password must contain at least one number')
-      .required('Password is required'),
+      .min(8, 'updatePassSchema.newPassword.min')
+      .max(50, 'updatePassSchema.newPassword.max')
+      .matches(/[a-z]+/, 'updatePassSchema.newPassword.matchesLow')
+      .matches(/[A-Z]+/, 'updatePassSchema.newPassword.matchesUp')
+      .matches(/\d+/, 'updatePassSchema.newPassword.matchesNumb')
+      .required('updatePassSchema.newPassword.required'),
     confirm_password: Yup.string()
-      .oneOf([Yup.ref('new_password'), ''], 'Passwords must match')
-      .required('Confirm password is required'),
+      .oneOf([Yup.ref('new_password'), ''], 'updatePassSchema.confirm.oneOf')
+      .required('updatePassSchema.confirm.required'),
   });
 
   return (
     <div className='relative min-h-[900px] space-y-8 sm:space-y-12 lg:min-h-[500px]'>
       {/* HEADING */}
-      <h2 className='text-2xl lg:text-4xl font-bold'>Update your password</h2>
+      <h2 className='text-2xl lg:text-4xl font-bold'>{translate('passwordInformation.title')}</h2>
       <Formik
         initialValues={{
           password: '',
@@ -58,8 +60,8 @@ const PasswordPage = () => {
         {({ errors, touched, isSubmitting }) => (
           <Form className='grid grid-cols-1 gap-7 w-full max-w-lg'>
             <FormikPasswordInput
-              title='Current password'
-              placeholder='Enter your password'
+              title='passwordInformation.form.current.title'
+              placeholder='passwordInformation.form.current.placeholder'
               rounded='rounded-full'
               sizeClass='h-14'
               error={errors.password}
@@ -67,9 +69,9 @@ const PasswordPage = () => {
             />
             {/* ---- */}
             <FormikPasswordInput
-              title='New password'
+              title='passwordInformation.form.new.title'
               name='new_password'
-              placeholder='Enter new password'
+              placeholder='passwordInformation.form.new.placeholder'
               rounded='rounded-full'
               sizeClass='h-14'
               error={errors.new_password}
@@ -77,9 +79,9 @@ const PasswordPage = () => {
             />
             {/* ---- */}
             <FormikPasswordInput
-              title='Confirm password'
+              title='passwordInformation.form.confirm.title'
               name='confirm_password'
-              placeholder='Confirm password'
+              placeholder='passwordInformation.form.confirm.placeholder'
               rounded='rounded-full'
               sizeClass='h-14'
               error={errors.confirm_password}
@@ -92,7 +94,7 @@ const PasswordPage = () => {
               loading={isSubmitting}
               className='text-base lg:text-lg w-full sm:w-56'
             >
-              Update password
+              {translate('passwordInformation.button.update')}
             </ButtonPrimary>
           </Form>
         )}
