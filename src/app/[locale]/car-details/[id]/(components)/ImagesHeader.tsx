@@ -25,13 +25,13 @@ export default function ImagesHeader({
 
   const handleOpenModalImageGallery = () => {
     images.length > 1
-      ? router.push(`${thisPathname}/?${translate('carDetails.href.tour')}` as Route)
-      : router.push(`${thisPathname}/?${translate('carDetails.href.tourPhoto')}` as Route);
+      ? router.push(`${thisPathname}/?modal=CAR_PHOTO_TOUR` as Route)
+      : router.push(`${thisPathname}/?modal=CAR_PHOTO_TOUR&photoId=0` as Route);
   };
 
   const handleOpenModalVideoGallery = () => {
     if(videos){
-      router.push(`${thisPathname}/?${translate('carDetails.href.videoTour')}` as Route);
+      router.push(`${thisPathname}/?modal=CAR_VIDEO_TOUR` as Route);
     }
     // FUTURE 
     // if(videos){
