@@ -46,7 +46,7 @@ export default async function RootLayout({
   params: {locale: string};
 }) {
   const messages = await getMessages()
-
+  console.log(params)
   return (
     <NextIntlClientProvider messages={messages}>
       <html lang={params.locale} className={poppins.className} suppressHydrationWarning>
@@ -64,15 +64,15 @@ export default async function RootLayout({
             }}
           />
           {/* Favicon */}
-          <link rel="icon" href="/img/favicon.ico" />
+          <link rel="icon" type="image/png" href="/images/favicon.ico" />
           {/* Additional Favicons */}
-          <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png" />
-          <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png" />
-          <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
-          <link rel="manifest" href="/img/site.webmanifest" />
+          <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+          <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+          <link rel="manifest" href="/images/site.webmanifest" />
           {/* Android Chrome */}
-          <link rel="icon" type="image/png" sizes="192x192" href="/img/android-chrome-192x192.png" />
-          <link rel="icon" type="image/png" sizes="512x512" href="/img/android-chrome-512x512.png" />
+          <link rel="icon" type="image/png" sizes="192x192" href="/images/android-chrome-192x192.png" />
+          <link rel="icon" type="image/png" sizes="512x512" href="/images/android-chrome-512x512.png" />
         </head>
         <body className='pt-16 md:pt-20 flex flex-col min-h-screen text-base bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200'>
           {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (

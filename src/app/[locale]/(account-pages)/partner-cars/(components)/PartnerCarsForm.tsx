@@ -15,16 +15,17 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Route } from 'next';
 import { toast } from 'react-toastify';
+import { useTranslations } from 'next-intl';
 
 const ModelSchema = Yup.object().shape({
-  id: Yup.number().required('ID is required'),
-  brand_name: Yup.string().trim().required('Brand name is required'),
-  model_name: Yup.string().trim().required('Model name is required'),
+  id: Yup.number().required('partnerCarsSchema.model.idRequired'),
+  brand_name: Yup.string().trim().required('partnerCarsSchema.model.brandRequired'),
+  model_name: Yup.string().trim().required('partnerCarsSchema.model.modelRequired'),
 });
 
 const CountrySchema = Yup.object().shape({
-  id: Yup.number().required('ID is required'),
-  name: Yup.string().trim().required('Country is required'),
+  id: Yup.number().required('partnerCarsSchema.country.idRequired'),
+  name: Yup.string().trim().required('partnerCarsSchema.country.nameRequired'),
 });
 
 interface IProps {
@@ -36,6 +37,7 @@ export default function PartnerCarsForm({
   partner,
   partnerCar
 }:IProps) {
+  const translate = useTranslations();
   const router = useRouter();
   const [car, setCar] = useState<ICarPartnerDetails | null>(partnerCar ? partnerCar : null);
   const [responseCarId, setResponseCarId] = useState<string>();
@@ -91,76 +93,76 @@ export default function PartnerCarsForm({
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   const PartnerCarsSchema = Yup.object().shape({
-    model: ModelSchema.required('Model is required'),
+    model: ModelSchema.required('partnerCarsSchema.model.required'),
     specification: Yup
       .string()
       .trim()
-      .required('Specification is required'),
+      .required('partnerCarsSchema.specification.required'),
     year: Yup
       .string()
       .trim()
-      .required('Year is required'),
+      .required('partnerCarsSchema.year.required'),
     vin: Yup
       .string()
       .trim()
-      .required('VIN is required'),
+      .required('partnerCarsSchema.vin.required'),
     price: Yup
       .string()
       .trim()
-      .required("Price is required"),
+      .required("partnerCarsSchema.price.required"),
     photos: car
     ? (Yup.array()
         .of(
           Yup.mixed<File>()
-            .test('fileType', 'Unsupported file type', (value) => {
+            .test('fileType', 'partnerCarsSchema.photos.unsupported', (value) => {
               return value && SUPPORTED_FORMATS.includes(value.type);
             })
-            .required('Photo is required')
+            .required('partnerCarsSchema.photos.required')
         )
-        .max(20, 'Photo is too long')
+        .max(20, 'partnerCarsSchema.photos.max')
       )
     : (Yup.array()
         .of(
           Yup.mixed<File>()
-            .test('fileType', 'Unsupported file type', (value) => {
+            .test('fileType', 'partnerCarsSchema.photosTwo.unsupported', (value) => {
               return value && SUPPORTED_FORMATS.includes(value.type);
             })
-            .required('Photo is required')
+            .required('partnerCarsSchema.photosTwo.required')
         )
-        .max(20, 'Photo is too long')
-        .required('Photo is required')
+        .max(20, 'partnerCarsSchema.photosTwo.max')
+        .required('partnerCarsSchema.photosTwo.unsupported')
       ),
     description: Yup
       .string()
       .trim()
-      .max(50000, 'Description is too long')
-      .required('Description is required'),
+      .max(50000, 'partnerCarsSchema.description.max')
+      .required('partnerCarsSchema.description.required'),
     innerColor: Yup
       .string()
       .trim()
-      .required('Inside color is required'),
+      .required('partnerCarsSchema.innerColor.required'),
     outerColor: Yup
       .string()
       .trim()
-      .required('Outer color is required'),
+      .required('partnerCarsSchema.outerColor.required'),
     documents: Yup.array()
       .of(
         Yup.mixed<File>()
-          .test('fileType', 'Unsupported file type', (value) => {
+          .test('fileType', 'partnerCarsSchema.documents.unsupported', (value) => {
             return value && SUPPORTED_FORMATS.includes(value.type);
           })
-          .required('Document is required')
+          .required('partnerCarsSchema.documents.required')
       )
-      .max(20, 'Document is too long'),
-    country: CountrySchema.required('Country is required'),
+      .max(20, 'partnerCarsSchema.documents.max'),
+    country: CountrySchema.required('partnerCarsSchema.country.required'),
     postCode: Yup
       .string()
       .trim()
-      .required('Index code is required'),
+      .required('partnerCarsSchema.postCode.required'),
     commentary: Yup
       .string()
       .trim()
-      .max(1000, 'Model is too long')
+      .max(1000, 'partnerCarsSchema.commentary.required')
   });
 
   const handleDeleteAttachedPhotos = (event: React.MouseEvent<HTMLButtonElement>, photo: IPartnerPhotoList) => {
@@ -180,7 +182,7 @@ export default function PartnerCarsForm({
     if(attachedPhotos && attachedPhotos.length > 0) {
       return (
         <div>
-          <p className='inline-block text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-1'>Uploaded Files</p>
+          <p className='inline-block text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-1'>{translate('accountPartnerCars.form.attachedPhotos.label')}</p>
           <div className='flex flex-col gap-1 block w-full border border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl text-sm font-normal px-4 py-3'>
             {attachedPhotos.map((photo) => (
               <div key={photo.id} className='relative flex items-center w-fit rounded-2xl px-1 py-2'>
@@ -221,7 +223,7 @@ export default function PartnerCarsForm({
     if(attachedDocuments && attachedDocuments.length > 0) {
       return (
         <div>
-          <p className='inline-block text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-1'>Uploaded Files</p>
+          <p className='inline-block text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-1'>{translate('accountPartnerCars.form.attachedDocuments.label')}</p>
           <div className='flex flex-col gap-1 block w-full border border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl text-sm font-normal px-4 py-3'>
             {attachedDocuments.map((document) => (
               <div key={document.file_name} className='flex items-center w-fit border rounded-2xl px-3 py-2'>
@@ -416,8 +418,8 @@ export default function PartnerCarsForm({
             <FormikInputCarSelector
               disabled={car?.is_verified}
               name='model'
-              placeholder='Chose model'
-              title='Model name'
+              placeholder='accountPartnerCars.form.modelName.placeholder'
+              title='accountPartnerCars.form.modelName.label'
               options={models}
               error={errors.model?.brand_name}
               touched={touched.model?.brand_name}
@@ -426,8 +428,8 @@ export default function PartnerCarsForm({
             <FormikInput
               disabled={car?.is_verified}
               name='specification'
-              placeholder='Enter specification'
-              title='Specification'
+              placeholder='accountPartnerCars.form.specification.placeholder'
+              title='accountPartnerCars.form.specification.label'
               error={errors.specification}
               touched={touched.specification}
             />
@@ -436,8 +438,8 @@ export default function PartnerCarsForm({
               disabled={car?.is_verified}
               onKeyPress={handleKeyPressNumber}
               name='year'
-              placeholder='Enter year'
-              title='Year of manufacture'
+              placeholder='accountPartnerCars.form.year.placeholder'
+              title='accountPartnerCars.form.year.label'
               error={errors.year}
               touched={touched.year}
             />
@@ -445,8 +447,8 @@ export default function PartnerCarsForm({
             <FormikInput
               disabled={car?.is_verified}
               name='vin'
-              placeholder='Enter VIN'
-              title='VIN'
+              placeholder='accountPartnerCars.form.vin.placeholder'
+              title='accountPartnerCars.form.vin.label'
               error={errors.vin}
               touched={touched.vin}
             />
@@ -454,8 +456,8 @@ export default function PartnerCarsForm({
             <FormikInput
               onKeyPress={handleKeyPressNumber}
               name='price'
-              placeholder='Enter price'
-              title='Price'
+              placeholder='accountPartnerCars.form.price.placeholder'
+              title='accountPartnerCars.form.price.label'
               error={errors.price}
               touched={touched.price}
             />
@@ -465,7 +467,7 @@ export default function PartnerCarsForm({
               variant='photo'
               initialValues={ car ? initialValueFilled : null}
               name='photos'
-              label='Upload car photos'
+              label='accountPartnerCars.form.uploadPhotos.label'
               multiple
               error={errors.photos}
               touched={touched.photos}
@@ -476,8 +478,8 @@ export default function PartnerCarsForm({
               disabled={car?.is_verified}
               rows={4}
               name='description'
-              placeholder='Description'
-              title='Description'
+              placeholder='accountPartnerCars.form.description.placeholder'
+              title='accountPartnerCars.form.description.label'
               rounded='rounded-[40px]'
               error={errors.description}
               touched={touched.description}
@@ -486,8 +488,8 @@ export default function PartnerCarsForm({
             <FormikInput
               disabled={car?.is_verified}
               name='outerColor'
-              placeholder='External color'
-              title='External color'
+              placeholder='accountPartnerCars.form.externalColor.placeholder'
+              title='accountPartnerCars.form.externalColor.label'
               error={errors.outerColor}
               touched={touched.outerColor}
             />
@@ -495,8 +497,8 @@ export default function PartnerCarsForm({
             <FormikInput
               disabled={car?.is_verified}
               name='innerColor'
-              placeholder='Inside color'
-              title='Inside color'
+              placeholder='accountPartnerCars.form.insideColor.placeholder'
+              title='accountPartnerCars.form.insideColor.label'
               error={errors.innerColor}
               touched={touched.innerColor}
             />
@@ -505,7 +507,7 @@ export default function PartnerCarsForm({
               disabled={car?.is_verified}
               initialValues={ car ? initialValueFilled : null}
               name='documents'
-              label='Upload extra car documents'
+              label='accountPartnerCars.form.uploadDocuments.label'
               multiple
               error={errors.documents}
               touched={touched.documents}
@@ -517,8 +519,8 @@ export default function PartnerCarsForm({
                 <FormikInputSelector
                   disabled={car?.is_verified}
                   name='country'
-                  placeholder='Chose country'
-                  title='Car location, Country'
+                  placeholder='accountPartnerCars.form.carLocation.placeholder'
+                  title='accountPartnerCars.form.carLocation.label'
                   options={countries}
                   error={errors.country?.name}
                   touched={touched.country?.name}
@@ -529,8 +531,8 @@ export default function PartnerCarsForm({
                 <FormikInput
                   disabled={car?.is_verified}
                   name='postCode'
-                  placeholder='Post code'
-                  title='Post code'
+                  placeholder='accountPartnerCars.form.postCode.placeholder'
+                  title='accountPartnerCars.form.postCode.label'
                   error={errors.postCode}
                   touched={touched.postCode}
                 />
@@ -541,8 +543,8 @@ export default function PartnerCarsForm({
               disabled={car?.is_verified}
               rows={4}
               name='commentary'
-              placeholder='Commentary'
-              title='Commentary'
+              placeholder='accountPartnerCars.form.commentary.placeholder'
+              title='accountPartnerCars.form.commentary.label'
               rounded='rounded-[40px]'
               error={errors.commentary}
               touched={touched.commentary}
@@ -554,14 +556,14 @@ export default function PartnerCarsForm({
               disabled={!!partner.is_verified ? isSubmitting : true}
               loading={isSubmitting}
             >
-              Continue
+              {translate('accountPartnerCars.form.button.continue')}
             </ButtonPrimary>
           </Form>
         )}
       </Formik>
 
       <Modal
-        title='Thank you!'
+        title={translate('accountPartnerCars.modal.thankYou.label')}
         isModalOpen={isCreateModalOpen ? isCreateModalOpen : isUpdateModalOpen}
         setIsModalOpen={ isCreateModalOpen ? setIsCreateModalOpen : setIsUpdateModalOpen }
         handleChange={ isCreateModalOpen ? handleRedirectOnEdit : undefined }
@@ -571,7 +573,7 @@ export default function PartnerCarsForm({
               <div className='text-center space-y-10'>
                 <InformationCircleIcon className='block mx-auto w-24 h-24 text-yellow-500' />
                 <p className='px-3 text-md font-semibold'>
-                  Thank you, your request has been accepted. Soon it will be processed and the car will appear on the website. If there is not enough information, our manager will contact you.
+                  {translate('accountPartnerCars.modal.thankYouRequest.title')}
                 </p>
               </div>
             )
@@ -579,7 +581,7 @@ export default function PartnerCarsForm({
               <div className='text-center space-y-10'>
                 <InformationCircleIcon className='block mx-auto w-24 h-24 text-yellow-500' />
                 <p className='px-3 text-md font-semibold'>
-                  Thank you, your update has been accepted.
+                  {translate('accountPartnerCars.modal.thankYouUpdate.title')}
                 </p>
               </div>
             )

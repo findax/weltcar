@@ -13,10 +13,12 @@ const CarCard = ({
   className = '',
   carData,
   paddingBottomGrid,
+  translate
 }: {
   className?: string;
   carData: ICar;
   paddingBottomGrid: string;
+  translate: any;
 }) => {
   const {
     brand,
@@ -68,7 +70,10 @@ const CarCard = ({
 
         <div className='flex-grow py-3 text-sm space-y-2'>
           <h4 className='flex items-center'>
-            exterior&nbsp;color:&nbsp;
+            {translate('catalog.exterior')}
+            &nbsp;
+            {translate('catalog.exterior.label')}:
+            &nbsp;
             <span
               className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 flex-shrink-0'
               style={{ backgroundColor: `${outer_color_hex}` }}
@@ -81,7 +86,10 @@ const CarCard = ({
             </span>
           </h4>
           <h4 className='flex items-center'>
-            interior&nbsp;color:&nbsp;
+            {translate('catalog.interior')}
+            &nbsp;
+            {translate('catalog.interior.label')}:
+            &nbsp;
             <span
               className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 flex-shrink-0'
               style={{ backgroundColor: `${inner_color_hex}` }}
@@ -104,7 +112,7 @@ const CarCard = ({
               fontSize='text-sm'
               sizeClass='px-5 py-2 md:px-6 md:py-3'
             >
-              See more
+              {translate('catalog.button.seeMore')}
             </ButtonPrimary>
           </Link>
         </div>

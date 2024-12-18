@@ -18,6 +18,8 @@ import { useUserStore } from '@/stores/user-store';
 import ButtonAddCar from './components/ButtonAddCar';
 import { getPartner } from '@/api/partner';
 import { IPartnerResponse } from '@/types/partner';
+import { useTranslations } from 'next-intl';
+import { LanguageSelector } from '@/shared/LanguageSelector';
 
 const Header = () => {
   const prevScrollPos = useRef(0);
@@ -28,6 +30,8 @@ const Header = () => {
   const isMobile = useMediaQuery(1024);
   const user = useUserStore((state) => state.user);
   const [partner, setPartner] = useState<IPartnerResponse>();
+
+  const t = useTranslations()
 
   useEffect(() => {
     useUserStore.persist.rehydrate();
@@ -85,14 +89,18 @@ const Header = () => {
               isDark={isDarkMode} 
             />
 
-            <Navigation />
+            <Navigation translate={t}/>
           </div>
 
+          {/* <div className='flex mr-4'>
+            <LanguageSelector />
+          </div> */}
+
           <div className='flex flex-shrink-0 justify-end flex-1 lg:flex-none text-neutral-700 dark:text-neutral-100 space-x-0.5'>
-            {partner?.is_verified && <ButtonAddCar />}
+            {partner?.is_verified && <ButtonAddCar translate={t}/>}
             <SwitchDarkMode />
             {user ? (
-              <AvatarDropdown />
+              <AvatarDropdown translate={t}/>
             ) : (
               <button
                 className={`self-center w-10 h-10 md:w-12 md:h-12 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center`}
@@ -103,7 +111,11 @@ const Header = () => {
               </button>
             )}
             <div className='px-0.5' />
-            <MenuMobile isDark={isDarkMode} partner={partner ? partner : undefined}/>
+            <MenuMobile 
+              isDark={isDarkMode} 
+              partner={partner ? partner : undefined}
+              translate={t}
+            />
           </div>
         </div>
       </header>

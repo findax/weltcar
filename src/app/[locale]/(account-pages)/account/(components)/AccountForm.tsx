@@ -5,8 +5,10 @@ import { FormikInput, FormikPhoneNumberInput } from '@/shared/FormInputs';
 import { IUser } from '@/types/user';
 import { updateUser } from '@/api/user';
 import { useUserStore } from '@/stores/user-store';
+import { useTranslations } from 'next-intl';
 
 export default function AccountForm() {
+  const translate = useTranslations();
   const user = useUserStore((state) => state.user);
   const updateUserState = useUserStore((state) => state.updateUserState);
   // const phoneValidationPattern = /\+38 \(0\d{2}\) \d{3}-\d{2}-\d{2}/;
@@ -14,17 +16,17 @@ export default function AccountForm() {
   const AccountSchema = Yup.object().shape({
     name: Yup.string()
       .trim()
-      .min(2, 'Name is too short')
-      .max(50, 'Name is too long')
-      .required('Name is required'),
+      .min(2, 'accountSchema.name.min')
+      .max(50, 'accountSchema.name.max')
+      .required('accountSchema.name.required'),
     surname: Yup.string()
       .trim()
-      .min(2, 'Surname is too short')
-      .max(50, 'Surname is too long'),
+      .min(2, 'accountSchema.surname.min')
+      .max(50, 'accountSchema.surname.max'),
     city: Yup.string()
       .trim()
-      .min(2, 'City name is too short')
-      .max(50, 'City name is too long'),
+      .min(2, 'accountSchema.city.min')
+      .max(50, 'accountSchema.city.max'),
     phone: Yup.string().trim(),
     // .matches(phoneValidationPattern, 'Invalid phone number')
   });
@@ -51,8 +53,8 @@ export default function AccountForm() {
         <Form className='grid grid-cols-1 gap-7 w-full max-w-xl mt-10 md:pr-32'>
           <FormikInput
             name='name'
-            placeholder='Enter your name'
-            title='First name'
+            placeholder='accountInformation.form.firstName.placeholder'
+            title='accountInformation.form.firstName.label'
             rounded='rounded-full'
             sizeClass='h-14'
             error={errors.name}
@@ -61,8 +63,8 @@ export default function AccountForm() {
           {/* ---- */}
           <FormikInput
             name='surname'
-            placeholder='Enter your surname'
-            title='Last name'
+            placeholder='accountInformation.form.lastName.placeholder'
+            title='accountInformation.form.lastName.label'
             rounded='rounded-full'
             sizeClass='h-14'
             error={errors.surname}
@@ -72,8 +74,8 @@ export default function AccountForm() {
           <FormikInput
             name='email'
             type='email'
-            placeholder='example@mail.com'
-            title='Email address'
+            placeholder='accountInformation.form.emailAddress.placeholder'
+            title='accountInformation.form.emailAddress.label'
             rounded='rounded-full'
             sizeClass='h-14'
             disabled
@@ -81,16 +83,16 @@ export default function AccountForm() {
           {/* ---- */}
           <FormikInput
             name='city'
-            placeholder='Enter your city'
-            title='City'
+            placeholder='accountInformation.form.city.placeholder'
+            title='accountInformation.form.city.label'
             rounded='rounded-full'
             sizeClass='h-14'
             error={errors.city}
-            touched={touched.city}
+            // touched={touched.city}
           />
           {/* ---- */}
           <FormikPhoneNumberInput
-            title='Phone number'
+            title='accountInformation.form.phoneNumber.label'
             rounded='rounded-full'
             sizeClass='h-14'
             error={errors.phone}
@@ -103,7 +105,7 @@ export default function AccountForm() {
             loading={isSubmitting}
             className='text-base lg:text-lg w-full sm:w-40'
           >
-            Update info
+            {translate('accountInformation.form.button.update')}
           </ButtonPrimary>
         </Form>
       )}

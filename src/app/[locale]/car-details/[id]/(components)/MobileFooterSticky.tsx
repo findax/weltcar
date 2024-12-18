@@ -1,5 +1,6 @@
 import { ButtonPrimary } from '@/shared/Buttons';
 import priceWithComma from '@/utils/priceWithComma';
+import { useTranslations } from 'next-intl';
 
 const MobileFooterSticky = ({
   onClick,
@@ -10,6 +11,7 @@ const MobileFooterSticky = ({
   price: string | number;
   isSold: boolean;
 }) => {
+  const translate = useTranslations();
   const isDisabled = isSold || isNaN(Number(price));
   const buttonClass = isDisabled ? '!bg-gray-600 hover:bg-gray-600' : '';
 
@@ -27,7 +29,7 @@ const MobileFooterSticky = ({
           disabled={isDisabled}
           className={buttonClass}
         >
-          {isSold ? 'Sold' : 'Reserve'}
+          {isSold ? translate('carDetails.mobile.button.sold') : translate('carDetails.mobile.button.reserve')}
         </ButtonPrimary>
       </div>
     </div>

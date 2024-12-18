@@ -13,7 +13,7 @@ export default function SearchFormCatalog() {
       .trim()
       .min(2, 'Name is too short')
       .max(20, 'Name is too long')
-      .required(''),
+      .required('Name is required'),
   });
 
   return (
@@ -36,7 +36,7 @@ export default function SearchFormCatalog() {
           <FormikInput
             name='search'
             type='text'
-            placeholder='Search by car name'
+            placeholder='filters.input.searchByCarName'
             rounded='rounded-full'
             sizeClass='h-12 px-5 py-3'
             error={errors.search}

@@ -62,7 +62,7 @@ function PageHome() {
     scrollStep();
   };
   
-  const t = useTranslations()
+  const t = useTranslations();
 
   if (!mounted) return null;
 
@@ -100,7 +100,7 @@ function PageHome() {
 
       {/* SECTION HERO */}
       <div className='relative container pt-12 xl:pt-14 pb-24 lg:pb-28'>
-        <SectionHero />
+        <SectionHero translate={t}/>
         <div onClick={scrollToSection} className='hidden lg:block absolute -bottom-[10%] right-[48%] cursor-pointer animate-pulse'>
           <Image 
             className='w-8 h-7'
@@ -112,13 +112,13 @@ function PageHome() {
 
       <div ref={targetSectionRef}  className='container relative space-y-24 mb-0 sm:mb-24 lg:space-y-28 lg:mb-28 mt-40'>
         <div className='relative py-16'>
-          <SectionHowItWork />
+          <SectionHowItWork translate={t}/>
         </div>
 
         {/* <SectionVideos /> */}
 
         <div className='relative flex pb-20 lg:py-20'>
-          <SectionWhyChooseUs />
+          <SectionWhyChooseUs translate={t}/>
           <div className='lg:max-w-[70%] xl:max-w-full absolute top-[80%] md:top-[65%] lg:top-20 xl:-top-10 -right-24'>
             <Image 
               alt='car image' 
@@ -132,7 +132,7 @@ function PageHome() {
         </div> */}
 
         <div className='relative pt-64 sm:pt-96 lg:pt-0 xl:pt-16 py-16'>
-          <SectionSubscribe />
+          <SectionSubscribe translate={t}/>
         </div>
       </div>
 

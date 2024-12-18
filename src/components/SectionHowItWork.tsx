@@ -15,32 +15,34 @@ export interface SectionHowItWorkProps {
     img: StaticImageData;
     imgDark?: StaticImageData;
   }[];
+  translate: any;
 }
 
 const DEMO_DATA: SectionHowItWorkProps['data'] = [
   {
     id: 1,
     img: HIW1img,
-    title: 'Discover Luxury',
-    desc: 'Explore our curated collection of exclusive vehicles, each selected for its unparalleled quality and elegance. Begin your journey into luxury today',
+    title: 'howItWorks.luxury.title',
+    desc: 'howItWorks.luxury.description',
   },
   {
     id: 2,
     img: HIW2img,
-    title: 'Personalized Consultation',
-    desc: 'Our expert consultants are dedicated to understanding your unique preferences and needs, providing tailored advice and support to help you find your perfect car',
+    title: 'howItWorks.consultation.title',
+    desc: 'howItWorks.consultation.description',
   },
   {
     id: 3,
     img: HIW3img,
-    title: 'Exclusive Savings',
-    desc: 'Enjoy exclusive deals and savings on the most luxurious vehicles. At WeltCar, we make high-end car ownership accessible',
+    title: 'howItWorks.saving.title',
+    desc: 'howItWorks.saving.description',
   },
 ];
 
 const SectionHowItWork: FC<SectionHowItWorkProps> = ({
   className = '',
   data = DEMO_DATA,
+  translate
 }) => {
   return (
     <div
@@ -52,7 +54,7 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
         // desc='Keep calm & drive on'
         fontClass='!font-bold text-3xl md:text-4xl xl:text-5xl text-neutral-1050 dark:text-white'
       >
-        How It Works
+        {translate('howItWorks.title')}
       </Heading>
       <div className='flex flex-col gap-5 lg:flex-row justify-around mt-14'>
         {data.map((item) => (
@@ -68,9 +70,9 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
               />
             </div>
             <div className='mt-4 md:mt-8'>
-              <h3 className='text-lg md:text-2xl font-bold text-neutral-1050 dark:text-white '>{item.title}</h3>
+              <h3 className='text-lg md:text-2xl font-bold text-neutral-1050 dark:text-white '>{translate(item.title)}</h3>
               <span className='block mt-5 md:text-lg text-neutral-500 dark:text-neutral-400'>
-                {item.desc}
+                {translate(item.desc)}
               </span>
             </div>
           </div>

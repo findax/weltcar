@@ -8,6 +8,7 @@ import { PlayIcon } from '@heroicons/react/24/outline';
 import { ICarGallery, ICarVideos } from '@/types/cardetails';
 import CarDetailsVideos from './(car-details-gallery)/CarDetailsVideos';
 import BtnDetails from './BtnDetails';
+import { useTranslations } from 'next-intl';
 
 interface IProps {
   images: ICarGallery[];
@@ -20,16 +21,17 @@ export default function ImagesHeader({
 }: IProps) {
   const thisPathname = usePathname();
   const router = useRouter();
+  const translate = useTranslations();
 
   const handleOpenModalImageGallery = () => {
     images.length > 1
-      ? router.push(`${thisPathname}/?modal=CAR_PHOTO_TOUR` as Route)
-      : router.push(`${thisPathname}/?modal=CAR_PHOTO_TOUR&photoId=0` as Route);
+      ? router.push(`${thisPathname}/?${translate('carDetails.href.tour')}` as Route)
+      : router.push(`${thisPathname}/?${translate('carDetails.href.tourPhoto')}` as Route);
   };
 
   const handleOpenModalVideoGallery = () => {
     if(videos){
-      router.push(`${thisPathname}/?modal=CAR_VIDEO_TOUR` as Route);
+      router.push(`${thisPathname}/?${translate('carDetails.href.videoTour')}` as Route);
     }
     // FUTURE 
     // if(videos){
@@ -73,7 +75,7 @@ export default function ImagesHeader({
               videos && (
                 <BtnDetails 
                   className='flex items-center justify-center left-3 bottom-3 xl:left-[60px] 2xl:left-[108px] md:bottom-3'
-                  title="Watch Video"
+                  title={translate('carDetails.whatchV.label')}
                   ico={<PlayIcon className='h-4 w-4 md:h-5 md:w-5' />}
                   handleOpenModal={handleOpenModalVideoGallery}
                 />
@@ -132,7 +134,7 @@ export default function ImagesHeader({
 
             <BtnDetails 
               className='hidden md:flex md:items-center md:justify-center left-3 bottom-3'
-              title="Show all photos"
+              title={translate('carDetails.showP.label')}
               ico={<Squares2X2Icon className='h-4 w-4 md:h-5 md:w-5' />}
               handleOpenModal={handleOpenModalImageGallery}
             />
@@ -141,7 +143,7 @@ export default function ImagesHeader({
               videos && (
                 <BtnDetails 
                   className='flex items-center justify-center left-3 bottom-3 md:left-52 md:bottom-3'
-                  title="Watch Video"
+                  title={translate('carDetails.whatchV.label')}
                   ico={<PlayIcon className='h-4 w-4 md:h-5 md:w-5' />}
                   handleOpenModal={handleOpenModalVideoGallery}
                 />

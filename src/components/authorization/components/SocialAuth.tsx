@@ -1,21 +1,23 @@
 import facebookSvg from '@/images/Facebook.svg';
 import googleSvg from '@/images/Google.svg';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 const loginSocials = [
   {
-    name: 'Continue with Facebook',
+    name: 'socialAuth.facebookContine.title',
     href: '#',
     icon: facebookSvg,
   },
   {
-    name: 'Continue with Google',
+    name: 'socialAuth.googleContine.title',
     href: '#',
     icon: googleSvg,
   },
 ];
 
 export default function SocialAuth() {
+  const translate = useTranslations();
   return (
     <>
       <div className='grid gap-3'>
@@ -27,7 +29,7 @@ export default function SocialAuth() {
           >
             <Image className='flex-shrink-0' src={item.icon} alt={item.name} />
             <h3 className='flex-grow text-center text-sm font-medium text-neutral-700 dark:text-neutral-300 sm:text-sm'>
-              {item.name}
+              {translate(item.name)}
             </h3>
           </a>
         ))}
@@ -35,7 +37,7 @@ export default function SocialAuth() {
       {/* OR */}
       <div className='relative text-center'>
         <span className='relative z-10 inline-block px-4 font-medium text-sm bg-white dark:text-neutral-400 dark:bg-neutral-900'>
-          OR
+          {translate('socialAuth.or.title')}
         </span>
         <div className='absolute left-0 w-full top-1/2 transform -translate-y-1/2 border border-neutral-100 dark:border-neutral-800'></div>
       </div>

@@ -12,8 +12,10 @@ import Image from 'next/image';
 import bgImg from '@/images/bg-cars/bg-car-10.webp';
 import { useUserStore } from '@/stores/user-store';
 import { IUser } from '@/types/user';
+import { useTranslations } from 'next-intl';
 
 export default function RefreshPasswordPage() {
+  const translate = useTranslations();
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [code, setCode] = useState('');
@@ -28,15 +30,15 @@ export default function RefreshPasswordPage() {
   const UpdatePasswordSchema = Yup.object().shape({
     new_password: Yup.string()
       .trim()
-      .min(8, 'Password must be at least 8 characters')
-      .max(50, 'Password must be less than 50 characters')
-      .matches(/[a-z]+/, 'Password must contain at least one lowercase letter')
-      .matches(/[A-Z]+/, 'Password must contain at least one uppercase letter')
-      .matches(/\d+/, 'Password must contain at least one number')
-      .required('Password is required'),
+      .min(8, 'refreshPasswordSchema.newPassword.min')
+      .max(50, 'refreshPasswordSchema.newPassword.max')
+      .matches(/[a-z]+/, 'refreshPasswordSchema.newPassword.matchesLow')
+      .matches(/[A-Z]+/, 'refreshPasswordSchema.newPassword.matchesUp')
+      .matches(/\d+/, 'refreshPasswordSchema.newPassword.matchesNumb')
+      .required('refreshPasswordSchema.newPassword.required'),
     confirm_password: Yup.string()
-      .oneOf([Yup.ref('new_password'), ''], 'Passwords must match')
-      .required('Confirm password is required'),
+      .oneOf([Yup.ref('new_password'), ''], 'refreshPasswordSchema.password.oneOf')
+      .required('refreshPasswordSchema.password.required'),
   });
 
   return (
@@ -50,14 +52,14 @@ export default function RefreshPasswordPage() {
           <div className='text-center space-y-10'>
             <CheckCircleIcon className='block mx-auto w-24 h-24 text-green-500' />
             <p className='px-6 text-2xl font-semibold'>
-              Your password has been updated successfully!
+              {translate('refreshPass.successfully.title')}
             </p>
-            <ButtonPrimary href='/catalog'>Choose your car</ButtonPrimary>
+            <ButtonPrimary href='/catalog'>{translate('refreshPass.button.choose')}</ButtonPrimary>
           </div>
         </div>
       ) : (
         <div className='h-[calc(100vh-76px)] py-16 xl:py-28 relative space-y-6 sm:space-y-8'>
-          <h2 className='text-3xl font-semibold'>Update your password</h2>
+          <h2 className='text-3xl font-semibold'>{translate('refreshPass.update.title')}</h2>
           <div className='w-14 border-b border-neutral-300 dark:border-neutral-700'></div>
           <Formik
             initialValues={{
@@ -87,17 +89,17 @@ export default function RefreshPasswordPage() {
             {({ errors, touched, isSubmitting }) => (
               <Form className='grid grid-cols-1 gap-7 w-full max-w-lg'>
                 <FormikPasswordInput
-                  title='New password'
+                  title='refreshPass.password.title'
                   name='new_password'
-                  placeholder='Enter new password'
+                  placeholder='refreshPass.password.placeholder'
                   error={errors.new_password}
                   touched={touched.new_password}
                 />
                 {/* ---- */}
                 <FormikPasswordInput
-                  title='Confirm password'
+                  title='refreshPass.password.confirm.title'
                   name='confirm_password'
-                  placeholder='Confirm password'
+                  placeholder='refreshPass.password.confirm.placeholder'
                   error={errors.confirm_password}
                   touched={touched.confirm_password}
                 />
@@ -107,7 +109,7 @@ export default function RefreshPasswordPage() {
                   disabled={isSubmitting}
                   loading={isSubmitting}
                 >
-                  Update password
+                  {translate('refreshPass.button.update')}
                 </ButtonPrimary>
               </Form>
             )}

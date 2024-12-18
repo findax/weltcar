@@ -17,8 +17,8 @@ export default function SubscribeForm({
   const SubscribeSchema = Yup.object().shape({
     email: Yup.string()
       .trim()
-      .email('Invalid email')
-      .required('Email is required'),
+      .email('subscribeSchema.email.invalid')
+      .required('subscribeSchema.email.required'),
   });
   return (
     <Formik
@@ -40,7 +40,7 @@ export default function SubscribeForm({
           <FormikInput
             name='email'
             type='email'
-            placeholder='example@mail.com'
+            placeholder='joinOurNewsletter.placeholder'
             rounded='rounded-full'
             sizeClass='px-0 py-3 p-0 h-14'
             error={errors.email}

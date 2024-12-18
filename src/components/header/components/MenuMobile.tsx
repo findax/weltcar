@@ -20,13 +20,15 @@ interface MenuMobileProps {
   data?: NavItemType[];
   partner?: IPartnerResponse;
   isDark?: boolean;
+  translate: any;
 }
 const MenuMobile = ({
   className = '',
   iconClassName = 'h-8 w-8',
   data = NAVIGATION_DEMO_MOBILE,
   partner = undefined,
-  isDark = false
+  isDark = false,
+  translate
 }: MenuMobileProps) => {
   const [isVisable, setIsVisable] = useState(false);
   const pathname = usePathname();
@@ -65,9 +67,9 @@ const MenuMobile = ({
             <Logo isDark={isDark}/>
             <div className='flex flex-col mt-5 text-neutral-700 dark:text-neutral-300 text-sm'>
               <p className='text-neutral-600 dark:text-neutral-300'>
-                Welcome to WeltCar - Your Gateway to
+                {translate('mobileNavMenu.title.welcomeTo')}
                 <br />
-                Luxury Automotive Excellence
+                {translate('mobileNavMenu.title.luxury')}
               </p>
 
               <div className='flex justify-between items-center mt-4'>
@@ -94,7 +96,7 @@ const MenuMobile = ({
                       className='flex w-full px-4 font-medium uppercase tracking-wide text-sm hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg'
                       onClick={(e) => e.preventDefault()}
                     >
-                      <span className='py-2.5 pr-3'>{item.name}</span>
+                      <span className='py-2.5 pr-3'>{translate(item.name)}</span>
                       <span className='flex-1 flex'>
                         <Disclosure.Button
                           as='span'
@@ -120,7 +122,7 @@ const MenuMobile = ({
                               <span
                                 className={`py-2.5 pr-3 ${!i.children ? 'block w-full' : ''}`}
                               >
-                                {i.name}
+                                {translate(i.name)}
                               </span>
                               {i.children && (
                                 <span
@@ -151,7 +153,7 @@ const MenuMobile = ({
                     href={item.href || '/'}
                   >
                     <span className='py-2.5 pr-3 block w-full'>
-                      {item.name}
+                      {translate(item.name)}
                     </span>
                   </Link>
                 )}

@@ -6,8 +6,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-const ButtonAddCar = () => {
-  const [buttonInfo, setButtonInfo] = useState<NavItemType>({ id: ncNanoId(), href: '/partner-cars', name: 'Add Car' })
+interface IProps {
+  translate: any;
+}
+
+const ButtonAddCar = ({ translate }:IProps) => {
+  const [buttonInfo, setButtonInfo] = useState<NavItemType>({ id: ncNanoId(), href: '/partner-cars', name: 'navbar.addCar' })
   const locationPathName = usePathname();
   const isActive = locationPathName === buttonInfo.href;
 
@@ -19,7 +23,7 @@ const ButtonAddCar = () => {
         }`}
         href={buttonInfo.href}
       >
-        {buttonInfo.name}
+        {translate(buttonInfo.name)}
       </Link>
     </div>
   );

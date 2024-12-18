@@ -12,15 +12,17 @@ import ErrorComponent from '@/components/ErrorComponent';
 import LoadingSpinner from '@/shared/LoadingSpinner';
 import { getPartnerCarId } from '@/api/cars';
 import { useSearchParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 
 const PartnerCarsPage = () => {
-  const searchParams = useSearchParams()
-  const id = searchParams.get('id')
+  const translate = useTranslations();
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id');
   const [isFirstLoading, setFirstLoading] = useState(true);
   const [isError, setError] = useState(false);
   const [partner, setPartner] = useState<IPartnerResponse>();
-  const [partnerCar, setPartnerCar] = useState<ICarPartnerDetails>()
+  const [partnerCar, setPartnerCar] = useState<ICarPartnerDetails>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,7 +63,7 @@ const PartnerCarsPage = () => {
     <ProtectedRoute role={UserRole.partner}>
       <div className='relative space-y-6 md:space-y-8 lg:min-h-[650px]'>
         {/* HEADING */}
-        <h2 className='text-3xl font-semibold'>Account Partner cars</h2>
+        <h2 className='text-3xl font-semibold'>{translate('accountPartnerCars.title')}</h2>
         <div className='w-14 border-b border-neutral-300 dark:border-neutral-700'></div>
         <div className='flex flex-col md:flex-row'>
           <div className='flex-shrink-0 flex items-start'>

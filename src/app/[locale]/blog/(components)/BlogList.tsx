@@ -7,10 +7,12 @@ import BlogCard from './BlogCard';
 interface IProps {
   articleListData: Article[];
   results?: number;
+  translate: any;
 }
 
 const BlogList = ({
   articleListData,
+  translate,
   results
 }: IProps ) => {
   const { currentPage, handlePageChange } = useQueryParams();
@@ -41,7 +43,7 @@ const BlogList = ({
             </div>
         ) : (
           <div className='h-[40vh] flex justify-center items-center flex-col bg-white/50 dark:bg-neutral-800/60'>
-            <p className='text-2xl'>Sorry, nothing found</p>
+            <p className='text-2xl'>{translate('Blog.notFound.title')}</p>
           </div>
         )}
       </div>

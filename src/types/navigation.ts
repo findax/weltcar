@@ -6,25 +6,25 @@ export const NAVIGATION_DEMO: NavItemType[] = [
   {
     id: ncNanoId(),
     href: '/catalog',
-    name: 'Catalog',
+    name: 'navbar.catalog',
   },
-  { id: ncNanoId(), href: '/about', name: 'About us' },
-  { id: ncNanoId(), href: '/blog', name: 'Blog' },
-  { id: ncNanoId(), href: '/contact', name: 'Contact us' },
-  { id: ncNanoId(), href: '/find-car', name: 'Find car' },
+  { id: ncNanoId(), href: '/about', name: 'navbar.about' },
+  { id: ncNanoId(), href: '/blog', name: 'navbar.blog' },
+  { id: ncNanoId(), href: '/contact', name: 'navbar.contact' },
+  { id: ncNanoId(), href: '/find-car', name: 'navbar.findCar' },
 ];
 
 export const NAVIGATION_DEMO_MOBILE: NavItemType[] = [
   {
     id: ncNanoId(),
     href: '/catalog',
-    name: 'Catalog',
+    name: 'navbar.catalog',
   },
-  { id: ncNanoId(), href: '/about', name: 'About us' },
-  { id: ncNanoId(), href: '/blog', name: 'Blog' },
-  { id: ncNanoId(), href: '/contact', name: 'Contact us' },
-  { id: ncNanoId(), href: '/find-car', name: 'Find car' },
-  { id: ncNanoId(), href: '/partner-cars', name: 'Add Car' },
+  { id: ncNanoId(), href: '/about', name: 'navbar.about' },
+  { id: ncNanoId(), href: '/blog', name: 'navbar.blog' },
+  { id: ncNanoId(), href: '/contact', name: 'navbar.contact' },
+  { id: ncNanoId(), href: '/find-car', name: 'navbar.findCar' },
+  { id: ncNanoId(), href: '/partner-cars', name: 'navbar.addCar' },
 ];
 
 export enum NavigationRoutes {

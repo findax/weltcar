@@ -10,26 +10,32 @@ import {
 import { ButtonPrimary } from '@/shared/Buttons';
 import { sendFeedback } from '@/api/feedback';
 
-export default function FeedbackForm() {
+interface IProps {
+  translate: any;
+}
+
+export default function FeedbackForm({
+  translate
+}: IProps) {
   // const phoneValidationPattern = /\+38 \(0\d{2}\) \d{3}-\d{2}-\d{2}/;
 
   const FeedbackSchema = Yup.object().shape({
     name: Yup.string()
       .trim()
-      .min(2, 'Name is too short')
-      .max(50, 'Name is too long')
-      .required('Name is required'),
+      .min(2, 'feedbackSchema.name.min')
+      .max(50, 'feedbackSchema.name.max')
+      .required('feedbackSchema.name.required'),
     email: Yup.string()
       .trim()
-      .email('Invalid email')
-      .required('Email is required'),
+      .email('feedbackSchema.email.invalid')
+      .required('feedbackSchema.email.required'),
     phone: Yup.string().trim(),
     // .matches(phoneValidationPattern, 'Invalid phone number')
     message: Yup.string()
       .trim()
-      .min(10, 'Message is too short')
-      .max(5000, 'Message is too long')
-      .required('Message is required'),
+      .min(10, 'feedbackSchema.message.min')
+      .max(5000, 'feedbackSchema.message.max')
+      .required('feedbackSchema.message.required'),
   });
   return (
     <Formik
@@ -55,8 +61,8 @@ export default function FeedbackForm() {
         <Form className='grid grid-cols-1 gap-7 -mt-1'>
           <FormikInput
             name='name'
-            placeholder='Enter your name'
-            title='Full name'
+            placeholder='contact.form.fullName.placeholder'
+            title='contact.form.fullName.label'
             rounded='rounded-full'
             sizeClass='h-14'
             error={errors.name}
@@ -66,8 +72,8 @@ export default function FeedbackForm() {
           <FormikInput
             name='email'
             type='email'
-            placeholder='example@mail.com'
-            title='Email address'
+            placeholder='contact.form.emailAddress.placeholder'
+            title='contact.form.emailAddress.label'
             rounded='rounded-full'
             sizeClass='h-14'
             error={errors.email}
@@ -75,7 +81,7 @@ export default function FeedbackForm() {
           />
           {/* ---- */}
           <FormikPhoneNumberInput
-            title='Phone number'
+            title='contact.form.phoneNumber.label'
             rounded='rounded-full'
             sizeClass='h-14'
             error={errors.phone}
@@ -84,8 +90,8 @@ export default function FeedbackForm() {
           {/* ---- */}
           <FormikTextarea
             name='message'
-            placeholder='Enter message'
-            title='Message'
+            placeholder='contact.form.message.placeholder'
+            title='contact.form.message.label'
             rows={6}
             rounded='rounded-[40px]'
             error={errors.message}
@@ -98,7 +104,7 @@ export default function FeedbackForm() {
             loading={isSubmitting}
             className='!text-lg mt-5 w-full sm:w-[102px]'
           >
-            Send
+            {translate('contact.form.button.send')}
           </ButtonPrimary>
         </Form>
       )}

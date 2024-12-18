@@ -6,8 +6,10 @@ import { IOrderDetails } from '@/types/user';
 import Link from 'next/link';
 import { UrlObject } from 'url';
 import { Route } from 'next';
+import { useTranslations } from 'next-intl';
 
 export default function OrderDetails({ order }: { order: IOrderDetails }) {
+  const translate = useTranslations();
   function correctDate(date: string) {
     const dateArray = date.split('T')[0].split('-');
     return `${dateArray[2]}.${dateArray[1]}.${dateArray[0]}`;
@@ -20,11 +22,11 @@ export default function OrderDetails({ order }: { order: IOrderDetails }) {
   return (
     <ul className='py-6 px-2 sm:px-6 lg:px-10 xl:px-20 bg-white/60 dark:bg-neutral-800/80 space-y-3'>
       <li className='flex items-center flex-wrap'>
-        <h4 className='text-md font-semibold mr-4'>Order:</h4>
+        <h4 className='text-md font-semibold mr-4'>{translate('yourOrders.order.title')}</h4>
         <span className='text-md'>{order.order_no}</span>
       </li>
       <li className='flex items-center flex-wrap'>
-        <h4 className='text-md font-semibold mr-4'>Payment status:</h4>
+        <h4 className='text-md font-semibold mr-4'>{translate('yourOrders.payment.status')}</h4>
         <span className='text-md'>{order.payment_status_name}</span>
       </li>
       <li>
@@ -67,7 +69,7 @@ export default function OrderDetails({ order }: { order: IOrderDetails }) {
       </li> */}
       {order.files.length > 0 && (
         <li className='flex flex-col items-start'>
-          <h4 className='text-md font-semibold mr-4'>Documents:</h4>
+          <h4 className='text-md font-semibold mr-4'>{translate('yourOrders.documents.title')}</h4>
           <ul className='ml-6 space-y-2'>
             {order.files.map((file, index) => (
               <li key={index} className='text-md font-medium'>
@@ -90,7 +92,7 @@ export default function OrderDetails({ order }: { order: IOrderDetails }) {
       )}
 
       <li className='pt-4 flex items-center flex-wrap'>
-        <h4 className='text-md font-semibold mr-4'>Last update:</h4>
+        <h4 className='text-md font-semibold mr-4'>{translate('yourOrders.update.title')}</h4>
         <span className='text-md'>
           {correctDate(order.updated_at)} at {correctTime(order.updated_at)}
         </span>

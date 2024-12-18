@@ -2,8 +2,13 @@ import React from 'react';
 import NavigationItem from './NavigationItem';
 import { NAVIGATION_DEMO } from '@/types/navigation';
 import { useUserStore } from '@/stores/user-store';
+import { Route } from 'next';
 
-function Navigation() {
+interface IProps {
+  translate: any
+}
+
+function Navigation({ translate }:IProps) {
   const user = useUserStore((state) => state.user);
 
   const filteredNavigationItems = NAVIGATION_DEMO.filter(item => {
@@ -16,7 +21,7 @@ function Navigation() {
   return (
     <ul className='nc-Navigation hidden lg:flex lg:flex-wrap lg:space-x-1 relative'>
       {filteredNavigationItems.map((item) => (
-        <NavigationItem key={item.id} menuItem={item} />
+        <NavigationItem key={item.id} menuItem={item} translate={translate} />
       ))}
     </ul>
   );

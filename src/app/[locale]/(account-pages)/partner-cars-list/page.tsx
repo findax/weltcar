@@ -9,9 +9,11 @@ import { getPartnerCars } from '@/api/cars';
 import ErrorComponent from '@/components/ErrorComponent';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { getPartner } from '@/api/partner';
+import { useTranslations } from 'next-intl';
 
 
 const PartnerCarsListPage = () => {
+  const translate = useTranslations();
   const [isFirstLoading, setFirstLoading] = useState(true);
   const [isError, setError] = useState(false)
   const [carListData, setCarListData] = useState<ICarsPartner[]>([]);
@@ -54,7 +56,7 @@ const PartnerCarsListPage = () => {
                 }
               >
                 <div>
-                  <h1 className="mb-2">Your Cars</h1>
+                  <h1 className="mb-4 text-2xl lg:text-4xl font-bold">{translate('yourCars.title')}</h1>
                   <ProtectedRoute role={UserRole.partner}>
                     <CatalogPartner carListData={carListData} />
                   </ProtectedRoute>
@@ -63,11 +65,11 @@ const PartnerCarsListPage = () => {
             )
           : (
               <div className='h-[40vh] flex justify-center items-center flex-col bg-white/50 dark:bg-neutral-800/60'>
-                <h3 className='text-2xl'>You have no added the cars</h3>
+                <h3 className='text-2xl'>{translate('yourCars.nocars.title')}</h3>
                 {
                   partner?.is_verified && 
                   <ButtonPrimary className='mt-6' href='/partner-cars'>
-                    Add car
+                    {translate('yourCars.button.addCar')}
                   </ButtonPrimary>
                 }
               </div>

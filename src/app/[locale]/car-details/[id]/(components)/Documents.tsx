@@ -1,5 +1,6 @@
 import { ICarDocuments } from '@/types/cardetails';
 import { DocumentTextIcon } from '@heroicons/react/24/outline';
+import { useTranslations } from 'next-intl';
 
 // const documents = [
 //   {
@@ -27,10 +28,11 @@ export default function Documents({
 }: {
   documents: ICarDocuments[];
 }) {
+  const translate = useTranslations();
   return (
     <div className='detailsSection__wrap sm:bg-white dark:bg-neutral-900'>
       {/* <div> */}
-      <h2 className='text-2xl font-semibold'>Documents</h2>
+      <h2 className='text-2xl font-semibold'>{translate('carDetails.documents.title')}</h2>
       {/* <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>
           Questions are at the heart of making things great.
         </span> */}

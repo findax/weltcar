@@ -14,6 +14,7 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { Route } from 'next';
 import Link from 'next/link';
 import { ICountries, IModels, IPartnerResponse } from '@/types/partner'; 
+import { useTranslations } from 'next-intl';
 
 
 const commonClass =
@@ -130,22 +131,26 @@ export const FormikInput = ({
   rounded,
   sizeClass,
   disabled = false,
+  placeholder,
   ...args
 }: FormikInputProps) => {
+  const translate = useTranslations();
+  console.log(error);
   return (
     <fieldset className='relative'>
-      {title && <span className={commonTitleClass}>{title}</span>}
+      {title && <span className={commonTitleClass}>{translate(title)}</span>}
       <Field
         className={`${commonClass} ${rounded} ${sizeClass} .custom-input`}
         name={name}
         onKeyPress={onKeyPress}
         disabled={disabled}
+        placeholder={translate(placeholder)}
         {...args}
       />
       {error && touched ? (
         <div className={commonErrorClass}>
           <InformationCircleIcon className='w-4 inline-block mr-1' />
-          {error}
+          {translate(error)}
         </div>
       ) : null}
     </fieldset>
@@ -169,9 +174,10 @@ export const FormikPhoneNumberInput = ({
   touched,
   disabled = false
 }: FormikPhoneNumberInputProps) => {
+  const translate = useTranslations();
   return (
     <fieldset className='relative'>
-      <span className={commonTitleClass}>{title}</span>
+      <span className={commonTitleClass}>{translate(title)}</span>
       <Field 
         name='phone' 
         type='tel' 
@@ -190,7 +196,7 @@ export const FormikPhoneNumberInput = ({
       {error && touched ? (
         <div className={commonErrorClass}>
           <InformationCircleIcon className='w-4 inline-block mr-1' />
-          {error}
+          {translate(error)}
         </div>
       ) : null}
     </fieldset>
@@ -214,8 +220,10 @@ export const FormikPasswordInput = ({
   touched,
   rounded,
   sizeClass,
+  placeholder,
   ...args
 }: FormikPasswordInputProps) => {
+  const translate = useTranslations();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const togglePasswordVisibility = () =>
@@ -223,12 +231,13 @@ export const FormikPasswordInput = ({
 
   return (
     <fieldset className='relative'>
-      <span className={commonTitleClass}>{title}</span>
+      <span className={commonTitleClass}>{translate(title)}</span>
       <div className='relative'>
         <Field
           name={name}
           type={isPasswordVisible ? 'text' : 'password'}
           className={`${commonClass} ${rounded} ${sizeClass}`}
+          placeholder={translate(placeholder)}
           {...args}
         />
         <button
@@ -246,7 +255,7 @@ export const FormikPasswordInput = ({
       {error && touched ? (
         <div className={commonErrorClass}>
           <InformationCircleIcon className='w-4 inline-block mr-1' />
-          <span>{error}</span>
+          <span>{translate(error)}</span>
         </div>
       ) : null}
     </fieldset>
@@ -272,6 +281,7 @@ export const FormikCheckbox = ({
   error,
   touched,
 }: FormikCheckboxProps) => {
+  const translate = useTranslations();
 
   const renderingNavLinkLabel = () => {
     let ourLabel = label.split(" ");
@@ -310,7 +320,7 @@ export const FormikCheckbox = ({
             defaultChecked={defaultChecked}
           />
           <span className='ml-3.5 text-neutral-900 hover:text-neutral-400 dark:text-neutral-100 dark:hover:text-neutral-400'>
-            {label}
+            {translate(label)}
           </span>
       </label>
       )
@@ -323,7 +333,7 @@ export const FormikCheckbox = ({
       {error && touched ? (
         <div className={commonErrorClass}>
           <InformationCircleIcon className='w-4 inline-block mr-1' />
-          {error}
+          {translate(error)}
         </div>
       ) : null}
     </fieldset>
@@ -352,30 +362,32 @@ export const FormikTextarea = ({
   rounded,
   sizeClass,
   disabled,
+  placeholder,
   ...args
 }: FormikTextareaProps) => {
-  const { values, setFieldValue } = useFormikContext<any>();
-
+  const translate = useTranslations();
+  
+  // const { values, setFieldValue } = useFormikContext<any>();
   // function stripHtmlTags(html: string) {
   //   const doc = new DOMParser().parseFromString(html, 'text/html');
   //   return doc.body.textContent || "";
   // }
-
   return (
     <fieldset className='relative'>
-      {title && <span className={commonTitleClass}>{title}</span>}
+      {title && <span className={commonTitleClass}>{translate(title)}</span>}
       <Field
         disabled={disabled}
         as='textarea'
         name={name}
         rows={rows}
+        placeholder={translate(placeholder)}
         className={`${commonClass} ${rounded} ${sizeClass} h-auto`}
         {...args}
       />
       {error && touched ? (
         <div className={commonErrorClass}>
           <InformationCircleIcon className='w-4 inline-block mr-1' />
-          {error}
+          {translate(error)}
         </div>
       ) : null}
     </fieldset>
@@ -413,6 +425,7 @@ export const FormikFile = ({
   initialValues,
   disabled = false
 }: FormikFileProps) => {
+  const translate = useTranslations();
   const [files, setFiles] = useState<File[] | null>(null);
 
   useEffect(() => {
@@ -483,13 +496,13 @@ export const FormikFile = ({
           )
       ))
     }else {
-      return <p className="text-neutral-500">Select a file</p>
+      return <p className="text-neutral-500">{translate('accountPartner.form.uploadDocuments.text')}</p>
     }
   }
 
   return (
     <fieldset className='relative'>
-      {label && <span className={commonTitleClass}>{label}</span>}
+      {label && <span className={commonTitleClass}>{translate(label)}</span>}
       <Field name={name}>
         {({ form }: any) => (
           <>
@@ -525,7 +538,7 @@ export const FormikFile = ({
       {error && touched ? (
         <div className={commonErrorClass}>
           <InformationCircleIcon className='w-4 inline-block mr-1' />
-          {error}
+          {translate(error)}
         </div>
       ) : null}
     </fieldset>
@@ -558,6 +571,7 @@ export const FormikInputSelector = ({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isHighlighted, setIsHighlighted] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const translate = useTranslations();
   
   const { values, setFieldValue } = useFormikContext<any>();
   const dropDownRef = useRef<HTMLDivElement>(null);
@@ -582,7 +596,7 @@ export const FormikInputSelector = ({
 
   return (
     <fieldset className='relative'>
-      {title && <span className={commonTitleClass}>{title}</span>}
+      {title && <span className={commonTitleClass}>{translate(title)}</span>}
       <div className='relative' ref={dropDownRef} >
         <button
           disabled={disabled}
@@ -591,8 +605,8 @@ export const FormikInputSelector = ({
           className={`border text-md text-neutral-500 ${sizeClass} ${rounded} block w-full border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-1100 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-1150 rounded-2xl font-normal h-11 px-7 lg:text-lg py-3 text-left flex items-center justify-between`}
         >
           {values[name]?.name.length > 0 
-            ? ( <p className='text-black dark:text-neutral-200'>{values[name]?.name}</p> ) 
-            : placeholder
+            ? ( <p className='text-black dark:text-neutral-200'>{translate(values[name]?.name)}</p> ) 
+            : translate(placeholder)
           }
           {isDropdownOpen ? <IoIosArrowUp/> : <IoIosArrowDown/> }
         </button>
@@ -622,7 +636,7 @@ export const FormikInputSelector = ({
                     setInputValue('');
                   }}
                 >
-                  {option.name}
+                  {translate(option.name)}
                 </li>
               ))}
             </ul>
@@ -632,7 +646,7 @@ export const FormikInputSelector = ({
       {error && touched ? (
         <div className={commonErrorClass}>
           <InformationCircleIcon className='w-4 inline-block mr-1' />
-          {error}
+          {translate(error)}
         </div>
       ) : null}
     </fieldset>
@@ -662,10 +676,11 @@ export const FormikInputCarSelector = ({
   options,
   disabled = false
 }: FormikInputSelectorCarProps) => {
+  const translate = useTranslations();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isHighlighted, setIsHighlighted] = useState(false);
   const [inputValue, setInputValue] = useState('');
-  
+  console.log(error);
   const { values, setFieldValue } = useFormikContext<any>();
   const dropDownRef = useRef<HTMLDivElement>(null);
 
@@ -689,7 +704,7 @@ export const FormikInputCarSelector = ({
 
   return (
     <fieldset className='relative'>
-      {title && <span className={commonTitleClass}>{title}</span>}
+      {title && <span className={commonTitleClass}>{translate(title)}</span>}
       <div className='relative' ref={dropDownRef}>
         <button
           disabled={disabled}
@@ -699,7 +714,7 @@ export const FormikInputCarSelector = ({
         >
           {values[name]?.brand_name.length > 0 
             ? ( <p className='text-black dark:text-neutral-200'>{`[${values[name]?.brand_name}] ${values[name]?.model_name}`}</p> ) 
-            : placeholder
+            : translate(placeholder)
           }
           {isDropdownOpen ? <IoIosArrowUp/> : <IoIosArrowDown/> }
         </button>
@@ -739,7 +754,7 @@ export const FormikInputCarSelector = ({
       {error && touched ? (
         <div className={commonErrorClass}>
           <InformationCircleIcon className='w-4 inline-block mr-1' />
-          {error}
+          {translate(error)}
         </div>
       ) : null}
     </fieldset>

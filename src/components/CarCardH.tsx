@@ -13,10 +13,12 @@ const CarCardH = ({
   className = '',
   carData,
   paddingBottomHorizontal,
+  translate
 }: {
   className?: string;
   carData: ICar;
   paddingBottomHorizontal: string;
+  translate: any;
 }) => {
   const {
     brand,
@@ -67,7 +69,10 @@ const CarCardH = ({
 
         <div className='flex-grow space-y-2'>
           <h4 className='flex items-center'>
-            exterior&nbsp;color:&nbsp;
+            {translate('catalog.exterior')}
+            &nbsp;
+            {translate('catalog.exterior.label')}:
+            &nbsp;
             <span
               className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 flex-shrink-0'
               style={{ backgroundColor: `${outer_color_hex}` }}
@@ -80,7 +85,10 @@ const CarCardH = ({
             </span>
           </h4>
           <h4 className='flex items-center'>
-            interior&nbsp;color:&nbsp;
+            {translate('catalog.interior')}
+            &nbsp;
+            {translate('catalog.interior.label')}:
+            &nbsp;
             <span
               className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 flex-shrink-0'
               style={{ backgroundColor: `${inner_color_hex}` }}
@@ -99,7 +107,9 @@ const CarCardH = ({
             {priceWithComma(price)}
           </span>
           <Link href={`/car-details/${id}` as Route} target='_blank'>
-            <ButtonPrimary>See more</ButtonPrimary>
+            <ButtonPrimary>
+              {translate('catalog.button.seeMore')}
+            </ButtonPrimary>
           </Link>
         </div>
       </div>

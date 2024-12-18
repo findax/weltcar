@@ -19,9 +19,13 @@ export interface NavItemType {
 
 interface NavigationItemProps {
   menuItem: NavItemType;
+  translate: any;
 }
 
-const NavigationItem = ({ menuItem }: NavigationItemProps) => {
+const NavigationItem = ({ 
+  menuItem,
+  translate
+}: NavigationItemProps) => {
   const [menuCurrentHovers, setMenuCurrentHovers] = useState<string[]>([]);
 
   // CLOSE ALL MENU OPENING WHEN CHANGE HISTORY
@@ -95,7 +99,7 @@ const NavigationItem = ({ menuItem }: NavigationItemProps) => {
   const renderMainItem = (item: NavItemType) => {
     return item.type ? (
       <div className='inline-flex items-center text-sm xl:text-base font-normal text-neutral-700 dark:text-neutral-300 py-2 px-4 xl:px-5 rounded-full cursor-default hover:bg-neutral-100 dark:hover:bg-neutral-800'>
-        {item.name}
+        {translate(item.name)}
         <ChevronDownIcon
           className='ml-1 -mr-1 h-4 w-4 text-neutral-400'
           aria-hidden='true'
@@ -109,7 +113,7 @@ const NavigationItem = ({ menuItem }: NavigationItemProps) => {
         href={item.href || '/'}
         scroll={false}
       >
-        {item.name}
+        {translate(item.name)}
       </Link>
     );
   };

@@ -8,8 +8,10 @@ import { IUserOrdersData } from '@/types/user';
 import LoadingSpinner from '@/shared/LoadingSpinner';
 import { ButtonPrimary } from '@/shared/Buttons';
 import ErrorComponent from '@/components/ErrorComponent';
+import { useTranslations } from 'next-intl';
 
 const OrdersPage = () => {
+  const translate = useTranslations();
   const [state, setState] = useState<IUserOrdersData | undefined>();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -29,7 +31,7 @@ const OrdersPage = () => {
   return (
     <div className='relative min-h-[540px] space-y-10 md:space-y-14 lg:min-h-[650px] xl:min-h-[600px]'>
       {/* HEADING */}
-      <h2 className='text-2xl lg:text-4xl font-bold'>Your orders</h2>
+      <h2 className='text-2xl lg:text-4xl font-bold'>{translate('yourOrders.title')}</h2>
 
       {isLoading ? (
         <div className='w-full h-96 flex justify-center items-center'>
@@ -45,10 +47,10 @@ const OrdersPage = () => {
             (state.data.length > 0 ? (
               <>
                 <div className='text-xl text-center font-semibold mb-6 pr-16 hidden md:grid grid-cols-4 gap-4'>
-                  <h3>Car</h3>
-                  <h3>Date</h3>
-                  <h3>Status</h3>
-                  <h3>Price</h3>
+                  <h3>{translate('yourOrders.car.title')}</h3>
+                  <h3>{translate('yourOrders.date.title')}</h3>
+                  <h3>{translate('yourOrders.status.title')}</h3>
+                  <h3>{translate('yourOrders.price.title')}</h3>
                 </div>
                 <div className='hidden md:block border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
                 <ul>
@@ -69,9 +71,9 @@ const OrdersPage = () => {
               </>
             ) : (
               <div className='mb-28 rounded-3xl h-[360px] md:h-[380px] lg:h-[420px] flex justify-center items-center flex-col bg-white dark:bg-neutral-950'>
-                <h3 className='text-lg lg:text-2xl font-bold'>You have no orders</h3>
+                <h3 className='text-lg lg:text-2xl font-bold'>{translate('yourOrders.noOrdersMessage')}</h3>
                 <ButtonPrimary className='text-base lg:text-lg mt-6' href='/catalog'>
-                  Choose Your Car
+                  {translate('yourOrders.button.chooseCar')}
                 </ButtonPrimary>
               </div>
             ))}

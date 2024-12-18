@@ -16,6 +16,7 @@ import { useThemeMode } from '@/hooks/useThemeMode';
 import triangleBackgroundImg from '@/images/bg-figures/triangle-1.png'
 import triangleBackgroundImgFive from '@/images/bg-figures/triangle-5.png'
 import triangleBackgroundImgBigger from '@/images/bg-figures/triangle-4.png'
+import { useTranslations } from 'next-intl';
 
 const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
   const prevScrollPos = useRef(0);
@@ -24,6 +25,8 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
   const [activePage, setActivePage] = useState('');
   const isMobile = useMediaQuery(1024);
   const { isDarkMode, mounted } = useThemeMode();
+
+  const t = useTranslations()
   
   if (!getAuth()) {
     typeof window !== 'undefined' && (window.location.href = '/');
@@ -162,6 +165,7 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
         <Nav 
           isScrolled={isScrolled} 
           setPathPage={handleSetActivePage}
+          translate={t}
         />
       </div>
       <Suspense>
