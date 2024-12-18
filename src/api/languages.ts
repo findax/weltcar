@@ -13,9 +13,9 @@ export const getLanguages = async (): Promise<Languages | false> => {
       .then((res) => resolve(res.data))
       .catch((err) => {
         if (err.response?.data.message) {
-          toast.error(err.response.data.message);
+          console.log(err.response.data.message);
         } else {
-          toast.error('Something went wrong!');
+          console.log('Something went wrong!');
         }
         resolve(false);
       });
@@ -42,9 +42,9 @@ export const getLanguagesTranslations = async (locale: string) => {
       }
     } catch (err: any) {
       if (err.response?.data.message) {
-        toast.error(err.response.data.message);
+        console.log(err.response.data.message);
       } else {
-        toast.error('Something went wrong!');
+        console.log('Something went wrong!');
       }
       resolve(false);
     }
