@@ -3,7 +3,8 @@
 import { usePathname } from 'next/navigation';
 import { NavItem } from './NavItem';
 import { useUserStore } from '@/stores/user-store';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocale } from 'next-intl';
 
 interface IProps {
   isScrolled?: boolean;
@@ -16,23 +17,12 @@ export const Nav = ({
   setPathPage,
   translate
 }: IProps ) => {
+  const locale = useLocale();
   const pathname = usePathname();
   const user = useUserStore((state) => state.user);
-
-  const listNav = ['/account-partner','/account', '/password', '/orders', '/car-subscriptions', '/partner-cars-list'];
-
+  const [newPathName, setNewPathName] = useState('');
   const listNavName = ['account.navbar.accountPartner','account.navbar.account', 'account.navbar.password', 'account.navbar.orders', 'account.navbar.carSubscriptions', 'account.navbar.partnerCarsList'];
   const listNavHref = ['/account-partner','/account', '/password', '/orders', '/car-subscriptions', '/partner-cars-list'];
-
-  const filteredNavigationItems = listNav.filter(item => {
-    if (!user?.contractor_id) {
-      return item !== '/partner-cars-list' && item !== '/account-partner'
-    }
-    if (user?.contractor_id) {
-      return item !== '/account';
-    }
-    return true;
-  });
 
   const filteredNavigationName = listNavName.filter(item => {
     if (!user?.contractor_id) {
@@ -54,17 +44,28 @@ export const Nav = ({
     return true;
   });
 
+  const changePathName = (pathname: string) => {
+    if(locale === 'en' || 'de'){
+      setNewPathName(pathname.replace(locale,''));
+    }else {
+      setNewPathName(pathname.replace(locale,''));
+    }
+  }
+
   useEffect(() => {
     if (pathname) {
       setPathPage(pathname.slice(1));
+      changePathName(pathname.slice(1));
     }
   }, [pathname]);
+
+  console.log()
   
   return (
     <div className='container'>
       <div className='flex space-x-8 md:space-x-14 overflow-x-auto hiddenScrollbar'>
         {filteredNavigationHref.map((item, index) => {
-          const isActive = pathname === item;
+          const isActive = newPathName === item;
           return (
             user ? (
               <NavItem

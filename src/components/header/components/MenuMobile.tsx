@@ -13,6 +13,7 @@ import SideMenuWrapper from '@/shared/SideMenuWrapper';
 import { NAVIGATION_DEMO_MOBILE } from '@/types/navigation';
 import { useUserStore } from '@/stores/user-store';
 import { IPartnerResponse } from '@/types/partner';
+import { LanguageSelector } from '@/shared/LanguageSelector';
 
 interface MenuMobileProps {
   className?: string;
@@ -74,9 +75,10 @@ const MenuMobile = ({
 
               <div className='flex justify-between items-center mt-4'>
                 <SocialsList itemClass='w-9 h-9 flex items-center justify-center rounded-full bg-neutral-100 text-xl dark:bg-neutral-800 dark:text-neutral-300' />
-                <span className='block'>
+                <div className='flex'>
+                  <LanguageSelector className='lg:hidden' />
                   <SwitchDarkMode className='bg-neutral-100 dark:bg-neutral-800' />
-                </span>
+                </div>
               </div>
             </div>
             <span className='absolute right-2 top-2 p-1'>

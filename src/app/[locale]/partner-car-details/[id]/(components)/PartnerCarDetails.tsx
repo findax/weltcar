@@ -52,7 +52,6 @@ export default function PartnerCarDetails({
         id: index,
         url: item.original,
       }));
-      console.log(carData);
       setCarGallery(modifiedPhotosArray);
       const carTitle = `${carData.brand} ${carData.model}`
       setBreadcrumbsPages((prevPages) => {
