@@ -56,18 +56,18 @@
   "download.button.download": "Download",
 
   "catalog.notFound.title": "Sorry, nothing found",
-  "catalog.exterior": "exterior",
+  "catalog.exterior.title": "exterior",
   "catalog.exterior.label": "color",
-  "catalog.interior.": "interior",
+  "catalog.interior.title": "interior",
   "catalog.interior.label": "color",
   "catalog.button.seeMore": "See more",
 
-  "about.title": "About",
+  "about.title.about": "About",
   "about.title.weltCar": "WeltCar",
   "about.description": "At WeltCar, we are committed to delivering the ultimate luxury automotive experience. Our mission is to provide discerning clients with a curated selection of VIP vehicles, exceptional customer service, and exclusive benefits. With years of expertise in the high-end car market, we ensure that each interaction is tailored to meet your specific needs and desires. Discover a world where luxury meets excellence with WeltCar.",
   "about.button.startSearch": "Start your search",
 
-  "fastFacts.title": "Fast Facts About",
+  "fastFacts.title.about": "Fast Facts About",
   "fastFacts.title.WeltCar": "WeltCar",
   "fastFacts.premiumVehicles.title": "500",
   "fastFacts.premiumVehicles.subtitle": "Premium Vehicles Sold Annually",

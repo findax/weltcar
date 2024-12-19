@@ -70,7 +70,7 @@ const CarCard = ({
 
         <div className='flex-grow py-3 text-sm space-y-2'>
           <h4 className='flex items-center'>
-            {translate('catalog.exterior')}
+            {translate('catalog.exterior.title')}
             &nbsp;
             {translate('catalog.exterior.label')}:
             &nbsp;
@@ -86,7 +86,7 @@ const CarCard = ({
             </span>
           </h4>
           <h4 className='flex items-center'>
-            {translate('catalog.interior')}
+            {translate('catalog.interior.title')}
             &nbsp;
             {translate('catalog.interior.label')}:
             &nbsp;
