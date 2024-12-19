@@ -14,7 +14,8 @@ const SectionHero = ({
       <div className='relative flex items-center flex-col lg:flex-row space-y-14 lg:space-y-0 lg:space-x-6 2xl:space-x-0 justify-between text-left'>
         <div className='lg:w-max'>
           <h1 className='text-neutral-1050 dark:text-white font-bold text-4xl lg:text-6xl xl:text-[80px] flex flex-col gap-2'>
-            {translate('about.title')} <span className='text-primary-600 dark:text-primary-950'>{translate('about.title.weltCar')}</span>
+            {translate('about.title')}  
+            <span className='text-primary-600 dark:text-primary-950'>{translate('about.title.weltCar')}</span>
           </h1>
           <div className='w-full lg:w-[400px] xl:w-[520px]'>
             <div className='mt-10 mb-8 xl:text-lg text-neutral-500 dark:text-neutral-400 lg:max-w-3xl'>

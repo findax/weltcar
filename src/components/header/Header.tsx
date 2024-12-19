@@ -88,13 +88,13 @@ const Header = () => {
               className='self-center'
               isDark={isDarkMode} 
             />
-
+          
             <Navigation translate={t}/>
           </div>
 
-          {/* <div className='flex mr-4'>
-            <LanguageSelector />
-          </div> */}
+          <div className='flex mr-1'>
+            <LanguageSelector className='hidden lg:flex' />
+          </div>
 
           <div className='flex flex-shrink-0 justify-end flex-1 lg:flex-none text-neutral-700 dark:text-neutral-100 space-x-0.5'>
             {partner?.is_verified && <ButtonAddCar translate={t}/>}

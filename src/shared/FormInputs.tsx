@@ -14,7 +14,7 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { Route } from 'next';
 import Link from 'next/link';
 import { ICountries, IModels, IPartnerResponse } from '@/types/partner'; 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 
 const commonClass =
@@ -135,7 +135,6 @@ export const FormikInput = ({
   ...args
 }: FormikInputProps) => {
   const translate = useTranslations();
-  console.log(error);
   return (
     <fieldset className='relative'>
       {title && <span className={commonTitleClass}>{translate(title)}</span>}
@@ -282,11 +281,19 @@ export const FormikCheckbox = ({
   touched,
 }: FormikCheckboxProps) => {
   const translate = useTranslations();
+  const locale = useLocale();
 
   const renderingNavLinkLabel = () => {
-    let ourLabel = label.split(" ");
-    let linkStr = ourLabel.slice(-2).join(" ");
-    let strLabel = ourLabel.slice(0, -2).join(" ");
+    let ourLabel, linkStr, strLabel;
+    if(locale === 'en' || locale === 'de') {
+      ourLabel = translate(label).split(" ");
+      linkStr = ourLabel.slice(-2).join(" ");
+      strLabel = ourLabel.slice(0, -2).join(" ");
+    } else {
+      ourLabel = translate(label).split("");
+      linkStr = ourLabel.slice(-4).join(" ");
+      strLabel = ourLabel.slice(0, -4).join(" ");
+    }
     if(href){
       return (
         <label htmlFor={name} className='flex items-center cursor-pointer'>
@@ -298,7 +305,7 @@ export const FormikCheckbox = ({
             defaultChecked={defaultChecked}
           />
           <span className='ml-3.5 mr-2 text-neutral-900 hover:text-neutral-400 dark:text-neutral-100 dark:hover:text-neutral-400'>
-            {`${strLabel}`}
+            {`${translate(strLabel)}`}
           </span>
           <Link 
             target='_blank'
@@ -680,7 +687,7 @@ export const FormikInputCarSelector = ({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isHighlighted, setIsHighlighted] = useState(false);
   const [inputValue, setInputValue] = useState('');
-  console.log(error);
+
   const { values, setFieldValue } = useFormikContext<any>();
   const dropDownRef = useRef<HTMLDivElement>(null);
 

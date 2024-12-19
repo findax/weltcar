@@ -23,7 +23,7 @@ export default function Authorization({
         <button
           id='login'
           className={`w-1/2 text-xl pb-4 border-b-4 ${
-            currentPage === AuthorizationPages.login ? 'border-primary-500 font-semibold' : 'border-transparent'
+            currentPage === AuthorizationPages.login ? 'border-primary-950 font-semibold' : 'border-transparent'
           }`}
           onClick={() => {
             setCurrentPage(AuthorizationPages.login);
@@ -35,7 +35,7 @@ export default function Authorization({
         <button
           id='signup'
           className={`w-1/2 text-xl pb-4 border-b-4 ${
-            currentPage === AuthorizationPages.signup ? 'border-primary-500 font-semibold' : 'border-transparent'
+            currentPage === AuthorizationPages.signup ? 'border-primary-950 font-semibold' : 'border-transparent'
           }`}
           onClick={() => {
             setCurrentPage(AuthorizationPages.signup);
