@@ -69,7 +69,7 @@ const CarCardH = ({
 
         <div className='flex-grow space-y-2'>
           <h4 className='flex items-center'>
-            {translate('catalog.exterior')}
+            {translate('catalog.exterior.title')}
             &nbsp;
             {translate('catalog.exterior.label')}:
             &nbsp;
@@ -85,7 +85,7 @@ const CarCardH = ({
             </span>
           </h4>
           <h4 className='flex items-center'>
-            {translate('catalog.interior')}
+            {translate('catalog.interior.title')}
             &nbsp;
             {translate('catalog.interior.label')}:
             &nbsp;
