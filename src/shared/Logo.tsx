@@ -1,3 +1,4 @@
+import { useLocale } from 'next-intl';
 import Link from 'next/link';
 
 interface LogoProps {
@@ -9,9 +10,10 @@ const Logo = ({
   className,
   isDark
 }: LogoProps) => {
+  const locale = useLocale();
   return (
     <Link
-      href='/'
+      href={`/${locale}`}
       className={`ttnc-logo inline-block text-primary-600 focus:outline-none focus:ring-0 ${className}`}
     >
     {isDark ? (

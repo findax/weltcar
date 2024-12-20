@@ -47,7 +47,7 @@ export default async function RootLayout({
 }) {
   const messages = await getMessages()
   return (
-    <NextIntlClientProvider messages={messages}>
+    <NextIntlClientProvider messages={messages} locale={params.locale}>
       <html lang={params.locale} className={poppins.className} suppressHydrationWarning>
         <head>
           <script

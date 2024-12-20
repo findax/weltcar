@@ -20,18 +20,36 @@ import { getPartner } from '@/api/partner';
 import { IPartnerResponse } from '@/types/partner';
 import { useTranslations } from 'next-intl';
 import { LanguageSelector } from '@/shared/LanguageSelector';
+import { getLanguages } from '@/api/languages';
+import { LocaleData } from '@/types/languages';
+
+const languagesData = [
+  {
+    locale: 'en',
+    name: 'English'
+  },
+  {
+    locale: 'de',
+    name: 'Deutsch'
+  },
+  {
+    locale: 'zh-cn',
+    name: '中国人'
+  },
+];
 
 const Header = () => {
+  const user = useUserStore((state) => state.user);
+  const { isDarkMode, mounted } = useThemeMode();
   const prevScrollPos = useRef(0);
+  const isMobile = useMediaQuery(1024);
+  const t = useTranslations()
+
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [isScrolled, setScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { isDarkMode, mounted } = useThemeMode();
-  const isMobile = useMediaQuery(1024);
-  const user = useUserStore((state) => state.user);
   const [partner, setPartner] = useState<IPartnerResponse>();
-
-  const t = useTranslations()
+  const [languages, setLanguages] = useState<LocaleData[]>([]);
 
   useEffect(() => {
     useUserStore.persist.rehydrate();
@@ -47,6 +65,20 @@ const Header = () => {
         })
     }
   }, [user]);
+
+  useEffect(() => {
+    const fetchLocale = async() => {
+      try {
+        const response = await getLanguages();
+        if(response){
+          setLanguages(response.data);
+        }
+      } catch (error) {
+        setLanguages(languagesData);
+      }
+    }
+    fetchLocale()
+  }, []);
 
   useEffect(() => {
     function handleScroll() {
@@ -93,7 +125,10 @@ const Header = () => {
           </div>
 
           <div className='flex mr-1'>
-            <LanguageSelector className='hidden lg:flex' />
+            <LanguageSelector 
+              className='hidden lg:flex' 
+              languages={languages}  
+            />
           </div>
 
           <div className='flex flex-shrink-0 justify-end flex-1 lg:flex-none text-neutral-700 dark:text-neutral-100 space-x-0.5'>
