@@ -15,6 +15,7 @@ import { logout } from '@/api/auth';
 import { useUserStore } from '@/stores/user-store';
 import { getPartner } from '@/api/partner';
 import { IPartnerResponse } from '@/types/partner';
+import { useLocale } from 'next-intl';
 
 export default function AvatarDropdown({
   className = '',
@@ -25,6 +26,7 @@ export default function AvatarDropdown({
 }) {
   const user = useUserStore((state) => state.user);
   const [partner, setPartner] = useState<IPartnerResponse>();
+  const locale = useLocale();
   
   useEffect(() => {
     if(!!user?.contractor_id !== false){
@@ -79,7 +81,7 @@ export default function AvatarDropdown({
 
                   {/* ------------------ 1 --------------------- */}
                   <Link
-                    href={ user?.contractor_id ? '/account-partner' : '/account'}
+                    href={ user?.contractor_id ? `/${locale}/account-partner` : '/account'}
                     className='flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-1100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50'
                     onClick={close}
                   >
