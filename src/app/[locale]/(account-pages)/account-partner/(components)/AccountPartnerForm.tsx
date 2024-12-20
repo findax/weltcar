@@ -10,10 +10,11 @@ import { useEffect, useState } from 'react';
 import { IoMdClose } from "react-icons/io";
 import { Route } from 'next';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 export default function AccountPartnerForm({ partner }:{ partner: IPartnerResponse }) {
   const translate = useTranslations();
+  const locale = useLocale();
   const [partnerUser, setPartnerUser] = useState(partner ? partner : null);
   const [attachedFiles, setAttachedFiles] = useState<IPartnerFileList[] | null>(partner ? partner.files : null);
   const [initialValues, setInitialValues] = useState({
@@ -119,7 +120,7 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
           tax_number: taxNumber,
           files: documents,
           attached_files: attachedFilesToRequest ? [...attachedFilesToRequest] : []
-        })
+        }, locale)
         .then((res) => {
           if(res){
             setPartnerUser(res);

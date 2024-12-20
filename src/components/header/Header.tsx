@@ -18,7 +18,7 @@ import { useUserStore } from '@/stores/user-store';
 import ButtonAddCar from './components/ButtonAddCar';
 import { getPartner } from '@/api/partner';
 import { IPartnerResponse } from '@/types/partner';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { LanguageSelector } from '@/shared/LanguageSelector';
 import { getLanguages } from '@/api/languages';
 import { LocaleData } from '@/types/languages';
@@ -44,6 +44,7 @@ const Header = () => {
   const prevScrollPos = useRef(0);
   const isMobile = useMediaQuery(1024);
   const t = useTranslations()
+  const locale = useLocale();
 
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [isScrolled, setScrolled] = useState(false);
@@ -56,15 +57,15 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    if(user?.contractor_id){
-      getPartner()
+    if(user?.contractor_id && locale){
+      getPartner(locale)
         .then((data) => {
           if(data){
             setPartner(data);
           }
         })
     }
-  }, [user]);
+  }, [user, locale]);
 
   useEffect(() => {
     const fetchLocale = async() => {

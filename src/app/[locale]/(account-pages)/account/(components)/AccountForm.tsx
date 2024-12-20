@@ -5,10 +5,11 @@ import { FormikInput, FormikPhoneNumberInput } from '@/shared/FormInputs';
 import { IUser } from '@/types/user';
 import { updateUser } from '@/api/user';
 import { useUserStore } from '@/stores/user-store';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 export default function AccountForm() {
   const translate = useTranslations();
+  const locale = useLocale();
   const user = useUserStore((state) => state.user);
   const updateUserState = useUserStore((state) => state.updateUserState);
   // const phoneValidationPattern = /\+38 \(0\d{2}\) \d{3}-\d{2}-\d{2}/;
@@ -43,7 +44,8 @@ export default function AccountForm() {
       validationSchema={AccountSchema}
       onSubmit={(values, { setSubmitting }) => {
         // trim values
-        const castValues = AccountSchema.cast(values);
+        const castValues: any = AccountSchema.cast(values);
+        castValues['locale'] = locale;
         updateUser(castValues)
           .then((res) => updateUserState(res as IUser))
           .finally(() => setSubmitting(false));

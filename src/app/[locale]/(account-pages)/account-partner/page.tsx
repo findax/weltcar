@@ -7,17 +7,18 @@ import { getPartner } from '@/api/partner';
 import LoadingSpinner from '@/shared/LoadingSpinner';
 import ErrorComponent from '@/components/ErrorComponent';
 import { IPartnerResponse } from '@/types/partner';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 const AccountPartnerPage = () => {
   const [isFirstLoading, setFirstLoading] = useState(true);
   const [isError, setError] = useState(false);
   const [partner, setPartner] = useState<IPartnerResponse>();
   const translate = useTranslations();
+  const locale = useLocale();
 
   useEffect(() => {
-    if(isFirstLoading){
-      getPartner()
+    if(isFirstLoading && locale){
+      getPartner(locale)
         .then((data) => {
           if(data){
             setPartner(data);
@@ -27,7 +28,7 @@ const AccountPartnerPage = () => {
           isFirstLoading && setFirstLoading(false);
         }); 
     }
-  },[isFirstLoading]);
+  },[isFirstLoading, locale]);
 
   return isFirstLoading ? (
     <div className='h-[calc(100vh-76px)] flex justify-center items-center'>

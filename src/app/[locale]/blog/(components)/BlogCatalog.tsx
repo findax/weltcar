@@ -7,7 +7,7 @@ import { useQueryParams } from '@/hooks/useQueryParams';
 import LoadingSpinner from '@/shared/LoadingSpinner';
 import ErrorComponent from '@/components/ErrorComponent';
 import BlogList from './BlogList';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 const BlogCatalog = () => {
   const [isFirstLoading, setFirstLoading] = useState(true);
@@ -17,6 +17,7 @@ const BlogCatalog = () => {
 
   const { currentPage } = useQueryParams();
   const translate = useTranslations();
+  const locale = useLocale();
 
   const sortArticleMassive = (articlesData: IBlog) => {
     const sortedArticles = [...articlesData.data].sort((a, b) => {
@@ -26,7 +27,7 @@ const BlogCatalog = () => {
   }
 
   useEffect(() => {
-    getBlogsList(currentPage, 5)
+    getBlogsList(currentPage, 5, locale)
       .then((data) => {
         if (data) {
           setBlogData(data as IBlog);

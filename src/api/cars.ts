@@ -14,12 +14,18 @@ import { ICarDetails } from '@/types/cardetails';
 export const getCarsList = async (
   page: number,
   perPage: number,
+  locale: string,
   queryParams?: ICatalogQueryParams
 ) => {
+  const headers: Record<string, string> = {
+    'Accept-Language': locale,
+  };
   return new Promise((resolve) => {
     api
       // .post(`/api/cars/list${url}`)
-      .post(`/api/cars/list?page=${page}&perPage=${perPage}`, queryParams)
+      .post(`/api/cars/list?page=${page}&perPage=${perPage}`, queryParams, {
+        headers,
+      })
       .then((res) => resolve(res.data))
       .catch((err) => {
         if (err.response?.data.message) {
@@ -32,10 +38,15 @@ export const getCarsList = async (
   });
 };
 
-export const getCarId = async (id: string) => {
+export const getCarId = async (id: string, locale: string) => {
+  const headers: Record<string, string> = {
+    'Accept-Language': locale,
+  };
   return new Promise<ICarDetails | false>((resolve) => {
     api
-      .get(`/api/cars/view/${id}`)
+      .get(`/api/cars/view/${id}`, {
+        headers,
+      })
       .then((res) => {
         resolve(res.data.data);
       })
@@ -53,13 +64,20 @@ export const getCarId = async (id: string) => {
 export const getSoldCarsList = async (
   page: number,
   perPage: number,
+  locale: string,
   queryParams?: ICatalogQueryParams
 ) => {
+  const headers: Record<string, string> = {
+    'Accept-Language': locale,
+  };
   return new Promise((resolve) => {
     api
       .post(
         `/api/cars/list?page=${page}&perPage=${perPage}&soldOnly=${true}`,
-        queryParams
+        queryParams,
+        {
+          headers,
+        }
       )
       .then((res) => resolve(res.data))
       .catch((err) => {
@@ -73,12 +91,17 @@ export const getSoldCarsList = async (
   });
 };
 
-export const createPartnerCar = async (car: ICarPartnerToRequest) => {
+export const createPartnerCar = async (
+  car: ICarPartnerToRequest,
+  locale: string
+) => {
   try {
+    const headers: Record<string, string> = {
+      'Accept-Language': locale,
+      'Content-Type': 'multipart/form-data',
+    };
     const response = await api.post(`/api/user/contractor/cars`, car, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
+      headers,
     });
     return response.data.data;
   } catch (err: any) {
@@ -93,13 +116,16 @@ export const createPartnerCar = async (car: ICarPartnerToRequest) => {
 
 export const updatePartnerCar = async (
   car: ICarPartnerToRequestUpdate,
-  id: string
+  id: string,
+  locale: string
 ): Promise<ICarPartnerDetails | any> => {
   try {
+    const headers: Record<string, string> = {
+      'Accept-Language': locale,
+      'Content-Type': 'multipart/form-data',
+    };
     const response = await api.post(`/api/user/contractor/cars/${id}`, car, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
+      headers,
     });
     return response.data.data;
   } catch (err: any) {
@@ -112,10 +138,15 @@ export const updatePartnerCar = async (
   }
 };
 
-export const deletePartnerCar = async (id: string) => {
+export const deletePartnerCar = async (id: string, locale: string) => {
+  const headers: Record<string, string> = {
+    'Accept-Language': locale,
+  };
   return new Promise((resolve) => {
     api
-      .delete(`/api/user/contractor/cars/${id}`)
+      .delete(`/api/user/contractor/cars/${id}`, {
+        headers,
+      })
       .then((res) => resolve(res.data.data))
       .catch((err) => {
         if (err.response?.data.message) {
@@ -128,10 +159,15 @@ export const deletePartnerCar = async (id: string) => {
   });
 };
 
-export const getPartnerModels = async () => {
+export const getPartnerModels = async (locale: string) => {
+  const headers: Record<string, string> = {
+    'Accept-Language': locale,
+  };
   return new Promise<IModels | false>((resolve) => {
     api
-      .get('/api/user/contractor/models')
+      .get('/api/user/contractor/models', {
+        headers,
+      })
       .then((res) => {
         const models: IModels = res.data.data;
         resolve(models);
@@ -147,10 +183,19 @@ export const getPartnerModels = async () => {
   });
 };
 
-export const getPartnerCars = async (page: number, perPage: number) => {
+export const getPartnerCars = async (
+  page: number,
+  perPage: number,
+  locale: string
+) => {
+  const headers: Record<string, string> = {
+    'Accept-Language': locale,
+  };
   return new Promise<ICarsPartner[] | false>((resolve) => {
     api
-      .get(`api/user/contractor/cars?page=${page}&perPage=${perPage}`)
+      .get(`api/user/contractor/cars?page=${page}&perPage=${perPage}`, {
+        headers,
+      })
       .then((res) => {
         resolve(res.data.data);
       })
@@ -165,10 +210,15 @@ export const getPartnerCars = async (page: number, perPage: number) => {
   });
 };
 
-export const getPartnerCarId = async (id: string) => {
+export const getPartnerCarId = async (id: string, locale: string) => {
+  const headers: Record<string, string> = {
+    'Accept-Language': locale,
+  };
   return new Promise<ICarPartnerDetails | false>((resolve) => {
     api
-      .get(`api/user/contractor/cars/${id}`)
+      .get(`api/user/contractor/cars/${id}`, {
+        headers,
+      })
       .then((res) => {
         resolve(res.data.data);
       })

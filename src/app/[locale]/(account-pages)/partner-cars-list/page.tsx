@@ -24,7 +24,7 @@ const PartnerCarsListPage = () => {
 
   useEffect(() => {
     if(isFirstLoading){
-      Promise.all(([getPartner(), getPartnerCars(1, 10)]))
+      Promise.all(([getPartner(locale), getPartnerCars(1, 10, locale)]))
         .then(([partner, carListdata]) => {
           partner && carListdata && (setPartner(partner), setCarListData(carListdata));
         })
@@ -47,7 +47,7 @@ const PartnerCarsListPage = () => {
   ) :(
     <div className='w-full'>
       {carListData && 
-        (carListData.length < 0 
+        (carListData.length > 0 
           ? (
               <Suspense
                 fallback={

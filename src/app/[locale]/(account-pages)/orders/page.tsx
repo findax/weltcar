@@ -19,7 +19,7 @@ const OrdersPage = () => {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    getUserOrders()
+    getUserOrders(locale)
       .then((res) => {
         if (res) {
           setState(res as IUserOrdersData);
@@ -28,7 +28,7 @@ const OrdersPage = () => {
         }
       })
       .finally(() => setIsLoading(false));
-  }, []);
+  }, [locale]);
 
   return (
     <div className='relative min-h-[540px] space-y-10 md:space-y-14 lg:min-h-[650px] xl:min-h-[600px]'>
