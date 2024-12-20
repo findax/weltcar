@@ -12,12 +12,13 @@ import ErrorComponent from '@/components/ErrorComponent';
 import LoadingSpinner from '@/shared/LoadingSpinner';
 import { getPartnerCarId } from '@/api/cars';
 import { useSearchParams } from 'next/navigation';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 
 const PartnerCarsPage = () => {
   const translate = useTranslations();
   const searchParams = useSearchParams();
+  const locale = useLocale();
   const id = searchParams.get('id');
   const [isFirstLoading, setFirstLoading] = useState(true);
   const [isError, setError] = useState(false);
@@ -29,12 +30,12 @@ const PartnerCarsPage = () => {
       setFirstLoading(true);
       try {
         if (!id) {
-          const partner = await getPartner();
+          const partner = await getPartner(locale);
           setPartner(partner as IPartnerResponse);
         } else {
           const [partner, partnerCar] = await Promise.all([
-            getPartner(),
-            getPartnerCarId(id as string),
+            getPartner(locale),
+            getPartnerCarId(id as string, locale),
           ]);
           setPartner(partner as IPartnerResponse);
           setPartnerCar(partnerCar as ICarPartnerDetails);

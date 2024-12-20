@@ -5,12 +5,14 @@ import { getPartnerCarId } from '@/api/cars';
 import PartnerCarDetails from './(components)/PartnerCarDetails';
 import { ICarPartnerDetails } from '@/types/partner';
 import { notFound } from 'next/navigation';
+import { useLocale } from 'next-intl';
 
 export default function PartnerCarDetailsPage({
   params: { id },
 }: {
   params: { id: string };
 }) {
+  const locale = useLocale();
   const [carData, setCarData] = useState<ICarPartnerDetails | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
@@ -18,7 +20,7 @@ export default function PartnerCarDetailsPage({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await getPartnerCarId(id);
+        const res = await getPartnerCarId(id, locale);
         if (res) {
           setCarData(res);
         } else {

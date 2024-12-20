@@ -10,4 +10,5 @@ export interface FindCarProps {
   name: string;
   email: string;
   phone: string;
+  locale: string;
 }

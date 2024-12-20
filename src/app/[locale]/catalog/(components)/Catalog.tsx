@@ -12,7 +12,7 @@ import { useQueryStore } from '@/stores/query-store';
 import FiltersCatalog from '@/components/catalogs/FiltersCatalog';
 import SortPanelCatalog from '@/components/catalogs/SortPanelCatalog';
 import CarListCatalog from '@/components/catalogs/CarListCatalog';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 export default function Catalog() {
   const [isFirstLoading, setFirstLoading] = useState(true);
@@ -24,6 +24,7 @@ export default function Catalog() {
   const [catalogData, setCatalogData] = useState({} as ICatalog);
 
   const translate = useTranslations();
+  const locale = useLocale();
   const queryState = useQueryStore((state) => state.query);
   const { queryParams, currentPage, isFiltersVisible, setFiltersVisible } =
     useQueryParams();
@@ -31,7 +32,7 @@ export default function Catalog() {
   useEffect(() => {
     const query = isFirstLoading ? queryParams : queryState;
     setLoading(true);
-    getCarsList(currentPage, 10, query as ICatalogQueryParams)
+    getCarsList(currentPage, 10, locale, query as ICatalogQueryParams)
       .then((data) => {
         if (data) {
           setCatalogData(data as ICatalog);

@@ -21,10 +21,15 @@ export const sendSubscribeEmail = async ({ email }: { email: string }) => {
   });
 };
 
-export const getSubscriptions = async () => {
+export const getSubscriptions = async (locale: string) => {
+  const headers: Record<string, string> = {
+    'Accept-Language': locale,
+  };
   return new Promise((resolve) => {
     api
-      .get('/api/user/mail/subscriptions')
+      .get('/api/user/mail/subscriptions', {
+        headers,
+      })
       .then((res) => {
         resolve(res.data.data);
       })

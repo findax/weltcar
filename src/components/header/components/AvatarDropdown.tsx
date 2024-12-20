@@ -30,7 +30,7 @@ export default function AvatarDropdown({
   
   useEffect(() => {
     if(!!user?.contractor_id !== false){
-      getPartner()
+      getPartner(locale)
         .then((partner) => {
           if(partner){
             setPartner(partner);

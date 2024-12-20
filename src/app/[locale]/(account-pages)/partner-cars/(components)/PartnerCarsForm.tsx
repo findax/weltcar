@@ -15,7 +15,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Route } from 'next';
 import { toast } from 'react-toastify';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 const ModelSchema = Yup.object().shape({
   id: Yup.number().required('partnerCarsSchema.model.idRequired'),
@@ -39,6 +39,7 @@ export default function PartnerCarsForm({
 }:IProps) {
   const translate = useTranslations();
   const router = useRouter();
+  const locale = useLocale();
   const [car, setCar] = useState<ICarPartnerDetails | null>(partnerCar ? partnerCar : null);
   const [responseCarId, setResponseCarId] = useState<string>();
   const [countries, setCountries] = useState<ICountries>([]);
@@ -274,7 +275,7 @@ export default function PartnerCarsForm({
         attached_documents: attachedDocumentsToRequest ? [...attachedDocumentsToRequest] : [],
       };
 
-      updatePartnerCar(carDataToRequest, car.id)
+      updatePartnerCar(carDataToRequest, car.id, locale)
         .then((data) => {
           if(data && !data.message){
             setCar(data);
@@ -307,7 +308,7 @@ export default function PartnerCarsForm({
         documents: values.documents ? values.documents : []
       };
 
-      createPartnerCar(carDataToRequest)
+      createPartnerCar(carDataToRequest, locale)
         .then((data) => {
           if(data && !data.message){
             setResponseCarId(data.id);
@@ -333,7 +334,7 @@ export default function PartnerCarsForm({
   }
 
   useEffect(() => {
-    Promise.all([getCountries(), getPartnerModels()])
+    Promise.all([getCountries(locale), getPartnerModels(locale)])
       .then(([countriesData, modelsData]) => {
         if(countriesData && modelsData){
           setCountries(countriesData);

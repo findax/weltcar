@@ -14,7 +14,7 @@ import { InformationCircleIcon } from '@heroicons/react/24/solid';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { Route } from 'next';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 const CarPartnerCard = ({
   className = '',
@@ -26,6 +26,7 @@ const CarPartnerCard = ({
   paddingBottomGrid: string;
 }) => {
   const translate = useTranslations();
+  const locale = useLocale();
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
   const {
     vin,
@@ -51,7 +52,7 @@ const CarPartnerCard = ({
   }
 
   const handleDeleteCarCard = () => {
-    deletePartnerCar(id);
+    deletePartnerCar(id, locale);
     let delateMessage = translate('yourCars.toast.success.delete');
     toast.success(delateMessage);
     setIsModalDeleteOpen(false);

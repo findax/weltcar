@@ -32,7 +32,7 @@ export default function SoldCarCatalog() {
   useEffect(() => {
     const query = isFirstLoading ? queryParams : queryState;
     setLoading(true);
-    getSoldCarsList(currentPage, 10, query as ICatalogQueryParams)
+    getSoldCarsList(currentPage, 10, 'zh-cn', query as ICatalogQueryParams)
       .then((data) => {
         if (data) {
           setCatalogData(data as ICatalog);

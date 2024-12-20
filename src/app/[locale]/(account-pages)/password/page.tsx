@@ -7,10 +7,11 @@ import { FormikPasswordInput } from '@/shared/FormInputs';
 import { updateUserPassword } from '@/api/user';
 import { useUserStore } from '@/stores/user-store';
 import { IUser } from '@/types/user';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 const PasswordPage = () => {
   const translate = useTranslations();
+  const locale = useLocale();
   const updateUserState = useUserStore((state) => state.updateUserState);
 
   const UpdatePasswordSchema = Yup.object().shape({
@@ -52,6 +53,7 @@ const PasswordPage = () => {
 
           updateUserPassword({
             password: castValues.confirm_password,
+            locale
           })
             .then((res) => updateUserState(res as IUser))
             .finally(() => setSubmitting(false));

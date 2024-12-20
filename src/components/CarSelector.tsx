@@ -9,11 +9,12 @@ import ErrorComponent from "./ErrorComponent";
 import LoadingSpinner from "@/shared/LoadingSpinner";
 import { ButtonPrimary } from "@/shared/Buttons";
 import { IoIosClose } from "react-icons/io";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 
 const CarSelector = () => { 
   const translate = useTranslations();
+  const locale = useLocale();
   const [isFirstLoading, setFirstLoading] = useState(true);
   const [isLoading, setLoading] = useState(true);
   const [isError, setError] = useState(false);
@@ -60,9 +61,9 @@ const CarSelector = () => {
   }
 
   useEffect(() => {
-    if (isFirstLoading) {
+    if (isFirstLoading && locale) {
       setLoading(true);
-      getSubscriptions()
+      getSubscriptions(locale)
         .then((data) => {
           if (data) {
             const cars = data as ICarData;
@@ -104,7 +105,7 @@ const CarSelector = () => {
           isFirstLoading && setFirstLoading(false);
         });
     }
-  }, [currentPage, isFirstLoading]);
+  }, [currentPage, isFirstLoading, locale]);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
