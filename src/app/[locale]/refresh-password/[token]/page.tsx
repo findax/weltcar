@@ -12,10 +12,12 @@ import Image from 'next/image';
 import bgImg from '@/images/bg-cars/bg-car-10.webp';
 import { useUserStore } from '@/stores/user-store';
 import { IUser } from '@/types/user';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { NextRoute } from '@/types/routers';
 
 export default function RefreshPasswordPage() {
   const translate = useTranslations();
+  const locale = useLocale();
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [code, setCode] = useState('');
@@ -54,7 +56,7 @@ export default function RefreshPasswordPage() {
             <p className='px-6 text-2xl font-semibold'>
               {translate('refreshPass.successfully.title')}
             </p>
-            <ButtonPrimary href='/catalog'>{translate('refreshPass.button.choose')}</ButtonPrimary>
+            <ButtonPrimary href={`/${locale}/catalog` as NextRoute}>{translate('refreshPass.button.choose')}</ButtonPrimary>
           </div>
         </div>
       ) : (

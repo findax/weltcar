@@ -1,6 +1,8 @@
 import carImg from '@/images/car-3.png';
 import Image from 'next/image';
 import { ButtonPrimary } from '@/shared/Buttons';
+import { useLocale } from 'next-intl';
+import { NextRoute } from '@/types/routers';
 
 interface IProps {
   translate: any;
@@ -9,6 +11,7 @@ interface IProps {
 const SectionHero = ({
   translate
 }: IProps) => {
+  const locale = useLocale();
   return (
     <div className='nc-SectionHero relative'>
       <div className='relative flex items-center flex-col lg:flex-row space-y-14 lg:space-y-0 lg:space-x-6 2xl:space-x-0 justify-between text-left'>
@@ -21,7 +24,7 @@ const SectionHero = ({
             <div className='mt-10 mb-8 xl:text-lg text-neutral-500 dark:text-neutral-400 lg:max-w-3xl'>
               {translate('about.description')}
             </div>
-            <ButtonPrimary className='xl:text-lg w-full sm:w-fit' sizeClass='px-5 py-4 sm:px-7' href='/catalog'>
+            <ButtonPrimary className='xl:text-lg w-full sm:w-fit' sizeClass='px-5 py-4 sm:px-7' href={`/${locale}/catalog` as NextRoute}>
               {translate('about.button.startSearch')}
             </ButtonPrimary>
           </div>

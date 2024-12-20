@@ -3,6 +3,7 @@
 import { PathName } from '@/types/routers';
 import { Popover, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/24/solid';
+import { useLocale } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { FC, Fragment, useEffect, useState } from 'react';
@@ -27,6 +28,7 @@ const NavigationItem = ({
   translate
 }: NavigationItemProps) => {
   const [menuCurrentHovers, setMenuCurrentHovers] = useState<string[]>([]);
+  const locale = useLocale();
 
   // CLOSE ALL MENU OPENING WHEN CHANGE HISTORY
   const locationPathName = usePathname();
@@ -97,6 +99,7 @@ const NavigationItem = ({
 
   // ===================== MENU MAIN MENU =====================
   const renderMainItem = (item: NavItemType) => {
+    const newRoute = `/${locale}${item.href}`
     return item.type ? (
       <div className='inline-flex items-center text-sm xl:text-base font-normal text-neutral-700 dark:text-neutral-300 py-2 px-4 xl:px-5 rounded-full cursor-default hover:bg-neutral-100 dark:hover:bg-neutral-800'>
         {translate(item.name)}
@@ -110,7 +113,7 @@ const NavigationItem = ({
         className={`inline-flex items-center text-sm xl:text-base font-normal text-neutral-700 dark:text-neutral-300 py-2 px-4 xl:px-5 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-primary-600 dark:hover:text-primary-950 ${
           isActive ? 'text-primary-600 dark:text-primary-950' : ''
         }`}
-        href={item.href || '/'}
+        href={newRoute || '/'}
         scroll={false}
       >
         {translate(item.name)}
