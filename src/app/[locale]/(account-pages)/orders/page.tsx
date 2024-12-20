@@ -8,10 +8,12 @@ import { IUserOrdersData } from '@/types/user';
 import LoadingSpinner from '@/shared/LoadingSpinner';
 import { ButtonPrimary } from '@/shared/Buttons';
 import ErrorComponent from '@/components/ErrorComponent';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { NextRoute } from '@/types/routers';
 
 const OrdersPage = () => {
   const translate = useTranslations();
+  const locale = useLocale();
   const [state, setState] = useState<IUserOrdersData | undefined>();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -44,7 +46,7 @@ const OrdersPage = () => {
       ) : (
         <div className='w-full'>
           {state &&
-            (state.data.length > 0 ? (
+            (state.data.length < 0 ? (
               <>
                 <div className='text-xl text-center font-semibold mb-6 pr-16 hidden md:grid grid-cols-4 gap-4'>
                   <h3>{translate('yourOrders.car.title')}</h3>
@@ -72,7 +74,7 @@ const OrdersPage = () => {
             ) : (
               <div className='mb-28 rounded-3xl h-[360px] md:h-[380px] lg:h-[420px] flex justify-center items-center flex-col bg-white dark:bg-neutral-950'>
                 <h3 className='text-lg lg:text-2xl font-bold'>{translate('yourOrders.noOrdersMessage')}</h3>
-                <ButtonPrimary className='text-base lg:text-lg mt-6' href='/catalog'>
+                <ButtonPrimary className='text-base lg:text-lg mt-6' href={`/${locale}/catalog` as NextRoute}>
                   {translate('yourOrders.button.chooseCar')}
                 </ButtonPrimary>
               </div>

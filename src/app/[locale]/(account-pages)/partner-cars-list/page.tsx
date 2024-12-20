@@ -9,11 +9,14 @@ import { getPartnerCars } from '@/api/cars';
 import ErrorComponent from '@/components/ErrorComponent';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { getPartner } from '@/api/partner';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { Route } from 'next';
+import { NextRoute } from '@/types/routers';
 
 
 const PartnerCarsListPage = () => {
   const translate = useTranslations();
+  const locale = useLocale();
   const [isFirstLoading, setFirstLoading] = useState(true);
   const [isError, setError] = useState(false)
   const [carListData, setCarListData] = useState<ICarsPartner[]>([]);
@@ -44,7 +47,7 @@ const PartnerCarsListPage = () => {
   ) :(
     <div className='w-full'>
       {carListData && 
-        (carListData.length > 0 
+        (carListData.length < 0 
           ? (
               <Suspense
                 fallback={
@@ -68,7 +71,7 @@ const PartnerCarsListPage = () => {
                 <h3 className='text-2xl'>{translate('yourCars.nocars.title')}</h3>
                 {
                   partner?.is_verified && 
-                  <ButtonPrimary className='mt-6' href='/partner-cars'>
+                  <ButtonPrimary className='mt-6' href={`/${locale}/partner-cars` as NextRoute}>
                     {translate('yourCars.button.addCar')}
                   </ButtonPrimary>
                 }

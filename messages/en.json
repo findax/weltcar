@@ -562,6 +562,10 @@
   "searchSchema.search.max": "Name is too long",
   "searchSchema.search.required": "Name is required",
 
+  "cookieAlert.text.description": " We use cookies to improve your experience and for ads personalisation, by continuing to use this website, you are agreeing to our",
+  "cookieAlert.link.policy": "cookie policy",
+  "cookieAlert.button.accept": "Accept",
+
   "footer.title.weltcarTo": "WeltCar - Your Gateway to Luxury Automotive Excellence",
   "footer.title.luxury": "Luxury Automotive Excellence",
   "footer.quickLink.title": "Quick Link",
@@ -577,5 +581,6 @@
   "footer.newsletter.input": "example@mail.com",
   "footer.privacy": "Privacy Policy",
   "footer.legal": "Legal Notice",
-  "footer.cookie": "Cookie Policy"
+  "footer.cookie": "Cookie Policy",
+  "footer.copyright": "Copyright"
 }

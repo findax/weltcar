@@ -6,12 +6,12 @@ import SocialsList1 from '@/shared/SocialsList1';
 import SubscribeForm from '@/components/SubscribeForm';
 import { WatsappIcon } from '@/shared/icons';
 import { useThemeMode } from '@/hooks/useThemeMode';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 export default function Footer() {
   const { isDarkMode, mounted } = useThemeMode();
-
   const translate = useTranslations()
+  const locale = useLocale();
 
   if (!mounted) return null;
 
@@ -76,7 +76,7 @@ export default function Footer() {
               <ul className='flex flex-col gap-2'>
                 <li>
                   <Link
-                    href='/catalog'
+                    href={`/${locale}/catalog`}
                     className='text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
                   >
                     {translate('footer.quickLink.catalog')}
@@ -84,7 +84,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href='/about'
+                    href={`/${locale}/about`}
                     className='text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
                   >
                     {translate('footer.quickLink.about')}
@@ -92,7 +92,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href='/contact'
+                    href={`/${locale}/contact`}
                     className='text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
                   >
                     {translate('footer.quickLink.contact')}
@@ -100,7 +100,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href='/sold-car'
+                    href={`/${locale}/sold-car`}
                     className='text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
                   >
                     {translate('footer.quickLink.soldCar')}
@@ -173,14 +173,14 @@ export default function Footer() {
           <div className='grid grid-cols-12 gap-4 text-sm'>
             <div className='col-span-12 lg:col-span-6'>
               <p className='text-center lg:text-start text-neutral-500 dark:text-neutral-400'>
-                Copyright &copy; {new Date().getFullYear()} WeltCar
+                {translate('footer.copyright')} &copy; {new Date().getFullYear()} WeltCar
               </p>
             </div>
             <div className='col-span-12 lg:col-span-6'>
               <ul className='flex items-center flex-wrap gap-6 justify-center lg:justify-end'>
                 <li>
                   <Link
-                    href='/privacy-policy'
+                    href={`/${locale}/privacy-policy`}
                     className='text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white'
                   >
                     {translate('footer.privacy')}
@@ -188,7 +188,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href='/legal-notice'
+                    href={`/${locale}/legal-notice`}
                     className='text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white'
                   >
                     {translate('footer.legal')}
@@ -196,7 +196,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href='/cookie-policy'
+                    href={`/${locale}/cookie-policy`}
                     className='text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white'
                   >
                     {translate('footer.cookie')}

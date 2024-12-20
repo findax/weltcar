@@ -5,8 +5,11 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
 import { ButtonPrimary } from '@/shared/Buttons';
+import { useLocale, useTranslations } from 'next-intl';
 
 export default function CookieAlert() {
+  const translate = useTranslations();
+  const locale = useLocale();
   const [cookieAlertOpen, setCookieAlertOpen] = useState(false);
 
   useEffect(() => {
@@ -38,14 +41,12 @@ export default function CookieAlert() {
       >
         <div className='container relative flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0'>
           <p className='cookie-popup__text'>
-            We use cookies to improve your experience and for ads
-            personalisation, by continuing to use this website, you are agreeing
-            to our{' '}
+            {translate('cookieAlert.text.description')}
             <Link
               className='underline hover:no-underline'
-              href='/cookie-policy'
+              href={`/${locale}/cookie-policy`}
             >
-              cookie&nbsp;policy
+              {translate('cookieAlert.link.policy')}
             </Link>
             .
           </p>
@@ -53,7 +54,7 @@ export default function CookieAlert() {
             className='w-full sm:w-auto sm:ml-5'
             onClick={handleAcceptCookie}
           >
-            Accept
+            {translate('cookieAlert.button.accept')}
           </ButtonPrimary>
         </div>
       </motion.div>

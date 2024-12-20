@@ -10,12 +10,14 @@ import Image from 'next/image';
 import bgImg from '@/images/bg-cars/bg-car-7.webp';
 import { useUserStore } from '@/stores/user-store';
 import { IUser } from '@/types/user';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { NextRoute } from '@/types/routers';
 
 export default function ConfirmRegistrationPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const translate = useTranslations();
+  const locale = useLocale();
 
   const updateUserState = useUserStore((state) => state.updateUserState);
 
@@ -45,7 +47,7 @@ export default function ConfirmRegistrationPage() {
           <p className='px-6 text-2xl font-semibold'>
             {translate('confirmRegister.successfully.title')}
           </p>
-          <ButtonPrimary href='/catalog'>{translate('confirmRegister.button.choose')}</ButtonPrimary>
+          <ButtonPrimary href={`/${locale}/catalog` as NextRoute}>{translate('confirmRegister.button.choose')}</ButtonPrimary>
         </div>
       )}
 
