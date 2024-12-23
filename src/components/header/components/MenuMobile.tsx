@@ -14,6 +14,7 @@ import { NAVIGATION_DEMO_MOBILE } from '@/types/navigation';
 import { useUserStore } from '@/stores/user-store';
 import { IPartnerResponse } from '@/types/partner';
 import { LanguageSelector } from '@/shared/LanguageSelector';
+import { LocaleData } from '@/types/languages';
 
 interface MenuMobileProps {
   className?: string;
@@ -22,9 +23,11 @@ interface MenuMobileProps {
   partner?: IPartnerResponse;
   isDark?: boolean;
   translate: any;
+  languages: LocaleData[];
 }
 const MenuMobile = ({
   className = '',
+  languages,
   iconClassName = 'h-8 w-8',
   data = NAVIGATION_DEMO_MOBILE,
   partner = undefined,
@@ -76,7 +79,7 @@ const MenuMobile = ({
               <div className='flex justify-between items-center mt-4'>
                 <SocialsList itemClass='w-9 h-9 flex items-center justify-center rounded-full bg-neutral-100 text-xl dark:bg-neutral-800 dark:text-neutral-300' />
                 <div className='flex'>
-                  <LanguageSelector className='lg:hidden' />
+                  <LanguageSelector languages={languages} className='lg:hidden' />
                   <SwitchDarkMode className='bg-neutral-100 dark:bg-neutral-800' />
                 </div>
               </div>

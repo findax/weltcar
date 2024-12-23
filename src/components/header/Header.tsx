@@ -148,6 +148,7 @@ const Header = () => {
             )}
             <div className='px-0.5' />
             <MenuMobile 
+              languages={languages}
               isDark={isDarkMode} 
               partner={partner ? partner : undefined}
               translate={t}
