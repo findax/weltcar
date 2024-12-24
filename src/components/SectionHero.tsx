@@ -2,6 +2,7 @@ import sectionHeroCar from '@/images/car-1.png';
 import Image from 'next/image';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { Route } from 'next';
+import { useLocale } from 'next-intl';
 
 interface IProps {
   translate: any;
@@ -10,6 +11,7 @@ interface IProps {
 export default function SectionHeroArchivePage({
   translate
 }:IProps) {
+  const locale = useLocale();
   return (
     <div
       className='nc-SectionHeroArchivePage flex flex-col relative'
@@ -29,7 +31,7 @@ export default function SectionHeroArchivePage({
                 <div className='mt-5 mb-8 xl:text-lg text-neutral-500 dark:text-neutral-400 lg:max-w-3xl'>
                   {translate("welcome.description")}
                 </div>
-                <ButtonPrimary className='xl:text-lg w-full sm:w-fit' sizeClass='px-5 py-4 sm:px-7' href={'/catalog' as Route}>
+                <ButtonPrimary className='xl:text-lg w-full sm:w-fit' sizeClass='px-5 py-4 sm:px-7' href={`/${locale}/catalog` as Route}>
                   {translate("welcome.button.startSearch")}
                 </ButtonPrimary>
               </div>

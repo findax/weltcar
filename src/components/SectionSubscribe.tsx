@@ -2,6 +2,8 @@ import Image from 'next/image';
 import SubscribeForm from '@/components/SubscribeForm';
 import { ButtonPrimary } from '@/shared/Buttons';
 import coverImg from '@/images/icons/cover.svg'
+import { useLocale } from 'next-intl';
+import { NextRoute } from '@/types/routers';
 
 export interface IProps {
   className?: string;
@@ -12,6 +14,8 @@ const Subscribe = ({
   className = '',
   translate
 }:IProps) => {
+  const locale = useLocale();
+  const newHref = `/${locale}/catalog`;
   return (
     <div
       className={`nc-Subscribe flex flex-col gap-12 xl:gap-0 lg:flex-row justify-between  ${className}`}
@@ -20,7 +24,7 @@ const Subscribe = ({
       <div className='w-full lg:w-[506px]'>
         <h2 className='mb-10 lg:mb-20 font-bold text-neutral-1050 dark:text-white text-3xl md:text-4xl xl:text-5xl'>{translate('joinOurNewsletter.title')}</h2>
         <SubscribeForm />
-        <ButtonPrimary className='mt-5 sm:mt-8 w-full sm:w-fit' href={'/catalog'}>
+        <ButtonPrimary className='mt-5 sm:mt-8 w-full sm:w-fit' href={newHref as NextRoute}>
           {translate('joinOurNewsletter.button.sendEmail')}
         </ButtonPrimary>
       </div>

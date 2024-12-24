@@ -58,8 +58,6 @@ export const Nav = ({
       changePathName(pathname.slice(1));
     }
   }, [pathname]);
-
-  console.log()
   
   return (
     <div className='container'>

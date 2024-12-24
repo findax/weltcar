@@ -3,10 +3,11 @@ import I404Png from '@/images/404.png';
 import Image from 'next/image';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { NextRoute } from '@/types/routers';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 const NotFound = () => {
   const translate = useTranslations();
+  const locale = useLocale();
   return (
     <div className='nc-Page404'>
       <div className='container relative pt-5 pb-16 lg:pb-20 lg:pt-5'>
@@ -17,7 +18,7 @@ const NotFound = () => {
             {translate('notFound.title')}{' '}
           </span>
           <div className='pt-8'>
-            <ButtonPrimary href={'/' as NextRoute}>
+            <ButtonPrimary href={`/${locale}` as NextRoute}>
               {translate('notFound.button.return')}
             </ButtonPrimary>
           </div>

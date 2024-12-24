@@ -15,6 +15,7 @@ import { useUserStore } from '@/stores/user-store';
 import { IPartnerResponse } from '@/types/partner';
 import { LanguageSelector } from '@/shared/LanguageSelector';
 import { LocaleData } from '@/types/languages';
+import { useLocale } from 'next-intl';
 
 interface MenuMobileProps {
   className?: string;
@@ -36,6 +37,7 @@ const MenuMobile = ({
 }: MenuMobileProps) => {
   const [isVisable, setIsVisable] = useState(false);
   const pathname = usePathname();
+  const locale = useLocale();
   const user = useUserStore((state) => state.user);
 
   useEffect(() => {
@@ -55,6 +57,47 @@ const MenuMobile = ({
     }
     return true;
   });
+
+  const renderChildren = (children: NavItemType[] | undefined) => (
+    <ul className="nav-mobile-sub-menu pl-6 pb-1 text-base">
+      {children?.map((child, index) => {
+        const childLocaleRoute = `/${locale}${child.href}`;
+        return (
+          <Disclosure key={`${childLocaleRoute}-${index}`} as="li">
+            <Link
+              href={{ pathname: child.href || undefined }}
+              className="flex px-4 text-neutral-900 dark:text-neutral-200 text-sm font-medium rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 mt-0.5"
+            >
+              <span
+                className={`py-2.5 pr-3 ${!child.children ? 'block w-full' : ''}`}
+              >
+                {translate(child.name)}
+              </span>
+              {child.children && (
+                <span
+                  className="flex-1 flex"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <Disclosure.Button
+                    as="span"
+                    className="py-2.5 flex justify-end flex-1"
+                  >
+                    <ChevronDownIcon
+                      className="ml-2 h-4 w-4 text-neutral-500"
+                      aria-hidden="true"
+                    />
+                  </Disclosure.Button>
+                </span>
+              )}
+            </Link>
+            {child.children && (
+              <Disclosure.Panel>{renderChildren(child.children)}</Disclosure.Panel>
+            )}
+          </Disclosure>
+        );
+      })}
+    </ul>
+  );
 
   return (
     <>
@@ -89,7 +132,10 @@ const MenuMobile = ({
             </span>
           </div>
           <ul className='flex flex-col py-6 px-2 space-y-1'>
-            {filteredNavigationItems.map((item, index) => (
+            {filteredNavigationItems.map((item, index) => {
+              const defaultLocaleRoute = `/${locale}${item.href}`;
+              const defaultRoute = `/${locale}`;
+              return (
               <Disclosure
                 key={item.id}
                 as='li'
@@ -115,47 +161,14 @@ const MenuMobile = ({
                       </span>
                     </div>
                     <Disclosure.Panel>
-                      <ul className='nav-mobile-sub-menu pl-6 pb-1 text-base'>
-                        {item.children?.map((i, index) => (
-                          <Disclosure key={i.href + index} as='li'>
-                            <Link
-                              href={{
-                                pathname: i.href || undefined,
-                              }}
-                              className='flex px-4 text-neutral-900 dark:text-neutral-200 text-sm font-medium rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 mt-0.5'
-                            >
-                              <span
-                                className={`py-2.5 pr-3 ${!i.children ? 'block w-full' : ''}`}
-                              >
-                                {translate(i.name)}
-                              </span>
-                              {i.children && (
-                                <span
-                                  className='flex-1 flex'
-                                  onClick={(e) => e.preventDefault()}
-                                >
-                                  <Disclosure.Button
-                                    as='span'
-                                    className='py-2.5 flex justify-end flex-1'
-                                  >
-                                    <ChevronDownIcon
-                                      className='ml-2 h-4 w-4 text-neutral-500'
-                                      aria-hidden='true'
-                                    />
-                                  </Disclosure.Button>
-                                </span>
-                              )}
-                            </Link>
-                          </Disclosure>
-                        ))}
-                      </ul>
+                      {renderChildren(item.children)}
                     </Disclosure.Panel>
                   </>
                 ) : (
                   <Link
                     rel='noopener noreferrer'
                     className='flex w-full px-4 font-medium uppercase tracking-wide text-sm hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg'
-                    href={item.href || '/'}
+                    href={defaultLocaleRoute || defaultRoute}
                   >
                     <span className='py-2.5 pr-3 block w-full'>
                       {translate(item.name)}
@@ -163,7 +176,7 @@ const MenuMobile = ({
                   </Link>
                 )}
               </Disclosure>
-            ))}
+            )})}
           </ul>
           {/* <div className='flex items-center justify-between py-6 px-5'>
         <a

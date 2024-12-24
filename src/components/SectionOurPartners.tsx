@@ -5,6 +5,7 @@ import technicalImg from '@/images/bg-partners/technical.jpeg';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { Route } from 'next';
 import { NextRoute } from '@/types/routers';
+import { useLocale } from 'next-intl';
 
 const PARTNERS = [
   {
@@ -34,6 +35,7 @@ interface IProps {
 const OurPartners = ({ 
   translate
 }: IProps) => {
+  const locale = useLocale();
   return (
     <div className={`nc-OurPartners relative`}>
       <h2 className='text-3xl md:text-4xl xl:text-5xl text-center font-bold text-neutral-1050 dark:text-white'>{translate('partners.title')}</h2>
@@ -51,7 +53,7 @@ const OurPartners = ({
               <h3 className='text-lg lg:text-2xl font-bold text-neutral-1050 md:text-2xl dark:text-white'>{translate(partner.title)}</h3>
               <span className='block lg:text-lg text-neutral-500 text-base dark:text-neutral-400'>{translate(partner.subTitle)}</span>
             </div>
-            <ButtonPrimary className='mt-5 sm:mt-8 w-full sm:w-fit' href={partner.href as NextRoute }>
+            <ButtonPrimary className='mt-5 sm:mt-8 w-full sm:w-fit' href={`/${locale}${partner.href}` as NextRoute }>
               {translate('partners.button.forAll')}
             </ButtonPrimary>
           </div>
