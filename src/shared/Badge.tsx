@@ -2,6 +2,7 @@ import { TwMainColor } from '@/types/types';
 import { Route } from '@/types/routers';
 import Link from 'next/link';
 import React, { FC, ReactNode } from 'react';
+import { useLocale } from 'next-intl';
 
 export interface BadgeProps {
   className?: string;
@@ -16,6 +17,10 @@ const Badge: FC<BadgeProps> = ({
   color = 'blue',
   href,
 }) => {
+  const locale = useLocale();
+  const newHrefLocaleDefault = `/${locale}${href}`;
+  const newHrefDefault = '';
+
   const getColorClass = (hasHover = true) => {
     switch (color) {
       case 'pink':
@@ -60,7 +65,7 @@ const Badge: FC<BadgeProps> = ({
     className;
   return !!href ? (
     <Link
-      href={href || ''}
+      href={newHrefLocaleDefault || newHrefDefault}
       className={`transition-colors hover:text-white duration-300 ${CLASSES} ${getColorClass()}`}
     >
       {name}

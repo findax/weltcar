@@ -1,7 +1,9 @@
 'use client';
 
 import { NavItemType } from "@/shared/Navigation/NavigationItem";
+import { NextRoute } from "@/types/routers";
 import ncNanoId from "@/utils/ncNanoId";
+import { useLocale } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -11,7 +13,9 @@ interface IProps {
 }
 
 const ButtonAddCar = ({ translate }:IProps) => {
-  const [buttonInfo, setButtonInfo] = useState<NavItemType>({ id: ncNanoId(), href: '/partner-cars', name: 'navbar.addCar' })
+  const locale = useLocale();
+  const newHref = `/${locale}/partner-cars` as NextRoute;
+  const [buttonInfo, setButtonInfo] = useState<NavItemType>({ id: ncNanoId(), href: newHref, name: 'navbar.addCar' })
   const locationPathName = usePathname();
   const isActive = locationPathName === buttonInfo.href;
 

@@ -19,48 +19,6 @@ export default function Footer() {
     <footer className='nc-Footer relative bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-700'>
       <div className='container'>
         <div className='py-24 lg:py-28'>
-          {/* <div className='flex justify-between'>
-            <div className='shrink'>
-              <SocialsList1 className='flex flex-col gap-2 justify-around' />
-            </div>
-            <div className='shrink'>
-              <h4 className='text-2xl text-neytral-1050 font-bold dark:text-white'>Quick Link</h4>
-              <ul className='flex flex-col gap-2'>
-                <li>
-                  <Link
-                    href='/catalog'
-                    className='text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
-                  >
-                    Catalog
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href='/about'
-                    className='text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
-                  >
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href='/contact'
-                    className='text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
-                  >
-                    Contact
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href='/sold-car'
-                    className='text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
-                  >
-                    Sold Car
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div> */}
           <div className='grid grid-cols-12 gap-y-14 gap-x-6 px-3 xl:px-0'>
             <div className='-mt-3 col-span-12 md:col-span-6 xl:col-span-3'>
               <Logo isDark={isDarkMode} />
