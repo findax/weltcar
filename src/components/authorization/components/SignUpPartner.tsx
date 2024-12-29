@@ -156,14 +156,14 @@ export default function SignUpPartner({
           />
           {/* ---- */}
           <FormikPhoneNumberInput
-            title='authorization.phone.email.title'
+            title='authorization.signUp.phone.title'
             error={errors.phone}
             touched={touched.phone}
           />
           {/* ---- */}
           <FormikPasswordInput
-            title='authorization.password.email.title'
-            placeholder='authorization.password.email.placeholder'
+            title='authorization.signUp.password.title'
+            placeholder='authorization.signUp.password.placeholder'
             error={errors.password}
             touched={touched.password}
           />
