@@ -15,6 +15,7 @@ import Modal from '@/shared/Modal';
 import { InformationCircleIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
 import { useUserStore } from '@/stores/user-store';
+import { useLocale } from 'next-intl';
 
 const EngineTypesSchema = Yup.object().shape({
   id: Yup.number().required('findCarSchema.engine.idRequired'),
@@ -35,6 +36,7 @@ export default function FindCarForm({
 }: IProps) {
   const [isSeuccessRequest, setIsSuccessRequest] = useState(false);
   const user = useUserStore((state) => state.user);
+  const locale = useLocale();
   const phoneValidationPattern = /\+?[\d]+/;
 
   const initialValueDefault = {
@@ -152,8 +154,9 @@ export default function FindCarForm({
   const returnFindCarDataToRequest = (data: any) => {
     const { engineType, requestTime, ...newValues } = data;
     const valuesToRequest = {...newValues};
-    valuesToRequest['engineType'] = data.engineType.name
-    valuesToRequest['requestTime'] = data.requestTime.name
+    valuesToRequest['engineType'] = data.engineType.name;
+    valuesToRequest['requestTime'] = data.requestTime.name;
+    valuesToRequest['locale'] = locale;
     return valuesToRequest;
   }
   return (

@@ -245,22 +245,32 @@ export const findCar = async ({
   comment,
   engineType,
   requestTime,
+  locale,
 }: FindCarProps) => {
+  const headers: Record<string, string> = {
+    'Accept-Language': locale,
+  };
   return new Promise((resolve) => {
     api
-      .post('/api/car-search-request', {
-        name,
-        email,
-        phone,
-        brand,
-        model,
-        color,
-        specification,
-        additional,
-        comment,
-        engine_type: engineType.toLowerCase(),
-        request_time: requestTime.toLowerCase(),
-      })
+      .post(
+        '/api/car-search-request',
+        {
+          name,
+          email,
+          phone,
+          brand,
+          model,
+          color,
+          specification,
+          additional,
+          comment,
+          engine_type: engineType.toLowerCase(),
+          request_time: requestTime.toLowerCase(),
+        },
+        {
+          headers,
+        }
+      )
       .then((res) => {
         toast.success('Message sent successfully!');
         resolve(res);
