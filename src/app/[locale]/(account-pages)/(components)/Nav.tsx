@@ -44,18 +44,9 @@ export const Nav = ({
     return true;
   });
 
-  const changePathName = (pathname: string) => {
-    if(locale === 'en' || 'de'){
-      setNewPathName(pathname.replace(locale,''));
-    }else {
-      setNewPathName(pathname.replace(locale,''));
-    }
-  }
-
   useEffect(() => {
     if (pathname) {
       setPathPage(pathname.slice(1));
-      changePathName(pathname.slice(1));
     }
   }, [pathname]);
   
