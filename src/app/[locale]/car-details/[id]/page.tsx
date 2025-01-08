@@ -4,9 +4,13 @@ import CarDetails from './(components)/CarDetails';
 
 async function fetchCarData(id: string) {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/cars/view/${id}`, {
+    const headers: Record<string, string> = {
       cache: 'no-store',
-    });
+      'Accept-Language': 'de',
+    };
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/cars/view/${id}`, {
+      headers
+    },);
     if (!response.ok) {
       throw new Error('Car data not found');
     }

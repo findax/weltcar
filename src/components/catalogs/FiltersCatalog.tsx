@@ -106,6 +106,16 @@ const FiltersCatalog = ({
             );
           }
         })}
+
+      <div className='flex lg:hidden justify-end mt-4'>
+        <ButtonPrimary
+          fontSize='text-sm'
+          sizeClass='px-5 py-2 md:px-6'
+          onClick={() => closeFilters(false)}
+        >
+          Apply
+        </ButtonPrimary>
+      </div>
     </div>
   );
 };

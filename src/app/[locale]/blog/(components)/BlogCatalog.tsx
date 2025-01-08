@@ -19,19 +19,12 @@ const BlogCatalog = () => {
   const translate = useTranslations();
   const locale = useLocale();
 
-  const sortArticleMassive = (articlesData: IBlog) => {
-    const sortedArticles = [...articlesData.data].sort((a, b) => {
-      return new Date(a.published_at).getTime() - new Date(b.published_at).getTime();
-    });
-    setArticles([...sortedArticles]);
-  }
-
   useEffect(() => {
     getBlogsList(currentPage, 5, locale)
       .then((data) => {
         if (data) {
           setBlogData(data as IBlog);
-          sortArticleMassive(data);
+          setArticles(data.data);
         } else {
           setError(true);
         }

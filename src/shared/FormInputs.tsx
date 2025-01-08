@@ -637,7 +637,8 @@ export const FormikInputSelector = ({
                   key={option.id}
                   className={`py-1 px-3 dark:hover:text-black ${(isHighlighted && option.id === values[name]?.id) ? 'dark:text-black dark:bg-neutral-300 bg-neutral-100' : ''} hover:bg-neutral-100 dark:hover:bg-neutral-1100 cursor-pointer`}
                   onClick={() => {
-                    setFieldValue(name, option);
+                    const newOption = { ...option, name: translate(option.name)};
+                    setFieldValue(name, newOption);
                     setIsHighlighted(true);
                     setIsDropdownOpen(false);
                     setInputValue('');
