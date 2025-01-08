@@ -16,7 +16,7 @@ import { useUserStore } from '@/stores/user-store';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { IUser } from '@/types/user';
 import { getCarId } from '@/api/cars';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 interface IPages {
   pageName: string;
@@ -28,6 +28,7 @@ export default function CarDetails({
 }: {
   carId: string;
 }) {
+  const locale = useLocale();
   const translate = useTranslations();
   const [carData, setCarData] = useState<ICarDetails>();
   const [isLoading, setIsLoading] = useState(true);
@@ -50,7 +51,7 @@ export default function CarDetails({
   const user = useUserStore((state) => state.user);
 
   useEffect(() => {
-    getCarId(carId)
+    getCarId(carId, locale)
       .then((carData) => {
         if(carData){
           setCarData(carData);
