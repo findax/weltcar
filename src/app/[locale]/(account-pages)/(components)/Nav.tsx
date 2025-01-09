@@ -44,9 +44,15 @@ export const Nav = ({
     return true;
   });
 
+  const changePathName = (pathname: string) => {
+    let path = pathname.replace(locale,'');
+    setNewPathName(path);
+  }
+
   useEffect(() => {
     if (pathname) {
       setPathPage(pathname.slice(1));
+      changePathName(pathname.slice(1));
     }
   }, [pathname]);
   

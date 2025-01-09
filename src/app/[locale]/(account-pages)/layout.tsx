@@ -54,7 +54,7 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
       window.scrollY > 20 ? setScrolled(true) : setScrolled(false);
     });
   }, []);
-  console.log(activePage)
+
   const handleSetActivePage = (pathPage: string) => {
     setActivePage(pathPage);
   }
