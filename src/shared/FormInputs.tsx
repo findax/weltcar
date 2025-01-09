@@ -13,7 +13,7 @@ import { IoIosArrowDown, IoIosArrowUp, IoMdClose } from "react-icons/io";
 import { HiOutlineSearch } from "react-icons/hi";
 import { Route } from 'next';
 import Link from 'next/link';
-import { ICountries, IModels, IPartnerResponse } from '@/types/partner'; 
+import { ICountries, IModels, IPartnerResponse, ISelectorFindCar } from '@/types/partner'; 
 import { useLocale, useTranslations } from 'next-intl';
 
 
@@ -611,7 +611,7 @@ export const FormikInputSelector = ({
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           className={`border text-md text-neutral-500 ${sizeClass} ${rounded} block w-full border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-1100 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-1150 rounded-2xl font-normal h-11 px-7 lg:text-lg py-3 text-left flex items-center justify-between`}
         >
-          {values[name]?.name.length > 0 
+          {values[name]?.name
             ? ( <p className='text-black dark:text-neutral-200'>{translate(values[name]?.name)}</p> ) 
             : translate(placeholder)
           }
@@ -637,8 +637,7 @@ export const FormikInputSelector = ({
                   key={option.id}
                   className={`py-1 px-3 dark:hover:text-black ${(isHighlighted && option.id === values[name]?.id) ? 'dark:text-black dark:bg-neutral-300 bg-neutral-100' : ''} hover:bg-neutral-100 dark:hover:bg-neutral-1100 cursor-pointer`}
                   onClick={() => {
-                    const newOption = { ...option, name: translate(option.name)};
-                    setFieldValue(name, newOption);
+                    setFieldValue(name, option);
                     setIsHighlighted(true);
                     setIsDropdownOpen(false);
                     setInputValue('');

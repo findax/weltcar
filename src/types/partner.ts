@@ -106,7 +106,13 @@ interface ICountry {
   name: string;
 }
 
-export type ICountries = ICountry[];
+export interface ISelectorFindCar {
+  id: number;
+  name: string;
+  value: string;
+}
+
+export type ICountries = ICountry[] | ISelectorFindCar[];
 
 interface IModel {
   id: number;

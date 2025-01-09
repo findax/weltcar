@@ -79,34 +79,41 @@ export default function FindCarForm({
   const engineTypes = [
     {
       "id": 1,
-      "name": "findCar.form.engineType.petrol.value"
+      "name": "findCar.form.engineType.petrol.value",
+      "value": "petrol"
     },
     {
       "id": 2,
-      "name": "findCar.form.engineType.diesel.value"
+      "name": "findCar.form.engineType.diesel.value",
+      "value": "diesel"
     },
     {
       "id": 3,
-      "name": "findCar.form.engineType.electrical.value"
+      "name": "findCar.form.engineType.electrical.value",
+      "value": "electrical"
     },
     {
       "id": 4,
-      "name": "findCar.form.engineType.hybrid.value"
+      "name": "findCar.form.engineType.hybrid.value",
+      "value": "hybrid"
     }
   ]
 
   const requestTime = [
     {
       "id": 1,
-      "name": "findCar.form.requestTime.immediate.value"
+      "name": "findCar.form.requestTime.immediate.value",
+      "value": "immediate"
     },
     {
       "id": 2,
-      "name": "findCar.form.requestTime.month.value"
+      "name": "findCar.form.requestTime.month.value",
+      "value": "month"
     },
     {
       "id": 3,
-      "name": "findCar.form.requestTime.readyToWait.value"
+      "name": "findCar.form.requestTime.readyToWait.value",
+      "value": "ready_to_wait"
     }
   ]
 
@@ -154,8 +161,8 @@ export default function FindCarForm({
   const returnFindCarDataToRequest = (data: any) => {
     const { engineType, requestTime, ...newValues } = data;
     const valuesToRequest = {...newValues};
-    valuesToRequest['engineType'] = data.engineType.name;
-    valuesToRequest['requestTime'] = data.requestTime.name;
+    valuesToRequest['engineType'] = data.engineType.value;
+    valuesToRequest['requestTime'] = data.requestTime.value;
     valuesToRequest['locale'] = locale;
     return valuesToRequest;
   }
@@ -269,7 +276,7 @@ export default function FindCarForm({
               touched={touched.requestTime?.name}
             />
             {/* ---- */}
-            <div className='w-full md:absolute md:bottom-[0] md:left-0'>
+            <div className='w-full md:absolute md:-bottom-[14px] md:left-0'>
               <FormikTextarea
                 name='additional'
                 placeholder='findCar.form.additional.placeholder'
@@ -282,7 +289,7 @@ export default function FindCarForm({
               />
             </div>
 
-            <div className='md:absolute md:-bottom-[88px] md:right-0 md:w-[32%] flex items-end'>
+            <div className='md:absolute md:-bottom-[95px] md:right-0 md:w-[32%] flex items-end'>
               <ButtonPrimary
                 type='submit'
                 disabled={isSubmitting}

@@ -1,4 +1,5 @@
 import { Route } from "next";
+import { useLocale } from "next-intl";
 import Link from "next/link";
 
 interface IProps {
@@ -15,9 +16,10 @@ export const NavItem = ({
   translate
 }:IProps) => {
   const name = translate(item);
+  const locale = useLocale();
   return (
     <Link
-      href={href as Route}
+      href={`/${locale}${href}` as Route}
       className={className}
     >
       {name.replace('-', ' ').replace('/', ' ')}
