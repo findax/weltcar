@@ -45,7 +45,7 @@ export default function PriceSidebar({
           {isPriceVisible
             && <span className='text-2xl font-semibold'>{translate('carDetails.price.title')}</span>
           }
-          <span className='text-5xl leading-10 font-semibold'>
+          <span className='text-4xl 2xl:text-5xl leading-10 font-semibold'>
             {priceWithComma(price)}
           </span>
         </div>

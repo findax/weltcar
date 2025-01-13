@@ -10,6 +10,7 @@ export interface ICarDetails {
   outer_color_hex: string;
   outer_color_name: string;
   pdf_url: string;
+  pdf_url_clean: string;
   photos: {
     thumb: string;
     original: string;
@@ -45,4 +46,10 @@ export interface ICarVideos {
   file_name: string;
   id: number;
   url: string;
+}
+
+export interface PdfVariant {
+  name: string;
+  value: string;
+  selected: boolean;
 }

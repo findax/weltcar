@@ -125,7 +125,7 @@ const Header = () => {
             <Navigation translate={t}/>
           </div>
 
-          <div className='flex mr-1'>
+          <div className='flex'>
             <LanguageSelector 
               className='hidden lg:flex' 
               languages={languages}  

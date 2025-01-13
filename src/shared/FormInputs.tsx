@@ -10,7 +10,8 @@ import {
   DocumentTextIcon,
 } from '@heroicons/react/24/outline';
 import { IoIosArrowDown, IoIosArrowUp, IoMdClose } from "react-icons/io";
-import { HiOutlineSearch } from "react-icons/hi";
+import { HiOutlineSearch, HiCheck } from "react-icons/hi";
+
 import { Route } from 'next';
 import Link from 'next/link';
 import { ICountries, IModels, IPartnerResponse, ISelectorFindCar } from '@/types/partner'; 
@@ -99,6 +100,54 @@ export const Checkbox = ({
           )}
           <span className='mr-4 whitespace-nowrap overflow-hidden text-ellipsis text-neutral-900 hover:text-neutral-400 dark:text-neutral-100 dark:hover:text-neutral-400'>
             {label}
+          </span>
+        </>
+      )}
+    </label>
+  );
+};
+
+interface RadioButtonProps {
+  className?: string;
+  label?: string;
+  name: string;
+  checked?: boolean;
+  onChange: () => void;
+}
+
+export const RadioButton = ({
+  className = '',
+  label = '',
+  name,
+  checked,
+  onChange,
+}: RadioButtonProps) => {
+  const translate = useTranslations();
+  return (
+    <label
+      htmlFor={name}
+      className={`flex items-center text-sm sm:text-base cursor-pointer overflow-hidden ${className}`}
+    >
+      <input
+        id={name}
+        name={name}
+        type='checkbox'
+        className="hidden peer"
+        checked={checked}
+        onChange={onChange}
+      />
+       <span
+        className={`
+          w-6 h-6 flex items-center justify-center border-2 border-primary-600 dark:border-primary-950 rounded-full 
+          transition-all duration-200
+        `}
+      >
+        { checked && <HiCheck className="dark:text-primary-950 text-primary-600 h-4 w-4" />}
+      </span>
+      {label && (
+        <>
+          <span className='ml-3 whitespace-nowrap overflow-hidden text-ellipsis text-neutral-1100 dark:text-white md:text-lg'>
+            {translate(label)}
           </span>
         </>
       )}

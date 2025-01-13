@@ -8,6 +8,8 @@ import priceWithComma from '@/utils/priceWithComma';
 import { ICar } from '@/types/catalog';
 import Link from 'next/link';
 import { Route } from 'next';
+import Image from 'next/image';
+import defaultWatermark from '@/images/defaultWatermark.svg';
 
 const CarCardH = ({
   className = '',
@@ -34,7 +36,30 @@ const CarCardH = ({
     status,
     specification,
     year,
+    watermark
   } = carData;
+
+  const renderWatermark = () => {
+    return (
+      <div className='absolute bottom-4 right-4 z-10'>
+        {watermark ? (
+          <Image
+            src={watermark}
+            alt={'default watermark'}
+            height={25}
+            width={80}
+          />
+        ) : (
+          <Image
+            src={defaultWatermark}
+            alt={'default watermark'}
+            height={25}
+            width={80}
+          />
+        )}
+      </div>
+    )
+  }
 
   return (
     <div
@@ -47,6 +72,7 @@ const CarCardH = ({
           grayscale={`${status === 'sold' ? 'grayscale' : ''}`}
           carName={`${brand} ${model}`}
         />
+        {renderWatermark()}
         {/* <BtnLikeIcon isLiked={like} className='absolute right-3 top-3' /> */}
         {status === 'sold' && <SoldBadge />}
       </div>

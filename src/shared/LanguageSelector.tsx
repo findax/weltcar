@@ -42,7 +42,7 @@ export const LanguageSelector = ({
   }
 
   return (
-    <div className={`flex items-center gap-2 w-[100px] ${className}`}>
+    <div className={`flex items-center gap-2 w-[90px] ${className}`}>
       <div className="relative w-full">
         <button className="border uppercase text-md text-neutral-500 block w-fit border-neutral-200 focus:border-primary-300 bg-white dark:border-neutral-700 dark:bg-neutral-900 rounded-2xl font-normal h-11 px-4 py-3 text-left flex items-center justify-between" onClick={() => setShowDropDown(!showDropDown)}>{currentLocale}</button>
         {showDropDown &&

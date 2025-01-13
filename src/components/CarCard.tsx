@@ -8,6 +8,8 @@ import { ButtonPrimary } from '@/shared/Buttons';
 import priceWithComma from '@/utils/priceWithComma';
 import { ICar } from '@/types/catalog';
 import { Route } from 'next';
+import Image from 'next/image';
+import defaultWatermark from '@/images/defaultWatermark.svg';
 
 const CarCard = ({
   className = '',
@@ -34,7 +36,30 @@ const CarCard = ({
     status,
     specification,
     year,
+    watermark
   } = carData;
+
+  const renderWatermark = () => {
+    return (
+      <div className='absolute bottom-3 right-4 z-10'>
+        {watermark ? (
+          <Image
+            src={watermark}
+            alt={'default watermark'}
+            height={25}
+            width={80}
+          />
+        ) : (
+          <Image
+            src={defaultWatermark}
+            alt={'default watermark'}
+            height={25}
+            width={80}
+          />
+        )}
+      </div>
+    )
+  }
 
   return (
     <div
@@ -48,6 +73,7 @@ const CarCard = ({
           grayscale={`${status === 'sold' ? 'grayscale' : ''}`}
           carName={`${brand} ${model}`}
         />
+        {renderWatermark()}
         {/* <BtnLikeIcon isLiked={like} className='absolute right-3 top-3 z-[1]' /> */}
         {status === 'sold' && <SoldBadge />}
       </div>

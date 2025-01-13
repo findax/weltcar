@@ -15,6 +15,8 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { Route } from 'next';
 import { useLocale, useTranslations } from 'next-intl';
+import Image from 'next/image';
+import defaultWatermark from '@/images/defaultWatermark.svg';
 
 const CarPartnerCard = ({
   className = '',
@@ -44,7 +46,8 @@ const CarPartnerCard = ({
     contractor_comment,
     year,
     is_verified,
-    is_deleted
+    is_deleted,
+    watermark
   } = carData;
 
   const handleModalDeleteOpen = () => {
@@ -69,6 +72,28 @@ const CarPartnerCard = ({
     }
   } 
 
+  const renderWatermark = () => {
+    return (
+      <div className='absolute bottom-3 right-4 z-10'>
+        {watermark ? (
+          <Image
+            src={watermark}
+            alt={'default watermark'}
+            height={25}
+            width={80}
+          />
+        ) : (
+          <Image
+            src={defaultWatermark}
+            alt={'default watermark'}
+            height={25}
+            width={80}
+          />
+        )}
+      </div>
+    )
+  }
+
   return (
     <>
       <div
@@ -82,6 +107,7 @@ const CarPartnerCard = ({
             grayscale={`${!is_verified ? 'grayscale' : ''}`}
             carName={`${brand} ${model}`}
           />
+          {renderWatermark()}
           {/* <BtnLikeIcon isLiked={like} className='absolute right-3 top-3 z-[1]' /> */}
           {renderBadge()}
         </div>

@@ -5,8 +5,10 @@ import { useTranslations } from 'next-intl';
 
 export default function Title({
   carData,
+  onDownloadCarInfo
 }: {
   carData: ICarDetails | ICarPartnerDetails | undefined;
+  onDownloadCarInfo: () => void;
 }) {
   const {
     brand,
@@ -60,16 +62,17 @@ export default function Title({
           </div>
         </div>
 
-        <a
-          href={pdf_url}
-          download
+        <div
+          // href={pdf_url}
+          // download
+          onClick={onDownloadCarInfo}
           className='flex flex-col items-center justify-center group'
         >
           <DocumentArrowDownIcon className='w-12 group-hover:text-primary-700 dark:group-hover:text-primary-500' />
           <span className='text-lg font-semibold group-hover:text-primary-700 dark:group-hover:text-primary-500'>
             PDF
           </span>
-        </a>
+        </div>
       </div>
 
       {

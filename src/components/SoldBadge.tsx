@@ -5,7 +5,7 @@ interface IProps {
 }
 
 const SoldBadge = ({
-  className = 'absolute bottom-2 right-3 py-1 px-4 text-2xl bg-gray-600 text-white rounded-full',
+  className = 'absolute top-2 right-3 py-1 px-4 text-2xl bg-gray-600 text-white rounded-full',
 }: IProps) => {
   const translate = useTranslations()
   return (
