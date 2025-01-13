@@ -22,9 +22,7 @@ export default function DownloadPdf({
   return (
     <div className='flex flex-col'>
       <h3 className='text-3xl text-neutral-900 dark:text-white text-center font-semibold'>
-        {translate('carDetails.downloadPdf.title.how')}
-        <br />
-        {translate('carDetails.downloadPdf.title.to')}
+        {translate('carDetails.downloadPdf.title.pdf')} PDF
       </h3>
       <div className='flex flex-col py-9 gap-5 '>
         {pdfOptions.map((pdfOption) => (
