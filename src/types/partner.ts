@@ -64,6 +64,7 @@ export interface ICarsPartner {
   };
   post_code: string | null;
   is_verified: boolean;
+  watermark: string | null;
 }
 
 export interface ICarPartnerDetails {
@@ -86,7 +87,8 @@ export interface ICarPartnerDetails {
   status: string;
   status_name: string;
   year: number;
-  pdf_url?: string;
+  pdf_url: string;
+  pdf_url_clean: string;
   is_deleted: boolean;
   contractor_comment: string;
   country: {
@@ -99,6 +101,7 @@ export interface ICarPartnerDetails {
   is_partner_car: boolean;
   partner_phone: string | null;
   partner_name: string | null;
+  watermark: string | null;
 }
 
 interface ICountry {

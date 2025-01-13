@@ -22,6 +22,7 @@ export interface ICar {
   status: string;
   status_name: string;
   year: number;
+  watermark: string;
 }
 
 export interface IFilters {

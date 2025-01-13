@@ -203,6 +203,11 @@
   "carDetails.mobile.button.sold": "Sold",
   "carDetails.mobile.button.reserve": "Reserve",
   "carDetails.partnersCar.title": "Partner’s Car",
+  "carDetails.downloadPdf.title.how": "How do You want",
+  "carDetails.downloadPdf.title.to": "to download this file?",
+  "carDetails.downloadPdf.title.with": "With Price",
+  "carDetails.downloadPdf.title.without": "Without Price",
+  "carDetails.downloadPdf.button": "Download",
   "carDetails.confirm.button": "Continue and Reserve",
 
   "authorization.button.signIn": "SIGN IN",

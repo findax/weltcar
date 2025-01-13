@@ -17,6 +17,9 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import { IUser } from '@/types/user';
 import { getCarId } from '@/api/cars';
 import { useLocale, useTranslations } from 'next-intl';
+import { ButtonPrimary } from '@/shared/Buttons';
+import { RadioButton } from '@/shared/FormInputs';
+import DownloadPdf from './DownloadPdf';
 
 interface IPages {
   pageName: string;
@@ -30,6 +33,8 @@ export default function CarDetails({
 }) {
   const locale = useLocale();
   const translate = useTranslations();
+  const [isOpenDownloadPdfModal, setIsOpenDownloadPdfModal] = useState(false);
+  const [isDownloadButtonClick, setIsDownloadButtonClick] = useState(false);
   const [carData, setCarData] = useState<ICarDetails>();
   const [isLoading, setIsLoading] = useState(true);
   const [carGallery, setCarGallery] = useState<ICarGallery[]>([]);
@@ -37,6 +42,7 @@ export default function CarDetails({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPartnerLogo, setIsPartnerLogo] = useState(false);
   const [modalId, setModalId] = useState('');
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [breadcrumbsPages, setBreadcrumbsPages] = useState<IPages[]>([
     {
       pageName: 'carDetails.breadcrumbs.main',
@@ -47,8 +53,29 @@ export default function CarDetails({
       pageHref: '/catalog'
     }
   ]);
+  const [pdfVariants, setPdfVariants] = useState([
+    {
+      name: 'with',
+      value: 'carDetails.downloadPdf.title.with',
+      selected: false
+    },
+    {
+      name: 'without',
+      value: 'carDetails.downloadPdf.title.without',
+      selected: false
+    },
+  ]);
 
   const user = useUserStore((state) => state.user);
+
+  const downloadFile = (fileUrl: string, fileName: string) => {
+    const anchor = document.createElement("a");
+    anchor.href = fileUrl;
+    anchor.download = fileName;
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+  };
 
   useEffect(() => {
     getCarId(carId, locale)
@@ -86,6 +113,35 @@ export default function CarDetails({
     }
   }, [isModalOpen]);
 
+  useEffect(() => {
+    if (carData && isDownloadButtonClick) {
+      const fileUrl =
+        selectedOption === "without"
+          ? carData.pdf_url
+          : carData.pdf_url_clean;
+      const fileName =
+        selectedOption === "without"
+          ? "file-without-price.pdf"
+          : "file-with-price.pdf";
+
+      downloadFile(fileUrl, fileName);
+      setIsDownloadButtonClick(false);
+    }
+  },[isDownloadButtonClick])
+
+  const handleRadioButtonChange = (name: string) => {
+    setSelectedOption(name);
+  };
+
+  const handleOpenDownloadModal = () => {
+    setIsOpenDownloadPdfModal(true);
+  }
+
+  const handleDownloadButton = () => {
+    setIsOpenDownloadPdfModal(false);
+    setIsDownloadButtonClick(true);
+  }
+
   function handleReserve() {
     if (!!user) {
       setModalId('confirm');
@@ -113,7 +169,7 @@ export default function CarDetails({
           <div className='w-full col-span-3 lg:col-span-2 space-y-8 lg:space-y-10'>
             {carData && (
               <>
-                <Title carData={carData} />
+                <Title carData={carData} onDownloadCarInfo={handleOpenDownloadModal} />
                 {carData.documents.length > 0 && (
                   <Documents documents={carData.documents} />
                 )}
@@ -160,6 +216,21 @@ export default function CarDetails({
       {modalId === 'authorization' && (
         <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
           <Authorization setIsModalOpen={setIsModalOpen} />
+        </Modal>
+      )}
+
+      {isOpenDownloadPdfModal && (
+        <Modal
+          maxWidth='max-w-[430px]'
+          isModalOpen={isOpenDownloadPdfModal}
+          setIsModalOpen={setIsOpenDownloadPdfModal}
+        >
+          <DownloadPdf 
+            selectedOption={selectedOption} 
+            pdfOptions={pdfVariants} 
+            handleDownloadButton={handleDownloadButton}
+            handleRadioButtonChange={handleRadioButtonChange} 
+          />
         </Modal>
       )}
     </>
