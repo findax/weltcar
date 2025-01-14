@@ -84,8 +84,8 @@ export default function PartnerCarsForm({
     outerColor: car?.outer_color_name,
     documents: undefined,
     country: {
-      id: car?.country.id,
-      name: car?.country.name
+      id: car?.country?.id,
+      name: car?.country?.name
     },
     postCode: car?.post_code,
     commentary: car?.contractor_comment
@@ -186,7 +186,7 @@ export default function PartnerCarsForm({
           <p className='inline-block text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-1'>{translate('accountPartnerCars.form.attachedPhotos.label')}</p>
           <div className='flex flex-col gap-1 block w-full border border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl text-sm font-normal px-4 py-3'>
             {attachedPhotos.map((photo) => (
-              <div key={photo.id} className='relative flex items-center w-fit rounded-2xl px-1 py-2'>
+              <div key={photo?.id} className='relative flex items-center w-fit rounded-2xl px-1 py-2'>
                 <img
                   src={photo.thumb}
                   className='h-[70px] w-[70px] rounded-lg'
@@ -252,30 +252,30 @@ export default function PartnerCarsForm({
 
   const handleCheckFetch = (car: ICarPartnerDetails | null, values: any, setSubmitting = (isSubmitting: boolean) => {}, resetForm = () => {}) => {
     if(car){
-      const attachedPhotosToRequest = attachedPhotos?.map((attachedPhoto) => attachedPhoto.id);
-      const attachedDocumentsToRequest = attachedDocuments?.map((attachedDocument) => attachedDocument.id);
+      const attachedPhotosToRequest = attachedPhotos?.map((attachedPhoto) => attachedPhoto?.id);
+      const attachedDocumentsToRequest = attachedDocuments?.map((attachedDocument) => attachedDocument?.id);
 
       const carDataToRequest: ICarPartnerToRequestUpdate = {
-        model_id: values.model.id.toString(),
-        specification: values.specification,
+        model_id: values?.model?.id.toString(),
+        specification: values?.specification,
         year: Number(values.year),
-        vin: values.vin,
-        price: values.price,
-        inner_color_hex: values.innerColor,
-        inner_color_name: values.innerColor,
-        outer_color_hex: values.outerColor,
-        outer_color_name: values.outerColor,
+        vin: values?.vin,
+        price: values?.price,
+        inner_color_hex: values?.innerColor,
+        inner_color_name: values?.innerColor,
+        outer_color_hex: values?.outerColor,
+        outer_color_name: values?.outerColor,
         contractor_comment: values.commentary ? values.commentary : '',
-        country: values.country.id,
-        post_code: values.postCode,
-        description: values.description,
+        country: values?.country?.id,
+        post_code: values?.postCode,
+        description: values?.description,
         photos: values.photos ? values.photos : [],
         documents: values.documents ? values.documents : [],
         attached_photos: attachedPhotosToRequest ? [...attachedPhotosToRequest] : [],
         attached_documents: attachedDocumentsToRequest ? [...attachedDocumentsToRequest] : [],
       };
 
-      updatePartnerCar(carDataToRequest, car.id, locale)
+      updatePartnerCar(carDataToRequest, car?.id, locale)
         .then((data) => {
           if(data && !data.message){
             setCar(data);
@@ -291,27 +291,27 @@ export default function PartnerCarsForm({
 
     } else {
       const carDataToRequest: ICarPartnerToRequest = {
-        model_id: values.model.id.toString(),
-        specification: values.specification,
-        year: Number(values.year),
-        vin: values.vin,
-        price: values.price,
-        inner_color_hex: values.innerColor,
-        inner_color_name: values.innerColor,
-        outer_color_hex: values.outerColor,
-        outer_color_name: values.outerColor,
-        contractor_comment: values.commentary ? values.commentary : '',
-        country: values.country.id,
-        post_code: values.postCode,
-        description: values.description,
-        photos: values.photos,
+        model_id: values?.model?.id.toString(),
+        specification: values?.specification,
+        year: Number(values?.year),
+        vin: values?.vin,
+        price: values?.price,
+        inner_color_hex: values?.innerColor,
+        inner_color_name: values?.innerColor,
+        outer_color_hex: values?.outerColor,
+        outer_color_name: values?.outerColor,
+        contractor_comment: values.commentary ? values?.commentary : '',
+        country: values?.country?.id,
+        post_code: values?.postCode,
+        description: values?.description,
+        photos: values?.photos,
         documents: values.documents ? values.documents : []
       };
 
       createPartnerCar(carDataToRequest, locale)
         .then((data) => {
           if(data && !data.message){
-            setResponseCarId(data.id);
+            setResponseCarId(data?.id);
             setSubmitting(false);
             resetForm()
             handleModalCreateOpen();
@@ -361,8 +361,8 @@ export default function PartnerCarsForm({
         outerColor: car?.outer_color_name,
         documents: undefined,
         country: {
-          id: car?.country.id,
-          name: car?.country.name
+          id: car?.country?.id,
+          name: car?.country?.name
         },
         postCode: car?.post_code,
         commentary: car?.contractor_comment
@@ -382,21 +382,21 @@ export default function PartnerCarsForm({
         specification: partnerCar?.specification,
         year: partnerCar?.year,
         vin: partnerCar?.vin,
-        price: partnerCar?.price.toString(),
+        price: partnerCar?.price?.toString(),
         photos: undefined,
         description: partnerCar?.description,
         innerColor: partnerCar?.inner_color_name,
         outerColor: partnerCar?.outer_color_name,
         documents: undefined,
         country: {
-          id: partnerCar?.country.id,
-          name: partnerCar?.country.name
+          id: partnerCar?.country?.id,
+          name: partnerCar?.country?.name
         },
         postCode: partnerCar?.post_code,
         commentary: partnerCar?.contractor_comment
       })
-      setAttachedPhotos(partnerCar.photos);
-      setAttachedDocuments(partnerCar.documents)
+      setAttachedPhotos(partnerCar?.photos);
+      setAttachedDocuments(partnerCar?.documents)
     }
   },[partnerCar])
 

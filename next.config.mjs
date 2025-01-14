@@ -10,7 +10,11 @@ const nextConfig = {
     typedRoutes: true,
   },
   images: {
-    domains: ['localhost', 'stageapi.weltcar.de'],
+    domains: [
+      'localhost',
+      'stageapi.weltcar.de',
+      'weltcar.s3.eu-central-1.amazonaws.com',
+    ],
     remotePatterns: [
       {
         protocol: 'https',

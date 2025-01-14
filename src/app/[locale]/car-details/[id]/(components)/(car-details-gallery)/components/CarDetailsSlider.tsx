@@ -134,7 +134,7 @@ export default function CarDetailsSlider({
                   <ArrowTopRightOnSquareIcon className='w-6 md:w-8' />
                 </a>
 
-                <button
+                {/* <button
                   onClick={() =>
                     downloadPhoto(currentImage?.url || '', `${index}.jpg`)
                   }
@@ -142,7 +142,7 @@ export default function CarDetailsSlider({
                   title='Download fullsize version'
                 >
                   <ArrowDownTrayIcon className='w-6 md:w-8' />
-                </button>
+                </button> */}
               </div>
               <div className='absolute top-0 left-0 flex items-center gap-2 text-white'>
                 <button
