@@ -20,7 +20,7 @@ export default function DownloadPdf({
   const translate = useTranslations();
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex w-full flex-col'>
       <h3 className='text-3xl text-neutral-900 dark:text-white text-center font-semibold'>
         {translate('carDetails.downloadPdf.title.pdf')} PDF
       </h3>
