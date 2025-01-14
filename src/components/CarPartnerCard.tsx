@@ -229,7 +229,7 @@ const CarPartnerCard = ({
               fontSize='text-sm'
               sizeClass='px-3 py-2 md:px-4 md:py-2'
               >
-                {translate('yourCars.modal.button.cancel')}
+                {translate('yourCars.modal.button.delete')}
             </ButtonPrimary>
           </div>
         </div>
