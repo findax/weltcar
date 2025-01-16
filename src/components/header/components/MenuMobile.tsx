@@ -16,6 +16,7 @@ import { IPartnerResponse } from '@/types/partner';
 import { LanguageSelector } from '@/shared/LanguageSelector';
 import { LocaleData } from '@/types/languages';
 import { useLocale } from 'next-intl';
+import { Route } from 'next';
 
 interface MenuMobileProps {
   className?: string;
@@ -122,7 +123,7 @@ const MenuMobile = ({
               <div className='flex justify-between items-center mt-4'>
                 <SocialsList itemClass='w-9 h-9 flex items-center justify-center rounded-full bg-neutral-100 text-xl dark:bg-neutral-800 dark:text-neutral-300' />
                 <div className='flex'>
-                  <LanguageSelector languages={languages} className='lg:hidden' />
+                  <LanguageSelector languages={languages} className='mr-4' />
                   <SwitchDarkMode className='bg-neutral-100 dark:bg-neutral-800' />
                 </div>
               </div>
