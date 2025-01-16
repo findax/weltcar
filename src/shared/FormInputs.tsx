@@ -185,7 +185,7 @@ export const FormikInput = ({
 }: FormikInputProps) => {
   const translate = useTranslations();
   return (
-    <fieldset className='relative'>
+    <fieldset className='relative flex flex-col h-full justify-between'>
       {title && <span className={commonTitleClass}>{translate(title)}</span>}
       <Field
         className={`${commonClass} ${rounded} ${sizeClass} .custom-input`}
@@ -667,7 +667,7 @@ export const FormikInputSelector = ({
           {isDropdownOpen ? <IoIosArrowUp/> : <IoIosArrowDown/> }
         </button>
         {isDropdownOpen && (
-          <div className='absolute max-h-[400px] overflow-y-auto z-10 mt-1 w-full bg-white dark:bg-neutral-1150 border border-neutral-200 dark:border-neutral-1100 rounded-2xl shadow-lg'>
+          <div className='absolute max-h-[350px] z-10 overflow-y-auto mt-1 w-full bg-white dark:bg-neutral-1150 border border-neutral-200 dark:border-neutral-1100 rounded-2xl shadow-lg'>
             <div className='py-2 px-2'>
               <div className='flex items-center w-full border border-neutral-200 dark:border-neutral-1100 rounded-lg px-2 py-1'>
                 <input
