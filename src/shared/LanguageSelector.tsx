@@ -4,7 +4,7 @@ import { LocaleData } from "@/types/languages";
 import { useLocale } from "next-intl";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface IProps {
   className?: string;
@@ -19,6 +19,7 @@ export const LanguageSelector = ({
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
+  const dropDownRef = useRef<HTMLDivElement>(null);
   const [showDropDown, setShowDropDown] = useState(false); 
   const [currentLocale, setCurrentLocale] = useState(localActive); 
 
@@ -26,6 +27,12 @@ export const LanguageSelector = ({
   searchParams.forEach((value, key) => {
     params[key] = value;
   });
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (dropDownRef.current && !dropDownRef.current.contains(event.target as Node)) {
+      setShowDropDown(false);
+    }
+  };
 
   const handleChangeLocale = (locale: string) => {
     const updatedPath = pathname.replace(`/${localActive}`, '');
@@ -41,9 +48,16 @@ export const LanguageSelector = ({
     setCurrentLocale(locale);
   }
 
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      <div className="relative">
+      <div className="relative" ref={dropDownRef}>
         <button className="border uppercase text-md text-neutral-500 block w-fit border-neutral-200 focus:border-primary-300 bg-white dark:border-neutral-700 dark:bg-neutral-900 rounded-2xl font-normal h-11 px-4 py-3 text-left flex items-center justify-between" onClick={() => setShowDropDown(!showDropDown)}>{currentLocale}</button>
         {showDropDown &&
           <div className="absolute overflow-y-auto z-10 mt-1 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-2xl shadow-lg">

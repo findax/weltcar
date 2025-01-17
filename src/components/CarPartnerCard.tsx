@@ -172,30 +172,30 @@ const CarPartnerCard = ({
             </h4>
           </div>
 
-          <div className='pt-4 flex justify-between items-center border-t border-dashed border-neutral-300 dark:border-neutral-700'>
-            <span className='2xl:text-2xl xl:text-xl text-sm font-semibold text-primary-1000 dark:text-primary-400'>
+          <div className='pt-4 flex flex-col gap-3 justify-between items-center border-t border-dashed border-neutral-300 dark:border-neutral-700'>
+            <span className='2xl:text-2xl xl:text-xl font-semibold text-primary-1000 dark:text-primary-400'>
               {priceWithComma(price)}
             </span>
-            <div style={{ display: `${ is_deleted ? "none" : "display"}`}} className='flex gap-1'>
+            <div style={{ display: `${ is_deleted ? "none" : "display"}`}} className='flex w-full justify-around'>
               <ButtonPrimary
                 onClick={handleModalDeleteOpen}
-                fontSize='md:text-sm text-xs'
-                sizeClass='px-2 py-1.5'
+                fontSize='lg:text-md text-xs'
+                sizeClass='h-full lg:px-2.5 lg:py-2 px-2 py-1.5'
                 >
                   {translate('yourCars.button.delete')}
               </ButtonPrimary>
               <Link href={`/partner-cars?id=${id}` as Route} target='_blank'>
                 <ButtonPrimary
-                  fontSize='md:text-sm text-xs'
-                  sizeClass='px-2 py-1.5 '
+                  fontSize='lg:text-md text-xs'
+                  sizeClass='h-full lg:px-2.5 lg:py-2 px-2 py-1.5'
                 >
                   {translate('yourCars.button.edit')}
                 </ButtonPrimary>
               </Link>
               <Link href={`/partner-car-details/${id}` as Route} target='_blank'>
                 <ButtonPrimary
-                  fontSize='md:text-sm text-xs'
-                  sizeClass='px-2 py-1.5 '
+                  fontSize='lg:text-md text-xs'
+                  sizeClass='h-full lg:px-2.5 lg:py-2 px-2 py-1.5'
                 >
                   {translate('yourCars.button.seeMore')}
                 </ButtonPrimary>
