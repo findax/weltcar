@@ -136,7 +136,7 @@ const CarCard = ({
           <Link href={`/car-details/${id}` as Route } target='_blank'>
             <ButtonPrimary
               fontSize='text-sm'
-              sizeClass='px-5 py-2 md:px-6 md:py-3'
+              sizeClass='px-5 py-2'
             >
               {translate('catalog.button.seeMore')}
             </ButtonPrimary>

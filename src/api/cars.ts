@@ -18,11 +18,11 @@ export const getCarsList = async (
   queryParams?: ICatalogQueryParams
 ) => {
   const headers: Record<string, string> = {
+    cache: 'no-store',
     'Accept-Language': locale,
   };
   return new Promise((resolve) => {
     api
-      // .post(`/api/cars/list${url}`)
       .post(`/api/cars/list?page=${page}&perPage=${perPage}`, queryParams, {
         headers,
       })

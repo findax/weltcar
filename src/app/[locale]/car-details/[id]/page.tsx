@@ -26,7 +26,6 @@ export async function generateMetadata({
   params,
 }:{
   params: { id: string };
-  // searchParams: { [key: string]: string | string[] | undefined };
 }): Promise<Metadata> {
   const resMetadata = await fetchCarData(params.id)
 
