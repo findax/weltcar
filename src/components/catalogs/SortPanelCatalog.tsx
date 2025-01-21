@@ -9,6 +9,8 @@ import { ISort } from '@/types/catalog';
 import { useQueryParams } from '@/hooks/useQueryParams';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { Route } from '@/types/routers';
+import { useLocale } from 'next-intl';
+import { getPdfFile } from '@/api/files';
 
 interface SortPanelProps {
   sortData: ISort[];
@@ -29,9 +31,9 @@ const SortPanelCatalog = ({
   openFilter,
   translate
 }: SortPanelProps) => {
+  const locale = useLocale();
   const [fileFormat, setFileFormat] = useState<string>('pdf');
   const { queryParams, handleSortChange } = useQueryParams();
-  const apiDownloadUrl: Route<string> = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/cars/list/export?type=${fileFormat}` as  Route<string>;
 
   const isSelectorShortWidth =
     (queryParams && queryParams.sort && queryParams.sort[0].id === 'oldest') !==
@@ -52,6 +54,16 @@ const SortPanelCatalog = ({
 
     handleSortChange(select.value);
   }
+
+  const handleExportClick = async (fileType: string) => {  
+    const success = await getPdfFile(fileType, locale);
+  
+    if (success) {
+      console.log('File exported successfully');
+    } else {
+      console.log('Failed to export file');
+    }
+  };
 
   return (
     <div className='col-span-12 bg-white dark:bg-neutral-900 mb-4 py-2 pl-4 pr-1 lg:mb-6 border border-neutral-200 dark:border-neutral-700 rounded-xl'>
@@ -75,8 +87,7 @@ const SortPanelCatalog = ({
               <option value='xlsx'>{translate('download.selectFileType.csv')}</option>
             </select>
             <ButtonPrimary
-              href={apiDownloadUrl}
-              download
+              onClick={() => handleExportClick(fileFormat)}
               className='!py-2 mx-2'
             >
               <span className='mr-2'>{translate('download.button.download')}</span>
