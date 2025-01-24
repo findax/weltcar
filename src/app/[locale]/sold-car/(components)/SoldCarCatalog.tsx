@@ -12,7 +12,7 @@ import { useQueryStore } from '@/stores/query-store';
 import FiltersCatalog from '@/components/catalogs/FiltersCatalog';
 import CarListCatalog from '@/components/catalogs/CarListCatalog';
 import SortPanelCatalog from '@/components/catalogs/SortPanelCatalog';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 export default function SoldCarCatalog() {
   const [isFirstLoading, setFirstLoading] = useState(true);
@@ -20,6 +20,7 @@ export default function SoldCarCatalog() {
   const [isError, setError] = useState(false);
   const [isGrid, setGrid] = useState(true);
   const isMobile = useMediaQuery(1024);
+  const locale = useLocale();
   const [activeFiltersCount, setActiveFiltersCount] = useState(0);
   const [catalogData, setCatalogData] = useState({} as ICatalog);
 
@@ -32,7 +33,7 @@ export default function SoldCarCatalog() {
   useEffect(() => {
     const query = isFirstLoading ? queryParams : queryState;
     setLoading(true);
-    getSoldCarsList(currentPage, 10, 'zh-cn', query as ICatalogQueryParams)
+    getSoldCarsList(currentPage, 10, locale, query as ICatalogQueryParams)
       .then((data) => {
         if (data) {
           setCatalogData(data as ICatalog);
