@@ -85,7 +85,7 @@ export interface ICarPartnerDetails {
   price: number | string;
   specification: string;
   status: string;
-  status_name: string;
+  status_extra: string;
   year: number;
   pdf_url: string;
   pdf_url_clean: string;

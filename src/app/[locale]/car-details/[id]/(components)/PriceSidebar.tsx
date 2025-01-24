@@ -12,6 +12,7 @@ export default function PriceSidebar({
   isShowPartnerLogo,
   partnerPhone,
   partnerName,
+  status_extra
 }: {
   onClick: () => void;
   price: string | number;
@@ -19,6 +20,7 @@ export default function PriceSidebar({
   isShowPartnerLogo?: boolean;
   partnerPhone: string | null;
   partnerName: string | null;
+  status_extra: string | null;
 }) {
   const translate = useTranslations();
   const [isPriceVisible, setIsPriceVisible] = useState<boolean>(true);
@@ -38,6 +40,7 @@ export default function PriceSidebar({
             partnerPhone={partnerPhone} 
             partnerName={partnerName} 
             translate={translate}
+            status_extra={status_extra || null}
           />
         )}
 
@@ -49,6 +52,12 @@ export default function PriceSidebar({
             {priceWithComma(price)}
           </span>
         </div>
+
+        {!isShowPartnerLogo && status_extra && 
+          <div className='flex gap-1'>
+            <span className='font-medium md:text-lg dark:text-neutral-400 text-neutral-1100'>Available {status_extra}</span>
+          </div>
+        }
 
         <ButtonPrimary
           onClick={onClick}

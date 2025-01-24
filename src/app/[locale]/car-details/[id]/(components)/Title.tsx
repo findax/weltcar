@@ -18,7 +18,6 @@ export default function Title({
     model,
     outer_color_hex,
     outer_color_name,
-    pdf_url,
     specification,
     vin,
     year,
@@ -63,10 +62,8 @@ export default function Title({
         </div>
 
         <div
-          // href={pdf_url}
-          // download
           onClick={onDownloadCarInfo}
-          className='flex flex-col items-center justify-center group'
+          className='flex flex-col cursor-pointer items-center justify-center group'
         >
           <DocumentArrowDownIcon className='w-12 group-hover:text-primary-700 dark:group-hover:text-primary-500' />
           <span className='text-lg font-semibold group-hover:text-primary-700 dark:group-hover:text-primary-500'>

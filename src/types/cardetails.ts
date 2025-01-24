@@ -19,6 +19,7 @@ export interface ICarDetails {
   properties: [];
   specification: string;
   status: string;
+  status_extra: string;
   vin: string;
   year: number;
   videos?: ICarVideos[] | null;

@@ -190,6 +190,7 @@ export default function CarDetails({
             isShowPartnerLogo={isPartnerLogo}
             partnerPhone={carData?.partner_phone || null}
             partnerName={carData?.partner_name || null}
+            status_extra={carData?.status_extra || null}
           />
         </div>
       </div>
