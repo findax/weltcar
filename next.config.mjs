@@ -12,7 +12,7 @@ const nextConfig = {
   images: {
     domains: [
       'localhost',
-      'stageapi.weltcar.de',
+      'api.weltcar.de',
       'weltcar.s3.eu-central-1.amazonaws.com',
     ],
     remotePatterns: [
