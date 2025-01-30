@@ -146,5 +146,5 @@ export const restorePassword = async ({
 export const logout = () => {
   localStorage.removeItem('user');
   localStorage.clear();
-  window.location.reload();
+  window.location.href = '/';
 };

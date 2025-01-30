@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { ButtonPrimary } from '@/shared/Buttons';
@@ -9,17 +9,17 @@ import { InformationCircleIcon } from '@heroicons/react/24/outline';
 import { useUserStore } from '@/stores/user-store';
 import { IUser } from '@/types/user';
 import { useTranslations } from 'next-intl';
-import router from 'next/router';
+import SignUpFavorite from './SignUpFavorite';
 
-export default function SignIn({
+export default function SignInFavorite({
   setIsModalOpen,
+  changeCurrentPage
 }: {
+  changeCurrentPage: (page: ReactElement) => void;
   setIsModalOpen: (isModalOpen: boolean) => void;
 }) {
   const translate = useTranslations();
-  const [isOpenForgotPassword, setIsOpenForgotPassword] = useState(false);
   const [emailValue, setEmailValue] = useState('');
-  const [isResetingPassword, setIsResetingPassword] = useState(false);
 
   const updateUserState = useUserStore((state) => state.updateUserState);
 
@@ -42,20 +42,13 @@ export default function SignIn({
     data.name === 'email' && setEmailValue(data.value);
   };
 
-  return isResetingPassword ? (
-    <div className='pt-4 flex justify-center items-center'>
-      <div className='text-center space-y-10'>
-        <InformationCircleIcon className='block mx-auto w-24 h-24 text-yellow-500' />
-        <p className='px-6 text-2xl font-semibold'>
-          {translate('authorization.signIn.resetPass.title')}
-        </p>
-        <ButtonPrimary onClick={() => setIsModalOpen(false)}>
-          {translate('authorization.signIn.button.gotIt')}
-        </ButtonPrimary>
-      </div>
-    </div>
-  ) : (
-    <>
+  return (
+    <div className='w-full max-w-md mx-auto space-y-8'>
+
+      <h3 className='font-semibold flex flex-col items-center gap-4 text-[32px] text-neutral-900 dark:text-white'>
+        <span>{translate('authorization.favorites.title.canAdd')}</span>
+        <span>{translate('authorization.favorites.title.only')}</span>
+      </h3>
       <Formik
         initialValues={{
           email: '',
@@ -68,9 +61,10 @@ export default function SignIn({
 
           singIn(castValues)
             .then((res) => {
-              if(res){
-                updateUserState(res as IUser), 
-                setIsModalOpen(false)
+              if(res) {
+                updateUserState(res as IUser);
+                setIsModalOpen(false);
+                window.location.reload();
               }
             })
             .finally(() => setSubmitting(false));
@@ -111,23 +105,18 @@ export default function SignIn({
               {translate('authorization.signIn.button.continue')}
             </ButtonPrimary>
 
-            <button
-              type='button'
-              className='-mt-2 text-sm underline font-medium'
-              onClick={() => setIsOpenForgotPassword(!isOpenForgotPassword)}
-            >
-              {isOpenForgotPassword ? translate('authorization.signIn.button.cancel') : translate('authorization.signIn.button.forgot')}
-            </button>
+            <div className='flex gap-1 justify-center'>
+              <span className='font-medium'>I don’t have an account.</span>
+              <button 
+                onClick={() => changeCurrentPage(<SignUpFavorite setIsModalOpen={setIsModalOpen} />)}
+                className='underline underline-offset-1'
+              >
+                Sign up
+              </button>
+            </div>
           </Form>
         )}
       </Formik>
-
-      {isOpenForgotPassword && (
-        <ForgotPassword
-          emailValue={emailValue}
-          setIsResetingPassword={setIsResetingPassword}
-        />
-      )}
-    </>
+    </div>
   );
 }

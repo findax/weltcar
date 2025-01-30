@@ -46,7 +46,7 @@ const OrdersPage = () => {
       ) : (
         <div className='w-full'>
           {state &&
-            (state.data.length < 0 ? (
+            (state.data.length > 0 ? (
               <>
                 <div className='text-xl text-center font-semibold mb-6 pr-16 hidden md:grid grid-cols-4 gap-4'>
                   <h3>{translate('yourOrders.car.title')}</h3>

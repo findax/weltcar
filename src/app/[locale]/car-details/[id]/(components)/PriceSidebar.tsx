@@ -46,9 +46,9 @@ export default function PriceSidebar({
 
         <div className={`${isPriceVisible ? 'flex justify-between items-end gap-1 ' : 'flex justify-center items-end gap-1 '}`}>
           {isPriceVisible
-            && <span className='text-2xl font-semibold'>{translate('carDetails.price.title')}</span>
+            && <span className='text-xl xl:text-2xl font-semibold'>{translate('carDetails.price.title')}</span>
           }
-          <span className='text-4xl 2xl:text-5xl leading-10 font-semibold'>
+          <span className='text-3xl xl:text-4xl leading-10 font-semibold'>
             {priceWithComma(price)}
           </span>
         </div>
