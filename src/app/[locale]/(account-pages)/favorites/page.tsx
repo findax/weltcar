@@ -1,69 +1,88 @@
 'use client';
 
-import { Tab } from '@headlessui/react';
-import CarCard from '@/components/CarCard';
-import { Fragment, useState } from 'react';
-import { ButtonSecondary } from '@/shared/Buttons';
+import { Suspense, useEffect, useState } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
+import { IFavoritesCarsDetails } from '@/types/favorites';
+import { getFavoritesCars } from '@/api/favorites';
+import LoadingSpinner from '@/shared/LoadingSpinner';
+import ErrorComponent from '@/components/ErrorComponent';
+import { CatalogFavorites } from './(components)/CatalogFavorites';
+import { ButtonPrimary } from '@/shared/Buttons';
+import { NextRoute } from '@/types/routers';
 
 const FavoritesPage = () => {
-  let [categories] = useState(['Stays', 'Experiences', 'Cars']);
+  const translate = useTranslations();
+  const locale = useLocale();
+  const [favoritesCars, setFavoritesCars] = useState<IFavoritesCarsDetails[] | undefined>();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
-  const renderSection1 = () => {
-    return (
-      <div className='space-y-6 md:space-y-8'>
-        <div>
-          <h2 className='text-3xl font-semibold'>Favorites</h2>
-        </div>
-        <div className='w-14 border-b border-neutral-300 dark:border-neutral-700'></div>
+  const fetchFavoritesCars = () => {
+    setIsLoading(true);
+    setIsError(false);
 
-        <div>
-          {/* <Tab.Group>
-            <Tab.List className='flex space-x-1 overflow-x-auto'>
-              {categories.map((item) => (
-                <Tab key={item} as={Fragment}>
-                  {({ selected }) => (
-                    <button
-                      className={`flex-shrink-0 block !leading-none font-medium px-5 py-2.5 text-sm sm:text-base sm:px-6 sm:py-3 capitalize rounded-full focus:outline-none ${
-                        selected
-                          ? 'bg-secondary-900 text-secondary-50 '
-                          : 'text-neutral-500 dark:text-neutral-400 dark:hover:text-neutral-100 hover:text-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800'
-                      } `}
-                    >
-                      {item}
-                    </button>
-                  )}
-                </Tab>
-              ))}
-            </Tab.List>
-            <Tab.Panels>
-              <Tab.Panel className='mt-8'>
-                <div className='grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-                  {carList.filter((_, i) => i < 6).map(car => (
-                    <CarCard key={car.id} carData={car} />
-                  ))}
-                </div>
-                <div className='flex mt-11 justify-center items-center'>
-                  <ButtonSecondary>Show me more</ButtonSecondary>
-                </div>
-              </Tab.Panel>
-            </Tab.Panels>
-          </Tab.Group> */}
-          {/* <div className='grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-            {carList
-              .filter((_, i) => i < 6)
-              .map((car) => (
-                <CarCard key={car.id} carData={car} />
-              ))}
-          </div> */}
-          <div className='flex mt-11 justify-center items-center'>
-            <ButtonSecondary>Show me more</ButtonSecondary>
-          </div>
-        </div>
-      </div>
-    );
+    getFavoritesCars(locale)
+      .then((res) => {
+        if (res) {
+          setFavoritesCars(res as IFavoritesCarsDetails[]);
+        } else {
+          setIsError(true);
+        }
+      })
+      .finally(() => setIsLoading(false));
   };
 
-  return renderSection1();
+  useEffect(() => {
+    fetchFavoritesCars();
+  }, []);
+
+  return (
+    <div className='relative min-h-[540px] space-y-10 md:space-y-14 lg:min-h-[650px] xl:min-h-[600px]'>
+      {/* HEADING */}
+      <h2 className='text-2xl lg:text-4xl font-bold'>{translate('favorites.title.favorites')}</h2>
+
+      {isLoading ? (
+        <div className='w-full h-96 flex justify-center items-center'>
+          <div className='-mt-[76px]'>
+            <LoadingSpinner className='w-12' />
+          </div>
+        </div>
+      ) : isError ? (
+        <ErrorComponent />
+      ) : (
+        <div className='w-full'>
+          {favoritesCars && 
+            (favoritesCars.length > 0 
+              ? (
+                  <Suspense
+                    fallback={
+                      <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
+                        <div className='-mt-[76px]'>
+                          <LoadingSpinner className='w-12' />
+                        </div>
+                      </div>
+                    }
+                  >
+                    <CatalogFavorites 
+                      carListData={favoritesCars} 
+                      fetchFavoritesCars={fetchFavoritesCars}
+                    />
+                  </Suspense>
+                )
+              : (
+                  <div className='h-[40vh] flex justify-center items-center flex-col bg-white/50 dark:bg-neutral-800/60'>
+                    <h3 className='text-2xl'>{translate('favorites.nocars.title')}</h3>
+                      <ButtonPrimary className='mt-6' href={`/${locale}/catalog` as NextRoute}>
+                        {translate('favorites.nocars.addCar')}
+                      </ButtonPrimary>
+                  </div>
+                )
+            )
+          }
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default FavoritesPage;

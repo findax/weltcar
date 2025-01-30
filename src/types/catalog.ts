@@ -10,6 +10,7 @@ export interface ICar {
   brand: string;
   car_id: string;
   id: string;
+  is_favorite: boolean;
   inner_color_hex: string;
   inner_color_name: string;
   is_sold: boolean;

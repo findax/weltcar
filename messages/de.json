@@ -79,6 +79,16 @@
   "fastFacts.yearsExperience.subtitle": "Years of Experience in the Luxury Auto Industry",
   "fastFacts.yearsExperience.description": "Our deep industry knowledge and long-standing relationships with top car manufacturers guarantee that you receive the best vehicles and services available.",
 
+  "favorites.title.favorites": "Favorites",
+  "favorites.catalog.button.seeMore": "See more",
+  "favorites.catalog.button.remove": "Remove from favorites",
+  "favorites.toast.success.delete": "Favorite car deleted",
+  "favorites.nocars.title": "You have no added the cars",
+  "favorites.button.addCar": "Add car",
+
+  "authorization.favorites.title.canAdd": "You can add to favorites",
+  "authorization.favorites.title.only": "only if you are authorized",
+
   "team.title": "Our Team",
   "team.description": "Our team at WeltCar is composed of industry experts dedicated to providing you with the best luxury car buying experience. We work together to ensure that every aspect of your interaction with us is seamless and satisfying, making your journey to owning a premium vehicle both enjoyable and memorable.",
   "team.members.oleg.name": "Oleg",
@@ -282,6 +292,7 @@
   "account.navbar.account": "account",
   "account.navbar.accountPartner": "account-partner",
   "account.navbar.password": "password",
+  "account.navbar.favorites": "favorites",
   "account.navbar.orders": "orders",
   "account.navbar.carSubscriptions": "car-subscriptions",
   "account.navbar.partnerCarsList": "partner-cars-list",
