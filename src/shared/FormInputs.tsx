@@ -16,10 +16,11 @@ import { Route } from 'next';
 import Link from 'next/link';
 import { ICountries, IModels, IPartnerResponse, ISelectorFindCar } from '@/types/partner'; 
 import { useLocale, useTranslations } from 'next-intl';
+import priceWithComma from '@/utils/priceWithComma';
 
 
 const commonClass =
-  'block w-full border-neutral-200 focus:border-primary-300 focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-1100 dark:focus:bg-neutral-1100 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-1150 rounded-2xl !text-xl font-normal h-11 px-7 py-3';
+  'block w-full border-neutral-200 focus:border-primary-300 focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-1100 dark:focus:bg-neutral-1100 !text-lg dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-1150 rounded-2xl font-normal h-11 px-7 py-3';
 const commonTitleClass =
   'inline-block text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-3';
 const commonErrorClass =
@@ -205,6 +206,52 @@ export const FormikInput = ({
   );
 };
 
+export const FormikInputPrice = ({
+  name,
+  title,
+  error,
+  onKeyPress,
+  touched,
+  rounded,
+  sizeClass,
+  disabled = false,
+  placeholder,
+  ...args
+}: FormikInputProps) => {
+  const translate = useTranslations();
+  const { setFieldValue, values } = useFormikContext<any>();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value.replace(/[^\d]/g, '');
+    const formattedValue = priceWithComma(inputValue);
+    setFieldValue(name, inputValue);
+    e.target.value = String(formattedValue);
+  };
+
+  return (
+    <fieldset className='relative flex flex-col h-full justify-between'>
+      {title && <span className={commonTitleClass}>{translate(title)}</span>}
+      <Field
+        className={`${commonClass} ${rounded} ${sizeClass} .custom-input`}
+        value={priceWithComma(values[name])}
+        name={name}
+        onKeyPress={onKeyPress}
+        disabled={disabled}
+        placeholder={translate(placeholder)}
+        {...args}
+        onChange={handleChange}
+      />
+      {error && touched ? (
+        <div className={commonErrorClass}>
+          <InformationCircleIcon className='w-4 inline-block mr-1' />
+          {translate(error)}
+        </div>
+      ) : null}
+    </fieldset>
+  );
+};
+
+
 interface FormikPhoneNumberInputProps {
   title: string;
   error?: string;
@@ -334,14 +381,14 @@ export const FormikCheckbox = ({
 
   const renderingNavLinkLabel = () => {
     let ourLabel, linkStr, strLabel;
-    if(locale === 'en' || locale === 'de') {
+    if(locale.length === 2) {
       ourLabel = translate(label).split(" ");
       linkStr = ourLabel.slice(-2).join(" ");
       strLabel = ourLabel.slice(0, -2).join(" ");
     } else {
       ourLabel = translate(label).split("");
-      linkStr = ourLabel.slice(-4).join(" ");
-      strLabel = ourLabel.slice(0, -4).join(" ");
+      linkStr = ourLabel.slice(-4).join(" ").replaceAll(' ', '');
+      strLabel = ourLabel.slice(0, -4).join(" ").replaceAll(' ', '');
     }
     if(href){
       return (
@@ -353,12 +400,12 @@ export const FormikCheckbox = ({
             className={`h-7 w-7 text-primary-500 border-primary border-neutral-500 bg-white dark:bg-neutral-700  dark:checked:bg-primary-500 cursor-pointer ${className}`}
             defaultChecked={defaultChecked}
           />
-          <span className='ml-3.5 mr-2 text-neutral-900 hover:text-neutral-400 dark:text-neutral-100 dark:hover:text-neutral-400'>
+          <span className='ml-3.5 mr-2 text-xs xs:text-base text-neutral-900 hover:text-neutral-400 dark:text-neutral-100 dark:hover:text-neutral-400'>
             {`${translate(strLabel)}`}
           </span>
           <Link 
             target='_blank'
-            className='text-primary-500 hover:text-primary-400' 
+            className='text-primary-500 text-xs xs:text-base hover:text-primary-400' 
             href={href}
           >
             {linkStr}
@@ -375,7 +422,7 @@ export const FormikCheckbox = ({
             className={`h-7 w-7 text-primary-500 border-primary border-neutral-500 bg-white dark:bg-neutral-700  dark:checked:bg-primary-500 cursor-pointer ${className}`}
             defaultChecked={defaultChecked}
           />
-          <span className='ml-3.5 text-neutral-900 hover:text-neutral-400 dark:text-neutral-100 dark:hover:text-neutral-400'>
+          <span className='ml-3.5 text-neutral-900 text-xs xs:text-base hover:text-neutral-400 dark:text-neutral-100 dark:hover:text-neutral-400'>
             {translate(label)}
           </span>
       </label>
