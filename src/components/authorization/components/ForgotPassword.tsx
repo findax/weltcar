@@ -42,6 +42,8 @@ export default function ForgotPassword({
           <FormikInput
             name='email'
             type='email'
+            rounded='rounded-full'
+            sizeClass='h-14'
             placeholder='forgotPassword.email.placeholder'
             title='forgotPassword.email.title'
             error={errors.email}

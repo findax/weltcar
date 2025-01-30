@@ -121,8 +121,10 @@ export default function SignUpPartner({
         }}
     >
       {({ errors, touched, isSubmitting }) => (
-        <Form className='grid grid-cols-1 gap-8'>
+        <Form className='grid grid-cols-1 gap-6'>
           <FormikInput
+            rounded='rounded-full'
+            sizeClass='h-14'
             name='company_name'
             placeholder='authorization.signUp.company.placeholder'
             title='authorization.signUp.company.title'
@@ -131,6 +133,8 @@ export default function SignUpPartner({
           />
           {/* ---- */}
           <FormikInput
+            rounded='rounded-full'
+            sizeClass='h-14'
             name='tax_number'
             placeholder='authorization.signUp.taxNumber.placeholder'
             title='authorization.signUp.taxNumber.title'
@@ -147,6 +151,8 @@ export default function SignUpPartner({
           />
           {/* ---- */}
           <FormikInput
+            rounded='rounded-full'
+            sizeClass='h-14'
             name='email'
             type='email'
             placeholder='authorization.signUp.email.placeholder'
@@ -156,12 +162,16 @@ export default function SignUpPartner({
           />
           {/* ---- */}
           <FormikPhoneNumberInput
+            rounded='rounded-full'
+            sizeClass='h-14'
             title='authorization.signUp.phone.title'
             error={errors.phone}
             touched={touched.phone}
           />
           {/* ---- */}
           <FormikPasswordInput
+            rounded='rounded-full'
+            sizeClass='h-14'
             title='authorization.signUp.password.title'
             placeholder='authorization.signUp.password.placeholder'
             error={errors.password}

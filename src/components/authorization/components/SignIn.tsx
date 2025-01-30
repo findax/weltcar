@@ -9,6 +9,7 @@ import { InformationCircleIcon } from '@heroicons/react/24/outline';
 import { useUserStore } from '@/stores/user-store';
 import { IUser } from '@/types/user';
 import { useTranslations } from 'next-intl';
+import router from 'next/router';
 
 export default function SignIn({
   setIsModalOpen,
@@ -67,7 +68,11 @@ export default function SignIn({
 
           singIn(castValues)
             .then((res) => {
-              res && (updateUserState(res as IUser), setIsModalOpen(false));
+              if(res){
+                updateUserState(res as IUser), 
+                setIsModalOpen(false),
+                window.location.reload();
+              }
             })
             .finally(() => setSubmitting(false));
         }}
@@ -82,6 +87,8 @@ export default function SignIn({
             <FormikInput
               name='email'
               type='email'
+              rounded='rounded-full'
+              sizeClass='h-14'
               placeholder='authorization.signIn.email.placeholder'
               title='authorization.signIn.email.title'
               error={errors.email}
@@ -89,6 +96,8 @@ export default function SignIn({
             />
             {/* ---- */}
             <FormikPasswordInput
+              rounded='rounded-full'
+              sizeClass='h-14'
               title='authorization.signIn.password.title'
               placeholder='authorization.signIn.password.placeholder'
               error={errors.password}
