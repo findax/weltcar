@@ -22,7 +22,7 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
   const prevScrollPos = useRef(0);
   const [isScrolled, setScrolled] = useState(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-  const [activePage, setActivePage] = useState('');
+  const [activePage, setActivePage] = useState<string>('');
   const isMobile = useMediaQuery(1024);
   const { isDarkMode, mounted } = useThemeMode();
 
@@ -56,7 +56,8 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
   }, []);
 
   const handleSetActivePage = (pathPage: string) => {
-    setActivePage(pathPage);
+    const newPathPage = pathPage.split("/").pop() || '';
+    setActivePage(newPathPage);
   }
 
   const renderCarImage = () => {
@@ -129,6 +130,22 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
             />
           </>
         )
+      case NavigationRoutes.Favorites:
+        return (
+          <Image 
+            className='absolute -top-[28%] left-[0px] -z-10'
+            src={triangleBackgroundImgBigger} 
+            alt='triangle background'
+          />
+        )
+      case NavigationRoutes.PartnerCarList:
+        return (
+          <Image 
+            src={triangleBackgroundImgBigger} 
+            alt='triangle background'
+            className='absolute -top-[6%] left-[0] -z-10'
+          />
+        )
       case NavigationRoutes.CarSubscriptions:
         return (
           <>
@@ -175,8 +192,8 @@ const CommonLayout = ({ children }: { children?: React.ReactNode }) => {
           ${NavigationRoutes.Orders === activePage ? 'xl:mt-20 xl:mb-40' : ''}
 
         `}>{children}</div>
-        {renderCarImage()}
       </Suspense>
+        {renderCarImage()}
     </div>
   );
 };
