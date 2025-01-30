@@ -10,17 +10,22 @@ import Link from 'next/link';
 import { Route } from 'next';
 import Image from 'next/image';
 import defaultWatermark from '@/images/defaultWatermark.svg';
+import { HeartIcon } from '@heroicons/react/24/outline';
+import { IUser } from '@/types/user';
+import { useState } from 'react';
 
 const CarCardH = ({
   className = '',
   carData,
   paddingBottomHorizontal,
-  translate
+  translate,
+  user
 }: {
   className?: string;
   carData: ICar;
   paddingBottomHorizontal: string;
   translate: any;
+  user: IUser | null;
 }) => {
   const {
     brand,
@@ -38,6 +43,15 @@ const CarCardH = ({
     year,
     watermark
   } = carData;
+  const [isAuthorizationModalOpen, setIsAuthorizationModalOpen] = useState(false);
+
+  const handleAddFavoriteCar = (user: IUser | null, idCar: string) => {
+    if(!user){
+      setIsAuthorizationModalOpen(true)
+    } else {
+      console.log('success')
+    }
+  }
 
   const renderWatermark = () => {
     return (
@@ -93,39 +107,46 @@ const CarCardH = ({
           </div>
         </div>
 
-        <div className='flex-grow space-y-2'>
-          <h4 className='flex items-center'>
-            {translate('catalog.exterior.title')}
-            &nbsp;
-            {translate('catalog.exterior.label')}:
-            &nbsp;
-            <span
-              className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 flex-shrink-0'
-              style={{ backgroundColor: `${outer_color_hex}` }}
-              data-tooltip-id={`${id}-exterior-color`}
-            >
-              <TooltipComponent
-                id={`${id}-exterior-color`}
-                content={outer_color_name}
-              />
-            </span>
-          </h4>
-          <h4 className='flex items-center'>
-            {translate('catalog.interior.title')}
-            &nbsp;
-            {translate('catalog.interior.label')}:
-            &nbsp;
-            <span
-              className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 flex-shrink-0'
-              style={{ backgroundColor: `${inner_color_hex}` }}
-              data-tooltip-id={`${id}-interior-color`}
-            >
-              <TooltipComponent
-                id={`${id}-interior-color`}
-                content={inner_color_name}
-              />
-            </span>
-          </h4>
+        <div className='flex'>
+          <div className='flex-grow space-y-2'>
+            <h4 className='flex items-center'>
+              {translate('catalog.exterior.title')}
+              &nbsp;
+              {translate('catalog.exterior.label')}:
+              &nbsp;
+              <span
+                className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 flex-shrink-0'
+                style={{ backgroundColor: `${outer_color_hex}` }}
+                data-tooltip-id={`${id}-exterior-color`}
+              >
+                <TooltipComponent
+                  id={`${id}-exterior-color`}
+                  content={outer_color_name}
+                />
+              </span>
+            </h4>
+            <h4 className='flex items-center'>
+              {translate('catalog.interior.title')}
+              &nbsp;
+              {translate('catalog.interior.label')}:
+              &nbsp;
+              <span
+                className='w-6 h-6 mx-2 rounded-full inline-block border border-neutral-500 flex-shrink-0'
+                style={{ backgroundColor: `${inner_color_hex}` }}
+                data-tooltip-id={`${id}-interior-color`}
+              >
+                <TooltipComponent
+                  id={`${id}-interior-color`}
+                  content={inner_color_name}
+                />
+              </span>
+            </h4>
+          </div>
+          <div className='flex items-end'>
+            <button className='h-8 w-8'>
+              <HeartIcon className='h-full w-full' />
+            </button>
+          </div>
         </div>
 
         <div className='pt-4 xl:pt-5 flex justify-between items-center border-t border-dashed border-neutral-300 dark:border-neutral-700'>

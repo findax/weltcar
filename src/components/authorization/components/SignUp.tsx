@@ -120,6 +120,8 @@ export default function SignUp({
               <Form className='grid grid-cols-1 gap-8'>
                 <FormikInput
                   name='name'
+                  rounded='rounded-full'
+                  sizeClass='h-14'
                   placeholder='authorization.signUp.customer.name.placeholder'
                   title='authorization.signUp.customer.name.title'
                   error={errors.name}
@@ -129,6 +131,8 @@ export default function SignUp({
                 <FormikInput
                   name='email'
                   type='email'
+                  rounded='rounded-full'
+                  sizeClass='h-14'
                   placeholder='authorization.signUp.customer.email.placeholder'
                   title='authorization.signUp.customer.email.title'
                   error={errors.email}
@@ -136,12 +140,16 @@ export default function SignUp({
                 />
                 {/* ---- */}
                 <FormikPhoneNumberInput
+                  rounded='rounded-full'
+                  sizeClass='h-14'
                   title='authorization.signUp.customer.phone.title'
                   error={errors.phone}
                   touched={touched.phone}
                 />
                 {/* ---- */}
                 <FormikPasswordInput
+                  rounded='rounded-full'
+                  sizeClass='h-14'
                   title='authorization.signUp.customer.password.placeholder'
                   placeholder='authorization.signUp.customer.password.placeholder'
                   error={errors.password}

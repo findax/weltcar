@@ -74,7 +74,7 @@ export default function BlogDetails({
         <Image 
           width={100}
           height={100}
-          src={blog.preview_image.original}
+          src={blog.images[0].original}
           alt='bg blog image'
           className='h-full rounded-3xl object-cover w-full'
         />

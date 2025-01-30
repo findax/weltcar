@@ -32,7 +32,7 @@ export default function CardSlider({
 
   return (
     <div
-      className={`${loaded ? '' : 'bg-img-placeholder'} relative group ${paddingBottom}`}
+      className={`${loaded ? '' : 'bg-img-placeholder'} relative h-full group ${paddingBottom}`}
     >
       {images.length > 1 ? (
         <Swiper

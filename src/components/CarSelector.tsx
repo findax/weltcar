@@ -317,7 +317,7 @@ const CarSelector = () => {
                         {car.models.map((model) => (
                           <div 
                             key={model.model_id} 
-                            className='px-3 py-1 rounded-lg hover:bg-neutral-1100 dark:hover:neutral-300 text-neutral-600 dark:text-white dark:hover:text-black cursor-pointer'
+                            className='px-3 py-1 rounded-lg hover:bg-neutral-1100 dark:hover:neutral-300 hover:text-white text-neutral-600 dark:text-white dark:hover:text-black cursor-pointer'
                             onMouseDown={() => handleAddTagModel(car, model.model_id)}
                           >
                             <p>{translate('carSubscriptions.model.title')} {model.model_name}</p>
@@ -340,31 +340,6 @@ const CarSelector = () => {
               </ButtonPrimary>
             </div>
           </div>
-          {/* {isShowDropdown && (
-            <div className={`border w-[90%] border-neutral-200 mt-[1px] rounded-2xl absolute w-full bg-white z-10 max-h-[400px] overflow-y-auto dark:border-neutral-700 dark:bg-neutral-950`}>
-              {filteredCars.map((car) => (
-                <div key={car.brand_id} className={`cursor-pointer dropdown-item`}>
-                  <div 
-                    className='text-neutral-1050 dark:text-white dark:hover:text-neutral-1050 flex px-3 py-2 dark:hover:bg-neutral-300 hover:bg-neutral-100 justify-between items-center'
-                    onMouseDown={() => handleAddTag(car)}
-                  >
-                    <p>{car.brand_name} - All models</p> 
-                  </div>
-                  <div className="px-4">
-                    {car.models.map((model) => (
-                      <div 
-                        key={model.model_id} 
-                        className='px-3 py-1 rounded-lg hover:bg-neutral-100 dark:hover:neutral-300 text-neutral-600 dark:text-white dark:hover:text-neutral-1050 cursor-pointer'
-                        onMouseDown={() => handleAddTagModel(car, model.model_id)}
-                      >
-                        <p>Model: {model.model_name}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )} */}
         </div>
       )}
     </>

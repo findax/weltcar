@@ -68,20 +68,26 @@ export default function ImagesHeader({
                 priority
               />
               <div className='absolute inset-0 bg-neutral-900 bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity'></div>
-
-            </div>
-
-            { 
-              videos && (
+              <div className='absolute flex gap-2 left-3 bottom-3 '>
                 <BtnDetails 
-                  className='flex items-center justify-center left-3 bottom-3 xl:left-[60px] 2xl:left-[108px] md:bottom-3'
-                  title={translate('carDetails.whatchV.label')}
-                  ico={<PlayIcon className='h-4 w-4 md:h-5 md:w-5' />}
-                  handleOpenModal={handleOpenModalVideoGallery}
+                  className='flex items-center md:justify-center'
+                  title={translate('carDetails.showP.label')}
+                  ico={<Squares2X2Icon className='h-4 w-4 md:h-5 md:w-5' />}
+                  handleOpenModal={handleOpenModalImageGallery}
                 />
-              )
-            }
 
+                { 
+                  videos && (
+                    <BtnDetails 
+                      className='flex items-center justify-center'
+                      title={translate('carDetails.whatchV.label')}
+                      ico={<PlayIcon className='h-4 w-4 md:h-5 md:w-5' />}
+                      handleOpenModal={handleOpenModalVideoGallery}
+                    />
+                  )
+                }
+              </div>
+            </div>
           </div>
         ) : ( 
           <div className='relative grid grid-rows-3 grid-cols-2 md:grid-rows-2 md:grid-cols-3 gap-2 sm:gap-4'>
@@ -99,6 +105,25 @@ export default function ImagesHeader({
                 priority
               />
               <div className='absolute inset-0 bg-neutral-900 bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity'></div>
+              <div className='absolute left-3 bottom-3 flex gap-2'>
+                <BtnDetails 
+                  className='hidden md:flex md:items-center md:justify-center left-3 bottom-3'
+                  title={translate('carDetails.showP.label')}
+                  ico={<Squares2X2Icon className='h-4 w-4 md:h-5 md:w-5' />}
+                  handleOpenModal={handleOpenModalImageGallery}
+                />
+
+                { 
+                  videos && (
+                    <BtnDetails 
+                      className='flex items-center justify-center left-3 bottom-3 md:left-52 md:bottom-3'
+                      title={translate('carDetails.whatchV.label')}
+                      ico={<PlayIcon className='h-4 w-4 md:h-5 md:w-5' />}
+                      handleOpenModal={handleOpenModalVideoGallery}
+                    />
+                  )
+                }
+              </div>
             </div>
 
             {/*  */}
@@ -131,25 +156,6 @@ export default function ImagesHeader({
                   </div>
                 </div>
               ))}
-
-            <BtnDetails 
-              className='hidden md:flex md:items-center md:justify-center left-3 bottom-3'
-              title={translate('carDetails.showP.label')}
-              ico={<Squares2X2Icon className='h-4 w-4 md:h-5 md:w-5' />}
-              handleOpenModal={handleOpenModalImageGallery}
-            />
-
-            { 
-              videos && (
-                <BtnDetails 
-                  className='flex items-center justify-center left-3 bottom-3 md:left-52 md:bottom-3'
-                  title={translate('carDetails.whatchV.label')}
-                  ico={<PlayIcon className='h-4 w-4 md:h-5 md:w-5' />}
-                  handleOpenModal={handleOpenModalVideoGallery}
-                />
-              )
-            }
-
           </div>
         )}
       </div>
