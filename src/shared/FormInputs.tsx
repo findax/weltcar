@@ -610,7 +610,7 @@ export const FormikFile = ({
         {({ form }: any) => (
           <>
             <label
-              className="w-full py-2 px-4 flex border border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-900 justify-between items-center rounded-2xl border-input-file file-input-label cursor-pointer"
+              className="w-full py-2 px-4 flex border border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-1150 justify-between items-center rounded-2xl border-input-file file-input-label cursor-pointer"
               htmlFor={name}
             >
               <div className="flex items-center gap-4">
