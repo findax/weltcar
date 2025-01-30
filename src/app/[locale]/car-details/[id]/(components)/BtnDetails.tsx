@@ -12,7 +12,7 @@ interface IProps {
 export default function BtnDetails({ 
   title,
   ico,
-  titleStyle,
+  titleStyle = '',
   className,
   handleOpenModal
 }: IProps) {
@@ -23,12 +23,12 @@ export default function BtnDetails({
 
   return (
     <div
-      className={`absolute px-2 py-1 md:px-4 md:py-2 rounded-xl bg-neutral-100 text-neutral-500 cursor-pointer hover:bg-neutral-200 z-10 ${className}`}
+      className={`px-1.5 py-1 md:px-4 md:py-2 rounded-xl bg-neutral-100 text-neutral-500 cursor-pointer hover:bg-neutral-200 z-10 ${className}`}
       onClick={onChange}
     >
       {ico}
 
-      <span className={`ml-1 md:ml-2 text-neutral-800 text-sm md:text-base font-medium ${titleStyle}`}>
+      <span className={`ml-1 md:ml-2 text-neutral-800 text-[10px] md:text-base font-medium ${titleStyle}`}>
         {translate(title)}
       </span>
     </div>
