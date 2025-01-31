@@ -70,15 +70,17 @@ export default function BlogDetails({
         </div>
       </div>
 
-      <div className='my-16 h-[250px] md:h-[430px] w-full'>
-        <Image 
-          width={100}
-          height={100}
-          src={blog.images[0].original}
-          alt='bg blog image'
-          className='h-full rounded-3xl object-cover w-full'
-        />
-      </div>
+      {blog.images.length > 0 && 
+        <div className='my-16 h-[250px] md:h-[430px] w-full'>
+          <Image 
+            width={100}
+            height={100}
+            src={blog.images[0].original}
+            alt='bg blog image'
+            className='h-full rounded-3xl object-cover w-full'
+          />
+        </div>
+      }
 
       <div className='flex justify-center w-full my-12 xl:my-20'>
         <div className='w-[860px]'>
