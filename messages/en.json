@@ -5,13 +5,11 @@
   "navbar.contact": "Contact Us",
   "navbar.findCar": "Find car",
   "navbar.addCar": "Add Car",
-
   "welcome.title.Welcome": "Welcome to",
   "welcome.title.WeltCar": "WeltCar",
   "welcome.subtitle": "Your Gateway to Luxury Automotive Excellence",
   "welcome.description": "At WeltCar, we specialize in providing the finest exclusive vehicles, ensuring luxury and sophistication in every drive. With our vast selection of top-tier cars, personalized service, and exclusive offers, we make your dream of owning a premium vehicle a reality. Experience the pinnacle of automotive excellence with WeltCar.",
   "welcome.button.startSearch": "Start your search",
-
   "howItWorks.title": "How It Works",
   "howItWorks.luxury.title": "Discover Luxury",
   "howItWorks.luxury.description": "Explore our curated collection of exclusive vehicles, each selected for its unparalleled quality and elegance. Begin your journey into luxury today",
@@ -19,11 +17,9 @@
   "howItWorks.consultation.description": "Our expert consultants are dedicated to understanding your unique preferences and needs, providing tailored advice and support to help you find your perfect car",
   "howItWorks.saving.title": "Exclusive Savings",
   "howItWorks.saving.description": "Enjoy exclusive deals and savings on the most luxurious vehicles. At WeltCar, we make high-end car ownership accessible",
-
   "whyChooseUs.title": "Why Choose Us?",
   "whyChooseUs.description": "At WeltCar, we pride ourselves on delivering exceptional service and exclusive access to the world’s finest cars. Our commitment to quality, personalized attention, and customer satisfaction sets us apart. Choose WeltCar for a seamless, luxurious car-buying experience.",
   "whyChooseUs.button.chooseCar": "Choose your car",
-
   "joinOurNewsletter.title": "Join Our Newsletter",
   "joinOurNewsletter.stayUpdated.title": "Stay Updated with WeltCar's Latest News",
   "joinOurNewsletter.stayUpdated.description": "Sign up for our newsletter to receive exclusive insights and updates on the latest luxury cars and special promotions. Don’t miss out on the chance to be the first to know about our exciting offers and news.",
@@ -31,7 +27,6 @@
   "joinOurNewsletter.subscribe.description": "Join our newsletter to stay informed and connected with the world of luxury automobiles. Be a part of our elite community and enjoy the benefits of being in the know.",
   "joinOurNewsletter.placeholder": "example@mail.com",
   "joinOurNewsletter.button.sendEmail": "Send email",
-
   "filters.input.searchByCarName": "Search by car name",
   "filters.title": "Filters",
   "filters.button.clear": "Clear",
@@ -42,7 +37,6 @@
   "filters.price": "Price",
   "filters.exterior": "Exterior",
   "filters.interior": "Interior",
-
   "download.title": "Download the catalog",
   "download.filters": "Filters",
   "download.results.title": "Results",
@@ -54,19 +48,16 @@
   "download.button.list": "List",
   "download.sortBy.title": "Sort By :",
   "download.button.download": "Download",
-
   "catalog.notFound.title": "Sorry, nothing found",
   "catalog.exterior.title": "exterior",
   "catalog.exterior.label": "color",
   "catalog.interior.title": "interior",
   "catalog.interior.label": "color",
   "catalog.button.seeMore": "See more",
-
   "about.title.about": "About",
   "about.title.weltCar": "WeltCar",
   "about.description": "At WeltCar, we are committed to delivering the ultimate luxury automotive experience. Our mission is to provide discerning clients with a curated selection of VIP vehicles, exceptional customer service, and exclusive benefits. With years of expertise in the high-end car market, we ensure that each interaction is tailored to meet your specific needs and desires. Discover a world where luxury meets excellence with WeltCar.",
   "about.button.startSearch": "Start your search",
-
   "fastFacts.title.about": "Fast Facts About",
   "fastFacts.title.WeltCar": "WeltCar",
   "fastFacts.premiumVehicles.title": "500",
@@ -78,21 +69,17 @@
   "fastFacts.yearsExperience.title": "20+",
   "fastFacts.yearsExperience.subtitle": "Years of Experience in the Luxury Auto Industry",
   "fastFacts.yearsExperience.description": "Our deep industry knowledge and long-standing relationships with top car manufacturers guarantee that you receive the best vehicles and services available.",
-
   "favorites.title.favorites": "Favorites",
   "favorites.catalog.button.seeMore": "See more",
   "favorites.catalog.button.remove": "Remove from favorites",
   "favorites.toast.success.delete": "Favorite car deleted",
   "favorites.nocars.title": "You have no added the cars",
   "favorites.button.addCar": "Add car",
-
   "favorites.message.toast.add": "Favorite car is added",
   "favorites.message.toast.delete": "Favorite car is deleted",
-
   "authorization.favorites.title.canAdd": "You can add to favorites",
   "authorization.favorites.title.only": "only if you are authorized",
   "authorization.favorites.title.signUp": "Sign Up",
-
   "team.title": "Our Team",
   "team.description": "Our team at WeltCar is composed of industry experts dedicated to providing you with the best luxury car buying experience. We work together to ensure that every aspect of your interaction with us is seamless and satisfying, making your journey to owning a premium vehicle both enjoyable and memorable.",
   "team.members.oleg.name": "Oleg",
@@ -105,7 +92,6 @@
   "team.members.alexander.position": "Purchasing Manager",
   "team.members.agassi.name": "Agassi",
   "team.members.agassi.position": "Administrative Manager",
-
   "partners.title": "Our Partners",
   "partners.button.forAll": "Learn More",
   "partners.carLogistics.title": "Car Logistics",
@@ -114,22 +100,18 @@
   "partners.legalAssistance.description": "Our legal experts are here to assist with all your business-related legal inquiries and issues. Reach out to us for professional support and reliable advice.",
   "partners.itSupport.title": "IT Support",
   "partners.itSupport.description": "We provide expert support in custom website and ERP development, ensuring your digital platforms run smoothly. Our team is ready to solve any technical challenges.",
-
   "Blog.breadcrump.main": "Main",
   "Blog.breadcrump.blog": "Blog",
   "Blog.title": "Blog",
   "Blog.notFound.title": "Sorry, nothing found",
-
   "contact.title": "Contact Us",
   "contact.description": "Whether you have questions about our vehicles, need assistance with your purchase, or want to learn more about our services, we are here to help. Reach out to us through any of the following methods:",
-
   "contact.address.label": "Address",
   "contact.address.value": "Theodor-Fontane-Straße 2, 22848 Norderstedt",
   "contact.email.label": "Email",
   "contact.phone.label": "Phone",
   "contact.messenger.label": "Messenger",
   "contact.social.label": "Social",
-
   "contact.form.fullName.label": "Full name",
   "contact.form.fullName.placeholder": "Enter your name",
   "contact.form.emailAddress.label": "Email address",
@@ -138,7 +120,6 @@
   "contact.form.message.label": "Message",
   "contact.form.message.placeholder": "Enter message",
   "contact.form.button.send": "Send",
-
   "findCar.title": "Find Car",
   "findCar.description": "If you are looking for a specific car, please fill out the form, and our specialist will contact you to provide all the necessary information. We strive to make the process of searching for and purchasing a car as convenient as possible for you.",
   "findCar.form.fullName.label": "Full name",
@@ -164,43 +145,34 @@
   "findCar.form.additional.label": "Additional",
   "findCar.form.additional.placeholder": "Enter",
   "findCar.form.button.send": "Send",
-
   "findCar.modal.title": "Thank you!",
   "findCar.modal.description": "Thank you, your request has been accepted. Soon it will be processed.",
-
   "badge.sold.label": "SOLD",
-
   "subscription.title": "Subscription",
   "subscription.description": "Pricing to fit the needs of any companie size.",
   "subscription.badge.popular": "POPULAR",
   "subscription.button.submit": "Submit",
-
   "subscription.starter.name": "Starter",
   "subscription.starter.features.automated": "Automated Reporting",
   "subscription.starter.features.faster": "Faster Processing",
   "subscription.starter.features.customizations": "Customizations",
   "subscription.starter.desc": "Literally you probably haven't heard of them jean shorts.",
-
   "subscription.basic.name": "Basic",
   "subscription.basic.features.everything": "Everything in Starter",
   "subscription.basic.features.builds": "100 Builds",
   "subscription.basic.features.progress": "Progress Reports",
   "subscription.basic.features.premium": "Premium Support",
   "subscription.basic.desc": "Literally you probably haven't heard of them jean shorts.",
-
   "subscription.plus.name": "Plus",
   "subscription.plus.features.everything": "Everything in Basic",
   "subscription.plus.features.builds": "Unlimited Builds",
   "subscription.plus.features.analytics": "Advanced Analytics",
   "subscription.plus.features.evaluations": "Company Evaluations",
   "subscription.plus.desc": "Literally you probably haven't heard of them jean shorts.",
-
   "notFound.title": "THE PAGE YOU WERE LOOKING FOR DOESN'T EXIST.",
   "notFound.button.return": "Return Home Page",
-
   "carDetails.breadcrumbs.main": "Main",
   "carDetails.breadcrumbs.catalog": "Catalog",
-
   "carDetails.href.tour": "modal=CAR_PHOTO_TOUR",
   "carDetails.href.tourPhoto": "modal=CAR_PHOTO_TOUR&photoId=0",
   "carDetails.href.videoTour": "modal=CAR_VIDEO_TOUR",
@@ -224,10 +196,8 @@
   "carDetails.downloadPdf.title.without": "Without Price",
   "carDetails.downloadPdf.button": "Download",
   "carDetails.confirm.button": "Continue and Reserve",
-
   "authorization.button.signIn": "SIGN IN",
   "authorization.button.signUp": "SIGN UP",
-
   "authorization.signIn.resetPass.title": "Please, check your email to reset your password!",
   "authorization.signIn.button.gotIt": "Got it!",
   "authorization.signIn.email.placeholder": "example@mail.com",
@@ -237,7 +207,6 @@
   "authorization.signIn.button.continue": "Continue",
   "authorization.signIn.button.cancel": "Cancel",
   "authorization.signIn.button.forgot": "Forgot password?",
-
   "authorization.signUp.confirmReg.title": "Please, check your email to confirm registration!",
   "authorization.signUp.button.gotIt": "Got it!",
   "authorization.signUp.button.customer": "I`am a customer",
@@ -255,11 +224,9 @@
   "authorization.signUp.password.title": "Password",
   "authorization.signUp.termAccept.label": "I agree with the partners agreement",
   "authorization.signUp.button.continue": "Continue",
-
   "socialAuth.googleContine.title": "Continue with Google",
   "socialAuth.facebookContine.title": "Continue with Facebook",
   "socialAuth.or.title": "OR",
-
   "authorization.signUp.customer.name.placeholder": "Enter your name",
   "authorization.signUp.customer.name.title": "Name",
   "authorization.signUp.customer.email.placeholder": "example@mail.com",
@@ -269,11 +236,9 @@
   "authorization.signUp.customer.password.title": "Password",
   "authorization.signUp.customer.termAccept.label": "I agree with the privacy policy",
   "authorization.signUp.customer.button.continue": "Continue",
-
   "forgotPassword.email.placeholder": "example@mail.com",
   "forgotPassword.email.title": "Email address",
   "forgotPassword.button.send": "Send",
-
   "refreshPass.successfully.title": "Your password has been updated successfully!",
   "refreshPass.button.choose": "Choose your car",
   "refreshPass.update.title": "Update your password",
@@ -282,10 +247,8 @@
   "refreshPass.password.confirm.title": "Confirm password",
   "refreshPass.password.confirm.placeholder": "Confirm password",
   "refreshPass.button.update": "Update password",
-
   "confirmRegister.successfully.title": "Your account has been successfully created!",
   "confirmRegister.button.choose": "Choose your car",
-
   "updatePassword.title": "Update your password",
   "updatePassword.form.currentPassword.label": "Current password",
   "updatePassword.form.currentPassword.placeholder": "Enter your password",
@@ -294,7 +257,6 @@
   "updatePassword.form.confirmPassword.label": "Confirm password",
   "updatePassword.form.confirmPassword.placeholder": "Confirm password",
   "updatePassword.form.button.update": "Update password",
-
   "account.navbar.account": "account",
   "account.navbar.accountPartner": "account-partner",
   "account.navbar.password": "password",
@@ -302,7 +264,6 @@
   "account.navbar.orders": "orders",
   "account.navbar.carSubscriptions": "car-subscriptions",
   "account.navbar.partnerCarsList": "partner-cars-list",
-
   "accountPartner.title": "Account Partner Information",
   "accountPartner.form.companyName.label": "Company name",
   "accountPartner.form.companyName.placeholder": "Enter your company name",
@@ -315,7 +276,6 @@
   "accountPartner.form.emailAddress.placeholder": "example@mail.com",
   "accountPartner.form.phoneNumber.label": "Phone number",
   "accountPartner.form.buttn.update": "Update info",
-
   "passwordInformation.title": "Update your password",
   "passwordInformation.form.current.title": "Current password",
   "passwordInformation.form.current.placeholder": "Enter your password",
@@ -324,7 +284,6 @@
   "passwordInformation.form.confirm.title": "Confirm password",
   "passwordInformation.form.confirm.placeholder": "Confirm password",
   "passwordInformation.button.update": "Update password",
-
   "yourOrders.title": "Your orders",
   "yourOrders.car.title": "Car",
   "yourOrders.date.title": "Date",
@@ -336,13 +295,11 @@
   "yourOrders.update.title": "Last update:",
   "yourOrders.noOrdersMessage": "You have no orders",
   "yourOrders.button.chooseCar": "Choose Your Car",
-
   "carSubscriptions.title": "Car Subscriptions",
   "carSubscriptions.input.placeholder": "Enter car",
   "carSubscriptions.models.title": "All models",
   "carSubscriptions.model.title": "Model:",
   "carSubscriptions.button.save": "Save",
-
   "yourCars.title": "Your Cars",
   "yourCars.exterior.label": "exterior",
   "yourCars.exterior.color": "color:",
@@ -360,7 +317,6 @@
   "yourCars.modal.button.delete": "Delete",
   "yourCars.nocars.title": "You have no added the cars",
   "yourCars.button.addCar": "Add car",
-
   "accountPartnerCars.title": "Account Partner Cars",
   "accountPartnerCars.form.modelName.label": "Model name",
   "accountPartnerCars.form.modelName.placeholder": "Chose model",
@@ -392,7 +348,6 @@
   "accountPartnerCars.modal.thankYou.label": "Thank you!",
   "accountPartnerCars.modal.thankYouRequest.title": "Thank you, your request has been accepted. Soon it will be processed and the car will appear on the website. If there is not enough information, our manager will contact you.",
   "accountPartnerCars.modal.thankYouUpdate.title": "Thank you, your update has been accepted.",
-
   "accountInformation.title": "Account information",
   "accountInformation.form.firstName.label": "First name",
   "accountInformation.form.firstName.placeholder": "Enter your name",
@@ -404,17 +359,14 @@
   "accountInformation.form.city.placeholder": "Enter your city",
   "accountInformation.form.phoneNumber.label": "Phone number",
   "accountInformation.form.button.update": "Update info",
-
   "errorComponent.error.title": "An error occurred.",
   "errorComponent.tryAgain.title": "Please, try again later",
-
   "userMenu.options.myAccount": "My Account",
   "userMenu.options.myOrders": "My orders",
   "userMenu.options.favorites": "Favorites",
   "userMenu.options.carsList": "Cars list",
   "userMenu.options.darkTheme": "Dark theme",
   "userMenu.options.button.logOut": "Log out",
-
   "mobileNavMenu.title.welcomeTo": "Welcome to WeltCar - Your Gateway to",
   "mobileNavMenu.title.luxury": "Luxury Automotive Excellence",
   "mobileNavMenu.links.catalog": "catalog",
@@ -423,7 +375,6 @@
   "mobileNavMenu.links.contactUs": "contact us",
   "mobileNavMenu.links.findCar": "find car",
   "mobileNavMenu.links.addCar": "add car",
-
   "accountSchema.name.min": "Name is too short",
   "accountSchema.name.max": "Name is too long",
   "accountSchema.name.required": "Name is required",
@@ -431,7 +382,6 @@
   "accountSchema.surname.max": "Surname is too long",
   "accountSchema.city.min": "City name is too short",
   "accountSchema.city.max": "City name is too long",
-
   "accountPartnerSchema.companyName.min": "Company name is too short",
   "accountPartnerSchema.companyName.max": "Company name is too long",
   "accountPartnerSchema.companyName.required": "Company name is required",
@@ -441,7 +391,6 @@
   "accountPartnerSchema.email.invalid": "Invalid email",
   "accountPartnerSchema.email.required": "Email is required",
   "accountPartnerSchema.phone.required": "Phone number is required",
-
   "partnerCarsSchema.model.idRequired": "ID is required",
   "partnerCarsSchema.model.brandRequired": "Brand name is required",
   "partnerCarsSchema.model.modelRequired": "Model name is required",
@@ -469,7 +418,6 @@
   "partnerCarsSchema.country.required": "Country is required",
   "partnerCarsSchema.postCode.required": "Index code is required",
   "partnerCarsSchema.commentary.required": "Commentary is too long",
-
   "updatePassSchema.password.min": "Password must be at least 8 characters",
   "updatePassSchema.password.max": "Password must be less than 50 characters",
   "updatePassSchema.password.matchesLow": "Password must contain at least one lowercase letter",
@@ -484,9 +432,7 @@
   "updatePassSchema.newPassword.required": "Password is required",
   "updatePassSchema.confirm.oneOf": "Passwords must match",
   "updatePassSchema.confirm.required": "Confirm password is required",
-
   "confirmSchema.confirm.oneOf": "You need to accept the Privacy Policy",
-
   "feedbackSchema.name.min": "Name is too short",
   "feedbackSchema.name.max": "Name is too long",
   "feedbackSchema.name.required": "Name is required",
@@ -495,7 +441,6 @@
   "feedbackSchema.message.min": "Message is too short",
   "feedbackSchema.message.max": "Message is too long",
   "feedbackSchema.message.required": "Message is required",
-
   "findCarSchema.name.min": "Name is too short",
   "findCarSchema.name.max": "Name is too long",
   "findCarSchema.name.required": "Name is required",
@@ -522,7 +467,6 @@
   "findCarSchema.request.idRequired": "ID is required",
   "findCarSchema.request.typeRequired": "Request time is required",
   "findCarSchema.request.required": "Request time is required",
-
   "refreshPasswordSchema.newPassword.min": "Password must be at least 8 characters",
   "refreshPasswordSchema.newPassword.max": "Password must be less than 50 characters",
   "refreshPasswordSchema.newPassword.matchesLow": "Password must contain at least one lowercase letter",
@@ -531,13 +475,10 @@
   "refreshPasswordSchema.newPassword.required": "Password is required",
   "refreshPasswordSchema.confirm.oneOf": "Passwords must match",
   "refreshPasswordSchema.confirm.required": "Confirm password is required",
-
   "subscribeSchema.email.invalid": "Invalid email",
   "subscribeSchema.email.required": "Email is required",
-
   "forgotPasswordSchema.email.invalid": "Invalid email",
   "forgotPasswordSchema.email.required": "Email is required",
-
   "loginSchema.email.invalid": "Invalid email",
   "loginSchema.email.required": "Email is required",
   "loginSchema.password.min": "Password must be at least 8 characters",
@@ -546,7 +487,6 @@
   "loginSchema.password.matchesUp": "Password must contain at least one uppercase letter",
   "loginSchema.password.matchesNumb": "Password must contain at least one number",
   "loginSchema.password.required": "Password is required",
-
   "signUpSchema.name.min": "Name is too short",
   "signUpSchema.name.max": "Name is too long",
   "signUpSchema.name.required": "Name is required",
@@ -561,7 +501,6 @@
   "signUpSchema.password.required": "Password is required",
   "signUpSchema.term.oneOf": "You must accept the terms and conditions of the privacy policy",
   "signUpSchema.term.required": "You must accept the terms and conditions of the privacy policy",
-
   "signUpPartnerSchema.companyName.min": "Company name is too short",
   "signUpPartnerSchema.companyName.max": "Company name is too long",
   "signUpPartnerSchema.companyName.required": "Company name is required",
@@ -580,15 +519,12 @@
   "signUpPartnerSchema.password.required": "Password is required",
   "signUpPartnerSchema.term.oneOf": "You must accept the terms and conditions of the partner agreement",
   "signUpPartnerSchema.term.required": "You must accept the terms and conditions of the partner agreement",
-
   "searchSchema.search.min": "Name is too short",
   "searchSchema.search.max": "Name is too long",
   "searchSchema.search.required": "Name is required",
-
   "cookieAlert.text.description": " We use cookies to improve your experience and for ads personalisation, by continuing to use this website, you are agreeing to our",
   "cookieAlert.link.policy": "cookie policy",
   "cookieAlert.button.accept": "Accept",
-
   "footer.title.weltcarTo": "WeltCar - Your Gateway to Luxury Automotive Excellence",
   "footer.title.luxury": "Luxury Automotive Excellence",
   "footer.quickLink.title": "Quick Link",
