@@ -102,7 +102,7 @@ const FavoriteCarCard = ({
 
           <div className='pt-4 flex justify-end items-center border-t border-dashed border-neutral-300 dark:border-neutral-700'>
             {
-              true ? (
+              isActive ? (
                 <ButtonPrimary
                   fontSize='text-sm'
                   sizeClass='px-5 py-2'

@@ -194,7 +194,7 @@ const CarPartnerCard = ({
                   {translate('yourCars.button.edit')}
                 </ButtonPrimary>
               </Link>
-              <Link href={`/partner-car-details/${id}` as Route} target='_blank'>
+              <Link href={`/car-details/${id}` as Route} target='_blank'>
                 <ButtonPrimary
                   fontSize='lg:text-md text-xs'
                   sizeClass='h-full lg:px-2.5 lg:py-2 px-2 py-1.5'

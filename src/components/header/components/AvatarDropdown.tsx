@@ -6,6 +6,7 @@ import Link from 'next/link';
 import {
   UserIcon,
   ClipboardDocumentListIcon,
+  ListBulletIcon,
   HeartIcon,
   LightBulbIcon,
   LifebuoyIcon,
@@ -106,8 +107,21 @@ export default function AvatarDropdown({
                     </div>
                   </Link>
 
-                  {/* <Link
-                    href={'/favorites'}
+                  { partner?.is_verified && <Link
+                    href={`/${locale}/partner-cars-list`}
+                    className='flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50'
+                    onClick={close}
+                  >
+                    <div className='flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300'>
+                      <ListBulletIcon className='w-7' />
+                    </div>
+                    <div className='ml-4'>
+                      <p className='font-medium '>{translate("userMenu.options.carsList")}</p>
+                    </div>
+                  </Link>}
+
+                  <Link
+                    href={`/${locale}/favorites`}
                     className='flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50'
                     onClick={close}
                   >
@@ -115,9 +129,9 @@ export default function AvatarDropdown({
                       <HeartIcon className='w-7' />
                     </div>
                     <div className='ml-4'>
-                      <p className='font-medium '>{'Wishlist'}</p>
+                      <p className='font-medium '>{translate("userMenu.options.favorites")}</p>
                     </div>
-                  </Link> */}
+                  </Link>
 
                   <div className='w-full border-b border-neutral-200 dark:border-neutral-700' />
 

@@ -86,8 +86,12 @@
   "favorites.nocars.title": "You have no added the cars",
   "favorites.button.addCar": "Add car",
 
+  "favorites.message.toast.add": "Favorite car is added",
+  "favorites.message.toast.delete": "Favorite car is deleted",
+
   "authorization.favorites.title.canAdd": "You can add to favorites",
   "authorization.favorites.title.only": "only if you are authorized",
+  "authorization.favorites.title.signUp": "Sign Up",
 
   "team.title": "Our Team",
   "team.description": "Our team at WeltCar is composed of industry experts dedicated to providing you with the best luxury car buying experience. We work together to ensure that every aspect of your interaction with us is seamless and satisfying, making your journey to owning a premium vehicle both enjoyable and memorable.",
@@ -210,8 +214,10 @@
   "carDetails.price.title": "Price",
   "carDetails.button.sold": "Sold",
   "carDetails.button.reserve": "Reserve",
+  "carDetails.button.outOfStock": "Out of Stock",
   "carDetails.mobile.button.sold": "Sold",
   "carDetails.mobile.button.reserve": "Reserve",
+  "carDetails.mobile.button.outOfStock": "Out of Stock",
   "carDetails.partnersCar.title": "Partner’s Car",
   "carDetails.downloadPdf.title.pdf": "Download",
   "carDetails.downloadPdf.title.with": "With Price",
@@ -404,6 +410,8 @@
 
   "userMenu.options.myAccount": "My Account",
   "userMenu.options.myOrders": "My orders",
+  "userMenu.options.favorites": "Favorites",
+  "userMenu.options.carsList": "Cars list",
   "userMenu.options.darkTheme": "Dark theme",
   "userMenu.options.button.logOut": "Log out",
 

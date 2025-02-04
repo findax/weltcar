@@ -16,7 +16,8 @@ import { useState } from 'react';
 import Modal from '@/shared/Modal';
 import AuthorizationFavorite from './authorization/AuthorizationFavorite';
 import { addToFavoritesCars, deleteFavoriteCar } from '@/api/favorites';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { toast } from 'react-toastify';
 
 const CarCard = ({
   className = '',
@@ -81,9 +82,11 @@ const CarCard = ({
       if(isFavorite){
         deleteFavoriteCar(idCar, locale);
         setIsFavorite(!isFavorite);
+        toast.success(translate('favorites.message.toast.delete'));
       } else {
         addToFavoritesCars(idCar, locale);
         setIsFavorite(!isFavorite);
+        toast.success(translate('favorites.message.toast.add'));
       }
     }
   }

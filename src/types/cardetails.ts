@@ -26,6 +26,7 @@ export interface ICarDetails {
   is_partner_car: boolean;
   partner_phone: string | null;
   partner_name: string | null;
+  is_favorite: boolean;
 }
 
 export interface ICarDocuments {
