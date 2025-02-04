@@ -13,6 +13,9 @@ import defaultWatermark from '@/images/defaultWatermark.svg';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { IUser } from '@/types/user';
 import { useState } from 'react';
+import { addToFavoritesCars, deleteFavoriteCar } from '@/api/favorites';
+import { useLocale } from 'next-intl';
+import { toast } from 'react-toastify';
 
 const CarCardH = ({
   className = '',
@@ -41,15 +44,26 @@ const CarCardH = ({
     status,
     specification,
     year,
-    watermark
+    watermark,
+    is_favorite
   } = carData;
+  const locale = useLocale();
+  const [isFavorite, setIsFavorite] = useState(is_favorite);
   const [isAuthorizationModalOpen, setIsAuthorizationModalOpen] = useState(false);
 
-  const handleAddFavoriteCar = (user: IUser | null, idCar: string) => {
+  const handleChangeFavoriteCar = (idCar: string) => {
     if(!user){
       setIsAuthorizationModalOpen(true)
     } else {
-      console.log('success')
+      if(isFavorite){
+        deleteFavoriteCar(idCar, locale);
+        setIsFavorite(!isFavorite);
+        toast.success(translate('favorites.message.toast.delete'));
+      } else {
+        addToFavoritesCars(idCar, locale);
+        setIsFavorite(!isFavorite);
+        toast.success(translate('favorites.message.toast.add'));
+      }
     }
   }
 
@@ -143,8 +157,8 @@ const CarCardH = ({
             </h4>
           </div>
           <div className='flex items-end'>
-            <button className='h-8 w-8'>
-              <HeartIcon className='h-full w-full' />
+            <button className='h-8 w-8' onClick={() => handleChangeFavoriteCar(id)}>
+              <HeartIcon className={`h-full w-full`} color={` ${isFavorite ? '#FF6464' : ''}`} />
             </button>
           </div>
         </div>

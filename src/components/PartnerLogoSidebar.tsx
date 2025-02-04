@@ -20,10 +20,10 @@ export default function PartnerLogoSidebar({
         <UserGroupIcon className='h-6 w-6' />
         <span className='font-medium'>{translate('carDetails.partnersCar.title')}</span>
       </div>
-      <div className='flex gap-1'>
+      {/* <div className='flex gap-1'>
         <span className='font-medium'>{partnerName}</span>
         <span className='font-medium'>{partnerPhone}</span>
-      </div>
+      </div> */}
       {status_extra && 
         <div className='flex gap-1'>
           <span className='font-medium md:text-lg dark:text-neutral-400 text-neutral-1100'>Available {status_extra}</span>

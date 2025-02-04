@@ -79,7 +79,7 @@ export const ButtonPrimary = ({ className = '', ...args }: ButtonProps) => {
 export const ButtonSecondary = ({ className = ' ', ...args }: ButtonProps) => {
   return (
     <Button
-      className={`ttnc-ButtonSecondary font-medium border bg-white border-neutral-200 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 ${className}`}
+      className={`ttnc-ButtonSecondary font-medium border bg-white border-primary-600 text-primary-600 dark:bg-neutral-900 dark:text-primary-950 dark:border-primary-950 hover:bg-neutral-100 dark:hover:bg-neutral-800 ${className}`}
       {...args}
     />
   );

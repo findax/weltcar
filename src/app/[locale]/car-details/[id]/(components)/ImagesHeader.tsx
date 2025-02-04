@@ -13,11 +13,13 @@ import { useTranslations } from 'next-intl';
 interface IProps {
   images: ICarGallery[];
   videos?: ICarVideos[] | null;
+  isSold: boolean;
 }
 
 export default function ImagesHeader({ 
   images, 
-  videos
+  videos,
+  isSold
 }: IProps) {
   const thisPathname = usePathname();
   const router = useRouter();
@@ -62,7 +64,7 @@ export default function ImagesHeader({
                 fill
                 src={images[0].url}
                 alt='car image'
-                className='absolute inset-0 object-cover transition-opacity opacity-0 duration-[1s]'
+                className={`absolute inset-0 object-cover transition-opacity opacity-0 duration-[1s] ${isSold ? ' grayscale' : ''}`}
                 onLoad={(e) => e.currentTarget.classList.remove('opacity-0')}
                 sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw'
                 priority
@@ -99,7 +101,7 @@ export default function ImagesHeader({
                 fill
                 src={images[0].url}
                 alt='car image'
-                className='object-cover rounded-3xl transition-opacity opacity-0 duration-[1s]'
+                className={`object-cover rounded-3xl transition-opacity opacity-0 duration-[1s] ${isSold ? ' grayscale' : ''}`}
                 onLoad={(e) => e.currentTarget.classList.remove('opacity-0')}
                 sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw'
                 priority
@@ -141,7 +143,7 @@ export default function ImagesHeader({
                       fill
                       src={item.url}
                       alt='car image'
-                      className='object-cover w-full h-full rounded-3xl transition-opacity opacity-0 duration-[1s]'
+                      className={`object-cover w-full h-full rounded-3xl transition-opacity opacity-0 duration-[1s] ${isSold ? ' grayscale' : ''}`}
                       onLoad={(e) =>
                         e.currentTarget.classList.remove('opacity-0')
                       }
