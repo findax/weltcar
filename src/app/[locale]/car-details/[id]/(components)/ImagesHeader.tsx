@@ -57,44 +57,53 @@ export default function ImagesHeader({
         {images.length < 3 ? (
           <div className='relative w-full h-fit'>
             <div
-              className='relative bg-img-placeholder w-full max-w-6xl m-auto pb-[44%] rounded-3xl overflow-hidden cursor-pointer'
+              className={`relative ${images.length === 0 ? "bg-img-placeholder": "" }  w-full max-w-6xl m-auto pb-[44%] rounded-3xl overflow-hidden cursor-pointer`}
               onClick={handleOpenModalImageGallery}
             >
               <Image
                 fill
                 src={images[0].url}
                 alt='car image'
-                className={`absolute inset-0 object-cover transition-opacity opacity-0 duration-[1s] ${isSold ? ' grayscale' : ''}`}
+                className={`absolute  inset-0 object-cover transition-opacity opacity-0 duration-[1s] ${isSold ? ' grayscale' : ''}`}
                 onLoad={(e) => e.currentTarget.classList.remove('opacity-0')}
                 sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw'
                 priority
               />
               <div className='absolute inset-0 bg-neutral-900 bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity'></div>
-              <div className='absolute flex gap-2 left-3 bottom-3 '>
-                <BtnDetails 
-                  className='flex items-center md:justify-center'
-                  title={translate('carDetails.showP.label')}
-                  ico={<Squares2X2Icon className='h-4 w-4 md:h-5 md:w-5' />}
-                  handleOpenModal={handleOpenModalImageGallery}
-                />
+            </div>
 
-                { 
-                  videos && (
-                    <BtnDetails 
-                      className='flex items-center justify-center'
-                      title={translate('carDetails.whatchV.label')}
-                      ico={<PlayIcon className='h-4 w-4 md:h-5 md:w-5' />}
-                      handleOpenModal={handleOpenModalVideoGallery}
-                    />
-                  )
-                }
-              </div>
+            <div className='absolute flex gap-2 left-3 bottom-3 '>
+              { images.length < 2 ?
+                  <BtnDetails 
+                    className='hidden items-center md:justify-center'
+                    title={translate('carDetails.showP.label')}
+                    ico={<Squares2X2Icon className='h-4 w-4 md:h-5 md:w-5' />}
+                    handleOpenModal={handleOpenModalImageGallery}
+                  />
+                : <BtnDetails 
+                    className='flex items-center md:justify-center'
+                    title={translate('carDetails.showP.label')}
+                    ico={<Squares2X2Icon className='h-4 w-4 md:h-5 md:w-5' />}
+                    handleOpenModal={handleOpenModalImageGallery}
+                  />
+
+              }
+
+              { true && (
+                  <BtnDetails 
+                    className='flex items-center justify-center'
+                    title={translate('carDetails.whatchV.label')}
+                    ico={<PlayIcon className='h-4 w-4 md:h-5 md:w-5' />}
+                    handleOpenModal={handleOpenModalVideoGallery}
+                  />
+                )
+              }
             </div>
           </div>
         ) : ( 
-          <div className='relative grid grid-rows-3 grid-cols-2 md:grid-rows-2 md:grid-cols-3 gap-2 sm:gap-4'>
+          <div className='relative w-full h-fit xsS:grid xsS:grid-rows-3 xsS:grid-cols-2 md:grid-rows-2 md:grid-cols-3 xsS:gap-2 sm:gap-4'>
             <div
-              className='relative bg-img-placeholder row-span-2 col-span-2 rounded-3xl overflow-hidden cursor-pointer'
+              className='relative bg-img-placeholder xsS:row-span-2 w-full max-w-6xl pb-[44%] xsS:w-auto xsS:col-span-2 rounded-3xl overflow-hidden cursor-pointer'
               onClick={handleOpenModalImageGallery}
             >
               <Image
@@ -107,26 +116,25 @@ export default function ImagesHeader({
                 priority
               />
               <div className='absolute inset-0 bg-neutral-900 bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity'></div>
-              <div className='absolute left-3 bottom-3 flex gap-2'>
-                <BtnDetails 
-                  className='hidden md:flex md:items-center md:justify-center left-3 bottom-3'
-                  title={translate('carDetails.showP.label')}
-                  ico={<Squares2X2Icon className='h-4 w-4 md:h-5 md:w-5' />}
-                  handleOpenModal={handleOpenModalImageGallery}
-                />
-
-                { 
-                  videos && (
-                    <BtnDetails 
-                      className='flex items-center justify-center left-3 bottom-3 md:left-52 md:bottom-3'
-                      title={translate('carDetails.whatchV.label')}
-                      ico={<PlayIcon className='h-4 w-4 md:h-5 md:w-5' />}
-                      handleOpenModal={handleOpenModalVideoGallery}
-                    />
-                  )
-                }
-              </div>
             </div>
+            <div className='absolute left-3  bottom-3 flex gap-2'>
+              <BtnDetails 
+                className='flex md:items-center md:justify-center left-3 bottom-3'
+                title={translate('carDetails.showP.label')}
+                ico={<Squares2X2Icon className='h-4 w-4 md:h-5 md:w-5' />}
+                handleOpenModal={handleOpenModalImageGallery}
+              />
+
+              { true && (
+                  <BtnDetails 
+                    className='flex items-center justify-center left-3 bottom-3 md:left-52 md:bottom-3'
+                    title={translate('carDetails.whatchV.label')}
+                    ico={<PlayIcon className='h-4 w-4 md:h-5 md:w-5' />}
+                    handleOpenModal={handleOpenModalVideoGallery}
+                  />
+                )
+              }
+              </div>
 
             {/*  */}
             {images
@@ -134,7 +142,7 @@ export default function ImagesHeader({
               .map((item, index) => (
                 <div
                   key={index}
-                  className={`relative rounded-3xl overflow-hidden ${
+                  className={`hidden xsS:block relative rounded-3xl overflow-hidden ${
                     index >= 2 ? 'block' : ''
                   }`}
                 >

@@ -72,9 +72,7 @@ export default function BlogDetails({
 
       {blog.images.length > 0 && 
         <div className='my-16 h-[250px] md:h-[430px] w-full'>
-          <Image 
-            width={100}
-            height={100}
+          <img 
             src={blog.images[0].original}
             alt='bg blog image'
             className='h-full rounded-3xl object-cover w-full'
