@@ -167,7 +167,7 @@ export default function CarDetails({
         <div className='mt-8'>
           <Breadcrumbs pages={breadcrumbsPages} />
         </div>
-        {carGallery.length > 0 && <ImagesHeader isSold={carData?.status === 'sold'} images={carGallery} videos={carVideos.length > 0 ? carVideos : null }/>}
+        {carGallery.length > 0 && <ImagesHeader isSold={carData?.status === 'inactive'} images={carGallery} videos={carVideos.length > 0 ? carVideos : null }/>}
 
         <div className='relative z-10 my-11 grid grid-rows-1 grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4'>
           <div className='w-full col-span-3 lg:col-span-2 space-y-8 lg:space-y-10'>
@@ -190,7 +190,7 @@ export default function CarDetails({
           <PriceSidebar
             onClick={handleReserve}
             price={carData?.price || 0}
-            isSold={carData?.status === 'sold'}
+            isSold={carData?.status === 'inactive'}
             isShowPartnerLogo={isPartnerLogo}
             partnerPhone={carData?.partner_phone || null}
             partnerName={carData?.partner_name || null}
@@ -207,7 +207,7 @@ export default function CarDetails({
       <MobileFooterSticky
         onClick={handleReserve}
         price={carData?.price || 0}
-        isSold={carData?.status === 'sold'}
+        isSold={carData?.status === 'inactive'}
         status_extra={carData?.status_extra || null}
         isFavorite={isFavorite}
         user={user}
