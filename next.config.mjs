@@ -10,6 +10,7 @@ const nextConfig = {
     typedRoutes: true,
   },
   images: {
+    unoptimized: Boolean(process.env.IMAGE_OPTIMIZATION),
     domains: [
       'localhost',
       'stageapi.weltcar.de',
