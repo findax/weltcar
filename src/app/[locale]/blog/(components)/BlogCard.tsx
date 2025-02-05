@@ -37,9 +37,7 @@ const BlogCard = ({
         data-nc-id='BlogCard'
       >
         <div className={`w-full ${heightImage}`}>
-          <Image 
-            width={100}
-            height={100}
+          <img 
             src={blogItem.preview_image.thumb}
             alt="blog image"
             className="w-full h-full object-cover rounded-t-3xl"

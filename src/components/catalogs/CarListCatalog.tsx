@@ -6,6 +6,7 @@ import CarCardHSkeleton from '@/components/CarCardHSkeleton';
 import CarCardSkeleton from '@/components/CarCardSkeleton';
 import { ICar } from '@/types/catalog';
 import { useQueryParams } from '@/hooks/useQueryParams';
+import { useUserStore } from '@/stores/user-store';
 
 interface CarListProps {
   carListData: ICar[];
@@ -23,6 +24,7 @@ const CarListCatalog = ({
   translate 
 }: CarListProps) => {
   const { currentPage, handlePageChange } = useQueryParams();
+  const user = useUserStore((state) => state.user);
 
   const ww = typeof window !== 'undefined' ? window.innerWidth : 1000;
   const pageCount = Math.ceil((results || 10) / 10);
@@ -43,6 +45,7 @@ const CarListCatalog = ({
                 carData={car}
                 paddingBottomHorizontal={paddingBottomHorizontal}
                 translate={translate}
+                user={user}
               />
             ))}
           </div>
@@ -61,6 +64,7 @@ const CarListCatalog = ({
               carData={car}
               paddingBottomGrid={paddingBottomGrid}
               translate={translate}
+              user={user}
             />
           ))}
         </div>

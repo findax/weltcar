@@ -22,7 +22,7 @@ export default function Authorization({
       <div style={{ display: `${isDispatched ? 'none' : 'display'}`}} className='w-full flex justify-between'>
         <button
           id='login'
-          className={`w-1/2 text-xl pb-4 border-b-4 ${
+          className={`w-1/2 text-sm md:text-lg pb-4 border-b-4 ${
             currentPage === AuthorizationPages.login ? 'border-primary-950 font-semibold' : 'border-transparent'
           }`}
           onClick={() => {
@@ -34,7 +34,7 @@ export default function Authorization({
         </button>
         <button
           id='signup'
-          className={`w-1/2 text-xl pb-4 border-b-4 ${
+          className={`w-1/2 text-sm  md:text-lg pb-4 border-b-4 ${
             currentPage === AuthorizationPages.signup ? 'border-primary-950 font-semibold' : 'border-transparent'
           }`}
           onClick={() => {

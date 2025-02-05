@@ -62,7 +62,7 @@ const PartnerCarsPage = () => {
     </div>
   ) : (
     <ProtectedRoute role={UserRole.partner}>
-      <div className='relative space-y-6 md:space-y-8 lg:min-h-[650px]'>
+      <div className='relative space-y-6 md:space-y-8 lg:min-h-[350px]'>
         {/* HEADING */}
         <h2 className='text-3xl font-semibold'>{translate('accountPartnerCars.title')}</h2>
         <div className='w-14 border-b border-neutral-300 dark:border-neutral-700'></div>

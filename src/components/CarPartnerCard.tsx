@@ -166,11 +166,13 @@ const CarPartnerCard = ({
             </h4>
           </div>
 
-          <div className='flex-grow py-3 text-sm space-y-2'>
-            <h4 className='flex items-center'>
-              {contractor_comment}
-            </h4>
-          </div>
+          {contractor_comment && 
+            <div className='flex-grow py-3 text-sm space-y-2'>
+              <h4 className='flex items-center'>
+                {contractor_comment}
+              </h4>
+            </div>
+          }
 
           <div className='pt-4 flex flex-col gap-3 justify-between items-center border-t border-dashed border-neutral-300 dark:border-neutral-700'>
             <span className='2xl:text-2xl xl:text-xl font-semibold text-primary-1000 dark:text-primary-400'>
@@ -192,7 +194,7 @@ const CarPartnerCard = ({
                   {translate('yourCars.button.edit')}
                 </ButtonPrimary>
               </Link>
-              <Link href={`/partner-car-details/${id}` as Route} target='_blank'>
+              <Link href={`/car-details/${id}` as Route} target='_blank'>
                 <ButtonPrimary
                   fontSize='lg:text-md text-xs'
                   sizeClass='h-full lg:px-2.5 lg:py-2 px-2 py-1.5'

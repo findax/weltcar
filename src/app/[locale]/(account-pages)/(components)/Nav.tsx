@@ -21,8 +21,8 @@ export const Nav = ({
   const pathname = usePathname();
   const user = useUserStore((state) => state.user);
   const [newPathName, setNewPathName] = useState('');
-  const listNavName = ['account.navbar.accountPartner','account.navbar.account', 'account.navbar.password', 'account.navbar.orders', 'account.navbar.carSubscriptions', 'account.navbar.partnerCarsList'];
-  const listNavHref = ['/account-partner','/account', '/password', '/orders', '/car-subscriptions', '/partner-cars-list'];
+  const listNavName = ['account.navbar.accountPartner','account.navbar.account', 'account.navbar.password', 'account.navbar.favorites', 'account.navbar.orders', 'account.navbar.carSubscriptions', 'account.navbar.partnerCarsList'];
+  const listNavHref = ['/account-partner','/account', '/password', '/favorites', '/orders', '/car-subscriptions', '/partner-cars-list'];
 
   const filteredNavigationName = listNavName.filter(item => {
     if (!user?.contractor_id) {

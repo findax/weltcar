@@ -85,7 +85,7 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
       return (
         <div>
           <p className='inline-block text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-1'>{translate('accountPartner.form.uploadedFiles.label')}</p>
-          <div className='flex flex-col gap-1 block w-full border border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl text-sm font-normal px-4 py-3'>
+          <div className='flex flex-col gap-1 block w-full border border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-1150 rounded-2xl text-sm font-normal px-4 py-3'>
             {attachedFiles.map((file) => (
               <div key={file.file_name} className='flex items-center w-fit border rounded-2xl px-3 py-2'>
               <Link href={file.url as Route } target='_blank'>

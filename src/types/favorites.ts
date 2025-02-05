@@ -1,8 +1,8 @@
-export interface ICarDetails {
+export interface IFavoritesCarsDetails {
   brand: string;
   car_id: string;
   description: string;
-  documents: ICarDocuments[];
+  documents: IFavoritesCarsDocuments[];
   id: string;
   inner_color_hex: string;
   inner_color_name: string;
@@ -22,26 +22,26 @@ export interface ICarDetails {
   status_extra: string;
   vin: string;
   year: number;
-  videos?: ICarVideos[] | null;
+  videos?: IFavoritesCarsVideos[] | null;
   is_partner_car: boolean;
   partner_phone: string | null;
   partner_name: string | null;
-  is_favorite: boolean;
+  watermark: string | null;
 }
 
-export interface ICarDocuments {
+export interface IFavoritesCarsDocuments {
   description: string | null;
   file_name: string;
   title: string | null;
   url: string;
 }
 
-export interface ICarGallery {
+export interface IFavoritesCarsGallery {
   id: number;
   url: string;
 }
 
-export interface ICarVideos {
+export interface IFavoritesCarsVideos {
   description?: string | null;
   title?: string | null;
   type: string;

@@ -20,6 +20,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { RadioButton } from '@/shared/FormInputs';
 import DownloadPdf from './DownloadPdf';
+import AuthorizationFavorite from '@/components/authorization/AuthorizationFavorite';
 
 interface IPages {
   pageName: string;
@@ -33,8 +34,10 @@ export default function CarDetails({
 }) {
   const locale = useLocale();
   const translate = useTranslations();
+  const [isFavorite, setIsFavorite] = useState(false);
   const [isOpenDownloadPdfModal, setIsOpenDownloadPdfModal] = useState(false);
   const [isDownloadButtonClick, setIsDownloadButtonClick] = useState(false);
+  const [isAuthorizationModalOpen, setIsAuthorizationModalOpen] = useState(false);
   const [carData, setCarData] = useState<ICarDetails>();
   const [isLoading, setIsLoading] = useState(true);
   const [carGallery, setCarGallery] = useState<ICarGallery[]>([]);
@@ -82,6 +85,7 @@ export default function CarDetails({
       .then((carData) => {
         if(carData){
           setCarData(carData);
+          setIsFavorite(carData.is_favorite);
           const modifiedPhotosArray = [...carData.photos].map((item, index) => ({
             id: index,
             url: item.original,
@@ -163,7 +167,7 @@ export default function CarDetails({
         <div className='mt-8'>
           <Breadcrumbs pages={breadcrumbsPages} />
         </div>
-        {carGallery.length > 0 && <ImagesHeader images={carGallery} videos={carVideos.length > 0 ? carVideos : null }/>}
+        {carGallery.length > 0 && <ImagesHeader isSold={carData?.status === 'inactive'} images={carGallery} videos={carVideos.length > 0 ? carVideos : null }/>}
 
         <div className='relative z-10 my-11 grid grid-rows-1 grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4'>
           <div className='w-full col-span-3 lg:col-span-2 space-y-8 lg:space-y-10'>
@@ -186,11 +190,16 @@ export default function CarDetails({
           <PriceSidebar
             onClick={handleReserve}
             price={carData?.price || 0}
-            isSold={carData?.status === 'sold'}
+            isSold={carData?.status === 'inactive'}
             isShowPartnerLogo={isPartnerLogo}
             partnerPhone={carData?.partner_phone || null}
             partnerName={carData?.partner_name || null}
             status_extra={carData?.status_extra || null}
+            isFavorite={isFavorite}
+            user={user}
+            idCar={carId}
+            onChangeFavorite={setIsFavorite}
+            onChangeModalAuthorizationOpen={setIsAuthorizationModalOpen}
           />
         </div>
       </div>
@@ -198,7 +207,13 @@ export default function CarDetails({
       <MobileFooterSticky
         onClick={handleReserve}
         price={carData?.price || 0}
-        isSold={carData?.status === 'sold'}
+        isSold={carData?.status === 'inactive'}
+        status_extra={carData?.status_extra || null}
+        isFavorite={isFavorite}
+        user={user}
+        idCar={carId}
+        onChangeFavorite={setIsFavorite}
+        onChangeModalAuthorizationOpen={setIsAuthorizationModalOpen}
       />
 
       {modalId === 'confirm' && (
@@ -232,6 +247,12 @@ export default function CarDetails({
             handleDownloadButton={handleDownloadButton}
             handleRadioButtonChange={handleRadioButtonChange} 
           />
+        </Modal>
+      )}
+
+      {isAuthorizationModalOpen && (
+        <Modal isModalOpen={isAuthorizationModalOpen} setIsModalOpen={setIsAuthorizationModalOpen}>
+          <AuthorizationFavorite setIsModalOpen={setIsAuthorizationModalOpen} />
         </Modal>
       )}
     </>

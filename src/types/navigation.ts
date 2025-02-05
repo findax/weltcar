@@ -31,6 +31,8 @@ export enum NavigationRoutes {
   Account = 'account',
   AccountPartner = 'account-partner',
   Password = 'password',
+  Favorites = 'favorites',
   Orders = 'orders',
+  PartnerCarList = 'partner-cars-list',
   CarSubscriptions = 'car-subscriptions',
 }
