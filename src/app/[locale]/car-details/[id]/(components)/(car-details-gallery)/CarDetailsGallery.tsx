@@ -78,7 +78,7 @@ const CarDetailsGallery = ({ images }: { images: ICarGallery[] }) => {
                 router.push(`${thisPathname}/?${newPathname}` as Route);
               }}
               ref={id === Number(lastViewedPhoto) ? lastViewedPhotoRef : null}
-              className='bg-img-placeholder after:content relative mb-5 block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight focus:outline-none'
+              className={` ${images.length === 0 && "bg-img-placeholder"} after:content relative mb-5 block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight focus:outline-none`}
             >
               <Image
                 alt='car image'

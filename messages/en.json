@@ -187,6 +187,8 @@
   "carDetails.button.sold": "Sold",
   "carDetails.button.reserve": "Reserve",
   "carDetails.button.outOfStock": "Out of Stock",
+  "carDetails.button.favorite.addTo": "Add to Favorite",
+  "carDetails.button.favorite.already": "Favorited",
   "carDetails.mobile.button.sold": "Sold",
   "carDetails.mobile.button.reserve": "Reserve",
   "carDetails.mobile.button.outOfStock": "Out of Stock",
