@@ -27,6 +27,7 @@ export interface IFavoritesCarsDetails {
   partner_phone: string | null;
   partner_name: string | null;
   watermark: string | null;
+  is_favorite: boolean;
 }
 
 export interface IFavoritesCarsDocuments {
