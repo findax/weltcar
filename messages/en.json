@@ -80,6 +80,7 @@
   "authorization.favorites.title.canAdd": "You can add to favorites",
   "authorization.favorites.title.only": "only if you are authorized",
   "authorization.favorites.title.signUp": "Sign Up",
+  "authorization.favorites.title.dontHaveAccount": "I don’t have an account.",
   "team.title": "Our Team",
   "team.description": "Our team at WeltCar is composed of industry experts dedicated to providing you with the best luxury car buying experience. We work together to ensure that every aspect of your interaction with us is seamless and satisfying, making your journey to owning a premium vehicle both enjoyable and memorable.",
   "team.members.oleg.name": "Oleg",

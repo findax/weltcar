@@ -105,12 +105,12 @@ export default function SignInFavorite({
             </ButtonPrimary>
 
             <div className='flex gap-1 justify-center'>
-              <span className='font-medium'>I don’t have an account.</span>
+              <span className='font-medium'>{translate('authorization.favorites.title.dontHaveAccount')}</span>
               <button 
                 onClick={() => changeCurrentPage(<SignUpFavorite setIsModalOpen={setIsModalOpen} />)}
                 className='underline underline-offset-1'
               >
-                Sign up
+                {translate('authorization.favorites.title.signUp')}
               </button>
             </div>
           </Form>
