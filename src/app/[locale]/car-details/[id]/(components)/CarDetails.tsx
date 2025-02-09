@@ -11,7 +11,7 @@ import Descriptions from './Descriptions';
 import PriceSidebar from './PriceSidebar';
 import MobileFooterSticky from './MobileFooterSticky';
 import ConfirmForm from './ConfirmForm';
-import { ICarDetails, ICarGallery, ICarVideos } from '@/types/cardetails';
+import { ICarDetails, ICarGallery, ICarVideos, StatusCar } from '@/types/cardetails';
 import { useUserStore } from '@/stores/user-store';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { IUser } from '@/types/user';
@@ -155,6 +155,19 @@ export default function CarDetails({
     setIsModalOpen(true);
   }
 
+  const getStatusMessage = (status: string | undefined) => {
+    switch (status) {
+      case StatusCar.Inactive:
+        return 'carDetails.button.outOfStock';
+      case StatusCar.Sold:
+        return 'carDetails.button.sold';
+      case StatusCar.Available:
+        return 'carDetails.button.reserve';
+      default:
+        return 'carDetails.button.reserve';
+    }
+  }
+
   return isLoading ? (
     <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
       <div className='-mt-[76px]'>
@@ -188,6 +201,7 @@ export default function CarDetails({
           </div>
 
           <PriceSidebar
+            buttonTitle={getStatusMessage(carData?.status)}
             onClick={handleReserve}
             price={carData?.price || 0}
             isSold={carData?.status === 'inactive' || carData?.status === 'sold'}
