@@ -72,7 +72,7 @@ export default function ImagesHeader({
               <div className='absolute inset-0 bg-neutral-900 bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity'></div>
             </div>
 
-            <div className='absolute flex gap-2 left-3 bottom-3 '>
+            <div className='absolute flex gap-2 xl:left-14 2xl:left-28 left-3 bottom-3 '>
               { images.length < 2 ?
                   <BtnDetails 
                     className='hidden items-center md:justify-center'
