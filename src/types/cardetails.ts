@@ -55,3 +55,10 @@ export interface PdfVariant {
   value: string;
   selected: boolean;
 }
+
+export enum StatusCar {
+  Sold = 'sold',
+  Inactive = 'inactive',
+  Available = 'available',
+  Preorder = 'preorder',
+}

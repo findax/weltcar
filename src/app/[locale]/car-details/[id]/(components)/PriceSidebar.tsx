@@ -12,6 +12,7 @@ export default function PriceSidebar({
   onClick,
   price,
   isSold,
+  buttonTitle,
   isShowPartnerLogo,
   partnerPhone,
   partnerName,
@@ -25,6 +26,7 @@ export default function PriceSidebar({
   onClick: () => void;
   price: string | number;
   isSold: boolean;
+  buttonTitle: string;
   isShowPartnerLogo?: boolean;
   partnerPhone: string | null;
   partnerName: string | null;
@@ -94,7 +96,7 @@ export default function PriceSidebar({
           disabled={isDisabled}
           className={buttonClass}
         >
-          { isDisabled ? translate('carDetails.button.outOfStock') : translate('carDetails.button.reserve')}
+          {translate(buttonTitle)}
         </ButtonPrimary>
 
         <ButtonSecondary onClick={() => handleChangeFavoriteCar(idCar)}>
