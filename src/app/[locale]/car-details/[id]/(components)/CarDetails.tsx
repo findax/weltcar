@@ -219,6 +219,7 @@ export default function CarDetails({
       </div>
 
       <MobileFooterSticky
+        buttonTitle={getStatusMessage(carData?.status)}
         onClick={handleReserve}
         price={carData?.price || 0}
         isSold={carData?.status === 'inactive' || carData?.status === 'sold'}

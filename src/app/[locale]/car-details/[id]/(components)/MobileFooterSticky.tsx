@@ -12,12 +12,14 @@ const MobileFooterSticky = ({
   isSold,
   status_extra,
   isFavorite,
+  buttonTitle,
   user,
   idCar,
   onChangeModalAuthorizationOpen,
   onChangeFavorite
 }: {
   onClick: () => void;
+  buttonTitle: string;
   price: string | number;
   isSold: boolean;
   status_extra: string | null;
@@ -67,17 +69,26 @@ const MobileFooterSticky = ({
           }
         </div>
 
-        <div className='w-full items-center flex gap-5'>
-          <button onClick={() => handleChangeFavoriteCar(idCar)}>
-            <HeartIcon className={`h-8 w-8 mx-3`} color={` ${isFavorite ? '#FF6464' : ''}`} />
-          </button>
+        <div className='w-full flex flex-col items-center flex gap-5'>
+
           <ButtonPrimary
             onClick={onClick}
             disabled={isDisabled}
             className={` w-full sm:w-4/6 ${buttonClass}`}
           >
-            {isDisabled ? translate('carDetails.mobile.button.outOfStock') : translate('carDetails.mobile.button.reserve')}
+            {translate(buttonTitle)}
           </ButtonPrimary>
+
+          <ButtonSecondary 
+            onClick={() => handleChangeFavoriteCar(idCar)}
+            className={` w-full sm:w-4/6`}
+          >
+            <HeartIcon className={`h-8 w-8 mr-3`} color={` ${isFavorite ? '#FF6464' : ''}`} />
+            {isFavorite 
+              ? translate('carDetails.button.favorite.already')
+              : translate('carDetails.button.favorite.addTo')
+            }
+          </ButtonSecondary>
         </div>
       </div>
     </div>
