@@ -11,7 +11,7 @@ import Descriptions from './Descriptions';
 import PriceSidebar from './PriceSidebar';
 import MobileFooterSticky from './MobileFooterSticky';
 import ConfirmForm from './ConfirmForm';
-import { ICarDetails, ICarGallery, ICarVideos } from '@/types/cardetails';
+import { ICarDetails, ICarGallery, ICarVideos, StatusCar } from '@/types/cardetails';
 import { useUserStore } from '@/stores/user-store';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { IUser } from '@/types/user';
@@ -155,6 +155,19 @@ export default function CarDetails({
     setIsModalOpen(true);
   }
 
+  const getStatusMessage = (status: string | undefined) => {
+    switch (status) {
+      case StatusCar.Inactive:
+        return 'carDetails.button.outOfStock';
+      case StatusCar.Sold:
+        return 'carDetails.button.sold';
+      case StatusCar.Available:
+        return 'carDetails.button.reserve';
+      default:
+        return 'carDetails.button.reserve';
+    }
+  }
+
   return isLoading ? (
     <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
       <div className='-mt-[76px]'>
@@ -167,7 +180,7 @@ export default function CarDetails({
         <div className='mt-8'>
           <Breadcrumbs pages={breadcrumbsPages} />
         </div>
-        {carGallery.length > 0 && <ImagesHeader isSold={carData?.status === 'inactive'} images={carGallery} videos={carVideos.length > 0 ? carVideos : null }/>}
+        {carGallery && <ImagesHeader isSold={carData?.status === 'inactive'} images={carGallery} videos={carVideos.length > 0 ? carVideos : null }/>}
 
         <div className='relative z-10 my-11 grid grid-rows-1 grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4'>
           <div className='w-full col-span-3 lg:col-span-2 space-y-8 lg:space-y-10'>
@@ -188,9 +201,10 @@ export default function CarDetails({
           </div>
 
           <PriceSidebar
+            buttonTitle={getStatusMessage(carData?.status)}
             onClick={handleReserve}
             price={carData?.price || 0}
-            isSold={carData?.status === 'inactive'}
+            isSold={carData?.status === 'inactive' || carData?.status === 'sold'}
             isShowPartnerLogo={isPartnerLogo}
             partnerPhone={carData?.partner_phone || null}
             partnerName={carData?.partner_name || null}
@@ -205,9 +219,10 @@ export default function CarDetails({
       </div>
 
       <MobileFooterSticky
+        buttonTitle={getStatusMessage(carData?.status)}
         onClick={handleReserve}
         price={carData?.price || 0}
-        isSold={carData?.status === 'inactive'}
+        isSold={carData?.status === 'inactive' || carData?.status === 'sold'}
         status_extra={carData?.status_extra || null}
         isFavorite={isFavorite}
         user={user}

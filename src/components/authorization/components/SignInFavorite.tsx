@@ -3,9 +3,7 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { FormikInput, FormikPasswordInput } from '@/shared/FormInputs';
-import ForgotPassword from './ForgotPassword';
 import { singIn } from '@/api/auth';
-import { InformationCircleIcon } from '@heroicons/react/24/outline';
 import { useUserStore } from '@/stores/user-store';
 import { IUser } from '@/types/user';
 import { useTranslations } from 'next-intl';
@@ -42,12 +40,13 @@ export default function SignInFavorite({
     data.name === 'email' && setEmailValue(data.value);
   };
 
+  const lol = `${translate('authorization.favorites.title.canAdd')} ${translate('authorization.favorites.title.only')}`;
+  console.log(lol)
+
   return (
     <div className='w-full max-w-md mx-auto space-y-8'>
-
-      <h3 className='font-semibold flex flex-col items-center gap-4 text-[32px] text-neutral-900 dark:text-white'>
-        <span>{translate('authorization.favorites.title.canAdd')}</span>
-        <span>{translate('authorization.favorites.title.only')}</span>
+      <h3 className='font-semibold leading-9 text-[32px] text-neutral-900 dark:text-white'>
+        {`${translate('authorization.favorites.title.canAdd')} ${translate('authorization.favorites.title.only')}`}
       </h3>
       <Formik
         initialValues={{
@@ -106,12 +105,12 @@ export default function SignInFavorite({
             </ButtonPrimary>
 
             <div className='flex gap-1 justify-center'>
-              <span className='font-medium'>I don’t have an account.</span>
+              <span className='font-medium'>{translate('authorization.favorites.title.dontHaveAccount')}</span>
               <button 
                 onClick={() => changeCurrentPage(<SignUpFavorite setIsModalOpen={setIsModalOpen} />)}
                 className='underline underline-offset-1'
               >
-                Sign up
+                {translate('authorization.favorites.title.signUp')}
               </button>
             </div>
           </Form>

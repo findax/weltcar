@@ -12,12 +12,14 @@ const MobileFooterSticky = ({
   isSold,
   status_extra,
   isFavorite,
+  buttonTitle,
   user,
   idCar,
   onChangeModalAuthorizationOpen,
   onChangeFavorite
 }: {
   onClick: () => void;
+  buttonTitle: string;
   price: string | number;
   isSold: boolean;
   status_extra: string | null;
@@ -51,7 +53,7 @@ const MobileFooterSticky = ({
   return (
     <div className='block lg:hidden fixed bottom-0 inset-x-0 py-2 sm:py-3 bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-600 z-40'>
       <div className='container flex gap-2 flex-col items-center justify-between'>
-        <div className='flex justify-start w-full sm:w-4/6 mb-5'>
+        <div className='flex flex-col gap-2 justify-start w-full sm:w-4/6 mb-5'>
           <div className='flex'>
             <span className='text-xl mr-7 xl:text-2xl font-semibold'>{translate('carDetails.price.title')}</span>
 
@@ -67,24 +69,25 @@ const MobileFooterSticky = ({
           }
         </div>
 
-        <div className='w-full items-center flex flex-col gap-5'>
+        <div className='w-full flex flex-col items-center flex gap-5'>
+
           <ButtonPrimary
             onClick={onClick}
             disabled={isDisabled}
             className={` w-full sm:w-4/6 ${buttonClass}`}
           >
-            {isSold 
-              ? translate('carDetails.mobile.button.sold') 
-              : isDisabled ? translate('carDetails.mobile.button.outOfStock') : translate('carDetails.mobile.button.reserve')
-            }
+            {translate(buttonTitle)}
           </ButtonPrimary>
 
-          <ButtonSecondary
+          <ButtonSecondary 
             onClick={() => handleChangeFavoriteCar(idCar)}
-            className='w-full sm:w-4/6'
+            className={` w-full sm:w-4/6`}
           >
             <HeartIcon className={`h-8 w-8 mr-3`} color={` ${isFavorite ? '#FF6464' : ''}`} />
-            Add to Favorite
+            {isFavorite 
+              ? translate('carDetails.button.favorite.already')
+              : translate('carDetails.button.favorite.addTo')
+            }
           </ButtonSecondary>
         </div>
       </div>

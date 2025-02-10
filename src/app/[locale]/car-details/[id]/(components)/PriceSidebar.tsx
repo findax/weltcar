@@ -12,6 +12,7 @@ export default function PriceSidebar({
   onClick,
   price,
   isSold,
+  buttonTitle,
   isShowPartnerLogo,
   partnerPhone,
   partnerName,
@@ -25,6 +26,7 @@ export default function PriceSidebar({
   onClick: () => void;
   price: string | number;
   isSold: boolean;
+  buttonTitle: string;
   isShowPartnerLogo?: boolean;
   partnerPhone: string | null;
   partnerName: string | null;
@@ -40,7 +42,7 @@ export default function PriceSidebar({
   const [isPriceVisible, setIsPriceVisible] = useState<boolean>(true);
 
   const isDisabled = isSold || isNaN(Number(price));
-  const buttonClass = isDisabled ? '!bg-gray-600 hover:bg-gray-600' : '';
+  const buttonClass = isDisabled ? '!bg-gray-600 hover:bg-gray-600 text-white' : '';
 
   useEffect(() => {
     setIsPriceVisible(!isNaN(Number(price)));
@@ -94,19 +96,15 @@ export default function PriceSidebar({
           disabled={isDisabled}
           className={buttonClass}
         >
-          {isSold 
-            ? translate('carDetails.button.sold') 
-            : isDisabled ? translate('carDetails.button.outOfStock') : translate('carDetails.button.reserve')
-          }
+          {translate(buttonTitle)}
         </ButtonPrimary>
 
-        <ButtonSecondary
-          onClick={() => handleChangeFavoriteCar(idCar)}
-          disabled={isDisabled}
-          className={buttonClass}
-        >
+        <ButtonSecondary onClick={() => handleChangeFavoriteCar(idCar)}>
           <HeartIcon className={`h-8 w-8 mr-3`} color={` ${isFavorite ? '#FF6464' : ''}`} />
-          Add to Favorite
+          {isFavorite 
+            ? translate('carDetails.button.favorite.already')
+            : translate('carDetails.button.favorite.addTo')
+          }
         </ButtonSecondary>
       </div>
     </div>

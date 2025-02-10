@@ -1,9 +1,6 @@
 import Link from 'next/link';
-import BtnLikeIcon from '@/components/BtnLikeIcon';
 import SoldBadge from '@/components/SoldBadge';
-import Badge from '@/shared/Badge';
 import CardSlider from '@/components/CardSlider';
-import TooltipComponent from '@/shared/TooltipComponent';
 import { ButtonPrimary } from '@/shared/Buttons';
 import { Route } from 'next';
 import Image from 'next/image';
@@ -12,6 +9,8 @@ import { deleteFavoriteCar } from '@/api/favorites';
 import { useLocale, useTranslations } from 'next-intl';
 import { IFavoritesCarsDetails } from '@/types/favorites';
 import { toast } from 'react-toastify';
+import { HeartIcon } from '@heroicons/react/24/outline';
+import { useState } from 'react';
 
 const FavoriteCarCard = ({
   className = '',
@@ -33,11 +32,13 @@ const FavoriteCarCard = ({
     status,
     year,
     status_extra,
-    watermark
+    watermark,
+    is_favorite
   } = carData;
   const translate = useTranslations();
   const locale = useLocale();
-  const isActive = status === 'sold';
+  const [isFavorite, setIsFavorite] = useState(is_favorite);
+  const isInActive = status === 'sold' || status === 'inactive';
 
   const renderWatermark = () => {
     return (
@@ -70,14 +71,14 @@ const FavoriteCarCard = ({
   return (
     <>
       <div
-        className={`relative flex flex-col hover:shadow-lg border border-neutral-200 ${isActive ? "dark:bg-neutral-1250 dark:border-neutral-1300 bg-neutral-1350 border-neutral-1400" : ""} dark:border-neutral-700 rounded-2xl overflow-hidden bg-white dark:bg-neutral-900 ${className}`}
+        className={`relative flex flex-col hover:shadow-lg border border-neutral-200 ${isInActive ? "dark:bg-neutral-1250 dark:border-neutral-1300 bg-neutral-1350 border-neutral-1400" : ""} dark:border-neutral-700 rounded-2xl overflow-hidden bg-white dark:bg-neutral-900 ${className}`}
         data-nc-id='CarCard'
       >
         <div className='relative w-full overflow-hidden'>
           <CardSlider
             photos={photos}
             paddingBottom={paddingBottomGrid}
-            grayscale={`${isActive ? 'grayscale' : ''}`}
+            grayscale={`${isInActive ? 'grayscale' : ''}`}
             carName={`${brand} ${model}`}
           />
           {renderWatermark()}
@@ -95,32 +96,24 @@ const FavoriteCarCard = ({
             <div className='flex items-center text-neutral-500 dark:text-neutral-400 space-x-2'>
               <span>{status}</span>
               {status_extra && (
-                 <span>{status_extra}</span>
+                 <span className={`${isInActive ? 'hidden' : 'block'}`}>{status_extra}</span>
               )}
             </div>
           </div>
 
-          <div className='pt-4 flex justify-end items-center border-t border-dashed border-neutral-300 dark:border-neutral-700'>
-            {
-              isActive ? (
-                <ButtonPrimary
-                  fontSize='text-sm'
-                  sizeClass='px-5 py-2'
-                  onClick={handleRemoveFavoriteCar}
-                >
-                  {translate('favorites.catalog.button.remove')}
-                </ButtonPrimary>
-              ) : (
-                <Link href={`/car-details/${id}` as Route } target='_blank'>
-                  <ButtonPrimary
-                    fontSize='text-sm'
-                    sizeClass='px-5 py-2'
-                  >
-                    {translate('favorites.catalog.button.seeMore')}
-                  </ButtonPrimary>
-                </Link>
-              )
-            }
+          <div className='pt-4 flex justify-end gap-5 items-center border-t border-dashed border-neutral-300 dark:border-neutral-700'>
+            <button onClick={handleRemoveFavoriteCar}>
+              <HeartIcon className={`h-8 w-8 mr-3`} color={` ${isFavorite ? '#FF6464' : ''}`} />
+            </button>
+
+            <Link href={`/car-details/${id}` as Route } target='_blank'>
+              <ButtonPrimary
+                fontSize='text-sm'
+                sizeClass='px-5 py-2'
+              >
+                {translate('favorites.catalog.button.seeMore')}
+              </ButtonPrimary>
+            </Link>
           </div>
         </div>
       </div>
