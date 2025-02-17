@@ -3,17 +3,21 @@
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { FormikInput } from '@/shared/FormInputs';
-import { ButtonCircle } from '@/shared/Buttons';
+import { ButtonCircle, ButtonPrimary } from '@/shared/Buttons';
 import { sendSubscribeEmail } from '@/api/subscribe';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
+import { useTranslations } from 'next-intl';
 
 interface IProps {
-  isButtonShow?: boolean;
+  isButtonShowCircle?: boolean;
+  isButtonShowClassic?: boolean;
 }
 
 export default function SubscribeForm({
-  isButtonShow = false
+  isButtonShowCircle = false,
+  isButtonShowClassic = false
 }: IProps) {
+  const translate = useTranslations();
   const SubscribeSchema = Yup.object().shape({
     email: Yup.string()
       .trim()
@@ -46,13 +50,20 @@ export default function SubscribeForm({
             error={errors.email}
             touched={touched.email}
           />
-          {isButtonShow && <ButtonCircle
+          {isButtonShowCircle && <ButtonCircle
             type='submit'
             className='absolute transform top-1/2 -translate-y-1/2 right-1'
             size='w-10 h-10'
           >
             <ChevronRightIcon className='w-8 ml-0.5 text-white dark:text-black' />
           </ButtonCircle>}
+          
+          {isButtonShowClassic && <ButtonPrimary 
+            className='mt-5 sm:mt-8 w-full sm:w-fit' 
+            type='submit'
+          >
+            {translate('joinOurNewsletter.button.sendEmail')}
+          </ButtonPrimary>}
         </Form>
       )}
     </Formik>

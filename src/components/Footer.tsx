@@ -122,7 +122,7 @@ export default function Footer() {
                 {translate('footer.newsletter.description')}
               </p>
               <SubscribeForm 
-                isButtonShow={true}
+                isButtonShowCircle={true}
               />
             </div>
           </div>
