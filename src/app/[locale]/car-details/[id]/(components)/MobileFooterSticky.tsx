@@ -69,7 +69,12 @@ const MobileFooterSticky = ({
           }
         </div>
 
-        <div className='w-full flex flex-col items-center flex gap-5'>
+        <div className='w-full flex items-center justify-center flex gap-5'>
+          <div className='flex py-3 items-end'>
+            <button className='w-full sm:w-4/6' onClick={() => handleChangeFavoriteCar(idCar)}>
+              <HeartIcon className={`h-8 w-8 mr-3`} color={` ${isFavorite ? '#FF6464' : ''}`} />
+            </button>
+          </div>
 
           <ButtonPrimary
             onClick={onClick}
@@ -78,17 +83,6 @@ const MobileFooterSticky = ({
           >
             {translate(buttonTitle)}
           </ButtonPrimary>
-
-          <ButtonSecondary 
-            onClick={() => handleChangeFavoriteCar(idCar)}
-            className={` w-full sm:w-4/6`}
-          >
-            <HeartIcon className={`h-8 w-8 mr-3`} color={` ${isFavorite ? '#FF6464' : ''}`} />
-            {isFavorite 
-              ? translate('carDetails.button.favorite.already')
-              : translate('carDetails.button.favorite.addTo')
-            }
-          </ButtonSecondary>
         </div>
       </div>
     </div>
