@@ -23,10 +23,7 @@ const Subscribe = ({
     >
       <div className='w-full lg:w-[506px]'>
         <h2 className='mb-10 lg:mb-20 font-bold text-neutral-1050 dark:text-white text-3xl md:text-4xl xl:text-5xl'>{translate('joinOurNewsletter.title')}</h2>
-        <SubscribeForm />
-        <ButtonPrimary className='mt-5 sm:mt-8 w-full sm:w-fit' href={newHref as NextRoute}>
-          {translate('joinOurNewsletter.button.sendEmail')}
-        </ButtonPrimary>
+        <SubscribeForm isButtonShowClassic={true}/>
       </div>
       <div className='w-full lg:w-[581px]'>
         <ul className='space-y-8'>
