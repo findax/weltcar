@@ -25,7 +25,7 @@ const BlogList = ({
   );
 
   const renderSmallCard = (item: Article) => (
-    <div key={item.slug} className='w-full h-fit'>
+    <div key={item.slug} className='w-full h-full'>
       <BlogCard blogItem={item} heightImage='h-[228px]' sizeTitle='!text-2xl' />
     </div>
   );
