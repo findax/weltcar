@@ -464,6 +464,7 @@ export default function PartnerCarsForm({
             />
             {/* ---- */}
             <FormikFile
+              accept="image/jpeg, image/png"
               disabled={car?.is_verified}
               variant='photo'
               initialValues={ car ? initialValueFilled : null}
@@ -505,6 +506,7 @@ export default function PartnerCarsForm({
             />
             {/* ---- */}
             <FormikFile
+              accept="image/jpeg, image/png, application/pdf"
               disabled={car?.is_verified}
               initialValues={ car ? initialValueFilled : null}
               name='documents'
