@@ -43,8 +43,10 @@ export default function SignUp({
       .required('signUpSchema.name.required'),
     email: Yup.string()
       .trim()
-      .email('signUpSchema.email.invalid')
-      .required('signUpSchema.email.required'),
+      .required('signUpPartnerSchema.email.required')
+      .matches(
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'signUpPartnerSchema.email.invalid'
+      ),
     phone: Yup.string()
       .trim()
       // .matches(phoneValidationPattern, 'Invalid phone number')

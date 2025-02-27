@@ -156,6 +156,7 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
           />
           {/* ---- */}
           <FormikFile 
+            accept="image/jpeg, image/png"
             disabled={partner?.is_verified}
             initialValues={initialValues}
             name='documents'
