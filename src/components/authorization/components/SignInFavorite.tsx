@@ -40,9 +40,6 @@ export default function SignInFavorite({
     data.name === 'email' && setEmailValue(data.value);
   };
 
-  const lol = `${translate('authorization.favorites.title.canAdd')} ${translate('authorization.favorites.title.only')}`;
-  console.log(lol)
-
   return (
     <div className='w-full max-w-md mx-auto space-y-8'>
       <h3 className='font-semibold leading-9 text-[32px] text-neutral-900 dark:text-white'>

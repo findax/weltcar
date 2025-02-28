@@ -6,6 +6,7 @@ import {
   ICarPartnerToRequest,
   ICarPartnerToRequestUpdate,
   ICarsPartner,
+  ICatalogPartner,
   IModels,
 } from '@/types/partner';
 import { FindCarProps } from '@/types/car';
@@ -186,19 +187,18 @@ export const getPartnerModels = async (locale: string) => {
 export const getPartnerCars = async (
   page: number,
   perPage: number,
-  locale: string
+  locale: string,
+  queryParams?: ICatalogQueryParams
 ) => {
   const headers: Record<string, string> = {
     'Accept-Language': locale,
   };
-  return new Promise<ICarsPartner[] | false>((resolve) => {
+  return new Promise<ICatalogPartner | false>((resolve) => {
     api
       .get(`api/user/contractor/cars?page=${page}&perPage=${perPage}`, {
         headers,
       })
-      .then((res) => {
-        resolve(res.data.data);
-      })
+      .then((res) => resolve(res.data))
       .catch((err) => {
         if (err.response?.data.message) {
           toast.error(err.response.data.message);

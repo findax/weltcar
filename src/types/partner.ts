@@ -1,5 +1,6 @@
 import { File } from 'buffer';
 import { ICarVideos } from './cardetails';
+import { IFilters, ILinks, IMeta, ISort } from './catalog';
 
 export interface ICarPartnerToRequest {
   model_id: string;
@@ -37,6 +38,14 @@ export interface ICarPartnerToRequestUpdate {
   documents: File[];
   attached_photos: number[] | undefined;
   attached_documents: number[] | undefined;
+}
+
+export interface ICatalogPartner {
+  data: ICarsPartner[];
+  filters: IFilters[];
+  links: ILinks;
+  meta: IMeta;
+  sort: ISort[];
 }
 
 export interface ICarsPartner {
