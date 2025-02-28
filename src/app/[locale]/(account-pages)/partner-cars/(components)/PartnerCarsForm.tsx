@@ -508,6 +508,7 @@ export default function PartnerCarsForm({
             <FormikFile
               accept="image/jpeg, image/png, application/pdf"
               disabled={car?.is_verified}
+              subTitle='JPG, JPEG, PDF or PNG'
               initialValues={ car ? initialValueFilled : null}
               name='documents'
               label='accountPartnerCars.form.uploadDocuments.label'
