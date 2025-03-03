@@ -8,7 +8,7 @@ function buildReadableQuery(query: ICatalogQueryParams): string {
 
   if (query.filters && Array.isArray(query.filters)) {
     query.filters.forEach((filter) => {
-      // Например, преобразуем фильтр в строку brands=8 или brands=8,9 (если значений несколько)
+      // Преобразуем фильтр в строку вида brands=8 или brands=8,4 (если значений несколько)
       params.push(`${filter.id}=${filter.values.join(',')}`);
     });
   }
@@ -24,23 +24,44 @@ function buildReadableQuery(query: ICatalogQueryParams): string {
   return '?' + params.join('&');
 }
 
-// Функция для парсинга читаемого URL в объект запроса
+// Функция для парсинга URL в объект запроса с поддержкой старого и нового формата
 function parseReadableQuery(search: string): ICatalogQueryParams {
   const params = new URLSearchParams(search);
-  const query: ICatalogQueryParams = {};
+  let query: ICatalogQueryParams = {};
 
-  if (params.has('brands')) {
-    query.filters = [{ id: 'brands', values: [Number(params.get('brands'))] }];
+  // Если есть старый формат (параметр query с JSON), пытаемся его распарсить
+  if (params.has('query')) {
+    try {
+      query = JSON.parse(decodeURIComponent(params.get('query')!));
+      return query;
+    } catch (e) {
+      console.error('Ошибка парсинга параметра query (старый формат):', e);
+    }
   }
 
-  if (params.has('search')) {
-    query.search = params.get('search')!;
+  // Новый формат: перебираем все ключи в URL
+  for (const key of params.keys()) {
+    if (key === 'search') {
+      query.search = params.get('search')!;
+    } else if (key === 'sort') {
+      query.sort = params.get('sort')!
+        .split(',')
+        .map((id) => ({ id }));
+    } else {
+      // Для всех остальных ключей считаем их фильтрами
+      const value = params.get(key)!;
+      const values = value.split(',').map((item) => {
+        const num = Number(item);
+        // Если строка может быть преобразована в число, возвращаем число, иначе оставляем строку
+        return isNaN(num) ? item : num;
+      });
+      if (!query.filters) {
+        query.filters = [];
+      }
+      // Добавляем новый фильтр, не затирая уже существующие
+      query.filters.push({ id: key, values });
+    }
   }
-
-  if (params.has('sort')) {
-    query.sort = params.get('sort')!.split(',').map((id) => ({ id }));
-  }
-
   return query;
 }
 
