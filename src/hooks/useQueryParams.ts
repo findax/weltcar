@@ -1,34 +1,105 @@
-import { useState } from 'react';
-import { useQueryState, parseAsJson, parseAsInteger } from 'nuqs';
+import { useState, useEffect } from 'react';
 import { ICatalogQueryParams } from '@/types/catalog';
 import { useQueryStore } from '@/stores/query-store';
 
+// Функция для формирования читаемой строки из объекта запроса
+function buildReadableQuery(query: ICatalogQueryParams): string {
+  const params = [];
+
+  if (query.filters && Array.isArray(query.filters)) {
+    query.filters.forEach((filter) => {
+      // Например, преобразуем фильтр в строку brands=8 или brands=8,9 (если значений несколько)
+      params.push(`${filter.id}=${filter.values.join(',')}`);
+    });
+  }
+
+  if (query.search) {
+    params.push(`search=${query.search}`);
+  }
+
+  if (query.sort) {
+    params.push(`sort=${query.sort.map((item) => item.id).join(',')}`);
+  }
+
+  return '?' + params.join('&');
+}
+
+// Функция для парсинга читаемого URL в объект запроса
+function parseReadableQuery(search: string): ICatalogQueryParams {
+  const params = new URLSearchParams(search);
+  const query: ICatalogQueryParams = {};
+
+  if (params.has('brands')) {
+    query.filters = [{ id: 'brands', values: [Number(params.get('brands'))] }];
+  }
+
+  if (params.has('search')) {
+    query.search = params.get('search')!;
+  }
+
+  if (params.has('sort')) {
+    query.sort = params.get('sort')!.split(',').map((id) => ({ id }));
+  }
+
+  return query;
+}
+
 export const useQueryParams = () => {
-  const [isFiltersVisible, setFiltersVisible] = useState(false);
-  const [currentPage, setPageParam] = useQueryState(
-    'page',
-    parseAsInteger.withDefault(1)
-  );
-  const [queryParams, setQueryParams] = useQueryState<ICatalogQueryParams>(
-    'query',
-    parseAsJson()
-  );
+  // Инициализируем состояние запроса, парся URL только на клиенте
+  const initialQuery =
+    typeof window !== 'undefined'
+      ? parseReadableQuery(window.location.search)
+      : ({} as ICatalogQueryParams);
+  const [queryParams, setQueryParams] = useState<ICatalogQueryParams>(initialQuery);
+  const [currentPage, setPageParam] = useState<number | null>(1);
 
   const queryState = useQueryStore((state) => state.query);
   const updateQueryState = useQueryStore((state) => state.updateQueryState);
+  const [isFiltersVisible, setFiltersVisible] = useState(false);
+
+  // Обновление URL происходит только на клиенте
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const readableUrl = buildReadableQuery(queryParams);
+      window.history.replaceState(null, '', readableUrl);
+    }
+  }, [queryParams]);
+
+  // Функция обновления состояния запроса
+  function updateParams(newQueryState: ICatalogQueryParams) {
+    if (newQueryState.filters && newQueryState.filters.length === 0) {
+      delete newQueryState.filters;
+    }
+    setQueryParams(newQueryState);
+    updateQueryState(newQueryState);
+    setPageParam(null);
+    if (isFiltersVisible) setFiltersVisible(false);
+
+    // Обновляем URL, если window доступен
+    if (typeof window !== 'undefined') {
+      const readableUrl = buildReadableQuery(newQueryState);
+      window.history.replaceState(null, '', readableUrl);
+    }
+  }
 
   const handleSortChange = (id: string) => {
     let newQueryState = { ...queryState };
-    id === 'latest'
-      ? delete newQueryState.sort
-      : (newQueryState.sort = [{ id }]);
+    if (id === 'latest') {
+      delete newQueryState.sort;
+    } else {
+      newQueryState.sort = [{ id }];
+    }
     updateParams(newQueryState);
   };
 
   const handlePageChange = ({ selected }: { selected: number }) => {
-    queryParams !== queryState && updateQueryState(queryParams);
+    if (queryParams !== queryState) {
+      updateQueryState(queryParams);
+    }
     const page = selected + 1 === 1 ? null : selected + 1;
-    window.scrollTo({ top: 0 });
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0 });
+    }
     setPageParam(page);
   };
 
@@ -36,9 +107,11 @@ export const useQueryParams = () => {
     let newQueryState = { ...queryParams };
     delete newQueryState.filters;
     newQueryState.search = value;
-    document
-      .querySelectorAll('input[type=checkbox]')
-      .forEach((el) => ((el as HTMLInputElement).checked = false));
+    if (typeof document !== 'undefined') {
+      document
+        .querySelectorAll('input[type=checkbox]')
+        .forEach((el) => ((el as HTMLInputElement).checked = false));
+    }
     updateParams(newQueryState);
   };
 
@@ -46,27 +119,23 @@ export const useQueryParams = () => {
     let newQueryState = { ...queryParams };
     delete newQueryState.search;
 
-    if (newQueryState?.filters) {
-      let isCategoryExist = newQueryState.filters.findIndex(
+    if (newQueryState.filters) {
+      const index = newQueryState.filters.findIndex(
         (item) => item.id === filterCategory
       );
-      if (isCategoryExist === -1) {
+      if (index === -1) {
         newQueryState.filters.push({ id: filterCategory, values: [id] });
       } else {
-        (newQueryState.filters as {}) = newQueryState.filters.map(
-          (filter: { id: string | number; values: (string | number)[] }) => {
+        newQueryState.filters = newQueryState.filters
+          .map((filter) => {
             if (filter.id === filterCategory) {
               filter.values = filter.values.includes(id)
-                ? filter.values.filter((value: string | number) => value !== id)
+                ? filter.values.filter((value) => value !== id)
                 : [...filter.values, id];
             }
             return filter;
-          }
-        );
-
-        newQueryState.filters = newQueryState.filters.filter(
-          (item) => item.values.length > 0
-        );
+          })
+          .filter((item) => item.values.length > 0);
       }
       updateParams(newQueryState);
     } else {
@@ -78,11 +147,15 @@ export const useQueryParams = () => {
   const resetFilters = (searchQuery?: boolean) => {
     let newQueryState = { ...queryParams };
     delete newQueryState.filters;
-    searchQuery && delete newQueryState.search;
-    window.scrollTo({ top: 0 });
-    document
-      .querySelectorAll('input[type=checkbox]')
-      .forEach((el) => ((el as HTMLInputElement).checked = false));
+    if (searchQuery) delete newQueryState.search;
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0 });
+    }
+    if (typeof document !== 'undefined') {
+      document
+        .querySelectorAll('input[type=checkbox]')
+        .forEach((el) => ((el as HTMLInputElement).checked = false));
+    }
     updateParams(newQueryState);
   };
 
@@ -94,20 +167,18 @@ export const useQueryParams = () => {
     let newQueryState = { ...queryParams };
 
     if (newQueryState.filters) {
-      let isCategoryExist = newQueryState.filters.findIndex(
+      const index = newQueryState.filters.findIndex(
         (item) => item.id === filterCategory
       );
-      if (isCategoryExist === -1) {
+      if (index === -1) {
         newQueryState.filters.push({ id: filterCategory, values: [min, max] });
       } else {
-        (newQueryState.filters as {}) = newQueryState.filters.map(
-          (filter: { id: string | number; values: (string | number)[] }) => {
-            if (filter.id === filterCategory) {
-              filter.values = [min, max];
-            }
-            return filter;
+        newQueryState.filters = newQueryState.filters.map((filter) => {
+          if (filter.id === filterCategory) {
+            filter.values = [min, max];
           }
-        );
+          return filter;
+        });
       }
       updateParams(newQueryState);
     } else {
@@ -124,28 +195,6 @@ export const useQueryParams = () => {
     updateParams(newQueryState);
   };
 
-  function updateParams(newQueryState: ICatalogQueryParams) {
-    const updateQueryParams = (query: ICatalogQueryParams) => {
-      function isEmpty(obj: object) {
-        for (const prop in obj) {
-          if (Object.hasOwn(obj, prop)) {
-            return false;
-          }
-        }
-
-        return true;
-      }
-
-      isEmpty(query) ? setQueryParams(null) : setQueryParams(query);
-    };
-    if (newQueryState.filters?.length === 0) delete newQueryState.filters;
-
-    updateQueryParams(newQueryState);
-    updateQueryState(newQueryState);
-    setPageParam(null);
-    isFiltersVisible && setFiltersVisible(false);
-  }
-
   return {
     queryParams,
     currentPage,
@@ -160,3 +209,5 @@ export const useQueryParams = () => {
     setFiltersVisible,
   };
 };
+
+export default useQueryParams;
