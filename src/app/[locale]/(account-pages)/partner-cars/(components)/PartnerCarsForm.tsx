@@ -17,6 +17,8 @@ import { Route } from 'next';
 import { toast } from 'react-toastify';
 import { useLocale, useTranslations } from 'next-intl';
 
+const DOCUMENTS_SUPPORTED_FORMATS = ['image/png','image/jpeg','image/jpg','application/pdf'];
+
 const ModelSchema = Yup.object().shape({
   id: Yup.number().required('partnerCarsSchema.model.idRequired'),
   brand_name: Yup.string().trim().required('partnerCarsSchema.model.brandRequired'),
@@ -150,7 +152,7 @@ export default function PartnerCarsForm({
       .of(
         Yup.mixed<File>()
           .test('fileType', 'partnerCarsSchema.documents.unsupported', (value) => {
-            return value && SUPPORTED_FORMATS.includes(value.type);
+            return value && DOCUMENTS_SUPPORTED_FORMATS.includes(value.type);
           })
           .required('partnerCarsSchema.documents.required')
       )
