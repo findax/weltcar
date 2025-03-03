@@ -8,7 +8,7 @@ function buildReadableQuery(query: ICatalogQueryParams): string {
 
   if (query.filters && Array.isArray(query.filters)) {
     query.filters.forEach((filter) => {
-      // Например, преобразуем фильтр в строку brands=8 или brands=8,9 (если значений несколько)
+      // Преобразуем фильтр в строку вида: brands=8 или brands=8,9 (если значений несколько)
       params.push(`${filter.id}=${filter.values.join(',')}`);
     });
   }
@@ -24,21 +24,29 @@ function buildReadableQuery(query: ICatalogQueryParams): string {
   return '?' + params.join('&');
 }
 
-// Функция для парсинга читаемого URL в объект запроса
+// Функция для парсинга URL в объект запроса с поддержкой старого и нового формата
 function parseReadableQuery(search: string): ICatalogQueryParams {
   const params = new URLSearchParams(search);
-  const query: ICatalogQueryParams = {};
+  let query: ICatalogQueryParams = {};
 
-  if (params.has('brands')) {
-    query.filters = [{ id: 'brands', values: [Number(params.get('brands'))] }];
-  }
-
-  if (params.has('search')) {
-    query.search = params.get('search')!;
-  }
-
-  if (params.has('sort')) {
-    query.sort = params.get('sort')!.split(',').map((id) => ({ id }));
+  // Если присутствует старый формат: ?query={"filters":[...]}
+  if (params.has('query')) {
+    try {
+      query = JSON.parse(decodeURIComponent(params.get('query')!));
+    } catch (e) {
+      console.error('Не удалось распарсить параметр query (старый формат):', e);
+    }
+  } else {
+    // Новый читаемый формат (например: ?brands=8&search=abc)
+    if (params.has('brands')) {
+      query.filters = [{ id: 'brands', values: [Number(params.get('brands'))] }];
+    }
+    if (params.has('search')) {
+      query.search = params.get('search')!;
+    }
+    if (params.has('sort')) {
+      query.sort = params.get('sort')!.split(',').map((id) => ({ id }));
+    }
   }
 
   return query;
