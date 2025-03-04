@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ICatalogQueryParams } from '@/types/catalog';
 import { useQueryStore } from '@/stores/query-store';
+import { useQueryState, parseAsInteger } from 'nuqs';
 
 // Функция для формирования читаемой строки из объекта запроса
 function buildReadableQuery(query: ICatalogQueryParams): string {
@@ -72,7 +73,10 @@ export const useQueryParams = () => {
       ? parseReadableQuery(window.location.search)
       : ({} as ICatalogQueryParams);
   const [queryParams, setQueryParams] = useState<ICatalogQueryParams>(initialQuery);
-  const [currentPage, setPageParam] = useState<number | null>(1);
+  const [currentPage, setPageParam] = useQueryState(
+    'page',
+    parseAsInteger.withDefault(1)
+  );
 
   const queryState = useQueryStore((state) => state.query);
   const updateQueryState = useQueryStore((state) => state.updateQueryState);
@@ -117,7 +121,7 @@ export const useQueryParams = () => {
     if (queryParams !== queryState) {
       updateQueryState(queryParams);
     }
-    const page = selected + 1 === 1 ? null : selected + 1;
+    const page = selected + 1 === 1 ? 1 : selected + 1;
     if (typeof window !== 'undefined') {
       window.scrollTo({ top: 0 });
     }

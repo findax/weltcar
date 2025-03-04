@@ -3,15 +3,18 @@ import { ICarsPartner } from "@/types/partner";
 import ReactPaginate from "react-paginate";
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 import { useQueryParams } from "@/hooks/useQueryParams";
+import { PAGE_SIZE } from "../page";
 
 interface IProp {
   carsListData: ICarsPartner[];
   results?: number;
 }
 
+
 export const CarsListPartner = ({carsListData, results}:IProp) => {
   const { currentPage, handlePageChange } = useQueryParams();
-  const pageCount = Math.ceil((results || 5) / 5);
+
+  const pageCount = Math.ceil((results || PAGE_SIZE) / PAGE_SIZE);
   const paddingBottomGrid = 'pb-[61.8%]';
 
   return (
@@ -50,7 +53,7 @@ export const CarsListPartner = ({carsListData, results}:IProp) => {
             }
             breakLabel={'...'}
             pageCount={pageCount}
-            forcePage={currentPage - 1}
+            forcePage={currentPage ? currentPage - 1 : 1}
             renderOnZeroPageCount={null}
             onPageChange={handlePageChange}
           />
