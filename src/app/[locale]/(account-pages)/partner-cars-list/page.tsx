@@ -13,6 +13,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { NextRoute } from '@/types/routers';
 import { useQueryParams } from '@/hooks/useQueryParams';
 
+export const PAGE_SIZE = 12
 
 const PartnerCarsListPage = () => {
   const { currentPage } = useQueryParams();
@@ -24,7 +25,7 @@ const PartnerCarsListPage = () => {
   const [partner, setPartner] = useState<IPartnerResponse>();
 
   useEffect(() => {
-    Promise.all(([getPartner(locale), getPartnerCars(currentPage as number, 12, locale)]))
+    Promise.all(([getPartner(locale), getPartnerCars(currentPage as number, PAGE_SIZE, locale)]))
       .then(([partner, carListdata]) => {
         if(partner && carListdata) {
           setPartner(partner);
