@@ -51,8 +51,10 @@ export default function SignUpPartner({
       .required('signUpPartnerSchema.files.required'),
     email: Yup.string()
       .trim()
-      .email('signUpPartnerSchema.email.invalid')
-      .required('signUpPartnerSchema.email.required'),
+      .required('signUpPartnerSchema.email.required')
+      .matches(
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'signUpPartnerSchema.email.invalid'
+      ),
     phone: Yup.string()
       .trim()
       // .matches(phoneValidationPattern, 'Invalid phone number')
@@ -144,6 +146,7 @@ export default function SignUpPartner({
           {/* ---- */}
           <FormikFile 
             name='files'
+            accept="image/jpeg, image/png, application/pdf"
             label='authorization.signUp.files.label'
             multiple
             error={errors.files}

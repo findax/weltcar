@@ -3,16 +3,19 @@ import { CarsListPartner } from "./CarsListPartner"
 
 interface IProps {
   carListData: ICarsPartner[];
+  results?: number;
 }
 
 export const CatalogPartner = ({
-  carListData
+  carListData,
+  results
 }:IProps) => {
   return (
     <div className='relative space-y-6 md:space-y-8 lg:min-h-[350px]'>
-      <div className="grid grid-cols-1 gap-4 lg:gap-5 xl:gap-6 lg:grid-cols-3 sm:grid-cols-2 mb-8 md:mb-14">
-        <CarsListPartner carsListData={carListData} />
-      </div>
+      <CarsListPartner 
+        carsListData={carListData} 
+        results={results}
+      />
     </div>
   )
 }

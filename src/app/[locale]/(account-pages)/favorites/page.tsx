@@ -73,7 +73,7 @@ const FavoritesPage = () => {
                   <div className='h-[40vh] flex justify-center items-center flex-col bg-white/50 dark:bg-neutral-800/60'>
                     <h3 className='text-2xl'>{translate('favorites.nocars.title')}</h3>
                       <ButtonPrimary className='mt-6' href={`/${locale}/catalog` as NextRoute}>
-                        {translate('favorites.nocars.addCar')}
+                        {translate('favorites.button.addCar')}
                       </ButtonPrimary>
                   </div>
                 )

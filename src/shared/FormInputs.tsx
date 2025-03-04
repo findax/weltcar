@@ -508,10 +508,11 @@ interface IPropsInitialValues {
 interface FormikFileProps {
   name: string;
   variant?: string;
+  subTitle?: string;
   label?: string;
   error?: string;
   touched?: boolean;
-  accept?: string; // MIME types or file extensions
+  accept?: string;
   multiple?: boolean;
   initialValues?: IPropsInitialValues | any | null;
   disabled?: boolean;
@@ -520,6 +521,7 @@ interface FormikFileProps {
 export const FormikFile = ({
   name,
   label = '',
+  subTitle = 'JPG, JPEG, or PNG',
   error,
   variant,
   touched,
@@ -570,7 +572,7 @@ export const FormikFile = ({
 
   const renderFiles = (form: any) => {
     if(files && files.length > 0){
-      return files.map((file, index) => (
+      return files.map((file) => (
         variant === 'photo' 
         ? 
           (
@@ -619,7 +621,7 @@ export const FormikFile = ({
                   <div className={`${variant === 'photo' ? "flex flex-wrap gap-2" : "flex flex-col gap-1"}`}>
                     {renderFiles(form)}
                   </div>
-                  <p className="text-primary-1000 dark:text-primary-400 text-sm pt-2.5">JPG, JPEG, or PNG</p>
+                  <p className="text-primary-1000 dark:text-primary-400 text-sm pt-2.5">{subTitle}</p>
                 </div>
               </div>
             </label>
