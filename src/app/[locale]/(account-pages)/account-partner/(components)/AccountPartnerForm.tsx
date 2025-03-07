@@ -11,10 +11,14 @@ import { IoMdClose } from "react-icons/io";
 import { Route } from 'next';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
+import Modal from '@/shared/Modal';
+import DeleteAccountForm from '@/components/DeleteAccountForm';
 
 export default function AccountPartnerForm({ partner }:{ partner: IPartnerResponse }) {
+  // const phoneValidationPattern = /\+38 \(0\d{2}\) \d{3}-\d{2}-\d{2}/;
   const translate = useTranslations();
   const locale = useLocale();
+  const [isDeleteAcoountModalShow, setIsDeleteAcoountModalShow] = useState(false);
   const [partnerUser, setPartnerUser] = useState(partner ? partner : null);
   const [attachedFiles, setAttachedFiles] = useState<IPartnerFileList[] | null>(partner ? partner.files : null);
   const [initialValues, setInitialValues] = useState({
@@ -36,7 +40,6 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
       });
     }
   }, [partnerUser]);
-  // const phoneValidationPattern = /\+38 \(0\d{2}\) \d{3}-\d{2}-\d{2}/;
 
   const AccountPartnerSchema = Yup.object().shape({
     companyName: Yup
@@ -80,6 +83,10 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
     }
   }
 
+  const handleDeleteAccount = () => {
+    setIsDeleteAcoountModalShow(true);
+  }
+
   const renderAttachedFiles = () => {
     if(attachedFiles && attachedFiles.length > 0) {
       return (
@@ -102,104 +109,129 @@ export default function AccountPartnerForm({ partner }:{ partner: IPartnerRespon
     }
   }
 
+
+
   return (
-    <Formik
-      enableReinitialize
-      initialValues={initialValues}
-      validationSchema={AccountPartnerSchema}
-      onSubmit={(values, { setSubmitting }) => {
-        // trim values
-        const castValues = AccountPartnerSchema.cast(values);
+    <>
+      <Formik
+        enableReinitialize
+        initialValues={initialValues}
+        validationSchema={AccountPartnerSchema}
+        onSubmit={(values, { setSubmitting }) => {
+          // trim values
+          const castValues = AccountPartnerSchema.cast(values);
 
-        const attachedFilesToRequest = attachedFiles?.map((attachedFile) => attachedFile.id);
-        const { companyName, email, phone, documents, taxNumber, } = castValues;
-        updatePartner({
-          name: companyName,
-          email,
-          phone,
-          tax_number: taxNumber,
-          files: documents,
-          attached_files: attachedFilesToRequest ? [...attachedFilesToRequest] : []
-        }, locale)
-        .then((res) => {
-          if(res){
-            setPartnerUser(res);
-            setAttachedFiles(res.files);
-            setSubmitting(false);
-          }
-        })
-        .finally(() => setSubmitting(false));
-      }}
-    >
-      {({ errors, touched, isSubmitting }) => (
-        <Form className='grid grid-cols-1 gap-7 w-full max-w-xl mt-10 md:pr-32'>
-           <FormikInput
-            disabled={partner?.is_verified}
-            name='companyName'
-            placeholder='accountPartner.form.companyName.placeholder'
-            title='accountPartner.form.companyName.label'
-            rounded='rounded-full'
-            sizeClass='h-14'
-            error={errors.companyName}
-            touched={touched.companyName}
-          />
-          {/* ---- */}
-          <FormikInput
-            disabled={partner?.is_verified}
-            name='taxNumber'
-            placeholder='accountPartner.form.taxNumber.placeholder'
-            title='accountPartner.form.taxNumber.label'
-            rounded='rounded-full'
-            sizeClass='h-14'
-            error={errors.taxNumber}
-            touched={touched.taxNumber}
-          />
-          {/* ---- */}
-          <FormikFile 
-            accept="image/jpeg, image/png"
-            disabled={partner?.is_verified}
-            initialValues={initialValues}
-            name='documents'
-            label='accountPartner.form.uploadDocuments.label'
-            multiple
-            error={errors.documents}
-            touched={touched.documents}
-          />
-          {renderAttachedFiles()}
-          {/* ---- */}
-          <FormikInput
-            disabled={partner?.is_verified}
-            name='email'
-            type='email'
-            placeholder='accountPartner.form.emailAddress.placeholder'
-            title='accountPartner.form.emailAddress.label'
-            rounded='rounded-full'
-            sizeClass='h-14'
-            error={errors.email}
-            touched={touched.email}
-          />
-          {/* ---- */}
-          <FormikPhoneNumberInput
-            disabled={partner?.is_verified}
-            title='accountPartner.form.phoneNumber.label'
-            rounded='rounded-full'
-            sizeClass='h-14'
-            error={errors.phone}
-            touched={touched.phone}
-          />
+          const attachedFilesToRequest = attachedFiles?.map((attachedFile) => attachedFile.id);
+          const { companyName, email, phone, documents, taxNumber, } = castValues;
+          updatePartner({
+            name: companyName,
+            email,
+            phone,
+            tax_number: taxNumber,
+            files: documents,
+            attached_files: attachedFilesToRequest ? [...attachedFilesToRequest] : []
+          }, locale)
+          .then((res) => {
+            if(res){
+              setPartnerUser(res);
+              setAttachedFiles(res.files);
+              setSubmitting(false);
+            }
+          })
+          .finally(() => setSubmitting(false));
+        }}
+      >
+        {({ errors, touched, isSubmitting }) => (
+          <Form className='grid grid-cols-1 gap-7 w-full max-w-xl mt-10 md:pr-32'>
+            <FormikInput
+              disabled={partner?.is_verified}
+              name='companyName'
+              placeholder='accountPartner.form.companyName.placeholder'
+              title='accountPartner.form.companyName.label'
+              rounded='rounded-full'
+              sizeClass='h-14'
+              error={errors.companyName}
+              touched={touched.companyName}
+            />
+            {/* ---- */}
+            <FormikInput
+              disabled={partner?.is_verified}
+              name='taxNumber'
+              placeholder='accountPartner.form.taxNumber.placeholder'
+              title='accountPartner.form.taxNumber.label'
+              rounded='rounded-full'
+              sizeClass='h-14'
+              error={errors.taxNumber}
+              touched={touched.taxNumber}
+            />
+            {/* ---- */}
+            <FormikFile 
+              accept="image/jpeg, image/png"
+              disabled={partner?.is_verified}
+              initialValues={initialValues}
+              name='documents'
+              label='accountPartner.form.uploadDocuments.label'
+              multiple
+              error={errors.documents}
+              touched={touched.documents}
+            />
+            {renderAttachedFiles()}
+            {/* ---- */}
+            <FormikInput
+              disabled={partner?.is_verified}
+              name='email'
+              type='email'
+              placeholder='accountPartner.form.emailAddress.placeholder'
+              title='accountPartner.form.emailAddress.label'
+              rounded='rounded-full'
+              sizeClass='h-14'
+              error={errors.email}
+              touched={touched.email}
+            />
+            {/* ---- */}
+            <FormikPhoneNumberInput
+              disabled={partner?.is_verified}
+              title='accountPartner.form.phoneNumber.label'
+              rounded='rounded-full'
+              sizeClass='h-14'
+              error={errors.phone}
+              touched={touched.phone}
+            />
 
-          { !partner.is_verified &&
-            <ButtonPrimary
-              type='submit'
-              disabled={isSubmitting}
-              loading={isSubmitting}
-              className='text-base lg:text-lg w-full sm:w-40'
+            { !partner.is_verified &&
+              <ButtonPrimary
+                type='submit'
+                disabled={isSubmitting}
+                loading={isSubmitting}
+                className='text-base lg:text-lg w-full sm:w-40'
+              >
+                {translate('accountPartner.form.buttn.update')}
+              </ButtonPrimary>
+            }
+
+            <button 
+              className="flex items-start py-2 px-4 xl:px-5 w-fit rounded-full dark:hover:text-secondary-1000 hover:text-primary-650 text-lg text-primary-600 dark:text-secondary-950"
+              onClick={handleDeleteAccount}
+              type='button'
             >
-              {translate('accountPartner.form.buttn.update')}
-            </ButtonPrimary>
-          }
-        </Form>
-      )}
-    </Formik>
+              Delete account
+            </button>
+          </Form>
+        )}
+      </Formik>
+
+      <Modal
+        title={'Delete account'}
+        isModalOpen={isDeleteAcoountModalShow}
+        setIsModalOpen={setIsDeleteAcoountModalShow}
+      >
+        <div className='w-full'>
+          <p className='mb-8 text-center xl:text-lg dark:text-white text-black lg:max-w-3xl'>
+            {translate('deleteAccount.modal.text.delete.description')}
+          </p>
+          <DeleteAccountForm onClickCancel={setIsDeleteAcoountModalShow} />
+        </div>
+      </Modal>
+    </>
   );
 }

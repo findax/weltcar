@@ -148,3 +148,25 @@ export const logout = () => {
   localStorage.clear();
   window.location.href = '/';
 };
+
+interface DeleteProps {
+  password: string;
+}
+
+export const deleteAccount = async ({ password }: DeleteProps) => {
+  return new Promise((resolve) => {
+    api
+      .post(`/api/user/delete`, { password })
+      .then((res) => {
+        resolve(res.data.data);
+      })
+      .catch((err) => {
+        if (err.response?.data.message) {
+          toast.error(err.response.data.message);
+        } else {
+          toast.error('Something went wrong!');
+        }
+        resolve(false);
+      });
+  });
+};

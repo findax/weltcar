@@ -46,6 +46,7 @@ module.exports = {
           400: customColors('--c-primary-400'),
           500: customColors('--c-primary-500'),
           600: customColors('--c-primary-600'),
+          650: customColors('--c-primary-650'),
           700: customColors('--c-primary-700'),
           800: customColors('--c-primary-800'),
           900: customColors('--c-primary-900'),
@@ -64,6 +65,7 @@ module.exports = {
           800: customColors('--c-secondary-800'),
           900: customColors('--c-secondary-900'),
           950: customColors('--c-secondary-950'),
+          1000: customColors('--c-secondary-1000'),
         },
         neutral: {
           50: customColors('--c-neutral-50'),
