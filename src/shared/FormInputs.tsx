@@ -532,6 +532,7 @@ export const FormikFile = ({
 }: FormikFileProps) => {
   const translate = useTranslations();
   const [files, setFiles] = useState<File[] | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     initialValues && setFiles(null);
@@ -564,6 +565,10 @@ export const FormikFile = ({
       } else {
         setFiles(null);
         form.setFieldValue(name, null);
+      }
+
+      if (fileInputRef.current) {
+        fileInputRef.current.value = ""; // Очистка input, чтобы можно было загружать тот же файл
       }
     }else {
       setFiles(null);
@@ -627,6 +632,7 @@ export const FormikFile = ({
             </label>
             <input 
               disabled={disabled}
+              ref={fileInputRef}
               style={{ display: 'none' }}
               hidden
               type='file'
