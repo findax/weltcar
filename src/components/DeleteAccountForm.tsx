@@ -7,6 +7,7 @@ import { FormikPasswordInput } from '@/shared/FormInputs';
 import { useTranslations } from 'next-intl';
 import { deleteAccount, logout } from '@/api/auth';
 import { toast } from 'react-toastify';
+import { getCountries } from '@/api/countries';
 
 interface IProps {
   onClickCancel: (isBack: boolean) => void;
@@ -34,17 +35,16 @@ export default function DeleteAccountForm({
           password: '',
         }}
         validationSchema={DeletePasswordSchema}
-        onSubmit={async (values, { setSubmitting }) => {
+        onSubmit={ (values, { setSubmitting }) => {
           // trim values
           const castValues = DeletePasswordSchema.cast(values);
 
-          const result = await deleteAccount(castValues);
-
-          if (result) {
-            toast.success(translate("deleteAccount.toast.success.delete.title"));
-            logout();
-          }
-          
+          deleteAccount(castValues)
+            .finally(() => {
+              handleClickCancel();
+              toast.success(translate("deleteAccount.toast.success.delete.title"));
+              logout(); 
+          });
         }}
       >
         {({ errors, touched }) => (
