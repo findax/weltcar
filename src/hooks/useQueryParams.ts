@@ -89,17 +89,23 @@ export const useQueryParams = () => {
   //  3) Делаем replaceState
   useEffect(() => {
     if (typeof window === 'undefined') return;
-
-    let url = buildReadableQuery(queryParams);
-
-    // Если нужно всегда видеть page=..., уберите проверку `!== 1`
+  
+    // Стартуем с pathname, без query
+    let baseUrl = window.location.pathname;
+  
+    // Формируем query-строку (она может быть пустой)
+    let queryString = buildReadableQuery(queryParams);
+  
+    // Добавляем &page=..., если текущая страница не 1
     if (currentPage !== 1) {
-      const joiner = url.includes('?') ? '&' : '?';
-      url += `${joiner}page=${currentPage}`;
+      const joiner = queryString.includes('?') ? '&' : '?';
+      queryString += `${joiner}page=${currentPage}`;
     }
-
-    window.history.replaceState(null, '', url);
-  }, [queryParams, currentPage]);
+  
+    // Если queryString в итоге осталась пустой, replaceState убирает вообще все параметры
+    window.history.replaceState(null, '', baseUrl + queryString);
+  }, [queryParams]);
+  
 
   function updateParams(newQueryState: ICatalogQueryParams) {
     // Удаляем пустые filters
