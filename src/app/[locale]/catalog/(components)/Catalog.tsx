@@ -50,6 +50,8 @@ export default function Catalog() {
       });
   }, [currentPage, queryState]);
 
+  console.log(queryState)
+
   useEffect(() => {
     updateQueryState(queryParams)
   }, [])
