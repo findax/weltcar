@@ -67,12 +67,11 @@ export default function PriceSidebar({
   return (
     <div className='block flex-grow mt-14 lg:mt-0'>
       <div className='detailsSectionSidebar__wrap sticky top-28 bg-white dark:bg-neutral-900 !hidden lg:!flex'>
-        {status_extra && (
+        {isShowPartnerLogo && (
           <PartnerLogoSidebar 
             partnerPhone={partnerPhone} 
             partnerName={partnerName} 
             translate={translate}
-            status_extra={status_extra || null}
           />
         )}
 
@@ -85,7 +84,7 @@ export default function PriceSidebar({
           </span>
         </div>
 
-        {!isShowPartnerLogo && status_extra && 
+        {status_extra && 
           <div className='flex gap-1'>
             <span className='font-medium md:text-lg dark:text-neutral-400 text-neutral-1100'>Available {status_extra}</span>
           </div>

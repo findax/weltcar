@@ -118,7 +118,7 @@ export default function PartnerCarsForm({
         .of(
           Yup.mixed<File>()
             .test('fileType', 'partnerCarsSchema.photos.unsupported', (value) => {
-              return value && SUPPORTED_FORMATS.includes(value.type);
+              if(value) return SUPPORTED_FORMATS.includes(value.type);
             })
             .required('partnerCarsSchema.photos.required')
         )
@@ -133,7 +133,7 @@ export default function PartnerCarsForm({
             .required('partnerCarsSchema.photosTwo.required')
         )
         .max(20, 'partnerCarsSchema.photosTwo.max')
-        .required('partnerCarsSchema.photosTwo.unsupported')
+        .required('partnerCarsSchema.photosTwo.required')
       ),
     description: Yup
       .string()
@@ -148,15 +148,6 @@ export default function PartnerCarsForm({
       .string()
       .trim()
       .required('partnerCarsSchema.outerColor.required'),
-    documents: Yup.array()
-      .of(
-        Yup.mixed<File>()
-          .test('fileType', 'partnerCarsSchema.documents.unsupported', (value) => {
-            return value && DOCUMENTS_SUPPORTED_FORMATS.includes(value.type);
-          })
-          .required('partnerCarsSchema.documents.required')
-      )
-      .max(20, 'partnerCarsSchema.documents.max'),
     country: CountrySchema.required('partnerCarsSchema.country.required'),
     postCode: Yup
       .string()
@@ -166,7 +157,7 @@ export default function PartnerCarsForm({
       .string()
       .trim()
       .max(1000, 'partnerCarsSchema.commentary.required')
-  });
+  })
 
   const handleDeleteAttachedPhotos = (event: React.MouseEvent<HTMLButtonElement>, photo: IPartnerPhotoList) => {
     event.preventDefault();
@@ -413,7 +404,6 @@ export default function PartnerCarsForm({
           const castValues = PartnerCarsSchema.cast(values);
 
           handleCheckFetch(car, castValues, setSubmitting, resetForm);
-
         }}
       >
         {({ errors, touched, isSubmitting }) => (
