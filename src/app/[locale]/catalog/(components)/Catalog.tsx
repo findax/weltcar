@@ -13,6 +13,7 @@ import FiltersCatalog from '@/components/catalogs/FiltersCatalog';
 import SortPanelCatalog from '@/components/catalogs/SortPanelCatalog';
 import CarListCatalog from '@/components/catalogs/CarListCatalog';
 import { useLocale, useTranslations } from 'next-intl';
+import { PAGE_SIZE } from '../../(account-pages)/partner-cars-list/page';
 
 export default function Catalog() {
   const [isFirstLoading, setFirstLoading] = useState(true);
@@ -29,10 +30,12 @@ export default function Catalog() {
   const { queryParams, currentPage, isFiltersVisible, setFiltersVisible } =
     useQueryParams();
 
+  const updateQueryState = useQueryStore((state) => state.updateQueryState);
+
   useEffect(() => {
     const query = isFirstLoading ? queryParams : queryState;
     setLoading(true);
-    getCarsList(currentPage, 10, locale, query as ICatalogQueryParams)
+    getCarsList(currentPage, PAGE_SIZE, locale, query as ICatalogQueryParams)
       .then((data) => {
         if (data) {
           setCatalogData(data as ICatalog);
@@ -46,6 +49,10 @@ export default function Catalog() {
         isFirstLoading && setFirstLoading(false);
       });
   }, [currentPage, queryState]);
+
+  useEffect(() => {
+    updateQueryState(queryParams)
+  }, [])
 
   function getActiveFiltersCount(queryParams: ICatalogQueryParams) {
     if (queryParams?.filters) {
