@@ -37,7 +37,8 @@ export default function FindCarForm({
   const [isSeuccessRequest, setIsSuccessRequest] = useState(false);
   const user = useUserStore((state) => state.user);
   const locale = useLocale();
-  const phoneValidationPattern = /\+?[\d]+/;
+  const phoneValidationPattern = /^\+\d{1,3} \d{3} \d{7}$/;
+  const emailValidationPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   const initialValueDefault = {
     name: '',
@@ -125,7 +126,7 @@ export default function FindCarForm({
       .required('findCarSchema.name.required'),
     email: Yup.string()
       .trim()
-      .email('findCarSchema.email.invalid')
+      .matches(emailValidationPattern, 'findCarSchema.email.invalid')
       .required('findCarSchema.email.required'),
     phone: Yup.string()
       .trim()

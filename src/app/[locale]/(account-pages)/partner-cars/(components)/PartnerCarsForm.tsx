@@ -17,7 +17,6 @@ import { Route } from 'next';
 import { toast } from 'react-toastify';
 import { useLocale, useTranslations } from 'next-intl';
 
-const DOCUMENTS_SUPPORTED_FORMATS = ['image/png','image/jpeg','image/jpg','application/pdf'];
 
 const ModelSchema = Yup.object().shape({
   id: Yup.number().required('partnerCarsSchema.model.idRequired'),
@@ -94,6 +93,8 @@ export default function PartnerCarsForm({
   });
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+
+  const buttonClass = !partner.is_verified ? '!bg-gray-600 hover:bg-gray-600 text-white' : '';
 
   const PartnerCarsSchema = Yup.object().shape({
     model: ModelSchema.required('partnerCarsSchema.model.required'),
@@ -550,6 +551,7 @@ export default function PartnerCarsForm({
             <ButtonPrimary
               type='submit'
               disabled={!!partner.is_verified ? isSubmitting : true}
+              className={buttonClass}
               loading={isSubmitting}
             >
               {translate('accountPartnerCars.form.button.continue')}
