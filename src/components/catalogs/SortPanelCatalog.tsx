@@ -33,13 +33,13 @@ const SortPanelCatalog = ({
 }: SortPanelProps) => {
   const locale = useLocale();
   const [fileFormat, setFileFormat] = useState<string>('pdf');
+  const [selectedSort, setSelectedSort] = useState<string>('latest');
   const { queryParams, handleSortChange } = useQueryParams();
 
-  const isSelectorShortWidth =
-    (queryParams && queryParams.sort && queryParams.sort[0].id === 'oldest') !==
-    false;
+  const isSelectorShortWidth = (queryParams && queryParams.sort && queryParams.sort[0].id === 'oldest') !== false;
 
   function handleSortSelectChange(select: HTMLSelectElement) {
+    const value = select.value;
     let tempOption = document.createElement('option');
     tempOption.textContent = select.selectedOptions[0].textContent;
 
@@ -52,6 +52,7 @@ const SortPanelCatalog = ({
     select.style.width = `${+tempSelect.clientWidth + 4}px`;
     tempSelect.remove();
 
+    // setSelectedSort(value);
     handleSortChange(select.value);
   }
 
@@ -127,8 +128,9 @@ const SortPanelCatalog = ({
           <label className='mb-0 clr-neutral-500 flex-grow whitespace-nowrap'>
             {translate('download.sortBy.title')}
             <select
-              className={`${isSelectorShortWidth ? 'w-[105px]' : ''} pl-4 pr-8 py-2 bg-transparent cursor-pointer border-0 focus:ring-indigo-500 focus:border-indigo-500 rounded-full`}
+              className={`${isSelectorShortWidth ? 'w-[105px]' : ''} pl-4 pr-8 py-2 bg-transparent cursor-pointer border-0 focus:ring-0 rounded-full`}
               defaultValue={`${(queryParams && queryParams.sort && queryParams.sort[0].id) || 'latest'}`}
+              // value={selectedSort}
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                 handleSortSelectChange(e.target)
               }
