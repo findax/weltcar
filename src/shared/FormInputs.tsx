@@ -111,6 +111,8 @@ export const Checkbox = ({
 interface RadioButtonProps {
   className?: string;
   label?: string;
+  borderStyle?: string;
+  sizeStyle?: string;
   name: string;
   checked?: boolean;
   onChange: () => void;
@@ -119,6 +121,8 @@ interface RadioButtonProps {
 export const RadioButton = ({
   className = '',
   label = '',
+  borderStyle = 'rounded-full',
+  sizeStyle = 'w-6 h-6',
   name,
   checked,
   onChange,
@@ -139,7 +143,7 @@ export const RadioButton = ({
       />
        <span
         className={`
-          w-6 h-6 flex items-center justify-center border-2 border-primary-600 dark:border-primary-950 rounded-full 
+          flex items-center justify-center border-2 border-primary-600 dark:border-primary-950 ${borderStyle} ${sizeStyle}
           transition-all duration-200
         `}
       >

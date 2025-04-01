@@ -535,6 +535,13 @@
   "cookieAlert.text.description": " We use cookies to improve your experience and for ads personalisation, by continuing to use this website, you are agreeing to our",
   "cookieAlert.link.policy": "cookie policy",
   "cookieAlert.button.accept": "Accept",
+
+  "lookingFor.title.looking": "We are looking for",
+  "lookingFor.subtitle.updating": "Here is the live updating list of the vehicles, we are currently looking for. Feel free to offer us.",
+  "lookingFor.subtitle.looking": "We are looking for",
+  "lookingFor.filter.button.filters": "Filter",
+  "lookingFor.filter.button.apply": "Apply",
+
   "footer.title.weltcarTo": "WeltCar - Your Gateway to Luxury Automotive Excellence",
   "footer.title.luxury": "Luxury Automotive Excellence",
   "footer.quickLink.title": "Quick Link",
