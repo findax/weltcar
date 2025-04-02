@@ -15,7 +15,6 @@ export default function LookingForHero({
       <div>
         <h1 className='text-4xl lg:text-6xl xl:text-[80px] font-bold text-neutral-1050 dark:text-white'>
           {translate('lookingFor.title.looking')}
-          We are looking for
         </h1>
         <span className='block lg:w-[480px] mt-8 lg:text-lg text-neutral-500 dark:text-neutral-400'>
           {translate('lookingFor.subtitle.updating')}
