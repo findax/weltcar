@@ -320,19 +320,19 @@ const PageLookingFor = () => {
         </div>
 
         <table className="hidden md:block table-auto w-full text-left border-collapse">
-          <thead className="relative w-full border-b dark:border-neutral-1100 border-neutral-200 dark:bg-[#1C2B2D] bg-bg-[linear-gradient(to-right,_rgba(188,202,204,0),_rgba(188,202,204,1),_rgba(188,202,204,1),_rgba(188,202,204,0))] dark:text-secondary-950 text-primary-600 md:text-lg text-xl">
+          <thead className="relative w-full border-b dark:border-neutral-1100 border-neutral-200 dark:bg-[#1C2B2D] dark:text-secondary-950 text-primary-600 md:text-lg text-xl">
             <tr>
               <th className="md:pr-2 md:py-2 lg:py-4 border-r dark:border-neutral-1100 border-neutral-200 ">Date</th>
-              <th className="md:px-2 md:py-2 lg:px-5 lg:py-4 border-r dark:border-neutral-1100 border-neutral-200 ">Manuf. <br /> year</th>
-              <th className="md:px-2 md:py-2 lg:px-5 lg:py-4 border-r w-[160px] dark:border-neutral-1100 border-neutral-200  border-neutral-200">Brand</th>
-              <th className="md:px-2 md:py-2 lg:px-5 lg:py-4 border-r w-[260px] dark:border-neutral-1100 border-neutral-200 ">Model</th>
+              <th className="md:px-2 md:py-2 lg:px-5 lg:py-4 border-r xl:w-[120px] dark:border-neutral-1100 border-neutral-200 ">Manuf. <br /> year</th>
+              <th className="md:px-2 md:py-2 lg:px-5 lg:py-4 border-r xl:w-[160px] dark:border-neutral-1100 border-neutral-200  border-neutral-200">Brand</th>
+              <th className="md:px-2 md:py-2 lg:px-5 lg:py-4 border-r xl:w-[260px] dark:border-neutral-1100 border-neutral-200 ">Model</th>
               <th className="md:px-2 md:py-2 lg:px-5 lg:py-4 border-r dark:border-neutral-1100 border-neutral-200 ">Exterior <br /> Color</th>
               <th className="md:px-2 md:py-2 lg:px-5 lg:py-4 border-r dark:border-neutral-1100 border-neutral-200 ">Interior <br /> Color</th>
-              <th className="md:px-2 md:py-2 lg:px-5 lg:py-4 md:w-[40px] w-[80px] border-r dark:border-neutral-1100 border-neutral-200 ">Qty</th>
+              <th className="md:px-2 md:py-2 lg:px-5 lg:py-4 md:w-[40px] xl:w-[80px] border-r dark:border-neutral-1100 border-neutral-200 ">Qty</th>
               <th className="md:px-2 md:py-2 lg:px-5 lg:py-4">Comments</th>
             </tr>
           </thead>
-          <tbody className="dark:text-white w-full text-neutral-500 md:text-sm lg:text-lg">
+          <tbody className="dark:text-white w-full text-neutral-500 md:text-sm lg:text-base xl:text-lg">
             {filteredCarList.map((car, index) => (
               <tr key={index} className="border-t dark:border-neutral-1100 border-neutral-200 ">
                 {Object.values(car).map((value:any, index) => (
