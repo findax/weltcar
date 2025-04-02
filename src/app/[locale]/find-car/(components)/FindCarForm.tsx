@@ -277,7 +277,7 @@ export default function FindCarForm({
               touched={touched.requestTime?.name}
             />
             {/* ---- */}
-            <div className='w-full md:absolute md:-bottom-[14px] md:left-0'>
+            <div className='w-full md:absolute md:bottom-[0px] md:left-0'>
               <FormikTextarea
                 name='additional'
                 placeholder='findCar.form.additional.placeholder'
@@ -290,7 +290,7 @@ export default function FindCarForm({
               />
             </div>
 
-            <div className='md:absolute md:-bottom-[95px] md:right-0 md:w-[32%] flex items-end'>
+            <div className='md:absolute md:-bottom-[80px] md:right-0 md:w-[32%] flex items-end'>
               <ButtonPrimary
                 type='submit'
                 disabled={isSubmitting}

@@ -42,11 +42,11 @@ const PageFindCar = () => {
         className='hidden lg:block bg-[#DFE172] opacity-[0.30] lg:-right-[145px] lg:bottom-[20%]' 
       />
 
-      <div className='container my-12 xl:my-20'>
+      <div className='container mt-12 mb-28 xl:mt-20 xl:mb-32'>
         <FindCarHero translate={translate} />
       </div>
 
-      <div className='flex relative sm:bottom-0 sm:h-full -bottom-[30px] h-72 justify-center w-full md:pt-12 xl:pt-0'>
+      <div className='hidden relative sm:bottom-0 sm:h-full -bottom-[30px] h-72 justify-center w-full md:pt-12 xl:pt-0'>
         <Image 
           src={isDarkMode ? carsBackgroundDarkImg : carsBackgroundLightImg } 
           alt='cars image'

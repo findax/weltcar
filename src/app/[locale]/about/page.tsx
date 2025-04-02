@@ -85,7 +85,7 @@ const PageAbout = () => {
           <SectionSubscribe translate={translate}/>
         </div>
       </div>
-      <div className='flex relative sm:bottom-0 sm:h-full -bottom-[30px] h-72 justify-center w-full'>
+      <div className='hidden relative sm:bottom-0 sm:h-full -bottom-[30px] h-72 justify-center w-full'>
         <Image 
           src={isDarkMode ? carsBackgroundDarkImg : carsBackgroundLightImg } 
           alt='cars image'
