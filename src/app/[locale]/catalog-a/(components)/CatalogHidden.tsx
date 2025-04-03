@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import LoadingSpinner from '@/shared/LoadingSpinner';
 import ErrorComponent from '@/components/ErrorComponent';
 import SideMenuWrapper from '@/shared/SideMenuWrapper';
-import { getCarsList } from '@/api/cars';
+import { getCarsListCatalogHidden } from '@/api/cars';
 import { ICatalog, ICatalogQueryParams } from '@/types/catalog';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useQueryParams } from '@/hooks/useQueryParams';
@@ -35,9 +35,10 @@ export default function CatalogHidden() {
   useEffect(() => {
     const query = isFirstLoading ? queryParams : queryState;
     setLoading(true);
-    getCarsList(currentPage, PAGE_SIZE, locale, query as ICatalogQueryParams)
+    getCarsListCatalogHidden(currentPage, PAGE_SIZE, locale)
       .then((data) => {
         if (data) {
+          console.log(data)
           setCatalogData(data as ICatalog);
           getActiveFiltersCount(query as ICatalogQueryParams);
         } else {
@@ -111,7 +112,7 @@ export default function CatalogHidden() {
           )}
         </div>
         <div className='col-span-12 lg:col-span-8'>
-          {/* <SortPanelCatalog
+          <SortPanelCatalog
             sortData={catalogData?.sort || []}
             results={catalogData?.meta.total || 0}
             isGrid={isGrid}
@@ -126,7 +127,7 @@ export default function CatalogHidden() {
             isGrid={isGrid}
             results={catalogData?.meta.total || 0}
             translate={translate}
-          /> */}
+          />
         </div>
       </div>
     </div>
