@@ -42,7 +42,7 @@ const PageFindCar = () => {
         className='hidden lg:block bg-[#DFE172] opacity-[0.30] lg:-right-[145px] lg:bottom-[20%]' 
       />
 
-      <div className='container mt-12 mb-28 xl:mt-20 xl:mb-32'>
+      <div className='container mt-12 mb-28 xl:mt-16 xl:mb-32'>
         <FindCarHero translate={translate} />
       </div>
 

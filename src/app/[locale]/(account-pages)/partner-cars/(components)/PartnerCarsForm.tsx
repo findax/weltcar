@@ -408,13 +408,15 @@ export default function PartnerCarsForm({
         }}
       >
         {({ errors, touched, isSubmitting }) => (
-          <Form className='grid grid-cols-1 gap-7 w-full max-w-xl mt-10 md:mt-0 md:pl-16'>
+          <Form className='grid grid-cols-1 gap-7'>
             <FormikInputCarSelector
               disabled={car?.is_verified}
               name='model'
               placeholder='accountPartnerCars.form.modelName.placeholder'
               title='accountPartnerCars.form.modelName.label'
               options={models}
+              rounded='rounded-full'
+              sizeClass='h-14'
               error={errors.model?.brand_name}
               touched={touched.model?.brand_name}
             />
@@ -424,6 +426,8 @@ export default function PartnerCarsForm({
               name='specification'
               placeholder='accountPartnerCars.form.specification.placeholder'
               title='accountPartnerCars.form.specification.label'
+              rounded='rounded-full'
+              sizeClass='h-14'
               error={errors.specification}
               touched={touched.specification}
             />
@@ -434,6 +438,8 @@ export default function PartnerCarsForm({
               name='year'
               placeholder='accountPartnerCars.form.year.placeholder'
               title='accountPartnerCars.form.year.label'
+              rounded='rounded-full'
+              sizeClass='h-14'
               error={errors.year}
               touched={touched.year}
             />
@@ -443,6 +449,8 @@ export default function PartnerCarsForm({
               name='vin'
               placeholder='accountPartnerCars.form.vin.placeholder'
               title='accountPartnerCars.form.vin.label'
+              rounded='rounded-full'
+              sizeClass='h-14'
               error={errors.vin}
               touched={touched.vin}
             />
@@ -452,6 +460,8 @@ export default function PartnerCarsForm({
               name='price'
               placeholder='accountPartnerCars.form.price.placeholder'
               title='accountPartnerCars.form.price.label'
+              rounded='rounded-full'
+              sizeClass='h-14'
               error={errors.price}
               touched={touched.price}
             />
@@ -485,6 +495,8 @@ export default function PartnerCarsForm({
               name='outerColor'
               placeholder='accountPartnerCars.form.externalColor.placeholder'
               title='accountPartnerCars.form.externalColor.label'
+              rounded='rounded-full'
+              sizeClass='h-14'
               error={errors.outerColor}
               touched={touched.outerColor}
             />
@@ -494,6 +506,8 @@ export default function PartnerCarsForm({
               name='innerColor'
               placeholder='accountPartnerCars.form.insideColor.placeholder'
               title='accountPartnerCars.form.insideColor.label'
+              rounded='rounded-full'
+              sizeClass='h-14'
               error={errors.innerColor}
               touched={touched.innerColor}
             />
@@ -518,6 +532,8 @@ export default function PartnerCarsForm({
                   name='country'
                   placeholder='accountPartnerCars.form.carLocation.placeholder'
                   title='accountPartnerCars.form.carLocation.label'
+                  rounded='rounded-full'
+                  sizeClass='h-14'
                   options={countries}
                   error={errors.country?.name}
                   touched={touched.country?.name}
@@ -530,6 +546,8 @@ export default function PartnerCarsForm({
                   name='postCode'
                   placeholder='accountPartnerCars.form.postCode.placeholder'
                   title='accountPartnerCars.form.postCode.label'
+                  rounded='rounded-full'
+                  sizeClass='h-14'
                   error={errors.postCode}
                   touched={touched.postCode}
                 />

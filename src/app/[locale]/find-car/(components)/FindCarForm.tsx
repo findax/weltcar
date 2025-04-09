@@ -38,7 +38,7 @@ export default function FindCarForm({
   const user = useUserStore((state) => state.user);
   const locale = useLocale();
   const phoneValidationPattern = /^\+\d{1,3} \d{3} \d{7}$/;
-  const emailValidationPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const emailValidationPattern = /^(?!\.)(?!.*\.\.)[a-zA-Z0-9._%+-]{1,64}(?<!\.)@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   const initialValueDefault = {
     name: '',
@@ -277,7 +277,7 @@ export default function FindCarForm({
               touched={touched.requestTime?.name}
             />
             {/* ---- */}
-            <div className='w-full md:absolute md:bottom-[0px] md:left-0'>
+            <div className='w-full md:absolute md:bottom-[10px] lg:bottom-[70px] md:left-0'>
               <FormikTextarea
                 name='additional'
                 placeholder='findCar.form.additional.placeholder'
@@ -290,7 +290,7 @@ export default function FindCarForm({
               />
             </div>
 
-            <div className='md:absolute md:-bottom-[80px] md:right-0 md:w-[32%] flex items-end'>
+            <div className='md:absolute md:-bottom-[80px] lg:-bottom-[20px] md:right-0 md:w-[32%] flex items-end'>
               <ButtonPrimary
                 type='submit'
                 disabled={isSubmitting}
