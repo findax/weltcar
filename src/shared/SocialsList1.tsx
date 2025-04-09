@@ -11,10 +11,10 @@ export interface SocialsList1Props {
 }
 
 const socials: SocialType[] = [
-  { name: 'Facebook', icon: facebookImg, href: '#' },
+  { name: 'Facebook', icon: facebookImg, href: 'https://www.facebook.com/weltcar.de' },
   { name: 'Twitter', icon: twitterImg, href: '#' },
   { name: 'Youtube', icon: youTubeImg, href: '#' },
-  { name: 'Instagram', icon: instagramImg, href: 'https://www.instagram.com/weltcar.de' },
+  { name: 'Instagram', icon: instagramImg, href: 'https://www.instagram.com/weltcar.de/' },
 ];
 
 const SocialsList1: FC<SocialsList1Props> = ({ className = 'space-y-2.5' }) => {

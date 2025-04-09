@@ -13,9 +13,9 @@ export interface SocialsListProps {
 
 const socialsDemo: SocialType[] = [
   { name: 'Youtube', icon: youTubeImg, href: '#' },
-  { name: 'Facebook', icon: facebookImg, href: '#' },
+  { name: 'Facebook', icon: facebookImg, href: 'https://www.facebook.com/weltcar.de' },
   { name: 'Twitter', icon: twitterImg, href: '#' },
-  { name: 'Instagram', icon: instagramImg, href: 'https://www.instagram.com/weltcar.de' },
+  { name: 'Instagram', icon: instagramImg, href: 'https://www.instagram.com/weltcar.de/' },
 ];
 
 const SocialsList = ({
