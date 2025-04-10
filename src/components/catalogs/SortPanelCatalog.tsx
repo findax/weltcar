@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   ListBulletIcon,
   Squares2X2Icon,
@@ -11,6 +11,7 @@ import { ButtonPrimary } from '@/shared/Buttons';
 import { Route } from '@/types/routers';
 import { useLocale } from 'next-intl';
 import { getPdfFile } from '@/api/files';
+import { usePathname } from 'next/navigation';
 
 interface SortPanelProps {
   sortData: ISort[];
@@ -32,10 +33,13 @@ const SortPanelCatalog = ({
   translate
 }: SortPanelProps) => {
   const locale = useLocale();
+  const pathname = usePathname();
   const [fileFormat, setFileFormat] = useState<string>('pdf');
   const [selectedSort, setSelectedSort] = useState<string>('latest');
   const { queryParams, handleSortChange } = useQueryParams();
 
+  const isCatalogAPage = useMemo(() => pathname.split('/').pop() === 'catalog-a', [pathname]);
+  const buttonStylesCatalogA = isCatalogAPage ? 'bg-[#f0ad4e] hover:bg-[#ec971f]' : '';
   const isSelectorShortWidth = (queryParams && queryParams.sort && queryParams.sort[0].id === 'oldest') !== false;
 
   function handleSortSelectChange(select: HTMLSelectElement) {
@@ -89,7 +93,7 @@ const SortPanelCatalog = ({
             </select>
             <ButtonPrimary
               onClick={() => handleExportClick(fileFormat)}
-              className='!py-2 mx-2'
+              className={`!py-2 mx-2 ${buttonStylesCatalogA}`}
             >
               <span className='mr-2'>{translate('download.button.download')}</span>
               <DocumentArrowDownIcon className='w-6' />
