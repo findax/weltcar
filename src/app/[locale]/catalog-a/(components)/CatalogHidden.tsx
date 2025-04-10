@@ -35,10 +35,9 @@ export default function CatalogHidden() {
   useEffect(() => {
     const query = isFirstLoading ? queryParams : queryState;
     setLoading(true);
-    getCarsListCatalogHidden(currentPage, PAGE_SIZE, locale)
+    getCarsListCatalogHidden(currentPage, PAGE_SIZE, locale, query as ICatalogQueryParams)
       .then((data) => {
         if (data) {
-          console.log(data)
           setCatalogData(data as ICatalog);
           getActiveFiltersCount(query as ICatalogQueryParams);
         } else {

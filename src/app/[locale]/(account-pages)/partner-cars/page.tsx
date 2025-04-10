@@ -64,7 +64,7 @@ const PartnerCarsPage = () => {
       <div className='relative space-y-6 md:space-y-8 lg:min-h-[350px]'>
         {/* HEADING */}
         <h2 className='text-3xl font-semibold'>{translate('accountPartnerCars.title')}</h2>
-        <div className='flex flex-col md:flex-row'>
+        <div className='w-full '>
           {partner && <PartnerCarsForm partnerCar={partnerCar} partner={partner} />}
         </div>
         <Image
