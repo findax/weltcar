@@ -111,6 +111,8 @@ export const Checkbox = ({
 interface RadioButtonProps {
   className?: string;
   label?: string;
+  borderStyle?: string;
+  sizeStyle?: string;
   name: string;
   checked?: boolean;
   onChange: () => void;
@@ -119,6 +121,8 @@ interface RadioButtonProps {
 export const RadioButton = ({
   className = '',
   label = '',
+  borderStyle = 'rounded-full',
+  sizeStyle = 'w-6 h-6',
   name,
   checked,
   onChange,
@@ -139,7 +143,7 @@ export const RadioButton = ({
       />
        <span
         className={`
-          w-6 h-6 flex items-center justify-center border-2 border-primary-600 dark:border-primary-950 rounded-full 
+          flex items-center justify-center border-2 border-primary-600 dark:border-primary-950 ${borderStyle} ${sizeStyle}
           transition-all duration-200
         `}
       >
@@ -821,7 +825,7 @@ export const FormikInputCarSelector = ({
           disabled={disabled}
           type='button'
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-          className={`border text-md text-neutral-500 block w-full border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl font-normal h-11 px-4 py-3 text-left flex items-center justify-between`}
+          className={`border ${sizeClass} ${rounded} text-md text-neutral-500 block w-full border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 rounded-2xl font-normal h-11 px-4 py-3 text-left flex items-center justify-between`}
         >
           {values[name]?.brand_name.length > 0 
             ? ( <p className='text-black dark:text-neutral-200'>{`[${values[name]?.brand_name}] ${values[name]?.model_name}`}</p> ) 

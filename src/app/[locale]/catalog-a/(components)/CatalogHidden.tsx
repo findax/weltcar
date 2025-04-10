@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import LoadingSpinner from '@/shared/LoadingSpinner';
 import ErrorComponent from '@/components/ErrorComponent';
 import SideMenuWrapper from '@/shared/SideMenuWrapper';
-import { getCarsList } from '@/api/cars';
+import { getCarsListCatalogHidden } from '@/api/cars';
 import { ICatalog, ICatalogQueryParams } from '@/types/catalog';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useQueryParams } from '@/hooks/useQueryParams';
@@ -15,7 +15,7 @@ import CarListCatalog from '@/components/catalogs/CarListCatalog';
 import { useLocale, useTranslations } from 'next-intl';
 import { PAGE_SIZE } from '../../(account-pages)/partner-cars-list/page';
 
-export default function Catalog() {
+export default function CatalogHidden() {
   const [isFirstLoading, setFirstLoading] = useState(true);
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
@@ -35,7 +35,7 @@ export default function Catalog() {
   useEffect(() => {
     const query = isFirstLoading ? queryParams : queryState;
     setLoading(true);
-    getCarsList(currentPage, PAGE_SIZE, locale, query as ICatalogQueryParams)
+    getCarsListCatalogHidden(currentPage, PAGE_SIZE, locale, query as ICatalogQueryParams)
       .then((data) => {
         if (data) {
           setCatalogData(data as ICatalog);

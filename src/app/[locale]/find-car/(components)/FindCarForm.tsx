@@ -37,7 +37,8 @@ export default function FindCarForm({
   const [isSeuccessRequest, setIsSuccessRequest] = useState(false);
   const user = useUserStore((state) => state.user);
   const locale = useLocale();
-  const phoneValidationPattern = /\+?[\d]+/;
+  const phoneValidationPattern = /^\+\d{1,3} \d{3} \d{7}$/;
+  const emailValidationPattern = /^(?!\.)(?!.*\.\.)[a-zA-Z0-9._%+-]{1,64}(?<!\.)@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   const initialValueDefault = {
     name: '',
@@ -125,7 +126,7 @@ export default function FindCarForm({
       .required('findCarSchema.name.required'),
     email: Yup.string()
       .trim()
-      .email('findCarSchema.email.invalid')
+      .matches(emailValidationPattern, 'findCarSchema.email.invalid')
       .required('findCarSchema.email.required'),
     phone: Yup.string()
       .trim()
@@ -276,7 +277,7 @@ export default function FindCarForm({
               touched={touched.requestTime?.name}
             />
             {/* ---- */}
-            <div className='w-full md:absolute md:-bottom-[14px] md:left-0'>
+            <div className='w-full md:absolute md:bottom-[10px] lg:bottom-[70px] md:left-0'>
               <FormikTextarea
                 name='additional'
                 placeholder='findCar.form.additional.placeholder'
@@ -289,7 +290,7 @@ export default function FindCarForm({
               />
             </div>
 
-            <div className='md:absolute md:-bottom-[95px] md:right-0 md:w-[32%] flex items-end'>
+            <div className='md:absolute md:-bottom-[80px] lg:-bottom-[20px] md:right-0 md:w-[32%] flex items-end'>
               <ButtonPrimary
                 type='submit'
                 disabled={isSubmitting}

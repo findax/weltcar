@@ -95,7 +95,7 @@ function PageHome() {
         className='dark:bg-[#123D4A] bg-[#00668451] dark:opacity-[10] -left-[200px] bottom-[34%] lg:left-[25px] lg:bottom-[40%]' 
       />
       <BackgroundShaadowSection 
-        className='-bottom-[2%] -right-[80%] bg-[#DFE172] opacity-[0.30] lg:-right-[367px] lg:bottom-[13%]' 
+        className='-bottom-[2%] -right-[80%] bg-[#DFE172] opacity-[0.30] lg:-right-[467px] lg:-bottom-[9%]' 
       />
 
       {/* SECTION HERO */}
@@ -143,7 +143,7 @@ function PageHome() {
         />
       </div> */}
 
-      <div className='flex relative sm:bottom-0 sm:h-full -bottom-[30px] h-72 justify-center w-full'>
+      <div className='hidden relative sm:bottom-0 sm:h-full -bottom-[30px] h-72 justify-center w-full'>
         <Image 
           src={isDarkMode ? carsBackgroundDarkImg : carsBackgroundLightImg } 
           alt='cars image'

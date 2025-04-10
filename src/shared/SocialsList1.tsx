@@ -4,6 +4,9 @@ import youTubeImg from '@/images/socials/youTube-1.svg'
 import facebookImg from '@/images/socials/facebook-1.svg'
 import twitterImg from '@/images/socials/twitter-1.svg'
 import instagramImg from '@/images/socials/instagram-1.svg'
+import { FaTelegram } from "react-icons/fa";
+import { RiInstagramFill } from "react-icons/ri";
+import { FaFacebookSquare } from "react-icons/fa";
 import Image from 'next/image';
 
 export interface SocialsList1Props {
@@ -11,10 +14,10 @@ export interface SocialsList1Props {
 }
 
 const socials: SocialType[] = [
-  { name: 'Facebook', icon: facebookImg, href: '#' },
-  { name: 'Twitter', icon: twitterImg, href: '#' },
-  { name: 'Youtube', icon: youTubeImg, href: '#' },
-  { name: 'Instagram', icon: instagramImg, href: 'https://www.instagram.com/weltcar.de' },
+  { name: 'Facebook', icon: <FaFacebookSquare />, href: 'https://www.facebook.com/weltcar.de', iconType: 'svg' },
+  { name: 'Telegram', icon: <FaTelegram />, href: 'http://t.me/weltcarde', iconType: 'svg' },
+  // { name: 'Youtube', icon: youTubeImg, href: '#' },
+  { name: 'Instagram', icon: <RiInstagramFill />, href: 'https://www.instagram.com/weltcar.de/', iconType: 'svg' },
 ];
 
 const SocialsList1: FC<SocialsList1Props> = ({ className = 'space-y-2.5' }) => {
@@ -26,10 +29,13 @@ const SocialsList1: FC<SocialsList1Props> = ({ className = 'space-y-2.5' }) => {
         className='flex items-center text-2xl text-neutral-600 hover:text-black dark:text-neutral-400 dark:hover:text-white leading-none space-x-2 group'
         key={index}
       >
-        <Image 
-          src={item.icon}
-          alt={item.name}
-        />
+        {item.iconType 
+          ? <span className='opacity-50'>{item.icon}</span>
+          : <Image 
+              src={item.icon}
+              alt={item.name}
+            />
+        }
         <span className='text-sm'>{item.name}</span>
       </a>
     );

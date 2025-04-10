@@ -13,7 +13,7 @@ export default function SearchFormCatalog() {
       .trim()
       .min(2, 'Name is too short')
       .max(20, 'Name is too long')
-      .required('Name is required'),
+      .notRequired(),
   });
 
   return (
@@ -24,14 +24,16 @@ export default function SearchFormCatalog() {
       validationSchema={SearchSchema}
       onSubmit={(values, { setSubmitting, resetForm }) => {
         // trim values
-        const castValues = SearchSchema.cast(values);
+        const castValues = {
+          search: SearchSchema.cast(values).search ?? '',
+        };
 
         handleSearchChange(castValues.search);
         setSubmitting(false);
         // resetForm();
       }}
     >
-      {({ values, errors, touched }) => (
+      {({ values, errors, touched, setFieldValue }) => (
         <Form className='mb-6 relative w-full'>
           <FormikInput
             name='search'
@@ -53,7 +55,7 @@ export default function SearchFormCatalog() {
             <button
               onClick={() => {
                 resetFilters(!!values.search);
-                values.search = '';
+                setFieldValue('search', '');
               }}
               className='absolute top-1/2 -translate-y-1/2 right-12 p-2 rounded-full bg-neutral-200 dark:bg-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-400'
             >

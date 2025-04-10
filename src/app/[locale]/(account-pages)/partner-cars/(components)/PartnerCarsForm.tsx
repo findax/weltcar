@@ -17,7 +17,6 @@ import { Route } from 'next';
 import { toast } from 'react-toastify';
 import { useLocale, useTranslations } from 'next-intl';
 
-const DOCUMENTS_SUPPORTED_FORMATS = ['image/png','image/jpeg','image/jpg','application/pdf'];
 
 const ModelSchema = Yup.object().shape({
   id: Yup.number().required('partnerCarsSchema.model.idRequired'),
@@ -94,6 +93,8 @@ export default function PartnerCarsForm({
   });
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+
+  const buttonClass = !partner.is_verified ? 'w-full md:w-fit !bg-gray-600 hover:bg-gray-600 text-white' : 'w-full md:w-fit';
 
   const PartnerCarsSchema = Yup.object().shape({
     model: ModelSchema.required('partnerCarsSchema.model.required'),
@@ -407,67 +408,142 @@ export default function PartnerCarsForm({
         }}
       >
         {({ errors, touched, isSubmitting }) => (
-          <Form className='grid grid-cols-1 gap-7 w-full max-w-xl mt-10 md:mt-0 md:pl-16'>
-            <FormikInputCarSelector
-              disabled={car?.is_verified}
-              name='model'
-              placeholder='accountPartnerCars.form.modelName.placeholder'
-              title='accountPartnerCars.form.modelName.label'
-              options={models}
-              error={errors.model?.brand_name}
-              touched={touched.model?.brand_name}
-            />
-            {/* ---- */}
-            <FormikInput
-              disabled={car?.is_verified}
-              name='specification'
-              placeholder='accountPartnerCars.form.specification.placeholder'
-              title='accountPartnerCars.form.specification.label'
-              error={errors.specification}
-              touched={touched.specification}
-            />
-            {/* ---- */}
-            <FormikInput
-              disabled={car?.is_verified}
-              onKeyPress={handleKeyPressNumber}
-              name='year'
-              placeholder='accountPartnerCars.form.year.placeholder'
-              title='accountPartnerCars.form.year.label'
-              error={errors.year}
-              touched={touched.year}
-            />
-            {/* ---- */}
-            <FormikInput
-              disabled={car?.is_verified}
-              name='vin'
-              placeholder='accountPartnerCars.form.vin.placeholder'
-              title='accountPartnerCars.form.vin.label'
-              error={errors.vin}
-              touched={touched.vin}
-            />
-            {/* ---- */}
-            <FormikInputPrice
-              onKeyPress={handleKeyPressNumber}
-              name='price'
-              placeholder='accountPartnerCars.form.price.placeholder'
-              title='accountPartnerCars.form.price.label'
-              error={errors.price}
-              touched={touched.price}
-            />
-            {/* ---- */}
-            <FormikFile
-              accept="image/jpeg, image/png"
-              disabled={car?.is_verified}
-              variant='photo'
-              initialValues={ car ? initialValueFilled : null}
-              name='photos'
-              label='accountPartnerCars.form.uploadPhotos.label'
-              multiple
-              error={errors.photos}
-              touched={touched.photos}
-            />
-            {renderAttachedPhotos()}
-            {/* ---- */}
+          <Form className='flex flex-col gap-7'>
+            <div className='md:grid md:grid-cols-3 flex flex-col gap-7'>
+              <FormikInputCarSelector
+                disabled={car?.is_verified}
+                name='model'
+                placeholder='accountPartnerCars.form.modelName.placeholder'
+                title='accountPartnerCars.form.modelName.label'
+                options={models}
+                rounded='rounded-full'
+                sizeClass='h-14'
+                error={errors.model?.brand_name}
+                touched={touched.model?.brand_name}
+              />
+              {/* ---- */}
+              <FormikInput
+                disabled={car?.is_verified}
+                name='specification'
+                placeholder='accountPartnerCars.form.specification.placeholder'
+                title='accountPartnerCars.form.specification.label'
+                rounded='rounded-full'
+                sizeClass='h-14'
+                error={errors.specification}
+                touched={touched.specification}
+              />
+              {/* ---- */}
+              <div></div>
+              {/* ---- */}
+              <FormikInput
+                disabled={car?.is_verified}
+                onKeyPress={handleKeyPressNumber}
+                name='year'
+                placeholder='accountPartnerCars.form.year.placeholder'
+                title='accountPartnerCars.form.year.label'
+                rounded='rounded-full'
+                sizeClass='h-14'
+                error={errors.year}
+                touched={touched.year}
+              />
+              {/* ---- */}
+              <FormikInput
+                disabled={car?.is_verified}
+                name='vin'
+                placeholder='accountPartnerCars.form.vin.placeholder'
+                title='accountPartnerCars.form.vin.label'
+                rounded='rounded-full'
+                sizeClass='h-14'
+                error={errors.vin}
+                touched={touched.vin}
+              />
+              {/* ---- */}
+              <FormikInputPrice
+                onKeyPress={handleKeyPressNumber}
+                name='price'
+                placeholder='accountPartnerCars.form.price.placeholder'
+                title='accountPartnerCars.form.price.label'
+                rounded='rounded-full'
+                sizeClass='h-14'
+                error={errors.price}
+                touched={touched.price}
+              />
+            </div>
+            <div className='md:grid md:grid-cols-2 flex flex-col gap-7'>
+              {/* ---- */}
+              <FormikInput
+                disabled={car?.is_verified}
+                name='outerColor'
+                placeholder='accountPartnerCars.form.externalColor.placeholder'
+                title='accountPartnerCars.form.externalColor.label'
+                rounded='rounded-full'
+                sizeClass='h-14'
+                error={errors.outerColor}
+                touched={touched.outerColor}
+              />
+              {/* ---- */}
+              <FormikInput
+                disabled={car?.is_verified}
+                name='innerColor'
+                placeholder='accountPartnerCars.form.insideColor.placeholder'
+                title='accountPartnerCars.form.insideColor.label'
+                rounded='rounded-full'
+                sizeClass='h-14'
+                error={errors.innerColor}
+                touched={touched.innerColor}
+              />
+              {/* ---- */}
+              <FormikInputSelector
+                disabled={car?.is_verified}
+                name='country'
+                placeholder='accountPartnerCars.form.carLocation.placeholder'
+                title='accountPartnerCars.form.carLocation.label'
+                rounded='rounded-full'
+                sizeClass='h-14'
+                options={countries}
+                error={errors.country?.name}
+                touched={touched.country?.name}
+              />
+              {/* ---- */}
+              <FormikInput
+                  disabled={car?.is_verified}
+                  name='postCode'
+                  placeholder='accountPartnerCars.form.postCode.placeholder'
+                  title='accountPartnerCars.form.postCode.label'
+                  rounded='rounded-full'
+                  sizeClass='h-14'
+                  error={errors.postCode}
+                  touched={touched.postCode}
+                />
+              {/* ---- */}
+              <FormikFile
+                accept="image/jpeg, image/png"
+                disabled={car?.is_verified}
+                variant='photo'
+                initialValues={ car ? initialValueFilled : null}
+                name='photos'
+                label='accountPartnerCars.form.uploadPhotos.label'
+                multiple
+                error={errors.photos}
+                touched={touched.photos}
+              />
+              {/* ---- */}
+              <FormikFile
+                accept="image/jpeg, image/png, application/pdf"
+                disabled={car?.is_verified}
+                subTitle='JPG, JPEG, PDF or PNG'
+                initialValues={ car ? initialValueFilled : null}
+                name='documents'
+                label='accountPartnerCars.form.uploadDocuments.label'
+                multiple
+                error={errors.documents}
+                touched={touched.documents}
+              />
+              {/* ---- */}
+              {renderAttachedPhotos()}
+              {/* ---- */}
+              {renderAttachedDocuments()}
+            </div>
             <FormikTextarea
               disabled={car?.is_verified}
               rows={4}
@@ -479,62 +555,6 @@ export default function PartnerCarsForm({
               touched={touched.description}
             />
             {/* ---- */}
-            <FormikInput
-              disabled={car?.is_verified}
-              name='outerColor'
-              placeholder='accountPartnerCars.form.externalColor.placeholder'
-              title='accountPartnerCars.form.externalColor.label'
-              error={errors.outerColor}
-              touched={touched.outerColor}
-            />
-            {/* ---- */}
-            <FormikInput
-              disabled={car?.is_verified}
-              name='innerColor'
-              placeholder='accountPartnerCars.form.insideColor.placeholder'
-              title='accountPartnerCars.form.insideColor.label'
-              error={errors.innerColor}
-              touched={touched.innerColor}
-            />
-            {/* ---- */}
-            <FormikFile
-              accept="image/jpeg, image/png, application/pdf"
-              disabled={car?.is_verified}
-              subTitle='JPG, JPEG, PDF or PNG'
-              initialValues={ car ? initialValueFilled : null}
-              name='documents'
-              label='accountPartnerCars.form.uploadDocuments.label'
-              multiple
-              error={errors.documents}
-              touched={touched.documents}
-            />
-            {renderAttachedDocuments()}
-            {/* ---- */}
-            <div className='flex gap-2'>
-              <div className='w-full'>
-                <FormikInputSelector
-                  disabled={car?.is_verified}
-                  name='country'
-                  placeholder='accountPartnerCars.form.carLocation.placeholder'
-                  title='accountPartnerCars.form.carLocation.label'
-                  options={countries}
-                  error={errors.country?.name}
-                  touched={touched.country?.name}
-                />
-              </div>
-              {/* ---- */}
-              <div className='w-full'>
-                <FormikInput
-                  disabled={car?.is_verified}
-                  name='postCode'
-                  placeholder='accountPartnerCars.form.postCode.placeholder'
-                  title='accountPartnerCars.form.postCode.label'
-                  error={errors.postCode}
-                  touched={touched.postCode}
-                />
-              </div>
-            </div>
-            {/* ---- */}
             <FormikTextarea
               disabled={car?.is_verified}
               rows={4}
@@ -545,15 +565,16 @@ export default function PartnerCarsForm({
               error={errors.commentary}
               touched={touched.commentary}
             />
-
-
-            <ButtonPrimary
-              type='submit'
-              disabled={!!partner.is_verified ? isSubmitting : true}
-              loading={isSubmitting}
-            >
-              {translate('accountPartnerCars.form.button.continue')}
-            </ButtonPrimary>
+            <div className='md:flex md:justify-end'>
+              <ButtonPrimary
+                type='submit'
+                disabled={!!partner.is_verified ? isSubmitting : true}
+                className={buttonClass}
+                loading={isSubmitting}
+              >
+                {translate('accountPartnerCars.form.button.continue')}
+              </ButtonPrimary>
+            </div>
           </Form>
         )}
       </Formik>

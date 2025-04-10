@@ -39,6 +39,33 @@ export const getCarsList = async (
   });
 };
 
+export const getCarsListCatalogHidden = async (
+  page: number,
+  perPage: number,
+  locale: string,
+  queryParams?: ICatalogQueryParams
+) => {
+  const headers: Record<string, string> = {
+    cache: 'no-store',
+    'Accept-Language': locale,
+  };
+  return new Promise((resolve) => {
+    api
+      .post(`/api/cars/list-a?page=${page}&perPage=${perPage}`, queryParams, {
+        headers,
+      })
+      .then((res) => resolve(res.data))
+      .catch((err) => {
+        if (err.response?.data.message) {
+          toast.error(err.response.data.message);
+        } else {
+          toast.error('Something went wrong!');
+        }
+        resolve(false);
+      });
+  });
+};
+
 export const getCarId = async (id: string, locale: string) => {
   const headers: Record<string, string> = {
     'Accept-Language': locale,
