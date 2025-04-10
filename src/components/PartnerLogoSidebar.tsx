@@ -17,10 +17,12 @@ export default function PartnerLogoSidebar({
         <UserGroupIcon className='h-6 w-6' />
         <span className='font-medium'>{translate('carDetails.partnersCar.title')}</span>
       </div>
-      {/* <div className='flex gap-1'>
-        <span className='font-medium'>{partnerName}</span>
-        <span className='font-medium'>{partnerPhone}</span>
-      </div> */}
+      {(partnerName || partnerPhone ) && 
+        <div className='flex gap-1'>
+          { partnerName && <span className='font-medium'>{partnerName}</span>}
+          { partnerPhone && <span className='font-medium'>{partnerPhone}</span>}
+        </div>
+      }
     </div>
   );
 }
