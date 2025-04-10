@@ -14,12 +14,14 @@ const FiltersCatalog = ({
   filtersData,
   closeFilters,
   activeFiltersCount,
-  translate
+  translate,
+  buttonColorStyles
 }: {
   filtersData: IFilters[];
   closeFilters: (value: boolean) => void;
   activeFiltersCount: number;
   translate: any;
+  buttonColorStyles?: string;
 }) => {
   const {
     handleFilterChange,
@@ -36,7 +38,7 @@ const FiltersCatalog = ({
       >
         <XMarkIcon className='w-6 h-6' />
       </button>
-      <SearchFormCatalog />
+      <SearchFormCatalog buttonColorStyles={buttonColorStyles} />
       <div className='border-t border-dashed border-neutral-300 dark:border-neutral-700'></div>
       <div className='sticky top:0 lg:top-20 flex justify-between items-center bg-white dark:bg-neutral-900 z-10'>
         <h4 className='flex justify-between items-center my-6 text-2xl font-semibold'>
@@ -72,6 +74,7 @@ const FiltersCatalog = ({
                   rangeData={filterCategory}
                   onChange={handleRangeFilterChange}
                   resetRangeFilter={resetRangeFilter}
+                  buttonColorStyles={buttonColorStyles}
                 />
               </AccordionComponent>
             );
@@ -111,6 +114,7 @@ const FiltersCatalog = ({
         <ButtonPrimary
           fontSize='text-sm'
           sizeClass='px-5 py-2 md:px-6'
+          className={`${buttonColorStyles}`}
           onClick={() => closeFilters(false)}
         >
           Apply

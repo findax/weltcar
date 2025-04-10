@@ -7,12 +7,14 @@ interface rangeDataProps {
   rangeData: IFilters;
   onChange: (filterCategory: string, min: number, max: number) => void;
   resetRangeFilter: (filterCategory: string) => void;
+  buttonColorStyles?: string;
 }
 
 export default function RangeSlider({
   rangeData,
   onChange,
   resetRangeFilter,
+  buttonColorStyles
 }: rangeDataProps) {
   const defaultRangeState = [rangeData.min, rangeData.max];
   const [rangeState, setRangeState] = useState([rangeData.min, rangeData.max]);
@@ -116,6 +118,7 @@ export default function RangeSlider({
         <ButtonPrimary
           fontSize='text-sm'
           sizeClass='px-5 py-2 md:px-6'
+          className={`${buttonColorStyles}`}
           onClick={() =>
             onChange(rangeData.id, rangeState[0] ?? 0, rangeState[1] ?? 0)
           }

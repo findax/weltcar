@@ -12,12 +12,13 @@ import Image from 'next/image';
 import defaultWatermark from '@/images/defaultWatermark.svg';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { IUser } from '@/types/user';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import Modal from '@/shared/Modal';
 import AuthorizationFavorite from './authorization/AuthorizationFavorite';
 import { addToFavoritesCars, deleteFavoriteCar } from '@/api/favorites';
 import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'react-toastify';
+import { usePathname } from 'next/navigation';
 
 const CarCard = ({
   className = '',
@@ -49,9 +50,14 @@ const CarCard = ({
     year,
     watermark
   } = carData;
-  const [isFavorite, setIsFavorite] = useState(is_favorite);
   const locale = useLocale();
+  const pathname = usePathname();
+  const [isFavorite, setIsFavorite] = useState(is_favorite);
   const [isAuthorizationModalOpen, setIsAuthorizationModalOpen] = useState(false);
+
+
+  const isCatalogAPage = useMemo(() => pathname.split('/').pop() === 'catalog-a', [pathname]);
+  const buttonStylesCatalogA = isCatalogAPage ? 'bg-[#f0ad4e] hover:bg-[#ec971f]' : '';
 
   const renderWatermark = () => {
     return (
@@ -175,6 +181,7 @@ const CarCard = ({
               <ButtonPrimary
                 fontSize='text-sm'
                 sizeClass='px-5 py-2'
+                className={`${buttonStylesCatalogA}`}
               >
                 {translate('catalog.button.seeMore')}
               </ButtonPrimary>
