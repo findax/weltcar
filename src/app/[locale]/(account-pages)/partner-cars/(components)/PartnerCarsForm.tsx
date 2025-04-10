@@ -94,7 +94,7 @@ export default function PartnerCarsForm({
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
-  const buttonClass = !partner.is_verified ? '!bg-gray-600 hover:bg-gray-600 text-white' : '';
+  const buttonClass = !partner.is_verified ? 'w-full md:w-fit !bg-gray-600 hover:bg-gray-600 text-white' : 'w-full md:w-fit';
 
   const PartnerCarsSchema = Yup.object().shape({
     model: ModelSchema.required('partnerCarsSchema.model.required'),
@@ -433,7 +433,7 @@ export default function PartnerCarsForm({
                 touched={touched.specification}
               />
               {/* ---- */}
-              <div>brand</div>
+              <div></div>
               {/* ---- */}
               <FormikInput
                 disabled={car?.is_verified}
@@ -565,7 +565,7 @@ export default function PartnerCarsForm({
               error={errors.commentary}
               touched={touched.commentary}
             />
-            <div className='flex justify-end'>
+            <div className='md:flex md:justify-end'>
               <ButtonPrimary
                 type='submit'
                 disabled={!!partner.is_verified ? isSubmitting : true}
