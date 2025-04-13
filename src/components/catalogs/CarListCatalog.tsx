@@ -30,7 +30,7 @@ const CarListCatalog = ({
   const pathname = usePathname();
 
   const isCatalogAPage = useMemo(() => pathname.split('/').pop() === 'catalog-a', [pathname]);
-  const buttonStylesCatalogA = isCatalogAPage ? 'bg-[#f0ad4e] hover:bg-[#ec971f]' : '';
+  const buttonStylesCatalogA = isCatalogAPage ? '!bg-[#f0ad4e] !hover:bg-[#ec971f]' : '';
 
   const ww = typeof window !== 'undefined' ? window.innerWidth : 1000;
   const pageCount = Math.ceil((results || 10) / 10);
