@@ -20,7 +20,7 @@ const Logo = ({
       className={`ttnc-logo inline-block text-primary-600 focus:outline-none focus:ring-0 ${className}`}
     >
     {isDark 
-      ? ( <Image src={logoLight.src} alt='logo' width={180} height={39}/> ) 
+      ? ( <Image src={logoDark.src} alt='logo' width={180} height={39}/> ) 
       : (<Image src={logoLight.src} alt='logo' width={180} height={39}/> )
     }
     </Link>
