@@ -30,7 +30,7 @@ export default function CatalogHidden() {
   const pathname = usePathname();
 
   const isCatalogAPage = useMemo(() => pathname.split('/').pop() === 'catalog-a', [pathname]);
-  const buttonStylesCatalogA = isCatalogAPage ? 'bg-[#f0ad4e] hover:bg-[#ec971f]' : '';
+  const buttonStylesCatalogA = isCatalogAPage ? '!bg-[#f0ad4e] !hover:bg-[#ec971f]' : '';
   const queryState = useQueryStore((state) => state.query);
   const { queryParams, currentPage, isFiltersVisible, setFiltersVisible } =
     useQueryParams();

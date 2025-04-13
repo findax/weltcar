@@ -39,7 +39,7 @@ const SortPanelCatalog = ({
   const { queryParams, handleSortChange } = useQueryParams();
 
   const isCatalogAPage = useMemo(() => pathname.split('/').pop() === 'catalog-a', [pathname]);
-  const buttonStylesCatalogA = isCatalogAPage ? 'bg-[#f0ad4e] hover:bg-[#ec971f]' : '';
+  const buttonStylesCatalogA = isCatalogAPage ? '!bg-[#f0ad4e] !hover:bg-[#ec971f]' : '';
   const isSelectorShortWidth = (queryParams && queryParams.sort && queryParams.sort[0].id === 'oldest') !== false;
 
   function handleSortSelectChange(select: HTMLSelectElement) {
