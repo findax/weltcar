@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import LoadingSpinner from '@/shared/LoadingSpinner';
 import ErrorComponent from '@/components/ErrorComponent';
 import SideMenuWrapper from '@/shared/SideMenuWrapper';
@@ -14,6 +14,7 @@ import SortPanelCatalog from '@/components/catalogs/SortPanelCatalog';
 import CarListCatalog from '@/components/catalogs/CarListCatalog';
 import { useLocale, useTranslations } from 'next-intl';
 import { PAGE_SIZE } from '../../(account-pages)/partner-cars-list/page';
+import { usePathname } from 'next/navigation';
 
 export default function CatalogHidden() {
   const [isFirstLoading, setFirstLoading] = useState(true);
@@ -26,6 +27,10 @@ export default function CatalogHidden() {
 
   const translate = useTranslations();
   const locale = useLocale();
+  const pathname = usePathname();
+
+  const isCatalogAPage = useMemo(() => pathname.split('/').pop() === 'catalog-a', [pathname]);
+  const buttonStylesCatalogA = isCatalogAPage ? 'bg-[#f0ad4e] hover:bg-[#ec971f]' : '';
   const queryState = useQueryStore((state) => state.query);
   const { queryParams, currentPage, isFiltersVisible, setFiltersVisible } =
     useQueryParams();
@@ -99,6 +104,7 @@ export default function CatalogHidden() {
                 closeFilters={setFiltersVisible}
                 activeFiltersCount={activeFiltersCount}
                 translate={translate}
+                buttonColorStyles={buttonStylesCatalogA}
               />
             </SideMenuWrapper>
           ) : (
@@ -107,6 +113,7 @@ export default function CatalogHidden() {
               closeFilters={setFiltersVisible}
               activeFiltersCount={activeFiltersCount}
               translate={translate}
+              buttonColorStyles={buttonStylesCatalogA}
             />
           )}
         </div>

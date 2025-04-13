@@ -5,7 +5,11 @@ import { ButtonCircle } from '@/shared/Buttons';
 import { FormikInput } from '@/shared/FormInputs';
 import { useQueryParams } from '@/hooks/useQueryParams';
 
-export default function SearchFormCatalog() {
+export default function SearchFormCatalog({
+  buttonColorStyles
+}:{
+  buttonColorStyles?: string;
+}) {
   const { queryParams, handleSearchChange, resetFilters } = useQueryParams();
 
   const SearchSchema = Yup.object().shape({
@@ -46,7 +50,7 @@ export default function SearchFormCatalog() {
           />
           <ButtonCircle
             type='submit'
-            className='absolute transform top-1/2 -translate-y-1/2 right-1'
+            className={` ${buttonColorStyles} absolute transform top-1/2 -translate-y-1/2 right-1`}
             size='w-10 h-10'
           >
             <i className='las la-search text-xl dark:text-black text-white'></i>
