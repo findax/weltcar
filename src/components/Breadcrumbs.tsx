@@ -1,7 +1,7 @@
 import { Route } from 'next';
 import Link from 'next/link';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 interface BreadcrumbsProps {
   pages: {
@@ -14,6 +14,7 @@ const Breadcrumbs = ({
   pages
 }: BreadcrumbsProps) => {
   const translate = useTranslations();
+  const locale = useLocale();
   return (
     <nav aria-label="breadcrumb" className="flex">
       {pages.map((page, index) => {
@@ -27,7 +28,7 @@ const Breadcrumbs = ({
               </span>
             ) : (
               <>
-                <Link href={page.pageHref as Route} className='text-sm dark:text-white text-neutral-1050'>
+                <Link href={`/${locale}/${page.pageHref}` as Route} className='text-sm dark:text-white text-neutral-1050'>
                   {translate(page.pageName)}
                 </Link>
                 <ChevronRightIcon className='w-4 h-4 mx-2'/>
