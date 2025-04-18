@@ -20,7 +20,7 @@ const GalleryList = ({
 
   const paddingBottomGrid = 'pb-[61.8%]';
   return (
-    <div className='grid grid-cols-1 gap-4 lg:gap-6 sm:grid-cols-3 mb-8 md:mb-14'>
+    <div className='grid grid-cols-1 gap-4 lg:gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-8 md:mb-14'>
       {galleries?.map((gallery) => (
         <GalleryCard
           key={gallery.id}
