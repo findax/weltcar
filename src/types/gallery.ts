@@ -21,3 +21,10 @@ export interface GalleryCarMedia {
   images: GalleryImageItem[];
   videos: GalleryVideoItem[];
 }
+
+export enum GalleryOption {
+  All = 'all',
+  VideoMedium = 'video&medium',
+  NoVideoAll = 'noVideo&all',
+  NoVideoMedium = 'noVideo&medium',
+}

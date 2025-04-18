@@ -18,7 +18,6 @@ export default function GalleryCarDetails({
 }: {
   galleryData: GalleryCarMedia | null;
 }) {
-  const [galleryMedia, setGalleryMedia] = useState<GalleryCarMedia | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [galleryImages, setGalleryImages] = useState<ICarGallery[]>([]);
   const [galleryVideos, setGalleryVideos] = useState<ICarVideos[]>([]);
@@ -36,7 +35,6 @@ export default function GalleryCarDetails({
 
   useEffect(() => {
     if (galleryData) {
-      setGalleryMedia(galleryData);
       const modifiedImagesArray = [...galleryData.images].map((item, index) => ({
         id: index,
         url: item.original,
@@ -58,9 +56,6 @@ export default function GalleryCarDetails({
       setIsLoading(false);
     }
   }, [galleryData]);
-
-  console.log(galleryMedia);
-
 
   return isLoading ? (
     <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
