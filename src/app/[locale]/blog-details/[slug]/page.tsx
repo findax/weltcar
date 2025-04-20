@@ -27,7 +27,6 @@ export default function BlogDetailsPage({
         }
       } catch (error) {
         setHasError(true);
-      } finally {
       }
     };
 

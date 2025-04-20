@@ -105,6 +105,11 @@
   "Blog.breadcrump.blog": "Blog",
   "Blog.title": "Blog",
   "Blog.notFound.title": "Sorry, nothing found",
+
+  "gallery.breadcrump.main": "Main",
+  "gallery.breadcrump.gallery": "Gallery",
+  "gallery.title.gallery": "Gallery",
+
   "contact.title": "Contact Us",
   "contact.description": "Whether you have questions about our vehicles, need assistance with your purchase, or want to learn more about our services, we are here to help. Reach out to us through any of the following methods:",
   "contact.address.label": "Address",
@@ -355,6 +360,7 @@
   "accountPartnerCars.form.commentary.label": "Commentary",
   "accountPartnerCars.form.commentary.placeholder": "Commentary",
   "accountPartnerCars.form.button.continue": "Continue",
+  "accountPartnerCars.form.tooltip.error": "not possible, your account has not been verified",
   "accountPartnerCars.modal.thankYou.label": "Thank you!",
   "accountPartnerCars.modal.thankYouRequest.title": "Thank you, your request has been accepted. Soon it will be processed and the car will appear on the website. If there is not enough information, our manager will contact you.",
   "accountPartnerCars.modal.thankYouUpdate.title": "Thank you, your update has been accepted.",

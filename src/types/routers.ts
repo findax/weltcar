@@ -6,6 +6,7 @@ export type NextRoute =
   | '/settings'
   | '/catalog'
   | '/about'
+  | '/gallery'
   | '/blog'
   | '/contact'
   | '/find-car'

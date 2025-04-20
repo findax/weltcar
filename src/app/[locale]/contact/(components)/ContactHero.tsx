@@ -29,7 +29,7 @@ export default function ContactHero({
             </h2>
             <Link
               className='inline-block mt-4 lg:mt-2 text-neutral-500 dark:text-neutral-400 hover:underline'
-              href='https://www.google.com/maps?q=FinDax+GmbH,+Theodor-Fontane-Stra%C3%9Fe+2,+22848+Norderstedt,+Germany&ftid=0x47b229e490544979:0x29213d5a4a4d551b&entry=gps&lucs=,94224825,94227247,94227248,94222042,47071704,47069508,94214172,94218641,94203019,47084304,94208458,94208447&g_ep=CAISDTYuMTE5LjEuNjYwNTAYACCenQoqbCw5NDIyNDgyNSw5NDIyNzI0Nyw5NDIyNzI0OCw5NDIyMjA0Miw0NzA3MTcwNCw0NzA2OTUwOCw5NDIxNDE3Miw5NDIxODY0MSw5NDIwMzAxOSw0NzA4NDMwNCw5NDIwODQ1OCw5NDIwODQ0N0ICRUU%3D&g_st=com.google.maps.preview.copy'
+              href='#'
               target='_blank'
               rel='noopener noreferrer'
             >
@@ -43,9 +43,9 @@ export default function ContactHero({
             </h2>
             <Link
               className='inline-block mt-4 lg:mt-2 text-neutral-500 dark:text-neutral-400 hover:underline'
-              href='mailto:info@findax.eu'
+              href='mailto:info@weltcar.de'
             >
-              info@findax.eu
+              info@weltcar.de
             </Link>
           </div>
           <div className='w-full lg:w-[18%]'>

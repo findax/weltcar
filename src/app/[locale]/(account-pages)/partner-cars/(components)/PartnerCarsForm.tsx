@@ -16,6 +16,7 @@ import Link from 'next/link';
 import { Route } from 'next';
 import { toast } from 'react-toastify';
 import { useLocale, useTranslations } from 'next-intl';
+import TooltipComponent from '@/shared/TooltipComponent';
 
 
 const ModelSchema = Yup.object().shape({
@@ -566,14 +567,33 @@ export default function PartnerCarsForm({
               touched={touched.commentary}
             />
             <div className='md:flex md:justify-end'>
-              <ButtonPrimary
-                type='submit'
-                disabled={!!partner.is_verified ? isSubmitting : true}
-                className={buttonClass}
-                loading={isSubmitting}
-              >
-                {translate('accountPartnerCars.form.button.continue')}
-              </ButtonPrimary>
+              {!partner.is_verified ? (
+                <>
+                  <div data-tooltip-id="partner-car-form-button">
+                    <ButtonPrimary
+                      type="submit"
+                      disabled
+                      className={buttonClass}
+                      loading={isSubmitting}
+                    >
+                      {translate('accountPartnerCars.form.button.continue')}
+                    </ButtonPrimary>
+                  </div>
+                  <TooltipComponent
+                    id="partner-car-form-button"
+                    content={translate('accountPartnerCars.form.tooltip.error')}
+                  />
+                </>
+              ) : (
+                <ButtonPrimary
+                  type="submit"
+                  disabled={isSubmitting}
+                  className={buttonClass}
+                  loading={isSubmitting}
+                >
+                  {translate('accountPartnerCars.form.button.continue')}
+                </ButtonPrimary>
+              )}
             </div>
           </Form>
         )}
