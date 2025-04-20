@@ -20,15 +20,11 @@ export default function CookiePolicyPage() {
       <h1>Legal Notice</h1>
       <div className='w-14 border-b border-neutral-300 dark:border-neutral-700 mb-6 lg:mb-8'></div>
       <p className='space-y-6 text-neutral-600 dark:text-neutral-300'>
-        FinDax GmbH <br />
-        Theodor-Fontane-Straße 2 <br />
-        22848 Norderstedt <br /> <br />
-        IBAN: DE39 4401 0046 0478 7494 69 <br />
-        BIC: PBNKDEFF <br />
-        Tax Number: 44/780/03655 <br /> <br />
-        VAT ID No. DE300567500 <br />
-        HRB 126671 <br /> <br />
-        Email: <Link href='mailto:info@findax.eu'>info@findax.eu</Link> <br />
+        WELTCAR TRADING - FZCO <br />
+        Registration Number: 58387 <br />
+        License Number: 60847 <br /> <br />
+        Dubai, U.A.E.  <br />  <br />
+        Email: <Link href='mailto:info@weltcar.de'>info@weltcar.de</Link> <br />
         Website: <Link href='https://www.weltcar.de'>www.weltcar.de</Link>
       </p>
 

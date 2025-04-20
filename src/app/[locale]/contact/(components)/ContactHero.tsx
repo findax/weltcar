@@ -43,9 +43,9 @@ export default function ContactHero({
             </h2>
             <Link
               className='inline-block mt-4 lg:mt-2 text-neutral-500 dark:text-neutral-400 hover:underline'
-              href='mailto:info@findax.eu'
+              href='mailto:info@weltcar.de'
             >
-              info@findax.eu
+              info@weltcar.de
             </Link>
           </div>
           <div className='w-full lg:w-[18%]'>
