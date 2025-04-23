@@ -2,44 +2,27 @@ import { useState, useRef, useEffect } from 'react';
 import playImage  from '@/images/icons/video-play.svg'
 import Image from 'next/image';
 import { SpeakerXMarkIcon } from '@heroicons/react/24/outline';
-import { ArrowsPointingInIcon } from '@heroicons/react/24/outline';
+import { ArrowsPointingOutIcon } from '@heroicons/react/24/outline';
 
 interface IProps {
   url: string;
-  onClose: () => void;
+  onOpen: () => void;
 }
 
-export const CustomVideoPlayer = ({ 
+export const GalleryVideoPlayer = ({ 
   url,
-  onClose
+  onOpen
 }: IProps) => {
-  const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  const handlePlay = () => {
-    if (videoRef.current) {
-      videoRef.current.play();
-      setIsPlaying(true);
-    }
-  };
-
-  const handlePause = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-      setIsPlaying(false);
-    }
-  };
 
   const handleTogglePlay = () => {
     if (!videoRef.current) return;
     
     if (videoRef.current.paused) {
       videoRef.current.play();
-      setIsPlaying(true);
     } else {
       videoRef.current.pause();
-      setIsPlaying(false);
     }
   };
   
@@ -62,21 +45,21 @@ export const CustomVideoPlayer = ({
   }, []);
 
   return (
-    <div className="relative sm:h-auto sm:max-w-[1180px]">
+    <>
       <video
         ref={videoRef}
         autoPlay
         muted
-        className="rounded-[45px] w-full h-full"
-          
-        onClick={handlePause}
-        onEnded={() => setIsPlaying(false)}
+        loop
+        playsInline
         preload="metadata"
+        className="absolute w-full h-full inset-0 object-cover transition-opacity opacity-0 duration-[1s]"
+        onLoadedData={(e) => e.currentTarget.classList.remove('opacity-0')}
       >
         <source src={url} type="video/mp4" />
       </video>
 
-      <div className='flex w-full px-8 z-10 gap-4 md:gap-6 items-center absolute bottom-5 left-0'>
+      <div className='flex w-full px-4 z-10 gap-4 items-center absolute bottom-5 left-0'>
         <div
           className="hidden md:block bg-opacity-0 cursor-pointer"
           onClick={handleTogglePlay}
@@ -133,33 +116,18 @@ export const CustomVideoPlayer = ({
 
         <div 
           className="hidden md:block bg-opacity-0 cursor-pointer"
-          onClick={onClose}
+          onClick={onOpen}
         >
-          <ArrowsPointingInIcon className="h-[25px] w-[25px] md:h-[30px] md:w-[30px]" />
+          <ArrowsPointingOutIcon className="h-[25px] w-[25px] md:h-[30px] md:w-[30px]" />
         </div>
       </div>
 
       <div 
-        className="md:hidden absolute top-4 right-8 md:bottom-8 md:right-10 z-10 bg-opacity-0 cursor-pointer"
-        onClick={onClose}
+        className="md:hidden absolute top-4 right-4 md:bottom-8 md:right-10 z-10 bg-opacity-0 cursor-pointer"
+        onClick={onOpen}
       >
-        <ArrowsPointingInIcon className="h-[25px] w-[25px] md:h-[30px] md:w-[30px]" />
+        <ArrowsPointingOutIcon className="h-[25px] w-[25px] md:h-[30px] md:w-[30px]" />
       </div>
-
-      {!isPlaying && (
-        <div
-          className="absolute inset-0 flex items-center justify-center bg-opacity-0 cursor-pointer"
-          onClick={handlePlay}
-        >
-          <button className='focus:outline-none'>
-            <Image
-              src={playImage}
-              alt='player image'
-              className='h-[52px] w-[52px] md:h-[78px] md:w-[78px] lg:h-[104px] lg:w-[104px]'
-            />
-          </button>
-        </div>
-      )}
-    </div>
+    </>
   );
 };

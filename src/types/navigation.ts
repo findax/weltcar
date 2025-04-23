@@ -22,6 +22,7 @@ export const NAVIGATION_DEMO_MOBILE: NavItemType[] = [
     name: 'navbar.catalog',
   },
   { id: ncNanoId(), href: '/about', name: 'navbar.about' },
+  { id: ncNanoId(), href: '/gallery', name: 'navbar.gallery' },
   { id: ncNanoId(), href: '/blog', name: 'navbar.blog' },
   { id: ncNanoId(), href: '/contact', name: 'navbar.contact' },
   { id: ncNanoId(), href: '/find-car', name: 'navbar.findCar' },
