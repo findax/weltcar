@@ -18,6 +18,7 @@ export interface GalleryVideoItem extends GalleryMediaItem {
 export interface GalleryCarMedia {
   id: number;
   name: string;
+  description: string;
   images: GalleryImageItem[];
   videos: GalleryVideoItem[];
 }

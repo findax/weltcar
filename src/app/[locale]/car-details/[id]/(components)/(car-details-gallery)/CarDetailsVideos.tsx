@@ -31,17 +31,6 @@ const CarDetailsVideos = ({ videos }: { videos: ICarVideos[] | null }) => {
   const thisPathname = usePathname();
   const router = useRouter();
   const isShowModal = searchParams?.get('modal') === 'CAR_VIDEO_TOUR';
-  // const [lastViewedVideo, setLastViewedVideo] = useLastViewedVideo();
-  // const videoId = searchParams?.get('videoId');
-  // const lastViewedVideoRef = useRef<HTMLDivElement>(null);
-
-  // useEffect(() => {
-  //   //This effect keeps track of the last viewed photo in the modal to keep the index page in sync when the user navigates back
-  //   if (lastViewedVideo && !videoId) {
-  //     lastViewedVideoRef.current?.scrollIntoView({ block: 'center' });
-  //     setLastViewedVideo(null);
-  //   }
-  // }, [videoId, lastViewedVideo, setLastViewedVideo]);
 
   const handleClose = () => {
     let params = new URLSearchParams(document.location.search);
@@ -53,7 +42,7 @@ const CarDetailsVideos = ({ videos }: { videos: ICarVideos[] | null }) => {
     return (
       <>
         {videos?.map(( video, index ) => (
-          index === 0 && <CustomVideoPlayer url={video.url} key={video.id}/>
+          index === 0 && <CustomVideoPlayer url={video.url} onClose={handleClose} key={video.id}/>
         ))}
       </>
     );
