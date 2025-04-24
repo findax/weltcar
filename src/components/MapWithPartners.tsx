@@ -66,9 +66,9 @@ const PartnersMap = () => {
     <MapContainer
       center={[52.52, 13.405]}
       zoom={7}
-      scrollWheelZoom={false}
-      className='w-full h-[300px] md:h-[500px]'
-      style={{ borderRadius: '20px' }}
+      scrollWheelZoom={true}
+      zoomControl={false}
+      className='w-full h-[300px] md:h-[500px] rounded-3xl'
     >
       <TileLayer
          url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
