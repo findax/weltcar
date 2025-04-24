@@ -3,7 +3,7 @@
 import { Metadata } from 'next';
 import { useThemeMode } from '@/hooks/useThemeMode';
 import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import carsBackgroundDarkImg from '@/images/car-dark.png'
 import carsBackgroundLightImg from '@/images/car-light.png'
@@ -12,6 +12,13 @@ import LookingForHero from './(components)/LookingForHero';
 import { ButtonClose, ButtonPrimary, ButtonSecondary } from '@/shared/Buttons';
 import SectionSubscribe from '@/components/SectionSubscribe';
 import { RadioButton } from '@/shared/FormInputs';
+import ErrorComponent from '@/components/ErrorComponent';
+import LoadingSpinner from '@/shared/LoadingSpinner';
+import { getLookingForList } from '@/api/looking-for';
+import useQueryParams from '@/hooks/useQueryParams';
+import { ILookingForCar } from '@/types/lookingFor';
+import BackgroundShaadowSection from '@/components/BackgroundShaadowSection';
+import triangleBackgroundImgThird from '@/images/bg-figures/triangle-3.png'
 
 const lookingForPages = [
   {
@@ -24,197 +31,6 @@ const lookingForPages = [
   }
 ];
 
-const carListFilter = [
-  {
-    name: 'Aston Martin',
-    value: 'Aston Martin',
-    selected: false
-  },
-  {
-    name: 'Bentley',
-    value: 'Bentley',
-    selected: false
-  },
-  {
-    name: 'BMW',
-    value: 'BMW',
-    selected: false
-  },
-  {
-    name: 'MB',
-    value: 'MB',
-    selected: false
-  },
-  {
-    name: 'Ford',
-    value: 'Ford',
-    selected: false
-  },
-  {
-    name: 'Harley Davidson',
-    value: 'Harley Davidson',
-    selected: false
-  },
-  {
-    name: 'Lamborghini',
-    value: 'Lamborghini',
-    selected: false
-  },
-  {
-    name: 'Land Rover',
-    value: 'Land Rover',
-    selected: false
-  },
-  {
-    name: 'Ferrari',
-    value: 'Ferrari',
-    selected: false
-  },
-  {
-    name: 'Mclaren',
-    value: 'Mclaren',
-    selected: false
-  },
-  {
-    name: 'Mercedes',
-    value: 'Mercedes',
-    selected: false
-  },
-  {
-    name: 'Porshe',
-    value: 'Porshe',
-    selected: false
-  },
-  {
-    name: 'Rolls-Royce',
-    value: 'Rolls-Royce',
-    selected: false
-  },
-];
-
-const carData = [
-  {
-    date: '17/02/2025',
-    manufYear: '2024–25',
-    brand: 'MB',
-    model: 'GLC Coupe 200d/220d/300d',
-    exteriorColor: 'Any',
-    interiorColor: 'Any',
-    qty: 1,
-    comments: 'Burmester Sound',
-  },
-  {
-    date: '17/02/2025',
-    manufYear: '2024–25',
-    brand: 'MB',
-    model: 'G63',
-    exteriorColor: 'Magno Black',
-    interiorColor: 'Red',
-    qty: 1,
-    comments: '-',
-  },
-  {
-    date: '17/02/2025',
-    manufYear: '2024–25',
-    brand: 'MB',
-    model: 'G63',
-    exteriorColor: 'Olive Green or Grey',
-    interiorColor: 'Red',
-    qty: 1,
-    comments: '-',
-  },
-  {
-    date: '17/02/2025',
-    manufYear: '2024–25',
-    brand: 'MB',
-    model: 'G63',
-    exteriorColor: 'Black',
-    interiorColor: 'Black',
-    qty: 1,
-    comments: 'A22, II Night Pack, Carbon Exterior&Interior',
-  },
-  {
-    date: '14/02/2025',
-    manufYear: '2024–25',
-    brand: 'Lamborghini',
-    model: 'X3 20dUrus Performante',
-    exteriorColor: 'Black',
-    interiorColor: 'Black',
-    qty: 1,
-    comments: 'Panorama',
-  },
-  {
-    date: '17/02/2025',
-    manufYear: '2024–25',
-    brand: 'BMW',
-    model: 'X3 20d',
-    exteriorColor: 'Any',
-    interiorColor: 'Any',
-    qty: 1,
-    comments: 'Simple Options',
-  },
-  {
-    date: '14/02/2025',
-    manufYear: '2024–25',
-    brand: 'Lamborghini',
-    model: 'X3 20dUrus Performante',
-    exteriorColor: 'Black',
-    interiorColor: 'Black',
-    qty: 1,
-    comments: 'Panorama'
-  },
-  {
-    date: '14/02/2025',
-    manufYear: '2024–25',
-    brand: 'BMW',
-    model: 'M5',
-    exteriorColor: 'Black or Silver',
-    interiorColor: 'Black or White',
-    qty: 1,
-    comments: '-'
-  },
-  {
-    date: '14/02/2025',
-    manufYear: '2024–25',
-    brand: 'BMW',
-    model: 'X7 40d',
-    exteriorColor: 'Any',
-    interiorColor: 'Any',
-    qty: 2,
-    comments: '-'
-  },
-  {
-    date: '14/02/2025',
-    manufYear: '2024–25',
-    brand: 'BMW',
-    model: 'X6M',
-    exteriorColor: 'Any',
-    interiorColor: 'Any',
-    qty: 1,
-    comments: '-'
-  },
-  {
-    date: '14/02/2025',
-    manufYear: '2024–25',
-    brand: 'BMW',
-    model: 'X6 30d/40d',
-    exteriorColor: 'Any',
-    interiorColor: 'Any',
-    qty: 1,
-    comments: '-'
-  },
-  {
-    date: '14/02/2025',
-    manufYear: '2024–25',
-    brand: 'BMW',
-    model: 'X5 30d/40d',
-    exteriorColor: 'Any',
-    interiorColor: 'Any',
-    qty: 1,
-    comments: '-'
-  }
-];
-
 const metadata: Metadata = {
   title: 'Looking for',
   description:
@@ -222,27 +38,49 @@ const metadata: Metadata = {
 };
 
 const PageLookingFor = () => {
-  const { isDarkMode, mounted } = useThemeMode();
-  const translate = useTranslations();
+  const [isFirstLoading, setFirstLoading] = useState(true);
+  const [isError, setError] = useState(false);
   const [showFilterDropDown, setShowFilterDropDown] = useState(false);
   const [selectedCars, setSelectedCars] = useState<string[]>([]);
-  const [filteredCarList, setFilteredCarList] = useState<any[]>(carData);
+  const [lookingForData, setLookingForData] = useState<ILookingForCar[]>([]);
+  const [filteredCarList, setFilteredCarList] = useState<ILookingForCar[]>(lookingForData);
+  
+  const locale = useLocale();
+  const translate = useTranslations();
+  const { isDarkMode, mounted } = useThemeMode();
+  const { currentPage } = useQueryParams();
 
+  const cellTHeadClass = "flex shrink grow basis-0 py-3 px-2 lg:px-4 min-w-0 font-bold dark:text-secondary-950 text-primary-600 border-r dark:border-neutral-1100 border-neutral-200 md:text-base lg:text-xl";
+  const cellTBodyClass = "flex shrink grow basis-0 py-3 px-2 lg:px-4 text-ellipsis overflow-hidden min-w-0 font-normal dark:text-white text-neutral-500 border-r dark:border-neutral-1100 border-neutral-200 md:text-sm lg:text-base xl:text-lg";
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
+    getLookingForList(currentPage, 10, locale)
+    .then((data) => {
+      if (data) {
+        setLookingForData(data);
+        setFilteredCarList(data);
+      } else {
+        setError(true);
+      }
+    })
+    .finally(() => {
+      isFirstLoading && setFirstLoading(false);
+    });
+  }, [currentPage]);
+
+  useEffect(() => {
     if(selectedCars.length > 0) {
-      const filteredCars = carData.filter((car, index, self) => 
+      const filteredCars = lookingForData.filter((car, index, self) => 
         selectedCars.includes(car.brand) && index === self.findIndex(c => c.brand === car.brand && c.model === car.model)
       );
       setFilteredCarList(filteredCars);
     } else {
-      setFilteredCarList(carData);
+      setFilteredCarList(lookingForData);
     }
   }, [selectedCars]);
-  
   
   if (!mounted) return null;
 
@@ -254,20 +92,38 @@ const PageLookingFor = () => {
     );
   }
   
-  return (
+  return isFirstLoading ? (
+    <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
+      <div className='-mt-[76px]'>
+        <LoadingSpinner className='w-12' />
+      </div>
+    </div>
+  ) : isError ? (
+    <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
+      <ErrorComponent />
+    </div>
+  ) : (
     <div className={`nc-PageLookingFor relative overflow-hidden`}>
+      <BackgroundShaadowSection 
+        className=' dark:bg-[#123D4A] bg-[#00668451] dark:opacity-[10] -right-[350px] top-[14%]' 
+      />
+      <Image 
+        src={triangleBackgroundImgThird} 
+        alt='triangle background'
+        className='absolute rotate-3 bottom-[3%] -left-[8px] sm:-bottom-[25%] lg:-bottom-[65%] lg:-left-[22px] -z-10'
+      />
       <div className='container mt-8'>
         <Breadcrumbs 
           pages={lookingForPages}
         />
 
-        <div className='flex mt-4 mb-14'>
+        <div className='flex flex-col gap-3 md:gap-0 md:flex-row mt-4 mb-14'>
           <div className='flex-1'>
             <LookingForHero translate={translate} />
           </div>
-          <div className='flex flex-col justify-end'>
-            <div className='relative'>
-              <ButtonSecondary bg='bg-transparent' onClick={() => setShowFilterDropDown(!showFilterDropDown)}>
+          <div className='flex md:flex-col justify-end'>
+            <div className='relative flex w-full'>
+              <ButtonSecondary bg='ml-auto bg-transparent dark:bg-transparent' onClick={() => setShowFilterDropDown(!showFilterDropDown)}>
                 {translate('lookingFor.filter.button.filters')}
               </ButtonSecondary>
                 {showFilterDropDown &&
@@ -276,21 +132,21 @@ const PageLookingFor = () => {
                       className="fixed inset-0 bg-black bg-opacity-50 z-40"
                       onClick={() => setShowFilterDropDown(false)}
                     />
-                    <div className="absolute p-10 top-full right-0 z-40 mt-5 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-2xl shadow-lg w-[430px]">
+                    <div className="absolute p-10 top-full right-0 z-40 mt-5 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-2xl shadow-lg w-full lg:w-[430px]">
                       <p className='text-2xl text-center lg:text-4xl font-semibold text-neutral-1050 dark:text-neutral-200'>{translate('lookingFor.filter.button.filters')}</p>
                       <span className='absolute right-0 top-0 p-1'>
                         <ButtonClose onClick={() => setShowFilterDropDown(!showFilterDropDown)} />
                       </span>
                       <div className='flex flex-col gap-4 my-9 max-h-[600px] overflow-y-auto pr-2'>
-                        {carListFilter.map((car, index) => 
+                        {lookingForData?.map((car, index) => 
                           <div key={index} className='flex items-center'>
                             <RadioButton 
-                              name={car.name}
-                              label={car.value}
+                              name={car.brand}
+                              label={car.brand}
                               sizeStyle='w-4 h-4'
                               borderStyle='rounded-sm'
-                              onChange={() => handleToggleSelectedCar(car.name)}
-                              checked={selectedCars.includes(car.name)}
+                              onChange={() => handleToggleSelectedCar(car.brand)}
+                              checked={selectedCars.includes(car.brand)}
                             />
                           </div>
                         )}
@@ -319,35 +175,59 @@ const PageLookingFor = () => {
           } 
         </div>
 
-        <table className="hidden md:block table-auto w-full text-left border-collapse">
-          <thead className="relative w-full border-b dark:border-neutral-1100 border-neutral-200 dark:bg-[#1C2B2D] dark:text-secondary-950 text-primary-600 md:text-lg text-xl">
-            <tr>
-              <th className="md:pr-2 md:py-2 lg:py-4 border-r dark:border-neutral-1100 border-neutral-200 ">Date</th>
-              <th className="md:px-2 md:py-2 lg:px-5 lg:py-4 border-r xl:w-[120px] dark:border-neutral-1100 border-neutral-200 ">Manuf. <br /> year</th>
-              <th className="md:px-2 md:py-2 lg:px-5 lg:py-4 border-r xl:w-[160px] dark:border-neutral-1100 border-neutral-200  border-neutral-200">Brand</th>
-              <th className="md:px-2 md:py-2 lg:px-5 lg:py-4 border-r xl:w-[260px] dark:border-neutral-1100 border-neutral-200 ">Model</th>
-              <th className="md:px-2 md:py-2 lg:px-5 lg:py-4 border-r dark:border-neutral-1100 border-neutral-200 ">Exterior <br /> Color</th>
-              <th className="md:px-2 md:py-2 lg:px-5 lg:py-4 border-r dark:border-neutral-1100 border-neutral-200 ">Interior <br /> Color</th>
-              <th className="md:px-2 md:py-2 lg:px-5 lg:py-4 md:w-[40px] xl:w-[80px] border-r dark:border-neutral-1100 border-neutral-200 ">Qty</th>
-              <th className="md:px-2 md:py-2 lg:px-5 lg:py-4">Comments</th>
-            </tr>
-          </thead>
-          <tbody className="dark:text-white w-full text-neutral-500 md:text-sm lg:text-base xl:text-lg">
-            {filteredCarList.map((car, index) => (
-              <tr key={index} className="border-t dark:border-neutral-1100 border-neutral-200 ">
-                {Object.values(car).map((value:any, index) => (
-                  <td key={index} className="first:px-0 first:pr-5 md:first:pr-2 md:px-2 md:py-2 lg:px-5 lg:py-3 last:border-r-0 border-r dark:border-neutral-1100 border-neutral-200 ">
-                    {value}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className='hidden md:block'>
+          <div 
+            className='flex w-full border-b dark:bg-[#1C2B2D] dark:border-neutral-1100 border-neutral-200'
+            style={{
+              background: isDarkMode
+              ? undefined
+              : 'linear-gradient(90deg, rgba(188, 202, 204, 0) 0%, rgba(188, 202, 204, 1) 30%, rgba(188, 202, 204, 1) 70%, rgba(188, 202, 204, 0) 100%)'
+            }}  
+          >
+            <>
+              <div className={`${cellTHeadClass} lg:grow-0 lg:basis-[120px] xl:basis-0 xl:grow text-center`}>
+                Date
+              </div>
+              <div className={cellTHeadClass}>
+                Manuf. <br /> year
+              </div>
+              <div className={cellTHeadClass}>
+                Brand
+              </div>
+              <div className={cellTHeadClass}>
+                Model
+              </div>
+              <div className={cellTHeadClass}>
+                Exterior <br /> Color
+              </div>
+              <div className={cellTHeadClass}>
+                Interior <br /> Color
+              </div>
+              <div className={`${cellTHeadClass} basis-[45px] lg:basis-[70px] grow-0 xl:basis-0 xl:grow text-center`}>
+                Qty
+              </div>
+              <div className={`${cellTHeadClass} border-r-0`}>
+                Comments
+              </div>
+            </>
+          </div>
+          {filteredCarList.map((car, index) => (
+            <div key={index} className="flex w-full border-b dark:border-neutral-1100 border-neutral-200">
+              <div className={`${cellTBodyClass} lg:basis-[120px] xl:basis-0 lg:grow-0 xl:grow text-center`}>{car.date}</div>
+              <div className={cellTBodyClass}>{car.my}</div>
+              <div className={cellTBodyClass}>{car.brand}</div>
+              <div className={cellTBodyClass}>{car.model}</div>
+              <div className={cellTBodyClass}>{car.color_exterior}</div>
+              <div className={cellTBodyClass}>{car.color_interior}</div>
+              <div className={`${cellTBodyClass} basis-[45px] grow-0 xl:basis-0 lg:basis-[70px] xl:grow text-center`}>{car.count}</div>
+              <div className={`${cellTBodyClass} border-r-0 `}>{car.comments}</div>
+            </div>
+          ))}
+        </div>
 
-        <div className='flex md:hidden flex-col gap-4 lg:gap-6 mb-8 md:mb-14'>
-            {filteredCarList.map((car) => (
-              <div className='flex w-[343px] gap-3 p-6 w-fit flex-col border dark:border-neutral-800 border-none dark:bg-neutral-950 bg-white rounded-2xl'>
+        <div className='flex md:hidden items-center flex-col gap-4 lg:gap-6 mb-8 md:mb-14'>
+            {filteredCarList.map((car, index) => (
+              <div key={index} className='flex max-w-[443px] w-full gap-3 p-6 flex-col border dark:border-neutral-800 border-none dark:bg-neutral-950 bg-white rounded-2xl'>
                 <div className='flex flex-col gap-3'>
                   <div className='flex gap-4'>
                     <div className='flex gap-4'>
@@ -356,7 +236,7 @@ const PageLookingFor = () => {
                   </div>
                   <div className='flex gap-4'>
                     <div className='flex gap-4'>
-                      <p className='text-primary-600 dark:text-secondary-950 font-bold w-[120px]'>Manuf. year</p><p className='text-neutral-1100 dark:text-white'>{car.manufYear}</p>
+                      <p className='text-primary-600 dark:text-secondary-950 font-bold w-[120px]'>Manuf. year</p><p className='text-neutral-1100 dark:text-white'>{car.my}</p>
                     </div>
                   </div>
                   <div className='flex gap-4'>
@@ -368,17 +248,17 @@ const PageLookingFor = () => {
                 <div className='flex flex-col py-3 gap-3 border-b border-t border-neutral-200 dark:border-neutral-1100'>
                   <div className='flex gap-4'>
                     <div className='flex gap-4'>
-                      <p className='text-primary-600 dark:text-secondary-950 font-bold whitespace-nowrap w-[120px]'>Exterior Color</p><p className='text-neutral-1100 dark:text-white'>{car.exteriorColor}</p>
+                      <p className='text-primary-600 dark:text-secondary-950 font-bold whitespace-nowrap w-[120px]'>Exterior Color</p><p className='text-neutral-1100 dark:text-white'>{car.color_exterior}</p>
                     </div>
                   </div>
                   <div className='flex gap-4'>
                     <div className='flex gap-4'>
-                      <p className='text-primary-600 dark:text-secondary-950 font-bold w-[120px]'>Interior Color</p><p className='text-neutral-1100 dark:text-white'>{car.interiorColor}</p>
+                      <p className='text-primary-600 dark:text-secondary-950 font-bold w-[120px]'>Interior Color</p><p className='text-neutral-1100 dark:text-white'>{car.color_interior}</p>
                     </div>
                   </div>
                   <div className='flex gap-4'>
                     <div className='flex gap-4'>
-                      <p className='text-primary-600 dark:text-secondary-950 font-bold w-[120px]'>Quantitiy</p><p className='text-neutral-1100 dark:text-white'>{car.qty}</p>
+                      <p className='text-primary-600 dark:text-secondary-950 font-bold w-[120px]'>Quantitiy</p><p className='text-neutral-1100 dark:text-white'>{car.count}</p>
                     </div>
                   </div>
                 </div>
