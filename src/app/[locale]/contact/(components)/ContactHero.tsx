@@ -59,6 +59,12 @@ export default function ContactHero({
             >
               +49 1590 2465256
             </Link>
+            <Link
+              className='inline-block mt-4 lg:mt-2 text-neutral-500 dark:text-neutral-400 hover:underline'
+              href='tel:+971522272939'
+            >
+              +971 52 227 2939
+            </Link>
           </div>
           <div className='w-full lg:w-[18%]'>
             <h2 className='font-semibold dark:text-neutral-200 tracking-wider'>
