@@ -134,7 +134,10 @@ export default function GalleryMedia({ images, videos }: IProps) {
     }
     if(!hasVideo && imageCount <= 2){
       return (
-        <div className="relative w-full max-w-6xl m-auto pb-[44%] rounded-3xl overflow-hidden cursor-pointer">
+        <div 
+          className="relative z-10 w-full max-w-6xl m-auto pb-[44%] rounded-3xl overflow-hidden cursor-pointer"
+          onClick={openImageModal}
+            >
           <Image
             fill
             src={images[0]?.url}

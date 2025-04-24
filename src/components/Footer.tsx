@@ -64,6 +64,14 @@ export default function Footer() {
                     {translate('footer.quickLink.soldCar')}
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href={`/${locale}/looking-for`}
+                    className='text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
+                  >
+                    {translate('footer.quickLink.carsSanted')}
+                  </Link>
+                </li>
               </ul>
             </div>
             <div className='col-span-12 md:col-span-6 xl:col-span-3 space-y-6'>

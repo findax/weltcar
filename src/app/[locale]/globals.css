@@ -25,3 +25,52 @@ input[type='checkbox']:focus {
 .dark .bg-img-placeholder {
   background-image: url('../../images/placeholder-dark.svg');
 }
+
+/* MAP STYLES */
+.dark .leaflet-popup-content-wrapper {
+  width: 300px !important;
+  background-color: rgba(11, 33, 38, 1) !important;
+  color: white !important;
+  border-radius: 25px !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+.light .leaflet-popup-content-wrapper {
+  width: 300px !important;
+  background-color: rgba(243, 246, 246, 1) !important;
+  color: white !important;
+  border-radius: 25px !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+.leaflet-popup-tip {
+  background-color: #0f172a !important;
+}
+
+.dark .leaflet-popup-content {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 30px !important;
+  color: rgba(188, 202, 204, 1) !important;
+  font-size: 18px !important;
+}
+
+.light .leaflet-popup-content {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 30px !important;
+  color: rgba(55, 78, 81, 1) !important;
+  font-size: 18px !important; 
+}
+
+.leaflet-popup-close-button {
+  padding: 5px 10px 0 0 !important;
+}
+
+.light .leaflet-container a {
+  color: rgba(55, 78, 81, 1) !important;
+}
+
+.dark .leaflet-container a {
+  color: rgba(188, 202, 204, 1) !important;
+}
