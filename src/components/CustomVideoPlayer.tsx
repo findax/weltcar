@@ -128,14 +128,14 @@ export const CustomVideoPlayer = ({
         </div>
 
         <div className="bg-opacity-0 flex items-center cursor-pointer">
-          <SpeakerXMarkIcon className="h-[25px] w-[25px] md:h-[30px] md:w-[30px]" />
+          <SpeakerXMarkIcon className="text-white h-[25px] w-[25px] md:h-[30px] md:w-[30px]" />
         </div>
 
         <div 
           className="hidden md:block bg-opacity-0 cursor-pointer"
           onClick={onClose}
         >
-          <ArrowsPointingInIcon className="h-[25px] w-[25px] md:h-[30px] md:w-[30px]" />
+          <ArrowsPointingInIcon className="text-white h-[25px] w-[25px] md:h-[30px] md:w-[30px]" />
         </div>
       </div>
 
@@ -143,7 +143,7 @@ export const CustomVideoPlayer = ({
         className="md:hidden absolute top-4 right-8 md:bottom-8 md:right-10 z-10 bg-opacity-0 cursor-pointer"
         onClick={onClose}
       >
-        <ArrowsPointingInIcon className="h-[25px] w-[25px] md:h-[30px] md:w-[30px]" />
+        <ArrowsPointingInIcon className="text-white h-[25px] w-[25px] md:h-[30px] md:w-[30px]" />
       </div>
 
       {!isPlaying && (

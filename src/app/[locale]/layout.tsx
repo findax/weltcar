@@ -13,8 +13,9 @@ import '@/fonts/line-awesome-1.3.0/css/line-awesome.css';
 import 'rc-slider/assets/index.css';
 import 'react-toastify/dist/ReactToastify.min.css';
 import 'react-tooltip/dist/react-tooltip.css';
-import './globals.css';
 import '@/styles/index.scss';
+import 'leaflet/dist/leaflet.css';
+import './globals.css';
 
 const poppins = Poppins({
   subsets: ['latin'],

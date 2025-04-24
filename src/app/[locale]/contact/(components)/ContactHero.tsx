@@ -1,8 +1,5 @@
 import Link from 'next/link';
 import SocialsList from '@/shared/SocialsList';
-import FeedbackForm from './FeedbackForm';
-import Image from 'next/image';
-import carImg from '@/images/car-4.png';
 import { WatsappIcon } from '@/shared/icons';
 
 interface IProps{
@@ -86,18 +83,6 @@ export default function ContactHero({
               {translate('contact.social.label')}
             </h2>
             <SocialsList itemClass='text-neutral-600 dark:hover:text-white hover:text-black dark:text-neutral-200' className='mt-4 lg:mt-2' />
-          </div>
-        </div>
-
-        <div className='flex gap-16 lg:gap-8 flex-col-reverse lg:flex-row mt-14 justify-between'>
-          <div className='flex flex-grow justify-center lg:justify-start shrink'>
-            <Image
-              src={carImg}
-              alt='mercedes icon'
-            />
-          </div>
-          <div className='w-full lg:w-[480px]'>
-            <FeedbackForm translate={translate}/>
           </div>
         </div>
       </div>

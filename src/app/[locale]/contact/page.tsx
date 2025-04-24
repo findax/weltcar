@@ -11,6 +11,9 @@ import triangleBackgroundImgThird from '@/images/bg-figures/triangle-3.png'
 import BackgroundShaadowSection from '@/components/BackgroundShaadowSection';
 import { useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import MapWithPartners from '@/components/MapWithPartners';
+import FeedbackForm from './(components)/FeedbackForm';
+import carImg from '@/images/car-4.png';
 
 
 const metadata: Metadata = {
@@ -46,8 +49,28 @@ const PageContact = () => {
         <ContactHero translate={translate} />
 
         <div className='relative pt-16 mb-24 lg:md-32'>
+          <h3 className='mb-10 text-center lg:mb-20 font-bold text-neutral-1050 dark:text-white text-3xl md:text-4xl xl:text-5xl'>
+            {translate('contact.title.ourPartners')}
+          </h3>
+          <MapWithPartners />
+        </div>
+
+        <div className='relative pt-16 mb-24 lg:md-32 flex gap-16 lg:gap-8 flex-col-reverse lg:flex-row mt-14 justify-between'>
+          <div className='flex flex-grow justify-center lg:justify-start shrink'>
+            <Image
+              src={carImg}
+              alt='mercedes icon'
+            />
+          </div>
+          <div className='w-full lg:w-[480px]'>
+            <FeedbackForm translate={translate}/>
+          </div>
+        </div>
+
+        <div className='relative pt-16 mb-24 lg:md-32'>
           <SectionSubscribe translate={translate} />
         </div>
+
       </div>
       <div className='hidden relative sm:bottom-0 sm:h-full -bottom-[30px] h-72 justify-center w-full'>
         <Image 
