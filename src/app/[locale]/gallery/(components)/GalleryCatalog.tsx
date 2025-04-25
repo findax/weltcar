@@ -7,6 +7,8 @@ import { useLocale, useTranslations } from 'next-intl';
 import { getGalleries } from '@/api/gallery';
 import { GalleryCarMedia } from '@/types/gallery';
 import GalleryList from './GalleryList';
+import { PAGE_SIZE } from '../../(account-pages)/partner-cars-list/page';
+import useQueryParams from '@/hooks/useQueryParams';
 
 const GalleryCatalog = () => {
   const [isFirstLoading, setFirstLoading] = useState(true);
@@ -16,8 +18,10 @@ const GalleryCatalog = () => {
   const translate = useTranslations();
   const locale = useLocale();
 
+  const { currentPage } = useQueryParams();
+
   useEffect(() => {
-    getGalleries(locale)
+    getGalleries(currentPage, PAGE_SIZE,locale)
       .then((data) => {
         if (data) {
           setGalleries(data as GalleryCarMedia[]);
@@ -28,7 +32,7 @@ const GalleryCatalog = () => {
       .finally(() => {
         isFirstLoading && setFirstLoading(false);
       });
-  }, []);
+  }, [currentPage]);
 
   return isFirstLoading ? (
     <div className='h-[calc(100vh-76px)] w-full flex justify-center items-center'>

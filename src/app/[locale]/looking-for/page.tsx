@@ -2,7 +2,7 @@
 
 import { Metadata } from 'next';
 import { useThemeMode } from '@/hooks/useThemeMode';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import carsBackgroundDarkImg from '@/images/car-dark.png'
@@ -19,6 +19,7 @@ import useQueryParams from '@/hooks/useQueryParams';
 import { ILookingForCar } from '@/types/lookingFor';
 import BackgroundShaadowSection from '@/components/BackgroundShaadowSection';
 import triangleBackgroundImgThird from '@/images/bg-figures/triangle-3.png'
+import { XMarkIcon } from '@heroicons/react/24/solid';
 
 const lookingForPages = [
   {
@@ -43,15 +44,21 @@ const PageLookingFor = () => {
   const [showFilterDropDown, setShowFilterDropDown] = useState(false);
   const [selectedCars, setSelectedCars] = useState<string[]>([]);
   const [lookingForData, setLookingForData] = useState<ILookingForCar[]>([]);
-  const [filteredCarList, setFilteredCarList] = useState<ILookingForCar[]>(lookingForData);
+  const [appliedCars, setAppliedCars] = useState<string[]>([]);
   
   const locale = useLocale();
   const translate = useTranslations();
   const { isDarkMode, mounted } = useThemeMode();
   const { currentPage } = useQueryParams();
 
+  const filteredCarList = useMemo(() => {
+    if (appliedCars.length === 0) return lookingForData;
+    return lookingForData.filter(car => appliedCars.includes(car.brand));
+  }, [appliedCars, lookingForData]);
+
   const cellTHeadClass = "flex shrink grow basis-0 py-3 px-2 lg:px-4 min-w-0 font-bold dark:text-secondary-950 text-primary-600 border-r dark:border-neutral-1100 border-neutral-200 md:text-base lg:text-xl";
   const cellTBodyClass = "flex shrink grow basis-0 py-3 px-2 lg:px-4 text-ellipsis overflow-hidden min-w-0 font-normal dark:text-white text-neutral-500 border-r dark:border-neutral-1100 border-neutral-200 md:text-sm lg:text-base xl:text-lg";
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -61,7 +68,6 @@ const PageLookingFor = () => {
     .then((data) => {
       if (data) {
         setLookingForData(data);
-        setFilteredCarList(data);
       } else {
         setError(true);
       }
@@ -71,17 +77,6 @@ const PageLookingFor = () => {
     });
   }, [currentPage]);
 
-  useEffect(() => {
-    if(selectedCars.length > 0) {
-      const filteredCars = lookingForData.filter((car, index, self) => 
-        selectedCars.includes(car.brand) && index === self.findIndex(c => c.brand === car.brand && c.model === car.model)
-      );
-      setFilteredCarList(filteredCars);
-    } else {
-      setFilteredCarList(lookingForData);
-    }
-  }, [selectedCars]);
-  
   if (!mounted) return null;
 
   const handleToggleSelectedCar = (carName: string) => {
@@ -91,6 +86,18 @@ const PageLookingFor = () => {
         : [...prev, carName]
     );
   }
+
+  const handleRemoveAppliedCar = (carBrandToRemove: string) => {
+    const updatedApplied = appliedCars.filter((carBrand) => carBrand !== carBrandToRemove);
+    setAppliedCars(updatedApplied);
+  
+    setSelectedCars((prev) => prev.filter((carBrand) => carBrand !== carBrandToRemove));
+  };
+
+  const handleApplyFilter = () => {
+    setAppliedCars(selectedCars);
+    setShowFilterDropDown(false);
+  };
   
   return isFirstLoading ? (
     <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
@@ -153,7 +160,7 @@ const PageLookingFor = () => {
                       </div>
                       <ButtonPrimary 
                         className='w-full'
-                        onClick={() => {}}
+                        onClick={handleApplyFilter}
                       >
                         {translate('lookingFor.filter.button.apply')}
                       </ButtonPrimary>
@@ -165,11 +172,16 @@ const PageLookingFor = () => {
         </div>
 
         <div className='flex gap-4 mt-7 mb-6'>
-          {selectedCars.length > 0 && 
-            selectedCars.map((selectedCarName) => (
-              <ButtonSecondary className='sm:py-2 sm:text-sm lg:text-lg' bg='bg-transparent'>
-                {selectedCarName}
-                <ButtonClose className='ml-2 text-primary-600 dark:text-primary-950' onClick={() => handleToggleSelectedCar(selectedCarName)} />
+          {(appliedCars.length > 0 ) && 
+            appliedCars.map((appliedCarName, index) => (
+              <ButtonSecondary key={index} className='sm:py-2 sm:text-sm lg:text-lg' bg='bg-transparent'>
+                {appliedCarName}
+                <div 
+                  className='flex items-center justify-center rounded-full w-5 h-5 ml-2 text-primary-600 dark:text-primary-950 hover:bg-neutral-100 dark:hover:bg-neutral-700'
+                  onClick={() => handleRemoveAppliedCar(appliedCarName)} 
+                >
+                  <XMarkIcon />
+                </div>
               </ButtonSecondary>
             ))
           } 
@@ -177,7 +189,7 @@ const PageLookingFor = () => {
 
         <div className='hidden md:block'>
           <div 
-            className='flex w-full border-b dark:bg-[#1C2B2D] dark:border-neutral-1100 border-neutral-200'
+            className={` ${filteredCarList?.length < 1 ? 'border-b dark:border-neutral-1100 border-neutral-200' : '' } flex w-full dark:bg-[#1C2B2D]`}
             style={{
               background: isDarkMode
               ? undefined
@@ -212,7 +224,7 @@ const PageLookingFor = () => {
             </>
           </div>
           {filteredCarList.map((car, index) => (
-            <div key={index} className="flex w-full border-b dark:border-neutral-1100 border-neutral-200">
+            <div key={index} className="flex w-full border-t dark:border-neutral-1100 border-neutral-200">
               <div className={`${cellTBodyClass} lg:basis-[120px] xl:basis-0 lg:grow-0 xl:grow text-center`}>{car.date}</div>
               <div className={cellTBodyClass}>{car.my}</div>
               <div className={cellTBodyClass}>{car.brand}</div>

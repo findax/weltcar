@@ -2,13 +2,17 @@ import { toast } from 'react-toastify';
 import api from './apiInstance';
 import { GalleryCarMedia } from '@/types/gallery';
 
-export const getGalleries = async (locale: string) => {
+export const getGalleries = async (
+  page: number,
+  perPage: number,
+  locale: string
+) => {
   const headers: Record<string, string> = {
     'Accept-Language': locale,
   };
   return new Promise<GalleryCarMedia[] | false>((resolve) => {
     api
-      .get(`/api/galleries`, {
+      .get(`/api/galleries?page=${page}&perPage=${perPage}`, {
         headers,
       })
       .then((res) => resolve(res.data.data))
