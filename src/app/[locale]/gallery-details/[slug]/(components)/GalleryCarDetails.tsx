@@ -41,15 +41,14 @@ export default function GalleryCarDetails({
       }));
       setGalleryImages(modifiedImagesArray);
       setGalleryVideos(galleryData.videos);
-      const newBreadcrumpTitle = `${galleryData.name} ${galleryData.images[0].title}`
-      setBrandCar(newBreadcrumpTitle);
+      setBrandCar(galleryData.name);
       setBreadcrumbsPages((prevPages) => {
         const isTitleExists = prevPages.some(
-          (page) => page.pageName === newBreadcrumpTitle
+          (page) => page.pageName === galleryData.name
         );
 
         if (!isTitleExists) {
-          return [...prevPages, { pageName: newBreadcrumpTitle, pageHref: '' }];
+          return [...prevPages, { pageName: galleryData.name, pageHref: '' }];
         }
         return prevPages;
       });
@@ -68,7 +67,7 @@ export default function GalleryCarDetails({
       <div className='mt-8'>
         <Breadcrumbs pages={breadcrumbsPages} />
       </div>
-      <GalleryTitle brand={brandCar} year='2024' />
+      <GalleryTitle brand={brandCar} description={galleryData?.description || ''} />
       {galleryImages && 
         <div className='mt-12 mb-44'>
           <GalleryMedia images={galleryImages} videos={galleryVideos}/>

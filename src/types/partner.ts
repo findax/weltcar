@@ -177,3 +177,19 @@ export interface IPartnerResponse {
   is_verified: boolean;
   files: IPartnerFileList[];
 }
+
+export interface IMapPartnerObject {
+  id: number;
+  name: string;
+  type: string;
+  position: string;
+  parameters: string;
+  address: string;
+  phones: string;
+}
+
+export interface IMapPartnerData {
+  id: number;
+  name: string;
+  objects: IMapPartnerObject[];
+}

@@ -64,6 +64,14 @@ export default function Footer() {
                     {translate('footer.quickLink.soldCar')}
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href={`/${locale}/looking-for`}
+                    className='text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
+                  >
+                    {translate('footer.quickLink.carsSanted')}
+                  </Link>
+                </li>
               </ul>
             </div>
             <div className='col-span-12 md:col-span-6 xl:col-span-3 space-y-6'>
@@ -101,6 +109,16 @@ export default function Footer() {
                     href='tel:+4915902465256'
                   >
                     +49 1590 2465256
+                  </Link>
+                </li>
+                <li className='flex items-center gap-4'>
+                  {/* <i className='las la-phone-volume text-xl p-2 rounded-full border border-neutral-200 dark:border-neutral-700'></i> */}
+                  📞{' '}
+                  <Link
+                    className='text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
+                    href='tel:+971522272939'
+                  >
+                    +971 52 227 2939
                   </Link>
                 </li>
                 <li>
