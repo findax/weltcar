@@ -12,7 +12,7 @@ export default function ContactHero({
   return (
     <div className='relative'>
       <div>
-        <h1 className='text-4xl lg:text-6xl xl:text-[80px] font-bold text-neutral-1050 dark:text-white '>{translate('contact.title.contact')}</h1>
+        <h1 className='text-4xl lg:text-6xl xl:text-[80px] font-bold text-neutral-1050 dark:text-white '>{translate('contact.title')}</h1>
         <span className='block lg:w-[480px] my-9 lg:my-14 lg:text-lg text-neutral-500 dark:text-neutral-400'>
           {translate('contact.description')}
         </span>
@@ -45,7 +45,7 @@ export default function ContactHero({
               info@findax.eu
             </Link>
           </div>
-          <div className='w-full lg:w-[18%]'>
+          <div className='flex flex-col lg:block w-full lg:w-[18%]'>
             <h2 className='font-semibold dark:text-neutral-200 tracking-wider'>
               <span className='mr-3'>📞</span>
               {translate('contact.phone.label')}
