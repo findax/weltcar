@@ -1,7 +1,6 @@
 'use client'
 
 import Image from 'next/image';
-import { Metadata } from 'next';
 import ContactHero from './(components)/ContactHero';
 import SectionSubscribe from '@/components/SectionSubscribe';
 import { useThemeMode } from '@/hooks/useThemeMode';
@@ -16,7 +15,7 @@ import FeedbackForm from './(components)/FeedbackForm';
 import carImg from '@/images/car-4.png';
 
 
-const metadata: Metadata = {
+const metadata = {
   title: 'Contact | Elite Car Sales & Global Delivery | Luxury Vehicles Worldwide | WeltCar',
   description:
     'Get in touch with us for inquiries about our luxury cars and global delivery services. Contact our team for assistance with purchasing elite vehicles and delivery to countries like Germany, Switzerland, Dubai, and China.',
