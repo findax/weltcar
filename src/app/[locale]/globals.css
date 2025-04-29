@@ -28,7 +28,7 @@ input[type='checkbox']:focus {
 
 /* MAP STYLES */
 .dark .leaflet-popup-content-wrapper {
-  width: auto !important;
+  width: 350px !important;
   background-color: rgba(11, 33, 38, 1) !important;
   color: white !important;
   border-radius: 25px !important;
@@ -36,7 +36,7 @@ input[type='checkbox']:focus {
 }
 
 .light .leaflet-popup-content-wrapper {
-  width: auto !important;
+  width: 350px !important;
   background-color: rgba(243, 246, 246, 1) !important;
   color: white !important;
   border-radius: 25px !important;
