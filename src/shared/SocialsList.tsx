@@ -14,7 +14,7 @@ export interface SocialsListProps {
 const socialsDemo: SocialType[] = [
   { name: 'Facebook', icon: <FaFacebookSquare />, href: 'https://www.facebook.com/weltcar.de', iconType: 'svg' },
   { name: 'Telegram', icon: <FaTelegram />, href: 'http://t.me/weltcarde', iconType: 'svg' },
-  { name: 'WhatsUp', icon: <IoLogoWhatsapp />, href: 'https://whatsapp.com/channel/0029VbBq1rO9RZAbDL2Quc2U', iconType: 'svg' },
+  { name: 'WhatsApp', icon: <IoLogoWhatsapp />, href: 'https://whatsapp.com/channel/0029VbBq1rO9RZAbDL2Quc2U', iconType: 'svg' },
   { name: 'Instagram', icon: <RiInstagramFill />, href: 'https://www.instagram.com/weltcar.de/', iconType: 'svg' },
 ];
 
@@ -37,9 +37,9 @@ const SocialsList = ({
           rel='noopener noreferrer'
           title={item.name}
         >
-          {item.iconType 
+          {item.iconType
             ? <span className='opacity-50'>{item.icon}</span>
-            : <Image 
+            : <Image
                 src={item.icon}
                 alt={item.name}
               />
