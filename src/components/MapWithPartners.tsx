@@ -14,6 +14,7 @@ import { PhoneIcon, MapPinIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link';
 import ErrorComponent from './ErrorComponent';
 import LoadingSpinner from '@/shared/LoadingSpinner';
+import { Route } from 'next';
 
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -47,9 +48,19 @@ const PartnersMap = () => {
         >
           {phone}
         </Link>
-        {/* <span className='block' key={index}></span> */}
       </div>
     ));
+  }
+
+  const renderSocialHref = (link: string) => {
+    const newUrl = new URL(link);
+    return  <Link
+      className='inline-block text-neutral-500 dark:text-neutral-400 hover:underline'
+      href={`${link}` as Route}
+      target='_blank'
+    >
+      {newUrl.host + newUrl.pathname}
+    </Link>
   }
   
   useEffect(() => {
@@ -83,9 +94,9 @@ const PartnersMap = () => {
     ) : (
     <MapContainer
       center={[52.52, 13.405]}
-      zoom={7}
+      zoom={5}
       scrollWheelZoom={true}
-      zoomControl={false}
+      zoomControl={true}
       className='w-full h-[300px] md:h-[500px] rounded-3xl'
     >
       <TileLayer
@@ -110,10 +121,14 @@ const PartnersMap = () => {
                 <div className='flex flex-col gap-1 font-medium mt-1'>
                   <div className='flex gap-1 items-center'>
                     <MapPinIcon height={18} width={18} className='mr-1' />
-                    <span>{partner.address}</span>
+                    <span>{partner?.address}</span>
                   </div>
                   <div className='flex flex-col gap-1'>
-                    {renderPhoneList(partner.phones)}
+                    {renderPhoneList(partner?.phones)}
+                  </div>
+                  <div className='flex flex-col gap-1'>
+                    {renderSocialHref(partner?.link)}
+                    <span className='break-words max-w-[300px]'>{partner?.comment}</span>
                   </div>
                 </div>
               </div>

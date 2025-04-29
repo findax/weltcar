@@ -1,11 +1,8 @@
 import { SocialType } from '@/shared/SocialsShare';
-import youTubeImg from '@/images/socials/youTube.svg'
-import facebookImg from '@/images/socials/facebook.svg'
-import twitterImg from '@/images/socials/twitter.svg'
-import instagramImg from '@/images/socials/instagram.svg'
 import { FaTelegram } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
 import { FaFacebookSquare } from "react-icons/fa";
+import { IoLogoWhatsapp } from "react-icons/io";
 import Image from 'next/image';
 
 export interface SocialsListProps {
@@ -17,7 +14,7 @@ export interface SocialsListProps {
 const socialsDemo: SocialType[] = [
   { name: 'Facebook', icon: <FaFacebookSquare />, href: 'https://www.facebook.com/weltcar.de', iconType: 'svg' },
   { name: 'Telegram', icon: <FaTelegram />, href: 'http://t.me/weltcarde', iconType: 'svg' },
-  // { name: 'Youtube', icon: youTubeImg, href: '#' },
+  { name: 'WhatsUp', icon: <IoLogoWhatsapp />, href: 'https://whatsapp.com/channel/0029VbBq1rO9RZAbDL2Quc2U', iconType: 'svg' },
   { name: 'Instagram', icon: <RiInstagramFill />, href: 'https://www.instagram.com/weltcar.de/', iconType: 'svg' },
 ];
 

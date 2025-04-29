@@ -186,6 +186,8 @@ export interface IMapPartnerObject {
   parameters: string;
   address: string;
   phones: string;
+  comment: string;
+  link: string;
 }
 
 export interface IMapPartnerData {
