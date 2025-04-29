@@ -1,3 +1,5 @@
+import { ILinks, IMeta } from './catalog';
+
 export interface GalleryMediaItem {
   description: string;
   file_name: string;
@@ -21,6 +23,12 @@ export interface GalleryCarMedia {
   description: string;
   images: GalleryImageItem[];
   videos: GalleryVideoItem[];
+}
+
+export interface IGalleryCatalog {
+  data: GalleryCarMedia[];
+  links: ILinks;
+  meta: IMeta;
 }
 
 export enum GalleryOption {

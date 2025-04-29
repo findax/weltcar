@@ -5,7 +5,7 @@ import LoadingSpinner from '@/shared/LoadingSpinner';
 import ErrorComponent from '@/components/ErrorComponent';
 import { useLocale, useTranslations } from 'next-intl';
 import { getGalleries } from '@/api/gallery';
-import { GalleryCarMedia } from '@/types/gallery';
+import { GalleryCarMedia, IGalleryCatalog } from '@/types/gallery';
 import GalleryList from './GalleryList';
 import { PAGE_SIZE } from '../../(account-pages)/partner-cars-list/page';
 import useQueryParams from '@/hooks/useQueryParams';
@@ -13,7 +13,7 @@ import useQueryParams from '@/hooks/useQueryParams';
 const GalleryCatalog = () => {
   const [isFirstLoading, setFirstLoading] = useState(true);
   const [isError, setError] = useState(false);
-  const [galleries, setGalleries] = useState([] as GalleryCarMedia[]);
+  const [galleries, setGalleries] = useState({} as IGalleryCatalog);
 
   const translate = useTranslations();
   const locale = useLocale();
@@ -21,10 +21,10 @@ const GalleryCatalog = () => {
   const { currentPage } = useQueryParams();
 
   useEffect(() => {
-    getGalleries(currentPage, PAGE_SIZE,locale)
+    getGalleries(currentPage, PAGE_SIZE, locale)
       .then((data) => {
         if (data) {
-          setGalleries(data as GalleryCarMedia[]);
+          setGalleries(data);
         } else {
           setError(true);
         }
@@ -46,8 +46,8 @@ const GalleryCatalog = () => {
     </div>
   ) : (
     <GalleryList
-      galleries={galleries || []}
-      // results={blogData?.meta.total || 0}
+      galleries={galleries.data || []}
+      results={galleries?.meta.total || 0}
       translate={translate}
     />
   );
