@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 import api from './apiInstance';
-import { GalleryCarMedia } from '@/types/gallery';
+import { GalleryCarMedia, IGalleryCatalog } from '@/types/gallery';
 
 export const getGalleries = async (
   page: number,
@@ -10,12 +10,12 @@ export const getGalleries = async (
   const headers: Record<string, string> = {
     'Accept-Language': locale,
   };
-  return new Promise<GalleryCarMedia[] | false>((resolve) => {
+  return new Promise<IGalleryCatalog | false>((resolve) => {
     api
-      .get(`/api/galleries?page=${page}&perPage=${perPage}`, {
+      .get(`/api/galleries?page=${page}&per_page=${perPage}`, {
         headers,
       })
-      .then((res) => resolve(res.data.data))
+      .then((res) => resolve(res.data))
       .catch((err) => {
         if (err.response?.data.message) {
           toast.error(err.response.data.message);
