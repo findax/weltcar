@@ -12,6 +12,8 @@ import { IMapPartnerData } from '@/types/partner';
 import { useThemeMode } from '@/hooks/useThemeMode';
 import { PhoneIcon, MapPinIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link';
+import ErrorComponent from './ErrorComponent';
+import LoadingSpinner from '@/shared/LoadingSpinner';
 
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -24,7 +26,9 @@ L.Icon.Default.mergeOptions({
 
 const PartnersMap = () => {
   const { isDarkMode } = useThemeMode();
-  const [partnersLocation, setPartnersLocation] = useState<IMapPartnerData>();
+  const [isFirstLoading, setFirstLoading] = useState(true);
+  const [isError, setError] = useState(false);
+  const [partnersLocation, setPartnersLocation] = useState({} as IMapPartnerData);
   
   const getParsedPosition = (pos: string): [number, number] | null => {
     if (!pos) return null;
@@ -57,12 +61,26 @@ const PartnersMap = () => {
       .then((data) => {
         if(data) {
           setPartnersLocation(data);
+        } else {
+          setError(true);
         }
       })
-      .finally()
+      .finally(() => {
+        isFirstLoading && setFirstLoading(false);
+      })
   }, []);
 
-  return (
+  return isFirstLoading ? (
+      <div className='h-[300px] md:h-[500px] flex justify-center items-center'>
+        <div className='-mt-[76px]'>
+          <LoadingSpinner className='w-12' />
+        </div>
+      </div>
+    ) : isError ? (
+      <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
+        <ErrorComponent />
+      </div>
+    ) : (
     <MapContainer
       center={[52.52, 13.405]}
       zoom={7}
@@ -74,7 +92,7 @@ const PartnersMap = () => {
          url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
         attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      {partnersLocation?.objects.map((partner, index) => {
+      {partnersLocation?.objects?.map((partner, index) => {
         const parsedPosition = getParsedPosition(partner.position);
         if (!parsedPosition) return null;
 
