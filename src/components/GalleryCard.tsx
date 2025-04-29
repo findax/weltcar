@@ -29,7 +29,7 @@ const GalleryCard = ({
         data-nc-id='GalleryCard'
       >
         <div className='relative w-full h-[250px] overflow-hidden'>
-          {images.length > 1 &&
+          {images.length > 0 &&
             <Image 
               src={images[0].thumb}
               alt={images[0].title}

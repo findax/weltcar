@@ -12,7 +12,7 @@ export const getGalleries = async (
   };
   return new Promise<IGalleryCatalog | false>((resolve) => {
     api
-      .get(`/api/galleries?page=${page}&perPage=${perPage}`, {
+      .get(`/api/galleries?page=${page}&per_page=${perPage}`, {
         headers,
       })
       .then((res) => resolve(res.data))
