@@ -50,7 +50,7 @@ const PageContact = () => {
 
         <div className='relative z-0 pt-16 mb-24 lg:md-32'>
           <h3 className='mb-10 text-center lg:mb-20 font-bold text-neutral-1050 dark:text-white text-3xl md:text-4xl xl:text-5xl'>
-            {translate('contact.ourPartners')}
+            {translate('contact.ourPartners.title')}
           </h3>
           <MapWithPartners />
         </div>
