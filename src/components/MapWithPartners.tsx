@@ -32,14 +32,14 @@ const PartnersMap = () => {
   const [partnersLocation, setPartnersLocation] = useState({} as IMapPartnerData);
   
   const getParsedPosition = (pos: string): [number, number] | null => {
-    if (!pos) return null;
+    if (!pos || pos.trim() === '') return null;
     const coords = pos.split(',').map(Number);
     if (coords.length !== 2 || coords.some(isNaN)) return null;
     return coords as [number, number];
   };
 
   const renderPhoneList = (phones?: string) => {
-    if (!phones) return null;
+    if (!phones || phones.trim() === '' || typeof phones !== 'string') return null;
     return phones.split(',').map((phone, index) => (
       <div key={index} className='flex items-center gap-1'>
         <PhoneIcon height={18} width={18} />
@@ -54,7 +54,7 @@ const PartnersMap = () => {
   }
 
   const renderSocialHref = (link?: string) => {
-    if (!link) return null;
+    if (!link || link.trim() === '' || typeof link !== 'string' || !/^https?:\/\//.test(link)) return null;
 
     try {
       const newUrl = new URL(link);
@@ -128,20 +128,18 @@ const PartnersMap = () => {
                   }}
                 >{partner.name}</span>
                 <div className='flex flex-col gap-1 font-medium mt-1'>
-                  <div className='flex gap-1 items-center'>
-                    {partner?.address?.trim() && (
-                      <>
-                        <MapPinIcon height={18} width={18} className='mr-1' />
-                        <span >{partner.address}</span>
-                      </>
-                    )}
-                  </div>
+                  {partner?.address && partner?.address?.trim() && (
+                    <div className='flex gap-1 items-center'>
+                      <MapPinIcon height={18} width={18} className='mr-1' />
+                      <span >{partner.address}</span>
+                    </div>
+                  )}
                   <div className='flex flex-col gap-1'>
                     {renderPhoneList(partner?.phones)}
                   </div>
                   <div className='flex flex-col gap-1'>
                     {renderSocialHref(partner?.link)}
-                    {partner?.comment?.trim() && (
+                    {partner?.comment && partner?.comment?.trim() && (
                       <span className='break-words max-w-[300px]'>{partner.comment}</span>
                     )}
                   </div>
