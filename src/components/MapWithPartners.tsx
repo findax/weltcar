@@ -32,13 +32,14 @@ const PartnersMap = () => {
   const [partnersLocation, setPartnersLocation] = useState({} as IMapPartnerData);
   
   const getParsedPosition = (pos: string): [number, number] | null => {
-    if (!pos) return null;
+    if (!pos || pos.trim() === '') return null;
     const coords = pos.split(',').map(Number);
     if (coords.length !== 2 || coords.some(isNaN)) return null;
     return coords as [number, number];
   };
 
-  const renderPhoneList = (phones: string) => {
+  const renderPhoneList = (phones?: string) => {
+    if (!phones || phones.trim() === '' || typeof phones !== 'string') return null;
     return phones.split(',').map((phone, index) => (
       <div key={index} className='flex items-center gap-1'>
         <PhoneIcon height={18} width={18} />
@@ -52,15 +53,23 @@ const PartnersMap = () => {
     ));
   }
 
-  const renderSocialHref = (link: string) => {
-    const newUrl = new URL(link);
-    return  <Link
-      className='inline-block text-neutral-500 dark:text-neutral-400 hover:underline'
-      href={`${link}` as Route}
-      target='_blank'
-    >
-      {newUrl.host + newUrl.pathname}
-    </Link>
+  const renderSocialHref = (link?: string) => {
+    if (!link || link.trim() === '' || typeof link !== 'string' || !/^https?:\/\//.test(link)) return null;
+
+    try {
+      const newUrl = new URL(link);
+      return (
+        <Link
+          className="inline-block text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 transition-colors"
+          href={link as Route}
+          target="_blank"
+        >
+          {newUrl.host + newUrl.pathname}
+        </Link>
+      );
+    } catch (error) {
+      return null;
+    }
   }
   
   useEffect(() => {
@@ -119,16 +128,20 @@ const PartnersMap = () => {
                   }}
                 >{partner.name}</span>
                 <div className='flex flex-col gap-1 font-medium mt-1'>
-                  <div className='flex gap-1 items-center'>
-                    <MapPinIcon height={18} width={18} className='mr-1' />
-                    <span>{partner?.address}</span>
-                  </div>
+                  {partner?.address && partner?.address?.trim() && (
+                    <div className='flex gap-1 items-center'>
+                      <MapPinIcon height={18} width={18} className='mr-1' />
+                      <span >{partner.address}</span>
+                    </div>
+                  )}
                   <div className='flex flex-col gap-1'>
                     {renderPhoneList(partner?.phones)}
                   </div>
                   <div className='flex flex-col gap-1'>
                     {renderSocialHref(partner?.link)}
-                    <span className='break-words max-w-[300px]'>{partner?.comment}</span>
+                    {partner?.comment && partner?.comment?.trim() && (
+                      <span className='break-words max-w-[300px]'>{partner.comment}</span>
+                    )}
                   </div>
                 </div>
               </div>
