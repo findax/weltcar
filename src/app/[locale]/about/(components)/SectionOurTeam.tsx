@@ -4,8 +4,7 @@ import React from 'react';
 import teamImg1 from '@/images/team/t1.svg';
 import teamImg2 from '@/images/team/t2.svg';
 import teamImg3 from '@/images/team/t3.svg';
-import teamImg4 from '@/images/team/t4.svg';
-import teamImg5 from '@/images/team/t5.svg';
+import teamImgAndrew from '@/images/team/t.andrew.jpg';
 
 const TEAM = [
   {
@@ -22,21 +21,15 @@ const TEAM = [
   },
   {
     id: '3',
-    name: 'team.members.sergey.name',
-    job: 'team.members.sergey.position',
+    name: 'team.members.alexander.name',
+    job: 'team.members.alexander.position',
     avatar: teamImg3,
   },
   {
     id: '4',
-    name: 'team.members.alexander.name',
-    job: 'team.members.alexander.position',
-    avatar: teamImg4,
-  },
-  {
-    id: '5',
-    name: 'team.members.agassi.name',
-    job: 'team.members.agassi.position',
-    avatar: teamImg5,
+    name: 'team.members.andrew.name',
+    job: 'team.members.andrew.position',
+    avatar: teamImgAndrew,
   },
 ];
 
@@ -44,13 +37,13 @@ interface IProps {
   translate: any;
 }
 
-const SectionOurTeam = ({
-  translate
-}: IProps) => {
+const SectionOurTeam = ({ translate }: IProps) => {
   return (
     <div className='nc-SectionFounder relative'>
       <div>
-        <h2 className='text-3xl md:text-4xl xl:text-5xl font-bold text-neutral-1050 dark:text-white '>{translate('team.title')}</h2>
+        <h2 className='text-3xl md:text-4xl xl:text-5xl font-bold text-neutral-1050 dark:text-white '>
+          {translate('team.title')}
+        </h2>
         <span className='block lg:w-[480px] my-14 lg:text-lg text-neutral-500 dark:text-neutral-400'>
           {translate('team.description')}
         </span>
@@ -66,7 +59,7 @@ const SectionOurTeam = ({
                 fill
                 className=' object-cover'
                 src={item.avatar}
-                alt={item.name + ' ' + item.job}
+                alt={`${translate(item.name)} ${translate(item.job)}`}
                 sizes='(max-width: 768px) 100vw, (max-width: 1200px) 30vw, 30vw'
               />
             </div>
