@@ -30,7 +30,9 @@ const CarListCatalog = ({
   const pathname = usePathname();
 
   const isCatalogAPage = useMemo(() => pathname.split('/').pop() === 'catalog-a', [pathname]);
-  const buttonStylesCatalogA = isCatalogAPage ? '!bg-[#f0ad4e] !hover:bg-[#ec971f]' : '';
+  const buttonStylesCatalogA = isCatalogAPage
+    ? '!bg-[#f0ad4e] !hover:bg-[#ec971f] !text-white'
+    : 'bg-primary-600 dark:bg-primary-950 text-white dark:text-black';
 
   const ww = typeof window !== 'undefined' ? window.innerWidth : 1000;
   const pageCount = Math.ceil((results || 10) / 10);
@@ -88,7 +90,7 @@ const CarListCatalog = ({
             'flex w-11 h-11 items-center justify-center rounded-full overflow-hidden bg-white hover:bg-neutral-100 border border-neutral-200 text-neutral-600 dark:text-neutral-400 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:border-neutral-700'
           }
           pageLinkClassName={'w-11 h-11 flex items-center justify-center'}
-          activeLinkClassName={`${buttonStylesCatalogA} !text-white`}
+          activeLinkClassName={buttonStylesCatalogA}
           previousLinkClassName={'w-11 h-11 flex items-center justify-center'}
           previousLabel={<ChevronLeftIcon className='w-6 mr-0.5' />}
           previousClassName={'w-11 h-11 flex items-center justify-center'}
