@@ -21,6 +21,7 @@ export default function Title({
     specification,
     vin,
     year,
+    year_manufacture,
   } = carData || {};
   const translate = useTranslations();
 
@@ -41,7 +42,9 @@ export default function Title({
         <div className='flex flex-col justify-betwee space-y-2 text-base mr-4'>
           <div className='my-2 flex items-center flex-wrap gap-1'>
             <div className='flex items-center'>
-              <span className=''>{translate('carDetails.exterior.color')}:</span>
+              <span className=''>
+                {translate('carDetails.exterior.color')}:
+              </span>
               <span
                 className='w-6 h-6 mx-3 rounded-full inline-block border border-neutral-500 flex-shrink-0'
                 style={{ backgroundColor: `${outer_color_hex}` }}
@@ -51,7 +54,9 @@ export default function Title({
           </div>
           <div className='mt-auto my-2 flex items-center flex-wrap gap-1'>
             <div className='flex items-center'>
-              <span className=''>{translate('carDetails.interior.color')}:</span>
+              <span className=''>
+                {translate('carDetails.interior.color')}:
+              </span>
               <span
                 className='w-6 h-6 mx-3 rounded-full inline-block border border-neutral-500 flex-shrink-0'
                 style={{ backgroundColor: `${inner_color_hex}` }}
@@ -72,14 +77,13 @@ export default function Title({
         </div>
       </div>
 
-      {
-        vin && 
-          <div 
-            className='font-semibold'
-          >
-            VIN: {vin}
-          </div>
-      }
+      {year_manufacture && (
+        <div className='font-semibold'>
+          {translate('carDetails.yearManufacture')}: {year_manufacture}
+        </div>
+      )}
+
+      {vin && <div className='font-semibold'>VIN: {vin}</div>}
     </div>
   );
 }
