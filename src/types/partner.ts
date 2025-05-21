@@ -5,6 +5,7 @@ import { IFilters, ILinks, IMeta, ISort } from './catalog';
 export interface ICarPartnerToRequest {
   model_id: string;
   price: string | number;
+  year_manufacture: number;
   year: number;
   specification: string;
   vin: string;
@@ -23,6 +24,7 @@ export interface ICarPartnerToRequest {
 export interface ICarPartnerToRequestUpdate {
   model_id: string;
   price: string | number;
+  year_manufacture: number;
   year: number;
   specification: string;
   vin: string;
@@ -95,6 +97,7 @@ export interface ICarPartnerDetails {
   specification: string;
   status: string;
   status_extra: string;
+  year_manufacture: number;
   year: number;
   pdf_url: string;
   pdf_url_clean: string;

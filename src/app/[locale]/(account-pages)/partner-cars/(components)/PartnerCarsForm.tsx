@@ -55,6 +55,7 @@ export default function PartnerCarsForm({
       model_name: '',
     },
     specification: '',
+    yearManufacture: '',
     year: '',
     vin: '',
     price: '',
@@ -65,10 +66,10 @@ export default function PartnerCarsForm({
     documents: undefined,
     country: {
       id: '',
-      name: ''
+      name: '',
     },
     postCode: '',
-    commentary: ''
+    commentary: '',
   });
   const [initialValueFilled, setInitialValueFilled] = useState({
     model: {
@@ -77,6 +78,7 @@ export default function PartnerCarsForm({
       model_name: car?.model,
     },
     specification: car?.specification,
+    yearManufacture: car?.year_manufacture,
     year: car?.year,
     vin: car?.vin,
     price: car?.price,
@@ -87,172 +89,206 @@ export default function PartnerCarsForm({
     documents: undefined,
     country: {
       id: car?.country?.id,
-      name: car?.country?.name
+      name: car?.country?.name,
     },
     postCode: car?.post_code,
-    commentary: car?.contractor_comment
+    commentary: car?.contractor_comment,
   });
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
-  const buttonClass = !partner.is_verified ? 'w-full md:w-fit !bg-gray-600 hover:bg-gray-600 text-white' : 'w-full md:w-fit';
+  const buttonClass = !partner.is_verified
+    ? 'w-full md:w-fit !bg-gray-600 hover:bg-gray-600 text-white'
+    : 'w-full md:w-fit';
 
   const PartnerCarsSchema = Yup.object().shape({
     model: ModelSchema.required('partnerCarsSchema.model.required'),
-    specification: Yup
-      .string()
+    specification: Yup.string()
       .trim()
       .required('partnerCarsSchema.specification.required'),
-    year: Yup
-      .string()
+    yearManufacture: Yup.string()
       .trim()
-      .required('partnerCarsSchema.year.required'),
-    vin: Yup
-      .string()
-      .trim()
-      .required('partnerCarsSchema.vin.required'),
-    price: Yup
-      .string()
-      .trim()
-      .required("partnerCarsSchema.price.required"),
+      .required('partnerCarsSchema.yearManufacture.required'),
+    year: Yup.string().trim().required('partnerCarsSchema.year.required'),
+    vin: Yup.string().trim().required('partnerCarsSchema.vin.required'),
+    price: Yup.string().trim().required('partnerCarsSchema.price.required'),
     photos: car
-    ? (Yup.array()
-        .of(
-          Yup.mixed<File>()
-            .test('fileType', 'partnerCarsSchema.photos.unsupported', (value) => {
-              if(value) return SUPPORTED_FORMATS.includes(value.type);
-            })
-            .required('partnerCarsSchema.photos.required')
-        )
-        .max(20, 'partnerCarsSchema.photos.max')
-      )
-    : (Yup.array()
-        .of(
-          Yup.mixed<File>()
-            .test('fileType', 'partnerCarsSchema.photosTwo.unsupported', (value) => {
-              return value && SUPPORTED_FORMATS.includes(value.type);
-            })
-            .required('partnerCarsSchema.photosTwo.required')
-        )
-        .max(20, 'partnerCarsSchema.photosTwo.max')
-        .required('partnerCarsSchema.photosTwo.required')
-      ),
-    description: Yup
-      .string()
+      ? Yup.array()
+          .of(
+            Yup.mixed<File>()
+              .test(
+                'fileType',
+                'partnerCarsSchema.photos.unsupported',
+                (value) => {
+                  if (value) return SUPPORTED_FORMATS.includes(value.type);
+                }
+              )
+              .required('partnerCarsSchema.photos.required')
+          )
+          .max(20, 'partnerCarsSchema.photos.max')
+      : Yup.array()
+          .of(
+            Yup.mixed<File>()
+              .test(
+                'fileType',
+                'partnerCarsSchema.photosTwo.unsupported',
+                (value) => {
+                  return value && SUPPORTED_FORMATS.includes(value.type);
+                }
+              )
+              .required('partnerCarsSchema.photosTwo.required')
+          )
+          .max(20, 'partnerCarsSchema.photosTwo.max')
+          .required('partnerCarsSchema.photosTwo.required'),
+    description: Yup.string()
       .trim()
       .max(50000, 'partnerCarsSchema.description.max')
       .required('partnerCarsSchema.description.required'),
-    innerColor: Yup
-      .string()
+    innerColor: Yup.string()
       .trim()
       .required('partnerCarsSchema.innerColor.required'),
-    outerColor: Yup
-      .string()
+    outerColor: Yup.string()
       .trim()
       .required('partnerCarsSchema.outerColor.required'),
     country: CountrySchema.required('partnerCarsSchema.country.required'),
-    postCode: Yup
-      .string()
+    postCode: Yup.string()
       .trim()
       .required('partnerCarsSchema.postCode.required'),
-    commentary: Yup
-      .string()
+    commentary: Yup.string()
       .trim()
-      .max(1000, 'partnerCarsSchema.commentary.required')
-  })
+      .max(1000, 'partnerCarsSchema.commentary.required'),
+  });
 
-  const handleDeleteAttachedPhotos = (event: React.MouseEvent<HTMLButtonElement>, photo: IPartnerPhotoList) => {
+  const handleDeleteAttachedPhotos = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    photo: IPartnerPhotoList
+  ) => {
     event.preventDefault();
-    if(attachedPhotos && attachedPhotos.length > 0) {
+    if (attachedPhotos && attachedPhotos.length > 0) {
       const newArrayAttachedPhotos = [...attachedPhotos];
-      const filteredPhotos = newArrayAttachedPhotos.filter((currentPhoto) => currentPhoto.original !== photo.original);
-      if(filteredPhotos.length > 0){
+      const filteredPhotos = newArrayAttachedPhotos.filter(
+        (currentPhoto) => currentPhoto.original !== photo.original
+      );
+      if (filteredPhotos.length > 0) {
         setAttachedPhotos(filteredPhotos);
       } else {
         setAttachedPhotos(null);
       }
     }
-  }
+  };
 
   const renderAttachedPhotos = () => {
-    if(attachedPhotos && attachedPhotos.length > 0) {
+    if (attachedPhotos && attachedPhotos.length > 0) {
       return (
         <div>
-          <p className='inline-block text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-1'>{translate('accountPartnerCars.form.attachedPhotos.label')}</p>
+          <p className='inline-block text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-1'>
+            {translate('accountPartnerCars.form.attachedPhotos.label')}
+          </p>
           <div className='flex flex-col gap-1 block w-full border border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-1150 rounded-2xl text-sm font-normal px-4 py-3'>
             {attachedPhotos.map((photo) => (
-              <div key={photo?.id} className='relative flex items-center w-fit rounded-2xl px-1 py-2'>
+              <div
+                key={photo?.id}
+                className='relative flex items-center w-fit rounded-2xl px-1 py-2'
+              >
                 <img
                   src={photo.thumb}
                   className='h-[70px] w-[70px] rounded-lg'
-                  alt="photo"
+                  alt='photo'
                 />
                 <button
                   onClick={(event) => handleDeleteAttachedPhotos(event, photo)}
-                  className='absolute bg-white dark:bg-neutral-900 top-0 right-0 ml-1 p-1 border rounded-full'>
-                    <IoMdClose/>
-                  </button>
+                  className='absolute bg-white dark:bg-neutral-900 top-0 right-0 ml-1 p-1 border rounded-full'
+                >
+                  <IoMdClose />
+                </button>
               </div>
             ))}
           </div>
         </div>
-      )
+      );
     } else {
       return null;
     }
-  }
+  };
 
-  const handleDeleteAttachedDocuments = (event: React.MouseEvent<HTMLButtonElement>, document: IPartnerFileList) => {
+  const handleDeleteAttachedDocuments = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    document: IPartnerFileList
+  ) => {
     event.preventDefault();
-    if(attachedDocuments && attachedDocuments.length > 0) {
+    if (attachedDocuments && attachedDocuments.length > 0) {
       const newArrayAttachedDocuments = [...attachedDocuments];
-      const filteredDocuments = newArrayAttachedDocuments.filter((currentDoc) => currentDoc.file_name !== document.file_name);
-      if(filteredDocuments.length > 0){
+      const filteredDocuments = newArrayAttachedDocuments.filter(
+        (currentDoc) => currentDoc.file_name !== document.file_name
+      );
+      if (filteredDocuments.length > 0) {
         setAttachedDocuments(filteredDocuments);
       } else {
         setAttachedDocuments(null);
       }
     }
-  }
+  };
 
   const renderAttachedDocuments = () => {
-    if(attachedDocuments && attachedDocuments.length > 0) {
+    if (attachedDocuments && attachedDocuments.length > 0) {
       return (
         <div>
-          <p className='inline-block text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-1'>{translate('accountPartnerCars.form.attachedDocuments.label')}</p>
+          <p className='inline-block text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-1'>
+            {translate('accountPartnerCars.form.attachedDocuments.label')}
+          </p>
           <div className='flex flex-col gap-1 block w-full border border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-1150 rounded-2xl text-sm font-normal px-4 py-3'>
             {attachedDocuments.map((document) => (
-              <div key={document.file_name} className='flex items-center w-fit border rounded-2xl px-3 py-2'>
+              <div
+                key={document.file_name}
+                className='flex items-center w-fit border rounded-2xl px-3 py-2'
+              >
                 <Link href={document.url as Route} target='_blank'>
-                  <p className="text-neutral-500">{document.file_name}</p>
+                  <p className='text-neutral-500'>{document.file_name}</p>
                 </Link>
-                <button onClick={(event) => handleDeleteAttachedDocuments(event, document)} className='ml-1'><IoMdClose/></button>
+                <button
+                  onClick={(event) =>
+                    handleDeleteAttachedDocuments(event, document)
+                  }
+                  className='ml-1'
+                >
+                  <IoMdClose />
+                </button>
               </div>
             ))}
           </div>
         </div>
-      )
+      );
     } else {
       return null;
     }
-  }
+  };
 
   const handleModalUpdateOpen = () => {
     setIsUpdateModalOpen(true);
-  }
+  };
 
   const handleModalCreateOpen = () => {
     setIsCreateModalOpen(true);
-  }
+  };
 
-  const handleCheckFetch = (car: ICarPartnerDetails | null, values: any, setSubmitting = (isSubmitting: boolean) => {}, resetForm = () => {}) => {
-    if(car){
-      const attachedPhotosToRequest = attachedPhotos?.map((attachedPhoto) => attachedPhoto?.id);
-      const attachedDocumentsToRequest = attachedDocuments?.map((attachedDocument) => attachedDocument?.id);
+  const handleCheckFetch = (
+    car: ICarPartnerDetails | null,
+    values: any,
+    setSubmitting = (isSubmitting: boolean) => {},
+    resetForm = () => {}
+  ) => {
+    if (car) {
+      const attachedPhotosToRequest = attachedPhotos?.map(
+        (attachedPhoto) => attachedPhoto?.id
+      );
+      const attachedDocumentsToRequest = attachedDocuments?.map(
+        (attachedDocument) => attachedDocument?.id
+      );
 
       const carDataToRequest: ICarPartnerToRequestUpdate = {
         model_id: values?.model?.id.toString(),
         specification: values?.specification,
+        year_manufacture: Number(values.yearManufacture),
         year: Number(values.year),
         vin: values?.vin,
         price: values?.price,
@@ -266,28 +302,31 @@ export default function PartnerCarsForm({
         description: values?.description,
         photos: values.photos ? values.photos : [],
         documents: values.documents ? values.documents : [],
-        attached_photos: attachedPhotosToRequest ? [...attachedPhotosToRequest] : [],
-        attached_documents: attachedDocumentsToRequest ? [...attachedDocumentsToRequest] : [],
+        attached_photos: attachedPhotosToRequest
+          ? [...attachedPhotosToRequest]
+          : [],
+        attached_documents: attachedDocumentsToRequest
+          ? [...attachedDocumentsToRequest]
+          : [],
       };
 
-      updatePartnerCar(carDataToRequest, car?.id, locale)
-        .then((data) => {
-          if(data && !data.message){
-            setCar(data);
-            setAttachedDocuments(data.documents);
-            setAttachedPhotos(data.photos);
-            setSubmitting(false);
-            handleModalUpdateOpen();
-            toast.success('Thank you, your update has been accepted.')
-          }else {
-            setSubmitting(false);
-          }
-        })
-
+      updatePartnerCar(carDataToRequest, car?.id, locale).then((data) => {
+        if (data && !data.message) {
+          setCar(data);
+          setAttachedDocuments(data.documents);
+          setAttachedPhotos(data.photos);
+          setSubmitting(false);
+          handleModalUpdateOpen();
+          toast.success('Thank you, your update has been accepted.');
+        } else {
+          setSubmitting(false);
+        }
+      });
     } else {
       const carDataToRequest: ICarPartnerToRequest = {
         model_id: values?.model?.id.toString(),
         specification: values?.specification,
+        year_manufacture: Number(values.yearManufacture),
         year: Number(values?.year),
         vin: values?.vin,
         price: values?.price,
@@ -300,46 +339,48 @@ export default function PartnerCarsForm({
         post_code: values?.postCode,
         description: values?.description,
         photos: values?.photos,
-        documents: values.documents ? values.documents : []
+        documents: values.documents ? values.documents : [],
       };
 
-      createPartnerCar(carDataToRequest, locale)
-        .then((data) => {
-          if(data && !data.message){
-            setResponseCarId(data?.id);
-            setSubmitting(false);
-            resetForm()
-            handleModalCreateOpen();
-            toast.success('Thank you, your request has been accepted.')
-          }else {
-            setSubmitting(false);
-          }
-        })
+      createPartnerCar(carDataToRequest, locale).then((data) => {
+        if (data && !data.message) {
+          setResponseCarId(data?.id);
+          setSubmitting(false);
+          resetForm();
+          handleModalCreateOpen();
+          toast.success('Thank you, your request has been accepted.');
+        } else {
+          setSubmitting(false);
+        }
+      });
     }
-  }
+  };
 
-  const handleKeyPressNumber = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyPressNumber = (
+    event: React.KeyboardEvent<HTMLInputElement>
+  ) => {
     if (!/^[0-9]$/.test(event.key)) {
       event.preventDefault();
     }
   };
 
   const handleRedirectOnEdit = () => {
-    responseCarId && router.push(`/partner-cars-list`)
-  }
+    responseCarId && router.push(`/partner-cars-list`);
+  };
 
   useEffect(() => {
-    Promise.all([getCountries(locale), getPartnerModels(locale)])
-      .then(([countriesData, modelsData]) => {
-        if(countriesData && modelsData){
+    Promise.all([getCountries(locale), getPartnerModels(locale)]).then(
+      ([countriesData, modelsData]) => {
+        if (countriesData && modelsData) {
           setCountries(countriesData);
           setModels(modelsData);
         }
-      })
-  },[]);
+      }
+    );
+  }, []);
 
   useEffect(() => {
-    if(car){
+    if (car) {
       setInitialValueFilled({
         model: {
           id: car?.model_id,
@@ -347,6 +388,7 @@ export default function PartnerCarsForm({
           model_name: car?.model,
         },
         specification: car?.specification,
+        yearManufacture: car?.year_manufacture,
         year: car?.year,
         vin: car?.vin,
         price: car?.price.toString(),
@@ -357,17 +399,17 @@ export default function PartnerCarsForm({
         documents: undefined,
         country: {
           id: car?.country?.id,
-          name: car?.country?.name
+          name: car?.country?.name,
         },
         postCode: car?.post_code,
-        commentary: car?.contractor_comment
+        commentary: car?.contractor_comment,
       });
     }
   }, [car]);
 
   useEffect(() => {
-    if(partnerCar) {
-      setCar(partnerCar)
+    if (partnerCar) {
+      setCar(partnerCar);
       setInitialValueFilled({
         model: {
           id: partnerCar?.model_id,
@@ -375,6 +417,7 @@ export default function PartnerCarsForm({
           model_name: partnerCar?.model,
         },
         specification: partnerCar?.specification,
+        yearManufacture: partnerCar?.year_manufacture,
         year: partnerCar?.year,
         vin: partnerCar?.vin,
         price: partnerCar?.price?.toString(),
@@ -385,21 +428,21 @@ export default function PartnerCarsForm({
         documents: undefined,
         country: {
           id: partnerCar?.country?.id,
-          name: partnerCar?.country?.name
+          name: partnerCar?.country?.name,
         },
         postCode: partnerCar?.post_code,
-        commentary: partnerCar?.contractor_comment
-      })
+        commentary: partnerCar?.contractor_comment,
+      });
       setAttachedPhotos(partnerCar?.photos);
-      setAttachedDocuments(partnerCar?.documents)
+      setAttachedDocuments(partnerCar?.documents);
     }
-  },[partnerCar])
+  }, [partnerCar]);
 
   return (
     <>
       <Formik
         //enableReinitialize
-        initialValues={ car ? initialValueFilled : initialValueDefault}
+        initialValues={car ? initialValueFilled : initialValueDefault}
         validationSchema={PartnerCarsSchema}
         onSubmit={(values, { setSubmitting, resetForm }) => {
           // trim values
@@ -434,7 +477,17 @@ export default function PartnerCarsForm({
                 touched={touched.specification}
               />
               {/* ---- */}
-              <div></div>
+              <FormikInput
+                disabled={car?.is_verified}
+                onKeyPress={handleKeyPressNumber}
+                name='yearManufacture'
+                placeholder='accountPartnerCars.form.yearManufacture.placeholder'
+                title='accountPartnerCars.form.yearManufacture.label'
+                rounded='rounded-full'
+                sizeClass='h-14'
+                error={errors.yearManufacture}
+                touched={touched.yearManufacture}
+              />
               {/* ---- */}
               <FormikInput
                 disabled={car?.is_verified}
@@ -507,21 +560,21 @@ export default function PartnerCarsForm({
               />
               {/* ---- */}
               <FormikInput
-                  disabled={car?.is_verified}
-                  name='postCode'
-                  placeholder='accountPartnerCars.form.postCode.placeholder'
-                  title='accountPartnerCars.form.postCode.label'
-                  rounded='rounded-full'
-                  sizeClass='h-14'
-                  error={errors.postCode}
-                  touched={touched.postCode}
-                />
+                disabled={car?.is_verified}
+                name='postCode'
+                placeholder='accountPartnerCars.form.postCode.placeholder'
+                title='accountPartnerCars.form.postCode.label'
+                rounded='rounded-full'
+                sizeClass='h-14'
+                error={errors.postCode}
+                touched={touched.postCode}
+              />
               {/* ---- */}
               <FormikFile
-                accept="image/jpeg, image/png"
+                accept='image/jpeg, image/png'
                 disabled={car?.is_verified}
                 variant='photo'
-                initialValues={ car ? initialValueFilled : null}
+                initialValues={car ? initialValueFilled : null}
                 name='photos'
                 label='accountPartnerCars.form.uploadPhotos.label'
                 multiple
@@ -530,10 +583,10 @@ export default function PartnerCarsForm({
               />
               {/* ---- */}
               <FormikFile
-                accept="image/jpeg, image/png, application/pdf"
+                accept='image/jpeg, image/png, application/pdf'
                 disabled={car?.is_verified}
                 subTitle='JPG, JPEG, PDF or PNG'
-                initialValues={ car ? initialValueFilled : null}
+                initialValues={car ? initialValueFilled : null}
                 name='documents'
                 label='accountPartnerCars.form.uploadDocuments.label'
                 multiple
@@ -569,9 +622,9 @@ export default function PartnerCarsForm({
             <div className='md:flex md:justify-end'>
               {!partner.is_verified ? (
                 <>
-                  <div data-tooltip-id="partner-car-form-button">
+                  <div data-tooltip-id='partner-car-form-button'>
                     <ButtonPrimary
-                      type="submit"
+                      type='submit'
                       disabled
                       className={buttonClass}
                       loading={isSubmitting}
@@ -580,13 +633,13 @@ export default function PartnerCarsForm({
                     </ButtonPrimary>
                   </div>
                   <TooltipComponent
-                    id="partner-car-form-button"
+                    id='partner-car-form-button'
                     content={translate('accountPartnerCars.form.tooltip.error')}
                   />
                 </>
               ) : (
                 <ButtonPrimary
-                  type="submit"
+                  type='submit'
                   disabled={isSubmitting}
                   className={buttonClass}
                   loading={isSubmitting}
@@ -602,27 +655,26 @@ export default function PartnerCarsForm({
       <Modal
         title={translate('accountPartnerCars.modal.thankYou.label')}
         isModalOpen={isCreateModalOpen ? isCreateModalOpen : isUpdateModalOpen}
-        setIsModalOpen={ isCreateModalOpen ? setIsCreateModalOpen : setIsUpdateModalOpen }
-        handleChange={ isCreateModalOpen ? handleRedirectOnEdit : undefined }
-      >
-        {isCreateModalOpen
-          ? (
-              <div className='text-center space-y-10'>
-                <InformationCircleIcon className='block mx-auto w-24 h-24 text-yellow-500' />
-                <p className='px-3 text-md font-semibold'>
-                  {translate('accountPartnerCars.modal.thankYouRequest.title')}
-                </p>
-              </div>
-            )
-          :  (
-              <div className='text-center space-y-10'>
-                <InformationCircleIcon className='block mx-auto w-24 h-24 text-yellow-500' />
-                <p className='px-3 text-md font-semibold'>
-                  {translate('accountPartnerCars.modal.thankYouUpdate.title')}
-                </p>
-              </div>
-            )
+        setIsModalOpen={
+          isCreateModalOpen ? setIsCreateModalOpen : setIsUpdateModalOpen
         }
+        handleChange={isCreateModalOpen ? handleRedirectOnEdit : undefined}
+      >
+        {isCreateModalOpen ? (
+          <div className='text-center space-y-10'>
+            <InformationCircleIcon className='block mx-auto w-24 h-24 text-yellow-500' />
+            <p className='px-3 text-md font-semibold'>
+              {translate('accountPartnerCars.modal.thankYouRequest.title')}
+            </p>
+          </div>
+        ) : (
+          <div className='text-center space-y-10'>
+            <InformationCircleIcon className='block mx-auto w-24 h-24 text-yellow-500' />
+            <p className='px-3 text-md font-semibold'>
+              {translate('accountPartnerCars.modal.thankYouUpdate.title')}
+            </p>
+          </div>
+        )}
       </Modal>
     </>
   );
