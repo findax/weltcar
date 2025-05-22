@@ -166,6 +166,23 @@ export const updatePartnerCar = async (
   }
 };
 
+export const reactivatePartnerCar = async (id: string, locale: string) => {
+  const headers: Record<string, string> = {
+    'Accept-Language': locale,
+  };
+
+  try {
+    await api.post(`/api/user/contractor/cars/${id}/reactivate/`, undefined, {
+      headers,
+    });
+
+    return true;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message || 'Something went wrong!');
+    return false;
+  }
+};
+
 export const deletePartnerCar = async (id: string, locale: string) => {
   const headers: Record<string, string> = {
     'Accept-Language': locale,
