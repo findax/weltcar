@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import bgImg from '@/images/bg-cars/bg-car-12.webp';
+import { CONTACT_INFO } from '@/constants/contact';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
@@ -28,10 +29,14 @@ export default function CookiePolicyPage() {
             WELTCAR TRADING - FZCO <br />
             Registration Number: 58387 <br />
             License Number: 60847 <br /> <br />
-            Dubai, U.A.E.  <br />  <br />
-            Email: <Link href='mailto:info@weltcar.de'>info@weltcar.de</Link>
+            Dubai, U.A.E. <br /> <br />
+            Email:{' '}
+            <Link href={CONTACT_INFO.email.link}>
+              {CONTACT_INFO.email.label}
+            </Link>
             <br />
-            Website: <Link href='https://www.weltcar.de'>www.weltcar.de</Link>
+            Website:{' '}
+            <Link href={CONTACT_INFO.site.link}>{CONTACT_INFO.site.label}</Link>
           </p>
           <p>
             The responsible party, alone or together with others, decides on the
