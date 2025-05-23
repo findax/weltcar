@@ -7,10 +7,11 @@ import SubscribeForm from '@/components/SubscribeForm';
 import { WatsappIcon } from '@/shared/icons';
 import { useThemeMode } from '@/hooks/useThemeMode';
 import { useLocale, useTranslations } from 'next-intl';
+import { CONTACT_INFO } from '@/constants/contact';
 
 export default function Footer() {
   const { isDarkMode, mounted } = useThemeMode();
-  const translate = useTranslations()
+  const translate = useTranslations();
   const locale = useLocale();
 
   if (!mounted) return null;
@@ -30,7 +31,9 @@ export default function Footer() {
               <SocialsList1 className='flex gap-2 md:space-x-0 flex-col md:space-y-2.5 items-start' />
             </div>
             <div className='col-span-12 md:col-span-6 xl:col-span-3 space-y-6'>
-              <h4 className='text-2xl text-neytral-1050 font-bold dark:text-white'>{translate('footer.quickLink.title')}</h4>
+              <h4 className='text-2xl text-neytral-1050 font-bold dark:text-white'>
+                {translate('footer.quickLink.title')}
+              </h4>
               <ul className='flex flex-col gap-2'>
                 <li>
                   <Link
@@ -75,7 +78,9 @@ export default function Footer() {
               </ul>
             </div>
             <div className='col-span-12 md:col-span-6 xl:col-span-3 space-y-6'>
-              <h4 className='text-2xl text-neytral-1050 font-bold dark:text-white'>{translate('footer.contact.title')}</h4>
+              <h4 className='text-2xl text-neytral-1050 font-bold dark:text-white'>
+                {translate('footer.contact.title')}
+              </h4>
               <ul className='flex flex-col gap-6'>
                 <li className='flex items-center gap-4'>
                   {/* <i className='las la-map-marker-alt text-xl p-2 rounded-full border border-neutral-200 dark:border-neutral-700'></i> */}
@@ -96,9 +101,9 @@ export default function Footer() {
                   ✉️{' '}
                   <Link
                     className='text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
-                    href='mailto:info@weltcar.de'
+                    href={CONTACT_INFO.email.link}
                   >
-                    info@weltcar.de
+                    {CONTACT_INFO.email.label}
                   </Link>
                 </li>
                 <li className='flex items-center gap-4'>
@@ -106,42 +111,32 @@ export default function Footer() {
                   📞{' '}
                   <Link
                     className='text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
-                    href='tel:+4915902465256'
+                    href={CONTACT_INFO.phone.link}
                   >
-                    +49 1590 2465256
-                  </Link>
-                </li>
-                <li className='flex items-center gap-4'>
-                  {/* <i className='las la-phone-volume text-xl p-2 rounded-full border border-neutral-200 dark:border-neutral-700'></i> */}
-                  📞{' '}
-                  <Link
-                    className='text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
-                    href='tel:+971522272939'
-                  >
-                    +971 52 227 2939
+                    {CONTACT_INFO.phone.label}
                   </Link>
                 </li>
                 <li>
                   <Link
                     className='inline-flex items-center py-1.5 text-xl border border-primary-200 dark:border-neutral-1100 rounded-full bg-primary-100/30 dark:bg-neutral-1150 hover:bg-primary-100 dark:hover:bg-neutral-900 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
-                    href='https://wa.me/&#x2B;4915902465256'
+                    href={CONTACT_INFO.watsApp.link}
                     target='_blank'
                     rel='noreferrer noopener'
                   >
                     <WatsappIcon className='w-9 mx-2.5' />
-                    <span className='mr-6'>+49 1590 2465256</span>
+                    <span className='mr-6'>{CONTACT_INFO.watsApp.label}</span>
                   </Link>
                 </li>
               </ul>
             </div>
             <div className='col-span-12 md:col-span-6 xl:col-span-3 space-y-6'>
-              <h4 className='text-2xl text-neytral-1050 font-bold dark:text-white'>{translate('footer.newsletter.title')}</h4>
+              <h4 className='text-2xl text-neytral-1050 font-bold dark:text-white'>
+                {translate('footer.newsletter.title')}
+              </h4>
               <p className='text-neutral-600 dark:text-neutral-400'>
                 {translate('footer.newsletter.description')}
               </p>
-              <SubscribeForm
-                isButtonShowCircle={true}
-              />
+              <SubscribeForm isButtonShowCircle={true} />
             </div>
           </div>
         </div>
@@ -149,7 +144,8 @@ export default function Footer() {
           <div className='grid grid-cols-12 gap-4 text-sm'>
             <div className='col-span-12 lg:col-span-6'>
               <p className='text-center lg:text-start text-neutral-500 dark:text-neutral-400'>
-                {translate('footer.copyright')} &copy; {new Date().getFullYear()} WeltCar
+                {translate('footer.copyright')} &copy;{' '}
+                {new Date().getFullYear()} WeltCar
               </p>
             </div>
             <div className='col-span-12 lg:col-span-6'>

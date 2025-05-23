@@ -1,18 +1,19 @@
 import Link from 'next/link';
 import SocialsList from '@/shared/SocialsList';
 import { WatsappIcon } from '@/shared/icons';
+import { CONTACT_INFO } from '@/constants/contact';
 
-interface IProps{
+interface IProps {
   translate: any;
 }
 
-export default function ContactHero({
-  translate
-}: IProps) {
+export default function ContactHero({ translate }: IProps) {
   return (
     <div className='relative'>
       <div>
-        <h1 className='text-4xl lg:text-6xl xl:text-[80px] font-bold text-neutral-1050 dark:text-white '>{translate('contactus.title')}</h1>
+        <h1 className='text-4xl lg:text-6xl xl:text-[80px] font-bold text-neutral-1050 dark:text-white '>
+          {translate('contactus.title')}
+        </h1>
         <span className='block lg:w-[480px] my-9 lg:my-14 lg:text-lg text-neutral-500 dark:text-neutral-400'>
           {translate('contact.description')}
         </span>
@@ -40,9 +41,9 @@ export default function ContactHero({
             </h2>
             <Link
               className='inline-block mt-4 lg:mt-2 text-neutral-500 dark:text-neutral-400 hover:underline'
-              href='mailto:info@weltcar.de'
+              href={CONTACT_INFO.email.link}
             >
-              info@weltcar.de
+              {CONTACT_INFO.email.label}
             </Link>
           </div>
           <div className='flex flex-col lg:block w-full lg:w-[18%]'>
@@ -52,15 +53,9 @@ export default function ContactHero({
             </h2>
             <Link
               className='inline-block mt-4 lg:mt-2 text-neutral-500 dark:text-neutral-400 hover:underline'
-              href='tel:+4915902465256'
+              href={CONTACT_INFO.phone.link}
             >
-              +49 1590 2465256
-            </Link>
-            <Link
-              className='inline-block mt-4 lg:mt-2 text-neutral-500 dark:text-neutral-400 hover:underline'
-              href='tel:+971522272939'
-            >
-              +971 52 227 2939
+              {CONTACT_INFO.phone.label}
             </Link>
           </div>
           <div className='w-full lg:w-[18%]'>
@@ -70,11 +65,11 @@ export default function ContactHero({
             </h2>
             <Link
               className='inline-block mt-4 lg:mt-2 text-neutral-500 dark:text-neutral-400 hover:underline'
-              href='https://wa.me/&#x2B;4915902465256'
+              href={CONTACT_INFO.watsApp.link}
               target='_blank'
               rel='noreferrer noopener'
             >
-              +49 1590 2465256
+              {CONTACT_INFO.watsApp.label}
             </Link>
           </div>
           <div className='w-full lg:w-[18%]'>
@@ -82,7 +77,10 @@ export default function ContactHero({
               <span className='mr-3'>🌏</span>
               {translate('contact.social.label')}
             </h2>
-            <SocialsList itemClass='text-neutral-600 dark:hover:text-white hover:text-black dark:text-neutral-200' className='mt-4 lg:mt-2' />
+            <SocialsList
+              itemClass='text-neutral-600 dark:hover:text-white hover:text-black dark:text-neutral-200'
+              className='mt-4 lg:mt-2'
+            />
           </div>
         </div>
       </div>
