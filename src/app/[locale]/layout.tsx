@@ -6,8 +6,9 @@ import LoadingProgressBar from '@/components/LoadingProgressBar';
 import Header from '@/components/header/Header';
 import Footer from '@/components/Footer';
 import CookieAlert from '@/components/CookieAlert';
-import { NextIntlClientProvider } from "next-intl"
-import { getMessages } from "next-intl/server"
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
+import LayoutWrapper from '@/components/LayoutWrapper';
 
 import '@/fonts/line-awesome-1.3.0/css/line-awesome.css';
 import 'rc-slider/assets/index.css';
@@ -41,18 +42,23 @@ export const viewport: Viewport = {
 
 export default async function RootLayout({
   children,
-  params
+  params,
 }: {
   children: React.ReactNode;
-  params: {locale: string};
+  params: { locale: string };
 }) {
-  const messages = await getMessages()
+  const messages = await getMessages();
+
   return (
     <NextIntlClientProvider messages={messages} locale={params.locale}>
-      <html lang={params.locale} className={poppins.className} suppressHydrationWarning>
+      <html
+        lang={params.locale}
+        className={poppins.className}
+        suppressHydrationWarning
+      >
         <head>
           <script
-            type="text/javascript"
+            type='text/javascript'
             dangerouslySetInnerHTML={{
               __html: `
                 (function(c,l,a,r,i,t,y){
@@ -64,15 +70,35 @@ export default async function RootLayout({
             }}
           />
           {/* Favicon */}
-          <link rel="icon" type="image/png" href="/images/favicon.ico" />
+          <link rel='icon' type='image/png' href='/images/favicon.ico' />
           {/* Additional Favicons */}
-          <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
-          <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
-          <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
-          <link rel="manifest" href="/images/site.webmanifest" />
+          <link
+            rel='icon'
+            type='image/png'
+            sizes='16x16'
+            href='/images/favicon-16x16.png'
+          />
+          <link
+            rel='icon'
+            type='image/png'
+            sizes='32x32'
+            href='/images/favicon-32x32.png'
+          />
+          <link rel='apple-touch-icon' href='/images/apple-touch-icon.png' />
+          <link rel='manifest' href='/images/site.webmanifest' />
           {/* Android Chrome */}
-          <link rel="icon" type="image/png" sizes="192x192" href="/images/android-chrome-192x192.png" />
-          <link rel="icon" type="image/png" sizes="512x512" href="/images/android-chrome-512x512.png" />
+          <link
+            rel='icon'
+            type='image/png'
+            sizes='192x192'
+            href='/images/android-chrome-192x192.png'
+          />
+          <link
+            rel='icon'
+            type='image/png'
+            sizes='512x512'
+            href='/images/android-chrome-512x512.png'
+          />
         </head>
         <body className='pt-16 md:pt-20 flex flex-col min-h-screen text-base bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200'>
           {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (
@@ -80,10 +106,12 @@ export default async function RootLayout({
           )}
           <LoadingProgressBar />
           <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-            <Header />
-            <main className='flex-grow overflow-hidden'>{children}</main>
-            <Footer />
-            <CookieAlert />
+            <LayoutWrapper>
+              <Header />
+              <main className='flex-grow overflow-hidden'>{children}</main>
+              <Footer />
+              <CookieAlert />
+            </LayoutWrapper>
           </ThemeProvider>
         </body>
       </html>

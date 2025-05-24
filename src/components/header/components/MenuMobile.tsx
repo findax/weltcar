@@ -23,7 +23,6 @@ interface MenuMobileProps {
   iconClassName?: string;
   data?: NavItemType[];
   partner?: IPartnerResponse;
-  isDark?: boolean;
   translate: any;
   languages: LocaleData[];
 }
@@ -33,8 +32,7 @@ const MenuMobile = ({
   iconClassName = 'h-8 w-8',
   data = NAVIGATION_DEMO_MOBILE,
   partner = undefined,
-  isDark = false,
-  translate
+  translate,
 }: MenuMobileProps) => {
   const [isVisable, setIsVisable] = useState(false);
   const pathname = usePathname();
@@ -48,26 +46,25 @@ const MenuMobile = ({
   const handleOpenMenu = () => setIsVisable(true);
   const handleCloseMenu = () => setIsVisable(false);
 
-
-  const filteredNavigationItems = data.filter(item => {
+  const filteredNavigationItems = data.filter((item) => {
     if (!user?.contractor_id) {
       return item.href !== '/partner-cars';
     }
-    if(!partner?.is_verified) {
+    if (!partner?.is_verified) {
       return item.href !== '/partner-cars';
     }
     return true;
   });
 
   const renderChildren = (children: NavItemType[] | undefined) => (
-    <ul className="nav-mobile-sub-menu pl-6 pb-1 text-base">
+    <ul className='nav-mobile-sub-menu pl-6 pb-1 text-base'>
       {children?.map((child, index) => {
         const childLocaleRoute = `/${locale}${child.href}`;
         return (
-          <Disclosure key={`${childLocaleRoute}-${index}`} as="li">
+          <Disclosure key={`${childLocaleRoute}-${index}`} as='li'>
             <Link
               href={{ pathname: child.href || undefined }}
-              className="flex px-4 text-neutral-900 dark:text-neutral-200 text-sm font-medium rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 mt-0.5"
+              className='flex px-4 text-neutral-900 dark:text-neutral-200 text-sm font-medium rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 mt-0.5'
             >
               <span
                 className={`py-2.5 pr-3 ${!child.children ? 'block w-full' : ''}`}
@@ -76,23 +73,25 @@ const MenuMobile = ({
               </span>
               {child.children && (
                 <span
-                  className="flex-1 flex"
+                  className='flex-1 flex'
                   onClick={(e) => e.preventDefault()}
                 >
                   <Disclosure.Button
-                    as="span"
-                    className="py-2.5 flex justify-end flex-1"
+                    as='span'
+                    className='py-2.5 flex justify-end flex-1'
                   >
                     <ChevronDownIcon
-                      className="ml-2 h-4 w-4 text-neutral-500"
-                      aria-hidden="true"
+                      className='ml-2 h-4 w-4 text-neutral-500'
+                      aria-hidden='true'
                     />
                   </Disclosure.Button>
                 </span>
               )}
             </Link>
             {child.children && (
-              <Disclosure.Panel>{renderChildren(child.children)}</Disclosure.Panel>
+              <Disclosure.Panel>
+                {renderChildren(child.children)}
+              </Disclosure.Panel>
             )}
           </Disclosure>
         );
@@ -112,7 +111,7 @@ const MenuMobile = ({
       <SideMenuWrapper handleCloseMenu={handleCloseMenu} isVisable={isVisable}>
         <div className='overflow-y-auto w-full h-screen py-2 transition transform shadow-lg ring-1 dark:ring-neutral-700 bg-white dark:bg-neutral-900 divide-y-2 divide-neutral-100 dark:divide-neutral-800'>
           <div className='py-6 px-5'>
-            <Logo isDark={isDark}/>
+            <Logo />
             <div className='flex flex-col mt-5 text-neutral-700 dark:text-neutral-300 text-sm'>
               <p className='text-neutral-600 dark:text-neutral-300'>
                 {translate('mobileNavMenu.title.welcomeTo')}
@@ -137,47 +136,50 @@ const MenuMobile = ({
               const defaultLocaleRoute = `/${locale}${item.href}`;
               const defaultRoute = `/${locale}`;
               return (
-              <Disclosure
-                key={item.id}
-                as='li'
-                className='text-neutral-900 dark:text-white'
-              >
-                {item.children ? (
-                  <>
-                    <div
+                <Disclosure
+                  key={item.id}
+                  as='li'
+                  className='text-neutral-900 dark:text-white'
+                >
+                  {item.children ? (
+                    <>
+                      <div
+                        className='flex w-full px-4 font-medium uppercase tracking-wide text-sm hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg'
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        <span className='py-2.5 pr-3'>
+                          {translate(item.name)}
+                        </span>
+                        <span className='flex-1 flex'>
+                          <Disclosure.Button
+                            as='span'
+                            className='py-2.5 flex items-center justify-end flex-1 '
+                          >
+                            <ChevronDownIcon
+                              className='ml-2 h-4 w-4 text-neutral-500'
+                              aria-hidden='true'
+                            />
+                          </Disclosure.Button>
+                        </span>
+                      </div>
+                      <Disclosure.Panel>
+                        {renderChildren(item.children)}
+                      </Disclosure.Panel>
+                    </>
+                  ) : (
+                    <Link
+                      rel='noopener noreferrer'
                       className='flex w-full px-4 font-medium uppercase tracking-wide text-sm hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg'
-                      onClick={(e) => e.preventDefault()}
+                      href={(defaultLocaleRoute || defaultRoute) as Route}
                     >
-                      <span className='py-2.5 pr-3'>{translate(item.name)}</span>
-                      <span className='flex-1 flex'>
-                        <Disclosure.Button
-                          as='span'
-                          className='py-2.5 flex items-center justify-end flex-1 '
-                        >
-                          <ChevronDownIcon
-                            className='ml-2 h-4 w-4 text-neutral-500'
-                            aria-hidden='true'
-                          />
-                        </Disclosure.Button>
+                      <span className='py-2.5 pr-3 block w-full'>
+                        {translate(item.name)}
                       </span>
-                    </div>
-                    <Disclosure.Panel>
-                      {renderChildren(item.children)}
-                    </Disclosure.Panel>
-                  </>
-                ) : (
-                  <Link
-                    rel='noopener noreferrer'
-                    className='flex w-full px-4 font-medium uppercase tracking-wide text-sm hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg'
-                    href={defaultLocaleRoute || defaultRoute}
-                  >
-                    <span className='py-2.5 pr-3 block w-full'>
-                      {translate(item.name)}
-                    </span>
-                  </Link>
-                )}
-              </Disclosure>
-            )})}
+                    </Link>
+                  )}
+                </Disclosure>
+              );
+            })}
           </ul>
           {/* <div className='flex items-center justify-between py-6 px-5'>
         <a

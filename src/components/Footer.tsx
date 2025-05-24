@@ -1,20 +1,18 @@
-'use client'
+'use client';
 
 import Link from 'next/link';
 import Logo from '@/shared/Logo';
 import SocialsList1 from '@/shared/SocialsList1';
 import SubscribeForm from '@/components/SubscribeForm';
 import { WatsappIcon } from '@/shared/icons';
-import { useThemeMode } from '@/hooks/useThemeMode';
 import { useLocale, useTranslations } from 'next-intl';
 import { CONTACT_INFO } from '@/constants/contact';
 
 export default function Footer() {
-  const { isDarkMode, mounted } = useThemeMode();
   const translate = useTranslations();
   const locale = useLocale();
 
-  if (!mounted) return null;
+  // if (!mounted) return null;
 
   return (
     <footer className='nc-Footer relative bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-700'>
@@ -22,7 +20,7 @@ export default function Footer() {
         <div className='py-24 lg:py-28'>
           <div className='grid grid-cols-12 gap-y-14 gap-x-6 px-3 xl:px-0'>
             <div className='-mt-3 col-span-12 md:col-span-6 xl:col-span-3'>
-              <Logo isDark={isDarkMode} />
+              <Logo />
               <p className='mt-2 mb-6 text-neutral-600 dark:text-neutral-400'>
                 {translate('footer.title.weltcarTo')}
                 <br />
