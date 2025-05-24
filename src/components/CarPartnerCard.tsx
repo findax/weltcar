@@ -2,12 +2,12 @@ import BtnLikeIcon from '@/components/BtnLikeIcon';
 import Badge from '@/shared/Badge';
 import CardSlider from '@/components/CardSlider';
 import TooltipComponent from '@/shared/TooltipComponent';
-import { ButtonPrimary } from '@/shared/Buttons';
+import { ButtonPrimary, ButtonThird } from '@/shared/Buttons';
 import priceWithComma from '@/utils/priceWithComma';
 import Link from 'next/link';
 import { ICarsPartner } from '@/types/partner';
 import InactiveBadge from './InactiveBadge';
-import { deletePartnerCar } from '@/api/cars';
+import { deletePartnerCar, reactivatePartnerCar } from '@/api/cars';
 import DeletedBadge from './deletedBadge';
 import Modal from '@/shared/Modal';
 import { InformationCircleIcon } from '@heroicons/react/24/solid';
@@ -17,6 +17,13 @@ import { Route } from 'next';
 import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import defaultWatermark from '@/images/defaultWatermark.svg';
+import { Menu } from '@headlessui/react';
+import {
+  ArrowPathIcon,
+  EllipsisVerticalIcon,
+  PencilIcon,
+  TrashIcon,
+} from '@heroicons/react/24/outline';
 
 const CarPartnerCard = ({
   className = '',
@@ -30,6 +37,7 @@ const CarPartnerCard = ({
   const translate = useTranslations();
   const locale = useLocale();
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
+  const [isModalReactivateOpen, setIsModalReactivateOpen] = useState(false);
   const {
     vin,
     brand,
@@ -47,30 +55,48 @@ const CarPartnerCard = ({
     year,
     is_verified,
     is_deleted,
-    watermark
+    watermark,
+    status,
   } = carData;
+
+  const isInactive = status === 'inactive';
 
   const handleModalDeleteOpen = () => {
     setIsModalDeleteOpen(true);
-  }
+  };
 
   const handleDeleteCarCard = () => {
     deletePartnerCar(id, locale);
     let delateMessage = translate('yourCars.toast.success.delete');
     toast.success(delateMessage);
     setIsModalDeleteOpen(false);
-  }
+  };
+
+  const handleModalReactivateOpen = () => {
+    setIsModalReactivateOpen(true);
+  };
+
+  const handleReactivateCar = async () => {
+    const response = await reactivatePartnerCar(id, locale);
+    if (response) {
+      toast.success(translate('yourCars.toast.success.reactivated'));
+      setIsModalReactivateOpen(false);
+      if (typeof window !== 'undefined') {
+        window.location.reload(); // TODO: Override fetch/refetch with tanstack
+      }
+    }
+  };
 
   const renderBadge = () => {
-    if (!is_verified && is_deleted){
-      return <DeletedBadge />
+    if (!is_verified && is_deleted) {
+      return <DeletedBadge />;
     }
-    if(!is_verified){
-      return <InactiveBadge />
+    if (!is_verified) {
+      return <InactiveBadge />;
     } else {
-      return null
+      return null;
     }
-  } 
+  };
 
   const renderWatermark = () => {
     return (
@@ -91,8 +117,8 @@ const CarPartnerCard = ({
           />
         )}
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <>
@@ -121,14 +147,13 @@ const CarPartnerCard = ({
               </span>
               <span>{year}</span>
             </h3>
-            {
-              vin && 
+            {vin && (
               <div className='flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-2'>
                 <span className=''>{vin}</span>
                 <span>-</span>
                 <span className=''>{'VIN'} </span>
               </div>
-            }
+            )}
           </div>
 
           <div className='flex-grow py-3 text-sm space-y-2'>
@@ -166,34 +191,21 @@ const CarPartnerCard = ({
             </h4>
           </div>
 
-          {contractor_comment && 
+          {contractor_comment && (
             <div className='flex-grow py-3 text-sm space-y-2'>
-              <h4 className='flex items-center'>
-                {contractor_comment}
-              </h4>
+              <h4 className='flex items-center'>{contractor_comment}</h4>
             </div>
-          }
+          )}
 
           <div className='pt-4 flex flex-col gap-3 justify-between items-center border-t border-dashed border-neutral-300 dark:border-neutral-700'>
             <span className='2xl:text-2xl xl:text-xl font-semibold text-primary-1000 dark:text-primary-400'>
               {priceWithComma(price)}
             </span>
-            <div style={{ display: `${ is_deleted ? "none" : "display"}`}} className='flex w-full justify-around'>
-              <ButtonPrimary
-                onClick={handleModalDeleteOpen}
-                fontSize='lg:text-md text-xs'
-                sizeClass='h-full lg:px-2.5 lg:py-2 px-2 py-1.5'
-                >
-                  {translate('yourCars.button.delete')}
-              </ButtonPrimary>
-              <Link href={`/partner-cars?id=${id}` as Route} target='_blank'>
-                <ButtonPrimary
-                  fontSize='lg:text-md text-xs'
-                  sizeClass='h-full lg:px-2.5 lg:py-2 px-2 py-1.5'
-                >
-                  {translate('yourCars.button.edit')}
-                </ButtonPrimary>
-              </Link>
+
+            <div
+              style={{ display: `${is_deleted ? 'none' : 'display'}` }}
+              className='flex w-full justify-between items-center'
+            >
               <Link href={`/car-details/${id}` as Route} target='_blank'>
                 <ButtonPrimary
                   fontSize='lg:text-md text-xs'
@@ -202,13 +214,71 @@ const CarPartnerCard = ({
                   {translate('yourCars.button.seeMore')}
                 </ButtonPrimary>
               </Link>
+
+              <Menu as='div' className='relative inline-block text-left'>
+                <Menu.Button className='p-2 hover:bg-gray-100 rounded-full'>
+                  <EllipsisVerticalIcon className='h-6 w-6 text-gray-600' />
+                </Menu.Button>
+
+                <Menu.Items className='absolute right-0 mb-2 w-36 bottom-full rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none z-10'>
+                  <div className='px-1 py-1'>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <Link
+                          href={`/partner-cars?id=${id}` as Route}
+                          target='_blank'
+                        >
+                          <button
+                            className={`${
+                              active ? 'bg-gray-100' : ''
+                            } group flex w-full items-center gap-2 rounded-md px-2 py-2 text-sm`}
+                          >
+                            <PencilIcon className='h-4 w-4 text-gray-500 shrink-0' />
+                            {translate('yourCars.button.edit')}
+                          </button>
+                        </Link>
+                      )}
+                    </Menu.Item>
+
+                    {isInactive && (
+                      <Menu.Item>
+                        {({ active }) => (
+                          <button
+                            onClick={handleModalReactivateOpen}
+                            className={`${
+                              active ? 'bg-gray-100' : ''
+                            } group flex w-full items-center gap-2 rounded-md px-2 py-2 text-sm`}
+                          >
+                            <ArrowPathIcon className='h-4 w-4 shrink-0' />
+                            {translate('yourCars.button.reactivate')}
+                          </button>
+                        )}
+                      </Menu.Item>
+                    )}
+
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                          onClick={handleModalDeleteOpen}
+                          className={`${
+                            active ? 'bg-red-50 text-red-700' : 'text-red-600'
+                          } group flex w-full items-center gap-2 rounded-md px-2 py-2 text-sm`}
+                        >
+                          <TrashIcon className='h-4 w-4 shrink-0' />
+                          {translate('yourCars.button.delete')}
+                        </button>
+                      )}
+                    </Menu.Item>
+                  </div>
+                </Menu.Items>
+              </Menu>
             </div>
           </div>
         </div>
       </div>
-      <Modal 
-        title='yourCars.modal.title' 
-        isModalOpen={isModalDeleteOpen} 
+      <Modal
+        title='yourCars.modal.title'
+        isModalOpen={isModalDeleteOpen}
         setIsModalOpen={setIsModalDeleteOpen}
       >
         <div className='flex flex-col'>
@@ -223,15 +293,45 @@ const CarPartnerCard = ({
               onClick={() => setIsModalDeleteOpen(false)}
               fontSize='text-sm'
               sizeClass='px-3 py-2 md:px-4 md:py-2'
-              >
-                {translate('yourCars.modal.button.cancel')}
+            >
+              {translate('yourCars.modal.button.cancel')}
             </ButtonPrimary>
             <ButtonPrimary
               onClick={handleDeleteCarCard}
               fontSize='text-sm'
               sizeClass='px-3 py-2 md:px-4 md:py-2'
-              >
-                {translate('yourCars.modal.button.delete')}
+            >
+              {translate('yourCars.modal.button.delete')}
+            </ButtonPrimary>
+          </div>
+        </div>
+      </Modal>
+      <Modal
+        title='yourCars.modal.reactivate.title'
+        isModalOpen={isModalReactivateOpen}
+        setIsModalOpen={setIsModalReactivateOpen}
+      >
+        <div className='flex flex-col'>
+          <div className='text-center space-y-5'>
+            <ArrowPathIcon className='block mx-auto w-24 h-24 text-yellow-500' />
+            <p className='px-3 text-md font-semibold'>
+              {translate('yourCars.modal.reactivate.label')}
+            </p>
+          </div>
+          <div className='flex gap-3 pt-5 m-auto'>
+            <ButtonThird
+              onClick={() => setIsModalReactivateOpen(false)}
+              fontSize='text-sm'
+              sizeClass='px-3 py-2 md:px-4 md:py-2'
+            >
+              {translate('yourCars.modal.reactivate.button.cancel')}
+            </ButtonThird>
+            <ButtonPrimary
+              onClick={handleReactivateCar}
+              fontSize='text-sm'
+              sizeClass='px-3 py-2 md:px-4 md:py-2'
+            >
+              {translate('yourCars.modal.reactivate.button.accept')}
             </ButtonPrimary>
           </div>
         </div>

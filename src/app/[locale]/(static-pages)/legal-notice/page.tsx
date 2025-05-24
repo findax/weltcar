@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import bgImg from '@/images/bg-cars/bg-car-9.webp';
+import { CONTACT_INFO } from '@/constants/contact';
 
 export const metadata: Metadata = {
   title: 'Legal Notice',
@@ -23,9 +24,14 @@ export default function CookiePolicyPage() {
         WELTCAR TRADING - FZCO <br />
         Registration Number: 58387 <br />
         License Number: 60847 <br /> <br />
-        Dubai, U.A.E.  <br />  <br />
-        Email: <Link href='mailto:info@weltcar.de'>info@weltcar.de</Link> <br />
-        Website: <Link href='https://www.weltcar.de'>www.weltcar.de</Link>
+        Dubai, U.A.E. <br /> <br />
+        Email:{' '}
+        <Link href={CONTACT_INFO.email.link}>
+          {CONTACT_INFO.email.label}
+        </Link>{' '}
+        <br />
+        Website:{' '}
+        <Link href={CONTACT_INFO.site.link}>{CONTACT_INFO.site.label}</Link>
       </p>
 
       <h2 className='font-semibold'>The Website</h2>

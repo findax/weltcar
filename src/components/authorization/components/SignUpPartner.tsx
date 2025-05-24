@@ -15,7 +15,12 @@ import { Route } from 'next';
 import { singUpPartner } from '@/api/auth';
 import { useTranslations } from 'next-intl';
 
-export const SUPPORTED_FORMATS = ['image/png','image/jpeg','image/jpg'];
+export const SUPPORTED_FORMATS = [
+  'image/png',
+  'image/jpeg',
+  'image/jpg',
+  'application/pdf',
+];
 
 export default function SignUpPartner({
   setIsModalOpen,
@@ -26,26 +31,29 @@ export default function SignUpPartner({
 }) {
   const translate = useTranslations();
   const [isSuccess, setIsSuccess] = useState(false);
-  const termsAcceptedLink = 'https://weltcar.de/partner-agreement' as Route<string>;
+  const termsAcceptedLink =
+    'https://weltcar.de/partner-agreement' as Route<string>;
   // const phoneValidationPattern = /\+38 \(0\d{2}\) \d{3}-\d{2}-\d{2}/;
 
   const SignUpPartnerSchema = Yup.object().shape({
-    company_name: Yup
-      .string()
+    company_name: Yup.string()
       .trim()
       .min(2, 'signUpPartnerSchema.companyName.min')
       .max(50, 'signUpPartnerSchema.companyName.max')
       .required('signUpPartnerSchema.companyName.required'),
-    tax_number: Yup
-      .string()
+    tax_number: Yup.string()
       .trim()
       .required('signUpPartnerSchema.tax.required'),
     files: Yup.array()
       .of(
         Yup.mixed<File>()
-          .test('fileType', 'signUpPartnerSchema.files.unsupported', (value) => {
-            return value && SUPPORTED_FORMATS.includes(value.type);
-          })
+          .test(
+            'fileType',
+            'signUpPartnerSchema.files.unsupported',
+            (value) => {
+              return value && SUPPORTED_FORMATS.includes(value.type);
+            }
+          )
           .required('signUpPartnerSchema.files.fRequired')
       )
       .required('signUpPartnerSchema.files.required'),
@@ -53,7 +61,8 @@ export default function SignUpPartner({
       .trim()
       .required('signUpPartnerSchema.email.required')
       .matches(
-        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'signUpPartnerSchema.email.invalid'
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+        'signUpPartnerSchema.email.invalid'
       ),
     phone: Yup.string()
       .trim()
@@ -93,34 +102,33 @@ export default function SignUpPartner({
         email: '',
         phone: '',
         password: '',
-        termsAccepted: false
+        termsAccepted: false,
       }}
       validationSchema={SignUpPartnerSchema}
       onSubmit={(values, { setSubmitting, resetForm }) => {
         // trim values
         const castValues = SignUpPartnerSchema.cast(values);
 
-        const {
-          company_name, 
-          tax_number, 
-          files, 
-          email, 
-          phone, 
-          password
-        } = castValues
+        const { company_name, tax_number, files, email, phone, password } =
+          castValues;
 
         singUpPartner({
-          company_name, 
-          tax_number, 
-          files, 
-          email, 
-          phone, 
-          password })
+          company_name,
+          tax_number,
+          files,
+          email,
+          phone,
+          password,
+        })
           .then((res) => {
-            res && (setIsSuccess(true), resetForm(), setSubmitting(false), setIsDispatched(true));
+            res &&
+              (setIsSuccess(true),
+              resetForm(),
+              setSubmitting(false),
+              setIsDispatched(true));
           })
           .finally(() => (setSubmitting(false), setIsDispatched(true)));
-        }}
+      }}
     >
       {({ errors, touched, isSubmitting }) => (
         <Form className='grid grid-cols-1 gap-6'>
@@ -144,10 +152,11 @@ export default function SignUpPartner({
             touched={touched.tax_number}
           />
           {/* ---- */}
-          <FormikFile 
+          <FormikFile
             name='files'
-            accept="image/jpeg, image/png, application/pdf"
+            accept={SUPPORTED_FORMATS.join(',')}
             label='authorization.signUp.files.label'
+            subTitle='JPG, JPEG, PNG or PDF'
             multiple
             error={errors.files}
             touched={touched.files}
