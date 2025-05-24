@@ -10,6 +10,11 @@ export default function LayoutWrapper({
   const { mounted } = useThemeMode();
 
   return (
-    <div style={{ display: mounted ? undefined : 'none' }}>{children}</div>
+    <div
+      style={{ display: mounted ? undefined : 'none' }}
+      className='flex flex-col min-h-screen'
+    >
+      {children}
+    </div>
   );
 }
