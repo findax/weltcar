@@ -26,24 +26,24 @@ import { LocaleData } from '@/types/languages';
 const languagesData = [
   {
     locale: 'en',
-    name: 'English'
+    name: 'English',
   },
   {
     locale: 'de',
-    name: 'Deutsch'
+    name: 'Deutsch',
   },
   {
     locale: 'zh-cn',
-    name: '中国人'
+    name: '中国人',
   },
 ];
 
 const Header = () => {
   const user = useUserStore((state) => state.user);
-  const { isDarkMode, mounted } = useThemeMode();
+  const { isDarkMode } = useThemeMode();
   const prevScrollPos = useRef(0);
   const isMobile = useMediaQuery(1024);
-  const t = useTranslations()
+  const t = useTranslations();
   const locale = useLocale();
 
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
@@ -57,28 +57,27 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    if(user?.contractor_id && locale){
-      getPartner(locale)
-        .then((data) => {
-          if(data){
-            setPartner(data);
-          }
-        })
+    if (user?.contractor_id && locale) {
+      getPartner(locale).then((data) => {
+        if (data) {
+          setPartner(data);
+        }
+      });
     }
   }, [user, locale]);
 
   useEffect(() => {
-    const fetchLocale = async() => {
+    const fetchLocale = async () => {
       try {
         const response = await getLanguages();
-        if(response){
+        if (response) {
           setLanguages(response.data);
         }
       } catch (error) {
         setLanguages(languagesData);
       }
-    }
-    fetchLocale()
+    };
+    fetchLocale();
   }, []);
 
   useEffect(() => {
@@ -104,7 +103,7 @@ const Header = () => {
     });
   }, []);
 
-  if (!mounted) return null;
+  // if (!mounted) return null;
 
   return (
     <>
@@ -117,26 +116,23 @@ const Header = () => {
       >
         <div className='px-4 h-16 md:h-20 lg:container relative flex justify-between'>
           <div className='flex justify-start flex-1 space-x-4 sm:space-x-10'>
-            <Logo 
-              className='self-center'
-              isDark={isDarkMode} 
-            />
-          
-            <Navigation translate={t}/>
+            <Logo className='self-center' />
+
+            <Navigation translate={t} />
           </div>
 
           <div className='flex mr-4'>
-            <LanguageSelector 
-              className='hidden lg:flex' 
-              languages={languages}  
+            <LanguageSelector
+              className='hidden lg:flex'
+              languages={languages}
             />
           </div>
 
           <div className='flex flex-shrink-0 justify-end flex-1 lg:flex-none text-neutral-700 dark:text-neutral-100 space-x-0.5'>
-            {partner?.is_verified && <ButtonAddCar translate={t}/>}
+            {partner?.is_verified && <ButtonAddCar translate={t} />}
             <SwitchDarkMode />
             {user ? (
-              <AvatarDropdown translate={t}/>
+              <AvatarDropdown translate={t} />
             ) : (
               <button
                 className={`self-center w-10 h-10 md:w-12 md:h-12 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center`}
@@ -147,9 +143,8 @@ const Header = () => {
               </button>
             )}
             <div className='px-0.5' />
-            <MenuMobile 
+            <MenuMobile
               languages={languages}
-              isDark={isDarkMode} 
               partner={partner ? partner : undefined}
               translate={t}
             />
