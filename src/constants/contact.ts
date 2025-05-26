@@ -1,11 +1,11 @@
 export const CONTACT_INFO = {
   phone: {
-    label: '+971 52 227 2939',
-    link: 'tel:+971522272939',
+    label: '+971 58 190 2200',
+    link: 'tel:+971581902200',
   },
   watsApp: {
-    label: '+971 52 227 2939',
-    link: 'https://wa.me/+971522272939',
+    label: '+971 58 190 2200',
+    link: 'https://wa.me/+971581902200',
   },
   email: {
     label: 'info@weltcar.de',
