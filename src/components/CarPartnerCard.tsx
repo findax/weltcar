@@ -7,7 +7,11 @@ import priceWithComma from '@/utils/priceWithComma';
 import Link from 'next/link';
 import { ICarsPartner } from '@/types/partner';
 import InactiveBadge from './InactiveBadge';
-import { deletePartnerCar, reactivatePartnerCar } from '@/api/cars';
+import {
+  deletePartnerCar,
+  reactivatePartnerCar,
+  updatePartnerCarPrice,
+} from '@/api/cars';
 import DeletedBadge from './deletedBadge';
 import Modal from '@/shared/Modal';
 import { InformationCircleIcon } from '@heroicons/react/24/solid';
@@ -20,10 +24,19 @@ import defaultWatermark from '@/images/defaultWatermark.svg';
 import { Menu } from '@headlessui/react';
 import {
   ArrowPathIcon,
+  BanknotesIcon,
+  ChevronDoubleRightIcon,
   EllipsisVerticalIcon,
   PencilIcon,
   TrashIcon,
 } from '@heroicons/react/24/outline';
+import { Form, Formik } from 'formik';
+import { FormikInputPrice } from '@/shared/FormInputs';
+import * as Yup from 'yup';
+
+const CarPriceSchema = Yup.object().shape({
+  price: Yup.number().required('partnerCarsSchema.price.required'),
+});
 
 const CarPartnerCard = ({
   className = '',
@@ -38,6 +51,7 @@ const CarPartnerCard = ({
   const locale = useLocale();
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
   const [isModalReactivateOpen, setIsModalReactivateOpen] = useState(false);
+  const [isModalPriceOpen, setIsModalPriceOpen] = useState(false);
   const {
     vin,
     brand,
@@ -85,6 +99,26 @@ const CarPartnerCard = ({
         window.location.reload(); // TODO: Override fetch/refetch with tanstack
       }
     }
+  };
+
+  const handleKeyPressNumber = (
+    event: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (!/^[0-9]$/.test(event.key)) {
+      event.preventDefault();
+    }
+  };
+
+  const handleUpdateCarPrice = async (price: number) => {
+    const response = await updatePartnerCarPrice({ price }, id, locale);
+    if (response) {
+      toast.success(translate('yourCars.toast.success.priceUpdated'));
+      setIsModalPriceOpen(false);
+      if (typeof window !== 'undefined') {
+        window.location.reload(); // TODO: Override fetch/refetch with tanstack
+      }
+    }
+    return response;
   };
 
   const renderBadge = () => {
@@ -220,25 +254,41 @@ const CarPartnerCard = ({
                   <EllipsisVerticalIcon className='h-6 w-6 text-gray-600' />
                 </Menu.Button>
 
-                <Menu.Items className='absolute right-0 mb-2 w-36 bottom-full rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none z-10'>
+                <Menu.Items className='absolute right-0 mb-2 bottom-full rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none z-10'>
                   <div className='px-1 py-1'>
                     <Menu.Item>
                       {({ active }) => (
-                        <Link
-                          href={`/partner-cars?id=${id}` as Route}
-                          target='_blank'
+                        <button
+                          onClick={() => setIsModalPriceOpen(true)}
+                          className={`${
+                            active ? 'bg-gray-100' : ''
+                          } group flex w-full items-center gap-2 rounded-md px-2 py-2 text-sm whitespace-nowrap`}
                         >
-                          <button
-                            className={`${
-                              active ? 'bg-gray-100' : ''
-                            } group flex w-full items-center gap-2 rounded-md px-2 py-2 text-sm`}
-                          >
-                            <PencilIcon className='h-4 w-4 text-gray-500 shrink-0' />
-                            {translate('yourCars.button.edit')}
-                          </button>
-                        </Link>
+                          <BanknotesIcon className='h-4 w-4 text-gray-500 shrink-0' />
+                          {translate('yourCars.button.priceUpdate')}
+                        </button>
                       )}
                     </Menu.Item>
+
+                    {isInactive && (
+                      <Menu.Item>
+                        {({ active }) => (
+                          <Link
+                            href={`/partner-cars?id=${id}` as Route}
+                            target='_blank'
+                          >
+                            <button
+                              className={`${
+                                active ? 'bg-gray-100' : ''
+                              } group flex w-full items-center gap-2 rounded-md px-2 py-2 text-sm`}
+                            >
+                              <PencilIcon className='h-4 w-4 text-gray-500 shrink-0' />
+                              {translate('yourCars.button.edit')}
+                            </button>
+                          </Link>
+                        )}
+                      </Menu.Item>
+                    )}
 
                     {isInactive && (
                       <Menu.Item>
@@ -333,6 +383,79 @@ const CarPartnerCard = ({
             >
               {translate('yourCars.modal.reactivate.button.accept')}
             </ButtonPrimary>
+          </div>
+        </div>
+      </Modal>
+      <Modal
+        title='yourCars.modal.priceUpdate.title'
+        isModalOpen={isModalPriceOpen}
+        setIsModalOpen={setIsModalPriceOpen}
+        maxWidth='max-w-max'
+      >
+        <div className='flex flex-col'>
+          <div className='space-y-5'>
+            <div>
+              <Formik
+                initialValues={{
+                  price: undefined,
+                }}
+                validationSchema={CarPriceSchema}
+                onSubmit={(values, { setSubmitting }) => {
+                  const castValues = CarPriceSchema.cast(values);
+                  handleUpdateCarPrice(castValues.price).finally(() =>
+                    setSubmitting(false)
+                  );
+                }}
+              >
+                {({ errors, touched, isSubmitting }) => (
+                  <Form className='flex flex-col gap-4 justify-start'>
+                    <div className='flex gap-8 items-center'>
+                      <div className='flex flex-col h-full justify-between'>
+                        <span className='text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-3 whitespace-nowrap'>
+                          {translate('yourCars.modal.form.priceCurrent.label')}
+                        </span>
+                        <div className='flex items-center justify-center text-lg font-normal h-14'>
+                          {priceWithComma(price)}
+                        </div>
+                      </div>
+
+                      <ChevronDoubleRightIcon className='h-6 w-6 text-gray-500 shrink-0' />
+
+                      <FormikInputPrice
+                        onKeyPress={handleKeyPressNumber}
+                        name='price'
+                        placeholder='yourCars.modal.form.price.placeholder'
+                        title='yourCars.modal.form.price.label'
+                        rounded='rounded-full'
+                        sizeClass='h-14'
+                        error={errors.price}
+                        touched={touched.price}
+                      />
+                    </div>
+
+                    <div className='flex gap-3 pt-5 m-auto'>
+                      <ButtonThird
+                        type='button'
+                        onClick={() => setIsModalPriceOpen(false)}
+                        fontSize='text-sm'
+                        sizeClass='px-3 py-2 md:px-4 md:py-2'
+                      >
+                        {translate('yourCars.modal.priceUpdate.button.cancel')}
+                      </ButtonThird>
+                      <ButtonPrimary
+                        type='submit'
+                        disabled={isSubmitting}
+                        loading={isSubmitting}
+                        fontSize='text-sm'
+                        sizeClass='px-3 py-2 md:px-4 md:py-2'
+                      >
+                        {translate('yourCars.modal.priceUpdate.button.accept')}
+                      </ButtonPrimary>
+                    </div>
+                  </Form>
+                )}
+              </Formik>
+            </div>
           </div>
         </div>
       </Modal>

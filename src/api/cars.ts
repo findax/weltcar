@@ -166,6 +166,27 @@ export const updatePartnerCar = async (
   }
 };
 
+export const updatePartnerCarPrice = async (
+  data: { price: number },
+  id: string,
+  locale: string
+) => {
+  const headers: Record<string, string> = {
+    'Accept-Language': locale,
+  };
+
+  try {
+    await api.put(`/api/user/contractor/cars/${id}/price`, data, {
+      headers,
+    });
+
+    return true;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message || 'Something went wrong!');
+    return false;
+  }
+};
+
 export const reactivatePartnerCar = async (id: string, locale: string) => {
   const headers: Record<string, string> = {
     'Accept-Language': locale,
