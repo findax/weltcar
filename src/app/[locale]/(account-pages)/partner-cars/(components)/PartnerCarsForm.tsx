@@ -110,7 +110,7 @@ export default function PartnerCarsForm({
       .trim()
       .required('partnerCarsSchema.yearManufacture.required'),
     year: Yup.string().trim().required('partnerCarsSchema.year.required'),
-    vin: Yup.string().trim().required('partnerCarsSchema.vin.required'),
+    vin: Yup.string().trim(),
     price: Yup.string().trim().required('partnerCarsSchema.price.required'),
     photos: car
       ? Yup.array()
