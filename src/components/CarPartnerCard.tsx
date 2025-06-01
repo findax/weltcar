@@ -74,6 +74,7 @@ const CarPartnerCard = ({
   } = carData;
 
   const isInactive = status === 'inactive';
+  const hotFixHide = false; // temporary hot fix, business logic is not ready yet
 
   const handleModalDeleteOpen = () => {
     setIsModalDeleteOpen(true);
@@ -254,7 +255,7 @@ const CarPartnerCard = ({
                   <EllipsisVerticalIcon className='h-6 w-6 text-gray-600' />
                 </Menu.Button>
 
-                <Menu.Items className='absolute right-0 mb-2 bottom-full rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none z-10'>
+                <Menu.Items className='absolute right-0 mb-2 bottom-full rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none z-10 whitespace-nowrap'>
                   <div className='px-1 py-1'>
                     <Menu.Item>
                       {({ active }) => (
@@ -262,7 +263,7 @@ const CarPartnerCard = ({
                           onClick={() => setIsModalPriceOpen(true)}
                           className={`${
                             active ? 'bg-gray-100' : ''
-                          } group flex w-full items-center gap-2 rounded-md px-2 py-2 text-sm whitespace-nowrap`}
+                          } group flex w-full items-center gap-2 rounded-md px-2 py-2 text-sm`}
                         >
                           <BanknotesIcon className='h-4 w-4 text-gray-500 shrink-0' />
                           {translate('yourCars.button.priceUpdate')}
@@ -290,7 +291,7 @@ const CarPartnerCard = ({
                       </Menu.Item>
                     )}
 
-                    {isInactive && (
+                    {hotFixHide && (
                       <Menu.Item>
                         {({ active }) => (
                           <button
