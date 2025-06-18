@@ -214,6 +214,8 @@
   "carDetails.downloadPdf.title.without": "Without Price",
   "carDetails.downloadPdf.button": "Download",
   "carDetails.confirm.button": "Continue and Reserve",
+  "carDetails.tooltip.auth.clickable": "Log in",
+  "carDetails.tooltip.auth.text": "o see the full VIN number",
   "authorization.button.signIn": "SIGN IN",
   "authorization.button.signUp": "SIGN UP",
   "authorization.signIn.resetPass.title": "Please, check your email to reset your password!",
