@@ -22,22 +22,25 @@ import { RadioButton } from '@/shared/FormInputs';
 import DownloadPdf from './DownloadPdf';
 import AuthorizationFavorite from '@/components/authorization/AuthorizationFavorite';
 
+enum ModalId {
+  SIMPLE_AUTHORIZATION = 'simple-authorization',
+  AUTHORIZATION = 'authorization',
+  CONFIRM = 'confirm',
+}
+
 interface IPages {
   pageName: string;
   pageHref: string;
-};
+}
 
-export default function CarDetails({
-  carId,
-}: {
-  carId: string;
-}) {
+export default function CarDetails({ carId }: { carId: string }) {
   const locale = useLocale();
   const translate = useTranslations();
   const [isFavorite, setIsFavorite] = useState(false);
   const [isOpenDownloadPdfModal, setIsOpenDownloadPdfModal] = useState(false);
   const [isDownloadButtonClick, setIsDownloadButtonClick] = useState(false);
-  const [isAuthorizationModalOpen, setIsAuthorizationModalOpen] = useState(false);
+  const [isAuthorizationModalOpen, setIsAuthorizationModalOpen] =
+    useState(false);
   const [carData, setCarData] = useState<ICarDetails>();
   const [isLoading, setIsLoading] = useState(true);
   const [carGallery, setCarGallery] = useState<ICarGallery[]>([]);
@@ -49,30 +52,31 @@ export default function CarDetails({
   const [breadcrumbsPages, setBreadcrumbsPages] = useState<IPages[]>([
     {
       pageName: 'carDetails.breadcrumbs.main',
-      pageHref: '/'
+      pageHref: '/',
     },
     {
       pageName: 'carDetails.breadcrumbs.catalog',
-      pageHref: '/catalog'
-    }
+      pageHref: '/catalog',
+    },
   ]);
   const [pdfVariants, setPdfVariants] = useState([
     {
       name: 'with',
       value: 'carDetails.downloadPdf.title.with',
-      selected: false
+      selected: false,
     },
     {
       name: 'without',
       value: 'carDetails.downloadPdf.title.without',
-      selected: false
+      selected: false,
     },
   ]);
 
   const user = useUserStore((state) => state.user);
+  const isAuthorized = Boolean(user?.id);
 
   const downloadFile = (fileUrl: string, fileName: string) => {
-    const anchor = document.createElement("a");
+    const anchor = document.createElement('a');
     anchor.href = fileUrl;
     anchor.download = fileName;
     document.body.appendChild(anchor);
@@ -83,20 +87,22 @@ export default function CarDetails({
   useEffect(() => {
     getCarId(carId, locale)
       .then((carData) => {
-        if(carData){
+        if (carData) {
           setCarData(carData);
           setIsFavorite(carData.is_favorite);
-          const modifiedPhotosArray = [...carData.photos].map((item, index) => ({
-            id: index,
-            url: item.original,
-          }));
+          const modifiedPhotosArray = [...carData.photos].map(
+            (item, index) => ({
+              id: index,
+              url: item.original,
+            })
+          );
           setCarGallery(modifiedPhotosArray);
-          const carTitle = `${carData.brand} ${carData.model}`
+          const carTitle = `${carData.brand} ${carData.model}`;
           setBreadcrumbsPages((prevPages) => {
             const isTitleExists = prevPages.some(
               (page) => page.pageName === carTitle
             );
-    
+
             if (!isTitleExists) {
               return [...prevPages, { pageName: carTitle, pageHref: '' }];
             }
@@ -104,7 +110,6 @@ export default function CarDetails({
           });
           carData.videos && setCarVideos([...carData.videos]);
           carData.is_partner_car && setIsPartnerLogo(carData.is_partner_car);
-
         }
       })
       .finally(() => setIsLoading(false));
@@ -120,18 +125,16 @@ export default function CarDetails({
   useEffect(() => {
     if (carData && isDownloadButtonClick) {
       const fileUrl =
-        selectedOption === "without"
-          ? carData.pdf_url
-          : carData.pdf_url_clean;
+        selectedOption === 'without' ? carData.pdf_url : carData.pdf_url_clean;
       const fileName =
-        selectedOption === "without"
-          ? "file-without-price.pdf"
-          : "file-with-price.pdf";
+        selectedOption === 'without'
+          ? 'file-without-price.pdf'
+          : 'file-with-price.pdf';
 
       downloadFile(fileUrl, fileName);
       setIsDownloadButtonClick(false);
     }
-  },[isDownloadButtonClick])
+  }, [isDownloadButtonClick]);
 
   const handleRadioButtonChange = (name: string) => {
     setSelectedOption(name);
@@ -139,12 +142,25 @@ export default function CarDetails({
 
   const handleOpenDownloadModal = () => {
     setIsOpenDownloadPdfModal(true);
-  }
+  };
+
+  const handleOpenAuthModal = () => {
+    setModalId(ModalId.SIMPLE_AUTHORIZATION);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseAuthModal = () => {
+    if (modalId === ModalId.SIMPLE_AUTHORIZATION) {
+      setModalId('');
+      window.location.reload(); // TODO: Override fetch/refetch with tanstack
+    }
+    setIsModalOpen(false);
+  };
 
   const handleDownloadButton = () => {
     setIsOpenDownloadPdfModal(false);
     setIsDownloadButtonClick(true);
-  }
+  };
 
   function handleReserve() {
     if (!!user) {
@@ -166,7 +182,7 @@ export default function CarDetails({
       default:
         return 'carDetails.button.reserve';
     }
-  }
+  };
 
   return isLoading ? (
     <div className='h-[calc(100vh-76px)] flex justify-center items-center'>
@@ -180,13 +196,24 @@ export default function CarDetails({
         <div className='mt-8'>
           <Breadcrumbs pages={breadcrumbsPages} />
         </div>
-        {carGallery && <ImagesHeader isSold={carData?.status === 'inactive'} images={carGallery} videos={carVideos.length > 0 ? carVideos : null }/>}
+        {carGallery && (
+          <ImagesHeader
+            isSold={carData?.status === 'inactive'}
+            images={carGallery}
+            videos={carVideos.length > 0 ? carVideos : null}
+          />
+        )}
 
         <div className='relative z-10 my-11 grid grid-rows-1 grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4'>
           <div className='w-full col-span-3 lg:col-span-2 space-y-8 lg:space-y-10'>
             {carData && (
               <>
-                <Title carData={carData} onDownloadCarInfo={handleOpenDownloadModal} />
+                <Title
+                  carData={carData}
+                  onDownloadCarInfo={handleOpenDownloadModal}
+                  onAuthModalOpen={handleOpenAuthModal}
+                  isAuthorized={isAuthorized}
+                />
                 {carData.documents.length > 0 && (
                   <Documents documents={carData.documents} />
                 )}
@@ -194,7 +221,8 @@ export default function CarDetails({
                   <Descriptions description={carData.description} />
                 )}
                 <p className='sm:px-2 text-sm text-neutral-600 dark:text-neutral-300'>
-                  <sup>*</sup>{translate('carDetails.vehicle.description')}
+                  <sup>*</sup>
+                  {translate('carDetails.vehicle.description')}
                 </p>
               </>
             )}
@@ -204,7 +232,9 @@ export default function CarDetails({
             buttonTitle={getStatusMessage(carData?.status)}
             onClick={handleReserve}
             price={carData?.price || 0}
-            isSold={carData?.status === 'inactive' || carData?.status === 'sold'}
+            isSold={
+              carData?.status === 'inactive' || carData?.status === 'sold'
+            }
             isShowPartnerLogo={isPartnerLogo}
             partnerPhone={carData?.partner_phone || null}
             partnerName={carData?.partner_name || null}
@@ -244,9 +274,10 @@ export default function CarDetails({
         </Modal>
       )}
 
-      {modalId === 'authorization' && (
+      {(modalId === 'authorization' ||
+        modalId === ModalId.SIMPLE_AUTHORIZATION) && (
         <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-          <Authorization setIsModalOpen={setIsModalOpen} />
+          <Authorization setIsModalOpen={handleCloseAuthModal} />
         </Modal>
       )}
 
@@ -256,17 +287,20 @@ export default function CarDetails({
           isModalOpen={isOpenDownloadPdfModal}
           setIsModalOpen={setIsOpenDownloadPdfModal}
         >
-          <DownloadPdf 
-            selectedOption={selectedOption} 
-            pdfOptions={pdfVariants} 
+          <DownloadPdf
+            selectedOption={selectedOption}
+            pdfOptions={pdfVariants}
             handleDownloadButton={handleDownloadButton}
-            handleRadioButtonChange={handleRadioButtonChange} 
+            handleRadioButtonChange={handleRadioButtonChange}
           />
         </Modal>
       )}
 
       {isAuthorizationModalOpen && (
-        <Modal isModalOpen={isAuthorizationModalOpen} setIsModalOpen={setIsAuthorizationModalOpen}>
+        <Modal
+          isModalOpen={isAuthorizationModalOpen}
+          setIsModalOpen={setIsAuthorizationModalOpen}
+        >
           <AuthorizationFavorite setIsModalOpen={setIsAuthorizationModalOpen} />
         </Modal>
       )}

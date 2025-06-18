@@ -1,3 +1,4 @@
+import { TooltipWrapper } from '@/components/TooltipWrapper';
 import { ICarDetails } from '@/types/cardetails';
 import { ICarPartnerDetails } from '@/types/partner';
 import { DocumentArrowDownIcon } from '@heroicons/react/24/outline';
@@ -5,10 +6,14 @@ import { useTranslations } from 'next-intl';
 
 export default function Title({
   carData,
-  onDownloadCarInfo
+  onDownloadCarInfo,
+  onAuthModalOpen,
+  isAuthorized,
 }: {
   carData: ICarDetails | ICarPartnerDetails | undefined;
   onDownloadCarInfo: () => void;
+  onAuthModalOpen: () => void;
+  isAuthorized: boolean;
 }) {
   const {
     brand,
@@ -67,7 +72,7 @@ export default function Title({
         </div>
 
         <div
-          onClick={onDownloadCarInfo}
+          onClick={isAuthorized ? onDownloadCarInfo : onAuthModalOpen}
           className='flex flex-col cursor-pointer items-center justify-center group'
         >
           <DocumentArrowDownIcon className='w-12 group-hover:text-primary-700 dark:group-hover:text-primary-500' />
@@ -83,7 +88,27 @@ export default function Title({
         </div>
       )}
 
-      {vin && <div className='font-semibold'>VIN: {vin}</div>}
+      {vin && (
+        <div className='font-semibold'>
+          VIN: {vin}{' '}
+          {!isAuthorized && (
+            <TooltipWrapper
+              id='vin-code'
+              tooltipContent={
+                <span className='whitespace-nowrap font-medium'>
+                  <b
+                    onClick={onAuthModalOpen}
+                    className='cursor-pointer text-orange-600 underline hover:text-orange-800'
+                  >
+                    {translate('carDetails.tooltip.auth.clickable')}
+                  </b>{' '}
+                  {translate('carDetails.tooltip.auth.text')}
+                </span>
+              }
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 }
