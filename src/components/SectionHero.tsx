@@ -1,12 +1,18 @@
 import sectionHeroCar from '@/images/car-1.png';
 import Image from 'next/image';
 import SearchForCar from './SearchForCar';
+import { getTranslations } from 'next-intl/server';
+import { getCarBrandsList } from '@/api';
 
-interface IProps {
-  translate: any;
+interface Props {
+  locale: string;
 }
 
-export default function SectionHeroArchivePage({ translate }: IProps) {
+export default async function SectionHeroArchivePage({ locale }: Props) {
+  const translate = await getTranslations();
+  const carBrandsResponse = await getCarBrandsList(locale);
+  const carBrands = carBrandsResponse?.data || [];
+
   return (
     <div
       className='nc-SectionHeroArchivePage flex flex-col relative'
@@ -18,7 +24,7 @@ export default function SectionHeroArchivePage({ translate }: IProps) {
         </h1>
         <div className='flex max-lg:flex-col max-lg:gap-8 lg:items-center justify-between'>
           <div className='flex-1 lg:basis-[100px] lg:max-w-[500px]'>
-            <SearchForCar translate={translate} />
+            <SearchForCar carBrands={carBrands} />
           </div>
 
           <div className='flex-1 lg:basis-[500px]'>

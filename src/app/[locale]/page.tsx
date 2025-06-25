@@ -1,26 +1,18 @@
-'use client';
-
 import { Metadata } from 'next/types';
 import SectionHero from '@/components/SectionHero';
 import SectionHowItWork from '@/components/SectionHowItWork';
 import SectionSubscribe from '@/components/SectionSubscribe';
 import SectionWhyChooseUs from '@/components/SectionWhyChooseUs';
-import SectionVideos from '@/components/SectionVideos';
-import SectionClientSay from '@/components/SectionClientSay';
 import Image from 'next/image';
-import arrowDownLightImg from '@/images/bg-figures/arrow-down.svg';
-import arrowDownDarkImg from '@/images/bg-figures/arrow-down-dark.svg';
 import carBackgroundDarkImg from '@/images/car-2.png';
 import carBackgroundLightImg from '@/images/car-2-light.png';
 import carsBackgroundDarkImg from '@/images/car-dark.png';
 import carsBackgroundLightImg from '@/images/car-light.png';
 import triangleBackgroundImg from '@/images/bg-figures/triangle-1.png';
-import triangleBackgroundImgTwo from '@/images/bg-figures/triangle-2.png';
 import triangleBackgroundImgThird from '@/images/bg-figures/triangle-3.png';
 import BackgroundShaadowSection from '@/components/BackgroundShaadowSection';
-import { useThemeMode } from '@/hooks/useThemeMode';
-import { useRef } from 'react';
-import { useTranslations } from 'next-intl';
+import ThemedImage from '@/shared/ThemedImage';
+import ScrollToSection from '@/components/ScrollToSectionButton';
 
 const metadata: Metadata = {
   title:
@@ -29,42 +21,14 @@ const metadata: Metadata = {
     'Discover our collection of elite cars with global delivery to all countries, including Germany, Switzerland, Dubai, and China. Experience luxury and performance with our exclusive vehicle range.',
 };
 
-function PageHome() {
-  const { isDarkMode, mounted } = useThemeMode();
+const TARGET_SECTION_ID = 'target-how-it-work';
 
-  const targetSectionRef: any = useRef(null);
+type Props = {
+  params: { locale: string };
+};
 
-  const scrollToSection = () => {
-    const element = targetSectionRef.current;
-    const targetPosition =
-      element.getBoundingClientRect().top + window.pageYOffset - 100;
-
-    slowScrollTo(targetPosition, 1300);
-  };
-
-  const slowScrollTo = (targetY: number, duration: number) => {
-    const startY = window.pageYOffset;
-    const distance = targetY - startY;
-    const startTime = Date.now();
-
-    const scrollStep = () => {
-      const now = Date.now();
-      const elapsedTime = now - startTime;
-      const progress = Math.min(elapsedTime / duration, 1);
-
-      window.scrollTo(0, startY + distance * progress);
-
-      if (progress < 1) {
-        setTimeout(scrollStep, 10);
-      }
-    };
-
-    scrollStep();
-  };
-
-  const t = useTranslations();
-
-  // if (!mounted) return null;
+export default async function PageHome({ params }: Props) {
+  const locale = params.locale;
 
   return (
     <div className='nc-PageHome relative overflow-hidden'>
@@ -75,8 +39,8 @@ function PageHome() {
         alt='triangle background'
         className='absolute top-[11%] -left-[5px] -z-10'
       />
-      {/* <Image 
-        src={triangleBackgroundImgTwo} 
+      {/* <Image
+        src={triangleBackgroundImgTwo}
         alt='triangle background'
         className='hidden md:block absolute top-[28%] -right-[5px] -z-10'
       /> */}
@@ -91,31 +55,30 @@ function PageHome() {
       <BackgroundShaadowSection className='-bottom-[2%] -right-[80%] bg-[#DFE172] opacity-[0.30] lg:-right-[467px] lg:-bottom-[9%]' />
       {/* SECTION HERO */}
       <div className='relative container pt-12 xl:pt-14 pb-24 lg:pb-28'>
-        <SectionHero translate={t} />
+        <SectionHero locale={locale} />
       </div>
-      <div onClick={scrollToSection} className=''>
-        <Image
-          className='w-8 h-7 mx-auto cursor-pointer animate-pulse'
-          alt='arrow down image'
-          src={isDarkMode ? arrowDownLightImg : arrowDownDarkImg}
-        />
-      </div>
+      <ScrollToSection targetId={TARGET_SECTION_ID} />
       <div
-        ref={targetSectionRef}
+        id={TARGET_SECTION_ID}
         className='container relative space-y-24 mb-0 sm:mb-24 lg:space-y-28 lg:mb-28 mt-40'
       >
         <div className='relative py-16'>
-          <SectionHowItWork translate={t} />
+          <SectionHowItWork />
         </div>
 
         {/* <SectionVideos /> */}
 
         <div className='relative flex pb-20 lg:py-20'>
-          <SectionWhyChooseUs translate={t} />
+          <SectionWhyChooseUs locale={locale} />
           <div className='lg:max-w-[70%] xl:max-w-full absolute top-[80%] md:top-[65%] lg:top-20 xl:-top-10 -right-24'>
-            <Image
+            {/* <Image
               alt='car image'
               src={isDarkMode ? carBackgroundDarkImg : carBackgroundLightImg}
+            /> */}
+            <ThemedImage
+              alt='car image'
+              lightSrc={carBackgroundLightImg}
+              darkSrc={carBackgroundDarkImg}
             />
           </div>
         </div>
@@ -125,24 +88,29 @@ function PageHome() {
         </div> */}
 
         <div className='relative pt-64 sm:pt-96 lg:pt-0 xl:pt-16 py-16'>
-          <SectionSubscribe translate={t} />
+          <SectionSubscribe />
         </div>
       </div>
       {/* <div className='flex-grow absolute top-[1530px] -right-0'>
-        <Image 
-          alt='car image' 
-          src={carImg}  
+        <Image
+          alt='car image'
+          src={carImg}
         />
       </div> */}
       <div className='hidden relative sm:bottom-0 sm:h-full -bottom-[30px] h-72 justify-center w-full'>
-        <Image
+        {/* <Image
           src={isDarkMode ? carsBackgroundDarkImg : carsBackgroundLightImg}
           alt='cars image'
+          className='w-full h-full object-cover'
+        /> */}
+
+        <ThemedImage
+          alt='cars image'
+          lightSrc={carsBackgroundLightImg}
+          darkSrc={carsBackgroundDarkImg}
           className='w-full h-full object-cover'
         />
       </div>
     </div>
   );
 }
-
-export default PageHome;

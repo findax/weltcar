@@ -1,24 +1,39 @@
-import { toast } from 'react-toastify';
 import api from './apiInstance';
 
-export const getSearchList = async (locale: string) => {
+import { AxiosResponse } from 'axios';
+
+export type CarModel = {
+  id: number;
+  name: string;
+};
+
+export type CarBrand = {
+  id: number;
+  name: string;
+  models: CarModel[];
+};
+
+export type CarBrandResponse = {
+  data: CarBrand[];
+};
+
+export const getCarBrandsList = async (locale: string) => {
   const headers: Record<string, string> = {
     cache: 'no-store',
     'Accept-Language': locale,
   };
-  return new Promise((resolve) => {
-    api
-      .get(`/api/index/search-list`, {
-        headers,
-      })
-      .then((res) => resolve(res.data))
-      .catch((err) => {
-        if (err.response?.data.message) {
-          toast.error(err.response.data.message);
-        } else {
-          toast.error('Something went wrong!');
-        }
-        resolve(false);
-      });
-  });
+
+  try {
+    const endpoint = `/api/index/search-list`;
+
+    const { data } = await api.get<
+      CarBrandResponse,
+      AxiosResponse<CarBrandResponse>
+    >(endpoint, { headers });
+
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 };
