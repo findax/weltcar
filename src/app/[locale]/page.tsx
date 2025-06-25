@@ -67,7 +67,7 @@ export default async function PageHome({ params }: Props) {
           <SectionHowItWork />
         </div>
 
-        <LatestCarsSections locale={locale} />
+        {/* <LatestCarsSections locale={locale} /> */}
 
         {/* <SectionVideos /> */}
 

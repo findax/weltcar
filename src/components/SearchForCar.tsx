@@ -55,10 +55,7 @@ const SearchForCar = ({ carBrands }: SearchForCarProps) => {
         />
       </div>
 
-      <ButtonPrimary
-        className='w-full sm:w-fit rounded-lg whitespace-nowrap'
-        href={href}
-      >
+      <ButtonPrimary className='w-full sm:w-fit whitespace-nowrap' href={href}>
         {translate('button.startSearch')}
       </ButtonPrimary>
     </div>

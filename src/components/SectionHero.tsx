@@ -29,7 +29,7 @@ export default async function SectionHeroArchivePage({ locale }: Props) {
 
           <div className='flex-1 lg:basis-[500px]'>
             <Image
-              className='w-full'
+              className='w-full origin-top-right lg:scale-105'
               src={sectionHeroCar}
               alt='premium logo background car'
               priority
