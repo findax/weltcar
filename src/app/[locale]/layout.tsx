@@ -17,6 +17,7 @@ import 'react-tooltip/dist/react-tooltip.css';
 import '@/styles/index.scss';
 import 'leaflet/dist/leaflet.css';
 import './globals.css';
+import { ReactQueryClientProvider } from '@/providers/query-client.provider';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -107,9 +108,11 @@ export default async function RootLayout({
           <LoadingProgressBar />
           <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
             <LayoutWrapper>
-              <Header />
-              <main className='flex-grow overflow-hidden'>{children}</main>
-              <Footer />
+              <ReactQueryClientProvider>
+                <Header />
+                <main className='flex-grow overflow-hidden'>{children}</main>
+                <Footer />
+              </ReactQueryClientProvider>
               <CookieAlert />
             </LayoutWrapper>
           </ThemeProvider>

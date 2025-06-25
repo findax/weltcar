@@ -1,19 +1,20 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { ButtonPrimary } from '@/shared/Buttons';
-import { useLocale } from 'next-intl';
 import { NextRoute } from '@/types/routers';
+import { getTranslations } from 'next-intl/server';
 
 export interface SectionWhyChooseUsProps {
   className?: string;
-  translate: any;
+  locale: string;
 }
 
-const SectionWhyChooseUs: FC<SectionWhyChooseUsProps> = ({
+export default async function SectionWhyChooseUs({
   className = '',
-  translate
-}) => {
-  const locale = useLocale();
+  locale,
+}: SectionWhyChooseUsProps) {
   const newHref = `/${locale}/catalog`;
+  const translate = await getTranslations();
+
   return (
     <div
       // lg:pt-10 xl:py-20
@@ -27,12 +28,13 @@ const SectionWhyChooseUs: FC<SectionWhyChooseUsProps> = ({
         <p className='mt-12 md:text-lg text-neutral-500 dark:text-neutral-400'>
           {translate('whyChooseUs.description')}
         </p>
-        <ButtonPrimary className='text-base md:text-lg mt-6 sm:mt-11' href={newHref as NextRoute}>
+        <ButtonPrimary
+          className='text-base md:text-lg mt-6 sm:mt-11'
+          href={newHref as NextRoute}
+        >
           {translate('whyChooseUs.button.chooseCar')}
         </ButtonPrimary>
       </div>
     </div>
   );
-};
-
-export default SectionWhyChooseUs;
+}
