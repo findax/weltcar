@@ -7,6 +7,8 @@ import { HeartIcon } from '@heroicons/react/24/outline';
 import { IUser } from '@/types/user';
 import { addToFavoritesCars, deleteFavoriteCar } from '@/api/favorites';
 import { toast } from 'react-toastify';
+import { CheckCircleIcon } from '@heroicons/react/24/solid';
+import { ExclamationCircleIcon } from '@heroicons/react/24/solid';
 
 export default function PriceSidebar({
   onClick,
@@ -47,6 +49,11 @@ export default function PriceSidebar({
   const buttonClass = isDisabled
     ? '!bg-gray-600 hover:bg-gray-600 text-white'
     : '';
+
+  const servicesTranslateLine = translate('carDetails.service.includes');
+  const splittedServices = servicesTranslateLine
+    .split(';')
+    .map((item) => item.trim());
 
   useEffect(() => {
     setIsPriceVisible(!isNaN(Number(price)));
@@ -94,6 +101,34 @@ export default function PriceSidebar({
           </span>
         </div>
 
+        <div>
+          {splittedServices?.length && (
+            <>
+              <span>{translate('carDetails.service.title')}</span>
+              <ul className='flex flex-col gap-4 mt-4 mb-6'>
+                {splittedServices.map((service) => (
+                  <li className='flex gap-2 items-start'>
+                    <CheckCircleIcon
+                      width={24}
+                      color='primary'
+                      className='text-primary-600 dark:text-primary-950 shrink-0'
+                    />{' '}
+                    {service}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+          <div className='flex gap-2 items-start'>
+            <ExclamationCircleIcon
+              width={24}
+              color='primary'
+              className='text-secondary-950 shrink-0'
+            />{' '}
+            {translate('carDetails.service.alert')}
+          </div>
+        </div>
+
         {status_extra && (
           <div className='flex gap-1'>
             <span className='font-medium md:text-lg dark:text-neutral-400 text-neutral-1100'>
@@ -112,7 +147,7 @@ export default function PriceSidebar({
 
         <ButtonSecondary onClick={() => handleChangeFavoriteCar(idCar)}>
           <HeartIcon
-            className={`h-8 w-8 mr-3`}
+            className={`h-6 w-8 mr-3`}
             color={` ${isFavorite ? '#FF6464' : ''}`}
           />
           {isFavorite
