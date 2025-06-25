@@ -240,10 +240,11 @@ export default function CarDetails({ carId }: { carId: string }) {
             partnerName={carData?.partner_name || null}
             status_extra={carData?.status_extra || null}
             isFavorite={isFavorite}
-            user={user}
+            isAuthorized={isAuthorized}
             idCar={carId}
             onChangeFavorite={setIsFavorite}
             onChangeModalAuthorizationOpen={setIsAuthorizationModalOpen}
+            onAuthModalOpen={handleOpenAuthModal}
           />
         </div>
       </div>

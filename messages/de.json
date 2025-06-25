@@ -216,6 +216,7 @@
   "carDetails.confirm.button": "Continue and Reserve",
   "carDetails.tooltip.auth.clickable": "Log in",
   "carDetails.tooltip.auth.text": "to see the full VIN number",
+  "carDetails.tooltip.auth.phoneText": "to see the full Phone number",
   "authorization.button.signIn": "SIGN IN",
   "authorization.button.signUp": "SIGN UP",
   "authorization.signIn.resetPass.title": "Please, check your email to reset your password!",
