@@ -19,7 +19,7 @@ import triangleBackgroundImgTwo from '@/images/bg-figures/triangle-2.png';
 import triangleBackgroundImgThird from '@/images/bg-figures/triangle-3.png';
 import BackgroundShaadowSection from '@/components/BackgroundShaadowSection';
 import { useThemeMode } from '@/hooks/useThemeMode';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { useTranslations } from 'next-intl';
 
 const metadata: Metadata = {
@@ -92,16 +92,13 @@ function PageHome() {
       {/* SECTION HERO */}
       <div className='relative container pt-12 xl:pt-14 pb-24 lg:pb-28'>
         <SectionHero translate={t} />
-        <div
-          onClick={scrollToSection}
-          className='hidden lg:block absolute -bottom-[10%] right-[48%] cursor-pointer animate-pulse'
-        >
-          <Image
-            className='w-8 h-7'
-            alt='arrow down image'
-            src={isDarkMode ? arrowDownLightImg : arrowDownDarkImg}
-          />
-        </div>
+      </div>
+      <div onClick={scrollToSection} className=''>
+        <Image
+          className='w-8 h-7 mx-auto cursor-pointer animate-pulse'
+          alt='arrow down image'
+          src={isDarkMode ? arrowDownLightImg : arrowDownDarkImg}
+        />
       </div>
       <div
         ref={targetSectionRef}
