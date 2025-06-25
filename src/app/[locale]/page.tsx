@@ -13,6 +13,7 @@ import triangleBackgroundImgThird from '@/images/bg-figures/triangle-3.png';
 import BackgroundShaadowSection from '@/components/BackgroundShaadowSection';
 import ThemedImage from '@/shared/ThemedImage';
 import ScrollToSection from '@/components/ScrollToSectionButton';
+import LatestCarsSections from '@/components/LatestCarsSection';
 
 const metadata: Metadata = {
   title:
@@ -65,6 +66,8 @@ export default async function PageHome({ params }: Props) {
         <div className='relative py-16'>
           <SectionHowItWork />
         </div>
+
+        <LatestCarsSections locale={locale} />
 
         {/* <SectionVideos /> */}
 
