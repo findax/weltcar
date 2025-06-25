@@ -23,11 +23,11 @@ export default async function SectionHeroArchivePage({ locale }: Props) {
           {translate('welcome.title.Welcome')}
         </h1>
         <div className='flex max-lg:flex-col max-lg:gap-8 lg:items-center justify-between'>
-          <div className='flex-1 lg:basis-[100px] lg:max-w-[500px]'>
+          <div className='relative z-[2] flex-1 lg:basis-[100px] lg:max-w-[500px]'>
             <SearchForCar carBrands={carBrands} />
           </div>
 
-          <div className='flex-1 lg:basis-[500px]'>
+          <div className='relative z-[1] flex-1 lg:basis-[500px]'>
             <Image
               className='w-full origin-top-right lg:scale-105'
               src={sectionHeroCar}
