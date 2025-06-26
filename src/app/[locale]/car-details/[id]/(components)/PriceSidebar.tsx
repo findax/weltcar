@@ -77,7 +77,7 @@ export default function PriceSidebar({
 
   return (
     <div className='block flex-grow mt-0'>
-      <div className='detailsSectionSidebar__wrap sticky top-28 bg-white dark:bg-neutral-900 lg:!flex'>
+      <div className='detailsSectionSidebar__wrap sticky top-28 sm:bg-white dark:sm:bg-neutral-900 lg:!flex'>
         {isShowPartnerLogo && (
           <PartnerLogoSidebar
             partnerPhone={partnerPhone}
@@ -137,7 +137,7 @@ export default function PriceSidebar({
           </div>
         )}
 
-        <div className='hidden lg:flex flex-col gap-y-6'>
+        <div className='hidden lg:flex flex-col gap-y-4'>
           <ButtonPrimary
             onClick={onClick}
             disabled={isDisabled}
