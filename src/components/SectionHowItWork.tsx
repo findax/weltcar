@@ -5,6 +5,7 @@ import HIW3img from '@/images/icons/saving.svg';
 import VectorImg from '@/images/VectorHIW.svg';
 import Image, { StaticImageData } from 'next/image';
 import Heading from '@/shared/Heading';
+import { getTranslations } from 'next-intl/server';
 
 export interface SectionHowItWorkProps {
   className?: string;
@@ -15,7 +16,6 @@ export interface SectionHowItWorkProps {
     img: StaticImageData;
     imgDark?: StaticImageData;
   }[];
-  translate: any;
 }
 
 const DEMO_DATA: SectionHowItWorkProps['data'] = [
@@ -39,11 +39,12 @@ const DEMO_DATA: SectionHowItWorkProps['data'] = [
   },
 ];
 
-const SectionHowItWork: FC<SectionHowItWorkProps> = ({
+export default async function SectionHowItWork({
   className = '',
   data = DEMO_DATA,
-  translate
-}) => {
+}: SectionHowItWorkProps) {
+  const translate = await getTranslations();
+
   return (
     <div
       className={`nc-SectionHowItWork lg:pb-12 ${className}`}
@@ -57,7 +58,7 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
         {translate('howItWorks.title')}
       </Heading>
       <div className='flex flex-col gap-5 lg:flex-row justify-around mt-14'>
-        {data.map((item) => (
+        {data?.map((item) => (
           <div
             key={item.id}
             className='flex flex-col max-w-full lg:w-full py-10 px-7 bg-white dark:bg-neutral-950 rounded-3xl'
@@ -70,7 +71,9 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
               />
             </div>
             <div className='mt-4 md:mt-8'>
-              <h3 className='text-lg md:text-2xl font-bold text-neutral-1050 dark:text-white '>{translate(item.title)}</h3>
+              <h3 className='text-lg md:text-2xl font-bold text-neutral-1050 dark:text-white '>
+                {translate(item.title)}
+              </h3>
               <span className='block mt-5 md:text-lg text-neutral-500 dark:text-neutral-400'>
                 {translate(item.desc)}
               </span>
@@ -82,4 +85,3 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
   );
 };
 
-export default SectionHowItWork;
