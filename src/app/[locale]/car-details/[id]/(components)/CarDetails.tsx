@@ -21,6 +21,7 @@ import { ButtonPrimary } from '@/shared/Buttons';
 import { RadioButton } from '@/shared/FormInputs';
 import DownloadPdf from './DownloadPdf';
 import AuthorizationFavorite from '@/components/authorization/AuthorizationFavorite';
+import PartnerLogoSidebar from '@/components/PartnerLogoSidebar';
 
 enum ModalId {
   SIMPLE_AUTHORIZATION = 'simple-authorization',
@@ -204,8 +205,8 @@ export default function CarDetails({ carId }: { carId: string }) {
           />
         )}
 
-        <div className='relative z-10 my-11 grid grid-rows-1 grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4'>
-          <div className='w-full col-span-3 lg:col-span-2 space-y-8 lg:space-y-10'>
+        <div className='relative z-10 my-11 grid grid-cols-1 lg:grid-cols-3 gap-x-2 sm:gap-x-4 gap-y-6 xl:gap-y-8'>
+          <div className='w-full lg:col-span-2 space-y-8 lg:space-y-10'>
             {carData && (
               <>
                 <Title
