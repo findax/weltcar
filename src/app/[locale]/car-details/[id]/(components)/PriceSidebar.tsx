@@ -76,8 +76,8 @@ export default function PriceSidebar({
   };
 
   return (
-    <div className='block flex-grow mt-14 lg:mt-0'>
-      <div className='detailsSectionSidebar__wrap sticky top-28 bg-white dark:bg-neutral-900 !hidden lg:!flex'>
+    <div className='block flex-grow mt-0'>
+      <div className='detailsSectionSidebar__wrap sticky top-28 sm:bg-white dark:sm:bg-neutral-900 lg:!flex'>
         {isShowPartnerLogo && (
           <PartnerLogoSidebar
             partnerPhone={partnerPhone}
@@ -89,7 +89,7 @@ export default function PriceSidebar({
         )}
 
         <div
-          className={`${isPriceVisible ? 'flex justify-between items-end gap-1 ' : 'flex justify-center items-end gap-1 '}`}
+          className={`hidden lg:flex ${isPriceVisible ? 'flex justify-between items-end gap-1 ' : 'flex justify-center items-end gap-1 '}`}
         >
           {isPriceVisible && (
             <span className='text-xl xl:text-2xl font-semibold'>
@@ -130,30 +130,32 @@ export default function PriceSidebar({
         </div>
 
         {status_extra && (
-          <div className='flex gap-1'>
+          <div className='hidden lg:flex gap-1'>
             <span className='font-medium md:text-lg dark:text-neutral-400 text-neutral-1100'>
               Available {status_extra}
             </span>
           </div>
         )}
 
-        <ButtonPrimary
-          onClick={onClick}
-          disabled={isDisabled}
-          className={buttonClass}
-        >
-          {translate(buttonTitle)}
-        </ButtonPrimary>
+        <div className='hidden lg:flex flex-col gap-y-4'>
+          <ButtonPrimary
+            onClick={onClick}
+            disabled={isDisabled}
+            className={buttonClass}
+          >
+            {translate(buttonTitle)}
+          </ButtonPrimary>
 
-        <ButtonSecondary onClick={() => handleChangeFavoriteCar(idCar)}>
-          <HeartIcon
-            className={`h-6 w-8 mr-3`}
-            color={` ${isFavorite ? '#FF6464' : ''}`}
-          />
-          {isFavorite
-            ? translate('carDetails.button.favorite.already')
-            : translate('carDetails.button.favorite.addTo')}
-        </ButtonSecondary>
+          <ButtonSecondary onClick={() => handleChangeFavoriteCar(idCar)}>
+            <HeartIcon
+              className={`h-6 w-8 mr-3`}
+              color={` ${isFavorite ? '#FF6464' : ''}`}
+            />
+            {isFavorite
+              ? translate('carDetails.button.favorite.already')
+              : translate('carDetails.button.favorite.addTo')}
+          </ButtonSecondary>
+        </div>
       </div>
     </div>
   );
