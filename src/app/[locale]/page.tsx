@@ -59,15 +59,18 @@ export default async function PageHome({ params }: Props) {
         <SectionHero locale={locale} />
       </div>
       <ScrollToSection targetId={TARGET_SECTION_ID} />
+
+      <div className='container relative mb-0 sm:mb-24 lg:space-y-28 mt-40'>
+        <LatestCarsSections locale={locale} />
+      </div>
+
       <div
         id={TARGET_SECTION_ID}
-        className='container relative space-y-24 mb-0 sm:mb-24 lg:space-y-28 lg:mb-28 mt-40'
+        className='container relative space-y-24 mb-0 sm:mb-24 lg:space-y-28 lg:mb-28 mt-20'
       >
         <div className='relative py-16'>
           <SectionHowItWork />
         </div>
-
-        {/* <LatestCarsSections locale={locale} /> */}
 
         {/* <SectionVideos /> */}
 

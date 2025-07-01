@@ -13,12 +13,9 @@ export default async function LatestCarsSections({ locale }: Props) {
   const carList = carsResponse?.data || [];
 
   return (
-    <div
-      className={`nc-SectionHowItWork lg:pb-12`}
-      data-nc-id='SectionHowItWork'
-    >
+    <div className={`nc-LatestCarsSections`} data-nc-id='LatestCarsSections'>
       <Heading
-        isCenter={false}
+        isCenter={true}
         fontClass='!font-bold text-3xl md:text-4xl xl:text-5xl text-neutral-1050 dark:text-white'
       >
         {t('latestCars.title')}
