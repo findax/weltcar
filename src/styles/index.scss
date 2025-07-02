@@ -21,3 +21,21 @@
     }
   }
 }
+
+.latest-cars-pagination {
+  width: max-content !important;
+  gap: 0.5rem;
+  flex-grow: 0;
+
+  .swiper-pagination-bullet {
+      width: 0.5rem;
+      height: 0.5rem;
+      background: #d0d0d0;
+      opacity: 1;
+
+      &-active {
+        opacity: 1;
+        @apply bg-primary-600 dark:bg-primary-950;
+      }
+    }
+}
