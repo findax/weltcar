@@ -44,20 +44,7 @@ const LatestCarsList = ({ carList }: LatestCarsListProps) => {
               <CarCard
                 className='h-full'
                 carData={car}
-                paddingBottomGrid='pb-[71.8%]'
-                translate={t}
-                user={user}
-              />
-            </div>
-          </SwiperSlide>
-        ))}
-        {carList.map((car) => (
-          <SwiperSlide key={car.id} className='w-max'>
-            <div className='h-[530px] w-full w-max-[380px]'>
-              <CarCard
-                className='h-full'
-                carData={car}
-                paddingBottomGrid='pb-[71.8%]'
+                paddingBottomGrid='p-0 h-[260px]'
                 translate={t}
                 user={user}
               />
