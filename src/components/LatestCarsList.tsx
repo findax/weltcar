@@ -44,7 +44,7 @@ const LatestCarsList = ({ carList }: LatestCarsListProps) => {
               <CarCard
                 className='h-full'
                 carData={car}
-                paddingBottomGrid='p-0 h-[260px]'
+                paddingBottomGrid='p-0 !h-[260px]'
                 translate={t}
                 user={user}
               />
